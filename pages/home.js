@@ -1,10 +1,10 @@
 import React, { Fragment } from "react";
-import Cta from "./CtaSection/Cta.js";
-import Hero from "./Hero/Hero.js";
-import HowItWorks from "./HowItWorks/HowItWorks.js";
-import Section2 from "./Section2/Section2.js";
-import Section3 from "./Section3/Section3.js";
-import MessageDemo from "./MessageDemo/MessageDemo";
+import Hero from "../pageComponents/HomePage/Hero";
+import Section2 from "../pageComponents/HomePage/Section2";
+import Section3 from "../pageComponents/HomePage/Section3";
+import MessageDemo from "../pageComponents/HomePage/MessageDemo";
+import HowItWorks from "../pageComponents/HomePage/HowItWorks";
+import Cta from "../pageComponents/HomePage/Cta";
 
 export default function HomePage() {
     return (

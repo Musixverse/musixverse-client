@@ -1,8 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 html,
 body {
     padding: 0;
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    @apply bg-light-100 dark:bg-dark-100;
+    @apply text-dark-100 dark:text-light-100;
 }
 
 a {
@@ -12,4 +18,63 @@ a {
 
 * {
     box-sizing: border-box;
+}
+
+/**************************************************************************/
+/*****************************    Navbar   ********************************/
+/**************************************************************************/
+
+.navbar {
+    @apply bg-light-100 border-gray-200 px-2 sm:px-6 py-3 dark:bg-gray-800 fixed w-full z-10 top-0;
+}
+
+.theme-toggle > input[type="checkbox"] {
+    position: relative;
+    width: 65px;
+    height: 30px;
+    outline: none;
+    -webkit-appearance: none;
+    background-color: #fefefe;
+    transition: 0.5s;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.theme-toggle > input:checked[type="checkbox"] {
+    background-color: #000000;
+    transition: 0.5s;
+}
+
+.theme-toggle > input[type="checkbox"]::before {
+    content: "☀️";
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    top: 0;
+    left: 0;
+    background-color: #ffffff;
+    border-radius: 50px;
+    /* transform: scale(1.1); */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: 0.5s;
+}
+
+.theme-toggle > input:checked[type="checkbox"]::before {
+    left: 36px;
+    content: "🌜";
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #555555;
+}
+
+/**************************************************************************/
+/*****************************    Footer   ********************************/
+/**************************************************************************/
+
+.footer {
+    @apply flex justify-center items-center py-8 text-sm border-t border-primary-100;
 }

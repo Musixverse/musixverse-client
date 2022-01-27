@@ -1,6 +1,9 @@
 import { useMoralis } from "react-moralis";
 import Link from "next/link";
 import { useTheme } from "next-themes";
+import Image from "next/image";
+import logoBlack from "../../../public/logo-black.svg";
+import logoWhite from "../../../public/logo-white.svg";
 import ErrorBox from "../Modal/ErrorBox";
 
 const Navbar = ({ setShowLoginModal }) => {
@@ -14,7 +17,11 @@ const Navbar = ({ setShowLoginModal }) => {
             <div className="container flex flex-wrap justify-between items-center mx-auto">
                 <Link href="/">
                     <a href="#" className="flex">
-                        <span className="self-center text-lg font-semibold whitespace-nowrap dark:text-white">Musixverse</span>
+                        {theme === "light" ? (
+                            <Image src={logoBlack} alt="MXV Logo" width="70" height="70" />
+                        ) : (
+                            <Image src={logoWhite} alt="MXV Logo" width="70" height="70" />
+                        )}
                     </a>
                 </Link>
 

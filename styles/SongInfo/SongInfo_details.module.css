@@ -1,0 +1,47 @@
+.song-info{
+    @apply flex;
+}
+
+.song-info__song-details{
+    @apply flex flex-column justify-center items-center flex-auto;    
+}
+
+.song-details__title{
+    @apply font-bold text-xl;
+}
+
+.song-details__subtitle{
+    @apply text-sm;
+}
+
+.song-details__artist-notes{
+    @apply text-sm;
+}
+
+.song-info__other-details{
+    @apply flex flex-column justify-center items-center flex-auto;
+}
+
+.other-details__title{
+    @apply font-bold text-xl;
+}
+
+.other-details__section1{
+
+}
+
+.other-details__section2{
+
+}
+
+.other-details__section3{
+
+}
+
+.other-details__Icons{
+    @apply flex flex-row justify-start items-center;
+}
+
+.other-details__Footer{
+
+}

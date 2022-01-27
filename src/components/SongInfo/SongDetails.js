@@ -1,5 +1,6 @@
 import React from "react";
 import "../../../styles/SongInfo/SongInfo_details.module.css";
+import data from "../../../metaData";
 
 export default SongDetails = () => {
   return (
@@ -15,21 +16,7 @@ export default SongDetails = () => {
           </div>
           <div className="song-details__artist-notes">
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure
-              expedita quaerat qui nam unde neque, dolorum facere atque, ab
-              fugiat eligendi iusto ad vel blanditiis itaque beatae
-              consequuntur. 
-              Earum at architecto porro ullam fugiat ut sit harum
-              inventore, laborum, recusandae cum, eaque doloribus accusantium!
-              Ratione doloremque.
-              voluptas perferendis ipsa quibusdam pariatur
-              cumque sed incidunt eligendi at facilis cupiditate nihil expedita
-              explicabo, veniam placeat corrupti fugit totam beatae vero natus.
-
-              Non excepturi ipsa tenetur tempore inventore. Quia iure veritatis
-              expedita velit nulla vel adipisci quos sit! Ullam a temporibus
-              labore magni error, incidunt beatae dolorum? Magni at commodi
-              suscipit voluptates odio.
+              {data.Hashes.descHash}
             </p>
           </div>
         </div>
@@ -40,11 +27,11 @@ export default SongDetails = () => {
           <div className="other-details__section1">
             <div>
                 <h4>Genres</h4>
-                <p>Slow & Relaxing</p>
+                <p>{data.Characteristics.genre}</p>
             </div>
             <div>
                 <h4>Intrument Used</h4>
-                <p>Drums,Piano,Violin,Flute</p>
+                <p>{data.instruments}</p>
             </div>
             <div>
                 <h4>sampling</h4>
@@ -55,7 +42,7 @@ export default SongDetails = () => {
           <div className="other-details__section2">
             <div>
                 <h4>Contact Address</h4>
-                <p>0xcc3s534ngd4dg...</p>
+                <p>{data.artistAddress}</p>
             </div>
             <div>
                 <h4>Token ID</h4>
@@ -73,22 +60,22 @@ export default SongDetails = () => {
           <hr />
           <div className="other-details__section3">
             <div className="secton3__artist-name">
-                <h4>Ben Kessler</h4>
+                <h4>{data.artistName}</h4>
                 <p>Go to artist profile page &nbsp;<i class="fas fa-long-arrow-right"></i></p>
             </div>
           </div>
           <div className="other-details__Icons">
-            <img src="https://img.icons8.com/ios-filled/50/000000/meta.png"/>
-            <i class="fab fa-twitter"></i>
+            <a href="#"><img src="https://img.icons8.com/ios-filled/50/000000/meta.png"/></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
           </div>
           <div className="other-details__footer">
             <div>
                 <h4>Listen on</h4>
                 <div className="footer__icons">
-                    <img src="https://img.icons8.com/ios-filled/50/000000/spotify.png"/>
-                    <img src="https://img.icons8.com/ios-filled/50/000000/apple-music.png"/>
-                    <img src="https://img.icons8.com/color/48/000000/amazon.png"/>
-                    <img src="https://img.icons8.com/bubbles/50/000000/youtube-music.png"/>
+                    <a href={data.Links.spotify}><img src="https://img.icons8.com/ios-filled/50/000000/spotify.png"/></a>
+                    <a href={data.Links.appleMusic}><img src="https://img.icons8.com/ios-filled/50/000000/apple-music.png"/></a>
+                    <a href={data.Links.amazonMusic}><img src="https://img.icons8.com/color/48/000000/amazon.png"/></a>
+                    <a href={data.Links.youtubeMusic}><img src="https://img.icons8.com/bubbles/50/000000/youtube-music.png"/></a>
                 </div>
             </div>
           </div>

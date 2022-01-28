@@ -103,9 +103,9 @@ const Navbar = ({ setShowLoginModal }) => {
                                             aria-expanded="false"
                                         >
                                             {theme === "dark" ? (
-                                                <img src="https://img.icons8.com/nolan/512/apple-settings.png" width="35" />
+                                                <Image src="https://img.icons8.com/nolan/512/apple-settings.png" width="35" height="35" />
                                             ) : (
-                                                <img src="https://img.icons8.com/ios/500/000000/apple-settings.png" width="35" />
+                                                <Image src="https://img.icons8.com/ios/500/000000/apple-settings.png" width="35" height="35" />
                                             )}
                                         </a>
                                         <ul
@@ -142,7 +142,7 @@ const Navbar = ({ setShowLoginModal }) => {
                                                                 type="checkbox"
                                                                 role="switch"
                                                                 onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                                                                checked={theme === "dark"}
+                                                                defaultChecked={theme === "dark"}
                                                             />
                                                         </div>
                                                     </div>

@@ -32,6 +32,15 @@ module.exports = {
                     200: "#D60202",
                     300: "#A60000",
                 },
+                nav: {
+                    light: "rgba(255, 255, 255, 0.4)",
+                    dark: "rgba(19, 19, 19, 0.4)",
+                },
+                search: {
+                    100: "#E8E8E8",
+                    200: "#292929",
+                    300: "#B2B2B2",
+                },
             },
             fontFamily: {
                 primary: ["Poppins", "sans-serif"],

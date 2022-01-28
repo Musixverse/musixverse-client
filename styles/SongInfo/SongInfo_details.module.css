@@ -1,5 +1,9 @@
 .song-info{
-    @apply flex;
+    @apply flex p-5;
+}
+
+.song-info__container{
+    @apply flex p-2;
 }
 
 .song-info__song-details{

@@ -1,0 +1,21 @@
+.purchase-info{
+    @apply p-10 bg-light-300 rounded-xl w-1/3 ;
+}
+/* divide-y-2 divide-gray-400 */
+
+.purchase-info__heading{
+    @apply flex justify-between items-center;
+}
+
+.purchase-info__heading--p{
+    @apply font-secondary font-medium text-base;
+}
+
+.purchase-info__heading--p i{
+    @apply text-[10px] text-[#6b6b6b];
+}
+
+.purchase-info__current-owner{
+    @apply my-3 flex justify-between items-center;
+}
+/* w-auto inline-block */

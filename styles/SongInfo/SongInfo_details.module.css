@@ -1,9 +1,9 @@
 .song-detail{
-    @apply flex p-20 mt-5 h-[560px] w-[1470px];
+    @apply flex px-24;
 }
 
 .song-detail__container{
-    @apply flex flex-1 p-10 border-2 border-gray-400 rounded-md;
+    @apply flex flex-1 p-8 border-2 border-gray-400 rounded-md;
 }
 
 .song-detail__song-details{
@@ -47,9 +47,9 @@
 }
 
 .other-details__footer{
-    @apply h-[74px] w-[650px] p-3 bg-white rounded-md;
+    @apply flex h-[60px] w-[650px] bg-white rounded-md items-center justify-between px-3;
 }
 
 .footer__icons{
-    @apply space-x-3;
+    @apply space-x-4;
 }

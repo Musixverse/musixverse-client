@@ -1,7 +1,15 @@
 .songHeader{
-    @apply p-10 w-full h-[580px];
+    @apply px-24 py-10 mt-20;
 }
 
 .songHeader__container{
-    @apply flex-1;
+    @apply flex flex-row justify-center items-center;
+}
+
+.songHeader__container--songImage{
+
+}
+
+.songHeader__container--songDetail{
+    @apply flex flex-col p-3;
 }

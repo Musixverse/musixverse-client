@@ -71,14 +71,12 @@ export default function SongDetails() {
               <a href="#"><Image src="https://img.icons8.com/ios-glyphs/30/000000/twitter--v1.png" width={20} height={20} alt="twitter" /></a>
             </div>
             <div className={styles['other-details__footer']}>
-              <div className="flex flex-row justify-between ">
                 <h4>Listen on</h4>
                 <div className={styles['footer__icons']}>
                   <a href={metaData.Links.spotify}><Image src="https://img.icons8.com/ios-filled/50/000000/spotify.png" width={25} height={25} alt="spotify" /></a>
                   <a href={metaData.Links.appleMusic}><Image src="https://img.icons8.com/ios-filled/50/000000/apple-music.png" width={25} height={25} alt="apple-music" /></a>
                   <a href={metaData.Links.amazonMusic}><Image src="https://img.icons8.com/color/48/000000/amazon.png" width={25} height={25} alt="amazon-music" /></a>
                   <a href={metaData.Links.youtubeMusic}><Image src="https://img.icons8.com/bubbles/50/000000/youtube-music.png" width={25} height={25} alt="youtube-music" /></a>
-                </div>
               </div>
             </div>
           </div>

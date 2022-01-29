@@ -11,12 +11,12 @@ export default function SongHeader() {
                 <div className={styles['songHeader__container']}>
                 {/* Image section */}
                     <div className={styles['songHeader__container--songImage']}>
-                        <Image src={metaData.songImage} alt="songImage" width={580} height={580} />
+                        <Image src={metaData.Hashes.imgHash} alt="songImage" width={580} height={580} />
                     </div>
                 {/* Song Details section */}
                     <div className={styles['songHeader__container--songDetail']}>
-                        <div>{metaData.artistName}</div>
-                        <div>{metaData.songName}</div>
+                        <div className="font-bold">{metaData.artistName}</div>
+                        <h2 className="font-bold">{metaData.songName}</h2>
                         <div><audio src="#"></audio></div>
                         <div>
                             <h4 className="font-bold">Description</h4>

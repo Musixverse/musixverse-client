@@ -4,9 +4,9 @@ import SalesHistory from "../../components/SongInfo/SalesHistory";
 
 export default function songInfo() {
     return(
-        <div  className="flex flex-row h-screen justify-center items-center bg-light-200">
+        <div  className="flex flex-col justify-center items-center bg-light-200">
             <SongDetails />
-            <div className="flex w-full justify-center">
+            <div className="flex w-full justify-center mb-10">
                 <PurchaseInfo/>
                 <SalesHistory/>
             </div>

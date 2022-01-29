@@ -1,13 +1,13 @@
-.song-info{
-    @apply flex p-20 mt-5 h-[560px] w-[1494px];
+.song-detail{
+    @apply flex p-20 mt-5 h-[560px] w-[1470px];
 }
 
-.song-info__container{
+.song-detail__container{
     @apply flex flex-1 p-10 border-2 border-gray-400 rounded-md;
 }
 
-.song-info__song-details{
-    @apply flex flex-col ;    
+.song-detail__song-details{
+    @apply flex flex-col pr-10;    
 }
 
 .song-details__title{

@@ -3,15 +3,12 @@ import styles from "../../../styles/SongInfo/SongInfo_details.module.css";
 import metaData from "../../../metaData";
 
 export default function SongDetails() {
-  console.log(metaData.id);
-  console.log(metaData.songName);
-  console.log(metaData.artistName);
-  console.log(metaData.price);
   return (
     <>
-      <div className={styles['song-info']}>
-        <div className={styles['song-info__container']}>
-          <div className={styles['song-info__song-details']}>
+      {/* song-detail parent div */}
+      <div className={styles['song-detail']}>
+        <div className={styles['song-detail__container']}>
+          <div className={styles['song-detail__song-details']}>
             <div className={styles['song-details__title']}>
               <h1>SONG DETAILS</h1>
             </div>

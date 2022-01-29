@@ -93,9 +93,9 @@ const Navbar = ({ setShowLoginModal }) => {
                                     </Link>
                                 </li>
                                 <li>
-                                    <ul className="dropdown relative">
+                                    <ul className="group dropdown relative">
                                         <a
-                                            className="dropdown-toggle flex items-center hidden-arrow"
+                                            className="dropdown-toggle flex items-center hidden-arrow "
                                             href="#"
                                             id="dropdownMenuButton2"
                                             role="button"
@@ -109,18 +109,19 @@ const Navbar = ({ setShowLoginModal }) => {
                                             )}
                                         </a>
                                         <ul
-                                            className="dropdown-menu min-w-max absolute hidden bg-white text-base z-50 float-left py-2 list-none text-left rounded-lg shadow-lg mt-1 m-0 bg-clip-padding border-none left-auto right-0"
+                                            className="dropdown-menu min-w-max absolute hidden bg-light-100 z-50 float-left py-2 list-none text-left rounded-lg shadow-lg mt-1 m-0 bg-clip-padding border-none left-auto right-0 group-hover:block"
                                             aria-labelledby="dropdownMenuButton2"
                                         >
-                                            <li>
+                                            <div className="py-2 px-4 border-b border-light-300 bg-transparent text-gray-700 hover:bg-primary-100 hover:text-light-100">
                                                 <a
-                                                    className="dropdown-item text-sm py-2 px-4 block w-full whitespace-nowrap bg-transparent text-gray-700 hover:bg-primary-100 hover:text-light-100"
+                                                    className="dropdown-item text-sm block w-full whitespace-nowrap "
                                                     href="#"
                                                     onClick={() => setShowLoginModal(true)}
                                                 >
                                                     Login/Authenticate
                                                 </a>
-                                            </li>
+                                            </div>
+                                            <li></li>
                                             <li>
                                                 <a
                                                     className="dropdown-item text-sm py-2 px-4 block w-full whitespace-nowrap bg-transparent text-gray-700 hover:bg-gray-100"

@@ -1,5 +1,9 @@
 .news-letter{
-    @apply bg-dark-200 text-light-100 font-secondary p-16 pl-24;
+    @apply flex justify-center bg-dark-200;
+}
+
+.news-letter__container{
+    @apply text-light-100 font-secondary p-16 pl-28 w-full max-w-[1500px];
 }
 
 .news-letter__email--input{

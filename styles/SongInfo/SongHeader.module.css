@@ -3,13 +3,13 @@
 }
 
 .songHeader__container{
-    @apply flex flex-row justify-center items-center;
+    @apply flex flex-row justify-center items-center space-x-5;
 }
 
 .songHeader__container--songImage{
-
+    
 }
 
 .songHeader__container--songDetail{
-    @apply flex flex-col p-3;
+    @apply flex flex-col px-5 w-[860px];
 }

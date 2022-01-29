@@ -2,6 +2,7 @@ import Image from "next/image";
 import styles from "../../../styles/SongInfo/SongHeader.module.css";
 import Button from "../../layouts/Button";
 import metaData from "../../../metaData";
+import mxv_verified from "../../assets/mxv_tick.svg";
 
 export default function SongHeader() {
     return (
@@ -15,18 +16,23 @@ export default function SongHeader() {
                     </div>
                 {/* Song Details section */}
                     <div className={styles['songHeader__container--songDetail']}>
-                        <div className="font-bold">{metaData.artistName}</div>
-                        <h2 className="font-bold">{metaData.songName}</h2>
-                        <div><audio src="#"></audio></div>
+                        <div className="font-bold pb-2">{metaData.artistName} <Image src={mxv_verified} width={17} height={17} alt='MXV verified'></Image></div>
+                        <h2 className="font-bold text-3xl pb-3 w-[268px]">{metaData.songName}</h2>
+                        {/* Audio Player component */}
+                        <div></div>
                         <div>
                             <h4 className="font-bold">Description</h4>
-                            <p>{metaData.Hashes.descHash}</p>
+                            <p className="pb-3">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Praesentium accusamus aspernatur, amet aperiam aliquam velit voluptatem a numquam cum? Deleniti!</p>
+                        </div>
+                        <div className="pb-8">
+                            <p>artwork by Joseph cardoni</p>
+                            <p>song written & produced by ben kessler</p>
                         </div>
                         <div className="flex justify-between">
-                            <div className="flex flex-row space-x-5">
+                            <div className="flex flex-row space-x-8">
                                 <div className="text-left">
-                                    <h4 className="font-bold">Genres</h4>
-                                    <p>{metaData.createTime}</p>
+                                    <h4 className="font-bold">Created on</h4>
+                                    <p>{metaData.createDate}</p>
                                 </div>
                                 <div className="text-left">
                                     <h4 className="font-bold">Lyrics</h4>

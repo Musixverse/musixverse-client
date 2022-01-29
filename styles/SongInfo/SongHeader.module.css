@@ -1,0 +1,7 @@
+.songHeader{
+    @apply p-10 w-full h-[580px];
+}
+
+.songHeader__container{
+    @apply flex-1;
+}

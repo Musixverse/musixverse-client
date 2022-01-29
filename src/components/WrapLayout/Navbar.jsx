@@ -112,7 +112,7 @@ const Navbar = ({ setShowLoginModal }) => {
                                             className="dropdown-menu min-w-max absolute hidden bg-light-100 z-50 float-left py-2 list-none text-left rounded-lg shadow-lg mt-1 m-0 bg-clip-padding border-none left-auto right-0 group-hover:block"
                                             aria-labelledby="dropdownMenuButton2"
                                         >
-                                            <div class="py-2 px-4 border-b border-light-300 bg-transparent text-gray-700 hover:bg-primary-100 hover:text-light-100">
+                                            <div className="py-2 px-4 border-b border-light-300 bg-transparent text-gray-700 hover:bg-primary-100 hover:text-light-100">
                                                 <a
                                                     className="dropdown-item text-sm block w-full whitespace-nowrap "
                                                     href="#"

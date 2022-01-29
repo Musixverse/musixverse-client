@@ -18,4 +18,11 @@
 .purchase-info__current-owner{
     @apply my-3 flex justify-between items-center;
 }
-/* w-auto inline-block */
+
+.purchase-info__price-div{
+    @apply my-3 flex justify-between items-end;
+}
+
+.purchase-info__price-div--cta button:first-child{
+    @apply mr-2;
+}

@@ -1,8 +1,14 @@
 import Image from "next/image";
 import styles from "../../../styles/SongInfo/PurchaseInfo.module.css";
 import ethLogo from "../../assets/Eth_logo.svg";
+import Button from "../../layouts/Button";
 
 export default function  PurchaseInfo(){
+    // Fetch data and replace the hard-coded constant values
+    const creatorShare = 20;
+    const currentOwner = "benkessler";
+    const NFTPrice = 0.3;
+
     return (
         <div className={styles['purchase-info']}>
             {/* Heading DIV */}
@@ -11,30 +17,31 @@ export default function  PurchaseInfo(){
 
                 <p className={styles['purchase-info__heading--p']}>
                     Creator Share 
-                    {/* {' '} */}
                     <i className="ml-2 mr-2 fas fa-arrow-right"></i>
-                    {/* {' '} */}
-                    20% {/* to be replaced with the fetched share */}
+                    {creatorShare}%
                 </p>
             </div>
             {/* Border Line Div */}
-            <div className="flex-grow border-t-2 border-gray-400"></div>
+            <div className="flex-grow border-t-[3px] border-[#9a9a9a]"></div>
             {/* Current Owner DIV*/}
             <div className={styles['purchase-info__current-owner']}>
                 <p className={styles['purchase-info__heading--p']}>Current Owner</p>
-                <p className="font-secondary">@benkessler</p>
+                <p className="font-secondary">@{currentOwner}</p>
             </div>
 
-            <div className="flex-grow border-t-2 border-gray-400"></div>
+            <div className="flex-grow border-t-[3px] border-[#9a9a9a]"></div>
             {/* Price Options */}
-            <div className="my-3">
+            <div className={styles['purchase-info__price-div']}>
                 <div className="flex flex-col">
                     <p className={styles['purchase-info__heading--p']}>Price (x3 -3Copies)</p>
-                    {/* main div */}
                     <div className="flex items-center">
                         <Image src={ethLogo} width={25} height={50} alt="ethereum"/>
-                        <p className="ml-2 font-bold text-4xl font-primary">0.3</p>
+                        <p className="ml-2 font-bold text-4xl font-primary">{NFTPrice}</p>
                     </div>
+                </div>
+                <div className={styles['purchase-info__price-div--cta']}>
+                    <Button green={false}>Make Offer</Button>
+                    <Button green={true}>Buy Now</Button>
                 </div>
             </div>
         </div>

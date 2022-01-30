@@ -11,5 +11,9 @@
 }
 
 .songHeader__container--songDetail{
-    @apply flex flex-col px-5 w-[860px];
+    @apply flex flex-col px-5 w-[860px] space-y-2;
+}
+
+.songDetail--button button{
+    @apply flex flex-row justify-center items-center;
 }

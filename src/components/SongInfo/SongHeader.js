@@ -1,8 +1,10 @@
 import Image from "next/image";
 import styles from "../../../styles/SongInfo/SongHeader.module.css";
+import AudioPlayer from "./AudioPlayer";
 import Button from "../../layouts/Button";
 import metaData from "../../../metaData";
 import mxv_verified from "../../assets/mxv_tick.svg";
+
 
 export default function SongHeader() {
     return (
@@ -19,7 +21,9 @@ export default function SongHeader() {
                         <div className="font-bold pb-2">{metaData.artistName} <Image src={mxv_verified} width={17} height={17} alt='MXV verified'></Image></div>
                         <h2 className="font-bold text-3xl pb-3 w-[268px]">{metaData.songName}</h2>
                         {/* Audio Player component */}
-                        <div></div>
+                        <div>
+                            <AudioPlayer />
+                        </div>
                         <div>
                             <h4 className="font-bold">Description</h4>
                             <p className="pb-3">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Praesentium accusamus aspernatur, amet aperiam aliquam velit voluptatem a numquam cum? Deleniti!</p>
@@ -40,7 +44,7 @@ export default function SongHeader() {
                                 </div>
                             </div>
                             {/* Connect to Metamask Button */}
-                            <div>
+                            <div className={styles["songDetail--button"]}>
                                 <Button green={true}><Image src="https://img.icons8.com/fluency/48/000000/fox.png" width={20} height={20} alt="metamask"/> &nbsp;Connect Metamask to Buy</Button>
                             </div>
                         </div>

@@ -16,7 +16,7 @@ export default function songInfo() {
             <div  className="flex flex-col justify-center items-center bg-light-200">
                 <SongHeader/>
                 <SongDetails />
-                <div className="flex w-full justify-center mb-10 max-w-[1500px]">
+                <div className="flex w-full justify-center my-10 max-w-[1500px]">
                     <PurchaseInfo/>
                     <SalesHistory/>
                 </div>

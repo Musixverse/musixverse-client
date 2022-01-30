@@ -40,7 +40,7 @@ export default function SongDetails() {
                 <p>No</p>
               </div>
             </div>
-            <hr />
+            <div className="flex-grow border-t-[3px] border-[#9a9a9a]"></div>
             <div className={styles['other-details__section2']}>
               <div className="text-left">
                 <h4 className="font-bold">Contact Address</h4>
@@ -59,7 +59,7 @@ export default function SongDetails() {
                 <p>Ethereum</p>
               </div>
             </div>
-            <hr />
+            <div className="flex-grow border-t-[3px] border-[#9a9a9a]"></div>
             <div className={styles['other-details__section3']}>
               <div className="pt-3">
                 <h4 className="font-bold">{metaData.artistName}</h4>

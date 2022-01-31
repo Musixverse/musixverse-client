@@ -23,7 +23,7 @@
 }
 
 .song-info__other-details{
-    @apply flex flex-col;
+    @apply flex flex-col font-secondary text-[15px];
 }
 
 .other-details__title{

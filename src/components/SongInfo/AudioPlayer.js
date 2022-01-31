@@ -9,7 +9,7 @@ export default function AudioPlayer(){
     return (
         <>
             <div className="flex flex-row justify-between items-center pb-10">
-                <div className="flex itme-center">
+                <div className="flex item-center">
                     <Image src={pausebtn} width={75} height={75} alt="Pause-button"></Image>
                 </div>
                 <div className="flex flex-col">
@@ -19,15 +19,15 @@ export default function AudioPlayer(){
                     <div className="flex flex-row space-x-8 pt-3 text-xs">
                         <button className="flex justify-center items-center space-x-2">
                             <Image src={favourite} width={18} height={18} alt="Pause-button"></Image>
-                            <span>Added to Favourite</span>
+                            <span className="font-secondary text-[14px]">Added to Favourite</span>
                         </button>
                         <button className="flex justify-center items-center space-x-2">
                             <Image src={sharebtn} width={18} height={18} alt="Pause-button"></Image>
-                            <span>Share</span>
+                            <span className="font-secondary text-[14px]">Share</span>
                         </button>
                         <button className="flex justify-center items-center space-x-2">
                             <Image src={mxvverified} width={18} height={18} alt="Pause-button"></Image>
-                            <span>MXV Cerified & Unmodified</span>
+                            <span className="font-secondary text-[14px]">MXV Cerified & Unmodified</span>
                         </button>
                     </div>
                 </div>

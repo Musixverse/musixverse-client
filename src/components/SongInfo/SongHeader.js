@@ -18,29 +18,29 @@ export default function SongHeader() {
                     </div>
                 {/* Song Details section */}
                     <div className={styles['songHeader__container--songDetail']}>
-                        <div className="font-bold pb-2">{metaData.artistName} <Image src={mxv_verified} width={17} height={17} alt='MXV verified'></Image></div>
-                        <h2 className="font-bold text-3xl pb-3 w-[268px]">{metaData.songName}</h2>
+                        <div className="font-secondary text-[18px] font-bold pb-2">{metaData.artistName} <Image src={mxv_verified} width={17} height={17} alt='MXV verified'></Image></div>
+                        <h2 className="font-tertiary leading-10 text-[46px] pb-3 w-[268px]">{metaData.songName}</h2>
                         {/* Audio Player component */}
                         <div>
                             <AudioPlayer />
                         </div>
                         <div>
-                            <h4 className="font-bold">Description</h4>
-                            <p className="pb-3">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Praesentium accusamus aspernatur, amet aperiam aliquam velit voluptatem a numquam cum? Deleniti!</p>
+                            <h4 className="font-bold font-secondary text-[18px]">Description</h4>
+                            <p className="pb-3 font-secondary text-[15px]">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Praesentium accusamus aspernatur, amet aperiam aliquam velit voluptatem a numquam cum? Deleniti!</p>
                         </div>
-                        <div className="pb-8">
+                        <div className="pb-8 font-secondary text-[15px]">
                             <p>artwork by Joseph cardoni</p>
                             <p>song written & produced by ben kessler</p>
                         </div>
                         <div className="flex justify-between">
                             <div className="flex flex-row space-x-8">
                                 <div className="text-left">
-                                    <h4 className="font-bold">Created on</h4>
-                                    <p>{metaData.createDate}</p>
+                                    <h4 className="font-bold font-secondary text-[18px]">Created on</h4>
+                                    <p className="font-secondary text-[15px]">{metaData.createDate}</p>
                                 </div>
                                 <div className="text-left">
-                                    <h4 className="font-bold">Lyrics</h4>
-                                    <p>Available&nbsp;<span className="align-sub"><Image src="https://img.icons8.com/external-kmg-design-basic-outline-kmg-design/32/000000/external-right-arrow-user-interface-kmg-design-basic-outline-kmg-design.png" width={20} height={20} alt="right arrow" /></span></p>
+                                    <h4 className="font-bold font-secondary text-[18px]">Lyrics</h4>
+                                    <button className="font-secondary text-[15px]">Available&nbsp;<span className="align-sub"><Image src="https://img.icons8.com/external-kmg-design-basic-outline-kmg-design/32/000000/external-right-arrow-user-interface-kmg-design-basic-outline-kmg-design.png" width={20} height={20} alt="right arrow" /></span></button>
                                 </div>
                             </div>
                             {/* Connect to Metamask Button */}

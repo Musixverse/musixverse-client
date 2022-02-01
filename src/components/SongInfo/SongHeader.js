@@ -4,6 +4,7 @@ import AudioPlayer from "./AudioPlayer";
 import Button from "../../layouts/Button";
 import metaData from "../../../metaData";
 import mxv_verified from "../../assets/mxv_tick.svg";
+import NewPlayer from "./AudioPlayer";
 
 
 export default function SongHeader() {

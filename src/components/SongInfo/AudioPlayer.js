@@ -41,11 +41,14 @@ export default function AudioPlayer(){
 
         if(queryForCurrTime)
             currTime.current.textContent = min +':'+ sec;
-        else{
-            console.log(min +':'+ sec);
+        else
             durTime.current.textContent = min +':'+ sec;
-        }
     }
+    const resetProgress = ()=>{
+        pauseSong(playBtn.current.children[0]);
+        audio.current.currentTime = 0;
+    }
+
     //Function to set the progress on Click
     const setProgress = (e)=>{
         //Get the width to normalise in the width of clicked
@@ -108,20 +111,20 @@ export default function AudioPlayer(){
                 </div>
                 <div className="flex flex-col">
                     {/* MP3 Bar */}
-                    <div className={styles['music-container']} id="music-container">
-                        <div className={styles['music-info']}>
+                    <div className={styles['music-bar__container']}>
+                        <div className={styles['music-bar__container--info']}>
                             {/* Time elapsed */}
-                            <p className="font-primary text-sm" ref={currTime}>00:00</p>
+                            <p className={styles['container__info--duration']} ref={currTime}>00:00</p>
                             {/* MP3 Progress */}
-                            <div ref={progressContainer} className={styles['progress-container']} onClick={setProgress}>
-                                <div ref={progress} className={styles['progress']}></div>
-                                <div className={styles['slider-box']}></div>
+                            <div ref={progressContainer} className={styles['container__info--progress-container']} onClick={setProgress}>
+                                <div ref={progress} className={styles['info__progress-container--progress']}></div>
+                                <div className={styles['info__progress-container--slider-box']}></div>
                             </div>
                             {/* Duration of song */}
-                            <p className="font-primary text-sm" ref={durTime}></p>
+                            <p className={styles['container__info--duration']} ref={durTime}></p>
                         </div>
                         {/* Audio elem */}
-                        <audio ref={audio} src="/sounds/rengoku.mp3" onTimeUpdate={updateProgress}></audio>
+                        <audio ref={audio} src="/sounds/rengoku.mp3" onTimeUpdate={updateProgress} onEnded={resetProgress}></audio>
                     </div>
 
                     <div className="flex flex-row space-x-8 pt-3 text-xs">

@@ -1,6 +1,6 @@
-import styles from "../../styles/Button/Button.module.css";
+import styles from "../../styles/CustomButton/CustomButton.module.css";
 
-export default function Button(props){
+export default function CustomButton(props){
     return(
         <button className={props.green? styles['button--green']: styles['button--white']}>
             {props.children}

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import styles from "../../../styles/SongInfo/SongHeader.module.css";
 import AudioPlayer from "./AudioPlayer";
-import Button from "../../layouts/Button";
+import CustomButton from "../../layouts/CustomButton";
 import metaData from "../../../metaData";
 import mxv_verified from "../../../public/assets/mxv_tick.svg";
 
@@ -44,7 +44,7 @@ export default function SongHeader() {
                             </div>
                             {/* Connect to Metamask Button */}
                             <div className={styles["song-detail--button"]}>
-                                <Button green={true}><Image src="https://img.icons8.com/fluency/48/000000/fox.png" width={20} height={20} alt="metamask"/> &nbsp;Connect Metamask to Buy</Button>
+                                <CustomButton green={true}><Image src="https://img.icons8.com/fluency/48/000000/fox.png" width={20} height={20} alt="metamask"/> &nbsp;Connect Metamask to Buy</CustomButton>
                             </div>
                         </div>
                     </div>

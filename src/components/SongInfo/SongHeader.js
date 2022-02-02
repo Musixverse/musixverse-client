@@ -1,7 +1,7 @@
 import Image from "next/image";
 import styles from "../../../styles/SongInfo/SongHeader.module.css";
 import AudioPlayer from "./AudioPlayer";
-import CustomButton from "../../layouts/CustomButton";
+import CustomButton from "../../Layouts/CustomButton";
 import metaData from "../../../metaData";
 import mxv_verified from "../../../public/assets/mxv_tick.svg";
 

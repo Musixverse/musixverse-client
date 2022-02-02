@@ -1,0 +1,19 @@
+.song-header{
+    @apply px-24 py-10 mt-20;
+}
+
+.song-header__container{
+    @apply flex flex-row justify-center items-center space-x-5;
+}
+
+.song-header__container--songImage{
+    
+}
+
+.song-header__container--song-detail{
+    @apply flex flex-col px-5 w-[860px] space-y-2;
+}
+
+.song-detail--button button{
+    @apply flex flex-row justify-center items-center;
+}

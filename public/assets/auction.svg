@@ -1,0 +1,11 @@
+<svg id="auction" xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+      }
+    </style>
+  </defs>
+  <path id="Path_733" data-name="Path 733" class="cls-1" d="M0,0H100V100H0Z"/>
+  <path id="Path_734" data-name="Path 734" d="M40.252,64.025v6.559H2V64.025ZM42.12.686,66.913,26.194l-4.507,4.644-3.379-1.161-7.9,8.113L69.164,56.341l-4.507,4.637L46.627,42.427l-7.663,7.884.9,3.712L35.355,58.66,10.562,33.153l4.511-4.637,3.6.925L38.738,8.8,37.612,5.326Z" transform="translate(20.414 7.002)"/>
+</svg>

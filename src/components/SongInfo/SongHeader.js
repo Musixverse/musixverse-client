@@ -3,22 +3,20 @@ import styles from "../../../styles/SongInfo/SongHeader.module.css";
 import AudioPlayer from "./AudioPlayer";
 import Button from "../../layouts/Button";
 import metaData from "../../../metaData";
-import mxv_verified from "../../assets/mxv_tick.svg";
-import NewPlayer from "./AudioPlayer";
-
+import mxv_verified from "../../../public/assets/mxv_tick.svg";
 
 export default function SongHeader() {
     return (
         <>
-            {/* songHeader parent div */}
-            <div className={styles['songHeader']}>
-                <div className={styles['songHeader__container']}>
+            {/* song-header parent div */}
+            <div className={styles['song-header']}>
+                <div className={styles['song-header__container']}>
                 {/* Image section */}
-                    <div className={styles['songHeader__container--songImage']}>
+                    <div className={styles['song-header__container--songImage']}>
                         <Image src={metaData.Hashes.imgHash} alt="songImage" width={580} height={580} />
                     </div>
                 {/* Song Details section */}
-                    <div className={styles['songHeader__container--songDetail']}>
+                    <div className={styles['song-header__container--song-detail']}>
                         <div className="font-bold pb-2">{metaData.artistName} <Image src={mxv_verified} width={17} height={17} alt='MXV verified'></Image></div>
                         <h2 className="font-bold text-3xl pb-3 w-[268px]">{metaData.songName}</h2>
                         {/* Audio Player component */}
@@ -45,7 +43,7 @@ export default function SongHeader() {
                                 </div>
                             </div>
                             {/* Connect to Metamask Button */}
-                            <div className={styles["songDetail--button"]}>
+                            <div className={styles["song-detail--button"]}>
                                 <Button green={true}><Image src="https://img.icons8.com/fluency/48/000000/fox.png" width={20} height={20} alt="metamask"/> &nbsp;Connect Metamask to Buy</Button>
                             </div>
                         </div>

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import styles from "../../../styles/SongInfo/PurchaseInfo.module.css";
-import ethLogo from "../../assets/Eth_logo.svg";
+import ethLogo from "../../../public/assets/Eth_logo.svg";
 import Button from "../../Layouts/Button";
 
 export default function  PurchaseInfo(){

@@ -1,8 +1,8 @@
 import { useRef, useEffect } from "react";
 import Image from "next/image";
-import favourite from "../../assets/Favourite.svg";
-import mxvverified from "../../assets/mxv_verified.svg";
-import sharebtn from "../../assets/SHARE.svg";
+import favourite from "../../../public/assets/Favourite.svg";
+import mxvverified from "../../../public/assets/mxv_verified.svg";
+import sharebtn from "../../../public/assets/SHARE.svg";
 import styles from "../../../styles/SongInfo/AudioPlayer.module.css";
 
 export default function AudioPlayer(){

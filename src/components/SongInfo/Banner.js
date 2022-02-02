@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Button from "../../Layouts/Button";
-import ethLogo from "../../assets/Eth_logo.svg";
+import ethLogo from "../../../public/assets/Eth_logo.svg";
 import styles from "../../../styles/SongInfo/Banner.module.css";
 
 export default function Banner(){

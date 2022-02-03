@@ -1,7 +1,7 @@
 import Image from "next/image";
 import styles from "../../../styles/SongInfo/PurchaseInfo.module.css";
-import ethLogo from "../../assets/Eth_logo.svg";
-import Button from "../../Layouts/Button";
+import ethLogo from "../../../public/assets/Eth_logo.svg";
+import CustomButton from "../../Layouts/CustomButton";
 
 export default function  PurchaseInfo(){
     // Fetch data and replace the hard-coded constant values
@@ -40,8 +40,8 @@ export default function  PurchaseInfo(){
                     </div>
                 </div>
                 <div className={styles['purchase-info__price-div--cta']}>
-                    <Button green={false}>Make Offer</Button>
-                    <Button green={true}>Buy Now</Button>
+                    <CustomButton green={false}>Make Offer</CustomButton>
+                    <CustomButton green={true}>Buy Now</CustomButton>
                 </div>
             </div>
         </div>

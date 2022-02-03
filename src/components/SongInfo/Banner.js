@@ -1,6 +1,6 @@
 import Image from "next/image";
-import Button from "../../Layouts/Button";
-import ethLogo from "../../assets/Eth_logo.svg";
+import CustomButton from "../../Layouts/CustomButton";
+import ethLogo from "../../../public/assets/Eth_logo.svg";
 import styles from "../../../styles/SongInfo/Banner.module.css";
 
 export default function Banner(){
@@ -17,8 +17,8 @@ export default function Banner(){
                     <p className="font-bold ml-1">{price}</p>
 
                     <div className={styles['banner__container--cta--buttons']}>
-                        <Button green={false}>Make Offer</Button>
-                        <Button green={true}>Buy Now</Button>
+                        <CustomButton green={false}>Make Offer</CustomButton>
+                        <CustomButton green={true}>Buy Now</CustomButton>
                     </div>
                 </div>
             </div>

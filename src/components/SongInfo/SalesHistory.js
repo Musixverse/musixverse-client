@@ -1,5 +1,5 @@
-import minted from "../../assets/MINTED.svg";
-import auction from "../../assets/auction.svg";
+import minted from "../../../public/assets/MINTED.svg";
+import auction from "../../../public/assets/auction.svg";
 import Image from "next/image";
 import styles from "../../../styles/SongInfo/SalesHistory.module.css";
 

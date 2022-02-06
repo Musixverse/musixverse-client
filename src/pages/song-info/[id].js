@@ -4,7 +4,6 @@ import PurchaseInfo from "../../components/SongInfo/PurchaseInfo";
 import SalesHistory from "../../components/SongInfo/SalesHistory";
 import NewsLetter from "../../components/SongInfo/NewsLetter";
 import Banner from "../../components/SongInfo/Banner";
-import styles from "../../../styles/SongInfo/Home.module.css";
 
 export default function songInfo() {
     //Fetch data over here using SSG and then pass data in the

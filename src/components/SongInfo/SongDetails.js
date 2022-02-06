@@ -1,5 +1,5 @@
 import Image from "next/image";
-import styles from "../../../styles/SongInfo/SongInfo_details.module.css";
+import styles from "../../../styles/SongInfo/SongDetails.module.css";
 import metaData from "../../../metaData";
 
 export default function SongDetails() {

@@ -1,0 +1,11 @@
+.song-info__container{
+    @apply flex flex-col items-center justify-center;
+}
+
+.song-info__header-container{
+    @apply flex flex-col justify-center items-center bg-light-200 dark:bg-dark-200 max-w-[1500px];
+}
+
+.song-info__body-container{
+    @apply flex w-full justify-center my-10 max-w-[1500px];
+}

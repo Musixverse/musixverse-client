@@ -7,7 +7,7 @@ export default function SongDetails() {
     <>
       {/* song-detail parent div */}
       <div className={styles['song-detail']}>
-        <div className={styles['song-detail__container']}>
+        <div className="flex flex-1 p-8 border-2 border-gray-400 rounded-md dark:bg-dark-100 dark:border-dark-100">
           <div className={styles['song-detail__song-details']}>
             <div className={styles['song-details__title']}>
               <h1 className="font-tertiary text-[36px]">SONG DETAILS</h1>

@@ -11,12 +11,12 @@ export default function songInfo() {
     //components as props
     const onSale = true;
     return(
-        <div className={styles["song-info__container"]}>
+        <div className="flex flex-col items-center justify-center">
             {onSale? <Banner/>:null}
-            <div  className={styles["song-info__header-container"]}>
+            <div  className="flex flex-col justify-center items-center bg-light-200 dark:bg-dark-200 max-w-[1500px]">
                 <SongHeader/>
                 <SongDetails />
-                <div className={styles["song-info__body-container"]}>
+                <div className="flex w-full justify-center my-10 max-w-[1500px]">
                     <PurchaseInfo/>
                     <SalesHistory/>
                 </div>

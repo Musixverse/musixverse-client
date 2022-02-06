@@ -10,9 +10,9 @@ export default function songInfo() {
     //components as props
     const onSale = true;
     return(
-        <div className="flex flex-col items-center justify-center">
+        <div className="flex flex-col items-center justify-center w-full bg-light-100 dark:bg-dark-100">
             {onSale? <Banner/>:null}
-            <div  className="flex flex-col justify-center items-center bg-light-200 dark:bg-dark-100 max-w-[1500px]">
+            <div className="flex flex-col justify-center items-center max-w-[1500px]">
                 <SongHeader/>
                 <SongDetails />
                 <div className="flex w-full justify-center my-10 max-w-[1500px]">

@@ -1,5 +1,5 @@
 .song-header{
-    @apply px-24 py-10 mt-20;
+    @apply px-24 py-10 mt-12;
 }
 
 .song-header__container{
@@ -7,7 +7,7 @@
 }
 
 .song-header__container--songImage{
-    
+    @apply max-w-[474px];
 }
 
 .song-header__container--song-detail{

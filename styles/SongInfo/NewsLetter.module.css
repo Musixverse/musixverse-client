@@ -1,5 +1,5 @@
 .newsletter{
-    @apply flex justify-center bg-dark-200 w-full;
+    @apply flex justify-center bg-dark-100 w-full;
 }
 
 .newsletter__container{

@@ -3,7 +3,7 @@
 }
 
 .song-detail__container{
-    @apply flex flex-1 p-8 border-2 border-gray-400 rounded-md dark:bg-dark-100;
+    @apply flex flex-1 p-8 border-2 bg-light-200 rounded-md border-light-300;
 }
 
 .song-detail__song-details{

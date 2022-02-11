@@ -7,11 +7,11 @@ export default function SalesHistory() {
     const minter = "benkessler";
     const currentOwner = "benkessler";
     return(
-        <div className={styles['sales-history']}>
+        <div className={"dark:bg-dark-100 "+styles['sales-history']}>
             <h1 className={styles['sales-history__heading']}>SALES HISTORY</h1>
             {/* TO map div */}
             <div className="flex mb-4">
-                <div className={styles['sales-history__action']}>
+                <div className={"dark:bg-dark-200 "+styles['sales-history__action']}>
                     <Image src={auction} alt="minting logo" width={25} height={25}></Image>
                 </div>
                 
@@ -22,7 +22,7 @@ export default function SalesHistory() {
             </div>
 
             <div className="flex">
-                <div className={styles['sales-history__action']}>
+                <div className={"dark:bg-dark-200 "+styles['sales-history__action']}>
                     <Image src={minted} alt="minting logo" width={25} height={25}></Image>
                 </div>
                 

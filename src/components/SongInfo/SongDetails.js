@@ -7,7 +7,7 @@ export default function SongDetails() {
     <>
       {/* song-detail parent div */}
       <div className={styles['song-detail']}>
-        <div className="flex flex-1 p-8 border-2 border-gray-400 rounded-md dark:bg-dark-100 dark:border-dark-100">
+        <div className={"dark:bg-dark-100 dark:border-dark-100 "+styles['song-detail__container']} >
           <div className={styles['song-detail__song-details']}>
             <div className={styles['song-details__title']}>
               <h1 className="font-tertiary text-[36px]">SONG DETAILS</h1>
@@ -70,8 +70,8 @@ export default function SongDetails() {
               <a href="#"><Image src="https://img.icons8.com/ios-filled/50/000000/meta.png" width={20} height={20} alt="meta" /></a>
               <a href="#"><Image src="https://img.icons8.com/ios-glyphs/30/000000/twitter--v1.png" width={20} height={20} alt="twitter" /></a>
             </div>
-            <div className={styles['other-details__footer']}>
-                <h4 className="font-secondary text-[18px] dark:text-dark-200">Listen on</h4>
+            <div className={"dark:bg-dark-200 "+styles['other-details__footer']}>
+                <h4 className="font-secondary text-[18px]">Listen on</h4>
                 <div className={styles['footer__icons']}>
                   <a href={metaData.Links.spotify}><Image src="https://img.icons8.com/ios-filled/50/000000/spotify.png" width={25} height={25} alt="spotify" /></a>
                   <a href={metaData.Links.appleMusic}><Image src="https://img.icons8.com/ios-filled/50/000000/apple-music.png" width={25} height={25} alt="apple-music" /></a>

@@ -10,7 +10,7 @@ export default function SongHeaderCta(){
     let seconds = 12;
 
     return (
-        <div className="bg-light-200 p-5 rounded-lg">
+        <div className="bg-light-200 p-5 rounded-lg dark:bg-dark-100 ">
             <div className="flex justify-between items-center">
                 <p className="font-primary text-sm">Sale ends Feburary 4 2022 at 7:30am IST</p>
                 <p className="font-bold text-lg font-primary">

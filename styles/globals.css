@@ -41,5 +41,5 @@ a {
 /**************************************************************************/
 
 .footer {
-    @apply flex justify-center items-center py-8 text-sm border-t border-primary-100;
+    @apply flex justify-center items-center py-8 text-sm border-t border-primary-100 dark:bg-dark-200;
 }

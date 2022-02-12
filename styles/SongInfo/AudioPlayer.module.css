@@ -15,8 +15,8 @@
 }
 
 .info__progress-container--progress {
-    @apply bg-primary-100 h-full w-0 rounded-l-md;
-    transition: width 0.1s linear;
+  @apply bg-primary-100 h-full w-0 rounded-l-md;
+  transition: width 0.1s linear;
 }
 
 .info__progress-container--slider-box {

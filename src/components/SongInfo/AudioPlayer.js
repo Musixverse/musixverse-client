@@ -104,7 +104,7 @@ export default function AudioPlayer(){
 
     return(
         <div className="flex flex-row justify-between items-center pb-10">
-            <button ref={playBtn} onClick={playSongHandler} className={styles['play-btn']}>
+            <button ref={playBtn} onClick={playSongHandler} className={"dark:border-light-100 " +styles['play-btn']}>
                 <i className="fas fa-play text-2xl"></i>
             </button>
             <div className="ml-5 flex flex-col flex-grow">

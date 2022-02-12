@@ -1,17 +1,21 @@
 .song-header{
-    @apply px-24 py-10 mt-12;
+    /* @apply px-24 py-10 mt-12; */
+    @apply my-10;
 }
 
 .song-header__container{
-    @apply flex flex-row justify-center items-center space-x-5;
+    /* @apply flex flex-row justify-center items-center space-x-5; */
+    @apply grid grid-cols-5 gap-6;
 }
 
 .song-header__container--songImage{
-    @apply max-w-[474px];
+    /* @apply max-w-[474px]; */
+    @apply col-span-2;
 }
 
 .song-header__container--song-detail{
-    @apply flex flex-col px-5 w-[860px] space-y-2;
+    /* @apply flex flex-col px-5 w-[860px] space-y-2 col-span-3; */
+    @apply flex flex-col space-y-2 col-span-3;
 }
 
 .song-detail--button button{

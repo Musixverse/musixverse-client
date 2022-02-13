@@ -10,12 +10,24 @@ export default function songInfo() {
     //components as props
     const onSale = true;
     return(
-        <div className="flex flex-col items-center justify-center">
+        // <div className="flex flex-col items-center justify-center w-full bg-light-100 dark:bg-dark-200 ">
+        //     {onSale? <Banner/>:null}
+        //     <div  className="flex flex-col justify-center items-center max-w-[1500px]">
+        //         <SongHeader/>
+        //         <SongDetails />
+        //         <div className="flex w-full justify-center my-10 max-w-[1500px]">
+        //             <PurchaseInfo/>
+        //             <SalesHistory/>
+        //         </div>
+        //     </div>
+        //     <NewsLetter/>
+        // </div>
+        <div className="flex flex-col items-center justify-center w-full bg-light-100 dark:bg-dark-200">
             {onSale? <Banner/>:null}
-            <div  className="flex flex-col justify-center items-center bg-light-200 dark:bg-dark-100 max-w-[1500px]">
+            <div className="w-full max-w-[1920px] px-24 2xl:px-40">
                 <SongHeader/>
                 <SongDetails />
-                <div className="flex w-full justify-center my-10 max-w-[1500px]">
+                <div className="grid grid-cols-5 gap-6 my-10">
                     <PurchaseInfo/>
                     <SalesHistory/>
                 </div>

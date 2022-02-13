@@ -1,5 +1,5 @@
 .sales-history{
-    @apply ml-12 p-10 rounded-xl bg-light-100 w-1/2;
+    @apply p-10 rounded-xl bg-light-200 col-span-3;
 }
 
 .sales-history__heading{
@@ -7,5 +7,5 @@
 }
 
 .sales-history__action{
-    @apply bg-[#dedede] rounded-full w-[40px] h-[40px] flex justify-center items-center;
+    @apply bg-light-100 rounded-full w-[40px] h-[40px] flex justify-center items-center;
 }

@@ -1,5 +1,5 @@
 .music-bar__container {
-  @apply bg-transparent w-[640px];
+  @apply bg-transparent w-full;
 }
 
 .music-bar__container--info {
@@ -15,8 +15,8 @@
 }
 
 .info__progress-container--progress {
-    @apply bg-primary-100 h-full w-0 rounded-l-md;
-    transition: width 0.1s linear;
+  @apply bg-primary-100 h-full w-0 rounded-l-md;
+  transition: width 0.1s linear;
 }
 
 .info__progress-container--slider-box {
@@ -24,5 +24,5 @@
 }
 
 .play-btn{
-  @apply h-[75px] w-[75px] border-dark-200 border-4 rounded-full flex items-center justify-center;
+  @apply h-[70px] w-[70px] border-dark-200 border-4 rounded-full flex items-center justify-center;
 }

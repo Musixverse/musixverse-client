@@ -1,17 +1,19 @@
-.song-detail{
-    @apply flex px-24;
-}
+/* .song-detail{
+    @apply flex;
+} */
 
 .song-detail__container{
-    @apply flex flex-1 p-8 border-2 border-gray-400 rounded-md;
+    @apply grid grid-cols-5 gap-6 p-8 border-2 bg-light-200 rounded-xl border-light-300;
+    /* grid to appear in this div */
 }
 
 .song-detail__song-details{
-    @apply flex flex-col pr-10;    
+    @apply flex flex-col col-span-2;  
+      /*song details col should span to 2 grid cols  */
 }
 
 .song-details__title{
-    @apply font-bold text-xl;
+    @apply font-semibold text-xl;
 }
 
 .song-details__subtitle{
@@ -23,11 +25,11 @@
 }
 
 .song-info__other-details{
-    @apply flex flex-col;
+    @apply flex flex-col font-secondary text-[15px] col-span-3;
 }
 
 .other-details__title{
-    @apply font-bold text-xl;
+    @apply font-semibold text-xl;
 }
 
 .other-details__section1{

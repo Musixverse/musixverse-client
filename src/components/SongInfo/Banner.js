@@ -7,7 +7,7 @@ export default function Banner(){
     const price = 0.3;
 
     return(
-        <div className={styles['banner']}>
+        <div className={"dark:bg-[#6ec726] "+styles['banner']}>
             <div className={styles['banner__container']}>
                 <p>This Song is available to buy</p>
                 {/* CTA */}

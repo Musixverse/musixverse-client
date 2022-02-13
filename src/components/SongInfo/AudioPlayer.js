@@ -25,7 +25,7 @@ export default function AudioPlayer(){
         let min = (isNaN(duration) === true)? '0' : Math.floor(duration/60);
         min = min <10 ? '0'+min:min;
 
-        let sec= "";
+        let sec= "00";
 
         if(Math.floor(duration) >= 60){
             for (var i = 1; i<=60; i++){
@@ -78,13 +78,14 @@ export default function AudioPlayer(){
         getTime(true);
     }
     //Function to control and drive the play pause events
-    const playSongHandler = (e) => {
-        const isPaused = e.target.classList.contains('fa-play')
+    const playSongHandler = () => {
+        const playPause = playBtn.current.children[0];
+        const isPaused = playPause.classList.contains('fa-play')
 
         if (isPaused)
-            playSong(e.target);
+            playSong(playPause);
         else 
-            pauseSong(e.target);
+            pauseSong(playPause);
     };
 
     const pauseSong = (controller)=>{
@@ -102,47 +103,43 @@ export default function AudioPlayer(){
     };
 
     return(
-        <>
-            <div className="flex flex-row justify-between items-center pb-10">
-                <div className="flex items-center">                        
-                        <button ref={playBtn} onClick={playSongHandler} className={styles['play-btn']}>
-                            <i className="fas fa-play text-2xl"></i>
-                        </button>
-                </div>
-                <div className="flex flex-col">
-                    {/* MP3 Bar */}
-                    <div className={styles['music-bar__container']}>
-                        <div className={styles['music-bar__container--info']}>
-                            {/* Time elapsed */}
-                            <p className={styles['container__info--duration']} ref={currTime}>00:00</p>
-                            {/* MP3 Progress */}
-                            <div ref={progressContainer} className={styles['container__info--progress-container']} onClick={setProgress}>
-                                <div ref={progress} className={styles['info__progress-container--progress']}></div>
-                                <div className={styles['info__progress-container--slider-box']}></div>
-                            </div>
-                            {/* Duration of song */}
-                            <p className={styles['container__info--duration']} ref={durTime}></p>
+        <div className="flex flex-row justify-between items-center pb-10">
+            <button ref={playBtn} onClick={playSongHandler} className={"dark:border-light-100 " +styles['play-btn']}>
+                <i className="fas fa-play text-2xl"></i>
+            </button>
+            <div className="ml-5 flex flex-col flex-grow">
+                {/* MP3 Bar */}
+                <div className={styles['music-bar__container']}>
+                    <div className={styles['music-bar__container--info']}>
+                        {/* Time elapsed */}
+                        <p className={styles['container__info--duration']} ref={currTime}>00:00</p>
+                        {/* MP3 Progress */}
+                        <div ref={progressContainer} className={styles['container__info--progress-container']} onClick={setProgress}>
+                            <div ref={progress} className={styles['info__progress-container--progress']}></div>
+                            <div className={styles['info__progress-container--slider-box']}></div>
                         </div>
-                        {/* Audio elem */}
-                        <audio ref={audio} src="/sounds/rengoku.mp3" onTimeUpdate={updateProgress} onEnded={resetProgress}></audio>
+                        {/* Duration of song */}
+                        <p className={styles['container__info--duration']} ref={durTime}></p>
                     </div>
+                    {/* Audio elem */}
+                    <audio ref={audio} src="/sounds/rengoku.mp3" onTimeUpdate={updateProgress} onEnded={resetProgress}></audio>
+                </div>
 
-                    <div className="flex flex-row space-x-8 pt-3 text-xs">
-                        <button className="flex justify-center items-center space-x-2">
-                            <Image src={favourite} width={18} height={18} alt="Add to favourites"></Image>
-                            <span>Added to Favourite</span>
-                        </button>
-                        <button className="flex justify-center items-center space-x-2">
-                            <Image src={sharebtn} width={18} height={18} alt="Share Button"></Image>
-                            <span>Share</span>
-                        </button>
-                        <button className="flex justify-center items-center space-x-2">
-                            <Image src={mxvverified} width={18} height={18} alt="Authentic License"></Image>
-                            <span>MXV Cerified & Unmodified</span>
-                        </button>
-                    </div>
+                <div className="flex flex-row space-x-8 pt-3 text-xs">
+                    <button className="flex justify-center items-center space-x-2">
+                        <Image src={favourite} width={18} height={18} alt="Add to favourites"></Image>
+                        <span>Added to Favourite</span>
+                    </button>
+                    <button className="flex justify-center items-center space-x-2">
+                        <Image src={sharebtn} width={18} height={18} alt="Share Button"></Image>
+                        <span>Share</span>
+                    </button>
+                    <button className="flex justify-center items-center space-x-2">
+                        <Image src={mxvverified} width={18} height={18} alt="Authentic License"></Image>
+                        <span>MXV Cerified & Unmodified</span>
+                    </button>
                 </div>
             </div>
-        </>
+        </div>
     );
 }

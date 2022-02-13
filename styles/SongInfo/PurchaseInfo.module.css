@@ -1,5 +1,5 @@
 .purchase-info{
-    @apply p-10 bg-light-300 rounded-xl col-span-2;
+    @apply p-10 bg-light-300 rounded-xl xl:col-span-2 col-span-3;
 }
 /* divide-y-2 divide-gray-400 */
 

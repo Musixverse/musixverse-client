@@ -33,11 +33,13 @@
 }
 
 .other-details__section1{
-    @apply flex flex-row space-x-20 py-3;
+    /* @apply flex flex-row space-x-16 py-3; */
+    @apply grid grid-cols-4 py-3
 }
 
 .other-details__section2{
-    @apply flex flex-row space-x-10 py-3;
+    /* @apply flex flex-row space-x-10 py-3; */
+    @apply grid grid-cols-5 gap-4 py-3;
 }
 
 .other-details__section3{
@@ -49,7 +51,7 @@
 }
 
 .other-details__footer{
-    @apply flex h-[60px] w-[650px] bg-white rounded-md items-center justify-between px-3;
+    @apply flex flex-1 h-[60px] bg-white rounded-md items-center justify-between p-3;
 }
 
 .footer__icons{

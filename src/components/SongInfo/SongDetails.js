@@ -26,9 +26,9 @@ export default function SongDetails() {
 
         {/* OTHER DETAILS */}
         <div className={styles['song-info__other-details']}>
-          <div className={styles['other-details__title']}>
-            <h1 className="font-tertiary text-[36px]">OTHER DETAILS</h1>
-          </div>
+          {/* <div className={styles['other-details__title']}> */}
+            <h1 className="font-tertiary font-semibold text-[36px]">OTHER DETAILS</h1>
+          {/* </div> */}
           <div className={styles['other-details__section1']}>
             <div className="text-left">
               <h4 className="font-bold font-secondary text-[18px]">Genres</h4>

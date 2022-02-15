@@ -24,10 +24,10 @@ export default function songInfo() {
         // </div>
         <div className="flex flex-col items-center justify-center w-full bg-light-100 dark:bg-dark-200">
             {onSale? <Banner/>:null}
-            <div className="w-full max-w-[1920px] px-24 2xl:px-40">
+            <div className="w-full max-w-[1920px] px-16 xl:px-24 2xl:px-40">
                 <SongHeader/>
                 <SongDetails />
-                <div className="grid grid-cols-5 gap-6 my-10">
+                <div className="grid grid-cols-7 xl:grid-cols-5 gap-6 my-10">
                     <PurchaseInfo/>
                     <SalesHistory/>
                 </div>

@@ -7,6 +7,7 @@ import share from "../../../public/assets/SHARE.svg";
 export default function ArtistHeader(){
     return(
         <div className={styles['artist-banner__container']} >
+        
             {/* Left Image section */}
             <div className={styles['artist-banner__section1']}>
                 <div className={styles['section1__artist-image']}>

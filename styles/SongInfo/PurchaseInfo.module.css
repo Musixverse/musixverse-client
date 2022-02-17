@@ -1,5 +1,5 @@
 .purchase-info{
-    @apply p-10 bg-light-300 rounded-xl xl:col-span-2 col-span-3;
+    @apply p-8 xl:p-10 bg-light-300 rounded-xl xl:col-span-2 col-span-4;
 }
 /* divide-y-2 divide-gray-400 */
 
@@ -20,7 +20,11 @@
 }
 
 .purchase-info__price-div{
-    @apply my-3 flex justify-between items-end;
+    @apply mt-3 flex justify-between items-end;
+}
+
+.purchase-info__price-div--cta button{
+    @apply xl:px-5 px-4;
 }
 
 .purchase-info__price-div--cta button:first-child{

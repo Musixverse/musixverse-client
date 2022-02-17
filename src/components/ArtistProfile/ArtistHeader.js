@@ -1,5 +1,5 @@
 import Image from "next/image";
-import styles from "../../../styles/SongInfo/ArtistHeader.module.css";
+import styles from "../../../styles/ArtistProfile/ArtistHeader.module.css";
 import metaData from "../../../metaData";
 import CustomButton from "../../Layouts/CustomButton";
 import share from "../../../public/assets/SHARE.svg";

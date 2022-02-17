@@ -36,7 +36,7 @@ export default function  PurchaseInfo(){
                     <p className={styles['purchase-info__heading--p']}>Price (x3 -3Copies)</p>
                     <div className="flex items-center">
                         <Image src={ethLogo} width={25} height={50} alt="ethereum"/>
-                        <p className="ml-2 font-bold text-4xl font-primary">{NFTPrice}</p>
+                        <p className="ml-2 font-bold text-pricing font-primary">{NFTPrice}</p>
                     </div>
                 </div>
                 <div className={styles['purchase-info__price-div--cta']}>

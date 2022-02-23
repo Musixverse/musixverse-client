@@ -1,8 +1,9 @@
 import Image from "next/image";
-import styles from "../../../styles/SongInfo/ArtistHeader.module.css";
+import styles from "../../../styles/ArtistProfile/ArtistHeader.module.css";
 import metaData from "../../../metaData";
 import CustomButton from "../../Layouts/CustomButton";
 import share from "../../../public/assets/SHARE.svg";
+import artistProfile from "../../../public/Artist_Profile.png";
 
 export default function ArtistHeader(){
     return(
@@ -11,7 +12,7 @@ export default function ArtistHeader(){
             {/* Left Image section */}
             <div className={styles['artist-banner__section1']}>
                 <div className={styles['section1__artist-image']}>
-                    <Image src="#" width={210} height={210} alt="artist profile"></Image>
+                    <Image src={artistProfile} width={210} height={210} alt="artist profile"></Image>
                 </div>
                 <div className={styles['section1__social-icons']}>
                     <a href={metaData.Links.spotify}><Image src="https://img.icons8.com/ios-filled/50/000000/spotify.png" width={25} height={25} alt="spotify" /></a>

@@ -46,6 +46,9 @@ module.exports = {
                 replace2: ["Open Sans", "sans-serif"],
                 replace3: ["Inter", "sans-serif"],
             },
+            fontSize: {
+                pricing: "clamp(1.75rem, 1.6456rem + 0.4453vw, 2.18rem)",
+            },
         },
     },
     plugins: [],

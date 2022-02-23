@@ -1,12 +1,39 @@
 
 .artist-banner__container{
-
+    @apply flex space-x-10 p-10 bg-light-200 rounded-2xl backdrop-blur-2xl relative bottom-28;
 }
 
+/* Left section */
 .artist-banner__section1{
-
+    @apply flex flex-col;
 }
 
-.artist-banner__section2{
+.section1__artist-image{
+    @apply w-[210px] h-[210px];
+}
 
+.section1__social-icons{
+    @apply space-x-5 pt-5 flex justify-center;
+}
+
+.section1__buttons{
+    @apply space-x-5 pt-3 flex justify-center;
+}
+
+
+/* Right section */
+.artist-banner__section2{
+    @apply flex flex-col justify-between;
+}
+
+.section2__artist-name{
+    @apply flex justify-between;
+}
+
+.section2__artist-stats{
+    @apply p-3 bg-slate-400;
+}
+
+.section2__artist-footer{
+    
 }

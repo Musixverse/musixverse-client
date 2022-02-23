@@ -4,6 +4,7 @@ import metaData from "../../../metaData";
 import CustomButton from "../../Layouts/CustomButton";
 import share from "../../../public/assets/SHARE.svg";
 import artistProfile from "../../../public/Artist_Profile.png";
+import mxv_tick from "../../../public/assets/mxv_tick.svg";
 
 export default function ArtistHeader(){
     return(
@@ -22,7 +23,7 @@ export default function ArtistHeader(){
                 </div>
                 <div className={styles['section1__buttons']}>
                     <CustomButton green={true}>Follow</CustomButton>
-                    <button><Image src={share} width={38} height={38} alt="share button"></Image></button>
+                    <button><Image src={share} width={25} height={25} alt="share button"></Image></button>
                 </div>
             </div>
 
@@ -30,7 +31,8 @@ export default function ArtistHeader(){
             {/* Right Details section */}
             <div className={styles['artist-banner__section2']}>
                 <div className={styles['section2__artist-name']}>
-                    <h1>{metaData.artistName}</h1>
+                    <p className="font-tertiary text-5xl">{metaData.artistName}
+                    &nbsp;<Image src={mxv_tick} width={21} height={21} alt="mxv_verified"></Image></p>
                     <div className={styles['section2__artist-stats']}>
                         <span>535 Following</span>
                         <span>23 Followers</span>

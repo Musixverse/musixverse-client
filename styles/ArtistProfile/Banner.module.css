@@ -1,4 +1,4 @@
 
 .artist-banner__container{
-    @apply w-full h-[20vh];
+    @apply w-full h-[350px] z-0;
 }

@@ -19,7 +19,7 @@ export default function Filter(){
     return(
         <div className="bg-light-300 mt-[85px] p-6 rounded-xl flex justify-between items-end">
             {/* Left Section */}
-            <div className="flex items-start">
+            <div className="flex items-start w-1/3">
                 <Image src={"/assets/record_b.svg"} alt="vinyl disc" height={30} width={30}></Image>
                 <div className="ml-4 flex-grow">
                     <h4 className="font-tertiary text-[36px] leading-none">RECORDS</h4>
@@ -33,7 +33,10 @@ export default function Filter(){
                 </div>
             </div>
             {/* Right Section */}
-            <Dropdown/>
+            <div className="bg-white rounded-xl flex px-4 py-2 items-center border-2 border-white hover:border-primary-100">
+                <p className="mt-[0.85px] text-sm font-medium text-gray-700">Sort By: </p>
+                <Dropdown/>
+            </div>
         </div>
     );
 }

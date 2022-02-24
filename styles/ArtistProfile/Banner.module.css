@@ -1,4 +1,9 @@
 
 .artist-banner__container{
-    @apply w-full h-[350px] z-0;
+    @apply w-full h-[50vh] z-0;
+    background-image: url('../../public/Artist_banner.png');
+    /* object-fit: contain; */
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
 }

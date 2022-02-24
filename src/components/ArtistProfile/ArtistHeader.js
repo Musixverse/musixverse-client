@@ -16,12 +16,14 @@ export default function ArtistHeader(){
                 <div className={styles['section1__artist-image']}>
                     <Image src={artistProfile} width={210} height={210} alt="artist profile"></Image>
                 </div>
+                {/* links to music platforms */}
                 <div className={styles['section1__social-icons']}>
                     <a href={metaData.Links.spotify}><Image src="https://img.icons8.com/ios-filled/50/000000/spotify.png" width={25} height={25} alt="spotify" /></a>
     				<a href={metaData.Links.appleMusic}><Image src="https://img.icons8.com/ios-filled/50/000000/apple-music.png" width={25} height={25} alt="apple-music" /></a>
 					<a href={metaData.Links.amazonMusic}><Image src="https://img.icons8.com/color/48/000000/amazon.png" width={25} height={25} alt="amazon-music" /></a>
 					<a href={metaData.Links.youtubeMusic}><Image src="https://img.icons8.com/bubbles/50/000000/youtube-music.png" width={25} height={25} alt="youtube-music" /></a>
                 </div>
+                {/* Buttons section - Follow and share */}
                 <div className={styles['section1__buttons']}>
                     <CustomButton green={true}>Follow</CustomButton>
                     <button><Image src={share} width={21} height={21} alt="share button"></Image></button>
@@ -37,12 +39,14 @@ export default function ArtistHeader(){
                     {/* Stats component */}
                     <Stats />
                 </div>
+                {/* About Us section */}
                 <div className={styles['section2__artist-about_us']}>
                     <h4 className="font-bold text-[18px] pt-3">About</h4>
                     <p className="text-[15px]">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione</p>
                     <p className={"text-[15px] pt-3 "+styles['about_us']}>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quas illo ad eaque ipsa molestias distinctio cupiditate veniam, velit recusandae itaque deleniti voluptatum, quibusdam alias odit! Quibusdam, sed nulla. Pariatur, similique?</p>
                     <button className="text-primary-200 hover:text-primary-300 text-[14px] pt-3">Read More</button>
                 </div>
+                {/* footer section */}
                 <div className={styles['section2__artist-footer']}>
                     <div className="space-x-5">
                         <span>United Arab Emirates</span>

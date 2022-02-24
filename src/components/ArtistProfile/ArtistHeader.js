@@ -40,7 +40,7 @@ export default function ArtistHeader(){
                 <div className={styles['section2__artist-about_us']}>
                     <h4 className="font-bold text-[18px] pt-3">About</h4>
                     <p className="text-[15px]">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione</p>
-                    <p className="text-[15px] pt-3">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quas illo ad eaque ipsa molestias distinctio cupiditate veniam, velit recusandae itaque deleniti voluptatum, quibusdam alias odit! Quibusdam, sed nulla. Pariatur, similique?</p>
+                    <p className={"text-[15px] pt-3 "+styles['about_us']}>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quas illo ad eaque ipsa molestias distinctio cupiditate veniam, velit recusandae itaque deleniti voluptatum, quibusdam alias odit! Quibusdam, sed nulla. Pariatur, similique?</p>
                     <button className="text-primary-200 hover:text-primary-300 text-[14px] pt-3">Read More</button>
                 </div>
                 <div className={styles['section2__artist-footer']}>

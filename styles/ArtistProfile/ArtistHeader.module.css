@@ -34,6 +34,12 @@
     @apply flex justify-between;
 }
 
+.about_us{
+    background: -webkit-linear-gradient(#333,#eee);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
 .section2__artist-footer{
     @apply flex justify-between items-center text-[#818181] text-[15px] font-medium;
 }

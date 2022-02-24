@@ -129,7 +129,7 @@ export default function AudioPlayer(){
                         <p className={styles['container__info--duration']} ref={durTime}></p>
                     </div>
                     {/* Audio elem */}
-                    <audio ref={audio} src="/sounds/rengoku.mp3" onCanPlayThrough={()=>console.log("ok")} onCanPlay={()=>console.log("Heya")} onTimeUpdate={updateProgress} onEnded={resetProgress}></audio>
+                    <audio ref={audio} src="/sounds/rengoku.mp3" onTimeUpdate={updateProgress} onEnded={resetProgress}></audio>
                 </div>
 
                 <div className="flex flex-row space-x-8 pt-3 text-xs">

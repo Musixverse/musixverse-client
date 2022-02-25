@@ -1,6 +1,6 @@
 
 .artist-banner__container{
-    @apply flex space-x-10 p-10 -top-[15vh] relative bg-nav-light backdrop-blur-2xl backdrop-brightness-150 dark:bg-nav-dark dark:backdrop-blur-xl dark:backdrop-brightness-105 rounded-2xl;
+    @apply flex space-x-10 p-10 -mt-[5%] bg-nav-light backdrop-blur-2xl backdrop-brightness-150 dark:bg-nav-dark dark:backdrop-blur-xl dark:backdrop-brightness-105 rounded-2xl;
 }
 
 /* Left section */

@@ -1,11 +1,11 @@
 
 import Image from "next/image";
-import styles from "../../../styles/SongInfo/NewsLetter.module.css";
-import redit from "../../../public/assets/social/reddit.svg";
-import discord from "../../../public/assets/social/discord.svg";
-import facebook from "../../../public/assets/social/facebook.svg";
-import twitter from "../../../public/assets/social/twitter.svg";
-import instagram from "../../../public/assets/social/instagram.svg";
+import styles from "../../styles/NewsLetter.module.css";
+import redit from "../../public/assets/social/reddit.svg";
+import discord from "../../public/assets/social/discord.svg";
+import facebook from "../../public/assets/social/facebook.svg";
+import twitter from "../../public/assets/social/twitter.svg";
+import instagram from "../../public/assets/social/instagram.svg";
 
 export default function NewsLetter(){
     return(

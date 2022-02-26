@@ -2,7 +2,7 @@ import SongHeader from "../../components/SongInfo/SongHeader";
 import SongDetails from "../../components/SongInfo/SongDetails";
 import PurchaseInfo from "../../components/SongInfo/PurchaseInfo";
 import SalesHistory from "../../components/SongInfo/SalesHistory";
-import NewsLetter from "../../components/SongInfo/NewsLetter";
+import NewsLetter from "../../Layouts/NewsLetter";
 import Banner from "../../components/SongInfo/Banner";
 
 export default function songInfo() {

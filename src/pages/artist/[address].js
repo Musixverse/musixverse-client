@@ -2,6 +2,7 @@ import Banner from "../../components/ArtistProfile/Banner";
 import ArtistHeader from "../../components/ArtistProfile/ArtistHeader";
 import Filter from "../../components/ArtistProfile/Filter";
 import NFTs from "../../components/ArtistProfile/NFTs";
+import NewsLetter from "../../Layouts/NewsLetter";
 
 export default function artistProfile(){
     return (
@@ -12,6 +13,7 @@ export default function artistProfile(){
                 <Filter/>
                 <NFTs/>
             </div>
+            <NewsLetter />
         </div>
     );
 }

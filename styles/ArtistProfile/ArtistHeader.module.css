@@ -13,14 +13,14 @@
 }
 
 .section1__social-icons{
-    @apply space-x-5 pt-5 flex justify-center;
+    @apply flex justify-center pt-5 space-x-5;
 }
 
 .section1__buttons{
-    @apply space-x-5 pt-3 flex justify-center;
+    @apply flex justify-center pt-3 space-x-5;
 }
 
-.section1__buttons CustomButton{
+.section1__buttons button:first-child{
     @apply flex-1 font-bold;
 }
 

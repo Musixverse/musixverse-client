@@ -1,8 +1,13 @@
-import NFTCard from "../../Layouts/NFTCard";
+import NFTCard from "../../Layouts/NFTCard/NFTCard";
 
 export default function NFTs(){
     return (
-        <div className="my-5 grid grid-cols-5 gap-11">
+        <div className="grid grid-cols-5 my-11 gap-11">
+            <NFTCard/>
+            <NFTCard/>
+            <NFTCard/>
+            <NFTCard/>
+            <NFTCard/>
             <NFTCard/>
         </div>
     );

@@ -13,6 +13,7 @@ export default function NewsLetter(){
             <div className={styles['newsletter__container']}>
                 <p className="font-tertiary text-4xl mb-2">Stay in the loop</p>
                 <div className="flex justify-between">
+                    {/* left section */}
                     <div>
                         <p className="text-sm mb-4">
                             Join our mailing list to stay in the loop with our newest future realeases,
@@ -33,6 +34,7 @@ export default function NewsLetter(){
                             Subscribe
                         </button>
                     </div>
+                    {/* Right section */}
                     <div className="flex flex-col justify-end items-end">
                         <p className="mb-4 text-[18px]">Join the community</p>
                         <div className={styles['newsletter__social']}>

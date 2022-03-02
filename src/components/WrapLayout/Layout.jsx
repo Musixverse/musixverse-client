@@ -1,17 +1,15 @@
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import { useState } from "react";
-import LoginModal from "../Modal/LoginModal";
 
 const Layout = ({ children }) => {
-    const [showLoginModal, setShowLoginModal] = useState(false);
+    const [showErrorBox, setShowErrorBox] = useState(false);
 
     return (
         <div>
-            <Navbar setShowLoginModal={setShowLoginModal} />
+            <Navbar showErrorBox={showErrorBox} setShowErrorBox={setShowErrorBox} />
             {children}
             <Footer />
-            <LoginModal showLoginModal={showLoginModal} setShowLoginModal={setShowLoginModal} />
         </div>
     );
 };

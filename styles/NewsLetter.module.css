@@ -1,0 +1,23 @@
+.newsletter{
+    @apply bg-primary-200 w-full flex justify-center;
+}
+
+.newsletter__container{
+    @apply font-secondary text-light-200 w-full max-w-[1920px] py-16 px-24 2xl:px-40;
+}
+
+.newsletter__email--input{
+    @apply bg-dark-100 px-5 py-2 font-primary font-light w-80 text-sm rounded-lg outline-none;
+}
+
+.newsletter__email--button{
+    @apply bg-light-200 font-bold text-dark-200 py-1 px-5 font-secondary rounded-lg ml-3 border-2 hover:border-primary-300;
+}
+
+.newsletter__social{
+    @apply flex space-x-5 justify-end;
+}
+
+.newsletter__social button{
+    @apply bg-dark-100 border-none p-2 rounded-md hover:bg-dark-200;
+}

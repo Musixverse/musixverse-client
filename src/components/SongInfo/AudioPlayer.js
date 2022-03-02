@@ -15,7 +15,14 @@ export default function AudioPlayer(){
 
     // Fetch the duration once component is loaded
     useEffect(()=>{
-        getTime(false);
+        console.log(audio.current.readyState);
+        const intervalId = setInterval(()=>{
+            if(audio.current.readyState >= 2){
+                getTime(false);
+                clearInterval(intervalId);
+                return;
+            }
+        },1000);
     },[]);
 
     //Function to get the current time and the duration time

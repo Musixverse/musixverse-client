@@ -1,0 +1,7 @@
+.nft-card{
+    @apply flex flex-col overflow-hidden rounded-2xl;
+}
+
+.nft-card__description{
+    @apply p-5 bg-light-100;
+}

@@ -2,7 +2,7 @@ import SongHeader from "../../components/SongInfo/SongHeader";
 import SongDetails from "../../components/SongInfo/SongDetails";
 import PurchaseInfo from "../../components/SongInfo/PurchaseInfo";
 import SalesHistory from "../../components/SongInfo/SalesHistory";
-import NewsLetter from "../../components/SongInfo/NewsLetter";
+import NewsLetter from "../../Layouts/NewsLetter";
 import Banner from "../../components/SongInfo/Banner";
 
 export default function songInfo() {
@@ -24,10 +24,10 @@ export default function songInfo() {
         // </div>
         <div className="flex flex-col items-center justify-center w-full bg-light-100 dark:bg-dark-200">
             {onSale? <Banner/>:null}
-            <div className="w-full max-w-[1920px] px-24 2xl:px-40">
+            <div className="w-full max-w-[1920px] px-16 xl:px-20 2xl:px-36">
                 <SongHeader/>
                 <SongDetails />
-                <div className="grid grid-cols-5 gap-6 my-10">
+                <div className="grid grid-cols-9 xl:grid-cols-5 gap-6 my-10">
                     <PurchaseInfo/>
                     <SalesHistory/>
                 </div>

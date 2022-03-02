@@ -1,0 +1,8 @@
+
+.artist-banner__container{
+    @apply w-full h-[42vh] -z-0 relative;
+    background-image: url('../../public/Artist_banner.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}

@@ -1,4 +1,5 @@
 module.exports = {
+    mode: 'jit',
     content: ["./src/pages/**/*.{js,ts,jsx,tsx}", "./src/components/**/*.{js,ts,jsx,tsx}"],
     darkMode: "class",
     theme: {
@@ -45,6 +46,9 @@ module.exports = {
                 replace1: ["Lato", "sans-serif"],
                 replace2: ["Open Sans", "sans-serif"],
                 replace3: ["Inter", "sans-serif"],
+            },
+            fontSize: {
+                pricing: "clamp(1.75rem, 1.6456rem + 0.4453vw, 2.18rem)",
             },
         },
     },

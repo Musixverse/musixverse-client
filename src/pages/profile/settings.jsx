@@ -30,7 +30,7 @@ const Settings = ({}) => {
             setUsername(user.attributes.username);
             setEmail(user.attributes.email);
         }
-    }, [fetchBalance, isAuthenticated, user.attributes.username, user.attributes.email]);
+    }, [fetchBalance, isAuthenticated]);
 
     const handleSave = () => {
         if (username !== "" && email !== "") {

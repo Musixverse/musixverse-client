@@ -10,8 +10,13 @@ const Navbar = ({ showErrorBox, setShowErrorBox }) => {
     const { theme, setTheme } = useTheme();
     const { authenticate, isAuthenticated, authError, logout, user } = useMoralis();
 
+    if (typeof window !== "undefined") {
+        if (document.getElementById("w3a-modal")) {
+            document.getElementById("w3a-modal").style.zIndex = "500";
+        }
+    }
+
     const handleLogin = async () => {
-        // setShowLoginModal(true);
         authenticate({
             provider: "web3Auth",
             clientId: process.env.NEXT_PUBLIC_WEB3_AUTH_CLIENT_ID,

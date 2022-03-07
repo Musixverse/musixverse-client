@@ -6,7 +6,7 @@ const SuccessBox = ({ title, message, showSuccessBox, setShowSuccessBox }) => {
     return (
         showSuccessBox && (
             <div
-                className="bg-green-100 w-5/12 border border-green-400 text-green-700 px-4 py-3 rounded absolute top-16 left-3/4 transform -translate-x-1/2 -translate-y-1/2"
+                className="bg-green-100 w-5/12 border border-green-400 text-green-700 px-4 py-3 rounded fixed right-0 bottom-0 -translate-x-4 -translate-y-4 z-50"
                 role="alert"
             >
                 <strong className="font-bold">{title}</strong>

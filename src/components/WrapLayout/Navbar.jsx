@@ -1,23 +1,33 @@
 import { useMoralis } from "react-moralis";
+import { useEffect } from "react";
 import Link from "next/link";
 import { useTheme } from "next-themes";
 import Image from "next/image";
+import Router from "next/router";
 import logoBlack from "../../../public/logo-black.svg";
 import logoWhite from "../../../public/logo-white.svg";
-import ErrorBox from "../Modal/ErrorBox";
 
-const Navbar = ({ showErrorBox, setShowErrorBox }) => {
+const Navbar = () => {
     const { theme, setTheme } = useTheme();
-    const { authenticate, isAuthenticated, authError, logout, user } = useMoralis();
+    const { authenticate, isAuthenticated, logout, user } = useMoralis();
 
-    if (typeof window !== "undefined") {
-        if (document.getElementById("w3a-modal")) {
-            document.getElementById("w3a-modal").style.zIndex = "500";
-        }
+    if (typeof window !== "undefined" && document.getElementById("w3a-modal")) {
+        document.getElementById("w3a-modal").style.zIndex = "500";
     }
 
+    useEffect(() => {
+        console.log("User:", user);
+        if (user) {
+            if (!user.attributes.email) {
+                Router.push("/auth/step-2", undefined, { shallow: true });
+            } else {
+                Router.push("/profile", undefined, { shallow: true });
+            }
+        }
+    }, [user]);
+
     const handleLogin = async () => {
-        authenticate({
+        await authenticate({
             provider: "web3Auth",
             clientId: process.env.NEXT_PUBLIC_WEB3_AUTH_CLIENT_ID,
             theme: theme === "light" ? "light" : "dark",
@@ -98,7 +108,7 @@ const Navbar = ({ showErrorBox, setShowErrorBox }) => {
                                 href="/profile"
                                 className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:text-primary-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
                             >
-                                Dashboard
+                                Profile
                             </Link>
                         </li>
                         <li>
@@ -184,8 +194,6 @@ const Navbar = ({ showErrorBox, setShowErrorBox }) => {
                         </li>
                     </ul>
                 </div>
-
-                {authError && <ErrorBox title={"Auth failed!"} message={authError.message} showErrorBox={true} setShowErrorBox={setShowErrorBox} />}
             </div>
         </nav>
     );

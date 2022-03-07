@@ -1,18 +1,21 @@
-const SuccessBox = ({ title, message, showSuccessBox, setShowSuccessBox }) => {
+const SuccessBox = ({ success, setSuccess }) => {
     const handleClose = () => {
-        setShowSuccessBox(false);
+        setSuccess((prevState) => ({
+            ...prevState,
+            showSuccessBox: false,
+        }));
     };
 
     return (
-        showSuccessBox && (
+        success.showSuccessBox && (
             <div
                 className="bg-green-100 w-5/12 border border-green-400 text-green-700 px-4 py-3 rounded fixed right-0 bottom-0 -translate-x-4 -translate-y-4 z-50"
                 role="alert"
             >
-                <strong className="font-bold">{title}</strong>
+                <strong className="font-bold">{success.title}</strong>
                 <br />
                 <br />
-                <span className="block sm:inline">{message}</span>
+                <span className="block sm:inline">{success.message}</span>
                 <div className="absolute top-0 bottom-0 right-0 px-4 py-3" onClick={handleClose}>
                     <svg className="fill-current h-6 w-6 text-green-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                         <title>Close</title>

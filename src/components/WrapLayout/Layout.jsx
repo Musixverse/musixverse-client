@@ -1,16 +1,21 @@
 import { useMoralis } from "react-moralis";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import ErrorBox from "../Modal/ErrorBox";
+import SuccessBox from "../Modal/SuccessBox";
 
-const Layout = ({ children }) => {
-    const [showErrorBox, setShowErrorBox] = useState(false);
+const Layout = ({ children, error, setError, success, setSuccess }) => {
     const { authError } = useMoralis();
 
     useEffect(() => {
         if (authError) {
-            setShowErrorBox(true);
+            setError((prevState) => ({
+                ...prevState,
+                title: "Auth failed!",
+                message: authError.message,
+                showErrorBox: true,
+            }));
         }
     }, [authError]);
 
@@ -18,7 +23,8 @@ const Layout = ({ children }) => {
         <div>
             <Navbar />
             {children}
-            {authError && <ErrorBox title={"Auth failed!"} message={authError.message} showErrorBox={showErrorBox} setShowErrorBox={setShowErrorBox} />}
+            {error.showErrorBox && <ErrorBox error={error} setError={setError} />}
+            {success.showSuccessBox && <SuccessBox success={success} setSuccess={setSuccess} />}
             <Footer />
         </div>
     );

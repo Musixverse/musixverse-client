@@ -7,7 +7,7 @@ const ErrorBox = ({ title, message, showErrorBox, setShowErrorBox }) => {
     return (
         showErrorBox && (
             <div
-                className="bg-red-100 w-5/12 border border-red-400 text-red-700 px-4 py-3 rounded absolute top-16 left-3/4 transform -translate-x-1/2 -translate-y-1/2 z-40"
+                className="bg-red-100 w-5/12 border border-red-400 text-red-700 px-4 py-3 rounded fixed right-0 bottom-0 -translate-x-4 -translate-y-4 z-50"
                 role="alert"
             >
                 <strong className="font-bold">{title}</strong>

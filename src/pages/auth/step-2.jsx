@@ -4,12 +4,11 @@ import Router from "next/router";
 import { useMoralis } from "react-moralis";
 import SuccessBox from "../../components/Modal/SuccessBox";
 
-const Settings = ({}) => {
+const Settings = ({ error, setError, success, setSuccess }) => {
     const { user, isAuthenticated, setUserData, Moralis } = useMoralis();
     const [name, setName] = useState("");
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
-    const [showSuccessBox, setShowSuccessBox] = useState(false);
     const [balance, setBalance] = useState(0);
 
     const fetchBalance = async () => {
@@ -39,7 +38,13 @@ const Settings = ({}) => {
                 username: username === "" ? undefined : username,
                 email: email === "" ? undefined : email,
             });
-            setShowSuccessBox(true);
+            setSuccess((prevState) => ({
+                ...prevState,
+                title: "Profile updated!",
+                message: "Your profile has been updated successfully.",
+                showSuccessBox: true,
+            }));
+
             Router.push("/profile", undefined, { shallow: true });
         }
         return;
@@ -52,12 +57,7 @@ const Settings = ({}) => {
                 <meta name="description" content="Musixverse" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <SuccessBox
-                title={"Profile updated!"}
-                message={"Your profile was updated successfully."}
-                showSuccessBox={showSuccessBox}
-                setShowSuccessBox={setShowSuccessBox}
-            />
+
             <div className="container mx-auto pt-36 pb-20">
                 <div className="flex flex-wrap justify-center content-center items-center">
                     <h1 className="text-4xl font-semibold">Almost there!</h1>

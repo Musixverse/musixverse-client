@@ -2,9 +2,8 @@ import { useState, useEffect } from "react";
 import Head from "next/head";
 import { useMoralis } from "react-moralis";
 import ErrorBox from "../../components/Modal/ErrorBox";
-import SuccessBox from "../../components/Modal/SuccessBox";
 
-const Settings = ({}) => {
+const Settings = ({ error, setError, success, setSuccess }) => {
     const { user, isAuthenticated, setUserData, userError, Moralis } = useMoralis();
     const [name, setName] = useState("");
     const [username, setUsername] = useState("");
@@ -14,7 +13,6 @@ const Settings = ({}) => {
     const [instagram, setInstagram] = useState("");
     const [twitter, setTwitter] = useState("");
     const [spotify, setSpotify] = useState("");
-    const [showSuccessBox, setShowSuccessBox] = useState(false);
     const [balance, setBalance] = useState(0);
 
     const fetchBalance = async () => {
@@ -43,13 +41,22 @@ const Settings = ({}) => {
     }, [isAuthenticated]);
 
     const handleSave = () => {
-        if (username !== "" && email !== "") {
-            setUserData({
-                name: name === "" ? undefined : name,
-                username: username === "" ? undefined : username,
-                email: email === "" ? undefined : email,
-            });
-            setShowSuccessBox(true);
+        try {
+            if (username !== "" && email !== "") {
+                setUserData({
+                    name: name === "" ? undefined : name,
+                    username: username === "" ? undefined : username,
+                    email: email === "" ? undefined : email,
+                });
+                setSuccess((prevState) => ({
+                    ...prevState,
+                    title: "Profile updated!",
+                    message: "Your profile has been updated successfully.",
+                    showSuccessBox: true,
+                }));
+            }
+        } catch (error) {
+            console.log("ERROR-", error);
         }
         return;
     };
@@ -61,12 +68,7 @@ const Settings = ({}) => {
                 <meta name="description" content="Musixverse" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <SuccessBox
-                title={"Profile updated!"}
-                message={"Your profile was updated successfully."}
-                showSuccessBox={showSuccessBox}
-                setShowSuccessBox={setShowSuccessBox}
-            />
+
             <div className="container mx-auto pt-36 pb-20">
                 <div className="flex flex-wrap justify-center content-center items-center">
                     <h1 className="text-4xl font-semibold">Settings</h1>

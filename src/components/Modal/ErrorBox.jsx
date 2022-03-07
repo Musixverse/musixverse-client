@@ -1,19 +1,25 @@
-const ErrorBox = ({ title, message, showErrorBox, setShowErrorBox }) => {
+const ErrorBox = ({ error, setError }) => {
     const handleClose = () => {
-        setShowErrorBox(false);
-        window.location.reload();
+        setError((prevState) => ({
+            ...prevState,
+            showErrorBox: false,
+        }));
+
+        if (error.message == "Cannot execute Moralis.enableWeb3(), as Moralis Moralis.enableWeb3() already has been called, but is not finished yet ") {
+            window.location.reload();
+        }
     };
 
     return (
-        showErrorBox && (
+        error.showErrorBox && (
             <div
                 className="bg-red-100 w-5/12 border border-red-400 text-red-700 px-4 py-3 rounded fixed right-0 bottom-0 -translate-x-4 -translate-y-4 z-50"
                 role="alert"
             >
-                <strong className="font-bold">{title}</strong>
+                <strong className="font-bold">{error.title}</strong>
                 <br />
                 <br />
-                <span className="block sm:inline">{message}</span>
+                <span className="block sm:inline">{error.message}</span>
                 <div className="absolute top-0 bottom-0 right-0 px-4 py-3" onClick={handleClose}>
                     <svg className="fill-current h-6 w-6 text-red-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                         <title>Close</title>

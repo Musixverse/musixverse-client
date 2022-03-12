@@ -15,7 +15,7 @@ export default function Register(){
                 </div>
 
                 {/* Right section */}
-                <div className="w-1/2">
+                <div className="bg-light-100 my-4 rounded-md">
                     <p>SIGN UP</p>
                     <p>What&apos;s the difference Between Artist & Collectors?</p>
                     {/* Components */}

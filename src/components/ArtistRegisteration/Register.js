@@ -1,20 +1,20 @@
 
 import Image from "next/Image";
-import illustration_svg from "../../../public/assets/registeration/Illustation.svg";
+import illustration_svg from "../../../public/assets/registeration/Illustration.svg";
 import Notification_icon from "../../../public/assets/registeration/Notification.svg";
 
-export default function SignUp(){
+export default function Register(){
     return(
-        <div className="w-full h-screen max-w-[1920px]">
+        <div className="p-4 pt-24">
             <div className="flex flex-row space-x-4 rounded-md bg-light-300">
                 {/* Left section */}
-                <div>
-                    <p>LET&apos;S REVOLUTIONIZE THE MUSIC<br />INDUSTRY TOGETHER!</p>
-                    <Image src={illustration_svg} width={512} height={512} alt="music illustration" />
+                <div className="flex flex-col w-1/2 items-start pt-10 pl-10">
+                    <p className="text-5xl font-tertiary">LET&apos;S REVOLUTIONIZE THE MUSIC<br />INDUSTRY TOGETHER!</p>
+                    <Image src={illustration_svg} width={300} height={300} alt="music illustration" />
                 </div>
 
                 {/* Right section */}
-                <div>
+                <div className="w-1/2">
                     <p>SIGN UP</p>
                     <p>What&apos;s the difference Between Artist & Collectors?</p>
                     {/* Components */}

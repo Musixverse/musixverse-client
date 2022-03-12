@@ -2,6 +2,7 @@
 import Image from "next/Image";
 import illustration_svg from "../../../public/assets/registeration/Illustration.svg";
 import Notification_icon from "../../../public/assets/registeration/Notification.svg";
+import Register_sub from "./ArtistRegUtils/Register_sub";
 
 export default function Register(){
     return(
@@ -18,6 +19,8 @@ export default function Register(){
                     <p>SIGN UP</p>
                     <p>What&apos;s the difference Between Artist & Collectors?</p>
                     {/* Components */}
+                    <Register_sub category="artist" />
+                    <Register_sub category="collector" />
 
                     <div className="flex space-x-4">
                         <Image src={Notification_icon} width={20} height={20} alt="Notification" /> 

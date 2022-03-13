@@ -14,7 +14,9 @@ export default function Register(){
                     <p className="mt-20 text-5xl font-tertiary max-w-[468px]">
                         LET&apos;S REVOLUTIONIZE THE MUSIC INDUSTRY TOGETHER!
                     </p>
-                    <Image src={illustration_svg} width={800} height={800} alt="music illustration" />
+                    <div className={styles['image-wrapper']}>
+                        <img src="/assets/registeration/dark_MXV.svg" alt="music illustration" />
+                    </div>
                 </LeftSection>
 
                 {/* Right section */}

@@ -7,5 +7,9 @@
 }
 
 .register__container--left-section{
-    @apply flex flex-col items-start;
+    @apply flex flex-col items-start space-y-24;
+}
+
+.image-wrapper img {
+   @apply w-[1050px] h-[300px] absolute -left-40;
 }

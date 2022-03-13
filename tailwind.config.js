@@ -4,6 +4,9 @@ module.exports = {
     darkMode: "class",
     theme: {
         extend: {
+            padding:{
+                'responsive':'clamp(100px, calc(6.25rem + ((1vw - 10.24px) * 12.2768)), 210px)',
+            },
             colors: {
                 primary: {
                     100: "#5AB510",

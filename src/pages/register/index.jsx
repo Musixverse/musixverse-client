@@ -1,4 +1,3 @@
-
 import Head from "next/head";
 import Register from "../../components/ArtistRegisteration/Register";
 
@@ -10,10 +9,8 @@ const Register_Page = () => {
                 <meta name="description" content="Musixverse" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-
-            <div className="w-full max-w-[1920px] min-h-screen">
-                <Register />       
-            </div>
+            <Register/>
+            {/* <div className="w-full max-w-[1920px] min-h-screen"> */}
         </>
     );
 };

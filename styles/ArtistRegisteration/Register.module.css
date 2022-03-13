@@ -1,5 +1,5 @@
 .register{
-    @apply flex items-center justify-center pt-24;
+    @apply flex items-center justify-center pt-24 pb-4;
 }
 
 .register__container{

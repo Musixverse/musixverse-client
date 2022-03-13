@@ -3,6 +3,7 @@ import Image from "next/Image";
 import illustration_svg from "../../../public/assets/registeration/Illustration.svg";
 import Notification_icon from "../../../public/assets/registeration/Notification.svg";
 import Register_sub from "./ArtistRegUtils/Register_sub";
+import Whitecard from "./ArtistRegUtils/Whitecard";
 
 export default function Register(){
     return(
@@ -17,7 +18,7 @@ export default function Register(){
                 </div>
 
                 {/* Right section */}
-                <div className="bg-light-200 my-6 rounded-md px-10 pt-8">
+                <Whitecard>
                     <p className="text-5xl font-tertiary">SIGN UP</p>
                     <p className="text-[15px] font-secondary">What&apos;s the difference Between Artist & Collectors?</p>
                     {/* Components */}
@@ -27,9 +28,9 @@ export default function Register(){
                     </div>
                     <div className="flex space-x-4 pt-8">
                         <Image src={Notification_icon} width={20} height={20} alt="Notification" /> 
-                        <p className="text-[15px] font-secondary">Don&apos;t worry, you can switch your user profile to <br />an artist profile at any stage you&apos;d like.</p>
+                        <p className="text-[12px] font-secondary">Don&apos;t worry, you can switch your user profile to <br />an artist profile at any stage you&apos;d like.</p>
                     </div>
-                </div>
+                </Whitecard>
             </div>
         </div>
     );

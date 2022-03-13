@@ -1,6 +1,6 @@
 import Image from "next/Image";
-import illustration_svg from "../../../public/assets/registeration/Illustration.svg";
-import Whitecard from "./ArtistRegUtils/Whitecard";
+import illustration_svg from "../../../public/assets/registeration/dark_MXV.svg";
+import RightSection from "./ArtistRegUtils/RightSection";
 import styles from "../../../styles/ArtistRegisteration/Register.module.css";
 import LeftSection from "./ArtistRegUtils/LeftSection";
 import ArtistOrUser from "./ArtistRegUtils/ArtistOrUser";
@@ -14,15 +14,13 @@ export default function Register(){
                     <p className="mt-20 text-5xl font-tertiary max-w-[468px]">
                         LET&apos;S REVOLUTIONIZE THE MUSIC INDUSTRY TOGETHER!
                     </p>
-                    <div>
-                        <Image src={illustration_svg} width={400} height={400} alt="music illustration" />
-                    </div>
+                    <Image src={illustration_svg} width={800} height={800} alt="music illustration" />
                 </LeftSection>
 
                 {/* Right section */}
-                <Whitecard>{/*<-- Maybe, Rename component to RightSection*/}
+                <RightSection>
                     <ArtistOrUser/>
-                </Whitecard>
+                </RightSection>
             </div>
         </div>
     );

@@ -1,8 +1,8 @@
 
 import Image from "next/Image";
 import arrow from "../../../../public/assets/registeration/arrow.svg";
-import artist_mic from "../../../../public/assets/registeration/artist_mic.svg";
-import collection_category from "../../../../public/assets/registeration/collector.svg";
+import artist_mic from "../../../../public/assets/registeration/B_Artist.svg";
+import collection_category from "../../../../public/assets/registeration/B_collector.svg";
 
 
 export default function Register_sub({artist}) {

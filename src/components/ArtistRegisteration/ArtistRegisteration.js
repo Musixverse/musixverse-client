@@ -26,17 +26,17 @@ export default function ArtistRegisteration(){
                 {/* Right section */}
                 <RightSection>
                     <p className="text-5xl font-tertiary max-w-[468px]">YOUR DETAILS</p>
-                    <div className="flex mt-12 text-[18px] font-secondary font-bold">
+                    <div className="flex mt-12 text-[18px] font-secondary font-bold space-x-3">
                         <span>
                             <p>Username</p>
-                            <input type="text" className="" />
+                            <input type="text" className="border-2 rounded-md border-gray-500 shadow-sm" />
                         </span>
                         <span>
                             <p>Email Address</p>
-                            <input type="text" className=""></input>
+                            <input type="text" className="border-2 rounded-md border-gray-500  shadow-sm" />
                         </span>
                     </div>
-                    <div className="flex flex-col space-y-3">
+                    <div className="flex flex-col space-y-3 mt-8">
                         <span className="flex space-x-4 justify-start items-center">
                             <input type="checkbox" />
                             <p className="text-[18px] font-secondary font-bold">

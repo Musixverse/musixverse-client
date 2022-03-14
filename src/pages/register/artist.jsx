@@ -1,4 +1,5 @@
 import Head from "next/head";
+import ArtistRegisteration from "../../components/ArtistRegisteration/ArtistRegisteration";
 
 const Artist_Page = () => {
     return (
@@ -9,6 +10,7 @@ const Artist_Page = () => {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             {/* Component */}
+            <ArtistRegisteration />
         </>
     );
 };

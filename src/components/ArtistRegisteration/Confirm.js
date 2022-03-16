@@ -8,6 +8,8 @@ export default function CollectorRegisteration(){
     return (
         <div className={styles['register']}>
             <div className={styles['register__container']}>
+                
+                {/* Main container */}
                 <div className={styles['confirm__container']}>
                     <Image src={blackhole} width={440} height={318} alt="Black-hole" />
                     <span className="pt-8 flex flex-col justify-center items-center">
@@ -16,6 +18,7 @@ export default function CollectorRegisteration(){
                     </span>
                     <Button>Back to login</Button>
                 </div>
+                
             </div>
         </div>
     );

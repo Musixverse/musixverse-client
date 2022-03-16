@@ -1,9 +1,7 @@
-import Image from "next/Image";
 import RightSection from "./ArtistRegUtils/RightSection";
 import LeftSection from "./ArtistRegUtils/LeftSection";
 import ArtistOrUser from "./ArtistRegUtils/ArtistOrUser";
 import styles from "../../../styles/ArtistRegisteration/Register.module.css";
-import illustration_svg from "../../../public/assets/registeration/dark_MXV.svg";
 
 export default function Register(){
     return(

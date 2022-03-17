@@ -13,8 +13,8 @@ export default function CollectorRegisteration(){
                 <div className={styles['confirm__container']}>
                     <Image src={blackhole} width={440} height={318} alt="Black-hole" />
                     <span className="pt-8 flex flex-col justify-center items-center">
-                        <p className="font-tertiary text-5xl">CONFIRM YOUR EMAIL</p>
-                        <p className="font-secondary text-[15px]">Please check your inbox and follow the instructions in the mail.</p>
+                        <p className="font-tertiary text-4xl sm:text-5xl">CONFIRM YOUR EMAIL</p>
+                        <p className="font-secondary text-[15px] text-center">Please check your inbox and follow the instructions in the mail.</p>
                     </span>
                     <Button>Back to login</Button>
                 </div>

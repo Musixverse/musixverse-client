@@ -9,7 +9,7 @@ const Register_Page = () => {
                 <meta name="description" content="Musixverse" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <Register/>
+            <Register />
             {/* <div className="w-full max-w-[1920px] min-h-screen"> */}
         </>
     );

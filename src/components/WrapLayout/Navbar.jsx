@@ -19,7 +19,7 @@ const Navbar = () => {
         console.log("User:", user);
         if (user) {
             if (!user.attributes.email) {
-                Router.push("/auth/step-2", undefined, { shallow: true });
+                Router.push("/register", undefined, { shallow: true });
             } else {
                 Router.push("/profile", undefined, { shallow: true });
             }
@@ -55,7 +55,7 @@ const Navbar = () => {
 
                 <div className="hidden w-full md:block md:w-auto ml-auto" id="mobile-menu"></div>
 
-                <div className="flex ml-auto">
+                <div className="flex ml-auto hidden md:block">
                     <ul className="flex items-center flex-col md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium">
                         <li>
                             <div className="text-xs rounded text-search-200 bg-light-100 dark:text-search-300 dark:bg-search-200 flex items-center justify-center">

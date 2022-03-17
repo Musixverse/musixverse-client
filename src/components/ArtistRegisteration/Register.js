@@ -1,7 +1,5 @@
-import RightSection from "./ArtistRegUtils/RightSection";
-import LeftSection from "./ArtistRegUtils/LeftSection";
 import ArtistOrUser from "./ArtistRegUtils/ArtistOrUser";
-import styles from "../../../styles/ArtistRegisteration/New.module.css";
+import styles from "../../../styles/ArtistRegisteration/Register.module.css";
 
 export default function Register(){
     return(

@@ -1,4 +1,4 @@
-import styles from "../../../../styles/ArtistRegisteration/Register.module.css";
+import styles from "../../../../styles/ArtistRegisteration/Artist.module.css";
 
 export default function LeftSection(props){
     return(

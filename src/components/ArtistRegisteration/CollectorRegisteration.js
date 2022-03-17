@@ -1,5 +1,5 @@
 import RightSection from "./ArtistRegUtils/RightSection";
-import styles from "../../../styles/ArtistRegisteration/Register.module.css";
+import styles from "../../../styles/ArtistRegisteration/Artist.module.css";
 import Button from "./ArtistRegUtils/Button";
 import SelectAvatar from "./ArtistRegUtils/SelectAvatar";
 

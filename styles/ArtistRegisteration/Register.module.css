@@ -11,7 +11,10 @@
 }
 
 .register__container--right-section{
-    @apply ml-auto my-6 p-8 sm:p-16 bg-light-100 backdrop-blur-xl backdrop-brightness-150 dark:bg-nav-dark dark:backdrop-blur-xl dark:backdrop-brightness-105 rounded-xl relative z-[2];
+    @apply ml-auto my-6 p-8 sm:p-16 rounded-xl relative z-[2];
+    /*Frosted glass effect */
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255,0.6);
 }
 
 .container__left-section--asset-image{

@@ -1,5 +1,6 @@
+
 import Head from "next/head";
-import ConfirmPage from "../../components/ArtistRegistration/Confirm";
+import ConfirmPage from "../../components/ArtistRegisteration/Confirm";
 
 const Confirm_Page = () => {
     return (

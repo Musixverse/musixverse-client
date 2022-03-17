@@ -10,7 +10,7 @@ const Collector_Page = () => {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             {/* Component */}
-            <CollectorRegistration />
+            <CollectorRegistration/>
         </>
     );
 };

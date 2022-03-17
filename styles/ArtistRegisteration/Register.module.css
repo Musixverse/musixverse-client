@@ -1,5 +1,5 @@
 .register{
-    @apply flex items-center justify-center pt-48 pb-4 lg:pt-24 sm:pt-32;
+    @apply flex items-center justify-center lg:pt-24 sm:pt-32 pt-48 pb-4;
 }
 
 .register__container{
@@ -11,7 +11,7 @@
 }
 
 .register__container--right-section{
-    @apply ml-auto my-6 md:p-12 sm:p-16 bg-light-100 backdrop-blur-xl backdrop-brightness-150 dark:bg-nav-dark dark:backdrop-blur-xl dark:backdrop-brightness-105 rounded-xl relative z-[2];
+    @apply ml-auto my-6 p-8 sm:p-16 bg-light-100 backdrop-blur-xl backdrop-brightness-150 dark:bg-nav-dark dark:backdrop-blur-xl dark:backdrop-brightness-105 rounded-xl relative z-[2];
 }
 
 .container__left-section--asset-image{

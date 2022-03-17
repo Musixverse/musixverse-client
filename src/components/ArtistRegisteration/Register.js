@@ -16,9 +16,9 @@ export default function Register(){
                 </div>
 
                 {/* Right section */}
-                <RightSection>
+                <div className={styles['register__container--right-section']}>
                     <ArtistOrUser/>
-                </RightSection>
+                </div>
             </div>
         </div>
     );

@@ -31,11 +31,11 @@ export default function ArtistRegisteration(){
                     <p className="text-5xl font-tertiary max-w-[468px] mb-10">YOUR DETAILS</p>
                     <SelectAvatar/>
                     <div className="flex flex-col sm:flex-row mt-8 text-[16px] font-secondary font-bold space-y-4 sm:space-x-3 sm:space-y-0">
-                        <div>
+                        <div className="flex-1">
                             <p>Username</p>
                             <input type="text" className="w-full p-1 border-2 border-gray-500 rounded-md shadow-sm" />
                         </div>
-                        <div>
+                        <div className="flex-1">
                             <p>Email Address</p>
                             <input type="text" className="w-full p-1 border-2 border-gray-500 rounded-md shadow-sm" />
                         </div>
@@ -47,7 +47,7 @@ export default function ArtistRegisteration(){
                                 Permission of listening rights
                             </p>
                         </div>
-                        <p className="text-[13px] font-secondary max-w-[468px]">
+                        <p className="text-[13px] font-secondary lg:max-w-[468px] max-w-none">
                             Confirm that you are providing permissions to Musixverse to use your music for non-monetized streaming, both on Musixverse and any external apps and platforms which are directly associated with or part of the Musixverse platform.
                         </p>
                         <div className="flex items-center justify-start pt-2 mt-3 space-x-3">
@@ -56,7 +56,7 @@ export default function ArtistRegisteration(){
                                 Guidelines for submission
                             </p>
                         </div>
-                        <p className="text-[13px] font-secondary max-w-[468px] mt-2">
+                        <p className="text-[13px] font-secondary lg:max-w-[468px] max-w-none mt-2">
                             Confirm that none of your submissions,both current and future contain any infringing or unauthorized copyrighted material.
                         </p>
                     </div>

@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import arrow from "../../../../public/assets/registeration/arrow.svg";
 import artist_mic from "../../../../public/assets/registeration/B_Artist.svg";
 import collection_category from "../../../../public/assets/registeration/B_collector.svg";
 

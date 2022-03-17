@@ -1,6 +1,4 @@
-import Image from "next/image";
 import Register_sub from "./Register_sub";
-import Notification_icon from "../../../../public/assets/registeration/Notification.svg";
 
 export default function ArtistOrUser(){
     return(
@@ -16,7 +14,6 @@ export default function ArtistOrUser(){
                 </div>
                 <div className="flex items-start mt-12 space-x-3">
                     <i className="text-[18px] fa fa-exclamation-circle"></i>
-                    {/* <Image src={Notification_icon} width={20} height={20} alt="Notification" />  */}
                     <p className="text-[13px] font-secondary">Don&apos;t worry, you can switch your user profile to an artist profile at any stage you&apos;d like.</p>
                 </div>
             </div>

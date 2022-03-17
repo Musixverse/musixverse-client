@@ -5,8 +5,7 @@ import Section2 from "./Section2";
 import Section1 from "./Section1";
 
 export default function NFTCard(props){
-    const likeBtn = useRef();
-    
+    //fetch data    
     const songName = "Meridian";
     const songId = 65;
     const nftPrice = 0.3;

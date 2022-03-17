@@ -30,7 +30,11 @@ export default function ArtistRegistration(){
                 <RightSection>
                     <p className="text-5xl font-tertiary max-w-[468px] mb-10">YOUR DETAILS</p>
                     <SelectAvatar/>
-                    <div className="flex flex-col sm:flex-row mt-8 text-[16px] font-secondary font-bold space-y-4 sm:space-x-3 sm:space-y-0">
+                    {/* <div className="flex-1"> */}
+                        <p className="mt-8 text-[16px] font-secondary font-bold">Your Name</p>
+                        <input type="text" className="w-full p-1 border-2 border-gray-500 rounded-md shadow-sm" />
+                    {/* </div> */}
+                    <div className="flex flex-col sm:flex-row mt-3 text-[16px] font-secondary font-bold space-y-4 sm:space-x-3 sm:space-y-0">
                         <div className="flex-1">
                             <p>Username</p>
                             <input type="text" className="w-full p-1 border-2 border-gray-500 rounded-md shadow-sm" />

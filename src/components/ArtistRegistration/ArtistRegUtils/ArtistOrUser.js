@@ -1,7 +1,7 @@
 import Register_sub from "./Register_sub";
 
-export default function ArtistOrUser() {
-    return (
+export default function ArtistOrUser(){
+    return(
         <div className="flex flex-col justify-between h-full">
             <div>
                 <p className="text-4xl sm:text-5xl font-tertiary">SIGN UP</p>

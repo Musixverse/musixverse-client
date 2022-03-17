@@ -4,10 +4,10 @@ import styles from "../../../styles/ArtistRegistration/Artist.module.css";
 import Button from "./ArtistRegUtils/Button";
 import SelectAvatar from "./ArtistRegUtils/SelectAvatar";
 
-export default function ArtistRegistration() {
+export default function ArtistRegistration(){
     return (
-        <div className={styles["register"]}>
-            <div className={styles["register__container"]}>
+        <div className={styles['register']}>
+            <div className={styles['register__container']}>
                 {/* Left section */}
                 {/* <div> */}
                     <div className="lg:max-w-[30vw] pb-6 lg:pb-0">
@@ -42,15 +42,19 @@ export default function ArtistRegistration() {
                     </div>
                     <div className="flex flex-col mt-8">
                         <div className="flex items-center justify-start mb-2 space-x-3">
-                            <input type="checkbox" required />
-                            <p className="text-[16px] font-secondary font-bold">Permission of listening rights</p>
+                            <input type="checkbox" required/>
+                            <p className="text-[16px] font-secondary font-bold">
+                                Permission of listening rights
+                            </p>
                         </div>
                         <p className="text-[13px] font-secondary lg:max-w-[468px] max-w-none">
                             Confirm that you are providing permissions to Musixverse to use your music for non-monetized streaming, both on Musixverse and any external apps and platforms which are directly associated with or part of the Musixverse platform.
                         </p>
                         <div className="flex items-center justify-start pt-2 mt-3 space-x-3">
-                            <input type="checkbox" required />
-                            <p className="text-[16px] font-secondary font-bold">Guidelines for submission</p>
+                            <input type="checkbox" required/>
+                            <p className="text-[16px] font-secondary font-bold">
+                                Guidelines for submission
+                            </p>
                         </div>
                         <p className="text-[13px] font-secondary lg:max-w-[468px] max-w-none mt-2">
                             Confirm that none of your submissions,both current and future contain any infringing or unauthorized copyrighted material.
@@ -61,4 +65,4 @@ export default function ArtistRegistration() {
             </div>
         </div>
     );
-}
+};

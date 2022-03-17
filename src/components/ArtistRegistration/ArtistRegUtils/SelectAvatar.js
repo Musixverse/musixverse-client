@@ -1,18 +1,18 @@
 import { useRef, useState } from "react";
 
-export default function SelectAvatar() {
+export default function SelectAvatar(){
     const [imageUploadState, setImageUploadState] = useState(false);
     const uploadedImage = useRef();
     const handleImageUpload = (event) => {
         const el = uploadedImage.current;
-        const myMemoObj = URL.createObjectURL(event.target.files[0]);
-        el.src = URL.createObjectURL(event.target.files[0]);
-        URL.revokeObjectURL(myMemoObj); //Manging memo leak
-        // Set image upload state to true when uploaded
-        setImageUploadState(true);
-    };
+		const myMemoObj = URL.createObjectURL(event.target.files[0]);
+		el.src = URL.createObjectURL(event.target.files[0]);
+		URL.revokeObjectURL(myMemoObj); //Manging memo leak
+		// Set image upload state to true when uploaded
+		setImageUploadState(true);
+    }
 
-    return (
+    return(
         <div className="flex">
             <div className={"w-[100px] h-[100px] sm:w-[150px] sm:h-[150px] border border-dark-200 rounded-full " + ((imageUploadState? "hidden":""))}></div>
             <img className={"w-[100px] h-[100px] sm:w-[150px] sm:h-[150px] rounded-full "+(imageUploadState? "":"hidden")} ref={uploadedImage} alt="Selected Avatar"></img>

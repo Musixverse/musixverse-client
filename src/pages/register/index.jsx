@@ -1,5 +1,5 @@
 import Head from "next/head";
-import Register from "../../components/ArtistRegisteration/Register";
+import Register from "../../components/ArtistRegistration/Register";
 
 const Register_Page = () => {
     return (

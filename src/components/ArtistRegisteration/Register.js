@@ -12,9 +12,7 @@ export default function Register(){
                     <p className="mt-20 text-5xl font-tertiary max-w-[468px]">
                         LET&apos;S REVOLUTIONIZE THE MUSIC INDUSTRY TOGETHER!
                     </p>
-                    <div className={styles['image-wrapper']}>
-                        <img src="/assets/registeration/dark_MXV.svg" alt="music illustration" />
-                    </div>
+                    <img className={styles['container__left-section--asset-image']} src="/assets/registeration/dark_MXV.svg" alt="music illustration" />
                 </LeftSection>
 
                 {/* Right section */}

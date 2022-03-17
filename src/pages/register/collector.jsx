@@ -1,4 +1,5 @@
 import Head from "next/head";
+import CollectorRegisteration from "../../components/ArtistRegisteration/CollectorRegisteration";
 
 const Collector_Page = () => {
     return (
@@ -9,6 +10,7 @@ const Collector_Page = () => {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             {/* Component */}
+            <CollectorRegisteration/>
         </>
     );
 };

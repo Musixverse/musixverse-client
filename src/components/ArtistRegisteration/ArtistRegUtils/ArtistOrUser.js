@@ -19,7 +19,7 @@ export default function ArtistOrUser(){
                     <p className="text-[12px] font-secondary">Don&apos;t worry, you can switch your user profile to <br />an artist profile at any stage you&apos;d like.</p>
                 </div>
             </div>
-            <div className="w-16 h-1 mb-10 rounded-xl bg-primary-200"></div>
+            <div className="w-16 h-1 -mb-10 mt-44 rounded-xl bg-primary-200"></div>
         </div>
     );
 }

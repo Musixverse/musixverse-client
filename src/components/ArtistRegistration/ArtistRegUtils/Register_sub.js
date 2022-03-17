@@ -1,8 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
-import arrow from "../../../../public/assets/registeration/arrow.svg";
-import artist_mic from "../../../../public/assets/registeration/B_Artist.svg";
-import collection_category from "../../../../public/assets/registeration/B_collector.svg";
+import arrow from "../../../../public/assets/registration/arrow.svg";
+import artist_mic from "../../../../public/assets/registration/B_Artist.svg";
+import collection_category from "../../../../public/assets/registration/B_collector.svg";
 
 export default function Register_sub({ artist }) {
     return (
@@ -12,7 +12,7 @@ export default function Register_sub({ artist }) {
                 <div className="pr-16">
                     <p className="mb-1 text-4xl leading-none font-tertiary">{artist ? "ARTIST" : "COLLECTOR"}</p>
                     <p className="text-[15px] font-secondary leading-tight max-w-[250px]">
-                        {artist ? "An Artist can buy, browse & create any NFTs" : "A Collector can buy & browse NFTs but cannot create any NFTs"}
+                        {artist ? "An Artist can buy, browse & create NFTs" : "A Collector can buy & browse NFTs but cannot create any NFTs"}
                     </p>
                 </div>
                 <div className="flex items-center justify-center p-4 rounded-xl bg-light-300 hover:bg-[#b3c4c2] cursor-pointer">

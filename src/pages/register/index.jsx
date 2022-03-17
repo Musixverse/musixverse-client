@@ -1,5 +1,5 @@
 import Head from "next/head";
-import Register from "../../components/ArtistRegisteration/Register";
+import Register from "../../components/ArtistRegistration/Register";
 
 const Register_Page = () => {
     return (
@@ -9,7 +9,7 @@ const Register_Page = () => {
                 <meta name="description" content="Musixverse" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <Register/>
+            <Register />
             {/* <div className="w-full max-w-[1920px] min-h-screen"> */}
         </>
     );

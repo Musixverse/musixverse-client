@@ -5,7 +5,7 @@ const Register_Page = () => {
     return (
         <>
             <Head>
-                <title>Musixverse | Register</title>
+                <title>Musixverse | Registration</title>
                 <meta name="description" content="Musixverse" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>

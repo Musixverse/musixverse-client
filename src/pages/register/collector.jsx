@@ -5,12 +5,12 @@ const Collector_Page = () => {
     return (
         <>
             <Head>
-                <title>Musixverse | Collector</title>
+                <title>Musixverse | Collector Registration</title>
                 <meta name="description" content="Musixverse" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             {/* Component */}
-            <CollectorRegistration/>
+            <CollectorRegistration />
         </>
     );
 };

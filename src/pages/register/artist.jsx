@@ -5,7 +5,7 @@ const Artist_Page = () => {
     return (
         <>
             <Head>
-                <title>Musixverse | Artist</title>
+                <title>Musixverse | Artist Registration</title>
                 <meta name="description" content="Musixverse" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>

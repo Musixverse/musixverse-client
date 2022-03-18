@@ -1,8 +1,8 @@
 import { useState } from "react";
-import "../../styles/globals.css";
 import { MoralisProvider } from "react-moralis";
 import { ThemeProvider } from "next-themes";
 import Script from "next/script";
+import "../../styles/globals.css";
 import Layout from "../components/WrapLayout/Layout";
 
 function App({ Component, pageProps }) {
@@ -11,13 +11,11 @@ function App({ Component, pageProps }) {
         message: "",
         showErrorBox: false,
     });
-
     const [success, setSuccess] = useState({
         title: "",
         message: "",
         showSuccessBox: false,
     });
-
     const MORALIS_APP_ID = process.env.NEXT_PUBLIC_MORALIS_APP_ID;
     const MORALIS_SERVER_URL = process.env.NEXT_PUBLIC_MORALIS_SERVER_URL;
 

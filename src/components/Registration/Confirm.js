@@ -1,5 +1,5 @@
 import Image from "next/image";
-import styles from "../../../styles/ArtistRegistration/Confirm.module.css";
+import styles from "../../../styles/Registration/Confirm.module.css";
 import Button from "./ArtistRegUtils/Button";
 import blackhole from "../../../public/assets/registration/dark_black_hole.svg";
 import Router from "next/router";

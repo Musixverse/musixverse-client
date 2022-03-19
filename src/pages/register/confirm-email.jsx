@@ -1,5 +1,5 @@
 import Head from "next/head";
-import Confirm from "../../components/ArtistRegistration/Confirm";
+import Confirm from "../../components/Registration/Confirm";
 
 const Confirm_Page = () => {
     return (
@@ -9,7 +9,6 @@ const Confirm_Page = () => {
                 <meta name="description" content="Musixverse" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            {/* Component */}
             <Confirm />
         </>
     );

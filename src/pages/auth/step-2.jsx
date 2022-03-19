@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import Head from "next/head";
 import Router from "next/router";
 import { useMoralis } from "react-moralis";
-import SuccessBox from "../../components/Modal/SuccessBox";
 
 const Settings = ({ error, setError, success, setSuccess }) => {
     const { user, isAuthenticated, setUserData, Moralis } = useMoralis();

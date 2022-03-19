@@ -1,16 +1,16 @@
 import Head from "next/head";
-import ConfirmPage from "../../components/ArtistRegistration/Confirm";
+import Confirm from "../../components/ArtistRegistration/Confirm";
 
 const Confirm_Page = () => {
     return (
         <>
             <Head>
-                <title>Musixverse | Confirm</title>
+                <title>Musixverse | Confirm Email</title>
                 <meta name="description" content="Musixverse" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             {/* Component */}
-            <ConfirmPage />
+            <Confirm />
         </>
     );
 };

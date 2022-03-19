@@ -3,18 +3,7 @@ import Head from "next/head";
 import { useMoralis } from "react-moralis";
 
 const Profile = ({}) => {
-    const { user, isAuthenticated, Moralis } = useMoralis();
-
-    async function fetchUpdatedUser() {
-        if (user) {
-            user = await Moralis.User.current().fetch();
-            console.log(user);
-        }
-    }
-
-    useEffect(() => {
-        fetchUpdatedUser();
-    }, []);
+    const { user, isAuthenticated } = useMoralis();
 
     return (
         <>

@@ -10,7 +10,7 @@ export default function Register_sub({ artist }) {
     const { theme } = useTheme();
 
     return (
-        <div className="flex items-start justify-between p-3 space-x-4 bg-light-200 hover:bg-light-100 rounded-xl">
+        <div className="flex items-start justify-between p-3 space-x-4 bg-light-200 dark:bg-dark-100 dark:hover:bg-dark-200 hover:bg-light-100 rounded-xl">
             <div className="flex items-start space-x-3">
                 {theme === "light" ?
                     <Image src={artist ? B_artist_mic : B_collection_category} width={32} height={32} alt="artist_mic" /> :
@@ -24,7 +24,7 @@ export default function Register_sub({ artist }) {
                 </div>
             </div>
             <Link href={artist ? "/register/artist/basic-details" : "/register/collector"} passHref>
-                <button className="font-light text-[15px] sm:text-[18px] flex items-center justify-center p-4 rounded-xl bg-light-300 hover:bg-[#b3c4c2] cursor-pointer">
+                <button className="font-light dark:text-primary-200 text-[15px] sm:text-[18px] flex items-center justify-center p-4 rounded-xl bg-light-300 dark:bg-dark-200 dark:hover:bg-dark-100 hover:bg-[#b3c4c2] cursor-pointer">
                     <i className="fa fa-arrow-right"></i>
                 </button>
             </Link>

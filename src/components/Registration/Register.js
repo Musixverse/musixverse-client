@@ -7,7 +7,7 @@ export default function Register(){
 
     return(
         <div className={styles['register']}>
-            <div className={styles['register__container']}>
+            <div className={"dark:bg-dark-200 "+styles['register__container']}>
                 {/* Left section */}
                 <div className={styles['register__container--left-section']}>
                     <p className={styles['container__left-section--intro-text']}>
@@ -17,7 +17,7 @@ export default function Register(){
                 </div>
 
                 {/* Right section */}
-                <div className={styles['register__container--right-section']}>
+                <div className={styles[theme==="light"?'register__container--right-section_W':'register__container--right-section_B']}>
                     <ArtistOrUser/>
                 </div>
             </div>

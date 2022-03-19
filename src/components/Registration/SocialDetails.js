@@ -46,7 +46,7 @@ export default function SocialDetails({ error, setError, success, setSuccess }) 
 
     return (
         <div className={styles["register"]}>
-            <div className={styles["register__container"]}>
+            <div className={"dark:bg-dark-200 "+styles["register__container"]}>
                 {/* Left section */}
                 <div className="lg:max-w-[30vw] pb-6 lg:pb-0">
                     <p className="mt-20 text-5xl font-tertiary max-w-[468px]">ARTIST SIGN UP</p>

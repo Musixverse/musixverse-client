@@ -1,9 +1,9 @@
 import Head from "next/head";
-import Banner from "../../components/ArtistProfile/Banner";
-import ArtistHeader from "../../components/ArtistProfile/ArtistHeader";
-import Filter from "../../components/ArtistProfile/Filter";
-import NFTs from "../../components/ArtistProfile/NFTs";
-import NewsLetter from "../../Layouts/NewsLetter";
+import Banner from "../../../components/ArtistProfile/Banner";
+import ArtistHeader from "../../../components/ArtistProfile/ArtistHeader";
+import Filter from "../../../components/ArtistProfile/Filter";
+import NFTs from "../../../components/ArtistProfile/NFTs";
+import NewsLetter from "../../../layout/NewsLetter";
 
 export default function artistProfile() {
     return (

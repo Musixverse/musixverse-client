@@ -1,8 +1,7 @@
 import Head from "next/head";
-import SocialDetails from "../../../components/ArtistRegistration/SocialDetails";
+import SocialDetails from "../../../components/Registration/SocialDetails";
 
-
-const Collector_Page = () => {
+const ArtistSocialDetails = ({ error, setError, success, setSuccess }) => {
     return (
         <>
             <Head>
@@ -11,9 +10,9 @@ const Collector_Page = () => {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             {/* Component */}
-            <SocialDetails/>
+            <SocialDetails error={error} setError={setError} success={success} setSuccess={setSuccess} />
         </>
     );
 };
 
-export default Collector_Page;
+export default ArtistSocialDetails;

@@ -2,6 +2,7 @@ import { useMoralis } from "react-moralis";
 import { useEffect } from "react";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
+import Watcher from "./Watcher";
 import ErrorBox from "../Modal/ErrorBox";
 import SuccessBox from "../Modal/SuccessBox";
 
@@ -21,6 +22,7 @@ const Layout = ({ children, error, setError, success, setSuccess }) => {
 
     return (
         <div>
+            <Watcher />
             <Navbar />
             {children}
             {error.showErrorBox && <ErrorBox error={error} setError={setError} />}

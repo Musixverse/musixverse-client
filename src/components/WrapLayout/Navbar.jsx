@@ -1,51 +1,17 @@
 import { useMoralis } from "react-moralis";
-import { useEffect } from "react";
 import Link from "next/link";
 import { useTheme } from "next-themes";
 import Image from "next/image";
-import { useRouter } from "next/router";
-import Router from "next/router";
 import logoBlack from "../../../public/logo-black.svg";
 import logoWhite from "../../../public/logo-white.svg";
 
 const Navbar = () => {
     const { theme, setTheme } = useTheme();
-    const { authenticate, isAuthenticated, logout, user, Moralis } = useMoralis();
+    const { authenticate, isAuthenticated, logout, user } = useMoralis();
 
     if (typeof window !== "undefined" && document.getElementById("w3a-modal")) {
         document.getElementById("w3a-modal").style.zIndex = "500";
     }
-
-    const router = useRouter();
-    useEffect(() => {
-        if (router.pathname.startsWith("/register") && !user) {
-            Router.push("/", undefined, { shallow: true });
-        }
-    }, [router.pathname]);
-
-    async function fetchUpdatedUser() {
-        if (user) {
-            user = await Moralis.User.current().fetch();
-            console.log(user);
-        }
-    }
-
-    useEffect(() => {
-        console.log("User:", user);
-        fetchUpdatedUser();
-
-        if (user) {
-            if (!user.attributes.email) {
-                Router.push("/register", undefined, { shallow: true });
-            } else if (!user.attributes.emailVerified) {
-                Router.push("/register/confirm-email", undefined, { shallow: true });
-            } else {
-                Router.push("/profile", undefined, { shallow: true });
-            }
-        } else {
-            Router.push("/", undefined, { shallow: true });
-        }
-    }, [user]);
 
     const handleLogin = async () => {
         await authenticate({

@@ -1,5 +1,5 @@
 import Head from "next/head";
-import Register from "../../components/ArtistRegistration/Register";
+import Register from "../../components/Registration/Register";
 
 const Register_Page = () => {
     return (
@@ -10,7 +10,6 @@ const Register_Page = () => {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <Register />
-            {/* <div className="w-full max-w-[1920px] min-h-screen"> */}
         </>
     );
 };

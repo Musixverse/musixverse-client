@@ -1,20 +1,36 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import RightSection from "./ArtistRegUtils/RightSection";
-import LeftSection from "./ArtistRegUtils/LeftSection";
+// import LeftSection from "./ArtistRegUtils/LeftSection";
 import styles from "../../../styles/ArtistRegistration/Artist.module.css";
 import Button from "./ArtistRegUtils/Button";
 import SelectAvatar from "./ArtistRegUtils/SelectAvatar";
 import Router from "next/router";
 import { useMoralis } from "react-moralis";
+import YourDetails from "./ArtistRegUtils/YourDetails";
 
 export default function ArtistRegistration() {
     const { setUserData } = useMoralis();
-    const [name, setName] = useState("");
-    const [username, setUsername] = useState("");
-    const [email, setEmail] = useState("");
+    // const [name, setName] = useState("");
+    // const [username, setUsername] = useState("");
+    // const [email, setEmail] = useState("");
+    
+    const nameRef = useRef(null);
+    const usernameRef = useRef(null);
+    const emailRef = useRef(null);
+    const bioRef = useRef(null);
+    const facebookRef = useRef(null);
+    const twitterRef = useRef(null);
+    const spotifyRef = useRef(null);
+    const instagramRef = useRef(null);
+    const ref = useRef({nameRef, usernameRef, emailRef, bioRef, facebookRef, twitterRef, spotifyRef, instagramRef});
 
     const handleArtistDetailsSave = async (e) => {
         e.preventDefault();
+        console.log("called");
+        const name = nameRef.current.value;
+        const username = usernameRef.current.value;
+        const email = emailRef.current.value;
+        console.log("Current saved: ",name, username, email, bioRef.current.value, instagramRef.current.value, twitterRef.current.value,facebookRef.current.value, spotifyRef.current.value)
 
         if (name !== "" && username !== "" && email !== "") {
             await setUserData({
@@ -52,10 +68,18 @@ export default function ArtistRegistration() {
                     </Button> */}
                 </div>
 
-                {/* Right section */}
+                {/* Right section*/}
                 <RightSection>
                     <form onSubmit={handleArtistDetailsSave}>
-                        <p className="text-5xl font-tertiary max-w-[468px] mb-10">YOUR DETAILS</p>
+                        <YourDetails ref={ref}/>
+                    </form>
+                </RightSection>
+            </div>
+        </div>
+    );
+}
+/**
+ <p className="text-5xl font-tertiary max-w-[468px] mb-10">YOUR DETAILS</p>
                         <SelectAvatar />
 
                         <p className="mt-8 text-[16px] font-secondary font-bold">Your Name*</p>
@@ -114,9 +138,4 @@ export default function ArtistRegistration() {
                             </p>
                         </div>
                         <Button>Continue</Button>
-                    </form>
-                </RightSection>
-            </div>
-        </div>
-    );
-}
+ */

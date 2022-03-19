@@ -64,7 +64,7 @@ const Navbar = () => {
 
     return (
         <nav className="navbar">
-            <div className="container flex flex-wrap justify-between items-center mx-auto">
+            <div className="container flex flex-wrap items-center justify-between mx-auto">
                 <Link href="/">
                     <a href="#" className="flex">
                         {theme === "light" ? (
@@ -75,21 +75,21 @@ const Navbar = () => {
                     </a>
                 </Link>
 
-                <div className="hidden w-full md:block md:w-auto ml-auto" id="mobile-menu"></div>
+                <div className="hidden w-full ml-auto md:block md:w-auto" id="mobile-menu"></div>
 
-                <div className="flex ml-auto hidden md:block">
-                    <ul className="flex items-center flex-col md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium">
+                <div className="flex hidden ml-auto md:block">
+                    <ul className="flex flex-col items-center md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium">
                         <li>
-                            <div className="text-xs rounded text-search-200 bg-light-100 dark:text-search-300 dark:bg-search-200 flex items-center justify-center">
-                                <div className="border dark:border-dark-100 rounded overflow-hidden flex">
+                            <div className="flex items-center justify-center text-xs rounded text-search-200 bg-light-100 dark:text-search-300 dark:bg-search-200">
+                                <div className="flex overflow-hidden border rounded dark:border-dark-100">
                                     <input
                                         type="text"
-                                        className="w-60 px-4 py-2 border-1 border-light-300 bg-search-100 dark:text-search-300 dark:bg-search-200 focus:outline-none"
+                                        className="px-4 py-2 w-60 border-1 border-light-300 bg-search-100 dark:text-search-300 dark:bg-search-200 focus:outline-none"
                                         placeholder="Search items, and accounts"
                                     />
                                     <button className="flex items-center justify-center px-4 border-l border-light-300 dark:border-dark-100 bg-search-100 dark:bg-search-200">
                                         <svg
-                                            className="h-4 w-4 text-search-200 dark:text-search-300"
+                                            className="w-4 h-4 text-search-200 dark:text-search-300"
                                             fill="currentColor"
                                             xmlns="http://www.w3.org/2000/svg"
                                             viewBox="0 0 24 24"
@@ -103,7 +103,7 @@ const Navbar = () => {
                         <li className="hover:text-primary-200">
                             <Link
                                 href="/"
-                                className="block py-2 pr-4 pl-3 text-white bg-blue-700 hover:text-primary-100 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white"
+                                className="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded hover:text-primary-100 md:bg-transparent md:text-blue-700 md:p-0 dark:text-white"
                                 aria-current="page"
                             >
                                 Home
@@ -112,7 +112,7 @@ const Navbar = () => {
                         <li className="hover:text-primary-200">
                             <Link
                                 href="/library"
-                                className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:text-primary-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                                className="block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:text-primary-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
                             >
                                 Library
                             </Link>
@@ -120,7 +120,7 @@ const Navbar = () => {
                         <li className="hover:text-primary-200">
                             <Link
                                 href="/trending"
-                                className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:text-primary-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                                className="block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:text-primary-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
                             >
                                 Trending
                             </Link>
@@ -128,15 +128,15 @@ const Navbar = () => {
                         <li className="hover:text-primary-200">
                             <Link
                                 href="/profile"
-                                className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:text-primary-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                                className="block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:text-primary-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
                             >
                                 Profile
                             </Link>
                         </li>
                         <li>
-                            <ul className="group dropdown relative">
+                            <ul className="relative group dropdown">
                                 <a
-                                    className="dropdown-toggle flex items-center hidden-arrow"
+                                    className="flex items-center dropdown-toggle hidden-arrow"
                                     href="#"
                                     id="dropdownMenuButton2"
                                     role="button"
@@ -150,25 +150,25 @@ const Navbar = () => {
                                     )}
                                 </a>
                                 <ul
-                                    className="dropdown-menu min-w-max absolute hidden bg-light-100 float-left py-2 list-none text-left rounded-lg shadow-lg mt-1 m-0 bg-clip-padding border-none left-auto right-0 group-hover:block z-10"
+                                    className="absolute right-0 left-auto z-10 hidden float-left py-2 m-0 mt-1 text-left list-none border-none rounded-lg shadow-lg dropdown-menu min-w-max bg-light-100 bg-clip-padding group-hover:block"
                                     aria-labelledby="dropdownMenuButton2"
                                 >
                                     {isAuthenticated && user ? (
                                         <button
-                                            className="w-full py-2 px-4 border-b border-light-300 font-medium bg-transparent text-gray-700 hover:bg-primary-100 hover:text-light-100 cursor-pointer transition-all"
+                                            className="w-full px-4 py-2 font-medium text-gray-700 transition-all bg-transparent border-b cursor-pointer border-light-300 hover:bg-primary-100 hover:text-light-100"
                                             onClick={() => logout()}
                                         >
                                             <Link
-                                                className="dropdown-item text-sm block w-full whitespace-nowrap hover:bg-primary-100 active:bg-primary-100"
+                                                className="block w-full text-sm dropdown-item whitespace-nowrap hover:bg-primary-100 active:bg-primary-100"
                                                 href="#"
                                             >
                                                 Logout
                                             </Link>
                                         </button>
                                     ) : (
-                                        <div className="py-2 px-4 border-b border-light-300 bg-transparent text-gray-700 hover:bg-primary-100 hover:text-light-100">
+                                        <div className="px-4 py-2 text-gray-700 bg-transparent border-b border-light-300 hover:bg-primary-100 hover:text-light-100">
                                             <a
-                                                className="dropdown-item text-sm block w-full whitespace-nowrap hover:bg-primary-100 active:bg-primary-100"
+                                                className="block w-full text-sm dropdown-item whitespace-nowrap hover:bg-primary-100 active:bg-primary-100"
                                                 href="#"
                                                 onClick={handleLogin}
                                             >
@@ -179,21 +179,21 @@ const Navbar = () => {
                                     <li></li>
                                     <li>
                                         <Link href="/profile">
-                                            <div className="dropdown-item cursor-pointer text-sm py-2 px-4 block w-full whitespace-nowrap bg-transparent text-gray-700 hover:bg-gray-100">
+                                            <div className="block w-full px-4 py-2 text-sm text-gray-700 bg-transparent cursor-pointer dropdown-item whitespace-nowrap hover:bg-gray-100">
                                                 Profile
                                             </div>
                                         </Link>
                                     </li>
                                     <li>
                                         <Link href="/profile/settings">
-                                            <div className="dropdown-item cursor-pointer text-sm py-2 px-4 block w-full whitespace-nowrap bg-transparent text-gray-700 hover:bg-gray-100">
+                                            <div className="block w-full px-4 py-2 text-sm text-gray-700 bg-transparent cursor-pointer dropdown-item whitespace-nowrap hover:bg-gray-100">
                                                 Settings
                                             </div>
                                         </Link>
                                     </li>
                                     <li>
                                         <a
-                                            className="dropdown-item text-sm py-2 px-4 block w-full whitespace-nowrap bg-transparent text-gray-700 hover:bg-gray-100"
+                                            className="block w-full px-4 py-2 text-sm text-gray-700 bg-transparent dropdown-item whitespace-nowrap hover:bg-gray-100"
                                             href="#"
                                         >
                                             <div className="flex">
@@ -201,7 +201,7 @@ const Navbar = () => {
                                                 <div className="form-check form-switch">
                                                     <input
                                                         id="theme-switcher"
-                                                        className="form-check-input appearance-none w-10 float-right rounded-full h-5 align-top bg-light-300 dark:bg-primary-100  bg-no-repeat bg-contain focus:outline-none cursor-pointer shadow-sm"
+                                                        className="float-right w-10 h-5 align-top bg-no-repeat bg-contain rounded-full shadow-sm appearance-none cursor-pointer form-check-input bg-light-300 dark:bg-primary-100 focus:outline-none"
                                                         type="checkbox"
                                                         role="switch"
                                                         onClick={() => setTheme(theme === "dark" ? "light" : "dark")}

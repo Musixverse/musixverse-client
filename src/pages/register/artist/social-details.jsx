@@ -1,7 +1,8 @@
 import Head from "next/head";
-import ArtistRegistration from "../../components/ArtistRegistration/ArtistRegistration";
+import SocialDetails from "../../../components/ArtistRegistration/SocialDetails";
 
-const Artist_Page = () => {
+
+const Collector_Page = () => {
     return (
         <>
             <Head>
@@ -10,9 +11,9 @@ const Artist_Page = () => {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             {/* Component */}
-            <ArtistRegistration />
+            <SocialDetails/>
         </>
     );
 };
 
-export default Artist_Page;
+export default Collector_Page;

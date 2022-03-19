@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import RightSection from "./ArtistRegUtils/RightSection";
 import styles from "../../../styles/ArtistRegistration/Artist.module.css";
 import Button from "./ArtistRegUtils/Button";
@@ -8,20 +8,24 @@ import { useMoralis } from "react-moralis";
 
 export default function CollectorRegistration() {
     const { setUserData } = useMoralis();
-    const [name, setName] = useState("");
-    const [username, setUsername] = useState("");
-    const [email, setEmail] = useState("");
+    const nameRef = useRef(null);
+    const usernameRef = useRef(null);
+    const emailRef = useRef(null);
 
     const handleCollectorDetailsSave = async (e) => {
         e.preventDefault();
+
+        const name = nameRef.current.value;
+        const username = usernameRef.current.value;
+        const email = emailRef.current.value;
 
         if (name !== "" && username !== "" && email !== "") {
             await setUserData({
                 name: name === "" ? undefined : name,
                 username: username === "" ? undefined : username,
                 email: email === "" ? undefined : email,
+                isArtist: true,
             });
-
             Router.push("/register/confirm-email", undefined, { shallow: true });
         }
         return;
@@ -45,16 +49,14 @@ export default function CollectorRegistration() {
 
                 {/* Right section */}
                 <RightSection>
+                    <p className="text-5xl font-tertiary max-w-[468px] mb-10">YOUR DETAILS</p>
                     <form onSubmit={handleCollectorDetailsSave}>
-                        <p className="text-5xl font-tertiary max-w-[468px] mb-10">YOUR DETAILS</p>
                         <SelectAvatar />
 
                         <p className="mt-8 text-[16px] font-secondary font-bold">Your Name*</p>
                         <input
                             type="text"
-                            value={name}
-                            onChange={(e) => setName(e.target.value)}
-                            id="name"
+                            ref={nameRef}
                             className="w-full p-1 border-2 border-gray-500 rounded-md shadow-sm"
                             required
                         />
@@ -62,24 +64,20 @@ export default function CollectorRegistration() {
                         <div className="flex mt-3 text-[16px] font-secondary font-bold space-x-3">
                             <div className="flex-1">
                                 <p>Username*</p>
-                                <input
-                                    type="text"
-                                    value={username}
-                                    onChange={(e) => setUsername(e.target.value)}
-                                    id="username"
-                                    className="w-full p-1 border-2 border-gray-500 rounded-md shadow-sm"
+                                <input 
+                                    type="text" 
+                                    ref={usernameRef} 
                                     required
+                                    className="w-full p-1 border-2 border-gray-500 rounded-md shadow-sm outline-none focus:border-primary-100" 
                                 />
                             </div>
                             <div className="flex-1">
                                 <p>Email Address*</p>
-                                <input
-                                    type="email"
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
-                                    id="email"
-                                    className="w-full p-1 border-2 border-gray-500 rounded-md shadow-sm"
+                                <input 
+                                    type="email" 
+                                    ref={emailRef} 
                                     required
+                                    className="w-full p-1 border-2 border-gray-500 rounded-md shadow-sm outline-none focus:border-primary-100" 
                                 />
                             </div>
                         </div>

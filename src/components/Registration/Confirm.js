@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { useTheme } from "next-themes";
-import styles from "../../../styles/ArtistRegistration/Confirm.module.css";
+import styles from "../../../styles/Registration/Confirm.module.css";
 import Button from "./ArtistRegUtils/Button";
 import B_blackhole from "../../../public/assets/registration/dark_black_hole.svg";
 import W_blackhole from "../../../public/assets/registration/white_black_hole.svg";
@@ -16,7 +16,7 @@ export default function Confirm() {
 
     return (
         <div className={styles["register"]}>
-            <div className={styles["register__container"]}>
+            <div className={"dark:bg-dark-200 "+styles["register__container"]}>
                 {/* Main container */}
                 <div className={styles["confirm__container"]}>
                     <Image src={theme === "light" ? B_blackhole : W_blackhole} width={440} height={318} alt="Black-hole" />

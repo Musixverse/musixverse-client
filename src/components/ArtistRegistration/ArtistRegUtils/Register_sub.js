@@ -15,7 +15,7 @@ export default function Register_sub({ artist }) {
                         </p>
                     </div>
                 </div>
-                <Link href={artist ? "/register/artist" : "/register/collector"} passHref>
+                <Link href={artist ? "/register/artist/basic-details" : "/register/collector"} passHref>
                     <button className="font-light text-[15px] sm:text-[18px] flex items-center justify-center p-4 rounded-xl bg-light-300 hover:bg-[#b3c4c2] cursor-pointer">
                         <i className="fa fa-arrow-right"></i>
                     </button>

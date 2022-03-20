@@ -19,9 +19,16 @@
     margin-bottom: clamp(1px, calc(0.0625rem + ((1vw - 15.36px) * 20.5729)), 80px);
 }
 
-.register__container--right-section{
+.register__container--right-section_W{
     @apply mt-80 xl:ml-auto xl:mt-6 mb-6 p-10 sm:p-16 rounded-xl relative z-[2];
     /*Frosted glass effect */
     backdrop-filter: blur(10px);
     background: rgba(255, 255, 255,0.6);
+}
+
+.register__container--right-section_B{
+    @apply mt-80 xl:ml-auto xl:mt-6 mb-6 p-10 sm:p-16 rounded-xl relative z-[2];
+    /*Frosted glass effect */
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255,0.1);
 }

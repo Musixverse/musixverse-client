@@ -14,7 +14,7 @@ export default function SelectAvatar() {
 
     return (
         <div className="flex">
-            <div className={"w-[100px] h-[100px] sm:w-[150px] sm:h-[150px] border border-dark-200 rounded-full " + (imageUploadState ? "hidden" : "")}></div>
+            <div className={"w-[100px] h-[100px] sm:w-[150px] sm:h-[150px] border border-dark-200 dark:border-primary-200 rounded-full " + (imageUploadState ? "hidden" : "")}></div>
             <img
                 className={"w-[100px] h-[100px] sm:w-[150px] sm:h-[150px] rounded-full " + (imageUploadState ? "" : "hidden")}
                 ref={uploadedImage}

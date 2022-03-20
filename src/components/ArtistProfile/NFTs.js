@@ -1,4 +1,4 @@
-import NFTCard from "../../Layouts/NFTCard/NFTCard";
+import NFTCard from "../../layout/NFTCard/NFTCard";
 import Pager from "./ArtistProfileUtils/Pager";
 
 export default function NFTs() {
@@ -13,14 +13,14 @@ export default function NFTs() {
         // </div>
         <>
             <div className="grid grid-cols-5 my-11 gap-11">
-                <NFTCard/>
-                <NFTCard/>
-                <NFTCard/>
-                <NFTCard/>
-                <NFTCard/>
-                <NFTCard/>
+                <NFTCard />
+                <NFTCard />
+                <NFTCard />
+                <NFTCard />
+                <NFTCard />
+                <NFTCard />
             </div>
-            <Pager/>
+            <Pager />
         </>
     );
 }

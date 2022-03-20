@@ -3,7 +3,7 @@ import { MoralisProvider } from "react-moralis";
 import { ThemeProvider } from "next-themes";
 import Script from "next/script";
 import "../../styles/globals.css";
-import Layout from "../components/WrapLayout/Layout";
+import Layout from "../layout/WrapLayout/Layout";
 
 function App({ Component, pageProps }) {
     const [error, setError] = useState({

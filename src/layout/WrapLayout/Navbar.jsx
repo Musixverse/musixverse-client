@@ -43,7 +43,7 @@ const Navbar = () => {
 
                 <div className="hidden w-full ml-auto md:block md:w-auto" id="mobile-menu"></div>
 
-                <div className="flex hidden ml-auto md:block">
+                <div className="hidden ml-auto md:block">
                     <ul className="flex flex-col items-center md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium">
                         <li>
                             <div className="flex items-center justify-center text-xs rounded text-search-200 bg-light-100 dark:text-search-300 dark:bg-search-200">

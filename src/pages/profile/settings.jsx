@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Head from "next/head";
 import { useMoralis } from "react-moralis";
-import ErrorBox from "../../components/Modal/ErrorBox";
+import ErrorBox from "../../layout/Modal/ErrorBox";
 
 const Settings = ({ error, setError, success, setSuccess }) => {
     const { user, isAuthenticated, setUserData, userError, Moralis } = useMoralis();

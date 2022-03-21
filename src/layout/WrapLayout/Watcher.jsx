@@ -8,38 +8,40 @@ const Watcher = () => {
 
     /* Revoke access to Registration pages from any unauthenticated user */
     const router = useRouter();
-    useEffect(() => {
-        if (router.pathname.startsWith("/register") && !user) {
-            Router.push("/", undefined, { shallow: true });
-        }
-    }, [router.pathname]);
+    // TODO: Uncomment useEffects
 
-    /* Fetch updated user details */
-    async function fetchUpdatedUser() {
-        if (user) {
-            user = await Moralis.User.current().fetch();
-            console.log(user);
-        }
-    }
+    // useEffect(() => {
+    //     if (router.pathname.startsWith("/register") && !user) {
+    //         Router.push("/", undefined, { shallow: true });
+    //     }
+    // }, [router.pathname]);
 
-    /* Handle the flow of registration pages */
-    useEffect(() => {
-        console.log("User:", user);
-        fetchUpdatedUser();
+    // /* Fetch updated user details */
+    // async function fetchUpdatedUser() {
+    //     if (user) {
+    //         user = await Moralis.User.current().fetch();
+    //         console.log(user);
+    //     }
+    // }
 
-        if (user && isAuthenticated) {
-            if (!user.attributes.email) {
-                Router.push("/register", undefined, { shallow: true });
-            } else if (!user.attributes.emailVerified) {
-                Router.push("/register/confirm-email", undefined, { shallow: true });
-            } else {
-                Router.push("/profile", undefined, { shallow: true });
-            }
-        }
-        // else {
-        //     Router.push("/", undefined, { shallow: true });
-        // }
-    }, [user]);
+    // /* Handle the flow of registration pages */
+    // useEffect(() => {
+    //     console.log("User:", user);
+    //     fetchUpdatedUser();
+
+    //     if (user && isAuthenticated) {
+    //         if (!user.attributes.email) {
+    //             Router.push("/register", undefined, { shallow: true });
+    //         } else if (!user.attributes.emailVerified) {
+    //             Router.push("/register/confirm-email", undefined, { shallow: true });
+    //         } else {
+    //             Router.push("/profile", undefined, { shallow: true });
+    //         }
+    //     }
+    //     // else {
+    //     //     Router.push("/", undefined, { shallow: true });
+    //     // }
+    // }, [user]);
 
     return <span></span>;
 };

@@ -4,7 +4,7 @@ import Router from "next/router";
 import { useMoralis } from "react-moralis";
 
 const Watcher = () => {
-    const { user, isAuthenticated, Moralis } = useMoralis();
+    const { user, isAuthenticated, Moralis, refetchUserData } = useMoralis();
 
     /* Revoke access to Registration pages from any unauthenticated user */
     const router = useRouter();
@@ -19,7 +19,8 @@ const Watcher = () => {
     // /* Fetch updated user details */
     // async function fetchUpdatedUser() {
     //     if (user) {
-    //         user = await Moralis.User.current().fetch();
+    //         // user = await Moralis.User.current().fetch();
+    //         await refetchUserData();
     //         console.log(user);
     //     }
     // }
@@ -27,9 +28,9 @@ const Watcher = () => {
     // /* Handle the flow of registration pages */
     // useEffect(() => {
     //     console.log("User:", user);
-    //     fetchUpdatedUser();
 
     //     if (user && isAuthenticated) {
+    //     fetchUpdatedUser();
     //         if (!user.attributes.email) {
     //             Router.push("/register", undefined, { shallow: true });
     //         } else if (!user.attributes.emailVerified) {

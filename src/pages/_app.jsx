@@ -24,7 +24,7 @@ function App({ Component, pageProps }) {
             <Script src="https://kit.fontawesome.com/0366dd7992.js" crossOrigin="anonymous"></Script>
             <Script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></Script>
             <MoralisProvider appId={MORALIS_APP_ID} serverUrl={MORALIS_SERVER_URL}>
-                <ThemeProvider attribute="class">
+                <ThemeProvider attribute="class" defaultTheme="system" enableSystem={false}>
                     <Layout error={error} setError={setError} success={success} setSuccess={setSuccess}>
                         <Component {...pageProps} error={error} setError={setError} success={success} setSuccess={setSuccess} />
                     </Layout>

@@ -13,11 +13,11 @@ export default function Register(){
                     <p className={styles['container__left-section--intro-text']}>
                         LET&apos;S REVOLUTIONIZE THE MUSIC INDUSTRY TOGETHER!
                     </p>
-                    <img className={styles['container__left-section--asset-image']} src={theme === "light" ? "/assets/registration/dark_MXV.svg" : "/assets/registration/white_MXV.svg"} alt="music illustration" />
+                    <img className={styles['container__left-section--asset-image']} src={theme === "dark" ? "/assets/registration/white_MXV.svg" : "/assets/registration/dark_MXV.svg"} alt="music illustration" />
                 </div>
 
                 {/* Right section */}
-                <div className={styles[theme==="light"?'register__container--right-section_W':'register__container--right-section_B']}>
+                <div className={styles[theme==="dark"?'register__container--right-section_B':'register__container--right-section_W']}>
                     <ArtistOrUser/>
                 </div>
             </div>

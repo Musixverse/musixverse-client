@@ -5,18 +5,31 @@ import Button from "./ArtistRegUtils/Button";
 import B_blackhole from "../../../public/assets/registration/dark_black_hole.svg";
 import W_blackhole from "../../../public/assets/registration/white_black_hole.svg";
 import Router from "next/router";
+import { useMoralis } from "react-moralis";
 
 export default function Confirm() {
     const { theme } = useTheme();
+    const { user, refetchUserData } = useMoralis();
+
+    if (user) {
+        refetchUserData();
+    }
+
     const backToLogin = async (e) => {
         e.preventDefault();
-        Router.push("/profile", undefined, { shallow: true });
+        await refetchUserData();
+
+        if (user.attributes.isArtist) {
+            Router.push("/profile", undefined, { shallow: true });
+        } else {
+            Router.push("/library", undefined, { shallow: true });
+        }
         return;
     };
 
     return (
         <div className={styles["register"]}>
-            <div className={"dark:bg-dark-200 "+styles["register__container"]}>
+            <div className={"dark:bg-dark-200 " + styles["register__container"]}>
                 {/* Main container */}
                 <div className={styles["confirm__container"]}>
                     <Image src={theme === "light" ? B_blackhole : W_blackhole} width={440} height={318} alt="Black-hole" />
@@ -24,9 +37,7 @@ export default function Confirm() {
                         <p className="text-4xl font-tertiary sm:text-5xl">CONFIRM YOUR EMAIL</p>
                         <p className="font-secondary text-[15px] text-center">Please check your inbox and follow the instructions in the mail.</p>
                     </span>
-                    <form onSubmit={backToLogin}>
-                        <Button>Back to login</Button>
-                    </form>
+                    <form onSubmit={backToLogin}>{user && user.attributes.isArtist ? <Button>Go to Profile</Button> : <Button>Go to Library</Button>}</form>
                 </div>
             </div>
         </div>

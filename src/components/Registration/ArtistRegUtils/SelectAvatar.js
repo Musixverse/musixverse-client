@@ -1,8 +1,16 @@
 import { useRef, useState } from "react";
+import DefaultAvatar from "./DefaultAvatar";
 
 export default function SelectAvatar() {
     const [imageUploadState, setImageUploadState] = useState(false);
     const uploadedImage = useRef();
+
+    const handleImageSelection = (selectedUrl)=>{
+        const el = uploadedImage.current;
+        el.src = selectedUrl;
+        setImageUploadState(true);
+    }
+
     const handleImageUpload = (event) => {
         const el = uploadedImage.current;
         const myMemoObj = URL.createObjectURL(event.target.files[0]);
@@ -24,24 +32,17 @@ export default function SelectAvatar() {
             {/* Avatars */}
             <div className="max-w-[200px] ml-5">
                 <p className="text-secondary text-[14px] sm:text-[15px] mb-2 font-secondary">Upload or select an Avatar</p>
-                <div className="grid grid-cols-4 gap-1">
-                    <div className="w-[30px] h-[30px] sm:w-[39px] sm:h-[39px] rounded-full bg-light-300"></div>
-                    <div className="w-[30px] h-[30px] sm:w-[39px] sm:h-[39px] rounded-full bg-light-300"></div>
-                    <div className="w-[30px] h-[30px] sm:w-[39px] sm:h-[39px] rounded-full bg-light-300"></div>
-                    <div className="w-[30px] h-[30px] sm:w-[39px] sm:h-[39px] rounded-full bg-light-300"></div>
-                    <div className="w-[30px] h-[30px] sm:w-[39px] sm:h-[39px] rounded-full bg-light-300"></div>
-                    <div className="w-[30px] h-[30px] sm:w-[39px] sm:h-[39px] rounded-full bg-light-300"></div>
-                    {/* Upload from PC */}
+                <div className="grid grid-cols-4 gap-x-1 gap-y-2">
+                    <DefaultAvatar onImageSelection={handleImageSelection}/>
                     <label
                         htmlFor="upload-avatar"
                         className="flex items-center justify-center
                      text-dark-200 cursor-pointer w-[30px] h-[30px] sm:w-[39px] sm:h-[39px] rounded-full bg-light-300 hover:bg-[#bad9d5] text-[18px] sm:text-[20px]"
                     >
                         <i className="text-dark-200 fa fa-upload"></i>
-                        {/* <i className="fa fa-upload"></i> */}
                     </label>
                 </div>
-                <input className="hidden" onChange={handleImageUpload} type={"file"} id="upload-avatar" accept="image/*" required />
+                <input className="hidden" onChange={handleImageUpload} type={"file"} id="upload-avatar" accept="image/*" />
             </div>
         </div>
     );

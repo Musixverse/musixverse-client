@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { useMoralis } from "react-moralis";
 import Link from "next/link";
 import { useTheme } from "next-themes";
@@ -9,11 +10,22 @@ const Navbar = () => {
     const { theme, setTheme } = useTheme();
     const { authenticate, isAuthenticated, logout, user } = useMoralis();
 
-    if (typeof window !== "undefined" && document.getElementById("w3a-modal")) {
-        document.getElementById("w3a-modal").style.zIndex = "500";
+    const [watchWeb3AuthModal, setWatchWeb3AuthModal] = useState(false);
+
+    var checkWeb3AuthModalTimeout;
+    useEffect(() => {
+        checkWeb3AuthModalTimeout = setTimeout(changeWeb3AuthModalVisibility, 100);
+    }, [watchWeb3AuthModal]);
+
+    function changeWeb3AuthModalVisibility() {
+        if (typeof window !== "undefined" && document.getElementById("w3a-modal")) {
+            document.getElementById("w3a-modal").style.zIndex = "500";
+            clearTimeout(checkWeb3AuthModalTimeout);
+        }
     }
 
     const handleLogin = async () => {
+        setWatchWeb3AuthModal(true);
         await authenticate({
             provider: "web3Auth",
             clientId: process.env.NEXT_PUBLIC_WEB3_AUTH_CLIENT_ID,

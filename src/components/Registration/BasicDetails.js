@@ -20,6 +20,39 @@ export default function BasicDetails({ error, setError, success, setSuccess }) {
         const username = usernameRef.current.value;
         const email = emailRef.current.value;
 
+        //USERNAME CHECKS
+        const usernameRegex = /^\S*$/;
+        if(username.length < 2){
+            setError((prevState) => ({
+                title: "Invalid credentials!",
+                message: "Username length should be greater than 1",
+                showErrorBox: true,
+            }));
+            usernameRef.current.focus();
+            return;
+        }
+        else if(!usernameRegex.test(username)){
+            setError({
+                title: "Invalid credentials!",
+                message: "Username should only contain alphanumeric characters",
+                showErrorBox: true,
+            });
+            usernameRef.current.focus();
+            return;
+        }
+
+        //EMAIL CHECKS
+        const emailRegex = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+        if(!emailRegex.test(email)){
+            setError({
+                title: "Invalid credentials!",
+                message: "Please enter a valid email",
+                showErrorBox: true,
+            });
+            emailRef.current.focus();
+            return;
+        }
+
         if (name !== "" && username !== "" && email !== "") {
             await setUserData({
                 name: name === "" ? undefined : name,

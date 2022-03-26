@@ -21,7 +21,7 @@ export default function BasicDetails({ error, setError, success, setSuccess }) {
         const email = emailRef.current.value;
 
         //USERNAME CHECKS
-        const usernameRegex = /^\S*$/;
+        const usernameRegex = /^\w+$/;
         if(username.length < 2){
             setError((prevState) => ({
                 title: "Invalid credentials!",
@@ -31,10 +31,10 @@ export default function BasicDetails({ error, setError, success, setSuccess }) {
             usernameRef.current.focus();
             return;
         }
-        else if(!usernameRegex.test(username)){
+        if(!usernameRegex.test(username)){
             setError({
                 title: "Invalid credentials!",
-                message: "Username should only contain alphanumeric characters",
+                message: "Username can only contain alphabets, numbers, and '_'",
                 showErrorBox: true,
             });
             usernameRef.current.focus();

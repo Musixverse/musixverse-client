@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useMoralis } from "react-moralis";
+import Router from "next/router";
 import Link from "next/link";
 import { useTheme } from "next-themes";
 import Image from "next/image";
@@ -38,6 +39,11 @@ const Navbar = () => {
             loginMethodsOrder: ["google", "facebook", "twitter", "github", "linkedin", "discord", "apple", "email_passwordless"],
             signingMessage: "Musixverse Authentication",
         });
+    };
+
+    const handleLogout = async () => {
+        await logout();
+        Router.push("/", undefined, { shallow: true });
     };
 
     return (
@@ -136,7 +142,7 @@ const Navbar = () => {
                                     {isAuthenticated && user ? (
                                         <button
                                             className="w-full px-4 py-2 font-medium text-gray-700 transition-all bg-transparent border-b cursor-pointer border-light-300 hover:bg-primary-100 hover:text-light-100"
-                                            onClick={() => logout()}
+                                            onClick={handleLogout}
                                         >
                                             <Link
                                                 className="block w-full text-sm dropdown-item whitespace-nowrap hover:bg-primary-100 active:bg-primary-100"

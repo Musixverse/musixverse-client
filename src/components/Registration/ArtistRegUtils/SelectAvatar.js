@@ -7,20 +7,20 @@ export default function SelectAvatar() {
 
     //Array of default arrays
     const urls = [
+        "https://lh3.googleusercontent.com/MA0m87sfDmKHswPN39ycJkOUMS9C2wLqF5jz3SRpA8ij_V2Z-o3iPnViH1bT8_QISKwnCYSIO5ngL_85H60bpE9R6mogFuMjumBfB3w=s0",
         "https://www.artnews.com/wp-content/uploads/2021/08/BAYC-8746.png?w=631",
-        "https://lh3.googleusercontent.com/ppG4cJGe5bapx_fVYTaF7uN2vysBjuSFxlIh16Rd_sqsc-MRvsw2yOe-iP0RHZMXnaePLbnCO9hx4ti1GJQP6uteb32wbeua21ys3g=w361",
-        "https://lh3.googleusercontent.com/MYlZWpUkY6436fmMSha_qmbJ3FTxhFzdcxphNmB8qSUxvgphKTiWVDEyG8zTyMPxHqzkQYN_kwsMQmHGp9wIfeWhCqwwJ32hTcZCPLg=w361",
-        "https://lh3.googleusercontent.com/guWTxFAOxLKB2wVSICbVDPTzDV01_OPcNz5STMcvzRMmbZF6THBJaoKrmetK0yXix32SvqmJtxNw5NwhTFzVsfKnTlvZ1lQbdqakWw=w361",
-        "https://lh3.googleusercontent.com/InqKM6IlUvOaSD93iBg_FZI_QAABak7jCtR3HaiGcGq8RLG2ql3xU50N3I7Bt3Epy-h5h3ZbAXxZ-Fqb93MrCDtzowTYb_qsyBggBg=w361", 
-        "https://imageio.forbes.com/specials-images/imageserve/6170e01f8d7639b95a7f2eeb/Sotheby-s-NFT-Natively-Digital-1-2-sale-Bored-Ape-Yacht-Club--8817-by-Yuga-Labs/0x0.png?fit=bounds&format=png&width=960"
+        "https://lh3.googleusercontent.com/sQaGzstpAmGeIx0OQmb2RvPwpjZXY8iHzz6uadPifYNKeVnReB9g0p1rvtN3_8PJIv8XDbOWFnpG3LNl4F69CvDzFJ4lcT9wPm-S=w600",
+        "https://lh3.googleusercontent.com/CBT0DkF1cL6pXhtT-GCEZuQ4dXX0LmSbkhGo9b8HMwbbJ7bF1ej_bEtfW6ogKI_DqphMPuw0awPc7m7bMt43-u1rw3WlMt-I4DWY9Fs=w600",
+        "https://lh3.googleusercontent.com/LvPsEvPztcU-SfcXV8Kt2nAcWqn8osuBF5G4urVrXEHLgE3B-dmCaEefdTDLhmuzd7SKqbb8z3f2z8Vp6IllHszlFWfmPUMZT30i_Q=w600",
+        "https://lh3.googleusercontent.com/vQ2C30yW4SlWeBKfgkbH81GXhbbTOIdZIfScez6uEvg_y2CpbKiaRznPhnWUOCM6RJYL5MX_RkByRUxF4mUNFSNq5VERLCdp45u5=w600",
     ];
 
-    const handleImageSelection = (selectedUrl)=>{
+    const handleImageSelection = (selectedUrl) => {
         const el = uploadedImage.current;
         el.src = selectedUrl;
         //Reset the uploaded file
         uploadImage.current.value = "";
-    }
+    };
 
     const handleImageUpload = (event) => {
         const el = uploadedImage.current;
@@ -31,18 +31,13 @@ export default function SelectAvatar() {
 
     return (
         <div className="flex">
-            <img
-                className={"w-[100px] h-[100px] sm:w-[150px] sm:h-[150px] rounded-full"}
-                ref={uploadedImage}
-                src={urls[0]}
-                alt="Selected Avatar"
-            ></img>
+            <img className={"w-[100px] h-[100px] sm:w-[150px] sm:h-[150px] rounded-full"} ref={uploadedImage} src={urls[0]} alt="Selected Avatar"></img>
 
             {/* Avatars */}
             <div className="max-w-[200px] ml-5">
                 <p className="text-secondary text-[14px] sm:text-[15px] mb-2 font-secondary">Upload or select an Avatar</p>
                 <div className="grid grid-cols-4 gap-x-1 gap-y-2">
-                    <DefaultAvatar onImageSelection={handleImageSelection} urls={urls}/>
+                    <DefaultAvatar onImageSelection={handleImageSelection} urls={urls} />
                     <label
                         htmlFor="upload-avatar"
                         className="flex items-center justify-center

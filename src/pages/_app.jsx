@@ -23,6 +23,7 @@ function App({ Component, pageProps }) {
         <>
             <Script src="https://kit.fontawesome.com/0366dd7992.js" crossOrigin="anonymous"></Script>
             <Script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></Script>
+            <Script src="/theme.js" strategy="beforeInteractive" />
             <MoralisProvider appId={MORALIS_APP_ID} serverUrl={MORALIS_SERVER_URL}>
                 <ThemeProvider attribute="class" enableSystem={false}>
                     <Layout error={error} setError={setError} success={success} setSuccess={setSuccess}>

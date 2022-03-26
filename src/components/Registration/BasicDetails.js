@@ -20,9 +20,9 @@ export default function BasicDetails({ error, setError, success, setSuccess }) {
         const username = usernameRef.current.value;
         const email = emailRef.current.value;
 
-        //USERNAME CHECKS
+        // USERNAME CHECKS
         const usernameRegex = /^\S*$/;
-        if(username.length < 2){
+        if (username.length < 2) {
             setError((prevState) => ({
                 title: "Invalid credentials!",
                 message: "Username length should be greater than 1",
@@ -30,8 +30,7 @@ export default function BasicDetails({ error, setError, success, setSuccess }) {
             }));
             usernameRef.current.focus();
             return;
-        }
-        else if(!usernameRegex.test(username)){
+        } else if (!usernameRegex.test(username)) {
             setError({
                 title: "Invalid credentials!",
                 message: "Username should only contain alphanumeric characters",
@@ -41,9 +40,11 @@ export default function BasicDetails({ error, setError, success, setSuccess }) {
             return;
         }
 
-        //EMAIL CHECKS
-        const emailRegex = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
-        if(!emailRegex.test(email)){
+        // EMAIL CHECKS
+        const emailRegex = new RegExp(
+            /^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i
+        );
+        if (!emailRegex.test(email)) {
             setError({
                 title: "Invalid credentials!",
                 message: "Please enter a valid email",
@@ -91,7 +92,7 @@ export default function BasicDetails({ error, setError, success, setSuccess }) {
                     <p className="text-[15px] font-secondary mt-4">Keep an eye on your email and we will let you know as soon as you&apos;ve been verified.</p>
                 </div>
 
-                {/* Right section*/}
+                {/* Right section */}
                 <RightSection>
                     <p className="text-5xl font-tertiary max-w-[468px] mb-10">YOUR DETAILS</p>
                     <form onSubmit={handleBasicDetailsSave}>

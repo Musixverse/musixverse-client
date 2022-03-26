@@ -124,81 +124,91 @@ const Settings = ({ error, setError, success, setSuccess }) => {
                     </div>
                 </div>
 
-                <div className="flex flex-wrap justify-center content-center items-center">
-                    <div className="w-1/2 px-3">
-                        <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="email">
-                            Your Story (Bio)
-                        </label>
-                        <textarea
-                            rows="6"
-                            value={bio}
-                            onChange={(e) => setBio(e.target.value)}
-                            id="bio"
-                            className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-gray-100 focus:border-gray-500"
-                            placeholder="Tell your story to the world..."
-                        ></textarea>
+                {user && user.attributes.isArtist && (
+                    <div className="flex flex-wrap justify-center content-center items-center">
+                        <div className="w-1/2 px-3">
+                            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="email">
+                                Your Story (Bio)
+                            </label>
+                            <textarea
+                                rows="6"
+                                value={bio}
+                                onChange={(e) => setBio(e.target.value)}
+                                id="bio"
+                                className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-gray-100 focus:border-gray-500"
+                                placeholder="Tell your story to the world..."
+                            ></textarea>
+                        </div>
                     </div>
-                </div>
+                )}
 
-                <div className="flex flex-wrap justify-center content-center items-center">
-                    <div className="w-1/2 px-3">
-                        <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="email">
-                            Facebook
-                        </label>
-                        <input
-                            value={facebook}
-                            onChange={(e) => setFacebook(e.target.value)}
-                            id="facebook"
-                            className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-gray-100 focus:border-gray-500"
-                            placeholder="Your Facebook Profile URL"
-                        />
+                {user && user.attributes.isArtist && (
+                    <div className="flex flex-wrap justify-center content-center items-center">
+                        <div className="w-1/2 px-3">
+                            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="email">
+                                Facebook
+                            </label>
+                            <input
+                                value={facebook}
+                                onChange={(e) => setFacebook(e.target.value)}
+                                id="facebook"
+                                className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-gray-100 focus:border-gray-500"
+                                placeholder="Your Facebook Profile URL"
+                            />
+                        </div>
                     </div>
-                </div>
+                )}
 
-                <div className="flex flex-wrap justify-center content-center items-center">
-                    <div className="w-1/2 px-3">
-                        <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="email">
-                            Instagram
-                        </label>
-                        <input
-                            value={instagram}
-                            onChange={(e) => setInstagram(e.target.value)}
-                            id="instagram"
-                            className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-gray-100 focus:border-gray-500"
-                            placeholder="Your Instagram Profile URL"
-                        />
+                {user && user.attributes.isArtist && (
+                    <div className="flex flex-wrap justify-center content-center items-center">
+                        <div className="w-1/2 px-3">
+                            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="email">
+                                Instagram
+                            </label>
+                            <input
+                                value={instagram}
+                                onChange={(e) => setInstagram(e.target.value)}
+                                id="instagram"
+                                className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-gray-100 focus:border-gray-500"
+                                placeholder="Your Instagram Profile URL"
+                            />
+                        </div>
                     </div>
-                </div>
+                )}
 
-                <div className="flex flex-wrap justify-center content-center items-center">
-                    <div className="w-1/2 px-3">
-                        <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="email">
-                            Twitter
-                        </label>
-                        <input
-                            value={twitter}
-                            onChange={(e) => setTwitter(e.target.value)}
-                            id="twitter"
-                            className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-gray-100 focus:border-gray-500"
-                            placeholder="Your Twitter Profile URL"
-                        />
+                {user && user.attributes.isArtist && (
+                    <div className="flex flex-wrap justify-center content-center items-center">
+                        <div className="w-1/2 px-3">
+                            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="email">
+                                Twitter
+                            </label>
+                            <input
+                                value={twitter}
+                                onChange={(e) => setTwitter(e.target.value)}
+                                id="twitter"
+                                className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-gray-100 focus:border-gray-500"
+                                placeholder="Your Twitter Profile URL"
+                            />
+                        </div>
                     </div>
-                </div>
+                )}
 
-                <div className="flex flex-wrap justify-center content-center items-center">
-                    <div className="w-1/2 px-3">
-                        <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="email">
-                            Spotify
-                        </label>
-                        <input
-                            value={spotify}
-                            onChange={(e) => setSpotify(e.target.value)}
-                            id="spotify"
-                            className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-gray-100 focus:border-gray-500"
-                            placeholder="Your Spotify Profile URL"
-                        />
+                {user && user.attributes.isArtist && (
+                    <div className="flex flex-wrap justify-center content-center items-center">
+                        <div className="w-1/2 px-3">
+                            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="email">
+                                Spotify
+                            </label>
+                            <input
+                                value={spotify}
+                                onChange={(e) => setSpotify(e.target.value)}
+                                id="spotify"
+                                className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-gray-100 focus:border-gray-500"
+                                placeholder="Your Spotify Profile URL"
+                            />
+                        </div>
                     </div>
-                </div>
+                )}
 
                 {userError && (
                     <div className="flex flex-wrap justify-center content-center items-center">

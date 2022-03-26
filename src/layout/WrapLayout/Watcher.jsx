@@ -14,6 +14,9 @@ const Watcher = () => {
         if (router.pathname.startsWith("/register") && !user) {
             Router.push("/", undefined, { shallow: true });
         }
+        if (router.pathname.startsWith("/profile") && !user) {
+            Router.push("/", undefined, { shallow: true });
+        }
     }, [router.pathname]);
 
     /* Fetch updated user details */
@@ -28,20 +31,16 @@ const Watcher = () => {
     /* Handle the flow of registration pages */
     useEffect(() => {
         console.log("User:", user);
-
-        if (user && isAuthenticated) {
+        if (user) {
             fetchUpdatedUser();
             if (!user.attributes.email) {
                 Router.push("/register", undefined, { shallow: true });
             } else if (!user.attributes.emailVerified) {
                 Router.push("/register/confirm-email", undefined, { shallow: true });
             } else {
-                Router.push("/profile", undefined, { shallow: true });
+                // DO NOTHING
             }
         }
-        // else {
-        //     Router.push("/", undefined, { shallow: true });
-        // }
     }, [user]);
 
     return <span></span>;

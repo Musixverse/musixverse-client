@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { MoralisProvider } from "react-moralis";
 import { ThemeProvider } from "next-themes";
 import Script from "next/script";
@@ -18,6 +18,12 @@ function App({ Component, pageProps }) {
     });
     const MORALIS_APP_ID = process.env.NEXT_PUBLIC_MORALIS_APP_ID;
     const MORALIS_SERVER_URL = process.env.NEXT_PUBLIC_MORALIS_SERVER_URL;
+
+    // This is a workaround for the issue with the next-themes package. Without this, the theme was not being applied correctly.
+    const [mounted, setMounted] = useState(false);
+    // When mounted on client, now we can show the UI
+    useEffect(() => setMounted(true), []);
+    if (!mounted) return null;
 
     return (
         <>

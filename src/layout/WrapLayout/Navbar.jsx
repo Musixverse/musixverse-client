@@ -42,8 +42,8 @@ const Navbar = () => {
     };
 
     const handleLogout = async () => {
-        await logout();
         Router.push("/", undefined, { shallow: true });
+        await logout();
     };
 
     return (

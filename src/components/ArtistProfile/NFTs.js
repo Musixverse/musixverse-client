@@ -1,4 +1,5 @@
 import NFTCard from "../../layout/NFTCard/NFTCard";
+import NewPager from "./ArtistProfileUtils/NewPager";
 import Pager from "./ArtistProfileUtils/Pager";
 
 export default function NFTs() {
@@ -20,7 +21,8 @@ export default function NFTs() {
                 <NFTCard />
                 <NFTCard />
             </div>
-            <Pager />
+            {/* <Pager /> */}
+            <NewPager/>
         </>
     );
 }

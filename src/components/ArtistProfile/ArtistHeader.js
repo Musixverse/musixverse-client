@@ -33,8 +33,9 @@ export default function ArtistHeader() {
                 {/* Buttons section - Follow and share */}
                 <div className={styles["section1__buttons"]}>
                     <CustomButton green={true}>Follow</CustomButton>
-                    <button>
-                        <Image src={share} width={21} height={21} alt="share button"></Image>
+                    <button className="rounded-full bg-gray-700 w-[40px] text-light-200">
+                        <i className="fas fa-share-alt"></i>
+                        {/* <Image src={share} width={21} height={21} alt="share button"></Image> */}
                     </button>
                 </div>
             </div>
@@ -42,12 +43,15 @@ export default function ArtistHeader() {
             {/* Right Details section */}
             <div className={styles["artist-banner__section2"]}>
                 <div className={styles["section2__artist-name"]}>
-                    <p className="font-tertiary pt-3 text-5xl w-[12rem]">
+                    <p className="font-tertiary pt-2 text-5xl w-[12rem]">
                         {metaData.artistName}
                         &nbsp;<Image src={mxv_tick} width={21} height={21} alt="mxv_verified"></Image>
                     </p>
+                    <button className="w-[38px] h-[38px] text-center rounded-full bg-gray-200 hover:bg-[#dedede]">
+                        <i className="text-sm fas fa-ellipsis-v text-dark-100"></i>
+                    </button>
                     {/* Stats component */}
-                    <Stats />
+                    {/* <Stats /> */}
                 </div>
                 {/* About Us section */}
                 <div className={styles["section2__artist-about_us"]}>
@@ -65,11 +69,11 @@ export default function ArtistHeader() {
                         <span>United Arab Emirates</span>
                         <span>Joined Nov, 2020</span>
                     </div>
-                    <div>
+                    {/* <div>
                         <button className="w-[38px] h-[38px] text-center rounded-full bg-light-200 hover:bg-[#dedede]">
-                            <i className="fas fa-ellipsis-v text-dark-100 text-sm"></i>
+                            <i className="text-sm fas fa-ellipsis-v text-dark-100"></i>
                         </button>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </div>

@@ -5,9 +5,6 @@ import JumpToStart from "./JumpToStart";
 export default function Pager(){
     const [currentPage, setCurrentPage] = useState(1);
 
-    // useEffect(()=>{
-        
-    // },[]);
     //Requirements:
     //Next, Prev functionality
     //Page Jump Functionality
@@ -60,6 +57,7 @@ export default function Pager(){
                     {/* <JumpToEnd/> */}
                     <li onClick={handlePageIncrement} className="relative inline-flex items-center px-2 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-r-md hover:bg-gray-50">
                         <span className="sr-only">Next</span>
+                        {/* <i className="fas fa-caret-right"></i> */}
                         <ChevronRightIcon className="w-5 h-5" aria-hidden="true" />
                     </li>
                 </nav>

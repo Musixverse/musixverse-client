@@ -1,18 +1,17 @@
-import { useRef } from "react";
 import Image from "next/image";
 import styles from "../../../styles/NFTCard/Nftcard.module.css";
 import Section2 from "./Section2";
 import Section1 from "./Section1";
 
 export default function NFTCard(props){
-    //fetch data    
-    const songName = "Meridian";
-    const songId = 65;
-    const nftPrice = 0.3;
-    const likeCount = 2;
-    const lastPrice = 8;
-    const isVerified = true;
-    let artistName = "Monster KNY";
+    const songName = props.songName;
+    const songId = props.songId;
+    const nftPrice = props.nftPrice;
+    const likeCount = props.likeCount;
+    const lastPrice = props.lastPrice;
+    const isVerified = props.isVerified;
+    let artistName = props.artistName;
+
     if(artistName.length > 7)
         artistName = artistName.substring(0, 7)+"...";
 

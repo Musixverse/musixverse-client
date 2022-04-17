@@ -11,7 +11,7 @@ const CreateNFT3 = ({ }) => {
 
             <div className="container mx-auto pt-36 pb-20 min-h-screen">
                 <div className="flex flex-wrap justify-center content-center items-center">
-                    
+                    TBD
                 </div>
             </div>
         </>

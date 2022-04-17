@@ -1,66 +1,89 @@
-import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/solid";
-import { useState, useEffect } from "react";
-import JumpToStart from "./JumpToStart";
+import { useTheme } from "next-themes";
+import { useState, useRef } from "react";
 
-export default function Pager(){
-    const [currentPage, setCurrentPage] = useState(1);
-
-    //Requirements:
-    //Next, Prev functionality
-    //Page Jump Functionality
-    //Jump to start/end functionality
-    //Memoize the component
-    const numPages = 9; //change to-> props.rows
-    //Currently supports intervals of size 3
-    const pageIndexer = [];
-    const currInterval = Math.floor((currentPage + 2) / 3);
-    
-    const handlePageChange = (e) => {
-        const clickedPageIndex = parseInt(e.target.textContent);
-
-		if (currentPage === clickedPageIndex) 
+export default function Pager(props){
+    /**
+     * Data to be accepted in props:
+     * A set state function for NFTs array index
+     * maximum number of pages to be rendered
+     */
+    const {theme} = useTheme();
+    const inputRef = useRef(1);
+    const [currPage, setCurrPage] = useState(1);
+    const maxPages = 20;//Replace this with props.numPages
+    console.log(currPage);
+    const handlePageDecrement = () => {
+        if(currPage === 1)
             return;
-		setCurrentPage(clickedPageIndex);
-    }
+        inputRef.current.value = currPage-1;
+        setCurrPage(currPage-1);
+    };
 
     const handlePageIncrement = () => {
-        if(currentPage == numPages)
+        if(currPage === maxPages)
             return;
-        setCurrentPage(currentPage+1);
+        inputRef.current.value = currPage+1;
+        setCurrPage(currPage+1);
+    };
+
+    const handlePageInputChange = (e) => {
+        // inputRef.current.size = Math.max(inputRef.current.value.length, 1);
+        // inputRef.current.value = currPage;
+        e.target.size = Math.max(e.target.value.length, 1);
+        inputRef.current.value = e.target.value;
     }
 
-    for(let i = 1; i <= numPages; i++){
-        pageIndexer.push(
-            <li key={i} onClick={handlePageChange} className={(Math.floor((i+2)/3) === currInterval? "inline-flex items-center ":"hidden ") + "relative px-4 py-2 text-sm cursor-pointer font-medium border "+ (currentPage === i? " bg-primary-100 text-light-100 border-primary-100":" text-gray-500 bg-white border-gray-300 hover:bg-gray-50")}>
-              {i}
-            </li>
-        );
-        //relative inline-flex items-center px-4 py-2 text-sm font-medium border   ----  text-gray-500 bg-white border-gray-300 hover:bg-gray-50
-        //relative inline-flex items-center px-4 py-2 text-sm font-medium border   ----  bg-primary-100 text-light-100 border-primary-100
-        //currentPage === i? " bg-primary-100 text-light-100 border-primary-100":" text-gray-500 bg-white border-gray-300 hover:bg-gray-50"
+    const handlePageRequest = (e) => {
+        //If enter key is pressed only then considered a valid page change request
+        if (e.keyCode !== 13)
+            return;
+
+        const pageRequested = Number(e.target.value);
+        if(isNaN(pageRequested)){
+            alert("Page requested is not a number");
+            e.target.value = currPage;
+        }
+        else if(pageRequested > maxPages){
+            e.target.value = maxPages;
+            setCurrPage(maxPages);
+        }
+        else if(pageRequested < 1){
+            e.target.value = 1;
+            setCurrPage(1);
+        }
+        else{
+            e.target.value = pageRequested;
+            setCurrPage(pageRequested);
+        }
     }
-    return(
-        <div className="flex items-center justify-between my-11">
-            {/* Mobile Pager Div */}
-            {/* Will add soon */}
 
-
-            {/* Main Pager Div  */}
-            <div className="hidden sm:flex-1 sm:flex sm:items-center sm:justify-center">
-                <nav className="relative z-0 inline-flex -space-x-px rounded-md shadow-sm" aria-label="Pagination">
-                    <li className="relative inline-flex items-center px-2 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-l-md hover:bg-gray-50">
-                        <span className="sr-only">Previous</span>
-                        <ChevronLeftIcon className="w-5 h-5" aria-hidden="true" />
-                    </li>
-                    {currInterval !== 1? <JumpToStart currInterval={currInterval} currentPage={currentPage} handlePageChange={handlePageChange}/>: null}
-                    {pageIndexer}
-                    {/* <JumpToEnd/> */}
-                    <li onClick={handlePageIncrement} className="relative inline-flex items-center px-2 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-r-md hover:bg-gray-50">
-                        <span className="sr-only">Next</span>
-                        {/* <i className="fas fa-caret-right"></i> */}
-                        <ChevronRightIcon className="w-5 h-5" aria-hidden="true" />
-                    </li>
-                </nav>
+    return (
+        <div className="flex justify-center mb-11">
+            <div className={"flex rounded-md w-fit items-center "+(theme === "dark"? "bg-dark-100":"bg-light-300")}>
+                {/* Previous Page*/}
+                <button className="px-4 py-[7px] text-primary-300 hover:text-primary-200" onClick={handlePageDecrement}>
+                    <i className="fas fa-caret-left"></i>
+                </button>
+                {/* Pager Input */}
+                <p className="text-sm font-semibold px-7 font-secondary">
+                    Page 
+                    <input
+                        ref={inputRef}
+                        size={2} 
+                        className="mx-1 text-sm font-semibold text-center bg-transparent border-b-2 outline-none font-secondary border-primary-100" 
+                        onKeyUp={handlePageRequest}
+                        onInput={handlePageInputChange} 
+                        type={"text"}
+                        defaultValue={"1"}
+                        pattern={"[0-9]"}
+                    >
+                    </input>
+                    of <span>{maxPages}</span>
+                </p>
+                {/* Next Page*/}
+                <button className="px-4 py-[7px] text-primary-300 hover:text-primary-200" onClick={handlePageIncrement}>
+                    <i className="fas fa-caret-right"></i>
+                </button>
             </div>
         </div>
     );

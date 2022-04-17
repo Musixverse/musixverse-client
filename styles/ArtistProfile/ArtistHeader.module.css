@@ -1,6 +1,6 @@
 
 .artist-banner__container{
-    @apply flex space-x-10 p-10 -mt-[5%] bg-nav-light backdrop-blur-2xl backdrop-brightness-150 dark:bg-nav-dark dark:backdrop-blur-xl dark:backdrop-brightness-105 rounded-2xl;
+    @apply flex space-x-10 p-10 -mt-[5%] bg-nav-light backdrop-blur-2xl backdrop-brightness-150 rounded-2xl;
 }
 
 /* Left section */
@@ -13,7 +13,7 @@
 }
 
 .section1__social-icons{
-    @apply flex justify-center pt-5 space-x-5;
+    @apply flex justify-center space-x-5 mt-9;
 }
 
 .section1__buttons{
@@ -31,7 +31,7 @@
 }
 
 .section2__artist-name{
-    @apply flex items-center justify-between;
+    @apply flex justify-between;
 }
 
 .about_us{
@@ -41,5 +41,5 @@
 }
 
 .section2__artist-footer{
-    @apply flex justify-between items-center text-[#818181] text-[15px] font-medium;
+    @apply mt-3  flex justify-between items-center text-[#818181] text-[15px] font-medium;
 }

@@ -26,23 +26,23 @@ const CreateNFT2 = ({ }) => {
                     <div>
                         <label htmlFor="genre">Genre</label>
                         <select id="genre" name="Genre">
-                            <option value="Any">Original</option>
-                            <option value="pop">Cover</option>
-                            <option value="classical">Remix</option>
-                            <option value="rap">Live</option>
-                            <option value="indian">Remastered</option>
-                            <option value="cultural">Radio Edit</option>
+                            <option value="Any">Any</option>
+                            <option value="pop">Pop</option>
+                            <option value="classical">Classical</option>
+                            <option value="rap">Rap</option>
+                            <option value="indian">Indian</option>
+                            <option value="cultural">Cultural</option>
                         </select>
                     </div> 
                     <label htmlFor="rec-year">Recording Year</label>
                     <input
-                        type={number}
+                        type={"number"}
                         id="rec-year"
                         placeholder="Recording Year"
                     />
                     <label htmlFor="vocals">Does this track contain any singing, rapping, or other vocals?
-                        <input type={"radio"} id="vocals-yes" name="vocals" value="Yes" />
-                        <input type={"radio"} id="vocals-no" name="vocals" value="No" />
+                        <input type={"radio"} id="vocals-yes" name="vocals" value="Yes" /> Yes
+                        <input type={"radio"} id="vocals-no" name="vocals" value="No" /> No
                     </label>
                     <div>
                         <label htmlFor="content">Explicit Content</label>
@@ -53,8 +53,8 @@ const CreateNFT2 = ({ }) => {
                         </select>
                     </div> 
                     <label htmlFor="contributors">Do you want to add other contributors?
-                        <input type={"radio"} id="contributor-yes" name="contributors" value="Yes" />
-                        <input type={"radio"} id="contributor-no" name="contributors" value="No" />
+                        <input type={"radio"} id="contributor-yes" name="contributors" value="Yes" /> Yes
+                        <input type={"radio"} id="contributor-no" name="contributors" value="No" /> No
                     </label>
 
                     <button>Next</button>

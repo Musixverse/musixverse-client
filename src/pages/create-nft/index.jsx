@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Router from "next/router";
 
 const CreateNFT = ({ }) => {
     return (
@@ -22,7 +23,7 @@ const CreateNFT = ({ }) => {
                         placeholder="ISRC Number" 
                         maxLength={12}         
                     />
-                    <button>Next</button>
+                    <button onClick={Router.push('/create-nft/create-nft1',undefined,{shallow:true})}>Next</button>
                 </div>
             </div>
         </>

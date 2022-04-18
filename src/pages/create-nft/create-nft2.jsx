@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Router from "next/router";
 
 const CreateNFT2 = ({ }) => {
     return (
@@ -57,7 +58,7 @@ const CreateNFT2 = ({ }) => {
                         <input type={"radio"} id="contributor-no" name="contributors" value="No" /> No
                     </label>
 
-                    <button>Next</button>
+                    <button onClick={Router.push('/create-nft/create-nft3',undefined,{shallow:true})}>Next</button>
                 </div>
             </div>
         </>

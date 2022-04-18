@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Router from "next/router";
 
 const CreateNFT4 = ({ }) => {
     return (
@@ -42,7 +43,7 @@ const CreateNFT4 = ({ }) => {
                         <input type={"radio"} id="schedule-now" name="schedule" value="Schedule Now" /> Schedule Now
                         <input type={"radio"} id="schedule-later" name="schedule" value="Schedule for some time in the future" /> Schedule for some time in the future
                     </label>
-                    <button>Next</button>
+                    <button onClick={Router.push('/',undefined,{shallow:true})}>Next</button>
                 </div>
             </div>
         </>

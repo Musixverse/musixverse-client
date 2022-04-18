@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Router from "next/router";
 
 const CreateNFT1 = ({ }) => {
     return (
@@ -52,7 +53,7 @@ const CreateNFT1 = ({ }) => {
                         id="apple-music-link"
                         placeholder="Apple Music Link"
                     />
-                    <button>Next</button>
+                    <button onClick={Router.push('/create-nft/create-nft2',undefined,{shallow:true})}>Next</button>
                 </div>
             </div>
         </>

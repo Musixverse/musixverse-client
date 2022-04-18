@@ -2,21 +2,18 @@ import { useTheme } from "next-themes";
 import { useState, useRef } from "react";
 
 export default function Pager(props){
-    /**
-     * Data to be accepted in props:
-     * A set state function for NFTs array index
-     * maximum number of pages to be rendered
-     */
+    const [currPage, setCurrPage] = useState(1);
     const {theme} = useTheme();
     const inputRef = useRef(1);
-    const [currPage, setCurrPage] = useState(1);
-    const maxPages = 20;//Replace this with props.numPages
-    console.log(currPage);
+
+    const maxPages = props.maxPages;
+    
     const handlePageDecrement = () => {
         if(currPage === 1)
             return;
         inputRef.current.value = currPage-1;
         setCurrPage(currPage-1);
+        props.onPageChange(currPage-2);
     };
 
     const handlePageIncrement = () => {
@@ -24,11 +21,10 @@ export default function Pager(props){
             return;
         inputRef.current.value = currPage+1;
         setCurrPage(currPage+1);
+        props.onPageChange(currPage);
     };
 
     const handlePageInputChange = (e) => {
-        // inputRef.current.size = Math.max(inputRef.current.value.length, 1);
-        // inputRef.current.value = currPage;
         e.target.size = Math.max(e.target.value.length, 1);
         inputRef.current.value = e.target.value;
     }
@@ -46,14 +42,17 @@ export default function Pager(props){
         else if(pageRequested > maxPages){
             e.target.value = maxPages;
             setCurrPage(maxPages);
+            props.onPageChange(maxPages-1);
         }
         else if(pageRequested < 1){
             e.target.value = 1;
             setCurrPage(1);
+            props.onPageChange(0);
         }
         else{
             e.target.value = pageRequested;
             setCurrPage(pageRequested);
+            props.onPageChange(pageRequested-1);
         }
     }
 

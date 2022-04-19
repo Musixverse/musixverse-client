@@ -1,8 +1,11 @@
 import { useTheme } from "next-themes";
-import { useState, useRef } from "react";
+import { useState, useRef, useContext } from "react";
+import StatusContext from "../../../../store/status-context";
 
 export default function Pager(props){
     const [currPage, setCurrPage] = useState(1);
+    const [, setErrorDetails] = useContext(StatusContext);
+
     const {theme} = useTheme();
     const inputRef = useRef(1);
 
@@ -20,6 +23,11 @@ export default function Pager(props){
         if(currPage === maxPages)
             return;
         inputRef.current.value = currPage+1;
+        // setSuccessDetails({
+        //     title: "Page change successfull",
+        //     message: "Page was successfully changed to "+`${currPage+1}`,
+        //     showSuccessBox: true,
+        // });
         setCurrPage(currPage+1);
         props.onPageChange(currPage);
     };
@@ -36,7 +44,11 @@ export default function Pager(props){
 
         const pageRequested = Number(e.target.value);
         if(isNaN(pageRequested)){
-            alert("Page requested is not a number");
+            setErrorDetails({
+                title: "Invalid page request!",
+                message: `Page numbers can be numeric only. Kindly enter a numeric page number.`,
+                showErrorBox: true,
+            });
             e.target.value = currPage;
         }
         else if(pageRequested > maxPages){
@@ -74,7 +86,6 @@ export default function Pager(props){
                         onInput={handlePageInputChange} 
                         type={"text"}
                         defaultValue={"1"}
-                        pattern={"[0-9]"}
                     >
                     </input>
                     of <span>{maxPages}</span>

@@ -1,12 +1,14 @@
-import { useRef } from "react";
+import { useRef, useContext } from "react";
 import RightSection from "./ArtistRegUtils/RightSection";
 import styles from "../../../styles/Registration/Artist.module.css";
 import SelectAvatar from "./ArtistRegUtils/SelectAvatar";
 import Router from "next/router";
 import { useMoralis } from "react-moralis";
 import Button from "./ArtistRegUtils/Button";
+import StatusContext from "../../../store/status-context";
 
-export default function BasicDetails({ error, setError, success, setSuccess }) {
+export default function BasicDetails() {
+    const [, , , setError] = useContext(StatusContext);
     const { setUserData, userError } = useMoralis();
 
     const nameRef = useRef(null);
@@ -23,11 +25,11 @@ export default function BasicDetails({ error, setError, success, setSuccess }) {
         //USERNAME CHECKS
         const usernameRegex = /^\w+$/;
         if(username.length < 2){
-            setError((prevState) => ({
+            setError({
                 title: "Invalid credentials!",
                 message: "Username length should be greater than 1",
                 showErrorBox: true,
-            }));
+            });
             usernameRef.current.focus();
             return;
         } else if (!usernameRegex.test(username)) {

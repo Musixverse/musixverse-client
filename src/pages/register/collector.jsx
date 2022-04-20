@@ -1,7 +1,7 @@
 import Head from "next/head";
 import CollectorRegistration from "../../components/Registration/CollectorRegistration";
 
-const Collector_Page = ({ error, setError, success, setSuccess }) => {
+const Collector_Page = () => {
     return (
         <>
             <Head>
@@ -9,7 +9,7 @@ const Collector_Page = ({ error, setError, success, setSuccess }) => {
                 <meta name="description" content="Musixverse" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <CollectorRegistration error={error} setError={setError} success={success} setSuccess={setSuccess} />
+            <CollectorRegistration/>
         </>
     );
 };

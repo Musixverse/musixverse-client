@@ -1,7 +1,7 @@
 import Head from "next/head";
 import BasicDetails from "../../../components/Registration/BasicDetails";
 
-const ArtistBasicDetails = ({ error, setError, success, setSuccess }) => {
+const ArtistBasicDetails = () => {
     return (
         <>
             <Head>
@@ -10,7 +10,7 @@ const ArtistBasicDetails = ({ error, setError, success, setSuccess }) => {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             {/* Component */}
-            <BasicDetails error={error} setError={setError} success={success} setSuccess={setSuccess} />
+            <BasicDetails/>
         </>
     );
 };

@@ -4,7 +4,7 @@ import StatusContext from "../../../../store/status-context";
 
 export default function Pager(props){
     const [currPage, setCurrPage] = useState(1);
-    const [, setErrorDetails] = useContext(StatusContext);
+    const [, , , setErrorDetails] = useContext(StatusContext);
 
     const {theme} = useTheme();
     const inputRef = useRef(1);
@@ -50,6 +50,7 @@ export default function Pager(props){
                 showErrorBox: true,
             });
             e.target.value = currPage;
+            e.target.size = Math.max(e.target.value.length, 1);
         }
         else if(pageRequested > maxPages){
             e.target.value = maxPages;

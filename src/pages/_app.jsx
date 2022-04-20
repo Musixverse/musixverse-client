@@ -34,10 +34,10 @@ function App({ Component, pageProps }) {
             <MoralisProvider appId={MORALIS_APP_ID} serverUrl={MORALIS_SERVER_URL}>
                 <ThemeProvider attribute="class" enableSystem={false}>
                     <StatusContext.Provider
-                        value={[setSuccess, setError]}
+                        value={[error, success, setSuccess, setError]}
                     >
-                        <Layout error={error} setError={setError} success={success} setSuccess={setSuccess}>
-                            <Component {...pageProps} error={error} setError={setError} success={success} setSuccess={setSuccess} />
+                        <Layout>
+                            <Component {...pageProps}/>
                         </Layout>
                     </StatusContext.Provider>
                 </ThemeProvider>

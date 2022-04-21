@@ -4,7 +4,7 @@ import StatusContext from "../../../../store/status-context";
 
 export default function Pager(props){
     const [currPage, setCurrPage] = useState(1);
-    const [, , , setErrorDetails] = useContext(StatusContext);
+    const [, , , setError] = useContext(StatusContext);
 
     const {theme} = useTheme();
     const inputRef = useRef(1);
@@ -23,11 +23,6 @@ export default function Pager(props){
         if(currPage === maxPages)
             return;
         inputRef.current.value = currPage+1;
-        // setSuccessDetails({
-        //     title: "Page change successfull",
-        //     message: "Page was successfully changed to "+`${currPage+1}`,
-        //     showSuccessBox: true,
-        // });
         setCurrPage(currPage+1);
         props.onPageChange(currPage);
     };
@@ -44,13 +39,12 @@ export default function Pager(props){
 
         const pageRequested = Number(e.target.value);
         if(isNaN(pageRequested)){
-            setErrorDetails({
+            setError({
                 title: "Invalid page request!",
                 message: `Page numbers can be numeric only. Kindly enter a numeric page number.`,
                 showErrorBox: true,
             });
             e.target.value = currPage;
-            e.target.size = Math.max(e.target.value.length, 1);
         }
         else if(pageRequested > maxPages){
             e.target.value = maxPages;
@@ -67,6 +61,7 @@ export default function Pager(props){
             setCurrPage(pageRequested);
             props.onPageChange(pageRequested-1);
         }
+        e.target.size = Math.max(e.target.value.length, 1);
     }
 
     return (

@@ -1,22 +1,22 @@
 import { useTheme } from "next-themes";
-import { useState, useRef } from "react";
+import { useState, useRef, useContext } from "react";
+import StatusContext from "../../../../store/status-context";
 
 export default function Pager(props){
-    /**
-     * Data to be accepted in props:
-     * A set state function for NFTs array index
-     * maximum number of pages to be rendered
-     */
+    const [currPage, setCurrPage] = useState(1);
+    const [, , , setError] = useContext(StatusContext);
+
     const {theme} = useTheme();
     const inputRef = useRef(1);
-    const [currPage, setCurrPage] = useState(1);
-    const maxPages = 20;//Replace this with props.numPages
-    console.log(currPage);
+
+    const maxPages = props.maxPages;
+    
     const handlePageDecrement = () => {
         if(currPage === 1)
             return;
         inputRef.current.value = currPage-1;
         setCurrPage(currPage-1);
+        props.onPageChange(currPage-2);
     };
 
     const handlePageIncrement = () => {
@@ -24,11 +24,10 @@ export default function Pager(props){
             return;
         inputRef.current.value = currPage+1;
         setCurrPage(currPage+1);
+        props.onPageChange(currPage);
     };
 
     const handlePageInputChange = (e) => {
-        // inputRef.current.size = Math.max(inputRef.current.value.length, 1);
-        // inputRef.current.value = currPage;
         e.target.size = Math.max(e.target.value.length, 1);
         inputRef.current.value = e.target.value;
     }
@@ -40,21 +39,29 @@ export default function Pager(props){
 
         const pageRequested = Number(e.target.value);
         if(isNaN(pageRequested)){
-            alert("Page requested is not a number");
+            setError({
+                title: "Invalid page request!",
+                message: `Page numbers can be numeric only. Kindly enter a numeric page number.`,
+                showErrorBox: true,
+            });
             e.target.value = currPage;
         }
         else if(pageRequested > maxPages){
             e.target.value = maxPages;
             setCurrPage(maxPages);
+            props.onPageChange(maxPages-1);
         }
         else if(pageRequested < 1){
             e.target.value = 1;
             setCurrPage(1);
+            props.onPageChange(0);
         }
         else{
             e.target.value = pageRequested;
             setCurrPage(pageRequested);
+            props.onPageChange(pageRequested-1);
         }
+        e.target.size = Math.max(e.target.value.length, 1);
     }
 
     return (
@@ -75,7 +82,6 @@ export default function Pager(props){
                         onInput={handlePageInputChange} 
                         type={"text"}
                         defaultValue={"1"}
-                        pattern={"[0-9]"}
                     >
                     </input>
                     of <span>{maxPages}</span>

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { MoralisProvider } from "react-moralis";
 import { ThemeProvider } from "next-themes";
+import StatusContext from "../../store/status-context";
 import Script from "next/script";
 import "../../styles/globals.css";
 import Layout from "../layout/WrapLayout/Layout";
@@ -32,9 +33,13 @@ function App({ Component, pageProps }) {
             <Script src="/theme.js" strategy="beforeInteractive" />
             <MoralisProvider appId={MORALIS_APP_ID} serverUrl={MORALIS_SERVER_URL}>
                 <ThemeProvider attribute="class" enableSystem={false}>
-                    <Layout error={error} setError={setError} success={success} setSuccess={setSuccess}>
-                        <Component {...pageProps} error={error} setError={setError} success={success} setSuccess={setSuccess} />
-                    </Layout>
+                    <StatusContext.Provider
+                        value={[error, success, setSuccess, setError]}
+                    >
+                        <Layout>
+                            <Component {...pageProps}/>
+                        </Layout>
+                    </StatusContext.Provider>
                 </ThemeProvider>
             </MoralisProvider>
         </>

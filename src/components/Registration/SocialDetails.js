@@ -1,13 +1,14 @@
-import { useRef } from "react";
+import { useRef, useContext } from "react";
 import RightSection from "./ArtistRegUtils/RightSection";
 import styles from "../../../styles/Registration/Artist.module.css";
 import Button from "./ArtistRegUtils/Button";
 import Router from "next/router";
 import { useMoralis } from "react-moralis";
+import StatusContext from "../../../store/status-context";
 
-export default function SocialDetails({ error, setError, success, setSuccess }) {
+export default function SocialDetails() {
     const { setUserData, userError } = useMoralis();
-
+    const [, , , setError] = useContext(StatusContext);
     const bioRef = useRef(null);
     const instagramRef = useRef(null);
     const facebookRef = useRef(null);

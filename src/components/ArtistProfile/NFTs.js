@@ -1,7 +1,11 @@
+import { useState } from "react";
 import NFTCard from "../../layout/NFTCard/NFTCard";
 import Pager from "./ArtistProfileUtils/Pager";
 
 export default function NFTs() {
+    //0-based indexing
+    const [currentPage, setCurrentPage] = useState(0);
+
     //Fetch data from moralis using SSR(preffered)
     const nftData = [
         {
@@ -32,7 +36,7 @@ export default function NFTs() {
             artistName: "Monster KNY"
         },
         {
-            songName: "Meridian", 
+            songName: "Waka Waka", 
             songId: 65, 
             nftPrice: 0.3, 
             likeCount: 2, 
@@ -59,10 +63,15 @@ export default function NFTs() {
             artistName: "Monster KNY"
         }
     ];
-    const nftCards = nftData.map((nft, idx)=>{
-        return (
+
+    const n = nftData.length;
+    const tempArray = [];
+    const nftCards = [];
+    for(let i = 0; i < n; i++){
+        let nft = nftData[i];
+        tempArray.push(
             <NFTCard 
-                key={idx}
+                key={i}
                 songName= {nft.songName}
                 songId= {nft.songId}
                 nftPrice= {nft.nftPrice} 
@@ -72,21 +81,18 @@ export default function NFTs() {
                 artistName= {nft.artistName}
             />
         );
-    });
+        if(i%3 === 2 || i == n-1){
+            nftCards.push(tempArray);
+            tempArray = [];
+        }
+    }
+    
     return (
-        // <div className="z-0 grid grid-cols-5 my-11 gap-11">
-        //     <NFTCard />
-        //     <NFTCard />
-        //     <NFTCard />
-        //     <NFTCard />
-        //     <NFTCard />
-        //     <NFTCard />
-        // </div>
         <>
             <div className="grid grid-cols-5 my-11 gap-11">
-                {nftCards}
+                {nftCards[currentPage]}
             </div>
-            <Pager/>
+            <Pager onPageChange={setCurrentPage} maxPages={nftCards.length}/>
         </>
     );
 }

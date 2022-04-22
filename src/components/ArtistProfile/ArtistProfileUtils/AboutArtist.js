@@ -8,27 +8,27 @@ export default function AboutArtist(){
 
     return(
         <>
-            <div className={styles["section2__artist-about_us"]}>
-                <h4 className="font-bold text-[18px] pt-3">About</h4>
-                <p className="text-[15px]">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione</p>
-                <p className={"text-[15px] pt-3 " + styles["about_us"]}>
+            <div className="mt-3">
+                <h4 className="font-bold text-[18px]">About</h4>
+                <p className="text-[12px] md:text-[15px]">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione</p>
+                <p className={"text-[12px] md:text-[15px] pt-3 " + styles["about_us"]}>
                     Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quas illo ad eaque ipsa molestias distinctio cupiditate veniam, velit
                     recusandae itaque deleniti voluptatum, quibusdam alias odit! Quibusdam, sed nulla. Pariatur, similique?
                 </p>
-                <button onClick={()=> setShowModal(true)} className="text-primary-200 hover:text-primary-300 text-[14px] mt-2">Read More</button>
+                <button onClick={()=> setShowModal(true)} className="text-primary-200 hover:text-primary-300 text-[12px] md:text-[15px] mt-2">Read More</button>
             </div>
             {/* footer section */}
             <div className={styles["section2__artist-footer"]}>
-                <div className="space-x-5">
+                <div className="space-x-2 md:space-x-5">
                     <span>United Arab Emirates</span>
                     <span>Joined Nov, 2020</span>
                 </div>
                 <div>
-                    <button className="mx-3 w-[36px] h-[36px] text-center rounded-full bg-gray-200 hover:bg-[#dedede]">
-                        <i className="text-sm text-dark-100 fas fa-flag"></i>
+                    <button className="mr-2 md:mr-3 w-[28px] h-[28px] md:w-[36px] md:h-[36px]  text-center rounded-full bg-gray-200 hover:bg-[#dedede]">
+                        <i className="text-xs md:text-sm text-dark-100 fas fa-flag"></i>
                     </button>
-                    <button className="w-[36px] h-[36px] text-center rounded-full bg-gray-200 hover:bg-[#dedede]">
-                        <i className="text-sm fas fa-share-alt text-dark-100"></i>
+                    <button className="md:w-[36px] md:h-[36px] w-[28px] h-[28px] text-center rounded-full bg-gray-200 hover:bg-[#dedede]">
+                        <i className="text-xs md:text-sm fas fa-share-alt text-dark-100"></i>
                     </button>
                 </div>
             </div>

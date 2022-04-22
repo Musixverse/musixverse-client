@@ -5,7 +5,7 @@
 
 /* Left section */
 .artist-banner__section1{
-    @apply flex flex-col;
+    @apply flex flex-col justify-between h-full;
 }
 
 .section1__artist-image{
@@ -13,7 +13,7 @@
 }
 
 .section1__social-icons{
-    @apply flex justify-center space-x-5 mt-9;
+    @apply flex justify-center mt-5 space-x-5;
 }
 
 .section1__buttons{
@@ -41,5 +41,5 @@
 }
 
 .section2__artist-footer{
-    @apply mt-3  flex justify-between items-center text-[#818181] text-[15px] font-medium;
+    @apply mt-3 flex justify-between items-center text-[#818181] text-[15px] font-medium;
 }

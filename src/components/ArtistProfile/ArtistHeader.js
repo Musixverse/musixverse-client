@@ -5,6 +5,7 @@ import artistProfile from "../../../public/Artist_Profile.png";
 import mxv_tick from "../../../public/assets/mxv_tick.svg";
 import AboutArtist from "./ArtistProfileUtils/AboutArtist";
 import CustomButton from "../../layout/CustomButton";
+import Stats from "./ArtistProfileUtils/Stats";
 
 export default function ArtistHeader() {
     return (
@@ -20,6 +21,9 @@ export default function ArtistHeader() {
                     <a href="www.instagram.com"><i className="text-2xl fab fa-instagram hover:text-primary-100"></i></a>
                     <a href="www.twitter.com"><i className="text-2xl fab fa-twitter hover:text-primary-100"></i></a>
                 </div>
+                <div className="m-auto mt-3">
+                    <CustomButton green={true}>Edit profile <i className="ml-1 fas fa-edit"></i></CustomButton>
+                </div>
             </div>
 
             {/* Right Details section */}
@@ -30,7 +34,8 @@ export default function ArtistHeader() {
                         &nbsp;<Image src={mxv_tick} width={21} height={21} alt="mxv_verified"></Image>
                     </p>
                     {/* Report and Share CTA */}
-                    <div className="mt-2">
+                    <Stats/>
+                    {/* <div className="mt-2">
                         <CustomButton green={true}>Edit profile <i className="ml-1 fas fa-edit"></i></CustomButton>
                         <button className="mx-3 w-[36px] h-[36px] text-center rounded-full bg-gray-200 hover:bg-[#dedede]">
                             <i className="text-sm text-dark-100 fas fa-flag"></i>
@@ -38,7 +43,7 @@ export default function ArtistHeader() {
                         <button className="w-[36px] h-[36px] text-center rounded-full bg-gray-200 hover:bg-[#dedede]">
                             <i className="text-sm fas fa-share-alt text-dark-100"></i>
                         </button>
-                    </div>
+                    </div> */}
                 </div>
                 {/* About Us section */}
                 <AboutArtist/>

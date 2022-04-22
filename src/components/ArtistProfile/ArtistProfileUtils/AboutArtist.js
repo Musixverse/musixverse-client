@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styles from "../../../../styles/ArtistProfile/ArtistHeader.module.css";
 import ArtistBioModal from "./ArtistBioModal";
+import CustomButton from "../../../layout/CustomButton";
 
 export default function AboutArtist(){
     const [showModal, setShowModal] = useState(false);
@@ -21,6 +22,14 @@ export default function AboutArtist(){
                 <div className="space-x-5">
                     <span>United Arab Emirates</span>
                     <span>Joined Nov, 2020</span>
+                </div>
+                <div>
+                    <button className="mx-3 w-[36px] h-[36px] text-center rounded-full bg-gray-200 hover:bg-[#dedede]">
+                        <i className="text-sm text-dark-100 fas fa-flag"></i>
+                    </button>
+                    <button className="w-[36px] h-[36px] text-center rounded-full bg-gray-200 hover:bg-[#dedede]">
+                        <i className="text-sm fas fa-share-alt text-dark-100"></i>
+                    </button>
                 </div>
             </div>
             <ArtistBioModal showModal={showModal} setShowModal={setShowModal}/>

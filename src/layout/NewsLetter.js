@@ -14,9 +14,8 @@ export default function NewsLetter() {
                 <div className="flex flex-col md:flex-row justify-between">
                     {/* left section */}
                     <div>
-                        <p className="text-sm mb-4">
+                        <p className="text-sm mb-4 max-w-md">
                             Join our mailing list to stay in the loop with our newest future realeases,
-                            <br />
                             NFT drops and tips and tickets for navigating through Musixverse.
                         </p>
                         {/* SIGN UP */}

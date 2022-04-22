@@ -11,11 +11,11 @@
 }
 
 .newsletter__email--button{
-    @apply bg-light-200 font-bold text-dark-200 py-1 px-5 font-secondary rounded-lg ml-3 border-2 hover:border-primary-300;
+    @apply bg-light-200 font-bold max-w-[150px] mt-2 md:mt-0 text-dark-200 py-1 px-5 font-secondary rounded-lg sm:ml-3 border-2 hover:border-primary-300;
 }
 
 .newsletter__social{
-    @apply flex space-x-5 justify-end;
+    @apply flex space-x-5 md:justify-end;
 }
 
 .newsletter__social button{

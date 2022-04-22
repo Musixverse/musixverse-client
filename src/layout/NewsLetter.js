@@ -11,7 +11,7 @@ export default function NewsLetter() {
         <div className={styles["newsletter"]}>
             <div className={styles["newsletter__container"]}>
                 <p className="font-tertiary text-4xl mb-2">Stay in the loop</p>
-                <div className="flex justify-between">
+                <div className="flex flex-col md:flex-row justify-between">
                     {/* left section */}
                     <div>
                         <p className="text-sm mb-4">
@@ -26,7 +26,7 @@ export default function NewsLetter() {
                         </button>
                     </div>
                     {/* Right section */}
-                    <div className="flex flex-col justify-end items-end">
+                    <div className="flex flex-col mt-5 md:mt-0 md:justify-end md:items-end">
                         <p className="mb-4 text-[18px]">Join the community</p>
                         <div className={styles["newsletter__social"]}>
                             <button className="flex justify-center items-center">

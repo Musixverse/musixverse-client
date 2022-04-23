@@ -16,11 +16,7 @@ const CreateNFT4 = ({}) => {
                         <form className="w-full max-w-lg">
                             <div className="flex flex-wrap -mx-3 mb-6">
                                 <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                                    <label
-                                        htmlFor="nft-copies"
-                                        className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                                        for="grid-first-name"
-                                    >
+                                    <label htmlFor="nft-copies" className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
                                         No. of copies of the NFT
                                     </label>
                                     <input
@@ -33,11 +29,7 @@ const CreateNFT4 = ({}) => {
                                     />
                                 </div>
                                 <div className="w-full md:w-1/2 px-3">
-                                    <label
-                                        htmlFor="individual-nft-price"
-                                        className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                                        for="grid-first-name"
-                                    >
+                                    <label htmlFor="individual-nft-price" className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
                                         Price of Individual NFT
                                     </label>
                                     <input

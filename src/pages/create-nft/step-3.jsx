@@ -55,7 +55,7 @@ const CreateNFT2 = ({}) => {
                                             <option value="Alternative">Alternative</option>
                                             <option value="Big-Band">Big Band</option>
                                             <option value="Blues">Blues</option>
-                                            <option value="Childrens-Music">Children's Music</option>
+                                            <option value="Childrens-Music">Children&apos;s Music</option>
                                             <option value="Classical">Classical</option>
                                             <option value="Comedy">Comedy</option>
                                             <option value="Country">Country</option>
@@ -82,11 +82,7 @@ const CreateNFT2 = ({}) => {
                             </div>
                             <div className="flex flex-wrap -mx-3 mb-6">
                                 <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                                    <label
-                                        htmlFor="rec-year"
-                                        className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                                        for="grid-first-name"
-                                    >
+                                    <label htmlFor="rec-year" className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
                                         Recording Year
                                     </label>
                                     <input

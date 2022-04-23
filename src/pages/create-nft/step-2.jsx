@@ -17,11 +17,7 @@ const CreateNFT1 = ({}) => {
                             <div className="flex flex-wrap -mx-3 mb-6">
                                 <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                                     {/* @Sparsh: Add the code from Registration process here */}
-                                    <label
-                                        htmlFor="cover-art"
-                                        className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                                        for="grid-first-name"
-                                    >
+                                    <label htmlFor="cover-art" className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
                                         Cover Art
                                     </label>
                                     <input
@@ -55,12 +51,14 @@ const CreateNFT1 = ({}) => {
                                         placeholder="Enter track title here"
                                         required
                                     />
-                                    <p className="text-gray-600 text-xs italic">Feel free to include featured artists and "version" info to the track title</p>
+                                    <p className="text-gray-600 text-xs italic">
+                                        Feel free to include featured artists and &quot;version&quot; info to the track title
+                                    </p>
                                 </div>
                             </div>
                             <div className="flex flex-wrap -mx-3 mb-6">
                                 <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-city">
+                                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-city">
                                         City
                                     </label>
                                     <input
@@ -71,7 +69,7 @@ const CreateNFT1 = ({}) => {
                                     />
                                 </div>
                                 <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-state">
+                                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-state">
                                         State
                                     </label>
                                     <div className="relative">
@@ -91,7 +89,7 @@ const CreateNFT1 = ({}) => {
                                     </div>
                                 </div>
                                 <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-zip">
+                                    <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-zip">
                                         Zip
                                     </label>
                                     <input

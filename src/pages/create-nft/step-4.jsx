@@ -16,11 +16,7 @@ const CreateNFT3 = ({}) => {
                         <form className="w-full max-w-lg">
                             <div className="flex flex-wrap -mx-3 mb-6">
                                 <div className="w-full px-3 mb-6 md:mb-0">
-                                    <label
-                                        htmlFor="rec-year"
-                                        className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                                        for="grid-first-name"
-                                    >
+                                    <label htmlFor="rec-year" className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
                                         Add Contributors
                                     </label>
                                     <input

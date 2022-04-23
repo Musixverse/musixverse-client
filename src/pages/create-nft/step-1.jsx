@@ -28,7 +28,7 @@ const CreateNFT = ({}) => {
                                 maxLength={12}
                                 className="appearance-none block w-full bg-gray-200 text-gray-700 border-2 border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none shadow-sm focus:bg-white focus:border-primary-100"
                             />
-                            <p class="text-gray-600 text-xs italic">
+                            <p className="text-gray-600 text-xs italic">
                                 Please enter the ISRC of your track in the box above. You can find this code on your music distributor's website. We use this to
                                 pull in track data automatically to take a little burden off of you.
                             </p>

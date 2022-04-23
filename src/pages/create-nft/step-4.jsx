@@ -13,14 +13,18 @@ const CreateNFT3 = ({}) => {
             <div className="container mx-auto pt-36 pb-20 min-h-screen">
                 <div className="flex flex-wrap justify-center content-center items-center">
                     <div className="grid gap-y-10 justify-items-center">
-                        <form class="w-full max-w-lg">
-                            <div class="flex flex-wrap -mx-3 mb-6">
-                                <div class="w-full px-3 mb-6 md:mb-0">
-                                    <label htmlFor="rec-year" class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+                        <form className="w-full max-w-lg">
+                            <div className="flex flex-wrap -mx-3 mb-6">
+                                <div className="w-full px-3 mb-6 md:mb-0">
+                                    <label
+                                        htmlFor="rec-year"
+                                        className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                        for="grid-first-name"
+                                    >
                                         Add Contributors
                                     </label>
                                     <input
-                                        class="appearance-none block w-full bg-gray-200 text-gray-700 border-2 border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none shadow-sm focus:bg-white focus:border-primary-100"
+                                        className="appearance-none block w-full bg-gray-200 text-gray-700 border-2 border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none shadow-sm focus:bg-white focus:border-primary-100"
                                         id="rec-year"
                                         type="number"
                                         placeholder="Recording Year"

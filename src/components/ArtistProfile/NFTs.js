@@ -89,7 +89,7 @@ export default function NFTs() {
     
     return (
         <>
-            <div className="grid grid-cols-5 my-11 gap-11">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 my-8 gap-6 md:my-11 md:gap-11">
                 {nftCards[currentPage]}
             </div>
             <Pager onPageChange={setCurrentPage} maxPages={nftCards.length}/>

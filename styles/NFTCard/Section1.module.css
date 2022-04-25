@@ -7,7 +7,7 @@
 }
 
 .description--section1__songname{
-    @apply text-lg md:text-xl font-bold font-secondary;
+    @apply text-sm sm:text-lg md:text-xl font-bold font-secondary;
 }
 
 .description--section1__price{

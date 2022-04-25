@@ -5,6 +5,7 @@ import StatusContext from "../../store/status-context";
 import Script from "next/script";
 import "../../styles/globals.css";
 import Layout from "../layout/WrapLayout/Layout";
+import ScrollToTop from "../utils/ScrollToTop";
 
 function App({ Component, pageProps }) {
     const [error, setError] = useState({
@@ -33,11 +34,10 @@ function App({ Component, pageProps }) {
             <Script src="/theme.js" strategy="beforeInteractive" />
             <MoralisProvider appId={MORALIS_APP_ID} serverUrl={MORALIS_SERVER_URL}>
                 <ThemeProvider attribute="class" enableSystem={false}>
-                    <StatusContext.Provider
-                        value={[error, success, setSuccess, setError]}
-                    >
+                    <StatusContext.Provider value={[error, success, setSuccess, setError]}>
                         <Layout>
-                            <Component {...pageProps}/>
+                            <ScrollToTop />
+                            <Component {...pageProps} />
                         </Layout>
                     </StatusContext.Provider>
                 </ThemeProvider>

@@ -29,7 +29,7 @@ export default function Section1(props){
                 <p className={styles['description--section1__price']}>Price</p>
                 <div className="flex items-center font-bold">
                     <Image src={"/assets/Eth_logo.svg"} width={12.5} height={25} alt="ethereum logo"/>
-                    <span className="ml-1 text-lg">{props.nftPrice}</span>
+                    <span className="ml-1 sm:text-lg">{props.nftPrice}</span>
                 </div>
             </div>
         </div>

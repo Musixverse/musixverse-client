@@ -22,9 +22,9 @@ export default function BasicDetails() {
         const username = usernameRef.current.value;
         const email = emailRef.current.value;
 
-        //USERNAME CHECKS
+        // USERNAME CHECKS
         const usernameRegex = /^\w+$/;
-        if(username.length < 2){
+        if (username.length < 2) {
             setError({
                 title: "Invalid credentials!",
                 message: "Username length should be greater than 1",

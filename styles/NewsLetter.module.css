@@ -3,7 +3,7 @@
 }
 
 .newsletter__container{
-    @apply font-secondary text-light-200 w-full max-w-[1920px] py-16 px-24 2xl:px-40;
+    @apply font-secondary text-light-200 w-full max-w-[1920px] py-10 px-12 sm:py-16 sm:px-24 2xl:px-40;
 }
 
 .newsletter__email--input{
@@ -11,11 +11,11 @@
 }
 
 .newsletter__email--button{
-    @apply bg-light-200 font-bold text-dark-200 py-1 px-5 font-secondary rounded-lg ml-3 border-2 hover:border-primary-300;
+    @apply bg-light-200 font-bold max-w-[150px] mt-2 md:mt-0 text-dark-200 py-1 px-5 font-secondary rounded-lg ml-0 sm:ml-3 border-2 hover:border-primary-300;
 }
 
 .newsletter__social{
-    @apply flex space-x-5 justify-end;
+    @apply flex space-x-5 md:justify-end;
 }
 
 .newsletter__social button{

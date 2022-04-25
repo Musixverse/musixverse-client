@@ -1,4 +1,4 @@
-const ISRCInput = ({ step, nextStep, isrc, setIsrc }) => {
+const ISRCInput = ({ step, nextStep, isrc, setIsrc, fetchSongDetails }) => {
     return (
         <div className="container mx-auto pt-36 pb-20 min-h-screen">
             <div className="text-2xl font-secondary text-gray-500">Step {step}</div>
@@ -39,8 +39,9 @@ const ISRCInput = ({ step, nextStep, isrc, setIsrc }) => {
                             Skip
                         </button>
                         <button
-                            onClick={(e) => {
+                            onClick={async (e) => {
                                 e.preventDefault();
+                                await fetchSongDetails();
                                 // Router.push("/create-nft/step-2", undefined, { shallow: true });
                                 nextStep();
                             }}

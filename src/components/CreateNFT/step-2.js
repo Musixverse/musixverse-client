@@ -18,15 +18,13 @@ const TrackDetails = ({ step, nextStep, prevStep, trackTitle, setTrackTitle, lin
         URL.revokeObjectURL(myMemoObj); // Manging memo leak
         // Set image upload state to true when uploaded
         setImageUploadState(true);
-        const file = await uploadFile(event);
+        const file = await uploadFile(event.target.files[0]);
         setImageHash(file.hash());
-        console.log(file.ipfs(), file.hash());
     };
 
     const handleSongUpload = async (event) => {
         const file = await uploadFile(event);
         setSongHash(file.hash());
-        console.log(file.ipfs(), file.hash());
     };
 
     return (

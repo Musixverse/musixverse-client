@@ -35,7 +35,7 @@
 }
 
 .section2__artist-name{
-    @apply flex flex-col justify-between w-full xl:flex-row;
+    @apply flex flex-col justify-between w-full mb-12 xl:flex-row;
 }
 
 .about_us{

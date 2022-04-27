@@ -1,4 +1,5 @@
 import Image from "next/image";
+import styles from "../../../styles/CFB/BannerCFB.module.css";
 
 export default function BannerCFB(){
     return(

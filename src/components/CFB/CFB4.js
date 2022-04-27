@@ -1,4 +1,5 @@
 import Image from "next/image";
+import styles from "../../../styles/CFB/CFB4.module.css";
 
 export default function CFB4(){
     return(

@@ -1,0 +1,7 @@
+.cfb-banner__container{
+    @apply bg-search-100 w-full h-[60vh] pt-40 flex justify-center items-center pb-14 overflow-hidden;
+}
+
+.cfb-banner__subcontainer{
+    @apply flex flex-col justify-center items-center;
+}

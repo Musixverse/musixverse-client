@@ -1,23 +1,28 @@
 import Image from "next/image";
 import styles from "../../../styles/CFB/CFB5.module.css";
+// import redit from "../../../public/assets/social/reddit.svg";
+import discord from "../../../public/assets/social/discord.svg";
+import facebook from "../../../public/assets/social/facebook.svg";
+import twitter from "../../../public/assets/social/twitter.svg";
+import instagram from "../../../public/assets/social/instagram.svg";
 
 export default function CFB5(){
     return(
         <div className={styles['cfb5__container']}>
-            <div>
+            <div className={styles['cfb5__card']}>
                 <div>
-                    <h1>Get Started</h1>
-                    <p>For more details, you can contact us at</p> 
-                    <p>info@musixverse.com</p>
+                    <h1 className="font-primary text-3xl font-semibold">Get Started</h1>
+                    <p className="font-secondary text-sm mt-2">For more details, you can contact us at</p> 
+                    <a href="mailto:info@musixverse.com" className="font-primary text-sm">info@musixverse.com</a>
 
-                    <p>To Know more about community Feedback Hub 
+                    <p className="font-secondary text-sm pt-4">To Know more about community Feedback Hub 
                     <br />Join Our Discord Server
                     </p>
-                    <button>Join Discord Community</button>
-                    <div className="flex space-x-5 md:justify-end;">
-                        <button className="flex justify-center items-center">
+                    <button className="text-white text-xs bg-primary-200 hover:bg-primary-300 font-primary rounded-xl px-5 py-3 mt-6">Join Discord Community</button>
+                    <div className={styles["cfb5__social"]}>
+                        {/* <button className="flex justify-center items-center">
                             <Image src={redit} width={20} height={20} alt="redit"></Image>
-                        </button>
+                        </button> */}
                         <button className="flex justify-center items-center">
                             <Image src={discord} width={20} height={20} alt="discord"></Image>
                         </button>

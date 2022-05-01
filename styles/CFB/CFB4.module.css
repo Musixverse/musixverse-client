@@ -1,0 +1,23 @@
+.cfb4__container{
+    @apply flex flex-col items-center justify-center px-36;
+}
+
+.cfb4__card{
+    @apply flex flex-col justify-center items-center bg-white w-[80vw] rounded-2xl p-10;
+}
+
+.cfb4__card--innercard{
+    @apply flex p-10 rounded-2xl gap-6;
+}
+
+.cfb4__card--innercard2{
+    @apply flex flex-col p-10 rounded-3xl max-w-lg bg-light-200;
+}
+
+.cfb4__card--innercard2 h2{
+    @apply font-tertiary text-2xl text-primary-200 text-center;
+}
+
+.cfb4__card--innercard2 p{
+    @apply font-secondary text-sm text-center max-w-md;
+}

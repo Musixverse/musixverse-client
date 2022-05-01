@@ -1,0 +1,15 @@
+.cfb5__container{
+    @apply flex flex-col items-center justify-center px-36 py-20;
+}
+
+.cfb5__card{
+    @apply flex flex-col bg-light-300 w-[80vw] rounded-2xl p-10;
+}
+
+.cfb5__social{
+    @apply flex space-x-5 mt-4;
+}
+
+.cfb5__social button{
+    @apply bg-dark-100 border-none p-2 rounded-md hover:bg-dark-200;
+}

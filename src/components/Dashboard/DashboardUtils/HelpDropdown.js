@@ -7,12 +7,12 @@ function classNames(...classes) {
 }
 
 export default function HelpDropdown() {
-    const [currentFilter, setCurrentFilter] = useState("Latest Release");
+    const [currentFilter, setCurrentFilter] = useState("Shivam Singh");
     const handleOptionSelect = (e) => {
         setCurrentFilter(e.target.textContent);
     };
 
-    const optionsArray = ["Non Authorized Transactions", "Security Bypass", "Shivam Designed the web page"];
+    const optionsArray = ["Shivam Singh","Shivam Designed the webpage", "Landscape desgins by Shivam"];
     // Map all the options into a items renderable array
     const dropdownOptions = optionsArray.map((option, idx) => {
         return (
@@ -36,7 +36,7 @@ export default function HelpDropdown() {
         <Menu as="div" className="relative inline-block text-left">
             {/* The visible dropdown button */}
             <div>
-                <Menu.Button className="inline-flex justify-center ml-3 text-sm font-medium text-gray-700 bg-light-100 focus:outline-none dark:text-light-100">
+                <Menu.Button className="inline-flex justify-center ml-3 text-sm font-medium text-gray-700 bg-transparent focus:outline-none dark:text-light-100">
                     {currentFilter}
                     <ChevronDownIcon className="ml-2 h-5 w-5 text-[#6cc027]" aria-hidden="true" />
                 </Menu.Button>

@@ -1,5 +1,5 @@
 import CustomButton from "../../../layout/CustomButton";
-import Dropdown from "../../ArtistProfile/ArtistProfileUtils/Dropdown";
+import HelpDropdown from "./HelpDropdown";
 
 export default function LockAccount(){
     return(
@@ -8,7 +8,7 @@ export default function LockAccount(){
             <p className="font-secondary text-[15px] max-w-[941px] mb-5">If you believe your account has been compromised, we can help you by immediately locking your account to prevent any unauthorized transactions using Musixverse. <a className="font-semibold font-secondary text-primary-100">Learn more</a></p>
             <div className={"dark:border-dark-200 dark:bg-dark-200 dark:hover:border-primary-100 flex max-w-fit sm:w-auto ml-8 sm:ml-0 mt-3 sm:mt-0 items-center px-4 py-2 bg-white border-2 rounded-xl hover:border-primary-100"}>
                 <p className={"dark:text-light-100 mt-[1px] text-sm font-medium text-gray-700"}>Your Issue: </p>
-                <Dropdown />
+                <HelpDropdown/>
             </div>
             <div className="flex items-start my-6">
                 <input type={"checkbox"}></input>

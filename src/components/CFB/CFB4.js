@@ -1,12 +1,13 @@
-import Image from "next/image";
+// import Image from "next/image";
 import styles from "../../../styles/CFB/CFB4.module.css";
-import leftpng from "../../../public/assets/CFB/section5_left.png";
-import rightpng from "../../../public/assets/CFB/section5_right.png";
+// import leftpng from "../../../public/assets/CFB/section5_left.png";
+// import rightpng from "../../../public/assets/CFB/section5_right.png";
 
 export default function CFB4(){
     return(
         <div className={styles['cfb4__container']}>
             {/* Image */}
+            <img src="/assets/CFB/section5_left.png" className={styles['cfb4__image-left']} width={250} height={230} alt="svg" />
             <div className={styles['cfb4__card']}>
                 <h1 className="font-primary text-2xl text-center font-semibold max-w-xl">Join our Community Feedback Board for exclusive privileges on Musixverse.</h1>
                 <div className={styles['cfb4__card--innercard']}>
@@ -23,6 +24,7 @@ export default function CFB4(){
                 </div>
             </div>
             {/* Image */}
+            <img src="/assets/CFB/section5_right.png" className={styles['cfb4__image-right']} width={300} height={230} alt="svg" />
         </div>
     );
 }

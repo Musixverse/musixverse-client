@@ -5,3 +5,11 @@
 .cfb-banner__subcontainer{
     @apply flex flex-col justify-center items-center;
 }
+
+.cfb-banner__left-image{
+    @apply relative top-4;
+}
+
+.cfb-banner__right-image{
+    @apply relative top-28 right-20;
+}

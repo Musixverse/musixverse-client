@@ -13,9 +13,9 @@ export default function EditProfilePhoto(){
 
     return(
         <div className="flex flex-col">
-            <p className="mb-5 font-medium font-secondary">Profile Picture<i className="ml-2 text-lg fa fa-info-circle"></i></p>
-            <label className="relative" htmlFor="upload-image-inp">
-                <img className="w-[180px] h-[180px] sm:w-[150px] sm:h-[150px] rounded-full"
+            <p className="mb-5 text-sm font-medium md:text-base font-secondary">Profile Picture<i className="ml-2 text-base md:text-lg fa fa-info-circle"></i></p>
+            <label className="relative w-fit" htmlFor="upload-image-inp">
+                <img className="w-[130px] h-[130px] md:w-[150px] md:h-[150px] rounded-full"
                     ref={profilePicture} 
                     src="/Artist_Profile.png" 
                     alt="Current Avatar"

@@ -16,9 +16,9 @@ export default function CoverPhoto(){
 
     return(
         <div className="flex flex-col flex-1">
-            <p className="mb-5 font-medium font-secondary">Cover Photo<i className="ml-2 text-lg fa fa-info-circle"></i></p>
-            <label className="relative w-full h-[150px]" htmlFor="upload-cover-image">
-                <div className={"flex items-center justify-center w-full h-full rounded-xl bg-light-200 hover:cursor-pointer" + (coverImageUploaded? " hidden":"")}>
+            <p className="mb-2 text-sm font-medium md:text-base md:mb-5 font-secondary">Cover Photo<i className="ml-2 text-base md:text-lg fa fa-info-circle"></i></p>
+            <label className="relative w-full h-[130px] md:h-[150px]" htmlFor="upload-cover-image">
+                <div className={"flex items-center justify-center w-full h-full rounded-xl bg-light-200 dark:bg-[#323232] hover:cursor-pointer" + (coverImageUploaded? " hidden":"")}>
                     <label htmlFor="upload-cover-image" className="bg-light-300 w-[32px] h-[32px] hover:cursor-pointer rounded-full text-dark-200 flex items-center justify-center"><Image alt="add cover photo" src="/assets/dashboard/plus.svg" width={12} height={12}></Image></label>
                 </div>
                 <div className={"w-full h-full hover:cursor-pointer " + (coverImageUploaded? "":"hidden")}>

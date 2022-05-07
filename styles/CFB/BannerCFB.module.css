@@ -1,5 +1,5 @@
 .cfb-banner__container{
-    @apply bg-[#EAEAEA] w-full h-[60vh] pt-40 flex justify-center items-center pb-14 overflow-hidden;
+    @apply bg-[#EAEAEA] w-full h-[60vh] pt-40 relative flex justify-center items-center pb-14 overflow-hidden;
 }
 
 .cfb-banner__subcontainer{
@@ -12,4 +12,8 @@
 
 .cfb-banner__right-image{
     @apply relative top-28 right-20;
+}
+
+.cfb-banner__circle-dropdown{
+    @apply absolute bottom-[37%] left-[49%];
 }

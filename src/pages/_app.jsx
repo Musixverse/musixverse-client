@@ -6,6 +6,7 @@ import Script from "next/script";
 import "../../styles/globals.css";
 import Layout from "../layout/WrapLayout/Layout";
 import ScrollToTop from "../utils/ScrollToTop";
+import { connectSmartContract } from "../utils/smart-contract/functions";
 
 function App({ Component, pageProps }) {
     const [error, setError] = useState({
@@ -24,7 +25,10 @@ function App({ Component, pageProps }) {
     // This is a workaround for the issue with the next-themes package. Without this, the theme was not being applied correctly.
     const [mounted, setMounted] = useState(false);
     // When mounted on client, now we can show the UI
-    useEffect(() => setMounted(true), []);
+    useEffect(() => {
+        setMounted(true);
+        connectSmartContract();
+    }, []);
     if (!mounted) return null;
 
     return (

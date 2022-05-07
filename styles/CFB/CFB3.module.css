@@ -1,0 +1,24 @@
+.cfb3__container{
+    @apply flex flex-col items-center justify-center px-36 py-20;
+}
+
+.cfb3__card{
+    @apply flex flex-col bg-white w-[80vw] rounded-lg p-10;
+}
+
+.cfb3__card--innercard{
+    @apply flex flex-col items-center justify-center p-10 rounded-2xl bg-[url('../../public/assets/CFB/section4.png')];
+    @apply bg-cover bg-no-repeat text-white;
+}
+
+.cfb3__card--innercard2{
+    @apply flex flex-col max-w-xs;
+}
+
+.cfb3__card--innercard2 h1{
+    @apply font-tertiary text-2xl;
+}
+
+.cfb3__card--innercard2 p{
+    @apply font-secondary text-sm;
+}

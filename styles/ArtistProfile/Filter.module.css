@@ -7,7 +7,7 @@
 }
 
 .filter-card__left-section--heading {
-    @apply font-tertiary text-[36px] leading-none;
+    @apply font-tertiary text-4xl leading-none;
 }
 
 .filter-card__right-section {

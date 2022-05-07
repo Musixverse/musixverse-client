@@ -3,7 +3,7 @@
 }
 
 .cfb5__card{
-    @apply flex justify-between bg-light-300 w-[80vw] rounded-2xl py-10 px-14 relative;
+    @apply flex justify-between bg-[#DADADA] w-[80vw] rounded-2xl py-10 px-14 relative;
 }
 
 .cfb5__social{

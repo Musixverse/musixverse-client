@@ -38,7 +38,7 @@ export default function CFB5(){
                     </div>
                 </div>
                 <div>
-                    {/* Image */}
+                <img src="/assets/CFB/section6.png" className={styles['cfb5__right-image']} width={500} height={500} alt="Boy" />
                 </div>
             </div>
         </div>

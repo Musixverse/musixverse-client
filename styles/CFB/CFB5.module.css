@@ -3,7 +3,7 @@
 }
 
 .cfb5__card{
-    @apply flex flex-col bg-light-300 w-[80vw] rounded-2xl p-10;
+    @apply flex justify-between bg-light-300 w-[80vw] rounded-2xl py-10 px-14 relative;
 }
 
 .cfb5__social{
@@ -12,4 +12,8 @@
 
 .cfb5__social button{
     @apply bg-dark-100 border-none p-2 rounded-md hover:bg-dark-200;
+}
+
+.cfb5__right-image{
+    @apply absolute -top-7 right-0;
 }

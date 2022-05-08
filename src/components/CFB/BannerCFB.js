@@ -4,6 +4,9 @@ import styles from "../../../styles/CFB/BannerCFB.module.css";
 // import boy_svg from "../../../public/assets/CFB/Boy_Banner.png";
 
 export default function BannerCFB(){
+    const scrollToRef = () => {
+        window.scrollTo(0, 400);  
+    } 
     return(
         <>
             <div className={styles['cfb-banner__container']}>
@@ -20,7 +23,7 @@ export default function BannerCFB(){
                 </div>
                 <img src="/assets/CFB/Boy_Banner.png" className={styles['cfb-banner__right-image']} width={500} height={500} alt="Boy" />
             </div>
-            <button>
+            <button onClick={scrollToRef}>
                 <img src="/assets/CFB/circle_dropdown.png" className={styles['cfb-banner__circle-dropdown']} width={50} height={50} alt="circle dropdown" />       
             </button>
         </>

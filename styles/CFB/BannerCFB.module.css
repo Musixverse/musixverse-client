@@ -15,5 +15,5 @@
 }
 
 .cfb-banner__circle-dropdown{
-    @apply absolute bottom-[37%] left-[49%];
+    @apply absolute bottom-[37%] left-[49%] hover:animate-spin;
 }

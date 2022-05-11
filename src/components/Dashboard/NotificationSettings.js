@@ -5,11 +5,19 @@ export default function NotificationSettings(){
     
     return(
         <div className="flex-1 p-10 mb-10 pb-14 bg-light-300 dark:bg-dark-100 rounded-xl">
-            <div className="flex items-end justify-between w-full mb-5">
+            <div className="flex flex-col items-start justify-between w-full space-y-5 md:flex-row md:space-y-0">
+                <div className="flex flex-col space-y-5">
+                    <h1 className="text-4xl font-tertiary">NOTIFICATIONS SETTINGS</h1>
+                    <p className="max-w-[383px] font-secondary text-[13px] md:text-[15px] mb-14">Selected notification for wallet address: <span className="max-w-[300px] turncate">{walletAddress}</span></p>
+                </div>
+                <button className="px-8 py-2 text-[15px] rounded-3xl bg-dark-100 text-light-100 hover:bg-dark-200 font-primary">Reset Settings</button>
+            </div>
+            
+            {/* <div className="flex items-end justify-between w-full mb-5">
                 <h1 className="text-4xl font-tertiary">NOTIFICATIONS SETTINGS</h1>
                 <button className="px-8 py-2 text-[15px] rounded-3xl bg-dark-100 text-light-100 hover:bg-dark-200 font-primary">Reset Settings</button>
             </div>
-            <p className="max-w-[383px] font-secondary text-[15px] mb-14">Selected notification for wallet address: {walletAddress}</p>
+            <p className="max-w-[383px] font-secondary text-[15px] mb-14">Selected notification for wallet address: {walletAddress}</p> */}
             <Notification 
                 heading={"Musixverse Newsletter"} 
                 description={"Occasional updates from the MXV team"}

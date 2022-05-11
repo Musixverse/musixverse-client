@@ -16,7 +16,7 @@ export default function CFB2(){
                 <p className="font-secondary text-sm">To help artists get discovered quicker and not drown in the 
                 ever-expanding ocean of music</p>
            </div>
-           <div>
+           <div className="pt-4 lg:pt-0">
                <Image src={music} width={500} height={400} alt="Music" />
            </div>
         </div>

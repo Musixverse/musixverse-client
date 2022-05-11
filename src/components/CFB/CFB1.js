@@ -17,7 +17,7 @@ export default function CFB1(){
                     In today’s digital world, creating and releasing music is easier than ever 
                     but making money off it is as difficult as it has ever been.</p>
                 </div>
-                <div className="flex mt-6 justify-evenly">
+                <div className="flex flex-col md:flex-row gap-6 md:gap-none mt-6 justify-evenly">
                     <div className={styles['cfb1__card--innercard2']}>
                         <h1>ROYALITIES</h1>
                         <p>Distributed are few and far between, often coming in small balances at 

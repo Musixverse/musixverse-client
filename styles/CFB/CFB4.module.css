@@ -1,5 +1,5 @@
 .cfb4__container{
-    @apply flex items-center w-full relative px-36;
+    @apply flex items-center w-full relative px-16 xl:px-20 2xl:px-36;
 }
 
 .cfb4__card{
@@ -7,7 +7,7 @@
 }
 
 .cfb4__card--innercard{
-    @apply flex p-10 rounded-2xl gap-6;
+    @apply flex flex-col md:flex-row p-10 rounded-2xl gap-6;
 }
 
 .cfb4__card--innercard2{
@@ -23,9 +23,9 @@
 }
 
 .cfb4__image-left{
-    @apply absolute left-10;
+    @apply absolute left-10 hidden lg:block;
 }
 
 .cfb4__image-right{
-    @apply absolute right-5;
+    @apply absolute right-5 hidden lg:block;
 }

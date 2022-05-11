@@ -16,8 +16,8 @@ const CFB = ({}) => {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <div className="flex justify-center w-full">
-                <div className="flex flex-col max-w-[1920px] justify-center content-center items-center">
+            <div className="flex flex-col items-center justify-center w-full">
+                <div className="w-full max-w-[1920px]">
                     <BannerCFB />
                     <CFB1 />
                     <CFB2 />

@@ -1,9 +1,9 @@
 .cfb5__container{
-    @apply flex flex-col items-center justify-center px-36 py-20;
+    @apply flex flex-col items-center justify-center w-full px-36 py-20;
 }
 
 .cfb5__card{
-    @apply flex justify-between bg-[#DADADA] w-[80vw] rounded-2xl py-10 px-14 relative;
+    @apply flex justify-between bg-[#DADADA] w-full rounded-2xl py-10 px-14 relative;
 }
 
 .cfb5__social{

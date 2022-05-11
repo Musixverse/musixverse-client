@@ -1,9 +1,9 @@
 .cfb4__container{
-    @apply flex items-center relative px-36;
+    @apply flex items-center w-full relative px-36;
 }
 
 .cfb4__card{
-    @apply flex flex-col justify-center items-center bg-white w-[80vw] rounded-2xl p-10;
+    @apply flex flex-col justify-center items-center bg-white w-full rounded-2xl p-10;
 }
 
 .cfb4__card--innercard{

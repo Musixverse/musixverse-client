@@ -21,7 +21,7 @@ export default function BannerCFB(){
                     <button className="text-white text-xs bg-primary-200 hover:bg-primary-300 font-primary rounded-xl px-5 py-3 mt-6">
                     Join Discord Community</button>
                 </div>
-                <img src="/assets/CFB/Boy_Banner.png" className={styles['cfb-banner__right-image']} width={500} height={500} alt="Boy" />
+                <img src="/assets/CFB/Boy_Banner.png" className={styles['cfb-banner__right-image']} alt="Boy" />
             </div>
             <button onClick={scrollToRef}>
                 <img src="/assets/CFB/circle_dropdown.png" className={styles['cfb-banner__circle-dropdown']} width={50} height={50} alt="circle dropdown" />       

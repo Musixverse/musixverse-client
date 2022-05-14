@@ -1,17 +1,17 @@
 .cfb4__container{
-    @apply flex items-center w-full relative px-16 xl:px-20 2xl:px-36;
+    @apply flex items-center w-full relative px-10 sm:px-16 xl:px-20 2xl:px-36;
 }
 
 .cfb4__card{
-    @apply flex flex-col justify-center items-center bg-white w-full rounded-2xl p-10;
+    @apply flex flex-col justify-center items-center bg-white w-full rounded-2xl p-8 sm:p-10;
 }
 
 .cfb4__card--innercard{
-    @apply flex flex-col md:flex-row p-10 rounded-2xl gap-6;
+    @apply flex flex-col md:flex-row p-6 md:p-10 rounded-2xl gap-6;
 }
 
 .cfb4__card--innercard2{
-    @apply flex flex-col p-10 rounded-3xl max-w-lg bg-light-200;
+    @apply flex flex-col p-8 md:p-10 rounded-3xl max-w-lg bg-light-200;
 }
 
 .cfb4__card--innercard2 h2{

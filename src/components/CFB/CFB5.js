@@ -18,7 +18,7 @@ export default function CFB5(){
                     <p className="font-secondary text-sm pt-4">To Know more about community Feedback Hub 
                     <br />Join Our Discord Server
                     </p>
-                    <button className="text-white text-xs bg-primary-200 hover:bg-primary-300 font-primary rounded-xl px-5 py-3 mt-6">Join Discord Community</button>
+                    <button className="text-white text-xs bg-primary-200 hover:bg-primary-300 font-primary rounded-xl px-8 py-3 mt-6">Join Discord Community</button>
                     <div className={styles["cfb5__social"]}>
                         {/* <button className="flex justify-center items-center">
                             <Image src={redit} width={20} height={20} alt="redit"></Image>

@@ -1,9 +1,9 @@
 .cfb5__container{
-    @apply flex flex-col items-center justify-center w-full px-16 xl:px-20 2xl:px-36 py-20;
+    @apply flex flex-col items-center justify-center w-full px-10 sm:px-16 xl:px-20 2xl:px-36 py-20;
 }
 
 .cfb5__card{
-    @apply flex flex-col lg:flex-row justify-between bg-[#DADADA] w-full rounded-2xl py-10 px-14 relative;
+    @apply flex flex-col lg:flex-row justify-between bg-[#DADADA] w-full rounded-2xl p-10 pb-0 md:px-14 relative;
 }
 
 .cfb5__social{
@@ -14,6 +14,6 @@
     @apply bg-dark-100 border-none p-2 rounded-md hover:bg-dark-200;
 }
 
-.cfb5__right-image{
+/* .cfb5__right-image{
     @apply absolute lg:-top-7 lg:right-0;
-}
+} */

@@ -1,5 +1,5 @@
 .cfb2__container{
-    @apply w-full px-16 xl:px-20 2xl:px-36 py-12 flex-col lg:flex-row bg-[#D8D8D8] flex justify-around;
+    @apply w-full px-10 sm:px-16 xl:px-20 2xl:px-36 py-12 flex-col lg:flex-row bg-[#D8D8D8] flex justify-around;
 }
 
 .cfb2__card{

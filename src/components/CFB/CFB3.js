@@ -11,7 +11,7 @@ export default function CFB3(){
                     Musixverse aims to power ownership and distribution of music on the web 
                     and beyond and in the process empower artists and fans alike.</p>
                 </div>
-                <div className="flex flex-col md:flex-row gap-6 md:gap-none mt-6 justify-evenly">
+                <div className="flex flex-col md:flex-row gap-8 md:gap-6 md:gap-none mt-6 justify-evenly">
                     <div className={styles['cfb3__card--innercard2']}>
                         <h1>INVEST IN THE ARTIST</h1>
                         <p>Buy limited edition music created and sold directly by the artist 
@@ -34,7 +34,7 @@ export default function CFB3(){
             </div>
 
             <p className="font-primary mt-14 font-semibold text-3xl text-primary-200">This is just a start</p>
-            <p className="font-secondary text-sm max-w-2xl text-center pt-6">
+            <p className="font-secondary text-sm max-w-xs sm:max-w-2xl text-center pt-6">
             Everything that we are doing today is going to power the decentralized world of tomorrow. 
             Establishing ownership of these assets will be key to what you can and cannot do in the metaverse.
             </p>

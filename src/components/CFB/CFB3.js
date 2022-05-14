@@ -6,7 +6,7 @@ export default function CFB3(){
         <div className={styles['cfb3__container']}>
             <div className={styles['cfb3__card']}>
                 <div className={styles['cfb3__card--innercard']}>
-                    <p  className="font-primary font-semibold text-3xl">Introducing Musixverse</p>
+                    <p  className="font-primary text-center font-semibold text-3xl">Introducing Musixverse</p>
                     <p className="font-secondary text-sm max-w-xl text-center">
                     Musixverse aims to power ownership and distribution of music on the web 
                     and beyond and in the process empower artists and fans alike.</p>

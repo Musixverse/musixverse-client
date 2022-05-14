@@ -1,5 +1,5 @@
 .cfb1__container{
-    @apply flex flex-col items-center w-full justify-center content-center px-10 sm:px-16 xl:px-20 2xl:px-36 py-20;
+    @apply flex flex-col items-center w-full justify-center content-center px-10 sm:px-16 xl:px-20 2xl:px-36 pt-14;
 }
 
 .cfb1__card{

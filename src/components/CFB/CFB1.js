@@ -10,7 +10,7 @@ export default function CFB1(){
             individuals with exclusive access to Musixverse and its features before anyone else.
             In return, we will ask you to provide feedback about the platform as we continue to 
             build and improve it</p>
-            <div className={styles['cfb1__card']}>
+            {/* <div className={styles['cfb1__card']}>
                 <div className={styles['cfb1__card--innercard']}>
                     <p className="font-primary text-center font-semibold text-3xl">The Problem with Music Industry</p>
                     <p className="font-secondary text-sm max-w-xl text-center">
@@ -34,7 +34,7 @@ export default function CFB1(){
                         single day.</p>
                     </div>
                 </div>
-            </div>
+            </div> */}
         </div>
     );
 }

@@ -3,22 +3,22 @@
 }
 
 .cfb3__card{
-    @apply flex flex-col bg-white w-full rounded-lg p-8 sm:p-10;
+    @apply flex flex-col bg-white w-full rounded-2xl p-8 sm:p-4 sm:pb-10 ;
 }
 
 .cfb3__card--innercard{
-    @apply flex flex-col items-center justify-center p-10 rounded-[2.5rem] bg-[url('../../public/assets/CFB/section4.png')];
+    @apply flex flex-col items-center justify-center p-10 rounded-2xl bg-[url('../../public/assets/CFB/section.png')];
     @apply bg-cover bg-no-repeat text-white;
 }
 
 .cfb3__card--innercard2{
-    @apply flex flex-col max-w-xs;
+    @apply w-[1/3] flex flex-col max-w-xs;
 }
 
 .cfb3__card--innercard2 h1{
-    @apply font-tertiary text-2xl;
+    @apply font-tertiary text-xl lg:text-2xl;
 }
 
 .cfb3__card--innercard2 p{
-    @apply font-secondary text-sm;
+    @apply font-secondary text-xs lg:text-sm;
 }

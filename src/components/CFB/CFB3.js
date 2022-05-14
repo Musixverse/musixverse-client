@@ -11,7 +11,7 @@ export default function CFB3(){
                     Musixverse aims to power ownership and distribution of music on the web 
                     and beyond and in the process empower artists and fans alike.</p>
                 </div>
-                <div className="flex flex-col md:flex-row gap-8 md:gap-6 md:gap-none mt-6 justify-evenly">
+                <div className="flex flex-col md:flex-row gap-8 md:gap-6 md:gap-none mt-8 justify-evenly">
                     <div className={styles['cfb3__card--innercard2']}>
                         <h1>INVEST IN THE ARTIST</h1>
                         <p>Buy limited edition music created and sold directly by the artist 

@@ -7,7 +7,7 @@
 }
 
 .cfb4__card--innercard{
-    @apply flex flex-col md:flex-row p-6 md:p-10 rounded-2xl gap-6;
+    @apply flex flex-col md:flex-row p-5 md:p-10 rounded-2xl gap-6;
 }
 
 .cfb4__card--innercard2{

@@ -9,6 +9,7 @@ module.exports = {
             },
             padding: {
                 responsive: "clamp(75px, calc(4.6875rem + ((1vw - 10.28px) * 12.3318)), 185px)",
+                dashboardNav: "clamp(100px, calc(6.25rem + ((1vw - 10.28px) * 10.3139)), 192px)",
                 // 'responsive':'clamp(100px, calc(6.25rem + ((1vw - 10.24px) * 12.2768)), 210px)',
             },
             margin: {

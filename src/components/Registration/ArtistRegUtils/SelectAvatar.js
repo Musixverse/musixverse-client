@@ -24,9 +24,10 @@ export default function SelectAvatar() {
 
     const handleImageUpload = (event) => {
         const el = uploadedImage.current;
-        const myMemoObj = URL.createObjectURL(event.target.files[0]);
         el.src = URL.createObjectURL(event.target.files[0]);
-        URL.revokeObjectURL(myMemoObj); //Manging memo leak
+        el.onload = function(){
+            URL.revokeObjectURL(el.src); //Manging memo leak
+        }
     };
 
     return (

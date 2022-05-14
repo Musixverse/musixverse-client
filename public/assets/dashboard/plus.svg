@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #363636;
+      }
+    </style>
+  </defs>
+  <g id="Group_1571" data-name="Group 1571" transform="translate(-1292.93 -473)">
+    <path id="add-svgrepo-com_5_" data-name="add-svgrepo-com (5)" class="cls-1" d="M13.235,5.714H9.286V1.765a1.786,1.786,0,0,0-3.571,0v3.95H1.765a1.786,1.786,0,0,0,0,3.571h3.95v3.95a1.786,1.786,0,0,0,3.571,0V9.286h3.95a1.786,1.786,0,0,0,0-3.571Z" transform="translate(1292.93 473)"/>
+  </g>
+</svg>

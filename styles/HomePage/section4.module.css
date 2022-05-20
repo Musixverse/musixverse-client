@@ -1,0 +1,16 @@
+
+.HomePage_section4__container{
+    @apply my-14 ;
+}
+
+.section2__card--innercard{
+    @apply flex justify-between mt-14 p-4 rounded-2xl bg-[url('../../public/assets/homepage/back1.png')] bg-cover bg-no-repeat;
+}
+
+.newsletter__social{
+    @apply flex space-x-5 md:justify-end;
+}
+
+.newsletter__social button{
+    @apply bg-dark-100 border-none p-2 rounded-md hover:bg-dark-200;
+}

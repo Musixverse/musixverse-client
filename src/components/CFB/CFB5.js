@@ -15,7 +15,7 @@ export default function CFB5(){
                     <p className="font-secondary text-sm mt-2">For more details, you can contact us at</p> 
                     <a href="mailto:info@musixverse.com" className="font-primary text-sm">info@musixverse.com</a>
 
-                    <p className="font-secondary text-sm pt-4">To Know more about community Feedback Hub 
+                    <p className="font-secondary text-sm py-6">To Know more about community Feedback Hub 
                     <br />Join Our Discord Server
                     </p>
                     <button className="text-white text-xs bg-primary-200 hover:bg-primary-300 font-primary rounded-xl px-8 py-3 mt-6">Join Discord Community</button>

@@ -1,0 +1,24 @@
+.HomePage_section2__container{
+    @apply mt-14;
+}
+
+.section2__card{
+    @apply flex flex-col bg-white w-full rounded-2xl p-8 sm:p-4 sm:pb-10 ;
+}
+
+.section2__card--innercard{
+    @apply flex flex-col items-center justify-center p-10 rounded-2xl bg-[url('../../public/assets/CFB/section2.png')];
+    @apply bg-cover bg-no-repeat text-white;
+}
+
+.section2__card--innercard2{
+    @apply w-[1/3] flex flex-col max-w-xs;
+}
+
+.section2__card--innercard2 h1{
+    @apply font-tertiary text-xl lg:text-2xl;
+}
+
+.section2__card--innercard2 p{
+    @apply font-secondary text-xs lg:text-sm;
+}

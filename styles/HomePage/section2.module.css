@@ -1,5 +1,5 @@
 .HomePage_section2__container{
-    @apply mt-14;
+    @apply mt-14 relative;
 }
 
 .section2__card{
@@ -21,4 +21,8 @@
 
 .section2__card--innercard2 p{
     @apply font-secondary text-xs lg:text-sm;
+}
+
+.section2__circle-dropdown{
+    @apply absolute bottom-[1%] md:bottom-[2%] right-[10%] md:left-[48%] hover:animate-spin;
 }

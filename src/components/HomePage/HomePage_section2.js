@@ -2,6 +2,9 @@ import Image from "next/image";
 import styles from "../../../styles/HomePage/section2.module.css";
 
 export default function HomePage_section2(){
+    const scrollToRef = () => {
+        window.scrollTo(0, 500);  
+    } 
     return(
         <div className={styles['HomePage_section2__container']}>
             <div className={styles['section2__card']}>
@@ -23,6 +26,9 @@ export default function HomePage_section2(){
                     </div>
                 </div>
             </div>
+            <button onClick={scrollToRef}>
+                <img src="/assets/homepage/circle_dropdown2.png" className={styles['section2__circle-dropdown']} width={50} height={50} alt="circle dropdown" />       
+            </button>
         </div>
     );
 }

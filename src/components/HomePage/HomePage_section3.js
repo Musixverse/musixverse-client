@@ -6,7 +6,7 @@ export default function HomePage_section3(){
         <div className={styles['HomePage_section3__container']}>
             <div className={styles['section3__card']}>
                 <div className={styles['section3__card--innercard']}>
-                    <p  className="font-primary text-center font-semibold text-3xl">Introducing Musixverse</p>
+                    <p  className="font-primary text-center font-semibold text-xl md:text-3xl pb-4">Introducing Musixverse</p>
                     <p className="font-secondary text-sm max-w-xl text-center">
                     Musixverse aims to power ownership and distribution of music on the web 
                     and beyond and in the process empower artists and fans alike.</p>

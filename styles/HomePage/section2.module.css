@@ -1,5 +1,5 @@
 .HomePage_section2__container{
-    @apply mt-14;
+    @apply mt-14 relative;
 }
 
 .section2__card{
@@ -7,7 +7,7 @@
 }
 
 .section2__card--innercard{
-    @apply flex flex-col items-center justify-center p-10 rounded-2xl bg-[url('../../public/assets/CFB/section2.png')];
+    @apply flex flex-col items-center justify-center p-8 rounded-2xl bg-[url('../../public/assets/CFB/section2.png')];
     @apply bg-cover bg-no-repeat text-white;
 }
 
@@ -21,4 +21,8 @@
 
 .section2__card--innercard2 p{
     @apply font-secondary text-xs lg:text-sm;
+}
+
+.section2__circle-dropdown{
+    @apply absolute bottom-[1%] right-[10%] md:left-[48%] hover:animate-spin;
 }

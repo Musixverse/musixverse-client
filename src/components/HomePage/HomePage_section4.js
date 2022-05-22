@@ -11,9 +11,9 @@ export default function HomePage_section4(){
         <>
             <div className={styles['HomePage_section4__container']}>
                 <div>
-                    <p className="font-primary text-3xl font-semibold max-w-2xl">Join our community to get early access and exclusive privileges on Musixverse</p>
-                    <p className="font-secondary text-sm mt-5">Everything that we are doing today is going to power the decentralized world of tomorrow.</p>
-                    <p className="font-secondary text-sm"> Establishing ownership of these assets will be key to what you can and cannot do in the metaverse.</p>
+                    <p className="font-primary text-xl md:text-3xl font-semibold max-w-2xl">Join our community to get early access and exclusive privileges on Musixverse</p>
+                    <p className="font-secondary text-xs md:text-sm mt-5">Everything that we are doing today is going to power the decentralized world of tomorrow.</p>
+                    <p className="font-secondary text-xs md:text-sm"> Establishing ownership of these assets will be key to what you can and cannot do in the metaverse.</p>
                 </div>
                 <div className={styles['section2__card--innercard']}>
                     <div className="flex flex-col">

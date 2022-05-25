@@ -4,7 +4,7 @@ import styles from "../../../styles/CFB/CFB3.module.css";
 export default function CFB3(){
     return(
         <div className={styles['cfb3__container']}>
-            <div className={styles['cfb3__card']}>
+            <div className={"dark:bg-dark-100 "+styles['cfb3__card']}>
                 <div className={styles['cfb3__card--innercard']}>
                     <p  className="font-primary text-center font-semibold text-3xl">Introducing Musixverse</p>
                     <p className="font-secondary text-sm max-w-xl text-center">

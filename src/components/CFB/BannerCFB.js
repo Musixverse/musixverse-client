@@ -9,7 +9,7 @@ export default function BannerCFB(){
     } 
     return(
         <>
-            <div className={styles['cfb-banner__container']}>
+            <div className={"dark:bg-dark-100 "+styles['cfb-banner__container']}>
                 <img src="/assets/CFB/Girl_Banner.png" className={styles['cfb-banner__left-image']} width={500} height={500} alt="Girl" />
                 <div className={styles['cfb-banner__subcontainer']}>
                     <p className="font-primary font-semibold text-center">Hello there!</p>

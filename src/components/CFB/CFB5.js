@@ -9,7 +9,7 @@ import instagram from "../../../public/assets/social/instagram.svg";
 export default function CFB5(){
     return(
         <div className={styles['cfb5__container']}>
-            <div className={styles['cfb5__card']}>
+            <div className={"dark:bg-dark-100 "+styles['cfb5__card']}>
                 <div>
                     <h1 className="font-primary text-3xl font-semibold">Get Started</h1>
                     <p className="font-secondary text-sm mt-2">For more details, you can contact us at</p> 
@@ -23,16 +23,16 @@ export default function CFB5(){
                         {/* <button className="flex justify-center items-center">
                             <Image src={redit} width={20} height={20} alt="redit"></Image>
                         </button> */}
-                        <button className="flex justify-center items-center">
+                        <button className="dark:bg-dark-200 flex justify-center items-center">
                             <Image src={discord} width={20} height={20} alt="discord"></Image>
                         </button>
-                        <button className="flex justify-center items-center">
+                        <button className="dark:bg-dark-200 flex justify-center items-center">
                             <Image src={facebook} width={20} height={20} alt="facebook"></Image>
                         </button>
-                        <button className="flex justify-center items-center">
+                        <button className="dark:bg-dark-200 flex justify-center items-center">
                             <Image src={twitter} width={20} height={20} alt="twitter"></Image>
                         </button>
-                        <button className="flex justify-center items-center">
+                        <button className="dark:bg-dark-200 flex justify-center items-center">
                             <Image src={instagram} width={20} height={20} alt="instagram"></Image>
                         </button>
                     </div>

@@ -9,7 +9,7 @@ import instagram from "../../../public/assets/social/instagram.svg";
 export default function HomePage_section4(){
     return(
         <>
-            <div className={styles['HomePage_section4__container']}>
+            <div className={"dark:bg-dark-100 "+styles['HomePage_section4__container']}>
                 <div>
                     <p className="font-primary text-xl md:text-3xl font-semibold max-w-2xl">Join our community to get early access and exclusive privileges on Musixverse</p>
                     <p className="font-secondary text-xs md:text-sm mt-5">Everything that we are doing today is going to power the decentralized world of tomorrow.</p>
@@ -17,7 +17,7 @@ export default function HomePage_section4(){
                 </div>
                 <div className={styles['section2__card--innercard']}>
                     <div className="flex flex-col">
-                        <p className="font-secondary text-sm">To Know more about community Feedback Hub <br /> Tap the button to get stared</p>
+                        <p className="dark:text-dark-200 font-secondary font-normal text-sm">To Know more about community Feedback Hub <br /> Tap the button to get stared</p>
                         <div>
                             <button className="text-white text-xs bg-primary-200 hover:bg-primary-300 font-primary rounded-xl px-8 py-3 mt-6">Join Community</button>
                         </div>

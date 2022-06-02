@@ -1,49 +1,37 @@
 import Image from "next/image";
 import styles from "../../../styles/HomePage/section4.module.css";
-// import redit from "../../public/assets/social/reddit.svg";
-import discord from "../../../public/assets/social/discord.svg";
-import facebook from "../../../public/assets/social/facebook.svg";
-import twitter from "../../../public/assets/social/twitter.svg";
-import instagram from "../../../public/assets/social/instagram.svg";
 
-export default function HomePage_section4(){
+export default function HomePage_section3(){
     return(
-        <>
-            <div className={"dark:bg-dark-100 "+styles['HomePage_section4__container']}>
-                <div>
-                    <p className="font-primary text-xl md:text-3xl font-semibold max-w-2xl">Join our community to get early access and exclusive privileges on Musixverse</p>
-                    <p className="font-secondary text-xs md:text-sm mt-5">Everything that we are doing today is going to power the decentralized world of tomorrow.</p>
-                    <p className="font-secondary text-xs md:text-sm"> Establishing ownership of these assets will be key to what you can and cannot do in the metaverse.</p>
+        <div className={styles['HomePage_section3__container']}>
+            <div className={"dark:bg-dark-100 "+styles['section3__card']}>
+                <div className={styles['section3__card--innercard']}>
+                    <p  className="pb-4 text-xl font-semibold text-center font-primary md:text-3xl">Introducing Musixverse</p>
+                    <p className="max-w-xl text-sm text-center font-secondary">
+                    Musixverse aims to power ownership and distribution of music on the web 
+                    and beyond and in the process empower artists and fans alike.</p>
                 </div>
-                <div className={styles['section2__card--innercard']}>
-                    <div className="flex flex-col">
-                        <p className="dark:text-dark-200 font-secondary font-normal text-sm">To Know more about community Feedback Hub <br /> Tap the button to get stared</p>
-                        <div>
-                            <button className="text-white text-xs bg-primary-200 hover:bg-primary-300 font-primary rounded-xl px-8 py-3 mt-6">Join Community</button>
-                        </div>
+                <div className="flex flex-col gap-8 mt-8 md:flex-row md:gap-6 md:gap-none justify-evenly">
+                    <div className={styles['section3__card--innercard2']}>
+                        <h1>INVEST IN THE ARTIST</h1>
+                        <p>Buy limited edition music created and sold directly by the artist 
+                        packaged into Non-Fungible Tokens (NFTs) minted on the blockchain. 
+                        These are akin to limited edition vinyl sold by artists in the physical world.</p>
                     </div>
-                    <div className="items-end">
-                        <div className={styles["newsletter__social"]}>
-                            {/* <button className="flex justify-center items-center">
-                                <Image src={redit} width={20} height={20} alt="redit"></Image>
-                            </button> */}
-                            <button className="flex justify-center items-center">
-                                <Image src={discord} width={20} height={20} alt="discord"></Image>
-                            </button>
-                            <button className="flex justify-center items-center">
-                                <Image src={facebook} width={20} height={20} alt="facebook"></Image>
-                            </button>
-                            <button className="flex justify-center items-center">
-                                <Image src={twitter} width={20} height={20} alt="twitter"></Image>
-                            </button>
-                            <button className="flex justify-center items-center">
-                                <Image src={instagram} width={20} height={20} alt="instagram"></Image>
-                            </button>
-                        </div>
+                    <div className={styles['section3__card--innercard2']}>
+                        <h1>ELIMINATE MIDDLEMEN</h1>
+                        <p>Connect artists and fans like never before with no one in between. 
+                        This connection lives beyond the bounds of any platform or service including Musixverse</p>
+                    </div>
+                    <div className={styles['section3__card--innercard2']}>
+                        <h1>CONNECTION BEYOND BOUNDS</h1>
+                        <p>Artists will know who their “real” fans are, and they can give back to 
+                        their fans in any number of ways. Airdrop concerts + tickets, shares exclusive 
+                        merch directly with fans, or jump on private chats with the artist…. 
+                        Possibilities are limitless.</p>
                     </div>
                 </div>
             </div>
-        </>
-
-    )
+        </div>
+    );
 }

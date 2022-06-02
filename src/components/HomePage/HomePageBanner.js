@@ -18,8 +18,7 @@ export default function Banner(){
                 <div className={styles['hero-section-container__content-div']}>
                     <h1 className={styles['hero-section-container__content-div--heading']}>Empowering Artists and Fans<br/> like never before</h1>
                     <p className={styles['hero-section-container__content-div--description']}>
-                        Musixverse is a platform that will brong together Lorem Ipsum is
-                        simply dummy text of the printing and typesetting industry.
+                    Musixverse is a platform that will bring together artists and fans like never before, help each other do great things together, and empower each other in the process.
                     </p>
                     <CustomButton green={true}>Get Early Access</CustomButton>
                 </div>

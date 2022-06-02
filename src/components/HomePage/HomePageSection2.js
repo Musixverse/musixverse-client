@@ -4,6 +4,10 @@ import singer from "../../../public/assets/homepage/Artist_grid.png";
 import styles from "../../../styles/HomePage/section2.module.css";
 
 export default function Section2New(){
+    const scrollToRef = () => {
+        window.scrollTo(0, 1300);  
+    } 
+
     return(
         // Outer div
         <div className={"dark:bg-dark-200 "+styles['section2-container']}>
@@ -35,8 +39,11 @@ export default function Section2New(){
                 </div>
             </div>
             {/* Right Image Section */}
-            <div className={styles['section2-container__grid-image']}>
+            <div className={"relative "+styles['section2-container__grid-image']}>
                 <Image src={singer} alt="singer" objectFit="contain" priority></Image>
+                <button onClick={scrollToRef} className="absolute bottom-1/4 left-[12px] md:left-[28px]">
+                    <img src="/assets/homepage/dropdown_arrow_red.svg" className="w-[50px] h-[50px]" alt="circle dropdown" />       
+                </button>
             </div>
         </div>
     );

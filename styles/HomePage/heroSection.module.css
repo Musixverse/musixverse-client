@@ -7,7 +7,7 @@
 }
 
 .hero-section-container{
-    @apply mt-20 flex items-center justify-center h-[560px] w-full relative z-[2] backdrop-blur-[5px] backdrop-brightness-150;
+    @apply mt-20 flex items-center justify-center h-[560px] w-full relative z-[2] backdrop-blur-[7px] backdrop-brightness-150;
 }
 
 .hero-section-container__content-div{

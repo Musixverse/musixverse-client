@@ -5,6 +5,7 @@ import discord from "../../../public/assets/social/discord.svg";
 import facebook from "../../../public/assets/social/facebook.svg";
 import twitter from "../../../public/assets/social/twitter.svg";
 import instagram from "../../../public/assets/social/instagram.svg";
+import mxvB from "../../../public/assets/homepage/mxv_logo_b.svg"
 
 export default function HomePage_section4(){
     return(
@@ -39,6 +40,19 @@ export default function HomePage_section4(){
                             <button className="flex items-center justify-center">
                                 <Image src={instagram} width={20} height={20} alt="instagram"></Image>
                             </button>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <Image src={mxvB} alt="MXV logo" objectFit="contain"></Image>
+                    </div>
+                    <div className="flex flex-col justify-between w-full mt-3 space-y-2 md:mt-2 md:space-y-0 md:items-center md:flex-row">
+                        <p className="text-xs font-primary">Copyright © 2022 Musixverse Technologies. All rights reserved.</p>
+                        <div className="flex space-x-4 text-xs align-top font-primary">
+                            <a href="#" className="hover:text-primary-200">Terms and Conditions</a>
+                            <a href="#" className="hover:text-primary-200">Privacy Policy</a>
+                            <a href="#" className="hover:text-primary-200">Discord</a>
                         </div>
                     </div>
                 </div>

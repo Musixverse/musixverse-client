@@ -10,35 +10,32 @@ export default function CFB5(){
     return(
         <div className={styles['cfb5__container']}>
             <div className={"dark:bg-dark-100 "+styles['cfb5__card']}>
-                <div>
-                    <h1 className="font-primary text-3xl font-semibold">Get Started</h1>
-                    <p className="font-secondary text-sm mt-2">For more details, you can contact us at</p> 
-                    <a href="mailto:info@musixverse.com" className="font-primary text-sm">info@musixverse.com</a>
+                <div className="self-start lg:self-center">
+                    <h1 className="text-3xl font-semibold font-primary">Get Started</h1>
+                    <p className="mt-2 text-sm font-secondary">For more details, you can contact us at</p> 
+                    <a href="mailto:info@musixverse.com" className="text-sm font-secondary">info@musixverse.com</a>
 
-                    <p className="font-secondary text-sm py-6">To Know more about community Feedback Hub 
+                    <p className="py-6 text-sm font-secondary">To Know more about community Feedback Hub 
                     <br />Join Our Discord Server
                     </p>
-                    <button className="text-white text-xs bg-primary-200 hover:bg-primary-300 font-primary rounded-xl px-8 py-3 mt-6">Join Discord Community</button>
+                    <button className="px-8 py-3 mt-2 text-xs text-white bg-primary-200 hover:bg-primary-300 font-primary rounded-xl">Join Discord Community</button>
                     <div className={styles["cfb5__social"]}>
-                        {/* <button className="flex justify-center items-center">
-                            <Image src={redit} width={20} height={20} alt="redit"></Image>
-                        </button> */}
-                        <button className="dark:bg-dark-200 flex justify-center items-center">
+                        <button className="flex items-center justify-center dark:bg-dark-200">
                             <Image src={discord} width={20} height={20} alt="discord"></Image>
                         </button>
-                        <button className="dark:bg-dark-200 flex justify-center items-center">
+                        <button className="flex items-center justify-center dark:bg-dark-200">
                             <Image src={facebook} width={20} height={20} alt="facebook"></Image>
                         </button>
-                        <button className="dark:bg-dark-200 flex justify-center items-center">
+                        <button className="flex items-center justify-center dark:bg-dark-200">
                             <Image src={twitter} width={20} height={20} alt="twitter"></Image>
                         </button>
-                        <button className="dark:bg-dark-200 flex justify-center items-center">
+                        <button className="flex items-center justify-center dark:bg-dark-200">
                             <Image src={instagram} width={20} height={20} alt="instagram"></Image>
                         </button>
                     </div>
                 </div>
-                <div>
-                    <img src="/assets/CFB/section6.png" className={styles['cfb5__right-image']} width={500} height={500} alt="Boy" />
+                <div className="self-end -mb-10 -mr-56 lg:-mr-14">
+                    <img src="/assets/CFB/section6.png" className="h-[500px] min-w-[680px] md:min-w-0 lg:h-[370px] xl:h-[470px] md:aspect-auto" alt="Boy" />
                 </div>
             </div>
         </div>

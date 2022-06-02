@@ -1,5 +1,5 @@
 .cfb-banner__container{
-    @apply bg-[#EAEAEA] w-full h-[60vh] flex-col md:flex-row pt-40 px-10 sm:px-16 md:px-0 relative flex justify-center items-center pb-14 overflow-hidden;
+    @apply bg-[#EAEAEA] w-full max-h-[600px] h-[60vh] flex-col md:flex-row pt-40 px-10 sm:px-16 md:px-0 relative flex justify-center items-center pb-14 overflow-hidden;
 }
 
 .cfb-banner__subcontainer{
@@ -14,6 +14,7 @@
     @apply relative hidden lg:inline-block w-[32rem] top-10 right-10 md:top-28 md:right-32 xl:right-20;
 }
 
-.cfb-banner__circle-dropdown{
-    @apply absolute bottom-[37%] left-[48%] hover:animate-spin;
-}
+/* .cfb-banner__circle-dropdown{
+    @apply absolute bottom-0 z-[5] left-1/2;
+    transform: translate(-50%, 50%);
+} */

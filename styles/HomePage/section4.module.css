@@ -1,16 +1,24 @@
-
-.HomePage_section4__container{
-    @apply mt-14 w-full max-w-[1920px] py-10 px-10 md:px-8 lg:px-16 xl:px-20 2xl:px-36 bg-nav-light backdrop-blur-2xl backdrop-brightness-150;
+.HomePage_section3__container{
+    @apply mb-24;
 }
 
-.section2__card--innercard{
-    @apply flex flex-col md:flex-row justify-between mt-8 min-h-[300px] md:min-h-fit md:mt-14 p-6 md:p-4 rounded-2xl bg-[url('../../public/assets/homepage/back1.png')] bg-cover bg-no-repeat;
+.section3__card{
+    @apply flex flex-col w-full p-8 bg-white rounded-2xl sm:p-4 sm:pb-10 ;
 }
 
-.newsletter__social{
-    @apply flex space-x-5 md:justify-end;
+.section3__card--innercard{
+    @apply flex flex-col items-center justify-center p-8 rounded-2xl bg-[url('../../public/assets/CFB/section.png')];
+    @apply text-white bg-no-repeat bg-cover;
 }
 
-.newsletter__social button{
-    @apply bg-dark-100 border-none p-2 rounded-md hover:bg-dark-200;
+.section3__card--innercard2{
+    @apply w-[1/3] flex flex-col max-w-xs;
+}
+
+.section3__card--innercard2 h1{
+    @apply text-xl font-tertiary lg:text-2xl;
+}
+
+.section3__card--innercard2 p{
+    @apply text-xs font-secondary lg:text-sm;
 }

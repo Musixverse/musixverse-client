@@ -57,8 +57,9 @@ async function connectSmartContract() {
     console.log("Contract connected");
 }
 
-async function mintTrackNFT(numberOfCopies, metadataURIs, contributors, percentageContributions, address) {
+async function mintTrackNFT(numberOfCopies, price, metadataURIs, contributors, percentageContributions, onSale, address) {
     // window.web3.utils.toWei(_price, "Ether"),
+    // await MUSIXVERSE.methods.mintTrackNFT(numberOfCopies, price, metadataURIs, contributors, percentageContributions, onSale).send({ from: address });
     await MUSIXVERSE.methods.mintTrackNFT(numberOfCopies, metadataURIs, contributors, percentageContributions).send({ from: address });
 }
 

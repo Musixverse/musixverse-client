@@ -1,14 +1,14 @@
 .HomePage_section3__container{
-    @apply mt-14;
+    @apply mb-24;
 }
 
 .section3__card{
-    @apply flex flex-col bg-white w-full rounded-2xl p-8 sm:p-4 sm:pb-10 ;
+    @apply flex flex-col w-full p-8 bg-white rounded-2xl sm:p-4 sm:pb-10 ;
 }
 
 .section3__card--innercard{
     @apply flex flex-col items-center justify-center p-8 rounded-2xl bg-[url('../../public/assets/CFB/section.png')];
-    @apply bg-cover bg-no-repeat text-white;
+    @apply text-white bg-no-repeat bg-cover;
 }
 
 .section3__card--innercard2{
@@ -16,9 +16,9 @@
 }
 
 .section3__card--innercard2 h1{
-    @apply font-tertiary text-xl lg:text-2xl;
+    @apply text-xl font-tertiary lg:text-2xl;
 }
 
 .section3__card--innercard2 p{
-    @apply font-secondary text-xs lg:text-sm;
+    @apply text-xs font-secondary lg:text-sm;
 }

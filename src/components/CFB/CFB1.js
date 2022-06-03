@@ -2,22 +2,28 @@ import Image from "next/image";
 import styles from "../../../styles/CFB/CFB1.module.css";
 
 export default function CFB1(){
+    const scrollToRef = () => {
+        window.scrollTo(0, 400);  
+    } 
     return(
         <div className={styles['cfb1__container']}>
-           <p className="font-primary text-center font-semibold text-3xl text-primary-200">MXV COMMUNITY FEEDBACK BOARD</p>
-           <p className="font-secondary text-xs max-w-xs sm:max-w-2xl text-center pt-6">
+            <button className={styles['cfb-banner__circle-dropdown']} onClick={scrollToRef}>
+                <img src="/assets/CFB/circle_dropdown.png" className="z-[5]" width={50} height={50} alt="circle dropdown" />       
+            </button>
+           <p className="text-3xl font-semibold text-center font-primary text-primary-200">MXV COMMUNITY FEEDBACK BOARD</p>
+           <p className="max-w-xs pt-6 text-xs text-center font-secondary sm:max-w-2xl">
             We invite you to be a part of our Community Feedback Board- a group of select 
             individuals with exclusive access to Musixverse and its features before anyone else.
             In return, we will ask you to provide feedback about the platform as we continue to 
             build and improve it</p>
             {/* <div className={styles['cfb1__card']}>
                 <div className={styles['cfb1__card--innercard']}>
-                    <p className="font-primary text-center font-semibold text-3xl">The Problem with Music Industry</p>
-                    <p className="font-secondary text-sm max-w-xl text-center">
+                    <p className="text-3xl font-semibold text-center font-primary">The Problem with Music Industry</p>
+                    <p className="max-w-xl text-sm text-center font-secondary">
                     In today’s digital world, creating and releasing music is easier than ever 
                     but making money off it is as difficult as it has ever been.</p>
                 </div>
-                <div className="flex flex-col md:flex-row gap-8 md:gap-6 md:gap-none mt-6 justify-evenly">
+                <div className="flex flex-col gap-8 mt-6 md:flex-row md:gap-6 md:gap-none justify-evenly">
                     <div className={styles['cfb1__card--innercard2']}>
                         <h1>ROYALITIES</h1>
                         <p>Distributed are few and far between, often coming in small balances at 

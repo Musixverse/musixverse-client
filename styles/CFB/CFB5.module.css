@@ -1,16 +1,16 @@
-.cfb5__container{
+.cfb5__container {
     @apply flex flex-col items-center justify-center w-full px-10 py-20 sm:px-16 xl:px-20 2xl:px-36;
 }
 
-.cfb5__card{
+.cfb5__card {
     @apply overflow-x-hidden flex flex-col lg:flex-row justify-between bg-[#DADADA] w-full rounded-2xl md:pt-10 pt-16 p-10 md:px-14 relative;
 }
 
-.cfb5__social{
-    @apply flex mt-4 space-x-5;
+.cfb5__social {
+    @apply flex mt-8 space-x-5;
 }
 
-.cfb5__social button{
+.cfb5__social button {
     @apply p-2 border-none rounded-md bg-dark-100 hover:bg-dark-200;
 }
 

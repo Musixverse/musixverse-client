@@ -1,16 +1,16 @@
-.cfb-banner__container{
-    @apply bg-[#EAEAEA] w-full max-h-[600px] h-[60vh] flex-col md:flex-row pt-40 px-10 sm:px-16 md:px-0 relative flex justify-center items-center pb-14 overflow-hidden;
+.cfb-banner__container {
+    @apply bg-[#EAEAEA] w-full md:max-h-[600px] md:h-[60vh] sm:max-h-[700px] sm:h-[70vh] flex-col md:flex-row pt-40 px-10 sm:px-16 md:px-0 relative flex justify-center items-center pb-14 overflow-hidden;
 }
 
-.cfb-banner__subcontainer{
+.cfb-banner__subcontainer {
     @apply flex min-w-0 md:px-0 px-4 md:min-w-[409px] flex-col justify-center items-center;
 }
 
-.cfb-banner__left-image{
+.cfb-banner__left-image {
     @apply relative hidden lg:inline-block -right-16 md:right-0 top-4;
 }
 
-.cfb-banner__right-image{
+.cfb-banner__right-image {
     @apply relative hidden lg:inline-block w-[32rem] top-10 right-10 md:top-28 md:right-32 xl:right-20;
 }
 

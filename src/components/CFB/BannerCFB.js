@@ -16,7 +16,7 @@ export default function BannerCFB(){
                     together artist and fans like never before, help each other do great things together,
                     and empower each other in the process.</p>
                     <button className="px-5 py-3 mt-6 text-xs text-white bg-primary-200 hover:bg-primary-300 font-primary rounded-xl">
-                    Join Discord Community</button>
+                    Join Feedback Board</button>
                 </div>
                 <img src="/assets/CFB/Boy_Banner.png" className={styles['cfb-banner__right-image']} alt="Boy" />
                 

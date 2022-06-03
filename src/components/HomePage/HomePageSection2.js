@@ -28,7 +28,7 @@ export default function Section2New(){
                         imageSrc={"bg-[url('/assets/homepage/bars_2.png')]"}
                         statsFirst={"LESS"} 
                         statsLast={"DISCOVERABLE"} 
-                        statsDetail={"Average share of revenue goes to artists for the music they created."}
+                        statsDetail={"New artist discovery is increasingly difficult with hundreds of new artists releasing music every single day. "}
                     />
                     <Statsbar 
                         imageSrc={"bg-[url('/assets/homepage/bars_3.png')]"}

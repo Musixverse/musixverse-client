@@ -52,47 +52,36 @@ const Navbar = () => {
                             </Link>
                         </li>
                         <li>
-                            <ul className="relative group dropdown">
-                                <a
-                                    className="flex items-center dropdown-toggle hidden-arrow"
-                                    href="#"
-                                    id="dropdownMenuButton2"
-                                    role="button"
-                                    data-bs-toggle="dropdown"
-                                    aria-expanded="false"
+                            <button
+                                aria-label="Toggle Dark Mode"
+                                type="button"
+                                className="p-1 h-12 w-12 flex items-center justify-center rounded-full hover:bg-light-300 dark:hover:bg-zinc-800"
+                                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 24 24"
+                                    fill="currentColor"
+                                    stroke="currentColor"
+                                    className="h-6 w-6 text-gray-800 dark:text-gray-200"
                                 >
                                     {theme === "dark" ? (
-                                        <Image src="https://img.icons8.com/nolan/512/apple-settings.png" width="35" height="35" />
+                                        <path
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            strokeWidth={2}
+                                            d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+                                        />
                                     ) : (
-                                        <Image src="https://img.icons8.com/ios/500/000000/apple-settings.png" width="35" height="35" />
+                                        <path
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            strokeWidth={2}
+                                            d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
+                                        />
                                     )}
-                                </a>
-                                <ul
-                                    className="absolute right-0 left-auto z-10 hidden float-left py-2 m-0 mt-1 text-left list-none border-none rounded-lg shadow-lg dropdown-menu min-w-max bg-light-100 bg-clip-padding group-hover:block"
-                                    aria-labelledby="dropdownMenuButton2"
-                                >
-                                    <li>
-                                        <a
-                                            className="block w-full px-4 py-2 text-sm text-gray-700 bg-transparent dropdown-item whitespace-nowrap hover:bg-gray-100"
-                                            href="#"
-                                        >
-                                            <div className="flex">
-                                                Night mode
-                                                <div className="form-check form-switch">
-                                                    <input
-                                                        id="theme-switcher"
-                                                        className="float-right w-10 h-5 align-top bg-no-repeat bg-contain rounded-full shadow-sm appearance-none cursor-pointer form-check-input bg-light-300 dark:bg-primary-100 focus:outline-none"
-                                                        type="checkbox"
-                                                        role="switch"
-                                                        onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                                                        defaultChecked={theme === "dark"}
-                                                    />
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </ul>
+                                </svg>
+                            </button>
                         </li>
                     </ul>
                 </div>

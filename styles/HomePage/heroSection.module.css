@@ -1,9 +1,9 @@
 .background-image-div{
-    @apply absolute top-20 w-full h-[560px] flex;
+    @apply absolute -z-[1] w-full h-[560px] flex;
 }
 
 .background-image-div__image{
-    @apply object-contain w-full h-full 2xl:object-fill;
+    @apply w-full h-full;
 }
 
 .hero-section-container{

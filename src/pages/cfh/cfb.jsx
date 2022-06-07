@@ -19,7 +19,7 @@ const CFB = ({}) => {
                     <BannerCFB />
                     <CFB1 />
                     {/* <CFB2 /> */}
-                    <CFB3 />
+                    {/* <CFB3 /> */}
                     <CFB4 />
                     <CFB5 />
                 </div>

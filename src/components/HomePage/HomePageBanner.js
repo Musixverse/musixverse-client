@@ -21,7 +21,7 @@ export default function Banner() {
                     <br /> like never before
                 </h1>
                 <p className={styles["hero-section-container__content-div--description"]}>
-                    Musixverse will bring together artists and fans like never before, help them do great things together and empower each other in the
+                    Musixverse will bring together artists and fans like never before, help them do great things together, and empower each other in the
                     process.
                 </p>
                 <a

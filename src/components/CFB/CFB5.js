@@ -25,8 +25,8 @@ export default function CFB5() {
                     </p>
                     <Link href="https://cfbmusixverse.paperform.co/" passHref={true}>
                         <a target="_blank" rel="noopener noreferrer">
-                            <button className="px-20 py-3 mt-2 text-xs text-white bg-primary-200 hover:bg-primary-300 font-primary rounded-xl">
-                                Join the CFB now!
+                            <button className="px-8 py-3 mt-2 text-xs text-white bg-primary-200 hover:bg-primary-300 font-primary rounded-xl">
+                                Click here join the Community Feedback Board
                             </button>
                         </a>
                     </Link>

@@ -9,7 +9,7 @@ export default function CFB4() {
             {/* Image */}
             <img src="/assets/CFB/section5_left.png" className={styles["cfb4__image-left"]} width={250} height={230} alt="svg" />
             <div className={"dark:bg-dark-100 " + styles["cfb4__card"]}>
-                <h1 className="font-primary text-2xl text-center font-semibold max-w-xl">
+                <h1 className="max-w-xl text-2xl font-semibold text-center font-primary">
                     Join our Community Feedback Board for exclusive privileges on Musixverse.
                 </h1>
                 <div className={styles["cfb4__card--innercard"]}>
@@ -17,7 +17,7 @@ export default function CFB4() {
                         <h2>AS AN ARTIST</h2>
                         <p>
                             You will be among the first people to mint and sell NFTs on Musixverse. We will market your art across the internet and will
-                            guarantee a good price for your first NFT
+                            guarantee a fair price for your first NFT
                         </p>
                     </div>
                     <div className={"dark:bg-dark-200 " + styles["cfb4__card--innercard2"]}>

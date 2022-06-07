@@ -4,7 +4,7 @@ export default function Statsbar(props){
             <div className={"p-4 w-full md:w-[165px] flex items-center mr-3 justify-start rounded-xl md:bg-right bg-cover " + `${props.imageSrc}`}>
                 <h3 className="text-2xl font-tertiary text-light-100">{props.statsFirst} {' '}<br className="hidden md:inline-block"></br>{props.statsLast}</h3>
             </div>
-            <p className="font-secondary md:mt-0 mt-3 text-sm md:max-w-[230px] font-semibold">{props.statsDetail}</p>
+            <p className="font-secondary md:mt-0 mt-3 text-sm md:max-w-[230px]">{props.statsDetail}</p>
         </div>
     );
 }

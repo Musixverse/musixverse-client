@@ -8,7 +8,7 @@ const Footer = () => {
     const { theme } = useTheme();
 
     return (
-        <div className="footer">
+        <div className="footer dark:bg-dark-100">
             <div>
                 <Image src={theme === "dark" ? mxvW : mxvB} alt="MXV logo" objectFit="contain"></Image>
             </div>

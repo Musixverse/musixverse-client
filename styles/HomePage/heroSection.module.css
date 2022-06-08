@@ -1,5 +1,5 @@
 .background-image-div{
-    @apply absolute -z-[1] w-full h-[560px] flex;
+    @apply absolute -z-[1] w-full h-full flex;
 }
 
 .background-image-div__image{
@@ -7,7 +7,7 @@
 }
 
 .hero-section-container{
-    @apply mt-20 flex items-center justify-center h-[560px] w-full relative z-[2];
+    @apply mt-[73px] flex flex-col items-center justify-center w-full relative z-[2];
      /* backdrop-blur-[7px] backdrop-brightness-150; */
 }
 
@@ -16,9 +16,9 @@
 }
 
 .hero-section-container__content-div--heading{
-    @apply mb-10 text-2xl font-bold text-center md:text-4xl font-primary;
+    @apply mb-4 text-2xl font-bold text-center md:text-5xl font-primary;
 }
 
 .hero-section-container__content-div--description{
-    @apply max-w-xl mb-6 text-center text-[13px] md:text-[15px] font-secondary;
+    @apply max-w-xl mb-10 text-center text-[13px] md:text-[15px] font-secondary;
 }

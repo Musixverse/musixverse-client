@@ -23,18 +23,20 @@ export default function HomePage_section4() {
                 </div>
                 <div className={styles["section2__card--innercard"]}>
                     <div className="flex flex-col">
-                        <p className="text-sm font-normal dark:text-dark-200 font-secondary">
-                            Click the button to get started and
-                            <br /> know more about our community
+                        <p className="text-xs md:text-sm font-normal dark:text-dark-200 font-secondary">
+                            To Know more about the community Feedback Hub <br />
+                            Tap the button to get started
                         </p>
-                        <a
-                            className="px-8 py-3 mt-6 text-xs text-white bg-primary-200 hover:bg-primary-300 font-primary rounded-xl"
-                            href="https://discord.gg/sCxZyJmW"
-                            target={"_blank"}
-                            rel="noopener noreferrer"
-                        >
-                            Join Discord Community
-                        </a>
+                        <div className="max-w-xs mt-6">
+                            <a
+                                className="px-8 py-3 text-xs text-white bg-primary-200 hover:bg-primary-300 font-primary rounded-xl"
+                                href="https://discord.gg/sCxZyJmW"
+                                target={"_blank"}
+                                rel="noopener noreferrer"
+                            >
+                                Join Discord Community
+                            </a>
+                        </div>
                     </div>
                     <div className="items-end">
                         <div className={styles["newsletter__social"]}>

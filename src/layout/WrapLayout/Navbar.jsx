@@ -10,7 +10,7 @@ const Navbar = () => {
     const { theme, setTheme } = useTheme();
 
     return (
-        <nav className="navbar">
+        <nav className="px-0 navbar">
             <div className="container flex flex-wrap items-center justify-between mx-auto">
                 <Link href="/">
                     <a href="#" className="flex">
@@ -22,9 +22,9 @@ const Navbar = () => {
                     </a>
                 </Link>
 
-                <div className="ml-auto block">
-                    <ul className="flex flex-row items-center md:space-x-8 md:mt-0 sm:text-sm font-medium text-xs">
-                        <li className="hover:text-primary-200 hidden md:block">
+                <div className="block ml-auto">
+                    <ul className="flex flex-row items-center text-xs font-medium md:space-x-8 md:mt-0 sm:text-sm">
+                        <li className="hidden hover:text-primary-200 md:block">
                             <Link
                                 href="/"
                                 className="py-2 pl-3 pr-4 text-white rounded hover:text-primary-100 md:bg-transparent md:p-0 dark:text-white"
@@ -45,7 +45,7 @@ const Navbar = () => {
                             <button
                                 aria-label="Toggle Dark Mode"
                                 type="button"
-                                className="h-12 w-12 flex items-center justify-center rounded-full hover:bg-light-300 dark:hover:bg-zinc-800"
+                                className="flex items-center justify-center w-12 h-12 rounded-full hover:bg-light-300 dark:hover:bg-zinc-800"
                                 onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
                             >
                                 <svg
@@ -53,7 +53,7 @@ const Navbar = () => {
                                     viewBox="0 0 24 24"
                                     fill="currentColor"
                                     stroke="currentColor"
-                                    className="h-6 w-6 text-gray-800 dark:text-gray-200"
+                                    className="w-6 h-6 text-gray-800 dark:text-gray-200"
                                 >
                                     {theme === "dark" ? (
                                         <path
@@ -76,6 +76,7 @@ const Navbar = () => {
                     </ul>
                 </div>
             </div>
+            {/* <div className="w-full h-1 bg-gradient-to-r from-primary-100 to-primary-300"></div> */}
         </nav>
     );
 };

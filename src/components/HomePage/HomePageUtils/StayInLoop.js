@@ -5,8 +5,9 @@ import instagram from "../../../../public/assets/social/instagram.svg";
 import styles from "../../../../styles/HomePage/section5.module.css";
 
 export default function StayInLoop(){
+    // mt-28
     return(
-        <div className="w-full backdrop-blur-[12px] backdrop-brightness-150 flex justify-center mt-16">
+        <div className="w-full backdrop-blur-[12px] backdrop-brightness-150 flex justify-center mt-28">
             <div className="max-w-[1920px] flex flex-col justify-between w-full px-6 md:px-8 lg:px-16 xl:px-20 2xl:px-36 py-16 lg:flex-row">
                 {/* Left div */}
                 <div className="mb-3 text-light-100 lg:mb-0">

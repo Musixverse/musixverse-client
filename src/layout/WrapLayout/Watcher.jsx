@@ -4,10 +4,10 @@ import Router from "next/router";
 import { useMoralis } from "react-moralis";
 
 const Watcher = () => {
-    const { user, isAuthenticated, refetchUserData } = useMoralis();
+    // const { user, isAuthenticated, refetchUserData } = useMoralis();
 
     /* Revoke access to Registration pages from any unauthenticated user */
-    const router = useRouter();
+    // const router = useRouter();
     // TODO: Uncomment useEffects
 
     // useEffect(() => {

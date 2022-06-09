@@ -34,7 +34,7 @@ a {
 /**************************************************************************/
 
 .navbar {
-    @apply bg-nav-light px-2 sm:px-6 py-1 backdrop-blur-2xl backdrop-brightness-150 dark:bg-nav-dark dark:backdrop-blur-xl dark:backdrop-brightness-105 fixed w-full z-40 top-0;
+    @apply bg-nav-light pl-6 pr-4 sm:px-6 py-1 backdrop-blur-2xl backdrop-brightness-150 dark:bg-nav-dark dark:backdrop-blur-xl dark:backdrop-brightness-105 fixed w-full z-40 top-0;
 }
 
 /**************************************************************************/

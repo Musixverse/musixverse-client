@@ -7,7 +7,7 @@
 }
 
 .cfb3__card--innercard{
-    @apply flex flex-col items-center justify-center p-10 rounded-2xl bg-[url('../../public/assets/CFB/section.png')];
+    @apply flex flex-col items-center justify-center p-10 rounded-2xl bg-[url('../../public/assets/CFB/sectionM.png')] sm:bg-[url('../../public/assets/CFB/sectionT.png')] lg:bg-[url('../../public/assets/CFB/sectionD.png')];
     @apply bg-cover bg-no-repeat text-white;
 }
 

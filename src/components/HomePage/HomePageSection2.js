@@ -26,9 +26,9 @@ export default function Section2New(){
                     />
                     <Statsbar 
                         imageSrc={"bg-[url('/assets/homepage/bars_2.png')]"}
-                        statsFirst={"LESS"} 
-                        statsLast={"DISCOVERABLE"} 
-                        statsDetail={"New artist discovery is increasingly difficult with hundreds of new artists releasing music every single day. "}
+                        statsFirst={"NEW ARTIST"} 
+                        statsLast={"DISCOVERY"} 
+                        statsDetail={"Is increasing difficult with hundreds of new artists releasing music every single day?"}
                     />
                     <Statsbar 
                         imageSrc={"bg-[url('/assets/homepage/bars_3.png')]"}
@@ -41,9 +41,11 @@ export default function Section2New(){
             {/* Right Image Section */}
             <div className={"relative "+styles['section2-container__grid-image']}>
                 <Image src={singer} alt="singer" objectFit="contain" priority></Image>
-                <button onClick={scrollToRef} className="absolute bottom-1/4 left-[12px] md:left-[28px]">
-                    <img src="/assets/homepage/dropdown_arrow_red.svg" className="w-[50px] h-[50px]" alt="circle dropdown" />       
-                </button>
+                <a href="#section_3">
+                    <button className="absolute bottom-1/4 left-[12px] md:left-[28px]">
+                        <img src="/assets/homepage/dropdown_arrow_red.svg" className="w-[50px] h-[50px]" alt="circle dropdown" />       
+                    </button>
+                </a>
             </div>
         </div>
     );

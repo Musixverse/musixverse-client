@@ -5,14 +5,14 @@ export default function HomePage_section2() {
         window.scrollTo(0, 1900);
     };
     return (
-        <div className={styles["HomePage_section2__container"]}>
+        <div id="section_3" className={styles["HomePage_section2__container"]}>
             <div className={"dark:bg-dark-100 " + styles["section2__card"]}>
                 <div className={styles["section2__card--innercard"]}>
                     <p className="text-xl font-semibold text-center font-primary md:text-3xl">What is required?</p>
                 </div>
                 <div className="flex flex-col gap-8 mt-8 md:flex-row md:gap-6 md:gap-none justify-evenly">
                     <div className={styles["section2__card--innercard2"]}>
-                        <h1>ALTERNATE SOURCES OF INCOME</h1>
+                        <h1>ALTERNATIVE SOURCES OF INCOME</h1>
                         <p>To help artists sustain their art and stay motivated</p>
                     </div>
                     <div className={styles["section2__card--innercard2"]}>
@@ -25,9 +25,11 @@ export default function HomePage_section2() {
                     </div>
                 </div>
             </div>
-            <button onClick={scrollToRef}>
-                <img src="/assets/homepage/circle_dropdown2.png" className={styles["section2__circle-dropdown"]} width={50} height={50} alt="circle dropdown" />
-            </button>
+            <a href="#section_4">
+                <button>
+                    <img src="/assets/homepage/circle_dropdown2.png" className={styles["section2__circle-dropdown"]} width={50} height={50} alt="circle dropdown" />
+                </button>
+            </a>
         </div>
     );
 }

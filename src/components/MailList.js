@@ -35,12 +35,13 @@ export default function MailList() {
                     required
                 />
                 <button
-                    type="button"
+                    // type="button"
+                    type="submit"
                     className="px-5 py-2 mt-3 font-semibold rounded lg:mt-0 lg:ml-2 bg-primary-100 text-light-100 font-primary hover:bg-primary-200 hover:text-light-200"
-                    onClick={() => {
-                        setShowCategoryModal(true);
-                        setEnterPressed(false);
-                    }}
+                    // onClick={() => {
+                    //     setShowCategoryModal(true);
+                    //     setEnterPressed(false);
+                    // }}
                 >
                     Subscribe Now
                 </button>

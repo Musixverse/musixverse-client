@@ -18,7 +18,7 @@ const Footer = () => {
                     <div className="flex space-x-4 text-xs align-top font-primary">
                         <div>Terms and Conditions</div>
                         <div>Privacy Policy</div>
-                        <Link href="https://discord.gg/sCxZyJmW" passHref={true}>
+                        <Link href="https://discord.com/invite/rXKb7rCqjG" passHref={true}>
                             <a target="_blank" rel="noopener noreferrer" className="hover:text-primary-200">
                                 Discord
                             </a>

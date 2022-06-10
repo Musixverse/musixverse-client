@@ -1,9 +1,6 @@
 import styles from "../../../styles/HomePage/section3.module.css";
 
 export default function HomePage_section2() {
-    const scrollToRef = () => {
-        window.scrollTo(0, 1900);
-    };
     return (
         <div id="section_3" className={styles["HomePage_section2__container"]}>
             <div className={"dark:bg-dark-100 " + styles["section2__card"]}>
@@ -27,7 +24,13 @@ export default function HomePage_section2() {
             </div>
             <a href="#section_4">
                 <button>
-                    <img src="/assets/homepage/circle_dropdown2.png" className={styles["section2__circle-dropdown"]} width={50} height={50} alt="circle dropdown" />
+                    <img
+                        src="/assets/homepage/circle_dropdown2.png"
+                        className={styles["section2__circle-dropdown"]}
+                        width={50}
+                        height={50}
+                        alt="circle dropdown"
+                    />
                 </button>
             </a>
         </div>

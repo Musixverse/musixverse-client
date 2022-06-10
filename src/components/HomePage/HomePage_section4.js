@@ -3,7 +3,7 @@ import styles from "../../../styles/HomePage/section4.module.css";
 
 export default function HomePage_section3() {
     return (
-        <div className={styles["HomePage_section3__container"]}>
+        <div id="section_4" className={styles["HomePage_section3__container"]}>
             <div className={"dark:bg-dark-100 " + styles["section3__card"]}>
                 <div className={styles["section3__card--innercard"]}>
                     <p className="pb-4 text-xl font-semibold text-center font-primary md:text-3xl">Introducing Musixverse</p>

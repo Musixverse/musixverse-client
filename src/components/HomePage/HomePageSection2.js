@@ -5,7 +5,7 @@ import styles from "../../../styles/HomePage/section2.module.css";
 
 export default function Section2New(){
     const scrollToRef = () => {
-        window.scrollTo(0, 1300);  
+        window.scrollTo(0, 1400);  
     } 
 
     return(

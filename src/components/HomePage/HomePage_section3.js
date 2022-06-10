@@ -2,7 +2,7 @@ import styles from "../../../styles/HomePage/section3.module.css";
 
 export default function HomePage_section2() {
     const scrollToRef = () => {
-        window.scrollTo(0, 1700);
+        window.scrollTo(0, 1900);
     };
     return (
         <div className={styles["HomePage_section2__container"]}>

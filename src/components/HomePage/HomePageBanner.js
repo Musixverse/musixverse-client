@@ -24,7 +24,7 @@ export default function Banner() {
                 </p>
                 <a
                     className="px-5 py-3 text-xs text-white bg-primary-200 hover:bg-primary-300 font-primary rounded-3xl"
-                    href="https://discord.gg/sCxZyJmW"
+                    href="https://discord.com/invite/rXKb7rCqjG"
                     target={"_blank"}
                     rel="noopener noreferrer"
                 >

@@ -40,9 +40,9 @@ export default function CFB5() {
                         >
                             <Image src={discord} width={20} height={20} alt="discord"></Image>
                         </a>
-                        {/* <a className="flex items-center justify-center p-2 rounded-md bg-dark-100" href="https://discord.gg/sCxZyJmW" target={"_blank"} rel="noopener noreferrer">
+                        <a className="flex items-center justify-center p-2 rounded-md bg-dark-100" href="https://www.facebook.com/Musixverse-104390125641359" target={"_blank"} rel="noopener noreferrer">
                             <Image src={facebook} width={20} height={20} alt="facebook"></Image>
-                        </a> */}
+                        </a>
                         <a
                             className="flex items-center justify-center p-2 rounded-md bg-dark-100"
                             href="https://twitter.com/musixverse"

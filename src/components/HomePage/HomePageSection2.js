@@ -4,9 +4,9 @@ import singer from "../../../public/assets/homepage/Artist_grid.png";
 import styles from "../../../styles/HomePage/section2.module.css";
 
 export default function Section2New(){
-    // const scrollToRef = () => {
-    //     window.scrollTo(0, 1300);  
-    // } 
+    const scrollToRef = () => {
+        window.scrollTo(0, 1400);  
+    } 
 
     return(
         // Outer div

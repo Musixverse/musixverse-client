@@ -1,9 +1,9 @@
 import styles from "../../../styles/HomePage/section3.module.css";
 
 export default function HomePage_section2() {
-    // const scrollToRef = () => {
-    //     window.scrollTo(0, 1700);
-    // };
+    const scrollToRef = () => {
+        window.scrollTo(0, 1900);
+    };
     return (
         <div id="section_3" className={styles["HomePage_section2__container"]}>
             <div className={"dark:bg-dark-100 " + styles["section2__card"]}>

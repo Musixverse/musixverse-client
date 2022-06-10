@@ -3,7 +3,7 @@
 }
 
 .section2__card--innercard {
-    @apply flex flex-col md:flex-row justify-between my-8 min-h-[300px] md:min-h-fit md:my-14 p-8 md:p-6 rounded-2xl bg-[url('../../public/assets/homepage/back1.png')] bg-cover bg-no-repeat;
+    @apply flex flex-col md:flex-row justify-between my-8 min-h-[300px] md:min-h-fit md:my-14 p-8 md:p-6 rounded-2xl bg-[url('../../public/assets/homepage/sec5_backM.png')] md:bg-[url('../../public/assets/homepage/sec5_backT.png')] lg:bg-[url('../../public/assets/homepage/sec5_backD.png')] bg-cover bg-no-repeat;
 }
 
 .newsletter__social {

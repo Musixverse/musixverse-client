@@ -3,11 +3,11 @@
 }
 
 .section3__card{
-    @apply flex flex-col w-full p-8 bg-white rounded-2xl sm:p-4 sm:pb-10 ;
+    @apply flex flex-col xl:h-[50vh] w-full p-8 bg-white rounded-2xl sm:p-4 sm:pb-10 ;
 }
 
 .section3__card--innercard{
-    @apply flex flex-col items-center justify-center p-8 rounded-2xl bg-[url('../../public/assets/CFB/section.png')];
+    @apply flex flex-col md:h-[12vh] xl:h-[25vh] items-center justify-center p-8 rounded-2xl bg-[url('../../public/assets/CFB/sectionM.png')] sm:bg-[url('../../public/assets/CFB/sectionT.png')] lg:bg-[url('../../public/assets/CFB/sectionD.png')];
     @apply text-white bg-no-repeat bg-cover;
 }
 

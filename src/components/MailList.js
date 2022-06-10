@@ -12,7 +12,12 @@ export default function MailList() {
     };
 
     return (
-        <form action={enterPressed ? `javascript:void(0)` : "https://musixverse.us14.list-manage.com/subscribe/post"} method="POST" onKeyDown={handleKeyDown}>
+        <form
+            action={enterPressed ? `javascript:void(0)` : "https://musixverse.us14.list-manage.com/subscribe/post"}
+            method="POST"
+            onKeyDown={handleKeyDown}
+            id="mailchimp-mxv-mailing-list-form"
+        >
             <input type="hidden" name="u" value="526b30ef38873ddc8b5b707b2" />
             <input type="hidden" name="id" value="895279b10e" />
 

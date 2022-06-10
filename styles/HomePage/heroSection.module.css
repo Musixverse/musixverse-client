@@ -7,7 +7,7 @@
 }
 
 .hero-section-container{
-    @apply mt-[70px] flex flex-col items-center justify-center w-full relative z-[2];
+    @apply flex flex-col items-center justify-center w-full relative z-[2];
      /* backdrop-blur-[7px] backdrop-brightness-150; */
 }
 

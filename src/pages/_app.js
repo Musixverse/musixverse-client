@@ -44,7 +44,7 @@ function App({ Component, pageProps }) {
                     })(window,document,'script','dataLayer','${process.env.NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID}');
                 `}
             </Script>
-            {/* <!-- End Google Tag Manager --> */}
+
             <Script src="https://kit.fontawesome.com/0366dd7992.js" crossOrigin="anonymous"></Script>
             <Script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></Script>
 

@@ -4,7 +4,7 @@ import Script from "next/script";
 import Layout from "../components/WrapLayout/Layout";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
-import * as ga from "../lib/google-analytics";
+import * as ga from "../../lib/google-analytics";
 
 function App({ Component, pageProps }) {
     const router = useRouter();

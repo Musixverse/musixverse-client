@@ -26,9 +26,9 @@ export default function Section2New(){
                     />
                     <Statsbar 
                         imageSrc={"bg-[url('/assets/homepage/bars_2.png')]"}
-                        statsFirst={"LESS"} 
-                        statsLast={"DISCOVERABLE"} 
-                        statsDetail={"New artist discovery is increasingly difficult with hundreds of new artists releasing music every single day. "}
+                        statsFirst={"NEW ARTIST"} 
+                        statsLast={"DISCOVERY"} 
+                        statsDetail={"Is increasing difficult with hundreds of new artists releasing music every single day?"}
                     />
                     <Statsbar 
                         imageSrc={"bg-[url('/assets/homepage/bars_3.png')]"}

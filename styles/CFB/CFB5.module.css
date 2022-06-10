@@ -7,7 +7,7 @@
 }
 
 .cfb5__social {
-    @apply flex mt-8 space-x-5;
+    @apply flex mt-3 space-x-5;
 }
 
 .cfb5__social button {

@@ -12,7 +12,7 @@ export default function HomePage_section2() {
                 </div>
                 <div className="flex flex-col gap-8 mt-8 md:flex-row md:gap-6 md:gap-none justify-evenly">
                     <div className={styles["section2__card--innercard2"]}>
-                        <h1>ALTERNATE SOURCES OF INCOME</h1>
+                        <h1>ALTERNATIVE SOURCES OF INCOME</h1>
                         <p>To help artists sustain their art and stay motivated</p>
                     </div>
                     <div className={styles["section2__card--innercard2"]}>

@@ -10,22 +10,22 @@ import instagram from "../../../public/assets/social/instagram.svg";
 export default function CFB5() {
     return (
         <div className={styles["cfb5__container"]}>
-            <div className={"dark:bg-dark-100 " + styles["cfb5__card"]}>
+            <div className={styles["cfb5__card"]}>
                 <div className="self-start lg:self-center">
-                    <h1 className="text-3xl font-semibold font-primary">Get Started</h1>
-                    <p className="mt-2 text-sm font-secondary">For more details, you can contact us at</p>
-                    <a href="mailto:contact@musixverse.com" className="text-sm font-primary text-primary-200">
+                    <h1 className="text-3xl font-semibold dark:text-dark-100 font-primary">Get Started</h1>
+                    <p className="mt-2 text-sm font-secondary dark:text-dark-100">For more details, you can contact us at</p>
+                    <a href="mailto:contact@musixverse.com" className="block text-sm font-primary text-primary-200">
                         contact@musixverse.com
                     </a>
 
-                    <p className="py-4 text-sm font-secondary">
+                    {/* <p className="py-4 text-sm font-secondary">
                         Tap the button to join the Musixverse
                         <br />
                         Community Feedback Board (CFB)
-                    </p>
+                    </p> */}
                     <Link href="https://cfbmusixverse.paperform.co/" passHref={true}>
                         <a target="_blank" rel="noopener noreferrer">
-                            <button className="px-8 py-3 mt-2 text-xs text-white bg-primary-200 hover:bg-primary-300 font-primary rounded-xl">
+                            <button className="px-8 py-3 mt-5 text-xs text-white bg-primary-200 hover:bg-primary-300 font-primary rounded-xl">
                                 Click here join the Community Feedback Board
                             </button>
                         </a>

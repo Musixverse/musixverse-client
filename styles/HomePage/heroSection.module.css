@@ -16,7 +16,7 @@
 }
 
 .hero-section-container__content-div--heading{
-    @apply mb-4 text-2xl font-bold text-center md:text-5xl font-primary;
+    @apply mb-4 text-4xl font-bold text-center md:text-5xl font-primary;
 }
 
 .hero-section-container__content-div--description{

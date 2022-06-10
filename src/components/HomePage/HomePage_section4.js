@@ -30,7 +30,7 @@ export default function HomePage_section3() {
                         <h1>CONNECTION BEYOND BOUNDS</h1>
                         <p>
                             Artists will know who their “real” fans are, and they can give back to their fans in any number of ways. Airdrop concert tickets,
-                            share exclusive merch directly with fans, or jump on private chats with the artist…. Possibilities are limitless.
+                            share exclusive merch directly with fans, or jump on private chats with your most loyal fans... Possibilities are limitless
                         </p>
                     </div>
                 </div>

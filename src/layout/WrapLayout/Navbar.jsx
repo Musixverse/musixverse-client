@@ -10,7 +10,7 @@ const Navbar = () => {
     const { theme, setTheme } = useTheme();
 
     return (
-        <nav className="dark:bg-[rgba(19,19,19,0.4)] flex flex-col items-center justify-center dark:backdrop-blur-[24px] dark:backdrop-brightness-105 fixed top-0 z-40 w-full backdrop-blur-[40px] backdrop-brightness-150 bg-[rgba(255,255,255,0.4)]">
+        <nav className="dark:bg-[rgba(19,19,19,0.4)] flex flex-col items-center justify-center dark:backdrop-blur-[24px] dark:backdrop-brightness-105 fixed top-0 z-40 w-full backdrop-blur-[40px] backdrop-brightness-200 bg-[rgba(255,255,255,0.8)]">
             <div className="flex flex-wrap items-center justify-between w-full max-w-[1920px] px-6 md:px-8 lg:px-16 xl:px-20 2xl:px-36">
                 <Link href="/">
                     <a href="#" className="flex">
@@ -38,14 +38,14 @@ const Navbar = () => {
                                 href="/cfh/cfb"
                                 className="block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:text-primary-100 md:hover:bg-transparent md:border-0 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
                             >
-                                Community Feedback Board
+                                Musixverse Community
                             </Link>
                         </li>
                         <li className="ml-2">
                             <button
                                 aria-label="Toggle Dark Mode"
                                 type="button"
-                                className="flex items-center justify-center w-12 h-12 rounded-full hover:bg-light-300 dark:hover:bg-zinc-800"
+                                className="flex items-center justify-center w-12 h-12 rounded-full hover:bg-[#bdbdbd] dark:hover:bg-zinc-800"
                                 onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
                             >
                                 <svg

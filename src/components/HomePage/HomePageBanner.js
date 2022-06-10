@@ -2,11 +2,12 @@ import styles from "../../../styles/HomePage/heroSection.module.css";
 import { useTheme } from "next-themes";
 import StayInLoop from "./HomePageUtils/StayInLoop";
 
+
 export default function Banner() {
     const { theme } = useTheme();
     return (
         /* Outer div for bg blur */
-        <div className={(theme === 'dark'? "bg-[url('/assets/homepage/home_dark.png')] ":"bg-[url('/assets/homepage/home_light.png')] ")+"bg-cover bg-no-repeat bg-center "+styles["hero-section-container"]}>
+        <div className={"bg-[url('/assets/homepage/desk.png')] bg-cover bg-no-repeat bg-center "+styles["hero-section-container"]}>
             {/* For bg image */}
             {/* <div className={styles["background-image-div"]}>
                 <img
@@ -17,7 +18,7 @@ export default function Banner() {
             </div> */}
             {/* <div className="mt-8"> */}
             {/* Inner div for content */}
-            <div className={"text-white dark:text-white mt-28 " + styles["hero-section-container__content-div"]}>
+            <div className={"text-white dark:text-white mt-48 " + styles["hero-section-container__content-div"]}>
                 <h1 className={styles["hero-section-container__content-div--heading"]}>
                     We&apos;re Coming Soon!
                 </h1>

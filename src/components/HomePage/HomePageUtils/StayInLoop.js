@@ -2,16 +2,18 @@ import Image from "next/image";
 import discord from "../../../../public/assets/social/discord.svg";
 import twitter from "../../../../public/assets/social/twitter.svg";
 import instagram from "../../../../public/assets/social/instagram.svg";
+import facebook from "../../../../public/assets/social/facebook.svg";
 import styles from "../../../../styles/HomePage/section5.module.css";
 
 export default function StayInLoop(){
+    //nav: blur: 12px, 0.6 opacity
     // mt-28
     return(
-        <div className="w-full backdrop-blur-[12px] backdrop-brightness-150 flex justify-center mt-36">
+        <div className="w-full backdrop-blur-[40px] backdrop-brightness-150 flex justify-center mt-36">
             <div className="max-w-[1920px] flex flex-col justify-between w-full px-6 md:px-8 lg:px-16 xl:px-20 2xl:px-36 py-10 lg:flex-row">
                 {/* Left div */}
                 <div className="mb-5 sm:mb-3 text-light-100 lg:mb-0">
-                    <h3 className="mb-3 text-2xl font-primary">Stay in the loop</h3>
+                    <h3 className="mb-3 text-2xl font-semibold font-primary">Stay in the loop</h3>
                     <p className="max-w-md 2xl:max-w-xl font-secondary text-[15px]">Join our mailing list to stay in the loop with our newest feature releases, NFT drops, and tips and tickets for navigating Musixverse.</p>
                 </div>
                 {/* Right div */}
@@ -46,6 +48,9 @@ export default function StayInLoop(){
                                 rel="noopener noreferrer"
                             >
                                 <Image src={instagram} width={20} height={20} alt="instagram"></Image>
+                            </a>
+                            <a className="flex items-center justify-center p-2 rounded-md bg-dark-100" href="https://www.facebook.com/Musixverse-104390125641359" target={"_blank"} rel="noopener noreferrer">
+                                <Image src={facebook} width={20} height={20} alt="facebook"></Image>
                             </a>
                         </div>
                     </div>

@@ -28,16 +28,15 @@ export default function HomePage_section4() {
                             <br />
                             tap the button below
                         </p>
-                        <div className="max-w-xs mt-6">
-                            <a
-                                className="px-8 py-3 text-xs text-white bg-primary-200 hover:bg-primary-300 font-primary rounded-xl"
-                                href="cfh/cfb"
-                                target={"_blank"}
-                                rel="noopener noreferrer"
-                            >
+                        <a
+                            href="cfh/cfb"
+                            target={"_blank"}
+                            rel="noopener noreferrer"
+                        >
+                            <button className="px-8 py-3 mt-6 text-xs text-white bg-primary-200 hover:bg-primary-300 font-primary rounded-xl">
                                 Join Musixverse Community
-                            </a>
-                        </div>
+                            </button>
+                        </a>
                     </div>
                     <div className="items-end">
                         <div className={styles["newsletter__social"]}>

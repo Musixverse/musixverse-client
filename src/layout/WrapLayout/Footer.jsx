@@ -16,8 +16,8 @@ const Footer = () => {
                 <div className="flex flex-col justify-between w-full mt-3 space-y-2 md:mt-2 md:space-y-0 md:items-center md:flex-row">
                     <p className="text-xs font-primary">Copyright ©2022 Musixverse. All rights reserved.</p>
                     <div className="flex space-x-4 text-xs align-top font-primary">
-                        <div>Terms and Conditions</div>
-                        <div>Privacy Policy</div>
+                        {/* <div>Terms and Conditions</div>
+                        <div>Privacy Policy</div> */}
                         <Link href="https://discord.com/invite/rXKb7rCqjG" passHref={true}>
                             <a target="_blank" rel="noopener noreferrer" className="hover:text-primary-200">
                                 Discord

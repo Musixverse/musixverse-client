@@ -30,11 +30,11 @@ export default function HomePage_section4() {
                         <div className="max-w-xs mt-6">
                             <a
                                 className="px-8 py-3 text-xs text-white bg-primary-200 hover:bg-primary-300 font-primary rounded-xl"
-                                href="https://discord.gg/sCxZyJmW"
+                                href="cfh/cfb"
                                 target={"_blank"}
                                 rel="noopener noreferrer"
                             >
-                                Join Discord Community
+                                Join Musixverse Community
                             </a>
                         </div>
                     </div>

@@ -1,9 +1,5 @@
-.background-image-div{
+.background-div{
     @apply absolute -z-[1] w-full h-full flex;
-}
-
-.background-image-div__image{
-    @apply w-full h-full;
 }
 
 .hero-section-container{

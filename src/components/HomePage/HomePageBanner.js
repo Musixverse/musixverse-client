@@ -7,15 +7,23 @@ export default function Banner() {
     const { theme } = useTheme();
     return (
         /* Outer div for bg blur */
-        <div className={"bg-[url('/assets/homepage/desk.png')] bg-cover bg-no-repeat bg-center "+styles["hero-section-container"]}>
+        <div className={styles["hero-section-container"]}>
+            {/* "bg-[url('/assets/homepage/desk.png')] bg-cover bg-no-repeat bg-center " */}
             {/* For bg image */}
-            {/* <div className={styles["background-image-div"]}>
+            <div className={styles["background-div"]}>
+                <video 
+                    src={theme === "dark" ? "/assets/homepage/dark_video.mp4" : "/assets/homepage/light_video.mp4"} 
+                    className="hidden object-cover w-full h-full md:block" 
+                    loop 
+                    muted 
+                    autoPlay
+                ></video>
                 <img
                     src={theme === "dark" ? "/assets/homepage/home_dark.png" : "/assets/homepage/home_light.png"}
-                    className={styles["background-image-div__image"]}
+                    className={"md:hidden w-full h-full object-cover"}
                     alt="background image"
                 ></img>
-            </div> */}
+            </div>
             {/* <div className="mt-8"> */}
             {/* Inner div for content */}
             <div className={"text-white dark:text-white mt-48 " + styles["hero-section-container__content-div"]}>

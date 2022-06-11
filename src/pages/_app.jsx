@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { ThemeProvider } from "next-themes";
-import { useEffect } from "react";
 import { useRouter } from "next/router";
 import * as ga from "../../lib/google-analytics";
 import StatusContext from "../../store/status-context";

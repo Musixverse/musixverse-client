@@ -14,13 +14,20 @@ export default function Banner() {
             {/* For bg image */}
             <div className={styles["background-div"]}>
                 <video 
-                    src={theme === "dark" ? "/assets/homepage/dark_video.mp4" : "/assets/homepage/light_video.mp4"} 
+                    src={theme === "dark" ? "/assets/homepage/dark_video.mp4" : "/assets/homepage/light_video_layered.mp4"} 
                     className="hidden object-cover w-full h-full md:block" 
                     loop 
                     muted 
                     autoPlay
                 ></video>
-                <div className="md:hidden">
+                <video 
+                    src={theme === "dark" ? "/assets/homepage/dark_video_mobile.mp4" : "/assets/homepage/light_video_mobile.mp4"} 
+                    className="block object-cover w-full h-full md:hidden" 
+                    loop 
+                    muted 
+                    autoPlay
+                ></video>
+                {/* <div className="md:hidden">
                     <Image 
                         src={
                             theme === "dark" ? 
@@ -31,7 +38,7 @@ export default function Banner() {
                         layout="fill"
                         priority
                     ></Image>
-                </div>
+                </div> */}
                 {/* <img
                     src={theme === "dark" ? "/assets/homepage/home_dark.png" : "/assets/homepage/home_light.png"}
                     className={"md:hidden w-full h-full object-cover"}

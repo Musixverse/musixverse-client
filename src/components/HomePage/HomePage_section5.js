@@ -24,8 +24,9 @@ export default function HomePage_section4() {
                 <div className={styles["section2__card--innercard"]}>
                     <div className="flex flex-col">
                         <p className="text-xs font-normal md:text-sm dark:text-dark-200 font-secondary">
-                            To Know more about the Musixverse Community<br />
-                            Tap the button below
+                            To know more about the Musixverse Community,
+                            <br />
+                            tap the button below
                         </p>
                         <div className="max-w-xs mt-6">
                             <a
@@ -42,13 +43,13 @@ export default function HomePage_section4() {
                         <div className={styles["newsletter__social"]}>
                             <a
                                 className="flex items-center justify-center p-2 rounded-md bg-dark-100"
-                                href="https://discord.gg/sCxZyJmW"
+                                href="https://discord.com/invite/rXKb7rCqjG"
                                 target={"_blank"}
                                 rel="noopener noreferrer"
                             >
                                 <Image src={discord} width={20} height={20} alt="discord"></Image>
                             </a>
-                            {/* <a className="flex items-center justify-center p-2 rounded-md bg-dark-100" href="https://discord.gg/sCxZyJmW" target={"_blank"} rel="noopener noreferrer">
+                            {/* <a className="flex items-center justify-center p-2 rounded-md bg-dark-100" href="https://discord.com/invite/rXKb7rCqjG" target={"_blank"} rel="noopener noreferrer">
                                 <Image src={facebook} width={20} height={20} alt="facebook"></Image>
                             </a> */}
                             <a
@@ -67,7 +68,12 @@ export default function HomePage_section4() {
                             >
                                 <Image src={instagram} width={20} height={20} alt="instagram"></Image>
                             </a>
-                            <a className="flex items-center justify-center p-2 rounded-md bg-dark-100" href="https://www.facebook.com/Musixverse-104390125641359" target={"_blank"} rel="noopener noreferrer">
+                            <a
+                                className="flex items-center justify-center p-2 rounded-md bg-dark-100"
+                                href="https://www.facebook.com/Musixverse-104390125641359"
+                                target={"_blank"}
+                                rel="noopener noreferrer"
+                            >
                                 <Image src={facebook} width={20} height={20} alt="facebook"></Image>
                             </a>
                         </div>

@@ -15,7 +15,7 @@ body {
     padding: 0;
     margin: 0;
     @apply font-primary;
-    @apply bg-light-200 dark:bg-dark-100 scroll-smooth;
+    @apply bg-light-100 dark:bg-dark-100 scroll-smooth;
     @apply text-dark-100 dark:text-light-100;
     z-index: -2 !important;
 }

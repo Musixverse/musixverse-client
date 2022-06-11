@@ -1,7 +1,9 @@
 import styles from "../../../styles/HomePage/heroSection.module.css";
 import { useTheme } from "next-themes";
 import StayInLoop from "./HomePageUtils/StayInLoop";
-
+import Image from "next/image";
+import lightBanner from "../../../public/assets/homepage/home_light.png"
+import darkBanner from "../../../public/assets/homepage/home_dark.png"
 
 export default function Banner() {
     const { theme } = useTheme();
@@ -18,32 +20,41 @@ export default function Banner() {
                     muted 
                     autoPlay
                 ></video>
-                <img
+                <div className="md:hidden">
+                    <Image 
+                        src={
+                            theme === "dark" ? 
+                            darkBanner : lightBanner
+                        } 
+                        alt="banner image"
+                        objectFit="cover"
+                        layout="fill"
+                        priority
+                    ></Image>
+                </div>
+                {/* <img
                     src={theme === "dark" ? "/assets/homepage/home_dark.png" : "/assets/homepage/home_light.png"}
                     className={"md:hidden w-full h-full object-cover"}
                     alt="background image"
-                ></img>
+                ></img> */}
             </div>
             {/* <div className="mt-8"> */}
             {/* Inner div for content */}
-            <div className={"text-white dark:text-white mt-48 " + styles["hero-section-container__content-div"]}>
-                <h1 className={styles["hero-section-container__content-div--heading"]}>
-                    We&apos;re Coming Soon!
-                </h1>
+            <div className={"text-white dark:text-white mt-52 " + styles["hero-section-container__content-div"]}>
+                <h1 className={styles["hero-section-container__content-div--heading"]}>We&apos;re Coming Soon!</h1>
                 <p className={styles["hero-section-container__content-div--description"]}>
-                    Musixverse will bring together artists and fans like never before, help them do great things together, and empower each other in the
-                    process.
+                    Musixverse will bring together artists and fans like never before, help them do great things, and empower each other in the process.
                 </p>
                 <a
                     className="px-5 py-3 text-xs text-white bg-primary-200 hover:bg-primary-300 font-primary rounded-3xl"
-                    href="https://discord.gg/sCxZyJmW"
+                    href="https://discord.com/invite/rXKb7rCqjG"
                     target={"_blank"}
                     rel="noopener noreferrer"
                 >
                     Join the Discord Community
                 </a>
             </div>
-            <StayInLoop/>
+            <StayInLoop />
             {/* </div> */}
         </div>
     );

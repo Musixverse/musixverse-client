@@ -34,14 +34,11 @@ export default function CFB5() {
                     <div className={styles["cfb5__social"]}>
                         <a
                             className="flex items-center justify-center p-2 rounded-md bg-dark-100"
-                            href="https://discord.gg/sCxZyJmW"
+                            href="https://discord.com/invite/rXKb7rCqjG"
                             target={"_blank"}
                             rel="noopener noreferrer"
                         >
                             <Image src={discord} width={20} height={20} alt="discord"></Image>
-                        </a>
-                        <a className="flex items-center justify-center p-2 rounded-md bg-dark-100" href="https://www.facebook.com/Musixverse-104390125641359" target={"_blank"} rel="noopener noreferrer">
-                            <Image src={facebook} width={20} height={20} alt="facebook"></Image>
                         </a>
                         <a
                             className="flex items-center justify-center p-2 rounded-md bg-dark-100"
@@ -58,6 +55,14 @@ export default function CFB5() {
                             rel="noopener noreferrer"
                         >
                             <Image src={instagram} width={20} height={20} alt="instagram"></Image>
+                        </a>
+                        <a
+                            className="flex items-center justify-center p-2 rounded-md bg-dark-100"
+                            href="https://www.facebook.com/Musixverse-104390125641359"
+                            target={"_blank"}
+                            rel="noopener noreferrer"
+                        >
+                            <Image src={facebook} width={20} height={20} alt="facebook"></Image>
                         </a>
                     </div>
                 </div>

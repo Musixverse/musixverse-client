@@ -31,7 +31,7 @@ export default function Section2New() {
                         imageSrc={bar2}
                         statsFirst={"NEW ARTIST"}
                         statsLast={"DISCOVERY"}
-                        statsDetail={"Is increasing difficult with hundreds of new artists releasing music every single day"}
+                        statsDetail={"Is increasingly difficult with hundreds of new artists releasing music every single day"}
                     />
                     <Statsbar
                         imageSrc={bar3}
@@ -46,7 +46,8 @@ export default function Section2New() {
                 <Image src={singer} alt="singer" objectFit="contain" priority></Image>
                 <a href="#section_3">
                     <button className="absolute bottom-1/4 left-[12px] md:left-[28px]">
-                        <img src="/assets/homepage/dropdown_arrow_red.svg" className="w-[50px] h-[50px]" alt="circle dropdown" />
+                        <Image src="/assets/homepage/dropdown_arrow_red.svg" width={50} height={50} alt="circle dropdown"></Image>
+                        {/* <img src="/assets/homepage/dropdown_arrow_red.svg" className="w-[50px] h-[50px]" alt="circle dropdown" /> */}
                     </button>
                 </a>
             </div>

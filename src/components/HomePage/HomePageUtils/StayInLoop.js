@@ -15,7 +15,7 @@ export default function StayInLoop() {
                 <div className="mb-5 sm:mb-3 text-light-100 lg:mb-0">
                     <h3 className="mb-3 text-2xl font-semibold font-primary">Stay in the loop</h3>
                     <p className="max-w-md 2xl:max-w-xl font-secondary text-[15px]">
-                        Join our mailing list to stay in the loop with our newest feature releases, NFT drops, and tips and tickets for navigating Musixverse.
+                        Join our mailing list to stay in the loop with our newest feature releases, NFT drops, and tips and tricks for navigating Musixverse.
                     </p>
                 </div>
                 {/* Right div */}

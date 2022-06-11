@@ -20,32 +20,32 @@ export default function StayInLoop() {
                 </div>
                 {/* Right div */}
                 <div className="flex flex-col items-center justify-between sm:flex-row lg:items-end lg:flex-col">
-                    <div className="flex flex-col self-start sm:self-end md:flex-row">
-                        <form action="https://musixverse.us14.list-manage.com/subscribe/post" method="POST">
-                            <input type="hidden" name="u" value="526b30ef38873ddc8b5b707b2" />
-                            <input type="hidden" name="id" value="895279b10e" />
+                    <form
+                        className="flex flex-col self-start sm:self-end md:flex-row"
+                        action="https://musixverse.us14.list-manage.com/subscribe/post"
+                        method="POST"
+                    >
+                        <input type="hidden" name="u" value="526b30ef38873ddc8b5b707b2" />
+                        <input type="hidden" name="id" value="895279b10e" />
 
-                            <div className="w-full sm:max-w-xl">
-                                <input
-                                    type="email"
-                                    name="MERGE0"
-                                    id="MERGE0"
-                                    spellCheck={false}
-                                    autoCapitalize="off"
-                                    autoCorrect="off"
-                                    className="py-3 pl-4 pr-4 text-sm rounded-lg outline-none sm:pr-20 md:pr-24 2xl:pr-32 font-primary bg-dark-100 text-light-100"
-                                    placeholder="Your email address"
-                                    required
-                                ></input>
-                                <button
-                                    type="submit"
-                                    className="py-2 mt-3 font-semibold rounded md:mt-0 md:ml-3 px-7 bg-light-100 hover:bg-light-200 dark:text-dark-100"
-                                >
-                                    Subscribe
-                                </button>
-                            </div>
-                        </form>
-                    </div>
+                        <input
+                            type="email"
+                            name="MERGE0"
+                            id="MERGE0"
+                            spellCheck={false}
+                            autoCapitalize="off"
+                            autoCorrect="off"
+                            className="py-3 px-4 text-sm rounded-lg outline-none sm:w-[267px] md:w-[283px] 2xl:w-[315px] font-primary bg-dark-100 text-light-100"
+                            placeholder="Your email address"
+                            required
+                        ></input>
+                        <button
+                            type="submit"
+                            className="max-w-[137px] py-2 mt-3 font-semibold rounded md:mt-0 md:ml-3 px-7 bg-light-100 hover:bg-light-200 dark:text-dark-100"
+                        >
+                            Subscribe
+                        </button>
+                    </form>
                     <div className="self-start mt-3 sm:mt-0 lg:mt-4 lg:self-end md:self-center">
                         <p className="mb-1 lg:hidden font-secondary text-light-100">Join the Community</p>
                         <div className={styles["newsletter__social"]}>

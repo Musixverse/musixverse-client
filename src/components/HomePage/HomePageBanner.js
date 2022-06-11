@@ -19,6 +19,7 @@ export default function Banner() {
                     loop 
                     muted 
                     autoPlay
+                    playsInline
                 ></video>
                 <video 
                     src={theme === "dark" ? "/assets/homepage/dark_video_mobile.mp4" : "/assets/homepage/light_video_mobile.mp4"} 
@@ -26,6 +27,7 @@ export default function Banner() {
                     loop 
                     muted 
                     autoPlay
+                    playsInline
                 ></video>
                 {/* <div className="md:hidden">
                     <Image 

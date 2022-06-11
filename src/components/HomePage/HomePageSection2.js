@@ -31,7 +31,7 @@ export default function Section2New() {
                         imageSrc={bar2}
                         statsFirst={"NEW ARTIST"}
                         statsLast={"DISCOVERY"}
-                        statsDetail={"Is increasingly difficult with hundreds of new artists releasing music every single day"}
+                        statsDetail={"Is increasingly difficult with hundreds of new artists releasing music every single day."}
                     />
                     <Statsbar
                         imageSrc={bar3}

@@ -15,8 +15,9 @@ body {
     padding: 0;
     margin: 0;
     @apply font-primary;
-    @apply bg-light-200;
-    @apply text-dark-100 lg:overflow-hidden;
+    @apply bg-light-100 dark:bg-dark-100 scroll-smooth;
+    @apply text-dark-100 dark:text-light-100;
+    z-index: -2 !important;
 }
 
 a {
@@ -33,5 +34,13 @@ a {
 /**************************************************************************/
 
 .navbar {
-    @apply fixed top-0 z-10 w-full bg-nav-light backdrop-blur-2xl backdrop-brightness-150;
+    @apply bg-nav-light pl-6 pr-4 sm:px-6 py-1 backdrop-blur-2xl backdrop-brightness-150 dark:bg-nav-dark dark:backdrop-blur-xl dark:backdrop-brightness-105 fixed w-full z-40 top-0;
+}
+
+/**************************************************************************/
+/*****************************    Footer   ********************************/
+/**************************************************************************/
+
+.footer {
+    @apply w-full max-w-[1920px] pb-20 px-10 md:px-8 lg:px-16 xl:px-20 2xl:px-36 bg-nav-light backdrop-blur-2xl backdrop-brightness-150;
 }

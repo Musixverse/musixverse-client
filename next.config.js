@@ -10,7 +10,5 @@ module.exports = withPWA({
     },
     images: {
         domains: ["img.icons8.com"],
-        loader: "akamai",
-        path: "",
     },
 });

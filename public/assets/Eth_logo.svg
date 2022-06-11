@@ -1,0 +1,23 @@
+<svg id="Ethereum_logo_2014" xmlns="http://www.w3.org/2000/svg" width="129.99" height="187.634" viewBox="0 0 129.99 187.634">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #868686;
+      }
+
+      .cls-2 {
+        fill: #fff;
+      }
+
+      .cls-3 {
+        fill: #636363;
+      }
+    </style>
+  </defs>
+  <path id="Path_704" data-name="Path 704" class="cls-1" d="M126.585,0l-1.419,4.276V128.343l1.419,1.256,64.976-34.042Z" transform="translate(-61.609)"/>
+  <path id="Path_705" data-name="Path 705" class="cls-2" d="M64.976,0,0,95.557,64.976,129.6V0Z"/>
+  <path id="Path_706" data-name="Path 706" class="cls-1" d="M127.186,270.611l-.8.865v44.2l.8,2.071L192.2,236.587Z" transform="translate(-62.21 -130.109)"/>
+  <path id="Path_707" data-name="Path 707" class="cls-2" d="M64.976,317.74V270.609L0,236.585Z" transform="translate(0 -130.108)"/>
+  <path id="Path_708" data-name="Path 708" class="cls-3" d="M127.961,214.377l64.975-34.041-64.975-26.177Z" transform="translate(-62.985 -84.778)"/>
+  <path id="Path_709" data-name="Path 709" class="cls-1" d="M0,180.336l64.975,34.041V154.159Z" transform="translate(0 -84.778)"/>
+</svg>

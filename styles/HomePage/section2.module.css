@@ -1,0 +1,7 @@
+.section2-container{
+    @apply flex flex-col items-center justify-center w-full mt-24 lg:justify-between lg:flex-row bg-light-200;
+}
+
+.section2-container__grid-image{
+    @apply lg:mt-0 mt-20 w-[320px] h-[523px] md:w-[450px] md:h-[653px] flex items-center justify-center;
+}

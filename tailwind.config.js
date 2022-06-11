@@ -1,12 +1,20 @@
-const defaultTheme = require('tailwindcss/defaultTheme')
-
 module.exports = {
-    content: ["./src/pages/**/*.{js,ts,jsx,tsx}", "./src/components/**/*.{js,ts,jsx,tsx}"],
+    mode: "jit",
+    content: ["./src/pages/**/*.{js,ts,jsx,tsx}", "./src/components/**/*.{js,ts,jsx,tsx}", "./src/layout/**/*.{js,ts,jsx,tsx}"],
     darkMode: "class",
     theme: {
         extend: {
-            padding:{
-                'responsive':'clamp(100px, calc(6.25rem + ((1vw - 10.24px) * 12.2768)), 210px)',
+            width: {
+                responsive: "clamp(367px, calc(22.9375rem + ((1vw - 4.28px) * 45.7775)), 1050px)",
+            },
+            padding: {
+                responsive: "clamp(75px, calc(4.6875rem + ((1vw - 10.28px) * 12.3318)), 185px)",
+                dashboardNav: "clamp(100px, calc(6.25rem + ((1vw - 10.28px) * 10.3139)), 192px)",
+                // 'responsive':'clamp(100px, calc(6.25rem + ((1vw - 10.24px) * 12.2768)), 210px)',
+            },
+            margin: {
+                responsive: "clamp(75px, calc(4.6875rem + ((1vw - 10.28px) * 12.3318)), 185px)",
+                // 'responsive':'clamp(100px, calc(6.25rem + ((1vw - 10.24px) * 12.2768)), 210px)',
             },
             colors: {
                 primary: {
@@ -29,9 +37,9 @@ module.exports = {
                     200: "#FFAA01",
                 },
                 error: {
-                    100: "#EF5757",
-                    200: "#D60202",
-                    300: "#A60000",
+                    100: "#ff5555",
+                    200: "#f33f36",
+                    300: "#d80f23",
                 },
                 nav: {
                     light: "rgba(255, 255, 255, 0.4)",
@@ -51,7 +59,10 @@ module.exports = {
                 replace2: ["Open Sans", "sans-serif"],
                 replace3: ["Inter", "sans-serif"],
             },
+            fontSize: {
+                pricing: "clamp(1.75rem, 1.6456rem + 0.4453vw, 2.18rem)",
+            },
         },
     },
-    plugins: [require("@tailwindcss/forms")],
+    plugins: [],
 };

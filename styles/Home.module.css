@@ -1,15 +1,15 @@
 .home__container {
-    @apply overflow-hidden md:h-screen w-screen pt-10 pl-16 md:pt-20 md:pl-24 md:pr-0 md:-mr-32;
+    @apply flex h-screen justify-center items-center text-center;
 }
 
 .home__main {
-    @apply m-auto max-w-screen-2xl md:w-11/12 px-8 py-24 text-center;
+    @apply m-auto;
 }
 
 .home__title {
-    @apply text-6xl font-primary font-semibold mb-2;
+    @apply text-6xl font-semibold mb-2;
 }
 
 .home__description {
-    @apply text-base;
+    @apply text-lg;
 }

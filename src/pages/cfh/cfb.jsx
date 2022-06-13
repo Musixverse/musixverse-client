@@ -15,11 +15,11 @@ const CFB = ({}) => {
             </Head>
 
             <div className="flex flex-col items-center justify-center w-full bg-light-200 dark:bg-dark-200">
-                <div className="w-full max-w-[1920px]">
+                <div className="overflow-x-hidden w-full max-w-[1920px]">
                     <BannerCFB />
                     <CFB1 />
                     {/* <CFB2 /> */}
-                    <CFB3 />
+                    {/* <CFB3 /> */}
                     <CFB4 />
                     <CFB5 />
                 </div>

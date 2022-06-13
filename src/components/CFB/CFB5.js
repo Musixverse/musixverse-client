@@ -10,23 +10,23 @@ import instagram from "../../../public/assets/social/instagram.svg";
 export default function CFB5() {
     return (
         <div className={styles["cfb5__container"]}>
-            <div className={"dark:bg-dark-100 " + styles["cfb5__card"]}>
+            <div className={styles["cfb5__card"]}>
                 <div className="self-start lg:self-center">
-                    <h1 className="text-3xl font-semibold font-primary">Get Started</h1>
-                    <p className="mt-2 text-sm font-secondary">For more details, you can contact us at</p>
-                    <a href="mailto:contact@musixverse.com" className="text-sm font-primary text-primary-200">
+                    <h1 className="text-3xl font-semibold dark:text-dark-100 font-primary">Get Started</h1>
+                    <p className="mt-2 text-sm font-secondary dark:text-dark-100">For more details, you can contact us at</p>
+                    <a href="mailto:contact@musixverse.com" className="block text-sm font-primary text-primary-200">
                         contact@musixverse.com
                     </a>
 
-                    <p className="py-4 text-sm font-secondary">
+                    {/* <p className="py-4 text-sm font-secondary">
                         Tap the button to join the Musixverse
                         <br />
                         Community Feedback Board (CFB)
-                    </p>
+                    </p> */}
                     <Link href="https://cfbmusixverse.paperform.co/" passHref={true}>
                         <a target="_blank" rel="noopener noreferrer">
-                            <button className="px-20 py-3 mt-2 text-xs text-white bg-primary-200 hover:bg-primary-300 font-primary rounded-xl">
-                                Join the CFB now!
+                            <button className="px-8 py-3 mt-5 text-xs text-white bg-primary-200 hover:bg-primary-300 font-primary rounded-xl">
+                                Click here join the Community Feedback Board
                             </button>
                         </a>
                     </Link>
@@ -34,15 +34,12 @@ export default function CFB5() {
                     <div className={styles["cfb5__social"]}>
                         <a
                             className="flex items-center justify-center p-2 rounded-md bg-dark-100"
-                            href="https://discord.gg/sCxZyJmW"
+                            href="https://discord.com/invite/rXKb7rCqjG"
                             target={"_blank"}
                             rel="noopener noreferrer"
                         >
                             <Image src={discord} width={20} height={20} alt="discord"></Image>
                         </a>
-                        {/* <a className="flex items-center justify-center p-2 rounded-md bg-dark-100" href="https://discord.gg/sCxZyJmW" target={"_blank"} rel="noopener noreferrer">
-                            <Image src={facebook} width={20} height={20} alt="facebook"></Image>
-                        </a> */}
                         <a
                             className="flex items-center justify-center p-2 rounded-md bg-dark-100"
                             href="https://twitter.com/musixverse"
@@ -58,6 +55,14 @@ export default function CFB5() {
                             rel="noopener noreferrer"
                         >
                             <Image src={instagram} width={20} height={20} alt="instagram"></Image>
+                        </a>
+                        <a
+                            className="flex items-center justify-center p-2 rounded-md bg-dark-100"
+                            href="https://www.facebook.com/Musixverse-104390125641359"
+                            target={"_blank"}
+                            rel="noopener noreferrer"
+                        >
+                            <Image src={facebook} width={20} height={20} alt="facebook"></Image>
                         </a>
                     </div>
                 </div>

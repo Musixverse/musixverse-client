@@ -2,7 +2,7 @@ import { useContext } from "react";
 import StatusContext from "../../../store/status-context";
 
 const SuccessBox = () => {
-    const[, success, setSuccess, ] = useContext(StatusContext);
+    const [, success, setSuccess] = useContext(StatusContext);
     const handleClose = () => {
         setSuccess((prevState) => ({
             ...prevState,

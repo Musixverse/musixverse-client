@@ -1,24 +1,24 @@
-.HomePage_section3__container{
-    @apply mb-24;
+.HomePage_section3__container {
+    @apply pt-24 mb-24;
 }
 
-.section3__card{
-    @apply flex flex-col w-full p-8 bg-white rounded-2xl sm:p-4 sm:pb-10 ;
+.section3__card {
+    @apply flex flex-col xl:h-[400px] w-full p-8 bg-white rounded-2xl sm:p-4 sm:pb-10;
 }
 
-.section3__card--innercard{
-    @apply flex flex-col items-center justify-center p-8 rounded-2xl bg-[url('../../public/assets/CFB/section.png')];
+.section3__card--innercard {
+    @apply flex flex-col md:h-[200px] xl:h-[200px] items-center justify-center p-8 rounded-2xl bg-[url('../../public/assets/CFB/sectionM.png')] sm:bg-[url('../../public/assets/CFB/sectionT.png')] lg:bg-[url('../../public/assets/CFB/sectionD.png')];
     @apply text-white bg-no-repeat bg-cover;
 }
 
-.section3__card--innercard2{
+.section3__card--innercard2 {
     @apply w-[1/3] flex flex-col max-w-xs;
 }
 
-.section3__card--innercard2 h1{
+.section3__card--innercard2 h1 {
     @apply text-xl font-tertiary lg:text-2xl;
 }
 
-.section3__card--innercard2 p{
+.section3__card--innercard2 p {
     @apply text-xs font-secondary lg:text-sm;
 }

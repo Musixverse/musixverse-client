@@ -3,7 +3,7 @@ import styles from "../../../styles/HomePage/section4.module.css";
 
 export default function HomePage_section3() {
     return (
-        <div className={styles["HomePage_section3__container"]}>
+        <div id="section_4" className={styles["HomePage_section3__container"]}>
             <div className={"dark:bg-dark-100 " + styles["section3__card"]}>
                 <div className={styles["section3__card--innercard"]}>
                     <p className="pb-4 text-xl font-semibold text-center font-primary md:text-3xl">Introducing Musixverse</p>
@@ -30,7 +30,7 @@ export default function HomePage_section3() {
                         <h1>CONNECTION BEYOND BOUNDS</h1>
                         <p>
                             Artists will know who their “real” fans are, and they can give back to their fans in any number of ways. Airdrop concert tickets,
-                            share exclusive merch directly with fans, or jump on private chats with the artist…. Possibilities are limitless.
+                            share exclusive merch directly with fans, or jump on private chats with your most loyal fans... Possibilities are limitless
                         </p>
                     </div>
                 </div>

@@ -3,7 +3,7 @@ import styles from "../../../styles/CFB/CFB1.module.css";
 
 export default function CFB1() {
     const scrollToRef = () => {
-        window.scrollTo(0, 400);
+        window.scrollTo(0, 500);
     };
 
     return (

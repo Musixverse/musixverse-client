@@ -5,7 +5,7 @@ const notanartist = ({}) => {
     return (
         <>
             <Head>
-                <title>Musixverse | Create NFT</title>
+                <title>Musixverse | Not an Artist</title>
                 <meta name="description" content="Musixverse" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>

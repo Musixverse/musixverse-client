@@ -1,9 +1,8 @@
-import Image from "next/image";
 import DetailsInputGroup from "./DetailsInputGroup";
-import uploadImage from "../../../../public/assets/create-nft/upload-image.svg";
-import uploadMusic from "../../../../public/assets/create-nft/upload-music.svg";
+import ImageUpload from "./ImageUpload";
+import AudioUpload from "./AudioUpload";
 
-export default function Step1Form({setUploadedImage, setUploadedSong, nftName, setNftName, nftPrice, setNftPrice}){
+export default function Step1Form({setUploadedImage, setUploadedSong, nftName, setNftName}){
     return(
         <div className="flex space-x-20 flex-2 lg:flex-row">
             {/* Details */}
@@ -46,26 +45,9 @@ export default function Step1Form({setUploadedImage, setUploadedSong, nftName, s
             <div>
                 <p className="mb-10 font-semibold">UPLOADS</p>
                 {/* UPLOAD NFT ASSETS */}
-                <input accept="image/*" type="file" required className="hidden" id="uploadedNftImage"/>
-                <label className="flex items-center w-full p-2 pr-16 space-x-5 rounded-lg cursor-pointer bg-light-100" htmlFor="uploadedNftImage">
-                    <div className="flex items-center justify-center w-[65px] h-[65px] rounded-lg bg-light-300">
-                        <Image src={uploadImage} objectFit="contain" alt="upload image art digital illustration"></Image>
-                    </div>
-                    <div className="font-secondary">
-                        <h3 className="font-semibold">UPLOAD COVER ART</h3>
-                        <p className="text-sm">Recommended size: 300px X 300px</p>
-                    </div>
-                </label>
-                <input accept="audio/*" type="file" required className="hidden" id="uploadedNftAudio"/>
-                <label className="flex items-center w-full p-2 pr-16 mt-5 space-x-5 rounded-lg cursor-pointer bg-light-100" htmlFor="uploadedNftAudio">
-                    <div className="flex items-center justify-center w-[65px] h-[65px] rounded-lg bg-light-300">
-                        <Image src={uploadMusic} objectFit="contain" alt="upload image art digital illustration"></Image>
-                    </div>
-                    <div className="font-secondary">
-                        <h3 className="font-semibold">UPLOAD AUDIO FILE</h3>
-                        <p className="text-sm">Recommended minimum size: 10MB</p>
-                    </div>
-                </label>
+                <ImageUpload setUploadedImage={setUploadedImage}/>
+
+                <AudioUpload setUploadedSong={setUploadedSong}/>
 
                 {/* SHARE LINKS */}
                 <p className="mt-16 mb-3 font-semibold font-secondary">TRACK LINKS</p>

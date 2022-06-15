@@ -25,49 +25,39 @@ const PricingAndSplits = () => {
     };
 
     return (
-       <div className="flex flex-col min-h-screen">
-            <div className="text-2xl font-secondary text-gray-500">Step {step} of {step}</div>
-            <div className="flex justify-evenly items-start pt-20">
-                {/* 1st Column */}
-                <div className="min-w-[30%]">PREVIEW NFT</div>
-                
+       <div className="flex flex-col space-x-20 flex-2 min-h-screen">
+            <div className="flex justify-evenly items-start font-semibold font-secondary pt-20">
                 {/* 2nd Column */}
-                <div className="flex flex-col w-1/2 pr-14">
-                    <div className="flex flex-col mb-6">
-                        <span className="text-gray-900">ADD CONTRIBUTORS</span>
-                        <div className="mt-2 text-gray-700">
-                            <label className="inline-flex items-center cursor-pointer">
-                                <input
-                                    type="radio"
-                                    name="contributors"
-                                    value="Yes"
-                                    // checked={otherContributors}
-                                    // onChange={handleContributorsRadioChange}
-                                />
-                                <span className="ml-2">Yes</span>
-                            </label>
-                            <label className="inline-flex items-center cursor-pointer ml-6">
-                                <input
-                                    type="radio"
-                                    name="contributors"
-                                    value="No"
-                                    // checked={!otherContributors}
-                                    // onChange={handleContributorsRadioChange}
-                                />
-                                <span className="ml-2">No</span>
-                            </label>
+                <div className="flex flex-col">
+                    <div className="flex flex-col mb-10">
+                        <span>ADD CONTRIBUTORS</span>
+                        <div className="flex items-center mt-2 space-x-10">
+                            <div className="flex items-center">
+                                <input id="contributorsyes" type="radio" name="radio" defaultChecked className="hidden" />
+                                <label htmlFor="contributorsyes" className="flex items-center text-sm font-normal cursor-pointer font-secondary">
+                                    <span className="inline-block w-6 h-6 mr-1 border-2 rounded-full border-[#363636] flex-no-shrink"></span>
+                                    Yes
+                                </label>
+                            </div>
+                            <div className="flex items-center">
+                                <input id="contributorsno" type="radio" name="radio" className="hidden" />
+                                <label htmlFor="contributorsno" className="flex items-center text-sm font-normal cursor-pointer font-secondary">
+                                    <span className="inline-block w-6 h-6 mr-1 border-2 rounded-full border-[#363636] flex-no-shrink"></span>
+                                    No
+                                </label>
+                            </div>
                         </div>
                     </div>
 
                     <div className="flex flex-col mb-6">
-                        <span className="text-gray-900">ADD CONTRIBUTORS AND SPLITS</span>
-                        <div className="mt-2 flex gap-4 text-gray-700">
+                        <span>ADD CONTRIBUTORS AND SPLITS</span>
+                        <div className="mt-2 flex flex-col gap-4 text-gray-700">
                             {ContributorList.map((x, i) => {
                                 return (
                                     <div key={i} className="flex gap-4">
-                                        <div>
+                                        <div className="flex-1">
                                             <input
-                                                className="appearance-none w-full bg-white text-gray-700 border-2 border-gray-400 rounded py-2 px-3 leading-tight focus:outline-none shadow-sm focus:bg-white focus:border-primary-100"
+                                                className="dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-100 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-100"
                                                 id="contributor-name"
                                                 name="ContributorName"
                                                 type="text"
@@ -76,9 +66,9 @@ const PricingAndSplits = () => {
                                                 onChange={e => handleInputChange(e, i)}
                                             />
                                         </div>
-                                        <div>
+                                        <div className="flex-2">
                                             <input
-                                                className="appearance-none w-full bg-white text-gray-700 border-2 border-gray-400 rounded py-2 px-3 leading-tight focus:outline-none shadow-sm focus:bg-white focus:border-primary-100"
+                                                className="dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-100 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-100"
                                                 name="Split"
                                                 type="number"
                                                 placeholder="Split %"
@@ -97,22 +87,22 @@ const PricingAndSplits = () => {
                         {/* Button to add more contributors */}
                         {ContributorList.length < 4 && 
                             <div className="flex mt-4 justify-start items-center">
-                                <button className="rounded-full flex justify-center items-center w-8 h-8 bg-primary-300 hover:bg-primary-400 text-white" onClick={handleAddClick}>+</button>
-                                <span className="text-sm pl-2 text-secondary">Add more Contributors</span>
+                                <button className="rounded-full flex justify-center items-center w-8 h-8 bg-[#479E00] hover:bg-primary-300 text-white" onClick={handleAddClick}>+</button>
+                                <span className="pl-2 font-normal text-sm">Add more Contributors</span>
                             </div>
                         }
                     </div> 
                 </div>
                 
                 {/* 3rd Column */}
-                <div className="flex flex-col w-1/2">
+                <div className="flex flex-col">
                     <div className="flex flex-wrap -mx-3 mb-6">
                         <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                            <label htmlFor="nft-copies" className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                            <label htmlFor="nft-copies" className="block uppercase tracking-wide mb-2">
                                 NO. OF COPIES
                             </label>
                             <input
-                                className="appearance-none w-full bg-white text-gray-700 border-2 border-gray-400 rounded py-2 px-3 leading-tight focus:outline-none shadow-sm focus:bg-white focus:border-primary-100"
+                                className="dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-100 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-100"
                                 id="nft-copies"
                                 // value={numberOfCopies}
                                 // onChange={(e) => {
@@ -125,11 +115,11 @@ const PricingAndSplits = () => {
                             />
                         </div>
                         <div className="w-full md:w-1/2 px-3">
-                            <label htmlFor="individual-nft-price" className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                            <label htmlFor="individual-nft-price" className="block uppercase tracking-wide mb-2">
                                 PRICE OF EACH COPY
                             </label>
                             <input
-                                className="appearance-none w-full bg-white text-gray-700 border-2 border-gray-400 rounded py-2 px-3 leading-tight focus:outline-none shadow-sm focus:bg-white focus:border-primary-100"
+                                className="dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-100 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-100"
                                 id="individual-nft-price"
                                 // value={nftPrice}
                                 // onChange={(e) => {
@@ -142,12 +132,12 @@ const PricingAndSplits = () => {
                             />
                         </div>
                     </div> 
-                    <div className="w-full">
-                        <label htmlFor="resale-royalty-percentage" className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                    <div className="w-full mb-6">
+                        <label htmlFor="resale-royalty-percentage" className="block uppercase tracking-wide mb-2">
                             RESALE ROYALTY PERCENTAGE
                         </label>
                         <input
-                            className="appearance-none w-full bg-white text-gray-700 border-2 border-gray-400 rounded py-2 px-3 leading-tight focus:outline-none shadow-sm focus:bg-white focus:border-primary-100"
+                            className="dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-100 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-100"
                             id="resale-royalty-percentage"
                             // value={resaleRoyaltyPercent}
                             // onChange={(e) => {
@@ -159,60 +149,37 @@ const PricingAndSplits = () => {
                             required
                         />
                     </div>
-                    <div className="flex flex-col mb-6 mt-4">
-                        <span className="text-gray-900">SCHEDULE LAUNCH</span>
-                        <div className="mt-2 text-gray-700">
-                            <label className="inline-flex items-center cursor-pointer">
-                                <input 
-                                    type="radio" 
-                                    name="release" 
-                                    value="Yes" 
-                                    // checked={releaseNow} 
-                                    // onChange={handleReleaseNowRadioChange} 
-                                />
-                                <span className="ml-2">Release Now</span>
-                            </label>
-                            <label className="inline-flex items-center cursor-pointer ml-6">
-                                <input 
-                                    type="radio" 
-                                    name="release" 
-                                    value="No" 
-                                    // checked={!releaseNow} 
-                                    // onChange={handleReleaseNowRadioChange} 
-                                />
-                                <span className="ml-2">Schedule for later</span>
-                            </label>
+                    <div className="flex flex-col mb-6">
+                        <span>SCHEDULE LAUNCH</span>
+                        <div className="flex items-center mt-2 space-x-10">
+                            <div className="flex items-center">
+                                <input id="release_now" type="radio" name="radio" defaultChecked className="hidden" />
+                                <label htmlFor="release_now" className="flex items-center text-sm font-normal cursor-pointer font-secondary">
+                                    <span className="inline-block w-6 h-6 mr-1 border-2 rounded-full border-[#363636] flex-no-shrink"></span>
+                                    Release now
+                                </label>
+                            </div>
+                            <div className="flex items-center">
+                                <input id="release_later" type="radio" name="radio" className="hidden" />
+                                <label htmlFor="release_later" className="flex items-center text-sm font-normal cursor-pointer font-secondary">
+                                    <span className="inline-block w-6 h-6 mr-1 border-2 rounded-full border-[#363636] flex-no-shrink"></span>
+                                    Schedule for later
+                                </label>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
             {/* Navigation Buttons */}
-            <div className="w-full flex justify-end items-center gap-4 pt-10">
-                <div>
-                    <button
-                        onClick={(e) => {
-                            e.preventDefault();
-                            otherContributors ? prevStep() : (prevStep(), prevStep());
-                        }}
-                        className="text-black text-md bg-light-300 hover:bg-search-300 font-primary rounded px-6 py-2"
-                    >
-                        Back
+            <div className="flex self-end space-x-3">
+                    {/* Reset and continue buttons */}
+                    <button className="rounded-md px-4 py-3 bg-[#D7E0DF] hover:bg-[#c9d1d0] text-sm font-primary font-bold">Back</button>
+                    <button className="flex items-center px-4 py-3 text-sm font-bold rounded-md hover:bg-primary-200 bg-primary-100 text-light-100 font-primary">
+                        Create
+                        <span className="ml-24 font-semibold material-symbols-outlined">arrow_right_alt</span>
                     </button>
                 </div>
-                <div>
-                    <button
-                        // onClick={(e) => {
-                        //     e.preventDefault();
-                        //     nftCreateFormOnSubmit();
-                        //     Router.push("/create-nft/review-details", undefined, { shallow: true });
-                        // }}
-                        className="text-white text-md bg-primary-200 hover:bg-primary-300 font-primary rounded px-6 py-2"
-                    >
-                        Create &nbsp; -&gt;
-                    </button>
-                </div>
-            </div>
        </div> 
     );    
 }

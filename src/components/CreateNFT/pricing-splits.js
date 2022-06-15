@@ -1,8 +1,17 @@
 import { useState } from "react";
 
 const PricingAndSplits = () => {
-    const step = 2;
+    const [otherContributors, setOtherContributors] = useState(true);
     const [ContributorList, setContributorList] = useState([{ ContributorName: "", Split: "" }]);
+
+    //handle Contributors radio change
+    const handleContributorsRadioChange = (event) => {
+        if (event.target.value === "No") {
+            setOtherContributors(false);
+        } else {
+            setOtherContributors(true);
+        }
+    };
 
     // handle input change
     const handleInputChange = (e, index) => {
@@ -33,14 +42,28 @@ const PricingAndSplits = () => {
                         <span>ADD CONTRIBUTORS</span>
                         <div className="flex items-center mt-2 space-x-10">
                             <div className="flex items-center">
-                                <input id="contributorsyes" type="radio" name="radio" defaultChecked className="hidden" />
+                                <input id="contributorsyes" 
+                                    type="radio" 
+                                    name="contributors"
+                                    value="Yes"
+                                    checked={otherContributors}
+                                    onChange={handleContributorsRadioChange}
+                                    className="hidden"     
+                                />
                                 <label htmlFor="contributorsyes" className="flex items-center text-sm font-normal cursor-pointer font-secondary">
                                     <span className="inline-block w-6 h-6 mr-1 border-2 rounded-full border-[#363636] flex-no-shrink"></span>
                                     Yes
                                 </label>
                             </div>
                             <div className="flex items-center">
-                                <input id="contributorsno" type="radio" name="radio" className="hidden" />
+                                <input id="contributorsno" 
+                                    type="radio" 
+                                    name="contributors"
+                                    value="No"
+                                    checked={!otherContributors}
+                                    onChange={handleContributorsRadioChange}
+                                    className="hidden"
+                                />
                                 <label htmlFor="contributorsno" className="flex items-center text-sm font-normal cursor-pointer font-secondary">
                                     <span className="inline-block w-6 h-6 mr-1 border-2 rounded-full border-[#363636] flex-no-shrink"></span>
                                     No
@@ -49,7 +72,7 @@ const PricingAndSplits = () => {
                         </div>
                     </div>
 
-                    <div className="flex flex-col mb-6">
+                    {otherContributors && <div className="flex flex-col mb-6">
                         <span>ADD CONTRIBUTORS AND SPLITS</span>
                         <div className="mt-2 flex flex-col gap-4 text-gray-700">
                             {ContributorList.map((x, i) => {
@@ -88,10 +111,10 @@ const PricingAndSplits = () => {
                         {ContributorList.length < 4 && 
                             <div className="flex mt-4 justify-start items-center">
                                 <button className="rounded-full flex justify-center items-center w-8 h-8 bg-[#479E00] hover:bg-primary-300 text-white" onClick={handleAddClick}>+</button>
-                                <span className="pl-2 font-normal text-sm">Add more Contributors</span>
+                                <span className="pl-3 font-normal text-sm">Add more Contributors</span>
                             </div>
                         }
-                    </div> 
+                    </div>} 
                 </div>
                 
                 {/* 3rd Column */}
@@ -172,9 +195,9 @@ const PricingAndSplits = () => {
             </div>
 
             {/* Navigation Buttons */}
-            <div className="flex self-end space-x-3">
+            <div className="flex self-end space-x-3 mt-8">
                     {/* Reset and continue buttons */}
-                    <button className="rounded-md px-4 py-3 bg-[#D7E0DF] hover:bg-[#c9d1d0] text-sm font-primary font-bold">Back</button>
+                    <button className="dark:bg-[#323232] dark:border-[#323232] rounded-md px-4 py-3 bg-[#D7E0DF] hover:bg-[#c9d1d0] text-sm font-primary font-bold">Back</button>
                     <button className="flex items-center px-4 py-3 text-sm font-bold rounded-md hover:bg-primary-200 bg-primary-100 text-light-100 font-primary">
                         Create
                         <span className="ml-24 font-semibold material-symbols-outlined">arrow_right_alt</span>

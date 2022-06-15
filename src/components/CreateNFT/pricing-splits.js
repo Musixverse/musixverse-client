@@ -1,6 +1,28 @@
+import { useState } from "react";
 
 const PricingAndSplits = () => {
     const step = 2;
+    const [ContributorList, setContributorList] = useState([{ ContributorName: "", Split: "" }]);
+
+    // handle input change
+    const handleInputChange = (e, index) => {
+      const { name, value } = e.target;
+      const list = [...ContributorList];
+      list[index][name] = value;
+      setContributorList(list);
+    };
+  
+    // handle click event of the Remove button
+    const handleRemoveClick = index => {
+      const list = [...ContributorList];
+      list.splice(index, 1);
+      setContributorList(list);
+    };
+  
+    // handle click event of the Add button
+    const handleAddClick = () => {
+      setContributorList([...ContributorList, { ContributorName: "", Split: "" }]);
+    };
 
     return (
        <div className="flex flex-col min-h-screen">
@@ -40,27 +62,46 @@ const PricingAndSplits = () => {
                     <div className="flex flex-col mb-6">
                         <span className="text-gray-900">ADD CONTRIBUTORS AND SPLITS</span>
                         <div className="mt-2 flex gap-4 text-gray-700">
-                            <div>
-                                <input 
-                                    className="appearance-none w-full bg-white text-gray-700 border-2 border-gray-400 rounded py-2 px-3 leading-tight focus:outline-none shadow-sm focus:bg-white focus:border-primary-100"
-                                    id="contributor-name"
-                                    type="text" 
-                                    placeholder="Contributor Name"    
-                                />
-                            </div>
-                            <div>
-                                <input
-                                    className="appearance-none w-full bg-white text-gray-700 border-2 border-gray-400 rounded py-2 px-3 leading-tight focus:outline-none shadow-sm focus:bg-white focus:border-primary-100"
-                                    id="rec-year"
-                                    type="number"
-                                    placeholder="Split %"
-                                />
-                            </div>
+                            {ContributorList.map((x, i) => {
+                                return (
+                                    <div key={i} className="flex gap-4">
+                                        <div>
+                                            <input
+                                                className="appearance-none w-full bg-white text-gray-700 border-2 border-gray-400 rounded py-2 px-3 leading-tight focus:outline-none shadow-sm focus:bg-white focus:border-primary-100"
+                                                id="contributor-name"
+                                                name="ContributorName"
+                                                type="text"
+                                                placeholder="Contributor Name"
+                                                value={x.ContributorName}
+                                                onChange={e => handleInputChange(e, i)}
+                                            />
+                                        </div>
+                                        <div>
+                                            <input
+                                                className="appearance-none w-full bg-white text-gray-700 border-2 border-gray-400 rounded py-2 px-3 leading-tight focus:outline-none shadow-sm focus:bg-white focus:border-primary-100"
+                                                name="Split"
+                                                type="number"
+                                                placeholder="Split %"
+                                                value={x.Split}
+                                                onChange={e => handleInputChange(e, i)}
+                                            />
+                                        </div>
+                                        {/* Button to remove more contributors */}
+                                        <div className="flex">
+                                            {ContributorList.length !== 1 && <button className="text-gray-400 hover:text-gray-600" onClick={() => handleRemoveClick(i)}>x</button>}     
+                                        </div>
+                                    </div>
+                                );
+                            })}   
                         </div>
+                        {/* Button to add more contributors */}
+                        {ContributorList.length < 4 && 
+                            <div className="flex mt-4 justify-start items-center">
+                                <button className="rounded-full flex justify-center items-center w-8 h-8 bg-primary-300 hover:bg-primary-400 text-white" onClick={handleAddClick}>+</button>
+                                <span className="text-sm pl-2 text-secondary">Add more Contributors</span>
+                            </div>
+                        }
                     </div> 
-
-                    {/* Button to add more contributors */}
-                    {/* TO BE DONE */}
                 </div>
                 
                 {/* 3rd Column */}

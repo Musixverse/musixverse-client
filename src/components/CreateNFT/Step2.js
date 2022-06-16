@@ -41,7 +41,7 @@ export default function ComprehensiveDetails(){
                 <div className="flex self-end mt-16 space-x-3">
                     {/* Reset and continue buttons */}
                     {/* NOTE: Revoke the image url at the create NFT button click */}
-                    <button className="rounded-md px-4 py-3 bg-[#D7E0DF] hover:bg-[#c9d1d0] text-sm font-primary font-bold">Discard</button>
+                    <button className="dark:bg-[#323232] dark:hover:bg-dark-100 dark:border-[#323232] rounded-md px-4 py-3 bg-[#D7E0DF] hover:bg-[#c9d1d0] text-sm font-primary font-bold">Discard</button>
                     <button className="flex items-center px-4 py-3 text-sm font-bold rounded-md hover:bg-primary-200 bg-primary-100 text-light-100 font-primary">
                         Next
                         <span className="ml-24 font-semibold material-symbols-outlined">arrow_right_alt</span>
@@ -51,7 +51,7 @@ export default function ComprehensiveDetails(){
                 {/* @Sparsh we've to conditionally render the button div based on the form step */}
                 {/* Navigation Buttons for step 2 form */}
                 {/* <div className="flex self-end mt-16 space-x-3">
-                    <button className="dark:bg-[#323232] dark:border-[#323232] rounded-md px-4 py-3 bg-[#D7E0DF] hover:bg-[#c9d1d0] text-sm font-primary font-bold">Back</button>
+                    <button className="dark:bg-[#323232] dark:hover:bg-dark-100 dark:border-[#323232] rounded-md px-4 py-3 bg-[#D7E0DF] hover:bg-[#c9d1d0] text-sm font-primary font-bold">Back</button>
                     <button className="flex items-center px-4 py-3 text-sm font-bold rounded-md hover:bg-primary-200 bg-primary-100 text-light-100 font-primary">
                         Create
                         <span className="ml-24 font-semibold material-symbols-outlined">arrow_right_alt</span>

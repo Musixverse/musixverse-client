@@ -17,6 +17,7 @@ export default function ComprehensiveDetails(){
     const [uploadedSong, setUploadedSong] = useState(null);
     const [nftName, setNftName] = useState("");
     const [nftPrice, setNftPrice] = useState(0);
+    const [numberOfCopies, setNumberOfCopies] = useState(0);
     let truncatedNftName = nftName;
     
     if(nftName.length > 10){
@@ -24,6 +25,7 @@ export default function ComprehensiveDetails(){
     }
     const nftPreviewValues = {truncatedNftName, uploadedImage, uploadedSong}
     const step1Values = {setUploadedImage, setUploadedSong, nftName, setNftName};
+    const step2Values = {numberOfCopies,setNumberOfCopies,nftPrice, setNftPrice};
 
     return(
         <div className="flex items-center justify-center mb-28 lg:mb-36 bg-light-200 dark:bg-dark-200">
@@ -34,7 +36,7 @@ export default function ComprehensiveDetails(){
                     {/* Info div */}
                     {/* <Step1Form {...step1Values}/> */}
                     {/* ayush div */}
-                    <PricingAndSpilts />
+                    <PricingAndSpilts {...step2Values} />
                 </div>
 
                 {/* Button div */}

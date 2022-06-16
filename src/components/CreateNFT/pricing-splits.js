@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const PricingAndSplits = () => {
+const PricingAndSplits = ({numberOfCopies,setNumberOfCopies,nftPrice, setNftPrice}) => {
     const [otherContributors, setOtherContributors] = useState(true);
     const [ContributorList, setContributorList] = useState([{ ContributorName: "", Split: "" }]);
 
@@ -128,13 +128,13 @@ const PricingAndSplits = () => {
                             className="dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-100 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-100"
                             id="nft-copies"
                             // value={numberOfCopies}
-                            // onChange={(e) => {
-                            //     setNumberOfCopies(e.target.value);
-                            // }}
+                            onChange={(e) => {
+                                setNumberOfCopies(e.target.value);
+                            }}
                             type="number"
                             min={1}
                             step="1"
-                            // placeholder="No. of copies"
+                            placeholder="No. of copies"
                         />
                     </div>
                     <div className="w-full md:w-1/2 px-3">
@@ -145,13 +145,13 @@ const PricingAndSplits = () => {
                             className="dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-100 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-100"
                             id="individual-nft-price"
                             // value={nftPrice}
-                            // onChange={(e) => {
-                            //     setNftPrice(e.target.value);
-                            // }}
+                            onChange={(e) => {
+                                setNftPrice(e.target.value);
+                            }}
                             type="number"
                             min={0}
                             step="0.01"
-                            // placeholder="Enter individual NFT price"
+                            placeholder="Enter NFT price"
                         />
                     </div>
                 </div> 
@@ -168,7 +168,7 @@ const PricingAndSplits = () => {
                         // }}
                         type="number"
                         min={0}
-                        // placeholder="Enter Resale Royalty Percentage"
+                        placeholder="Enter Resale Royalty Percentage"
                         required
                     />
                 </div>

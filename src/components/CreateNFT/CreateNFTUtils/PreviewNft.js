@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { useRef } from "react";
 
-export default function PreviewNft({truncatedNftName, uploadedImage, uploadedSong}){
+export default function PreviewNft({truncatedNftName, uploadedImage, uploadedSong, nftPrice, numberOfCopies}) {
     const playBtn = useRef(null);
     const audio = useRef(null);
 
@@ -88,11 +88,15 @@ export default function PreviewNft({truncatedNftName, uploadedImage, uploadedSon
                         <p className="font-secondary">Price</p>
                         <div className="flex items-center font-bold">
                             <Image src={"/assets/Eth_logo.svg"} width={12.5} height={25} alt="ethereum logo"/>
-                            <span className="ml-1 sm:text-lg">0.3</span>
+                            <span className="ml-1 sm:text-lg">{nftPrice == 0 ? 0 : nftPrice }</span>
                         </div>
                     </div>
                 </div>
-                <div className="w-[150px] h-2 dark:bg-[#363636] bg-light-300 self-center rounded-lg"></div>
+                {numberOfCopies == 0?
+                    <div className="w-[150px] h-2 dark:bg-[#363636] bg-light-300 self-center rounded-lg"></div>
+                    :
+                    <div className="font-semibold font-secondary text-[#1D1D1D] dark:text-light-200 text-lg">No. of copies : {numberOfCopies}</div>
+                }
             </div>
         </div>
     );

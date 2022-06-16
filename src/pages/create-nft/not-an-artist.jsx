@@ -1,5 +1,5 @@
 import Head from "next/head";
-import NotAnArtist from "../../components/CreateNFT/Not-an-artist";
+import NotAnArtist from "../../components/CreateNFT/not-an-artist";
 
 const notanartist = ({}) => {
     return (

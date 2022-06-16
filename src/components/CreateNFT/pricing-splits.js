@@ -37,6 +37,7 @@ const PricingAndSplits = () => {
         <div className="flex space-x-20 flex-2 lg:flex-row font-semibold font-secondary">
             {/* Contributors Details */}
             <div>
+                <p className="mb-10">DETAILS</p>
                 <div className="flex flex-col mb-10">
                     <span>ADD CONTRIBUTORS</span>
                     <div className="flex items-center mt-2 space-x-10">
@@ -117,7 +118,7 @@ const PricingAndSplits = () => {
             </div>
             
             {/* NFT Details */}
-            <div>
+            <div className="mt-14">
                 <div className="flex flex-wrap -mx-3 mb-6">
                     <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                         <label htmlFor="nft-copies" className="block uppercase tracking-wide mb-2">

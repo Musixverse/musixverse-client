@@ -23,7 +23,7 @@ export default function ComprehensiveDetails(){
     if(nftName.length > 10){
         truncatedNftName = truncatedNftName.substring(0,8)+"...";
     }
-    const nftPreviewValues = {truncatedNftName, uploadedImage, uploadedSong}
+    const nftPreviewValues = {truncatedNftName, uploadedImage, uploadedSong, nftPrice, numberOfCopies};
     const step1Values = {setUploadedImage, setUploadedSong, nftName, setNftName};
     const step2Values = {numberOfCopies,setNumberOfCopies,nftPrice, setNftPrice};
 

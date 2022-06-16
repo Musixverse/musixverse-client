@@ -4,7 +4,7 @@ import Step1Form from "./CreateNFTUtils/Step1Form";
 import PricingAndSpilts from "./pricing-splits.js";
 // import styles from "../../../styles/CreateNFT/Step2.module.css";
 
-export default function ComprehensiveDetails(){
+export default function ComprehensiveDetails({currStep, setCurrStep}){
     /**
      * Need to add the following:
      * nftName truncation
@@ -13,10 +13,13 @@ export default function ComprehensiveDetails(){
      * Audio Preview (Done)
      * Price Preview(Ayush)
      */
+    console.log(currStep)
     const [uploadedImage, setUploadedImage] = useState(null);
     const [uploadedSong, setUploadedSong] = useState(null);
     const [nftName, setNftName] = useState("");
+    //Ayush's form States 
     const [nftPrice, setNftPrice] = useState(0);
+
     let truncatedNftName = nftName;
     
     if(nftName.length > 10){
@@ -32,22 +35,37 @@ export default function ComprehensiveDetails(){
                     {/* Preview div */}
                     <PreviewNft {...nftPreviewValues}/>
                     {/* Info div */}
+                    {currStep === 1? <Step1Form {...step1Values}/>:<PricingAndSpilts />}
                     {/* <Step1Form {...step1Values}/> */}
                     {/* ayush div */}
-                    <PricingAndSpilts />
+                    {/* <PricingAndSpilts /> */}
                 </div>
 
                 {/* Button div */}
-                <div className="flex self-end mt-16 space-x-3">
-                    {/* Reset and continue buttons */}
-                    {/* NOTE: Revoke the image url at the create NFT button click */}
-                    <button className="dark:bg-[#323232] dark:hover:bg-dark-100 dark:border-[#323232] rounded-md px-4 py-3 bg-[#D7E0DF] hover:bg-[#c9d1d0] text-sm font-primary font-bold">Discard</button>
-                    <button className="flex items-center px-4 py-3 text-sm font-bold rounded-md hover:bg-primary-200 bg-primary-100 text-light-100 font-primary">
-                        Next
-                        <span className="ml-24 font-semibold material-symbols-outlined">arrow_right_alt</span>
-                    </button>
-                </div>
-
+                {currStep === 1? 
+                    <div className="flex self-end mt-16 space-x-3">
+                        {/* Reset and continue buttons */}
+                        {/* NOTE: Revoke the image url at the create NFT button click */}
+                        <button className="dark:bg-[#323232] dark:hover:bg-dark-100 dark:border-[#323232] rounded-md px-4 py-3 bg-[#D7E0DF] hover:bg-[#c9d1d0] text-sm font-primary font-bold">Discard</button>
+                        <button 
+                            onClick={()=>{setCurrStep((prevStep)=>prevStep+1)}}
+                            className="flex items-center px-4 py-3 text-sm font-bold rounded-md hover:bg-primary-200 bg-primary-100 text-light-100 font-primary">
+                            Next
+                            <span className="ml-24 font-semibold material-symbols-outlined">arrow_right_alt</span>
+                        </button>
+                    </div>
+                    :
+                    <div className="flex self-end mt-16 space-x-3">
+                        <button
+                            onClick={()=>{setCurrStep((prevStep)=>prevStep-1)}}
+                            className="dark:bg-[#323232] dark:hover:bg-dark-100 dark:border-[#323232] rounded-md px-4 py-3 bg-[#D7E0DF] hover:bg-[#c9d1d0] text-sm font-primary font-bold">Back</button>
+                        <button className="flex items-center px-4 py-3 text-sm font-bold rounded-md hover:bg-primary-200 bg-primary-100 text-light-100 font-primary">
+                            Create
+                            <span className="ml-24 font-semibold material-symbols-outlined">arrow_right_alt</span>
+                        </button>
+                    </div>
+                }
+                
                 {/* @Sparsh we've to conditionally render the button div based on the form step */}
                 {/* Navigation Buttons for step 2 form */}
                 {/* <div className="flex self-end mt-16 space-x-3">

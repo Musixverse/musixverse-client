@@ -3,15 +3,8 @@ import PreviewNftContext from "../../../store/preview-nft-context";
 import ComprehensiveDetails from "../../components/CreateNFT/Step2";
 
 export default function TempPage(){
-    // const [uploadedImage, setUploadedImage] = useState(null);
-    // const [uploadedSong, setUploadedSong] = useState();
-    // const [nftName, setNftName] = useState(null);
-    // const [nftPrice, setNftPrice] = useState(null);
-
+    const [currStep, setCurrStep] = useState(1);
     return(
-        // <PreviewNftContext.Provider 
-        //     value={[uploadedImage, setUploadImage, uploadedSong, setUploadedSong, nftName, setNftName, nftPrice, setNftPrice]}>
-            <ComprehensiveDetails/>
-        // </PreviewNftContext.Provider>
+        <ComprehensiveDetails currStep={currStep} setCurrStep={setCurrStep}/>
     );
 }

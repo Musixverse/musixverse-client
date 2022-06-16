@@ -13,24 +13,12 @@ export default function DetailsInputGroup(){
                     <InputDropdown
                         optionsArray={["Original", "Cover","Remix", "Live", "Remastered","Radio Edit"]}
                     />
-                    {/* <input
-                        type="text"
-                        placeholder="Enter account url"
-                        spellCheck={false}
-                        className="dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-100 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-100"
-                    /> */}
                 </div>
                 <div className="flex-1 text-sm font-semibold md:text-base font-secondary">
                     <p className="mb-1">GENRE</p>
                     <InputDropdown
                         optionsArray={["Afrobeat", "Afropop", "Alternative", "Big Band", "Blues", "Children's Music", "Classical", "Comedy", "Country", "Dance", "Electronic", "Fitness and Workout", "Folk", "French Pop", "German Folk", "German Pop","Hip Hop", "J-Pop","Jazz","K-Pop","Rap"]}
                     />
-                    {/* <input
-                        type="text"
-                        placeholder="Enter account url"
-                        spellCheck={false}
-                        className="dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-100 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-100"
-                    /> */}
                 </div>
             </div>
             <div className="flex flex-col w-full space-y-2 md:flex-row md:space-x-4 md:space-y-0">
@@ -40,6 +28,7 @@ export default function DetailsInputGroup(){
                         type="number"
                         min={"1860"}
                         max={"2022"}
+                        value={"2000"}
                         placeholder="Enter the recording year"
                         spellCheck={false}
                         className="dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-100 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-100"

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import PreviewNft from "./CreateNFTUtils/PreviewNft";
 import Step1Form from "./CreateNFTUtils/Step1Form";
+import PricingAndSpilts from "./pricing-splits.js";
 // import styles from "../../../styles/CreateNFT/Step2.module.css";
 
 export default function ComprehensiveDetails(){
@@ -31,8 +32,9 @@ export default function ComprehensiveDetails(){
                     {/* Preview div */}
                     <PreviewNft {...nftPreviewValues}/>
                     {/* Info div */}
-                    <Step1Form {...step1Values}/>
+                    {/* <Step1Form {...step1Values}/> */}
                     {/* ayush div */}
+                    <PricingAndSpilts />
                 </div>
 
                 {/* Button div */}
@@ -45,6 +47,16 @@ export default function ComprehensiveDetails(){
                         <span className="ml-24 font-semibold material-symbols-outlined">arrow_right_alt</span>
                     </button>
                 </div>
+
+                {/* @Sparsh we've to conditionally render the button div based on the form step */}
+                {/* Navigation Buttons for step 2 form */}
+                {/* <div className="flex self-end mt-16 space-x-3">
+                    <button className="dark:bg-[#323232] dark:border-[#323232] rounded-md px-4 py-3 bg-[#D7E0DF] hover:bg-[#c9d1d0] text-sm font-primary font-bold">Back</button>
+                    <button className="flex items-center px-4 py-3 text-sm font-bold rounded-md hover:bg-primary-200 bg-primary-100 text-light-100 font-primary">
+                        Create
+                        <span className="ml-24 font-semibold material-symbols-outlined">arrow_right_alt</span>
+                    </button>
+                </div> */}
             </div>
         </div>
     );

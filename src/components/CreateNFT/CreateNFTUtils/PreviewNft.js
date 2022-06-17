@@ -33,6 +33,15 @@ export default function PreviewNft({truncatedNftName, uploadedImage, uploadedSon
         pauseSong(playBtn.current.children[0]);
         audio.current.currentTime = 0;
     }
+    
+    if(nftPrice >= 1000000){
+        nftPrice = (nftPrice/1000000).toFixed(1) + "M";
+    }
+    if(nftPrice >= 1000){
+        nftPrice = (nftPrice/1000).toFixed(1) + "K";
+    }
+
+
     /*
         Things to be passed here as props:      
         1. Uploaded Image url/blob (Done)
@@ -95,7 +104,7 @@ export default function PreviewNft({truncatedNftName, uploadedImage, uploadedSon
                 {numberOfCopies == 0?
                     <div className="w-[150px] h-2 dark:bg-[#363636] bg-light-300 self-center rounded-lg"></div>
                     :
-                    <div className="font-semibold font-secondary text-[#1D1D1D] dark:text-light-200 text-lg">No. of copies : {numberOfCopies}</div>
+                    <div className="font-secondary text-[#1D1D1D] dark:text-light-200">No. of copies : {numberOfCopies}</div>
                 }
             </div>
         </div>

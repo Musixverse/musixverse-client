@@ -11,7 +11,7 @@ export default function ComprehensiveDetails({currStep, setCurrStep}){
      * new nftId
      * Image Preview (Done)
      * Audio Preview (Done)
-     * Price Preview(Ayush)
+     * Price Preview(Done)
      */
     console.log(currStep)
     const [uploadedImage, setUploadedImage] = useState(null);

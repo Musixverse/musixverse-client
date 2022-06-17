@@ -2,7 +2,7 @@ import DetailsInputGroup from "./DetailsInputGroup";
 import ImageUpload from "./ImageUpload";
 import AudioUpload from "./AudioUpload";
 
-export default function Step1Form({setUploadedImage, setUploadedSong, nftName, setNftName}){
+export default function Step1Form({uploadedImage, setUploadedImage, uploadedSong, setUploadedSong, nftName, setNftName}){
     return(
         <div className="flex space-x-20 flex-2 lg:flex-row">
             {/* Details */}
@@ -45,9 +45,9 @@ export default function Step1Form({setUploadedImage, setUploadedSong, nftName, s
             <div>
                 <p className="mb-10 font-semibold">UPLOADS</p>
                 {/* UPLOAD NFT ASSETS */}
-                <ImageUpload setUploadedImage={setUploadedImage}/>
+                <ImageUpload uploadedImage={uploadedImage} setUploadedImage={setUploadedImage}/>
 
-                <AudioUpload setUploadedSong={setUploadedSong}/>
+                <AudioUpload uploadedSong={uploadedSong} setUploadedSong={setUploadedSong}/>
 
                 {/* SHARE LINKS */}
                 <p className="mt-16 mb-3 font-semibold font-secondary">TRACK LINKS</p>
@@ -59,6 +59,7 @@ export default function Step1Form({setUploadedImage, setUploadedSong, nftName, s
                     <input className="dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-100 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-100" type={"url"} placeholder="Amazon Music Track Link"/>
                     <input className="dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-100 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-100" type={"url"} placeholder="Youtube Music Track Link"/>
                 </div>
+                <input className="mt-3 dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-100 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-100" type={"url"} placeholder="Other Track Link"/>
             </div>
         </div>
     );

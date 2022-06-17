@@ -27,7 +27,7 @@ export default function ComprehensiveDetails({currStep, setCurrStep}){
         truncatedNftName = truncatedNftName.substring(0,8)+"...";
     }
     const nftPreviewValues = {truncatedNftName, uploadedImage, uploadedSong, nftPrice, numberOfCopies};
-    const step1Values = {setUploadedImage, setUploadedSong, nftName, setNftName};
+    const step1Values = {uploadedImage,setUploadedImage, uploadedSong, setUploadedSong, nftName, setNftName};
     const step2Values = {numberOfCopies,setNumberOfCopies,nftPrice, setNftPrice};
 
     return(
@@ -37,10 +37,11 @@ export default function ComprehensiveDetails({currStep, setCurrStep}){
                     {/* Preview div */}
                     <PreviewNft {...nftPreviewValues}/>
                     {/* Info div */}
-                    {currStep === 1? <Step1Form {...step1Values}/>:<PricingAndSpilts {...step2Values} />}
-                    {/* <Step1Form {...step1Values}/> */}
-                    {/* ayush div */}
-                    {/* <PricingAndSpilts {...step2Values} /> */}
+                    {currStep === 1? 
+                        <Step1Form {...step1Values}/>
+                        :
+                        <PricingAndSpilts {...step2Values} />
+                    }
                 </div>
 
                 {/* Button div */}

@@ -28,7 +28,7 @@ export default function DetailsInputGroup(){
                         type="number"
                         min={"1860"}
                         max={"2022"}
-                        value={"2000"}
+                        defaultValue={"2000"}
                         placeholder="Enter the recording year"
                         spellCheck={false}
                         className="dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-100 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-100"

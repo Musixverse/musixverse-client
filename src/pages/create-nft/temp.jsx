@@ -1,5 +1,5 @@
 import { useState } from "react";
-import PreviewNftContext from "../../../store/preview-nft-context";
+// import PreviewNftContext from "../../../store/preview-nft-context";
 import ComprehensiveDetails from "../../components/CreateNFT/Step2";
 
 export default function TempPage(){

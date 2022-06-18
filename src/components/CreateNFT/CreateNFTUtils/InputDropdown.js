@@ -40,7 +40,7 @@ export default function InputDropdown(props) {
         <Menu as="div" className="relative inline-block w-full text-left">
             {/* The visible dropdown button */}
             <div>
-                <Menu.Button className="inline-flex justify-between text-sm font-medium text-gray-700 bg-light-100 border-2 border-[#777777] w-full px-4 py-2 rounded-md hover:border-[#6cc027] dark:text-light-100">
+                <Menu.Button className="inline-flex justify-between text-sm font-medium dark:bg-[#323232] text-gray-700 bg-light-100 border-2 border-light-100 dark:border-[#323232] w-full px-4 py-2 rounded-md hover:border-[#6cc027] hover:dark:border-[#6cc027] dark:text-light-100">
                     {currentFilter}
                     <ChevronDownIcon className="ml-2 h-5 w-5 text-[#6cc027]" aria-hidden="true" />
                 </Menu.Button>

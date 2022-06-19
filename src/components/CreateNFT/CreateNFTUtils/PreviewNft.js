@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { useRef } from "react";
 
-export default function PreviewNft({truncatedNftName, uploadedImage, uploadedSong, nftPrice, numberOfCopies}) {
+export default function PreviewNft({truncatedNftName, uploadedImage, uploadedSong, nftPrice, numberOfCopies, currStep}) {
     const playBtn = useRef(null);
     const audio = useRef(null);
 
@@ -53,7 +53,7 @@ export default function PreviewNft({truncatedNftName, uploadedImage, uploadedSon
     // console.log("here",uploadedSong);
     return(
         <div className="flex-1">
-            <p className="mb-10 font-semibold font-secondary">STEP 1 OF 2</p>
+            <p className="mb-10 font-semibold font-secondary">STEP {currStep} OF 2</p>
             {/* Uploaded Art */}
             <div className="relative flex items-end justify-end w-[222px] h-[190px]">
                 {/* Cover art of NFT */}

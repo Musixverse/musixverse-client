@@ -85,15 +85,15 @@ function ImageCrop({ imageToCrop, setCroppedImage, setShowModal }) {
             leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
         >
             <div className="relative inline-block overflow-hidden text-left align-bottom transition-all transform bg-white rounded-lg shadow-xl sm:my-8 sm:align-middle sm:max-w-3xl sm:w-full">
-                <div className="px-4 pt-5 pb-6 bg-white sm:p-8 sm:pb-6">
+                <div className="px-4 pt-5 pb-6 bg-white dark:bg-dark-100 sm:p-8 sm:pb-6">
                     <div>
                         <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
                             {/* Modal Heading */}
-                            <Dialog.Title as="h3" className="mb-4 text-lg font-medium leading-6 text-gray-900">
+                            <Dialog.Title as="h3" className="mb-4 text-lg font-medium leading-6 text-gray-900 dark:text-light-100">
                                 Crop NFT Cover Art
                             </Dialog.Title>
                             {/* Crop Component */}
-                            {/* <div className"> */}
+                            <div className="max-h-[270px] overflow-y-scroll">
                                 <ReactCrop
                                     src={imageToCrop}
                                     crop={cropConfig}
@@ -103,11 +103,11 @@ function ImageCrop({ imageToCrop, setCroppedImage, setShowModal }) {
                                     onChange={(cropConfig) => setCropConfig(cropConfig)}
                                     crossorigin="anonymous" // to avoid CORS-related problems
                                 />
-                            {/* </div> */}
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div className="px-4 py-3 bg-gray-50 sm:px-6 sm:flex sm:flex-row-reverse">
+                <div className="px-4 py-3 bg-gray-50 dark:bg-dark-100 sm:px-6 sm:flex sm:flex-row-reverse">
                     <button
                         type="button"
                         className="inline-flex justify-center w-full px-4 py-2 text-base font-medium text-white bg-red-600 border border-transparent rounded-md shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm"
@@ -117,7 +117,7 @@ function ImageCrop({ imageToCrop, setCroppedImage, setShowModal }) {
                     </button>
                     <button
                         type="button"
-                        className="inline-flex justify-center w-full px-4 py-2 text-base font-medium text-white bg-red-600 border border-transparent rounded-md shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm"
+                        className="inline-flex justify-center w-full px-4 py-2 text-base font-medium text-white border border-transparent rounded-md shadow-sm bg-primary-100 hover:bg-primary-300 focus:outline-none sm:ml-3 sm:w-auto sm:text-sm"
                         onClick={() => {setShowModal(false);cropImage(cropConfig);}}
                     >
                         Confirm

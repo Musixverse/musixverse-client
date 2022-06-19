@@ -16,7 +16,7 @@ export default function Step1Form({uploadedImage, setUploadedImage, uploadedSong
                     onChange={(e) => {
                         setNftName(e.target.value);
                     }}
-                    className="w-full p-1 border-2 border-[#777777] rounded-md shadow-sm outline-none focus:border-primary-100"
+                    className="w-full p-1 border-2 border-[#777777] rounded-md shadow-sm outline-none focus:border-primary-100 focus:dark:border-primary-100 dark:bg-[#323232] dark:border-[#323232]"
                 ></input>
                 <p className="text-[#777777] mt-1 mb-10 font-normal text-[13px] max-w-[75%]">Feel free to include featured artists and version info in the track title</p>
                 

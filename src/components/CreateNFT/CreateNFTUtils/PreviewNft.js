@@ -78,9 +78,9 @@ export default function PreviewNft({truncatedNftName, uploadedImage, uploadedSon
                         <button 
                             ref={playBtn} 
                             onClick={playSongHandler} 
-                            className="h-[50px] w-[50px] border-light-100 border-4 rounded-full flex items-center justify-center"
+                            className="h-[40px] w-[40px] bg-primary-100 rounded-full flex items-center justify-center"
                         >
-                            <i className="text-lg fas fa-play text-light-100"></i>
+                            <i className="text-lg fas fa-play text-dark-200"></i>
                         </button>
                         <audio ref={audio} className="hidden" src={uploadedSong} onEnded={resetProgress}></audio>
                     </div>

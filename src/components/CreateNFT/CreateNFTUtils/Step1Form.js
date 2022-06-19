@@ -4,7 +4,7 @@ import AudioUpload from "./AudioUpload";
 
 export default function Step1Form({uploadedImage, setUploadedImage, uploadedSong, setUploadedSong, nftName, setNftName}){
     return(
-        <div className="flex space-x-20 flex-2 lg:flex-row">
+        <div className="flex space-x-20 lg:flex-row">
             {/* Details */}
             <div className="font-semibold font-secondary">
                 <p className="mb-10">DETAILS</p>
@@ -16,7 +16,7 @@ export default function Step1Form({uploadedImage, setUploadedImage, uploadedSong
                     onChange={(e) => {
                         setNftName(e.target.value);
                     }}
-                    className="w-full p-1 border-2 border-[#777777] rounded-md shadow-sm outline-none focus:border-primary-100 focus:dark:border-primary-100 dark:bg-[#323232] dark:border-[#323232]"
+                    className="w-full px-4 py-1 border-2 border-[#777777] rounded-md shadow-sm outline-none focus:border-primary-100 focus:dark:border-primary-100 dark:bg-[#323232] dark:border-[#323232]"
                 ></input>
                 <p className="text-[#777777] mt-1 mb-10 font-normal text-[13px] max-w-[75%]">Feel free to include featured artists and version info in the track title</p>
                 

@@ -7,11 +7,16 @@ import PricingAndSpilts from "./pricing-splits.js";
 export default function ComprehensiveDetails({currStep, setCurrStep}){
     /**
      * Need to add the following:
-     * nftName truncation
-     * new nftId
-     * Image Preview (Done)
-     * Audio Preview (Done)
-     * Price Preview(Done)
+     * Verfied artist check
+     * Artist name truncation
+     * Change ETH logo to MATIC
+     * Add states for the remaining input fields
+     * Add a form tag in this component to store data on Moralis
+     * Revoke Object URLs to avoid memo leak
+     * Refine the CSS for dark mode radio buttons
+     * Check for new navbar designs
+     * Responsiveness
+     * Move CSS from inline to external file
      */
     console.log(currStep)
     const [uploadedImage, setUploadedImage] = useState(null);
@@ -22,11 +27,11 @@ export default function ComprehensiveDetails({currStep, setCurrStep}){
     const [numberOfCopies, setNumberOfCopies] = useState(0);
 
     let truncatedNftName = nftName;
-    
+    console.log("uploaded Image :",uploadedImage);
     if(nftName.length > 10){
         truncatedNftName = truncatedNftName.substring(0,8)+"...";
     }
-    const nftPreviewValues = {truncatedNftName, uploadedImage, uploadedSong, nftPrice, numberOfCopies};
+    const nftPreviewValues = {truncatedNftName, uploadedImage, uploadedSong, nftPrice, numberOfCopies, currStep};
     const step1Values = {uploadedImage,setUploadedImage, uploadedSong, setUploadedSong, nftName, setNftName};
     const step2Values = {numberOfCopies,setNumberOfCopies,nftPrice, setNftPrice};
 

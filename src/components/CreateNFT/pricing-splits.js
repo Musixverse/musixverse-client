@@ -24,10 +24,10 @@ const PricingAndSplits = ({numberOfCopies,setNumberOfCopies,nftPrice, setNftPric
     };
 
     return (
-        <div className="flex space-x-20 flex-auto lg:flex-row font-semibold font-secondary">
+        <div className="flex flex-col lg:space-x-20 lg:flex-auto lg:flex-row font-semibold font-secondary">
             {/* Contributors Details */}
-            <div className="mt-14 w-1/2">
-                <div className="flex mb-6 gap-4">
+            <div className="mt-10 md:mt-28 lg:mt-14 lg:w-1/2">
+                <div className="flex md:mb-6 gap-4">
                     <div className="w-full md:w-1/2 mb-6 md:mb-0">
                         <label htmlFor="nft-copies" className="block uppercase tracking-wide mb-2">
                             NO. OF COPIES
@@ -112,7 +112,7 @@ const PricingAndSplits = ({numberOfCopies,setNumberOfCopies,nftPrice, setNftPric
             </div>
             
             {/* NFT Details */}
-            <div className="mt-14 w-1/2">
+            <div className="mt-10 lg:mt-14 lg:w-1/2">
                 <div className="w-full mb-6">
                     <label htmlFor="resale-royalty-percentage" className="block uppercase tracking-wide mb-2">
                         RESALE ROYALTY PERCENTAGE

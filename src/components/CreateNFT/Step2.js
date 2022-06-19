@@ -33,7 +33,7 @@ export default function ComprehensiveDetails({currStep, setCurrStep}){
     return(
         <div className="flex items-center justify-center mb-28 lg:mb-36 bg-light-200 dark:bg-dark-200">
             <div className="flex-col flex w-full max-w-[1920px] mt-28 lg:mt-36 px-6 md:px-8 lg:px-16 xl:px-20 2xl:px-36">
-                <div className="flex w-full space-x-20">
+                <div className="flex flex-col md:flex-row w-full md:space-x-20">
                     {/* Preview div */}
                     <PreviewNft {...nftPreviewValues}/>
                     {/* Info div */}
@@ -58,7 +58,7 @@ export default function ComprehensiveDetails({currStep, setCurrStep}){
                         </button>
                     </div>
                     :
-                    <div className="flex self-end mt-16 space-x-3">
+                    <div className="flex md:self-end mt-10 lg:mt-16 space-x-3">
                         <button
                             onClick={()=>{setCurrStep((prevStep)=>prevStep-1)}}
                             className="dark:bg-[#323232] dark:hover:bg-dark-100 dark:border-[#323232] rounded-md px-4 py-3 bg-[#D7E0DF] hover:bg-[#c9d1d0] text-sm font-primary font-bold">Back</button>

@@ -52,7 +52,7 @@ export default function PreviewNft({truncatedNftName, uploadedImage, uploadedSon
     */
     // console.log("here",uploadedSong);
     return(
-        <div className="flex-1">
+        <div className="flex-1 mt-14 lg:mt-0">
             <p className="mb-10 font-semibold font-secondary">STEP 1 OF 2</p>
             {/* Uploaded Art */}
             <div className="relative flex items-end justify-end w-[222px] h-[190px]">

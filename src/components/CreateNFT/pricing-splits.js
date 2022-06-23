@@ -95,7 +95,7 @@ const PricingAndSplits = ({numberOfCopies,setNumberOfCopies,nftPrice, setNftPric
                                     <div className="flex-1">
                                         <InputDropdown
                                             //Need to change the optionsArray by collecting data from @Pushpit07
-                                            optionsArray={["Afrobeat", "Afropop", "Alternative", "Big Band", "Blues", "Children's Music", "Classical", "Comedy", "Country", "Dance", "Electronic", "Fitness and Workout", "Folk", "French Pop", "German Folk", "German Pop","Hip Hop", "J-Pop","Jazz","K-Pop","Rap"]}
+                                            optionsArray={["Producer", "Distributor", "Composer","Artist","Publisher","Other"]}
                                         />
                                     </div>
                                     {/* Button to remove more contributors */}

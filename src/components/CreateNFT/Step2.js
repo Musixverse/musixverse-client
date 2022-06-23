@@ -18,7 +18,6 @@ export default function ComprehensiveDetails({currStep, setCurrStep}){
      * Responsiveness
      * Move CSS from inline to external file
      */
-    console.log(currStep)
     const [uploadedImage, setUploadedImage] = useState(null);
     const [uploadedSong, setUploadedSong] = useState(null);
     const [nftName, setNftName] = useState("");
@@ -27,7 +26,6 @@ export default function ComprehensiveDetails({currStep, setCurrStep}){
     const [numberOfCopies, setNumberOfCopies] = useState(0);
 
     let truncatedNftName = nftName;
-    console.log("uploaded Image :",uploadedImage);
     if(nftName.length > 10){
         truncatedNftName = truncatedNftName.substring(0,8)+"...";
     }
@@ -38,7 +36,7 @@ export default function ComprehensiveDetails({currStep, setCurrStep}){
     return(
         <div className="flex items-center justify-center mb-28 lg:mb-36 bg-light-200 dark:bg-dark-200">
             <div className="flex-col flex w-full max-w-[1920px] mt-28 lg:mt-36 px-6 md:px-8 lg:px-16 xl:px-20 2xl:px-36">
-                <div className="flex flex-col md:flex-row w-full md:space-x-20">
+                <div className="flex flex-col w-full space-y-20 md:space-x-10 md:space-y-0 md:flex-row xl:space-x-20">
                     {/* Preview div */}
                     <PreviewNft {...nftPreviewValues}/>
                     {/* Info div */}
@@ -51,7 +49,7 @@ export default function ComprehensiveDetails({currStep, setCurrStep}){
 
                 {/* Button div */}
                 {currStep === 1? 
-                    <div className="flex self-end mt-16 space-x-3">
+                    <div className="flex mt-16 space-x-3 md:self-end">
                         {/* Reset and continue buttons */}
                         {/* NOTE: Revoke the image url at the create NFT button click */}
                         <button className="dark:bg-[#323232] dark:hover:bg-dark-100 dark:border-[#323232] rounded-md px-4 py-3 bg-[#D7E0DF] hover:bg-[#c9d1d0] text-sm font-primary font-bold">Discard</button>
@@ -63,7 +61,7 @@ export default function ComprehensiveDetails({currStep, setCurrStep}){
                         </button>
                     </div>
                     :
-                    <div className="flex md:self-end mt-10 lg:mt-16 space-x-3">
+                    <div className="flex mt-10 space-x-3 md:self-end lg:mt-16">
                         <button
                             onClick={()=>{setCurrStep((prevStep)=>prevStep-1)}}
                             className="dark:bg-[#323232] dark:hover:bg-dark-100 dark:border-[#323232] rounded-md px-4 py-3 bg-[#D7E0DF] hover:bg-[#c9d1d0] text-sm font-primary font-bold">Back</button>

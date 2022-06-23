@@ -4,7 +4,7 @@ import AudioUpload from "./AudioUpload";
 
 export default function Step1Form({uploadedImage, setUploadedImage, uploadedSong, setUploadedSong, nftName, setNftName}){
     return(
-        <div className="flex space-x-20 lg:flex-row">
+        <div className="flex flex-col space-y-20 lg:space-x-10 lg:space-y-0 xl:space-x-20 lg:flex-row">
             {/* Details */}
             <div className="font-semibold font-secondary">
                 <p className="mb-10">DETAILS</p>

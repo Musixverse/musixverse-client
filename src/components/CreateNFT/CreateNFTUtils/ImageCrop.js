@@ -7,7 +7,6 @@ import "react-image-crop/dist/ReactCrop.css";
 function ImageCrop({ imageToCrop, setCroppedImage, setShowModal }) {
     //imageToCrop is the user selected image
     //setCroppedImage is the cropped image state setter function
-    console.log("from cropper",imageToCrop);
     const [cropConfig, setCropConfig] = useState(
         // default crop config
         {
@@ -27,6 +26,7 @@ function ImageCrop({ imageToCrop, setCroppedImage, setShowModal }) {
             );
             // calling the props function to expose
             // croppedImage to the parent component
+            URL.revokeObjectURL(imageToCrop);
             setCroppedImage(croppedImage);
         }
     }
@@ -84,8 +84,8 @@ function ImageCrop({ imageToCrop, setCroppedImage, setShowModal }) {
             leaveFrom="opacity-100 translate-y-0 sm:scale-100"
             leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
         >
-            <div className="relative inline-block overflow-hidden text-left align-bottom transition-all transform bg-white rounded-lg shadow-xl sm:my-8 sm:align-middle sm:max-w-3xl sm:w-full">
-                <div className="px-4 pt-5 pb-6 bg-white dark:bg-dark-100 sm:p-8 sm:pb-6">
+            <div className="relative inline-block overflow-hidden text-left align-bottom transition-all transform rounded-lg shadow-xl bg-none sm:my-8 sm:align-middle sm:max-w-3xl sm:w-full">
+                <div className="px-4 pt-5 pb-6 dark:bg-[rgba(255,255,255,0.06)] dark:backdrop-blur-[7px] backdrop-blur-[7px] bg-[rgba(255,255,255,0.7)] sm:p-8 sm:pb-6">
                     <div>
                         <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
                             {/* Modal Heading */}
@@ -93,13 +93,13 @@ function ImageCrop({ imageToCrop, setCroppedImage, setShowModal }) {
                                 Crop NFT Cover Art
                             </Dialog.Title>
                             {/* Crop Component */}
-                            <div className="max-h-[270px] overflow-y-scroll">
+                            <div className="flex items-center justify-center">
                                 <ReactCrop
                                     src={imageToCrop}
                                     crop={cropConfig}
                                     ruleOfThirds
+                                    imageStyle={{height: '270px'}}
                                     onImageLoaded={(imageRef) => setImageRef(imageRef)}
-                                    // onComplete={(cropConfig) => cropImage(cropConfig)}
                                     onChange={(cropConfig) => setCropConfig(cropConfig)}
                                     crossorigin="anonymous" // to avoid CORS-related problems
                                 />
@@ -107,11 +107,11 @@ function ImageCrop({ imageToCrop, setCroppedImage, setShowModal }) {
                         </div>
                     </div>
                 </div>
-                <div className="px-4 py-3 bg-gray-50 dark:bg-dark-100 sm:px-6 sm:flex sm:flex-row-reverse">
+                <div className="px-4 py-3 dark:bg-[rgba(255,255,255,0.06)] dark:backdrop-blur-[7px] backdrop-blur-[7px] bg-[rgba(255,255,255,0.7)] sm:px-6 sm:flex sm:flex-row-reverse">
                     <button
                         type="button"
-                        className="inline-flex justify-center w-full px-4 py-2 text-base font-medium text-white bg-red-600 border border-transparent rounded-md shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm"
-                        onClick={() => setShowModal(false)}
+                        className="inline-flex justify-center w-full px-4 py-2 text-base font-medium text-[#676767] border border-transparent rounded-md shadow-sm dark:text-[#323232] bg-light-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-light-300 sm:ml-3 sm:w-auto sm:text-sm"
+                        onClick={() => {URL.revokeObjectURL(imageToCrop);setShowModal(false);}}
                     >
                         Cancel
                     </button>

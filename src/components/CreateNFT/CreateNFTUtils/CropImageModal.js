@@ -3,12 +3,8 @@ import { Dialog, Transition } from '@headlessui/react';
 import ImageCrop from './ImageCrop';
 
 export default function CropImageModal({showModal, setShowModal, imageToCrop, setCroppedImage}){
-    // console.log(props.showModal);
-    // const {showModal, setShowModal, imageToCrop, setCroppedImage} = props;
-    const cancelButtonRef = useRef(null)
-    // console.log("hi: ",props.showModal);
-    console.log(" from modal: ",imageToCrop);
-
+    const cancelButtonRef = useRef(null);
+    
     return(
         <Transition.Root show={showModal} as={Fragment}>
             <Dialog as="div" className="fixed inset-0 z-10 overflow-y-auto" initialFocus={cancelButtonRef} onClose={()=>setShowModal(false)}>

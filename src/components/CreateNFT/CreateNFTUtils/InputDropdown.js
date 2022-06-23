@@ -1,6 +1,7 @@
 import { Fragment, useState } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/solid";
+import styles from "../../../../styles/CreateNFT/InputDropdown.module.css";
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(" ");
@@ -40,7 +41,7 @@ export default function InputDropdown(props) {
         <Menu as="div" className="relative inline-block w-full text-left">
             {/* The visible dropdown button */}
             <div>
-                <Menu.Button className="inline-flex justify-between text-sm font-medium dark:bg-[#323232] text-gray-700 bg-light-100 border-2 border-[#777777] dark:border-[#323232] w-full px-4 py-2 rounded-md hover:border-[#6cc027] hover:dark:border-[#6cc027] dark:text-light-100">
+                <Menu.Button className={"dark:bg-[#323232] hover:dark:border-[#6cc027] dark:text-light-100 dark:border-[#323232] "+ styles['menu-button']}>
                     {currentFilter}
                     <ChevronDownIcon className="ml-2 h-5 w-5 text-[#6cc027]" aria-hidden="true" />
                 </Menu.Button>
@@ -56,7 +57,7 @@ export default function InputDropdown(props) {
                 leaveTo="transform opacity-0 scale-95"
             >
                 <Menu.Items className="absolute right-0 z-10 w-56 mt-3 origin-top-right rounded-md shadow-lg bg-light-300 dark:bg-dark-100 ring-1 ring-black ring-opacity-5 focus:outline-none">
-                    <div className="py-1 max-h-[200px] overflow-y-scroll">{dropdownOptions}</div>
+                    <div className={styles['menu-item-div']}>{dropdownOptions}</div>
                 </Menu.Items>
             </Transition>
         </Menu>

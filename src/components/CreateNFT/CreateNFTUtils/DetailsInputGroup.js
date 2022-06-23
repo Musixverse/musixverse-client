@@ -6,8 +6,8 @@ import InputDropdown from "./InputDropdown";
 
 export default function DetailsInputGroup(){
     return(
-        <div className="flex flex-col flex-1 space-y-2 md:space-y-4">
-            <div className="flex flex-col w-full space-y-2 md:flex-row md:space-x-4 md:space-y-0">
+        <div className="flex flex-col flex-1 space-y-2 sm:space-y-4">
+            <div className="flex flex-col w-full space-y-2 sm:flex-row sm:space-x-4 sm:space-y-0">
                 <div className="flex-1 text-sm font-semibold md:text-base font-secondary">
                     <p className="mb-1">TRACK ORIGIN</p>
                     <InputDropdown
@@ -21,7 +21,7 @@ export default function DetailsInputGroup(){
                     />
                 </div>
             </div>
-            <div className="flex flex-col w-full space-y-2 md:flex-row md:space-x-4 md:space-y-0">
+            <div className="flex flex-col w-full space-y-2 sm:flex-row sm:space-x-4 sm:space-y-0">
                 <div className="flex-1 text-sm font-semibold md:text-base font-secondary">
                     <p className="mb-1">RECORDING YEAR</p>
                     <input

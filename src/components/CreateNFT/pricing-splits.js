@@ -1,5 +1,5 @@
 import { useState } from "react";
-import InputDropdown from "./createNFTUtils/InputDropdown";
+import InputDropdown from "../CreateNFT/createNFTUtils/InputDropdown";
 
 const PricingAndSplits = ({numberOfCopies,setNumberOfCopies,nftPrice, setNftPrice}) => {
     const [ContributorList, setContributorList] = useState([{ ContributorName: "", Split: "" }]);
@@ -25,7 +25,7 @@ const PricingAndSplits = ({numberOfCopies,setNumberOfCopies,nftPrice, setNftPric
     };
 
     return (
-        <div className="flex flex-col lg:space-x-20 lg:flex-auto lg:flex-row font-semibold font-secondary">
+        <div className="flex flex-col lg:space-x-10 xl:space-x-20 lg:flex-auto lg:flex-row font-semibold font-secondary">
             {/* Contributors Details */}
             <div className="mt-10 md:mt-28 lg:mt-14 lg:w-1/2">
                 <div className="flex md:mb-6 gap-4">

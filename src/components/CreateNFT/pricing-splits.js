@@ -1,5 +1,5 @@
 import { useState } from "react";
-import InputDropdown from "../CreateNFT/createNFTUtils/InputDropdown";
+import InputDropdown from "./createNFTUtils/InputDropdown";
 
 const PricingAndSplits = ({numberOfCopies,setNumberOfCopies,nftPrice, setNftPrice}) => {
     const [ContributorList, setContributorList] = useState([{ ContributorName: "", Split: "" }]);
@@ -94,6 +94,7 @@ const PricingAndSplits = ({numberOfCopies,setNumberOfCopies,nftPrice, setNftPric
                                     </div>
                                     <div className="flex-1">
                                         <InputDropdown
+                                            //Need to change the optionsArray by collecting data from @Pushpit07
                                             optionsArray={["Afrobeat", "Afropop", "Alternative", "Big Band", "Blues", "Children's Music", "Classical", "Comedy", "Country", "Dance", "Electronic", "Fitness and Workout", "Folk", "French Pop", "German Folk", "German Pop","Hip Hop", "J-Pop","Jazz","K-Pop","Rap"]}
                                         />
                                     </div>

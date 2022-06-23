@@ -1,4 +1,5 @@
 import { useState } from "react";
+import InputDropdown from "./createNFTUtils/InputDropdown";
 
 const PricingAndSplits = ({numberOfCopies,setNumberOfCopies,nftPrice, setNftPrice}) => {
     const [ContributorList, setContributorList] = useState([{ ContributorName: "", Split: "" }]);
@@ -70,13 +71,13 @@ const PricingAndSplits = ({numberOfCopies,setNumberOfCopies,nftPrice, setNftPric
                         {ContributorList.map((x, i) => {
                             return (
                                 <div key={i} className="flex gap-4">
-                                    <div className="flex-grow">
+                                    <div className="flex-1">
                                         <input
                                             className="dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-100 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-100"
                                             id="contributor-name"
                                             name="ContributorName"
                                             type="text"
-                                            placeholder="Contributor Name"
+                                            placeholder="Name"
                                             value={x.ContributorName}
                                             onChange={e => handleInputChange(e, i)}
                                         />
@@ -89,6 +90,11 @@ const PricingAndSplits = ({numberOfCopies,setNumberOfCopies,nftPrice, setNftPric
                                             placeholder="Split %"
                                             value={x.Split}
                                             onChange={e => handleInputChange(e, i)}
+                                        />
+                                    </div>
+                                    <div className="flex-1">
+                                        <InputDropdown
+                                            optionsArray={["Afrobeat", "Afropop", "Alternative", "Big Band", "Blues", "Children's Music", "Classical", "Comedy", "Country", "Dance", "Electronic", "Fitness and Workout", "Folk", "French Pop", "German Folk", "German Pop","Hip Hop", "J-Pop","Jazz","K-Pop","Rap"]}
                                         />
                                     </div>
                                     {/* Button to remove more contributors */}

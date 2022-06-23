@@ -1,5 +1,5 @@
 import { useState } from "react";
-import InputDropdown from "./createNFTUtils/InputDropdown";
+import InputDropdown from "./CreateNFTUtils/InputDropdown";
 
 const PricingAndSplits = ({numberOfCopies,setNumberOfCopies,nftPrice, setNftPrice}) => {
     const [ContributorList, setContributorList] = useState([{ ContributorName: "", Split: "" }]);

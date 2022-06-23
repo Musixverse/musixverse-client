@@ -1,6 +1,6 @@
 import { useState } from "react";
-import PreviewNft from "./createNFTUtils/PreviewNft";
-import Step1Form from "./createNFTUtils/Step1Form";
+import PreviewNft from "./CreateNFTUtils/PreviewNft";
+import Step1Form from "./CreateNFTUtils/Step1Form";
 import PricingAndSpilts from "./pricing-splits.js";
 // import styles from "../../../styles/CreateNFT/Step2.module.css";
 

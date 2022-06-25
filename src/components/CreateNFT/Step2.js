@@ -2,7 +2,6 @@ import { useState } from "react";
 import PreviewNft from "./CreateNFTUtils/PreviewNft";
 import Step1Form from "./CreateNFTUtils/Step1Form";
 import PricingAndSpilts from "./pricing-splits.js";
-// import styles from "../../../styles/CreateNFT/Step2.module.css";
 
 export default function ComprehensiveDetails({currStep, setCurrStep}){
     /**
@@ -21,9 +20,11 @@ export default function ComprehensiveDetails({currStep, setCurrStep}){
     const [uploadedImage, setUploadedImage] = useState(null);
     const [uploadedSong, setUploadedSong] = useState(null);
     const [nftName, setNftName] = useState("");
-    //Ayush's form States 
+    const [contributorList, setContributorList] = useState([{ ContributorName: "", Split: "" }]);
     const [nftPrice, setNftPrice] = useState(0);
     const [numberOfCopies, setNumberOfCopies] = useState(0);
+    const [resaleRoyaltyPercent, setResaleRoyaltyPercent] = useState("");
+    const [releaseNow, setReleaseNow] = useState(true);
 
     let truncatedNftName = nftName;
     if(nftName.length > 10){
@@ -31,7 +32,7 @@ export default function ComprehensiveDetails({currStep, setCurrStep}){
     }
     const nftPreviewValues = {truncatedNftName, uploadedImage, uploadedSong, nftPrice, numberOfCopies, currStep};
     const step1Values = {uploadedImage,setUploadedImage, uploadedSong, setUploadedSong, nftName, setNftName};
-    const step2Values = {numberOfCopies,setNumberOfCopies,nftPrice, setNftPrice};
+    const step2Values = {numberOfCopies,setNumberOfCopies, nftPrice,setNftPrice, contributorList,setContributorList, resaleRoyaltyPercent,setResaleRoyaltyPercent, releaseNow,setReleaseNow};
 
     return(
         <div className="flex items-center justify-center mb-28 lg:mb-36 bg-light-200 dark:bg-dark-200">

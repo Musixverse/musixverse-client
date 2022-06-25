@@ -1,27 +1,25 @@
-import { useState } from "react";
 import InputDropdown from "./CreateNFTUtils/InputDropdown";
 
-const PricingAndSplits = ({numberOfCopies,setNumberOfCopies,nftPrice, setNftPrice}) => {
-    const [ContributorList, setContributorList] = useState([{ ContributorName: "", Split: "" }]);
+const PricingAndSplits = ({numberOfCopies,setNumberOfCopies, nftPrice,setNftPrice, contributorList,setContributorList, resaleRoyaltyPercent,setResaleRoyaltyPercent, releaseNow,setReleaseNow}) => {
 
     // handle input change
     const handleInputChange = (e, index) => {
       const { name, value } = e.target;
-      const list = [...ContributorList];
+      const list = [...contributorList];
       list[index][name] = value;
       setContributorList(list);
     };
   
     // handle click event of the Remove button
     const handleRemoveClick = index => {
-      const list = [...ContributorList];
+      const list = [...contributorList];
       list.splice(index, 1);
       setContributorList(list);
     };
   
     // handle click event of the Add button
     const handleAddClick = () => {
-      setContributorList([...ContributorList, { ContributorName: "", Split: "" }]);
+      setContributorList([...contributorList, { ContributorName: "", Split: "" }]);
     };
 
     return (
@@ -68,7 +66,7 @@ const PricingAndSplits = ({numberOfCopies,setNumberOfCopies,nftPrice, setNftPric
                 <div>
                     <span>ADD CONTRIBUTORS AND SPLITS</span>
                     <div className="mt-2 flex flex-col gap-4 text-gray-700">
-                        {ContributorList.map((x, i) => {
+                        {contributorList.map((x, i) => {
                             return (
                                 <div key={i} className="flex gap-4">
                                     <div className="flex-1">
@@ -94,12 +92,12 @@ const PricingAndSplits = ({numberOfCopies,setNumberOfCopies,nftPrice, setNftPric
                                     </div>
                                     <div className="flex-1">
                                         <InputDropdown
-                                            //Need to change the optionsArray by collecting data from @Pushpit07
-                                            optionsArray={["Producer", "Distributor", "Composer","Artist","Publisher","Other"]}
+                                            //Need to change the optionsArray by Final data @Pushpit07
+                                            optionsArray={["Producer", "Composer", "Songwriter", "Lyricist", "Singer", "Vocalist", "Other"]}
                                         />
                                     </div>
                                     {/* Button to remove more contributors */}
-                                    {ContributorList.length !== 1 && 
+                                    {contributorList.length !== 1 && 
                                         <div className="flex">
                                             <button className="text-gray-400 hover:text-gray-600" onClick={() => handleRemoveClick(i)}>x</button>    
                                         </div>
@@ -109,7 +107,7 @@ const PricingAndSplits = ({numberOfCopies,setNumberOfCopies,nftPrice, setNftPric
                         })}   
                     </div>
                     {/* Button to add more contributors */}
-                    {ContributorList.length < 4 && 
+                    {contributorList.length < 4 && 
                         <div className="flex mt-4 justify-start items-center">
                             <button className="rounded-full flex justify-center items-center w-8 h-8 bg-[#479E00] hover:bg-primary-300 text-white" onClick={handleAddClick}>+</button>
                             <span className="pl-3 font-normal text-sm">Add more Contributors</span>
@@ -128,9 +126,9 @@ const PricingAndSplits = ({numberOfCopies,setNumberOfCopies,nftPrice, setNftPric
                         className="dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-100 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-100"
                         id="resale-royalty-percentage"
                         // value={resaleRoyaltyPercent}
-                        // onChange={(e) => {
-                        //     setResaleRoyaltyPercent(e.target.value);
-                        // }}
+                        onChange={(e) => {
+                            setResaleRoyaltyPercent(e.target.value);
+                        }}
                         type="number"
                         min={0}
                         placeholder="Enter Resale Royalty Percentage"
@@ -143,14 +141,30 @@ const PricingAndSplits = ({numberOfCopies,setNumberOfCopies,nftPrice, setNftPric
                     <span>SCHEDULE LAUNCH</span>
                     <div className="flex items-center mt-2 space-x-10">
                         <div className="flex items-center">
-                            <input id="release_now" type="radio" name="radio" defaultChecked className="hidden" />
+                            <input 
+                                id="release_now" 
+                                onChange={(e) => {
+                                    setReleaseNow(true);
+                                }} 
+                                type="radio" 
+                                name="radio" 
+                                defaultChecked 
+                                className="hidden"    
+                            />
                             <label htmlFor="release_now" className="flex items-center text-sm font-normal cursor-pointer font-secondary">
                                 <span className="inline-block w-6 h-6 mr-1 border-2 rounded-full border-[#363636] flex-no-shrink"></span>
                                 Release now
                             </label>
                         </div>
                         <div className="flex items-center">
-                            <input id="release_later" type="radio" name="radio" className="hidden" />
+                            <input 
+                                id="release_later" 
+                                type="radio" 
+                                onChange={(e) => {
+                                    setReleaseNow(false);
+                                }}
+                                name="radio" 
+                                className="hidden" />
                             <label htmlFor="release_later" className="flex items-center text-sm font-normal cursor-pointer font-secondary">
                                 <span className="inline-block w-6 h-6 mr-1 border-2 rounded-full border-[#363636] flex-no-shrink"></span>
                                 Schedule for later

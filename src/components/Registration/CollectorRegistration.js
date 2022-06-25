@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import RightSection from "./ArtistRegUtils/RightSection";
 import styles from "../../../styles/Registration/Artist.module.css";
 import Button from "./ArtistRegUtils/Button";
@@ -7,7 +7,8 @@ import Router from "next/router";
 import { useMoralis } from "react-moralis";
 
 export default function CollectorRegistration() {
-    const { setUserData } = useMoralis();
+    const { Moralis, setUserData } = useMoralis();
+    const [avatar, setAvatar] = useState("");
     const nameRef = useRef(null);
     const usernameRef = useRef(null);
     const emailRef = useRef(null);
@@ -21,18 +22,27 @@ export default function CollectorRegistration() {
 
         if (name !== "" && username !== "" && email !== "") {
             await setUserData({
+                avatar: avatar,
                 name: name === "" ? undefined : name,
                 username: username === "" ? undefined : username,
                 email: email === "" ? undefined : email,
+                coverImage: "https://ipfs.moralis.io:2053/ipfs/QmSQ2s8TEKBAdZy3Pm6oy7CPDLZ7dEUQZJ89azN4a2AVUE",
+                isArtist: false,
             });
-            Router.push("/register/confirm-email", undefined, { shallow: true });
+            // Router.push("/register/confirm-email", undefined, { shallow: true });
         }
         return;
     };
 
+    async function uploadFile(data) {
+        const file = new Moralis.File("file", data);
+        await file.saveIPFS();
+        return file;
+    }
+
     return (
         <div className={styles["register"]}>
-            <div className={"dark:bg-dark-200 "+styles["register__container"]}>
+            <div className={"dark:bg-dark-200 " + styles["register__container"]}>
                 {/* Left section */}
                 <div className="lg:max-w-[30vw] pb-6 lg:pb-0">
                     <p className="mt-20 text-5xl font-tertiary max-w-[468px]">COLLECTOR SIGN UP</p>
@@ -50,7 +60,7 @@ export default function CollectorRegistration() {
                 <RightSection>
                     <p className="text-5xl font-tertiary max-w-[468px] mb-10">YOUR DETAILS</p>
                     <form onSubmit={handleCollectorDetailsSave}>
-                        <SelectAvatar />
+                        <SelectAvatar uploadFile={uploadFile} setAvatar={setAvatar} />
 
                         <p className="mt-8 text-[16px] font-secondary font-bold">Your Name*</p>
                         <input

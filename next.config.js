@@ -9,6 +9,6 @@ module.exports = withPWA({
         disable: process.env.NODE_ENV === "development",
     },
     images: {
-        domains: ["img.icons8.com", "gateway.moralisipfs.com"],
+        domains: ["img.icons8.com", "gateway.moralisipfs.com", "ipfs.moralis.io", "lh3.googleusercontent.com"],
     },
 });

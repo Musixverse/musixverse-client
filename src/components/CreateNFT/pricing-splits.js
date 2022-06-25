@@ -42,6 +42,7 @@ const PricingAndSplits = ({numberOfCopies,setNumberOfCopies, nftPrice,setNftPric
                             min={1}
                             step="1"
                             placeholder="No. of copies"
+                            required
                         />
                     </div>
                     <div className="w-full md:w-1/2">
@@ -59,6 +60,7 @@ const PricingAndSplits = ({numberOfCopies,setNumberOfCopies, nftPrice,setNftPric
                             min={0}
                             step="0.01"
                             placeholder="Enter NFT price"
+                            required
                         />
                     </div>
                 </div> 

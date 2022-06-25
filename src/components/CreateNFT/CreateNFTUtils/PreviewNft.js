@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { useRef } from "react";
 
-export default function PreviewNft({truncatedNftName, uploadedImage, uploadedSong, nftPrice, numberOfCopies, currStep}) {
+export default function PreviewNft({truncatedNftName, uploadedImage, uploadedSong, truncatednftPrice, numberOfCopies, currStep}) {
     const playBtn = useRef(null);
     const audio = useRef(null);
 
@@ -33,14 +33,6 @@ export default function PreviewNft({truncatedNftName, uploadedImage, uploadedSon
         pauseSong(playBtn.current.children[0]);
         audio.current.currentTime = 0;
     }
-    
-    if(nftPrice >= 1000000){
-        nftPrice = (nftPrice/1000000).toFixed(1) + "M";
-    }
-    if(nftPrice >= 1000){
-        nftPrice = (nftPrice/1000).toFixed(1) + "K";
-    }
-
 
     /*
         Things to be passed here as props:      
@@ -97,7 +89,7 @@ export default function PreviewNft({truncatedNftName, uploadedImage, uploadedSon
                         <p className="font-secondary">Price</p>
                         <div className="flex items-center font-bold">
                             <Image src={"/assets/Eth_logo.svg"} width={12.5} height={25} alt="ethereum logo"/>
-                            <span className="ml-1 sm:text-lg">{nftPrice == 0 ? 0 : nftPrice }</span>
+                            <span className="ml-1 sm:text-lg">{truncatednftPrice == 0 ? 0 : truncatednftPrice }</span>
                         </div>
                     </div>
                 </div>

@@ -30,7 +30,16 @@ export default function ComprehensiveDetails({currStep, setCurrStep}){
     if(nftName.length > 10){
         truncatedNftName = truncatedNftName.substring(0,8)+"...";
     }
-    const nftPreviewValues = {truncatedNftName, uploadedImage, uploadedSong, nftPrice, numberOfCopies, currStep};
+
+    let truncatednftPrice = nftPrice;
+    if(nftPrice >= 1000000){
+        truncatednftPrice = (nftPrice/1000000).toFixed(1) + "M";
+    }
+    else if(nftPrice >= 1000){
+        truncatednftPrice = (nftPrice/1000).toFixed(1) + "K";
+    }
+
+    const nftPreviewValues = {truncatedNftName, uploadedImage, uploadedSong, truncatednftPrice, numberOfCopies, currStep};
     const step1Values = {uploadedImage,setUploadedImage, uploadedSong, setUploadedSong, nftName, setNftName};
     const step2Values = {numberOfCopies,setNumberOfCopies, nftPrice,setNftPrice, contributorList,setContributorList, resaleRoyaltyPercent,setResaleRoyaltyPercent, releaseNow,setReleaseNow};
 

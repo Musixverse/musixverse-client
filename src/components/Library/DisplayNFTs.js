@@ -47,7 +47,7 @@ const DisplayNFTs = () => {
 
     return (
         <div className="container mx-auto pb-60">
-            <div class="grid grid-cols-5 gap-10">
+            <div className="grid grid-cols-5 gap-10">
                 {Tokens &&
                     Tokens.map((nft, index) => {
                         const metadata = JSON.parse(nft.metadata);

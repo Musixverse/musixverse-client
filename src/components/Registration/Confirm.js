@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { useTheme } from "next-themes";
 import styles from "../../../styles/Registration/Confirm.module.css";
@@ -6,15 +6,27 @@ import Button from "./ArtistRegUtils/Button";
 import B_blackhole from "../../../public/assets/registration/dark_black_hole.svg";
 import W_blackhole from "../../../public/assets/registration/white_black_hole.svg";
 import Router from "next/router";
-import { useMoralis } from "react-moralis";
+import { useMoralis, useMoralisQuery } from "react-moralis";
 
 export default function Confirm() {
     const { theme } = useTheme();
     const { user, refetchUserData } = useMoralis();
+    const [userInfo, setUserInfo] = useState("");
+
+    const { fetch } = useMoralisQuery("UserInfo", (query) => query.equalTo("user", user), [], { autoFetch: false });
 
     useEffect(() => {
         if (user) {
             refetchUserData();
+            fetch({
+                onSuccess: (object) => {
+                    setUserInfo(object[0]);
+                },
+                onError: (error) => {
+                    // The object was not retrieved successfully.
+                    // error is a Moralis.Error with an error code and message.
+                },
+            });
         }
     }, [user]);
 
@@ -22,7 +34,7 @@ export default function Confirm() {
         e.preventDefault();
         await refetchUserData();
 
-        if (user.attributes.isArtist) {
+        if (userInfo.attributes.isArtist) {
             Router.push(`/profile/${user.attributes.username}`, undefined, { shallow: true });
         } else {
             Router.push("/library", undefined, { shallow: true });
@@ -40,7 +52,9 @@ export default function Confirm() {
                         <p className="text-4xl font-tertiary sm:text-5xl">CONFIRM YOUR EMAIL</p>
                         <p className="font-secondary text-[15px] text-center">Please check your inbox and follow the instructions in the mail.</p>
                     </span>
-                    <form onSubmit={backToLogin}>{user && user.attributes.isArtist ? <Button>Go to Profile</Button> : <Button>Go to Library</Button>}</form>
+                    <form onSubmit={backToLogin}>
+                        {user && userInfo && userInfo.attributes.isArtist ? <Button>Go to Profile</Button> : <Button>Go to Library</Button>}
+                    </form>
                 </div>
             </div>
         </div>

@@ -1,7 +1,7 @@
 import CustomButton from "../../../layout/CustomButton";
 
-export default function ProfileSection2(){
-    return(
+export default function ProfileSection2({ spotify, setSpotify, instagram, setInstagram, twitter, setTwitter, facebook, setFacebook, handleSave }) {
+    return (
         <div className="w-full p-8 mt-10 xl:p-10 bg-light-300 dark:bg-dark-100 rounded-xl">
             <h1 className="mb-8 text-3xl xl:text-4xl font-tertiary min-w-fit">SOCIAL PROFILES</h1>
             <div className="flex flex-col mb-10 md:mb-6 md:flex-row">
@@ -15,16 +15,22 @@ export default function ProfileSection2(){
                         <div className="flex-1 text-sm font-medium md:text-base font-secondary">
                             <p className="mb-1">Spotify account</p>
                             <input
-                                type="text"
+                                type="url"
+                                value={spotify}
+                                onChange={(e) => setSpotify(e.target.value)}
+                                id="spotify"
                                 placeholder="Enter account url"
                                 spellCheck={false}
                                 className="dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-100 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-light-100 focus:border-primary-100"
                             />
                         </div>
                         <div className="flex-1 text-sm font-medium md:text-base font-secondary">
-                            <p className="mb-1">Facebook account</p>
+                            <p className="mb-1">Instagram account</p>
                             <input
-                                type="text"
+                                type="url"
+                                value={instagram}
+                                onChange={(e) => setInstagram(e.target.value)}
+                                id="instagram"
                                 placeholder="Enter account url"
                                 spellCheck={false}
                                 className="dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-100 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-light-100 focus:border-primary-100"
@@ -35,16 +41,22 @@ export default function ProfileSection2(){
                         <div className="flex-1 text-sm font-medium md:text-base font-secondary">
                             <p className="mb-1">Twitter account</p>
                             <input
-                                type="text"
+                                type="url"
+                                value={twitter}
+                                onChange={(e) => setTwitter(e.target.value)}
+                                id="twitter"
                                 placeholder="Enter account url"
                                 spellCheck={false}
                                 className="dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-100 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-light-100 focus:border-primary-100"
                             />
                         </div>
                         <div className="flex-1 text-sm font-medium md:text-base font-secondary">
-                            <p className="mb-1">Instagram account</p>
+                            <p className="mb-1">Facebook account</p>
                             <input
-                                type="text"
+                                type="url"
+                                value={facebook}
+                                onChange={(e) => setFacebook(e.target.value)}
+                                id="facebook"
                                 placeholder="Enter account url"
                                 spellCheck={false}
                                 className="dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-100 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-light-100 focus:border-primary-100"
@@ -53,7 +65,9 @@ export default function ProfileSection2(){
                     </div>
                 </div>
             </div>
-            <CustomButton green={true}>Save Changes</CustomButton>
+            <div onClick={handleSave}>
+                <CustomButton green={true}>Save Changes</CustomButton>
+            </div>
         </div>
     );
 }

@@ -1,14 +1,12 @@
-import { Fragment, useRef } from 'react';
-import { Dialog, Transition } from '@headlessui/react';
+import { Fragment, useRef } from "react";
+import { Dialog, Transition } from "@headlessui/react";
 
-export default function ArtistBioModal(props){
-    const artistName = "Ben";
-    const artistBio = "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quas illo ad eaque ipsa molestias distinctio cupiditate veniam, velit recusandae itaque deleniti voluptatum, quibusdam alias odit! Quibusdam, sed nulla. Pariatur, similique Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quas illo ad eaque ipsa molestias distinctio cupiditate veniam, velit recusandae itaque deleniti voluptatum, quibusdam alias odit! Quibusdam, sed nulla. Pariatur, similique Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quas illo ad eaque ipsa molestias distinctio cupiditate veniam, velit recusandae itaque deleniti voluptatum, quibusdam alias odit! Quibusdam, sed nulla. Pariatur, similique Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quas illo ad eaque ipsa molestias distinctio cupiditate veniam, velit recusandae itaque deleniti voluptatum, quibusdam alias odit! Quibusdam, sed nulla. Pariatur, similique";
-    const cancelButtonRef = useRef(null)
+export default function ArtistBioModal(props) {
+    const cancelButtonRef = useRef(null);
 
-    return(
+    return (
         <Transition.Root show={props.showModal} as={Fragment}>
-            <Dialog as="div" className="fixed inset-0 z-10 overflow-y-auto" initialFocus={cancelButtonRef} onClose={()=>props.setShowModal(false)}>
+            <Dialog as="div" className="fixed inset-0 z-10 overflow-y-auto" initialFocus={cancelButtonRef} onClose={() => props.setShowModal(false)}>
                 <div className="flex items-end justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
                     <Transition.Child
                         as={Fragment}
@@ -46,12 +44,10 @@ export default function ArtistBioModal(props){
                                     <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
                                         {/* Artist Info Modal Heading */}
                                         <Dialog.Title as="h3" className="mb-4 text-lg font-medium leading-6 text-gray-900">
-                                            About {artistName}
+                                            About {props.name}
                                         </Dialog.Title>
                                         {/* Artist Bio */}
-                                        <p className="text-sm text-gray-500">
-                                            {artistBio}
-                                        </p>
+                                        <p className="text-sm text-gray-500">{props.bio}</p>
                                     </div>
                                 </div>
                             </div>

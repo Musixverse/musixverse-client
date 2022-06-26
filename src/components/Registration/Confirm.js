@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import Image from "next/image";
 import { useTheme } from "next-themes";
 import styles from "../../../styles/Registration/Confirm.module.css";
@@ -11,16 +12,18 @@ export default function Confirm() {
     const { theme } = useTheme();
     const { user, refetchUserData } = useMoralis();
 
-    if (user) {
-        refetchUserData();
-    }
+    useEffect(() => {
+        if (user) {
+            refetchUserData();
+        }
+    }, [user]);
 
     const backToLogin = async (e) => {
         e.preventDefault();
         await refetchUserData();
 
         if (user.attributes.isArtist) {
-            Router.push("/profile", undefined, { shallow: true });
+            Router.push(`/profile/${user.attributes.username}`, undefined, { shallow: true });
         } else {
             Router.push("/library", undefined, { shallow: true });
         }

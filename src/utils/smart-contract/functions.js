@@ -57,9 +57,26 @@ async function connectSmartContract() {
     console.log("Contract connected");
 }
 
-async function mintTrackNFT(numberOfCopies, metadataURIs, contributors, percentageContributions, address) {
-    // window.web3.utils.toWei(_price, "Ether"),
-    await MUSIXVERSE.methods.mintTrackNFT(numberOfCopies, metadataURIs, contributors, percentageContributions).send({ from: address });
+async function mintTrackNFT(numberOfCopies, price, metadataURIs, contributors, percentageContributions, resaleRoyaltyPercentage, onSale, callerAddress) {
+    await MUSIXVERSE.methods
+        .mintTrackNFT(numberOfCopies, price, metadataURIs, contributors, percentageContributions, resaleRoyaltyPercentage, onSale)
+        .send({ from: callerAddress });
+}
+
+async function purchaseMusicNFT(tokenId, price, callerAddress) {
+    const _tokenId = parseInt(tokenId).toString();
+    // const _price = web3.utils.fromWei(price.toString(), 'Ether')
+    await MUSIXVERSE.methods.purchaseMusicNFT(_tokenId).send({ from: callerAddress, value: price });
+}
+
+async function updatePrice(tokenId, newPrice, callerAddress) {
+    const _tokenId = parseInt(tokenId).toString();
+    await MUSIXVERSE.methods.updatePrice(_tokenId, newPrice).send({ from: callerAddress });
+}
+
+async function toggleOnSale(tokenId, callerAddress) {
+    const _tokenId = parseInt(tokenId).toString();
+    await MUSIXVERSE.methods.toggleOnSale(_tokenId).send({ from: callerAddress });
 }
 
 async function uri(tokenId) {
@@ -67,30 +84,22 @@ async function uri(tokenId) {
     return _tokenUri;
 }
 
-// async function purchaseSong(id, price, _artistAddress, _artistName) {
-//     const _id = parseInt(id).toString();
-//     // const _price = web3.utils.fromWei(price.toString(), 'Ether')
+async function ownerOf(tokenId) {
+    const _tokenId = parseInt(tokenId).toString();
+    return await MUSIXVERSE.methods.ownerOf(_tokenId).call();
+}
 
-//     setLoading(true);
+async function contractURI() {
+    return await MUSIXVERSE.methods.contractURI().call();
+}
 
-//     musixverse.methods
-//         .purchaseSong(_id)
-//         .send({ from: account, value: price })
-//         .once("receipt", async (receipt) => {
-//             if (account !== _artistAddress) {
-//                 await createMessagingChannel(_artistAddress, _artistName);
-//                 await createTeamChannel(_artistAddress, _artistName);
-//             }
-//             setLoading(false);
-//             setShowTradeSuccess(true);
-//         })
-//         .catch(function (error) {
-//             setLoading(false);
-//             setShowError(true);
-//             // if (error.code === 4001) {
-//             // 	window.location.reload();
-//             // }
-//         });
-// }
+async function baseURI() {
+    return await MUSIXVERSE.methods.baseURI().call();
+}
 
-module.exports = { connectSmartContract, mintTrackNFT, uri };
+async function getRoyaltyInfo(tokenId) {
+    const _tokenId = parseInt(tokenId).toString();
+    return await MUSIXVERSE.methods.getRoyaltyInfo(_tokenId).call();
+}
+
+module.exports = { connectSmartContract, mintTrackNFT, purchaseMusicNFT, updatePrice, toggleOnSale, uri, ownerOf, contractURI, baseURI, getRoyaltyInfo };

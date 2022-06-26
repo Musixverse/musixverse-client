@@ -1,4 +1,6 @@
 import Head from "next/head";
+import LibraryHeader from "../../components/Library/LibraryHeader";
+import DisplayNFTs from "../../components/Library/DisplayNFTs";
 
 const Library = ({}) => {
     return (
@@ -9,11 +11,9 @@ const Library = ({}) => {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <div className="container mx-auto pt-36 pb-20 min-h-screen">
-                <div className="flex flex-wrap justify-center content-center items-center">
-                    <h1 className="text-4xl font-semibold">Library</h1>
-                </div>
-            </div>
+            <LibraryHeader />
+
+            <DisplayNFTs />
         </>
     );
 };

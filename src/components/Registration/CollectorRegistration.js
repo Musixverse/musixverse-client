@@ -1,13 +1,17 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useContext } from "react";
 import RightSection from "./ArtistRegUtils/RightSection";
 import styles from "../../../styles/Registration/Artist.module.css";
 import Button from "./ArtistRegUtils/Button";
 import SelectAvatar from "./ArtistRegUtils/SelectAvatar";
 import Router from "next/router";
 import { useMoralis } from "react-moralis";
+import StatusContext from "../../../store/status-context";
 
 export default function CollectorRegistration() {
-    const { setUserData } = useMoralis();
+    const [, , , setError] = useContext(StatusContext);
+    const { Moralis, setUserData } = useMoralis();
+
+    const [avatar, setAvatar] = useState("");
     const nameRef = useRef(null);
     const usernameRef = useRef(null);
     const emailRef = useRef(null);
@@ -19,20 +23,73 @@ export default function CollectorRegistration() {
         const username = usernameRef.current.value;
         const email = emailRef.current.value;
 
+        // USERNAME CHECKS
+        const usernameRegex = /^\w+$/;
+        if (username.length < 2) {
+            setError({
+                title: "Invalid credentials!",
+                message: "Username length should be greater than 1",
+                showErrorBox: true,
+            });
+            usernameRef.current.focus();
+            return;
+        } else if (!usernameRegex.test(username)) {
+            setError({
+                title: "Invalid credentials!",
+                message: "Username can only contain alphabets, numbers, and '_'",
+                showErrorBox: true,
+            });
+            usernameRef.current.focus();
+            return;
+        }
+
+        // EMAIL CHECKS
+        const emailRegex = new RegExp(
+            /^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i
+        );
+        if (!emailRegex.test(email)) {
+            setError({
+                title: "Invalid credentials!",
+                message: "Please enter a valid email",
+                showErrorBox: true,
+            });
+            emailRef.current.focus();
+            return;
+        }
+
         if (name !== "" && username !== "" && email !== "") {
             await setUserData({
+                avatar: avatar,
                 name: name === "" ? undefined : name,
                 username: username === "" ? undefined : username,
                 email: email === "" ? undefined : email,
+                coverImage: "https://ipfs.moralis.io:2053/ipfs/QmSQ2s8TEKBAdZy3Pm6oy7CPDLZ7dEUQZJ89azN4a2AVUE",
+                isArtist: false,
             });
-            Router.push("/register/confirm-email", undefined, { shallow: true });
+
+            if (userError) {
+                setError((prevState) => ({
+                    ...prevState,
+                    title: "Invalid credentials!",
+                    message: JSON.stringify(userError.message),
+                    showErrorBox: true,
+                }));
+            } else {
+                Router.push("/register/confirm-email", undefined, { shallow: true });
+            }
         }
         return;
     };
 
+    async function uploadFile(data) {
+        const file = new Moralis.File("file", data);
+        await file.saveIPFS();
+        return file;
+    }
+
     return (
         <div className={styles["register"]}>
-            <div className={"dark:bg-dark-200 "+styles["register__container"]}>
+            <div className={"dark:bg-dark-200 " + styles["register__container"]}>
                 {/* Left section */}
                 <div className="lg:max-w-[30vw] pb-6 lg:pb-0">
                     <p className="mt-20 text-5xl font-tertiary max-w-[468px]">COLLECTOR SIGN UP</p>
@@ -50,7 +107,7 @@ export default function CollectorRegistration() {
                 <RightSection>
                     <p className="text-5xl font-tertiary max-w-[468px] mb-10">YOUR DETAILS</p>
                     <form onSubmit={handleCollectorDetailsSave}>
-                        <SelectAvatar />
+                        <SelectAvatar uploadFile={uploadFile} setAvatar={setAvatar} />
 
                         <p className="mt-8 text-[16px] font-secondary font-bold">Your Name*</p>
                         <input

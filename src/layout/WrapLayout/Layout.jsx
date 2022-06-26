@@ -15,12 +15,17 @@ const Layout = ({ children }) => {
 
     useEffect(() => {
         if (authError) {
-            setError((prevState) => ({
-                ...prevState,
-                title: "Auth failed!",
-                message: authError.message,
-                showErrorBox: true,
-            }));
+            if (
+                authError.message !== "Web3Auth: User closed login modal." &&
+                authError.message !== "Cannot execute Moralis.enableWeb3(), as Moralis Moralis.enableWeb3() already has been called, but is not finished yet "
+            ) {
+                setError((prevState) => ({
+                    ...prevState,
+                    title: "Auth failed!",
+                    message: authError.message,
+                    showErrorBox: true,
+                }));
+            }
         }
     }, [authError]);
 

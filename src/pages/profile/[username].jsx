@@ -12,30 +12,38 @@ export default function Profile() {
     const router = useRouter();
     const { username } = router.query;
     const [profileUser, setProfileUser] = useState(false);
+    const [profileUserInfo, setProfileUserInfo] = useState(false);
 
     const { fetch } = useMoralisCloudFunction("fetchUser", { username: username }, { autoFetch: false });
+    const { fetch: fetchInfo } = useMoralisCloudFunction("fetchUserInfo", { username: username }, { autoFetch: false });
 
     const fetchUser = async () => {
         const results = await fetch({
-            onSuccess: (data) => console.log("data:", data),
+            onSuccess: (data) => console.log("profileUser:", data.attributes),
         });
         if (results) {
             setProfileUser(results.attributes);
         }
     };
 
+    const fetchUserInfo = async () => {
+        const results = await fetchInfo({
+            onSuccess: (data) => console.log("profileUserInfo:", data),
+        });
+        if (results) {
+            setProfileUserInfo(results.attributes);
+        }
+    };
+
     useEffect(() => {
         fetchUser();
+        fetchUserInfo();
     }, [username]);
 
-    useEffect(() => {
-        console.log("profileUser:", profileUser);
-    }, [profileUser]);
-
-    if (!profileUser) return null;
+    if (!profileUser && !profileUserInfo) return null;
     return (
         <>
-            {profileUser.isArtist ? (
+            {profileUserInfo.isArtist ? (
                 <Head>
                     <title>Musixverse | Artist Profile</title>
                     <meta name="description" content="The NFT Marketplace for Musicians and Fans" />
@@ -48,19 +56,19 @@ export default function Profile() {
             )}
 
             <div className="flex flex-col items-center justify-center w-full bg-light-200 dark:bg-dark-200">
-                <Banner coverImage={profileUser.coverImage} />
+                <Banner coverImage={profileUserInfo.coverImage} />
                 <div className="w-full max-w-[1920px] px-6 md:px-8 lg:px-16 xl:px-20 2xl:px-36">
                     <ArtistHeader
-                        avatar={profileUser.avatar}
+                        avatar={profileUserInfo.avatar}
                         name={profileUser.name}
-                        isVerified={profileUser.isVerified}
-                        instagram={profileUser.instagram}
-                        facebook={profileUser.facebook}
-                        twitter={profileUser.twitter}
-                        followerCount={profileUser.followerCount}
-                        tracksReleased={profileUser.tracksReleased}
-                        bio={profileUser.bio}
-                        country={profileUser.country}
+                        isVerified={profileUserInfo.isVerified}
+                        instagram={profileUserInfo.instagram}
+                        facebook={profileUserInfo.facebook}
+                        twitter={profileUserInfo.twitter}
+                        followerCount={profileUserInfo.followerCount}
+                        tracksReleased={profileUserInfo.tracksReleased}
+                        bio={profileUserInfo.bio}
+                        country={profileUserInfo.country}
                         createdAt={profileUser.createdAt}
                     />
                     <Filter />

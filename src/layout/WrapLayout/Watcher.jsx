@@ -10,38 +10,41 @@ const Watcher = () => {
     const router = useRouter();
     // TODO: Uncomment useEffects
 
-    // useEffect(() => {
-    //     if (router.pathname.startsWith("/register") && !user) {
-    //         Router.push("/", undefined, { shallow: true });
-    //     }
-    //     if (router.pathname.startsWith("/profile") && !user) {
-    //         Router.push("/", undefined, { shallow: true });
-    //     }
-    // }, [router.pathname]);
+    useEffect(() => {
+        if (router.pathname.startsWith("/register") && !user) {
+            Router.push("/", undefined, { shallow: true });
+        }
+        if (router.pathname.startsWith("/profile") && !user.attributes.email && !user.attributes.avatar) {
+            Router.push("/register", undefined, { shallow: true });
+        }
+        if (router.pathname.startsWith("/dashboard") && !user.attributes.email && !user.attributes.avatar) {
+            Router.push("/register", undefined, { shallow: true });
+        }
+    }, [router.pathname]);
 
-    // /* Fetch updated user details */
-    // async function fetchUpdatedUser() {
-    //     if (user) {
-    //         // user = await Moralis.User.current().fetch();
-    //         await refetchUserData();
-    //         console.log(user);
-    //     }
-    // }
+    /* Fetch updated user details */
+    async function fetchUpdatedUser() {
+        if (user) {
+            // user = await Moralis.User.current().fetch();
+            await refetchUserData();
+            console.log(user);
+        }
+    }
 
-    // /* Handle the flow of registration pages */
-    // useEffect(() => {
-    //     console.log("User:", user);
-    //     if (user) {
-    //         fetchUpdatedUser();
-    //         if (!user.attributes.email) {
-    //             Router.push("/register", undefined, { shallow: true });
-    //         } else if (!user.attributes.emailVerified) {
-    //             Router.push("/register/confirm-email", undefined, { shallow: true });
-    //         } else {
-    //             // DO NOTHING
-    //         }
-    //     }
-    // }, [user]);
+    /* Handle the flow of registration pages */
+    useEffect(() => {
+        console.log("User:", user);
+        if (user) {
+            fetchUpdatedUser();
+            if (!user.attributes.email) {
+                Router.push("/register", undefined, { shallow: true });
+            } else if (!user.attributes.emailVerified) {
+                Router.push("/register/confirm-email", undefined, { shallow: true });
+            } else {
+                // DO NOTHING
+            }
+        }
+    }, [user]);
 
     return <span></span>;
 };

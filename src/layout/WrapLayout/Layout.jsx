@@ -4,13 +4,16 @@ import { useRouter } from "next/router";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import Watcher from "./Watcher";
+import Loading from "../Loading";
 import ErrorBox from "../Modal/ErrorBox";
 import SuccessBox from "../Modal/SuccessBox";
+import LoadingContext from "../../../store/loading-context";
 import StatusContext from "../../../store/status-context";
 
 const Layout = ({ children }) => {
     const { authError } = useMoralis();
     const [error, success, , setError] = useContext(StatusContext);
+    const [isLoading] = useContext(LoadingContext);
     const router = useRouter();
 
     useEffect(() => {
@@ -34,6 +37,7 @@ const Layout = ({ children }) => {
             <Watcher />
             <Navbar />
             {children}
+            {isLoading && <Loading />}
             {error.showErrorBox && <ErrorBox />}
             {success.showSuccessBox && <SuccessBox />}
             {router.pathname !== "/cfh/cfb" && <Footer />}

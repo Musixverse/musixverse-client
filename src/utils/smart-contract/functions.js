@@ -47,9 +47,9 @@ async function connectSmartContract() {
         await addPolygonTestnetNetwork();
     } else {
         window.web3 = new Web3(new Web3.providers.HttpProvider("https://speedy-nodes-nyc.moralis.io/9aef181628e87a4be542999f/polygon/mumbai"));
-        window.alert(
-            "Non-Ethereum browser detected. You cannot perform any transactions on the blockchain, however you will still be able to watch all content present on the blockchain. To make transactions you should consider installing Metamask"
-        );
+        // window.alert(
+        //     "Non-Ethereum browser detected. You cannot perform any transactions on the blockchain, however you will still be able to watch all content present on the blockchain. To make transactions you should consider installing Metamask"
+        // );
     }
 
     const web3 = window.web3;

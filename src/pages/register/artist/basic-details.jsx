@@ -2,7 +2,7 @@ import Head from "next/head";
 import BasicDetails from "../../../components/Registration/BasicDetails";
 import { useEffect, useContext } from "react";
 import { useMoralis } from "react-moralis";
-import LoadingContext from "../../../store/loading-context";
+import LoadingContext from "../../../../store/loading-context";
 
 const ArtistBasicDetails = () => {
     const { user, isInitialized } = useMoralis();

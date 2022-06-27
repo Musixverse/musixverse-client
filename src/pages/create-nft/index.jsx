@@ -172,10 +172,22 @@ const CreateNFT = () => {
         // await file.saveIPFS();
 
         // const numberOfCopies = 1;
+        // const price = 1.2;
         // const metadataURIs = [file.hash()];
         // const contributors = [user.attributes.accounts[0]];
         // const percentageContributions = [100];
-        // mintTrackNFT(numberOfCopies, metadataURIs, contributors, percentageContributions, user.attributes.accounts[0]);
+        // const resaleRoyaltyPercentage = 5;
+        // const onSale = true;
+        // mintTrackNFT(
+        //     numberOfCopies,
+        //     window.web3.utils.toWei(String(price), "Ether"),
+        //     metadataURIs,
+        //     contributors,
+        //     percentageContributions,
+        //     resaleRoyaltyPercentage,
+        //     onSale,
+        //     user.attributes.accounts[0]
+        // );
         console.log(await uri(1));
     };
 

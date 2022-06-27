@@ -1,4 +1,4 @@
-import { useRef, useContext } from "react";
+import { useState, useRef, useContext } from "react";
 import RightSection from "./ArtistRegUtils/RightSection";
 import styles from "../../../styles/Registration/Artist.module.css";
 import SelectAvatar from "./ArtistRegUtils/SelectAvatar";
@@ -9,11 +9,18 @@ import StatusContext from "../../../store/status-context";
 
 export default function BasicDetails() {
     const [, , , setError] = useContext(StatusContext);
-    const { setUserData, userError } = useMoralis();
+    const { Moralis, setUserData, userError } = useMoralis();
 
+    const [avatar, setAvatar] = useState("");
     const nameRef = useRef(null);
     const usernameRef = useRef(null);
     const emailRef = useRef(null);
+
+    async function uploadFile(data) {
+        const file = new Moralis.File("file", data);
+        await file.saveIPFS();
+        return file;
+    }
 
     const handleBasicDetailsSave = async (e) => {
         e.preventDefault();
@@ -58,9 +65,11 @@ export default function BasicDetails() {
 
         if (name !== "" && username !== "" && email !== "") {
             await setUserData({
+                avatar: avatar,
                 name: name === "" ? undefined : name,
                 username: username === "" ? undefined : username,
                 email: email === "" ? undefined : email,
+                coverImage: "https://ipfs.moralis.io:2053/ipfs/QmSQ2s8TEKBAdZy3Pm6oy7CPDLZ7dEUQZJ89azN4a2AVUE",
                 isArtist: true,
             });
 
@@ -75,6 +84,7 @@ export default function BasicDetails() {
                 Router.push("/register/confirm-email", undefined, { shallow: true });
             }
         }
+
         return;
     };
 
@@ -98,7 +108,7 @@ export default function BasicDetails() {
                 <RightSection>
                     <p className="text-5xl font-tertiary max-w-[468px] mb-10">YOUR DETAILS</p>
                     <form onSubmit={handleBasicDetailsSave}>
-                        <SelectAvatar />
+                        <SelectAvatar uploadFile={uploadFile} setAvatar={setAvatar} />
                         <p className="mt-8 text-[16px] font-secondary font-bold">Your Name</p>
                         <input
                             type="text"

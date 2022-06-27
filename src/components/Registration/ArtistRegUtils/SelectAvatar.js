@@ -1,11 +1,11 @@
 import { useRef } from "react";
 import DefaultAvatar from "./DefaultAvatar";
 
-export default function SelectAvatar() {
+export default function SelectAvatar({ uploadFile, setAvatar }) {
     const uploadedImage = useRef(null);
     const uploadImage = useRef(null);
 
-    //Array of default arrays
+    // Array of default urls
     const urls = [
         "https://lh3.googleusercontent.com/MA0m87sfDmKHswPN39ycJkOUMS9C2wLqF5jz3SRpA8ij_V2Z-o3iPnViH1bT8_QISKwnCYSIO5ngL_85H60bpE9R6mogFuMjumBfB3w=s0",
         "https://www.artnews.com/wp-content/uploads/2021/08/BAYC-8746.png?w=631",
@@ -18,16 +18,20 @@ export default function SelectAvatar() {
     const handleImageSelection = (selectedUrl) => {
         const el = uploadedImage.current;
         el.src = selectedUrl;
-        //Reset the uploaded file
+        // Reset the uploaded file
         uploadImage.current.value = "";
+        setAvatar(el.src);
     };
 
-    const handleImageUpload = (event) => {
+    const handleImageUpload = async (event) => {
         const el = uploadedImage.current;
         el.src = URL.createObjectURL(event.target.files[0]);
-        el.onload = function(){
-            URL.revokeObjectURL(el.src); //Manging memo leak
-        }
+        el.onload = function () {
+            URL.revokeObjectURL(el.src); // Manging memo leak
+        };
+
+        const file = await uploadFile(event.target.files[0]);
+        setAvatar(file.ipfs());
     };
 
     return (

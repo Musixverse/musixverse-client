@@ -21,7 +21,7 @@ const Watcher = () => {
                     Router.push("/", undefined, { shallow: true });
                 }
             } else {
-                if (router.pathname.startsWith("/register") && user.attributes.email) {
+                if (router.pathname.startsWith("/register") && user.attributes.email && user.attributes.emailVerified) {
                     Router.push("/", undefined, { shallow: true });
                 }
             }

@@ -25,7 +25,8 @@ export default function ProfileSection3({ balance, walletAddress }) {
             <div className="ml-6 self-end text-xl xl:text-2xl font-tertiary">
                 Balance:{" "}
                 <span className="ml-1 text-md font-primary">
-                    {balance} <span className="text-sm font-secondary">MATIC</span>
+                    {balance}
+                    <span className="ml-1 text-sm font-secondary">MATIC</span>
                 </span>
             </div>
         </div>

@@ -1,15 +1,17 @@
 import { useState, useRef, useContext } from "react";
 import RightSection from "./ArtistRegUtils/RightSection";
 import styles from "../../../styles/Registration/Artist.module.css";
+import Button from "./ArtistRegUtils/Button";
 import SelectAvatar from "./ArtistRegUtils/SelectAvatar";
 import Router from "next/router";
-import { useMoralis } from "react-moralis";
-import Button from "./ArtistRegUtils/Button";
+import { useMoralis, useNewMoralisObject } from "react-moralis";
 import StatusContext from "../../../store/status-context";
 
 export default function BasicDetails() {
     const [, , , setError] = useContext(StatusContext);
-    const { Moralis, setUserData, userError } = useMoralis();
+    const { Moralis, userError, user, setUserData } = useMoralis();
+    const { save: saveUserInfo } = useNewMoralisObject("UserInfo");
+    const { save: saveUserPreferences } = useNewMoralisObject("UserPreferences");
 
     const [avatar, setAvatar] = useState("");
     const nameRef = useRef(null);
@@ -65,12 +67,52 @@ export default function BasicDetails() {
 
         if (name !== "" && username !== "" && email !== "") {
             await setUserData({
-                avatar: avatar,
                 name: name === "" ? undefined : name,
                 username: username === "" ? undefined : username,
                 email: email === "" ? undefined : email,
+            });
+
+            const userData = {
+                user: user,
+                avatar: avatar,
                 coverImage: "https://ipfs.moralis.io:2053/ipfs/QmSQ2s8TEKBAdZy3Pm6oy7CPDLZ7dEUQZJ89azN4a2AVUE",
                 isArtist: true,
+            };
+            await saveUserInfo(userData, {
+                onSuccess: (obj) => {
+                    // Execute any logic that should take place after the object is saved.
+                },
+                onError: (error) => {
+                    // Execute any logic that should take place if the save fails.
+                    // error is a Moralis.Error with an error code and message.
+                    setError((prevState) => ({
+                        ...prevState,
+                        title: "Failed to save user information",
+                        message: JSON.stringify(error.message),
+                        showErrorBox: true,
+                    }));
+                    return;
+                },
+            });
+
+            const userPreferences = {
+                user: user,
+                newsletter: true,
+                itemSold: true,
+            };
+            await saveUserPreferences(userPreferences, {
+                onSuccess: (obj) => {
+                    // Execute any logic that should take place after the object is saved.
+                },
+                onError: (error) => {
+                    setError((prevState) => ({
+                        ...prevState,
+                        title: "Failed to save user information",
+                        message: JSON.stringify(error.message),
+                        showErrorBox: true,
+                    }));
+                    return;
+                },
             });
 
             if (userError) {

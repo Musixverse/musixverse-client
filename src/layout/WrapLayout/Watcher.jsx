@@ -1,33 +1,38 @@
-import { useEffect } from "react";
+import { useEffect, useContext } from "react";
 import { useRouter } from "next/router";
 import Router from "next/router";
 import { useMoralis } from "react-moralis";
 
 const Watcher = () => {
-    const { user, isAuthenticated, refetchUserData } = useMoralis();
+    const { user, refetchUserData, Moralis, isInitialized } = useMoralis();
 
     /* Revoke access to Registration pages from any unauthenticated user */
     const router = useRouter();
     // TODO: Uncomment useEffects
 
     useEffect(() => {
-        if (router.pathname.startsWith("/register") && !user) {
-            Router.push("/", undefined, { shallow: true });
+        if (isInitialized) {
+            const currentUser = Moralis.User.current();
+            if (!currentUser) {
+                if (router.pathname.startsWith("/register")) {
+                    Router.push("/", undefined, { shallow: true });
+                }
+                if (router.pathname.startsWith("/dashboard")) {
+                    Router.push("/", undefined, { shallow: true });
+                }
+            } else {
+                if (router.pathname.startsWith("/register") && user.attributes.email) {
+                    Router.push("/", undefined, { shallow: true });
+                }
+            }
         }
-        if (router.pathname.startsWith("/profile") && !user.attributes.email && !user.attributes.avatar) {
-            Router.push("/register", undefined, { shallow: true });
-        }
-        if (router.pathname.startsWith("/dashboard") && !user.attributes.email && !user.attributes.avatar) {
-            Router.push("/register", undefined, { shallow: true });
-        }
-    }, [router.pathname]);
+    }, [router.pathname, isInitialized]);
 
     /* Fetch updated user details */
     async function fetchUpdatedUser() {
         if (user) {
             // user = await Moralis.User.current().fetch();
             await refetchUserData();
-            console.log(user);
         }
     }
 

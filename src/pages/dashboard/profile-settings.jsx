@@ -2,13 +2,17 @@ import { useState, useEffect, useContext } from "react";
 import Head from "next/head";
 import DashboardNav from "../../components/Dashboard/DashboardNav";
 import ProfileSettings from "../../components/Dashboard/ProfileSettings";
-import { useMoralis } from "react-moralis";
+import { useMoralis, useMoralisQuery, useMoralisCloudFunction } from "react-moralis";
 import StatusContext from "../../../store/status-context";
+import LoadingContext from "../../../store/loading-context";
 import { BLOCKCHAIN_NETWORK } from "../../utils/smart-contract/constants";
 
 export default function Dashboard() {
+    const { user, setUserData, Moralis, isInitialized } = useMoralis();
+    // Context Management
+    const [isLoading, setLoading] = useContext(LoadingContext);
     const [, , setSuccess] = useContext(StatusContext);
-    const { user, isAuthenticated, setUserData, Moralis } = useMoralis();
+    // State Management
     const [avatar, setAvatar] = useState("");
     const [coverImage, setCoverImage] = useState("");
     const [name, setName] = useState("");
@@ -26,58 +30,83 @@ export default function Dashboard() {
             const options = { chain: BLOCKCHAIN_NETWORK };
             const _balance = await Moralis.Web3API.account.getNativeBalance(options);
             const _balanceAmount = parseFloat(_balance.balance) / 10 ** 18 === 0 ? "0" : parseFloat(_balance.balance) / 10 ** 18;
-            setBalance(_balanceAmount.toFixed(4));
+            setBalance(_balanceAmount > 0 ? _balanceAmount.toFixed(4) : 0);
         } catch (error) {
             console.log("ERROR-", error);
         }
     };
 
+    const { fetch: fetchUserInfo } = useMoralisQuery("UserInfo", (query) => query.equalTo("user", user), [], { autoFetch: false });
     useEffect(() => {
-        fetchBalance();
-        if (isAuthenticated) {
-            setAvatar(user.attributes.avatar);
-            setCoverImage(user.attributes.coverImage);
-            setName(user.attributes.name);
-            setUsername(user.attributes.username);
-            setEmail(user.attributes.email);
-            setBio(user.attributes.bio);
-            setSpotify(user.attributes.spotify);
-            setInstagram(user.attributes.instagram);
-            setTwitter(user.attributes.twitter);
-            setFacebook(user.attributes.facebook);
+        setLoading(true);
+        if (isInitialized) {
+            fetchBalance();
+            if (user) {
+                setName(user.attributes.name);
+                setUsername(user.attributes.username);
+                setEmail(user.attributes.email);
+                fetchUserInfo({
+                    onSuccess: (object) => {
+                        setAvatar(object[0].attributes.avatar);
+                        setCoverImage(object[0].attributes.coverImage);
+                        setBio(object[0].attributes.bio);
+                        setSpotify(object[0].attributes.spotify);
+                        setInstagram(object[0].attributes.instagram);
+                        setTwitter(object[0].attributes.twitter);
+                        setFacebook(object[0].attributes.facebook);
+                        setLoading(false);
+                    },
+                    onError: (error) => {
+                        // The object was not retrieved successfully.
+                        // error is a Moralis.Error with an error code and message.
+                        console.log("fetchUserInfo Error:", error);
+                    },
+                });
+            }
         }
-    }, [isAuthenticated]);
+        return () => {
+            setLoading(false);
+        };
+    }, [user, isInitialized]);
 
-    const handleSave = () => {
+    // Update User Information
+    const userData = {
+        avatar: avatar,
+        coverImage: coverImage,
+        bio: bio === "" ? undefined : bio,
+        spotify: spotify,
+        instagram: instagram,
+        twitter: twitter,
+        facebook: facebook,
+    };
+    const { fetch: updateUserInfo } = useMoralisCloudFunction("updateUserInfo", userData, { autoFetch: false });
+    const handleSave = async () => {
         try {
-            if (username !== "" && email !== "") {
+            if (name !== "" && username !== "" && email !== "") {
                 setUserData({
-                    avatar: avatar,
-                    coverImage: coverImage,
                     name: name === "" ? undefined : name,
                     username: username === "" ? undefined : username,
                     email: email === "" ? undefined : email,
-                    bio: bio === "" ? undefined : bio,
-                    spotify: spotify,
-                    instagram: instagram,
-                    twitter: twitter,
-                    facebook: facebook,
                 });
-                setSuccess((prevState) => ({
-                    ...prevState,
-                    title: "Profile updated!",
-                    message: "Your profile has been updated successfully.",
-                    showSuccessBox: true,
-                }));
+
+                await updateUserInfo({
+                    onSuccess: (data) => {
+                        setSuccess((prevState) => ({
+                            ...prevState,
+                            title: "Profile updated!",
+                            message: "Your profile has been updated successfully.",
+                            showSuccessBox: true,
+                        }));
+                    },
+                });
             }
         } catch (error) {
             console.log("ERROR-", error);
         }
-
         return;
     };
 
-    if (!user) return null;
+    if (isLoading) return null;
     return (
         <>
             <Head>
@@ -112,7 +141,7 @@ export default function Dashboard() {
                         setFacebook={setFacebook}
                         handleSave={handleSave}
                         balance={balance}
-                        walletAddress={user.attributes.ethAddress}
+                        walletAddress={user ? user.attributes.ethAddress : ""}
                     />
                 </div>
             </div>

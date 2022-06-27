@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import styles from "../../../../styles/ArtistProfile/ArtistHeader.module.css";
 import ArtistBioModal from "./ArtistBioModal";
@@ -6,10 +6,15 @@ import CustomButton from "../../../layout/CustomButton";
 
 export default function AboutArtist({ name, bio, country, createdAt }) {
     const [showModal, setShowModal] = useState(false);
+    const [joined, setJoined] = useState(false);
 
-    const dateStr = createdAt.toDateString();
-    const dateStrArr = dateStr.split(" ");
-    const joined = "Joined " + dateStrArr[1] + ", " + dateStrArr[3];
+    useEffect(() => {
+        if (createdAt) {
+            const dateStr = createdAt.toDateString();
+            const dateStrArr = dateStr.split(" ");
+            setJoined("Joined " + dateStrArr[1] + ", " + dateStrArr[3]);
+        }
+    }, [createdAt]);
 
     let bioCharacters = bio;
     if (bioCharacters && bioCharacters.length > 250) bioCharacters = bioCharacters.substring(0, 250) + "...";

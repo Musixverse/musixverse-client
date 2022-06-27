@@ -3,9 +3,11 @@ import Notification from "./DashboardUtils/Notification";
 import { useMoralis, useMoralisQuery, useMoralisCloudFunction } from "react-moralis";
 import StatusContext from "../../../store/status-context";
 import CustomButton from "../../layout/CustomButton";
+import LoadingContext from "../../../store/loading-context";
 
 export default function NotificationSettings({ walletAddress }) {
     const [, , setSuccess] = useContext(StatusContext);
+    const [isLoading, setLoading] = useContext(LoadingContext);
 
     const [newsletter, setNewsletter] = useState("");
     const [itemSold, setItemSold] = useState("");
@@ -14,6 +16,7 @@ export default function NotificationSettings({ walletAddress }) {
     const { fetch } = useMoralisQuery("UserPreferences", (query) => query.equalTo("user", user), [], { autoFetch: false });
 
     useEffect(() => {
+        setLoading(true);
         fetch({
             onSuccess: (object) => {
                 setNewsletter(object[0].attributes.newsletter);
@@ -24,6 +27,7 @@ export default function NotificationSettings({ walletAddress }) {
                 // error is a Moralis.Error with an error code and message.
             },
         });
+        setLoading(false);
     }, [user]);
 
     // Update User Information
@@ -49,7 +53,7 @@ export default function NotificationSettings({ walletAddress }) {
         return;
     };
 
-    if (!user) return null;
+    if (isLoading) return null;
     return (
         <div className="flex-1 p-10 mb-10 pb-14 bg-light-300 dark:bg-dark-100 rounded-xl">
             <div className="flex flex-col items-start justify-between w-full space-y-5 md:flex-row md:space-y-0">

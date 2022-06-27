@@ -4,11 +4,15 @@ import DashboardNav from "../../components/Dashboard/DashboardNav";
 import ProfileSettings from "../../components/Dashboard/ProfileSettings";
 import { useMoralis, useMoralisQuery, useMoralisCloudFunction } from "react-moralis";
 import StatusContext from "../../../store/status-context";
+import LoadingContext from "../../../store/loading-context";
 import { BLOCKCHAIN_NETWORK } from "../../utils/smart-contract/constants";
 
 export default function Dashboard() {
+    const { user, setUserData, Moralis, isInitialized } = useMoralis();
+    // Context Management
+    const [isLoading, setLoading] = useContext(LoadingContext);
     const [, , setSuccess] = useContext(StatusContext);
-    const { user, isAuthenticated, setUserData, Moralis } = useMoralis();
+    // State Management
     const [avatar, setAvatar] = useState("");
     const [coverImage, setCoverImage] = useState("");
     const [name, setName] = useState("");
@@ -32,30 +36,38 @@ export default function Dashboard() {
         }
     };
 
-    const { fetch } = useMoralisQuery("UserInfo", (query) => query.equalTo("user", user), [], { autoFetch: false });
+    const { fetch: fetchUserInfo } = useMoralisQuery("UserInfo", (query) => query.equalTo("user", user), [], { autoFetch: false });
     useEffect(() => {
-        fetchBalance();
-        if (user) {
-            setName(user.attributes.name);
-            setUsername(user.attributes.username);
-            setEmail(user.attributes.email);
-            fetch({
-                onSuccess: (object) => {
-                    setAvatar(object[0].attributes.avatar);
-                    setCoverImage(object[0].attributes.coverImage);
-                    setBio(object[0].attributes.bio);
-                    setSpotify(object[0].attributes.spotify);
-                    setInstagram(object[0].attributes.instagram);
-                    setTwitter(object[0].attributes.twitter);
-                    setFacebook(object[0].attributes.facebook);
-                },
-                onError: (error) => {
-                    // The object was not retrieved successfully.
-                    // error is a Moralis.Error with an error code and message.
-                },
-            });
+        setLoading(true);
+        if (isInitialized) {
+            fetchBalance();
+            if (user) {
+                setName(user.attributes.name);
+                setUsername(user.attributes.username);
+                setEmail(user.attributes.email);
+                fetchUserInfo({
+                    onSuccess: (object) => {
+                        setAvatar(object[0].attributes.avatar);
+                        setCoverImage(object[0].attributes.coverImage);
+                        setBio(object[0].attributes.bio);
+                        setSpotify(object[0].attributes.spotify);
+                        setInstagram(object[0].attributes.instagram);
+                        setTwitter(object[0].attributes.twitter);
+                        setFacebook(object[0].attributes.facebook);
+                        setLoading(false);
+                    },
+                    onError: (error) => {
+                        // The object was not retrieved successfully.
+                        // error is a Moralis.Error with an error code and message.
+                        console.log("fetchUserInfo Error:", error);
+                    },
+                });
+            }
         }
-    }, [user]);
+        return () => {
+            setLoading(false);
+        };
+    }, [user, isInitialized]);
 
     // Update User Information
     const userData = {
@@ -94,7 +106,7 @@ export default function Dashboard() {
         return;
     };
 
-    if (!user) return null;
+    if (isLoading) return null;
     return (
         <>
             <Head>
@@ -129,7 +141,7 @@ export default function Dashboard() {
                         setFacebook={setFacebook}
                         handleSave={handleSave}
                         balance={balance}
-                        walletAddress={user.attributes.ethAddress}
+                        walletAddress={user ? user.attributes.ethAddress : ""}
                     />
                 </div>
             </div>

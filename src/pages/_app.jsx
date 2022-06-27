@@ -5,6 +5,7 @@ import { ThemeProvider } from "next-themes";
 import { useRouter } from "next/router";
 import * as ga from "../../lib/google-analytics";
 import StatusContext from "../../store/status-context";
+import LoadingContext from "../../store/loading-context";
 import "../../styles/globals.css";
 import Layout from "../layout/WrapLayout/Layout";
 import ScrollToTop from "../utils/ScrollToTop";
@@ -24,6 +25,7 @@ function App({ Component, pageProps }) {
         };
     }, [router.events]);
 
+    const [isLoading, setLoading] = useState(false);
     const [error, setError] = useState({
         title: "",
         message: "",
@@ -66,12 +68,14 @@ function App({ Component, pageProps }) {
 
             <MoralisProvider appId={MORALIS_APP_ID} serverUrl={MORALIS_SERVER_URL}>
                 <ThemeProvider attribute="class" enableSystem={false}>
-                    <StatusContext.Provider value={[error, success, setSuccess, setError]}>
-                        <Layout>
-                            <ScrollToTop />
-                            <Component {...pageProps} />
-                        </Layout>
-                    </StatusContext.Provider>
+                    <LoadingContext.Provider value={[isLoading, setLoading]}>
+                        <StatusContext.Provider value={[error, success, setSuccess, setError]}>
+                            <Layout>
+                                <ScrollToTop />
+                                <Component {...pageProps} />
+                            </Layout>
+                        </StatusContext.Provider>
+                    </LoadingContext.Provider>
                 </ThemeProvider>
             </MoralisProvider>
         </>

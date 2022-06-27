@@ -1,7 +1,25 @@
 import Head from "next/head";
 import Confirm from "../../components/Registration/Confirm";
+import { useEffect, useContext } from "react";
+import { useMoralis } from "react-moralis";
+import LoadingContext from "../../../store/loading-context";
 
 const Confirm_Page = () => {
+    const { user, isInitialized } = useMoralis();
+    // Context Management
+    const [isLoading, setLoading] = useContext(LoadingContext);
+
+    useEffect(() => {
+        setLoading(true);
+        if (isInitialized && user) {
+            setLoading(false);
+        }
+        return () => {
+            setLoading(false);
+        };
+    }, [isInitialized, user]);
+    if (isLoading) return null;
+
     return (
         <>
             <Head>

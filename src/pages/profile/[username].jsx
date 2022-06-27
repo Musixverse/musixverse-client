@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useMoralisCloudFunction } from "react-moralis";
@@ -7,10 +7,13 @@ import ArtistHeader from "../../components/ArtistProfile/ArtistHeader";
 import Filter from "../../components/ArtistProfile/Filter";
 import NFTs from "../../components/ArtistProfile/NFTs";
 import NewsLetter from "../../layout/NewsLetter";
+import LoadingContext from "../../../store/loading-context";
 
 export default function Profile() {
     const router = useRouter();
     const { username } = router.query;
+
+    const [isLoading, setLoading] = useContext(LoadingContext);
     const [profileUser, setProfileUser] = useState(false);
     const [profileUserInfo, setProfileUserInfo] = useState(false);
 
@@ -36,11 +39,13 @@ export default function Profile() {
     };
 
     useEffect(() => {
+        setLoading(true);
         fetchUser();
         fetchUserInfo();
+        setLoading(false);
     }, [username]);
 
-    if (!profileUser && !profileUserInfo) return null;
+    if (isLoading) return null;
     return (
         <>
             {profileUserInfo.isArtist ? (

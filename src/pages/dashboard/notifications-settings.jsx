@@ -1,12 +1,26 @@
 import Head from "next/head";
-import { useMoralis } from "react-moralis";
 import DashboardNav from "../../components/Dashboard/DashboardNav";
 import NotificationSettings from "../../components/Dashboard/NotificationSettings";
+import { useEffect, useContext } from "react";
+import { useMoralis } from "react-moralis";
+import LoadingContext from "../../../store/loading-context";
 
 export default function NotificationsSettings() {
-    const { user } = useMoralis();
+    const { user, isInitialized } = useMoralis();
+    // Context Management
+    const [isLoading, setLoading] = useContext(LoadingContext);
 
-    if (!user) return null;
+    useEffect(() => {
+        setLoading(true);
+        if (isInitialized && user) {
+            setLoading(false);
+        }
+        return () => {
+            setLoading(false);
+        };
+    }, [isInitialized, user]);
+    if (isLoading) return null;
+
     return (
         <>
             <Head>

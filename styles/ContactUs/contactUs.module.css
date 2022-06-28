@@ -1,71 +1,10 @@
-@media (max-width: 490px) {
-	.contact_us_container.contact_us_container.contact_us_container {
-		padding-bottom: 400px;
-	}
-
-	.contact_us_box.contact_us_box.contact_us_box {
-		top: 95%;
-		height: 690px;
-		width: 130%;
-	}
-
-	.message_box.message_box.message_box {
-		margin-left: 30px !important;
-	}
-}
-
-@media (max-width: 768px) {
-	.contact_us_container.contact_us_container {
-		padding-bottom: 350px;
-	}
-
-	.contact_us_box.contact_us_box {
-		top: 85%;
-		height: 640px;
-	}
-
-	.contact_us_box .inputBox.inputBox {
-		left: 5%;
-	}
-
-	.message_inputs.message_inputs {
-		margin-top: 30px;
-	}
-
-	.contact_us_box .inputBox.inputBox input {
-		width: 90% !important;
-	}
-
-	.provide_email.provide_email {
-		left: 5%;
-		margin-top: 5px;
-		margin-bottom: 30px;
-	}
-
-	.message_box.message_box {
-		margin-left: 30px !important;
-	}
-}
-
-@media (max-width: 940px) {
-	.message_box.message_box {
-		margin-left: 30px;
-	}
-
-	.contact_us_box .inputBox input {
-		width: 100% !important;
-	}
-}
 
 .contact_us_container {
-	@apply w-[100xw] flex flex-col justify-center items-center;
-	/* padding: 60px;
-	padding-top: 140px;
-	padding-bottom: 150px; */
+	@apply w-[100xw] flex flex-col justify-center items-center py-36;
 }
 
 .contact_us {
-	@apply w-[100xw] relative;
+	@apply w-[100xw];
 }
 
 .contact_us_heading {	
@@ -73,91 +12,55 @@
 }
 
 .contact_notice {
-	@apply font-primary text-white text-sm;
+	@apply font-primary dark:text-white text-sm;
 }
 
 .email_us {
-	@apply font-primary mt-16 text-[#afafaf]
+	@apply font-primary mt-16 dark:text-[#afafaf];
 }
 
 .contact_form {
 	@apply mt-10;
 }
 
-.contact_us_div {
-	@apply w-[100%] h-[400px] relative;
-}
-
 .contact_us_box {
-	@apply h-[400px] absolute top-[60%] left-[50%] p-12 rounded-xl shadow mb-5;
-	transform: translate(-50%, -50%);
+	@apply h-[400px] p-12 border-2 border-[#afafaf] rounded-xl shadow;
 }
 
-.message_inputs {
-	@apply mt-1;
+.inputBox input {
+	@apply w-full p-2 text-sm text-primary-100 rounded-sm focus:border-[1px] border-primary-100 outline-none text-left; 
 }
 
-.contact_us_box .inputBox {
-	@apply relative left-[10%] mt-5;
-}
-
-.contact_us_box .inputBox input {
-	@apply w-[80%] p-1 pl-2 text-lg text-primary-100 border-none border-b-[1px] border-b-[#afafaf] outline-none text-left; 
-}
-
-.contact_us_box .inputBox label {
-	@apply absolute top-0 left-0 p-2 text-[1em] font-secondary opacity-50;
-	transition: 0.4s;
-	z-index: -1;
-}
-
-.contact_us_box .inputBox input:focus ~ label,
-.contact_us_box .inputBox input:not([value=""]) ~ label {
-	@apply top[-22px] left-0 text-primary-100 text-xs opacity-100;
-}
-
-.provide_email {
-	@apply font-primary text-primary-100 text-sm left-[10%] relative;
-}
-
-.message_box {
-	@apply ml-10 mt-3;
-}
-
-.message {
-	@apply text-[#afafaf] font-primary font-semibold;
-}
-
-textarea {
-	@apply resize-none text-primary-100;
+.inputBox label {
+	@apply p-2 text-[1em] font-secondary;
 }
 
 .textarea_contact {
-	@apply bg-[#1a1a1a] border-[#747373] text-primary-100 focus:outline-none focus:shadow-none focus:text-primary-100 focus:border-[#747373];
+	@apply w-full p-2 focus:border-[1px] border-primary-100 rounded-sm focus:outline-none focus:shadow-none focus:text-primary-100;
 }
 
 /* CSS for send message button */
 .send_message_btn {
-	@apply font-primary font-medium shadow-sm relative px-3 py-8 mt-8 cursor-pointer text-center block border-0 outline-none rounded-md text-[#202020] bg-primary-100;
+	@apply w-full font-primary font-medium shadow-sm px-3 py-3 mt-4 cursor-pointer text-center block border-0 outline-none rounded-md text-[#202020] bg-primary-100;
 
 }
 
 .send_message_btn span {
-	@apply relative inline-block cursor-pointer;
+	@apply inline-block cursor-pointer;
 	transition: 0.5s;
 }
 
 .send_message_btn i {
-	@apply absolute opacity-0 top-0 -right-4 font-bold mt-1;
+	@apply absolute opacity-0 font-bold mt-1;
 	transition: 0.4s;
 }
 
-.send_message_btn span {
-	@apply hover:pr-6;
+.send_message_btn:hover span {
+	@apply pr-6;
 }
 
-.send_message_btn i {
-	@apply hover:opacity-100 hover:right-0;
+.send_message_btn:hover i {
+	@apply opacity-100 pl-2;
 }
 
 .send_message_btn{

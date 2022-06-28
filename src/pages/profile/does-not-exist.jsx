@@ -27,7 +27,7 @@ function DoesNotExist() {
                 <div className="flex flex-row justify-start sm:mt-24 mt-16 mb-10">
                     <div className="w-full grid grid-cols-5 gap-4">
                         <div className="col-span-5 p-10 border-2 border-gray-400 rounded-md">
-                            <div className="mb-16 font-secondary text-lg">User Profile with the username "{username}" does not exist</div>
+                            <div className="mb-16 font-secondary text-lg">User Profile with the username &quot;{username}&quot; does not exist</div>
 
                             <Link href="/" passHref={true}>
                                 <button className="px-5 py-3 mt-16 text-xs text-white bg-primary-200 hover:bg-primary-300 font-primary rounded-lg">

@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import Router from "next/router";
 import { useMoralis } from "react-moralis";
 
-const Watcher = () => {
+const Auth = () => {
     const { user, refetchUserData, Moralis, isInitialized } = useMoralis();
 
     /* Revoke access to Registration pages from any unauthenticated user */
@@ -54,4 +54,4 @@ const Watcher = () => {
     return <span></span>;
 };
 
-export default Watcher;
+export default Auth;

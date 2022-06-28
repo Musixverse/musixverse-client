@@ -36,58 +36,64 @@ export default function Dashboard() {
         }
     };
 
-    const { fetch: fetchUserInfo } = useMoralisQuery("UserInfo", (query) => query.equalTo("user", user), [], { autoFetch: false });
     useEffect(() => {
         setLoading(true);
-        if (isInitialized) {
+        if (isInitialized && user) {
             fetchBalance();
-            if (user) {
-                setName(user.attributes.name);
-                setUsername(user.attributes.username);
-                setEmail(user.attributes.email);
-                fetchUserInfo({
-                    onSuccess: (object) => {
-                        setAvatar(object[0].attributes.avatar);
-                        setCoverImage(object[0].attributes.coverImage);
-                        setBio(object[0].attributes.bio);
-                        setSpotify(object[0].attributes.spotify);
-                        setInstagram(object[0].attributes.instagram);
-                        setTwitter(object[0].attributes.twitter);
-                        setFacebook(object[0].attributes.facebook);
-                        setLoading(false);
-                    },
-                    onError: (error) => {
-                        // The object was not retrieved successfully.
-                        // error is a Moralis.Error with an error code and message.
-                        console.log("fetchUserInfo Error:", error);
-                    },
-                });
-            }
+            setName(user.attributes.name);
+            setUsername(user.attributes.username);
+            setEmail(user.attributes.email);
         }
         return () => {
             setLoading(false);
         };
-    }, [user, isInitialized]);
+    }, [user]);
+
+    const { data: userInfo } = useMoralisQuery("UserInfo", (query) => query.equalTo("user", user), [user]);
+    useEffect(() => {
+        if (userInfo[0]) {
+            setAvatar(userInfo[0].attributes.avatar);
+            setAvatar(userInfo[0].attributes.avatar);
+            setCoverImage(userInfo[0].attributes.coverImage);
+            setBio(userInfo[0].attributes.bio ? userInfo[0].attributes.bio : "");
+            setSpotify(userInfo[0].attributes.spotify ? userInfo[0].attributes.spotify : "");
+            setInstagram(userInfo[0].attributes.instagram ? userInfo[0].attributes.instagram : "");
+            setTwitter(userInfo[0].attributes.twitter ? userInfo[0].attributes.twitter : "");
+            setFacebook(userInfo[0].attributes.facebook ? userInfo[0].attributes.facebook : "");
+            setLoading(false);
+        }
+    }, [userInfo]);
 
     // Update User Information
     const userData = {
         avatar: avatar,
         coverImage: coverImage,
         bio: bio === "" ? undefined : bio,
-        spotify: spotify,
-        instagram: instagram,
-        twitter: twitter,
-        facebook: facebook,
+        spotify: spotify === "" ? undefined : spotify,
+        instagram: instagram === "" ? undefined : instagram,
+        twitter: twitter === "" ? undefined : twitter,
+        facebook: facebook === "" ? undefined : facebook,
     };
     const { fetch: updateUserInfo } = useMoralisCloudFunction("updateUserInfo", userData, { autoFetch: false });
     const handleSave = async () => {
         try {
             if (name !== "" && username !== "" && email !== "") {
-                setUserData({
-                    name: name === "" ? undefined : name,
-                    username: username === "" ? undefined : username,
-                    email: email === "" ? undefined : email,
-                });
+                if (email === user.attributes.email && username === user.attributes.username) {
+                    setUserData({
+                        name: name === "" ? undefined : name,
+                    });
+                } else if (email === user.attributes.email) {
+                    setUserData({
+                        name: name === "" ? undefined : name,
+                        username: username === "" ? undefined : username,
+                    });
+                } else {
+                    setUserData({
+                        name: name === "" ? undefined : name,
+                        username: username === "" ? undefined : username,
+                        email: email === "" ? undefined : email,
+                    });
+                }
 
                 await updateUserInfo({
                     onSuccess: (data) => {

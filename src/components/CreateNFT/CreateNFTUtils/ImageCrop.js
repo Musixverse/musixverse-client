@@ -4,7 +4,7 @@ import { Dialog, Transition } from '@headlessui/react';
 import ReactCrop from "react-image-crop";
 import "react-image-crop/dist/ReactCrop.css";
 
-function ImageCrop({ imageToCrop, setCroppedImage, setShowModal }) {
+function ImageCrop({ imageToCrop, setCroppedImage, setShowModal, circularCrop }) {
     //imageToCrop is the user selected image
     //setCroppedImage is the cropped image state setter function
     const [cropConfig, setCropConfig] = useState(
@@ -95,6 +95,7 @@ function ImageCrop({ imageToCrop, setCroppedImage, setShowModal }) {
                             {/* Crop Component */}
                             <div className="flex items-center justify-center">
                                 <ReactCrop
+                                    circularCrop={circularCrop}
                                     src={imageToCrop}
                                     crop={cropConfig}
                                     ruleOfThirds

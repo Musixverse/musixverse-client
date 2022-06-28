@@ -1,10 +1,12 @@
-import { useRef } from "react";
+import { useRef, useContext } from "react";
 import { useMoralis } from "react-moralis";
 import CustomButton from "../../../layout/CustomButton";
+import LoadingContext from "../../../../store/loading-context";
 
 export default function EditProfilePhoto({ avatar, setAvatar, handleSave }) {
     const profilePicture = useRef(null);
     const { Moralis } = useMoralis();
+    const [isLoading, setLoading] = useContext(LoadingContext);
 
     async function uploadFile(data) {
         const file = new Moralis.File("file", data);
@@ -13,6 +15,7 @@ export default function EditProfilePhoto({ avatar, setAvatar, handleSave }) {
     }
 
     const handleAvatarChange = async (event) => {
+        setLoading(true);
         const output = profilePicture.current;
         output.src = URL.createObjectURL(event.target.files[0]);
         output.onload = function () {
@@ -21,6 +24,7 @@ export default function EditProfilePhoto({ avatar, setAvatar, handleSave }) {
         };
         const file = await uploadFile(event.target.files[0]);
         setAvatar(file.ipfs());
+        setLoading(false);
     };
 
     return (
@@ -29,7 +33,12 @@ export default function EditProfilePhoto({ avatar, setAvatar, handleSave }) {
                 Profile Picture<i className="ml-2 text-base md:text-lg fa fa-info-circle"></i>
             </p>
             <label className="relative w-fit" htmlFor="upload-image-inp">
-                <img className="w-[130px] h-[130px] md:w-[150px] md:h-[150px] rounded-full" ref={profilePicture} src={avatar} alt="Current Avatar"></img>
+                <img
+                    className="w-[130px] h-[130px] md:w-[150px] md:h-[150px] rounded-full"
+                    ref={profilePicture}
+                    src={avatar || "https://ipfs.moralis.io:2053/ipfs/Qmcn1aZ4PKUUzwpTncuSbruwLD98dtiNqvoJG5zm8EMwXZ"}
+                    alt="Current Avatar"
+                ></img>
 
                 <input type="file" id="upload-image-inp" onChange={handleAvatarChange} accept="image/*" className="hidden mt-2 mb-5" />
                 <label

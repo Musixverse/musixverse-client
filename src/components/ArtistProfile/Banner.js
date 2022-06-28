@@ -8,7 +8,7 @@ export default function Banner({ coverImage }) {
         <div className={styles["artist-banner__container"]}>
             <Image
                 priority
-                src={coverImage || "https://ipfs.moralis.io:2053/ipfs/QmSQ2s8TEKBAdZy3Pm6oy7CPDLZ7dEUQZJ89azN4a2AVUE"}
+                src={coverImage || "https://ipfs.moralis.io:2053/ipfs/Qmcn1aZ4PKUUzwpTncuSbruwLD98dtiNqvoJG5zm8EMwXZ"}
                 layout="fill"
                 alt="cover-image"
             ></Image>

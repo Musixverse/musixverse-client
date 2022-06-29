@@ -20,11 +20,11 @@
 }
 
 .contact_form {
-	@apply mt-14;
+	@apply mt-16 ;
 }
 
 .contact_us_box {
-	@apply h-[400px] p-12 border-2 border-[#afafaf] rounded-xl shadow;
+	@apply max-h-max md:h-[400px] p-8 md:p-12 border-2 border-[#afafaf] rounded-xl shadow;
 }
 
 .inputBox input {

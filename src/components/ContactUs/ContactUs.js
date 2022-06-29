@@ -45,10 +45,10 @@ export default function ContactUs() {
 					</div>
 
 					<div className={styles["contact_form"]}>
-							<div className={styles["contact_us_box"]}>
+							<div className={"dark:backdrop-blur-2xl dark:backdrop-brightness-200 "+styles["contact_us_box"]}>
 								<form action="https://getform.io/f/91471bcd-4363-49f9-9762-bb91ed85745b" method="POST">
-									<div className="flex space-x-14">
-										<div className="w-1/3">
+									<div className="flex flex-col md:flex-row md:space-x-8 xl:space-x-14">
+										<div className="w-full md:w-1/3">
 											<div className={styles["inputBox"]}>
 												<label className="dark:opacity-50">Name&nbsp; (Optional)</label>
 												<input className="dark:bg-[#1a1a1a] mt-1" type="text" name="name" value={name} onChange={(e) => setName(e.target.value)} autoComplete="off" onFocus={onFocus} />
@@ -64,7 +64,7 @@ export default function ContactUs() {
 											</div>
 										</div>
 
-										<div className="w-2/3">
+										<div className="w-full mt-5 md:w-2/3 md:mt-0">
 											<div>
 												<label className="text-sm font-primary dark:opacity-50">Message</label>
 												<textarea className={"dark:bg-[#1a1a1a] mt-1 "+styles["textarea_contact"]} name="message" rows="8" required></textarea>

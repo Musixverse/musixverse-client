@@ -41,19 +41,10 @@ export default function ContactUs() {
         }
 
 		// NAME CHECKS
-		const nameRegex = /^\w+$/;
         if (name.length < 2) {
             setError({
                 title: "Invalid credentials!",
                 message: "Please enter a valid name",
-                showErrorBox: true,
-            });
-            nameRef.current.focus();
-            return;
-        } else if (!nameRegex.test(name)) {
-            setError({
-                title: "Invalid credentials!",
-                message: "Name can only contain alphabets, numbers, and '_'",
                 showErrorBox: true,
             });
             nameRef.current.focus();
@@ -77,7 +68,7 @@ export default function ContactUs() {
 				email: email,
                 message: message
             };
-            await saveUserMessage(userData, {
+            saveUserMessage(userData, {
                 onSuccess: (obj) => {
                     // Execute any logic that should take place after the object is saved.
                 },

@@ -4,20 +4,17 @@ import { useMoralis, useNewMoralisObject } from "react-moralis";
 import StatusContext from "../../../store/status-context";
 
 export default function ContactUs() {
-	const [name, setName] = useState("");
-	const [email, setEmail] = useState("");
-	const [, , , setError] = useContext(StatusContext);
-	const { save: saveUserMessage } = useNewMoralisObject("UserMessage");
+	const [, , setSuccess, setError] = useContext(StatusContext);
+	const { save: saveContactMessage } = useNewMoralisObject("ContactForm");
 
+	/*
+	Name and Email can be null check conditions add
+	name and email .length!=0 checks condition
+
+	*/
 	const nameRef = useRef(null);
     const emailRef = useRef(null);
 	const messageRef = useRef(null);
-
-	const onFocus = (event) => {
-		if (event.target.autocomplete) {
-			event.target.autocomplete = "No";
-		}
-	};
 
 	const handleFormSubmit = (e) => {
 		e.preventDefault();
@@ -52,7 +49,7 @@ export default function ContactUs() {
         }
 
 		// Message Check 
-        if (message.length < 2) {
+        if (message.length < 5) {
             setError({
                 title: "Invalid credentials!",
                 message: "Please enter a valid message",
@@ -62,15 +59,25 @@ export default function ContactUs() {
             return;
         }
 
-        if (name!="" && email!="" && message !== "") {
+        if (message !== "") {
             const userData = {
-                user: name,
+                name: name,
 				email: email,
                 message: message
             };
-            saveUserMessage(userData, {
+            saveContactMessage(userData, {
                 onSuccess: (obj) => {
                     // Execute any logic that should take place after the object is saved.
+					nameRef.current.value = "";
+					emailRef.current.value = "";
+					messageRef.current.value = "";
+					setSuccess((prevState) => ({
+                        ...prevState,
+                        title: "Message sent!",
+                        message: "Your message has been recorded successfully",
+                        showSuccessBox: true,
+                    }));
+                    return;
                 },
                 onError: (error) => {
                     // Execute any logic that should take place if the save fails.
@@ -122,40 +129,40 @@ export default function ContactUs() {
 					</div>
 
 					<div className={styles["contact_form"]}>
-							<div className={"dark:backdrop-blur-2xl dark:backdrop-brightness-200 "+styles["contact_us_box"]}>
-								<form onSubmit={handleFormSubmit}>
-									<div className="flex flex-col md:flex-row md:space-x-8 xl:space-x-14">
-										<div className="w-full md:w-1/3">
-											<div className={styles["inputBox"]}>
-												<label className="dark:opacity-50">Name&nbsp; (Optional)</label>
-												<input className="dark:bg-[#1a1a1a] mt-1" type="text" ref={nameRef} name="name" value={name} onChange={(e) => setName(e.target.value)} autoComplete="off" onFocus={onFocus} />
-											</div>
-
-											<div className={"mt-4 "+styles["inputBox"]}>
-												<label className="dark:opacity-50">Email Address&nbsp; (Optional)</label>
-												<input className="dark:bg-[#1a1a1a] mt-1" type="email" ref={emailRef} name="email" value={email} onChange={(e) => setEmail(e.target.value)} autoComplete="off" onFocus={onFocus} />
-											</div>
-
-											<div className="mt-5">
-												<div className="font-primary text-primary-100 text-sm">If you don&apos;t provide an email, we will not be able to respond to your query!</div>
-											</div>
+						<div className={"dark:backdrop-blur-2xl dark:backdrop-brightness-200 "+styles["contact_us_box"]}>
+							<form onSubmit={handleFormSubmit}>
+								<div className="flex flex-col md:flex-row md:space-x-8 xl:space-x-14">
+									<div className="w-full md:w-1/3">
+										<div className={styles["inputBox"]}>
+											<label className="dark:opacity-50">Name&nbsp; (Optional)</label>
+											<input className="dark:bg-[#1a1a1a] mt-1" type="text" ref={nameRef} name="name" autoComplete="off" />
 										</div>
 
-										<div className="w-full mt-5 md:w-2/3 md:mt-0">
-											<div>
-												<label className="text-sm font-primary dark:opacity-50">Message</label>
-												<textarea className={"dark:bg-[#1a1a1a] mt-1 "+styles["textarea_contact"]} ref={messageRef} name="message" rows="8" required></textarea>
-											</div>
+										<div className={"mt-4 "+styles["inputBox"]}>
+											<label className="dark:opacity-50">Email Address&nbsp; (Optional)</label>
+											<input className="dark:bg-[#1a1a1a] mt-1" type="email" ref={emailRef} name="email" autoComplete="off" />
+										</div>
 
-											<button className={styles["send_message_btn"]}>
-												<span>
-													Send Message<i className="fas fa-angle-double-right"></i>
-												</span>
-											</button>
+										<div className="mt-5">
+											<div className="font-primary text-primary-100 text-sm">If you don&apos;t provide an email, we will not be able to respond to your query!</div>
 										</div>
 									</div>
-								</form>
-							</div>
+
+									<div className="w-full mt-5 md:w-2/3 md:mt-0">
+										<div>
+											<label className="text-sm font-primary dark:opacity-50">Message</label>
+											<textarea className={"dark:bg-[#1a1a1a] mt-1 "+styles["textarea_contact"]} ref={messageRef} name="message" rows="8" required></textarea>
+										</div>
+
+										<button className={styles["send_message_btn"]}>
+											<span>
+												Send Message<i className="fas fa-angle-double-right"></i>
+											</span>
+										</button>
+									</div>
+								</div>
+							</form>
+						</div>
 					</div>
 				</div>
 			</div>

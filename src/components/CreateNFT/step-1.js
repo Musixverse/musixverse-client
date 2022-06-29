@@ -1,191 +1,118 @@
-import { useState } from "react";
+import { useContext } from "react";
+import PreviewNft from "./CreateNFTUtils/PreviewNft";
+import Step1Form from "./CreateNFTUtils/Step1Form";
+import StatusContext from "../../../store/status-context";
 
-const TrackDetails = ({ step, nextStep, prevStep, trackTitle, setTrackTitle, links, setLinks, setImageHash, setSongHash, uploadFile }) => {
-    const [imageUploadState, setImageUploadState] = useState(false);
+export default function TrackDetails({
+    step,
+    nextStep,
+    prevStep,
+    uploadedImage,
+    setUploadedImage,
+    uploadedSong,
+    setUploadedSong,
+    trackTitle,
+    setTrackTitle,
+    setGenre,
+    setTrackOrigin,
+    setExplicit,
+    recordingYear,
+    setRecordingYear,
+    vocals,
+    setVocals,
+    links,
+    setLinks,
+    nftPrice,
+    numberOfCopies,
+}) {
+    /**
+     * TODO: Need to add the following-
+     * Verfied artist check
+     * Artist name truncation
+     * Change ETH logo to MATIC
+     * Add states for the remaining input fields
+     * Add a form tag in this component to store data on Moralis
+     * Revoke Object URLs to avoid memo leak
+     * Refine the CSS for dark mode radio buttons
+     * Check for new navbar designs
+     * Responsiveness
+     * Move CSS from inline to external file
+     */
+    const [, , , setError] = useContext(StatusContext);
 
-    const handleLinksChange = (e) => {
-        const { name, value } = e.target;
-        setLinks((prevState) => ({
-            ...prevState,
-            [name]: value,
-        }));
-    };
-
-    const handleImageUpload = async (event) => {
-        const el = document.getElementById("uploaded-img");
-        const myMemoObj = URL.createObjectURL(event.target.files[0]);
-        el.src = URL.createObjectURL(event.target.files[0]);
-        URL.revokeObjectURL(myMemoObj); // Manging memo leak
-        // Set image upload state to true when uploaded
-        setImageUploadState(true);
-        const file = await uploadFile(event.target.files[0]);
-        setImageHash(file.hash());
-    };
-
-    const handleSongUpload = async (event) => {
-        const file = await uploadFile(event.target.files[0]);
-        setSongHash(file.hash());
+    const nftPreviewValues = { trackTitle, uploadedImage, uploadedSong, nftPrice, numberOfCopies, step };
+    const step1FormValues = {
+        uploadedImage,
+        setUploadedImage,
+        uploadedSong,
+        setUploadedSong,
+        trackTitle,
+        setTrackTitle,
+        setGenre,
+        setTrackOrigin,
+        setExplicit,
+        recordingYear,
+        setRecordingYear,
+        vocals,
+        setVocals,
+        links,
+        setLinks,
     };
 
     return (
-        <div className="container mx-auto pt-36 pb-20 min-h-screen">
-            <div className="text-2xl font-secondary text-gray-500">Step {step}</div>
-            <div className="flex flex-wrap justify-center content-center items-center">
-                <div className="grid gap-y-10 justify-items-center">
-                    <form className="w-full max-w-lg">
-                        <div className="flex flex-wrap -mx-3 mb-6">
-                            <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                                <label htmlFor="cover-art" className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                                    Cover Art
-                                </label>
-                                {imageUploadState ? null : (
-                                    <label htmlFor="upload-image-inp">
-                                        <div className="upload-img-div">
-                                            <label
-                                                htmlFor="cover-art"
-                                                className="block content-center w-[240px] h-[240px] rounded-md cursor-pointer bg-light-300"
-                                            >
-                                                <div className="grid place-items-center h-full w-full text-sm text-dark-100">Upload Image</div>
-                                            </label>
-                                            <input
-                                                className="hidden"
-                                                onChange={handleImageUpload}
-                                                id="cover-art"
-                                                type="file"
-                                                accept=".jpg, .jpeg, .png, .bmp, .gif, .mp4, .mkv, .ogg, .wmv"
-                                            />
-                                        </div>
-                                    </label>
-                                )}
-                                <label className="relative" htmlFor="upload-image-inp" style={imageUploadState ? {} : { display: "none" }}>
-                                    <img id="uploaded-img" alt="uploaded file" className="w-[240px] h-[240px] rounded-md cursor-pointer" />
-                                    <input
-                                        type="file"
-                                        id="upload-image-inp"
-                                        onChange={handleImageUpload}
-                                        accept=".jpg, .jpeg, .png, .bmp, .gif, .mp4, .mkv, .ogg, .wmv"
-                                        className="hidden"
-                                    />
-                                </label>
-                            </div>
-                            <div className="w-full md:w-1/2 px-3">
-                                <label htmlFor="audio-file" className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                                    Audio File
-                                </label>
-                                <input type="file" id="upload-song-inp" accept="audio/*" onChange={handleSongUpload} />
-                            </div>
-                        </div>
-                        <div className="flex flex-wrap -mx-3 mb-6">
-                            <div className="w-full px-3">
-                                <label htmlFor="track-title" className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                                    Track Title
-                                </label>
-                                <input
-                                    className="appearance-none block w-full bg-gray-200 text-gray-700 border-2 border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none shadow-sm focus:bg-white focus:border-primary-100"
-                                    id="track-title"
-                                    value={trackTitle}
-                                    onChange={(e) => {
-                                        setTrackTitle(e.target.value);
-                                    }}
-                                    type="text"
-                                    placeholder="Enter track title here"
-                                />
-                                <p className="text-gray-600 text-xs italic">
-                                    Feel free to include featured artists and &quot;version&quot; info in the track title
-                                </p>
-                            </div>
-                        </div>
-                        {/* Links to other platforms */}
-                        {/* @Ayush: Develop a select box similar to this- https://www.youtube.com/watch?v=W89sCr3g5eQ */}
-                        <div className="flex flex-wrap -mx-3 mb-2">
-                            <div className="w-full px-3">
-                                <label htmlFor="spotify-link" className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                                    Spotify Link
-                                </label>
-                                <input
-                                    className="appearance-none block w-full bg-gray-200 text-gray-700 border-2 border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none shadow-sm focus:bg-white focus:border-primary-100"
-                                    id="spotify-link"
-                                    name="spotifyLink"
-                                    value={links.spotifyLink}
-                                    onChange={handleLinksChange}
-                                    type="text"
-                                    placeholder="Paste the track's Spotify url here"
-                                />
-                            </div>
-                        </div>
-                        <div className="flex flex-wrap -mx-3 mb-2">
-                            <div className="w-full px-3">
-                                <label htmlFor="apple-music-link" className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                                    Apple Music Link
-                                </label>
-                                <input
-                                    className="appearance-none block w-full bg-gray-200 text-gray-700 border-2 border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none shadow-sm focus:bg-white focus:border-primary-100"
-                                    id="apple-music-link"
-                                    name="appleMusicLink"
-                                    value={links.appleMusicLink}
-                                    onChange={handleLinksChange}
-                                    type="text"
-                                    placeholder="Paste the track's Apple Music url here"
-                                />
-                            </div>
-                        </div>
-                        <div className="flex flex-wrap -mx-3 mb-2">
-                            <div className="w-full px-3">
-                                <label htmlFor="yt-music-link" className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                                    YouTube Music Link
-                                </label>
-                                <input
-                                    className="appearance-none block w-full bg-gray-200 text-gray-700 border-2 border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none shadow-sm focus:bg-white focus:border-primary-100"
-                                    id="yt-music-link"
-                                    name="youtubeMusicLink"
-                                    value={links.youtubeMusicLink}
-                                    onChange={handleLinksChange}
-                                    type="text"
-                                    placeholder="Paste the track's YouTube Music url here"
-                                />
-                            </div>
-                        </div>
-                        <div className="flex flex-wrap -mx-3 mb-6">
-                            <div className="w-full px-3">
-                                <label htmlFor="amazon-music-link" className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                                    Amazon Music Link
-                                </label>
-                                <input
-                                    className="appearance-none block w-full bg-gray-200 text-gray-700 border-2 border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none shadow-sm focus:bg-white focus:border-primary-100"
-                                    id="amazon-music-link"
-                                    name="amazonMusicLink"
-                                    value={links.amazonMusicLink}
-                                    onChange={handleLinksChange}
-                                    type="text"
-                                    placeholder="Paste the track's Amazon Music url here"
-                                />
-                            </div>
-                        </div>
-                    </form>
-                    <div className="w-full flex justify-between">
+        <div className="flex items-center justify-center mb-28 lg:mb-36 bg-light-200 dark:bg-dark-200">
+            <div className="flex-col flex w-full max-w-[1920px] mt-28 lg:mt-36 px-6 md:px-8 lg:px-16 xl:px-20 2xl:px-36">
+                <form
+                    onSubmit={(e) => {
+                        e.preventDefault();
+                        if (!uploadedImage) {
+                            setError({
+                                title: "Image not uploaded!",
+                                message: "You need to upload an image to proceed.",
+                                showErrorBox: true,
+                            });
+                            return;
+                        } else if (!uploadedSong) {
+                            setError({
+                                title: "Audio file not uploaded!",
+                                message: "You need to upload an audio file to proceed.",
+                                showErrorBox: true,
+                            });
+                            return;
+                        } else {
+                            nextStep();
+                        }
+                    }}
+                >
+                    <div className="flex flex-col w-full space-y-20 md:space-x-10 md:space-y-0 md:flex-row xl:space-x-20">
+                        {/* Preview div */}
+                        <PreviewNft {...nftPreviewValues} />
+                        {/* Info div */}
+                        <Step1Form {...step1FormValues} />
+                    </div>
+
+                    {/* Button div */}
+                    <div className="flex mt-16 space-x-3 md:self-end justify-end">
+                        {/* Reset and continue buttons */}
+                        {/* NOTE: Revoke the image url at the create NFT button click */}
                         <button
-                            onClick={(e) => {
-                                e.preventDefault();
+                            onClick={() => {
                                 prevStep();
                             }}
-                            className="text-black text-md bg-light-300 font-primary rounded px-6 py-2"
+                            className="dark:bg-[#323232] dark:hover:bg-dark-100 dark:border-[#323232] rounded-md px-4 py-3 bg-[#D7E0DF] hover:bg-[#c9d1d0] text-sm font-primary font-bold"
                         >
-                            Back
+                            Discard
                         </button>
                         <button
-                            onClick={(e) => {
-                                e.preventDefault();
-                                nextStep();
-                            }}
-                            className="text-white text-md bg-primary-200 hover:bg-primary-300 font-primary rounded px-6 py-2"
+                            type="submit"
+                            className="flex items-center px-4 py-3 text-sm font-bold rounded-md hover:bg-primary-200 bg-primary-100 text-light-100 font-primary"
                         >
                             Next
+                            <span className="ml-24 font-semibold material-symbols-outlined">arrow_right_alt</span>
                         </button>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
     );
-};
-
-export default TrackDetails;
+}

@@ -1,25 +1,40 @@
-import InputDropdown from "./CreateNFTUtils/InputDropdown";
+import InputDropdown from "./InputDropdown";
 
-const PricingAndSplits = ({numberOfCopies,setNumberOfCopies, nftPrice,setNftPrice, contributorList,setContributorList, resaleRoyaltyPercent,setResaleRoyaltyPercent, releaseNow,setReleaseNow}) => {
-
+const Step2Form = ({
+    numberOfCopies,
+    setNumberOfCopies,
+    nftPrice,
+    setNftPrice,
+    contributorList,
+    setContributorList,
+    resaleRoyaltyPercent,
+    setResaleRoyaltyPercent,
+    releaseNow,
+    setReleaseNow,
+}) => {
     // handle input change
     const handleInputChange = (e, index) => {
-      const { name, value } = e.target;
-      const list = [...contributorList];
-      list[index][name] = value;
-      setContributorList(list);
+        const { name, value } = e.target;
+        const list = [...contributorList];
+        list[index][name] = value;
+        setContributorList(list);
     };
-  
+
     // handle click event of the Remove button
-    const handleRemoveClick = index => {
-      const list = [...contributorList];
-      list.splice(index, 1);
-      setContributorList(list);
+    const handleRemoveClick = (index) => {
+        const list = [...contributorList];
+        list.splice(index, 1);
+        setContributorList(list);
     };
-  
+
     // handle click event of the Add button
     const handleAddClick = () => {
-      setContributorList([...contributorList, { ContributorName: "", Split: "" }]);
+        setContributorList([...contributorList, { ContributorName: "", Split: "", Role: "" }]);
+    };
+
+    const setRole = (value) => {
+        console.log("contributorList:", contributorList);
+        console.log("setRole", value);
     };
 
     return (
@@ -34,7 +49,7 @@ const PricingAndSplits = ({numberOfCopies,setNumberOfCopies, nftPrice,setNftPric
                         <input
                             className="dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-100 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-100"
                             id="nft-copies"
-                            // value={numberOfCopies}
+                            value={numberOfCopies}
                             onChange={(e) => {
                                 setNumberOfCopies(e.target.value);
                             }}
@@ -52,7 +67,7 @@ const PricingAndSplits = ({numberOfCopies,setNumberOfCopies, nftPrice,setNftPric
                         <input
                             className="dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-100 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-100"
                             id="individual-nft-price"
-                            // value={nftPrice}
+                            value={nftPrice}
                             onChange={(e) => {
                                 setNftPrice(e.target.value);
                             }}
@@ -63,7 +78,7 @@ const PricingAndSplits = ({numberOfCopies,setNumberOfCopies, nftPrice,setNftPric
                             required
                         />
                     </div>
-                </div> 
+                </div>
 
                 <div>
                     <span>ADD CONTRIBUTORS AND SPLITS</span>
@@ -79,7 +94,7 @@ const PricingAndSplits = ({numberOfCopies,setNumberOfCopies, nftPrice,setNftPric
                                             type="text"
                                             placeholder="Name"
                                             value={x.ContributorName}
-                                            onChange={e => handleInputChange(e, i)}
+                                            onChange={(e) => handleInputChange(e, i)}
                                         />
                                     </div>
                                     <div className="flex-1">
@@ -89,35 +104,45 @@ const PricingAndSplits = ({numberOfCopies,setNumberOfCopies, nftPrice,setNftPric
                                             type="number"
                                             placeholder="Split %"
                                             value={x.Split}
-                                            onChange={e => handleInputChange(e, i)}
+                                            onChange={(e) => handleInputChange(e, i)}
                                         />
                                     </div>
                                     <div className="flex-1">
                                         <InputDropdown
-                                            //Need to change the optionsArray by Final data @Pushpit07
+                                            name="Role"
+                                            // Need to change the optionsArray by Final data @Pushpit07
                                             optionsArray={["Producer", "Composer", "Songwriter", "Lyricist", "Singer", "Vocalist", "Other"]}
+                                            setChoice={setRole}
                                         />
                                     </div>
                                     {/* Button to remove more contributors */}
-                                    {contributorList.length !== 1 && 
+                                    {contributorList.length !== 1 && (
                                         <div className="flex">
-                                            <button className="text-gray-400 hover:text-gray-600" onClick={() => handleRemoveClick(i)}>x</button>    
+                                            <button className="text-gray-400 hover:text-gray-600" onClick={() => handleRemoveClick(i)}>
+                                                x
+                                            </button>
                                         </div>
-                                    }
+                                    )}
                                 </div>
                             );
-                        })}   
+                        })}
                     </div>
+
                     {/* Button to add more contributors */}
-                    {contributorList.length < 4 && 
+                    {contributorList.length < 4 && (
                         <div className="flex mt-4 justify-start items-center">
-                            <button className="rounded-full flex justify-center items-center w-8 h-8 bg-[#479E00] hover:bg-primary-300 text-white" onClick={handleAddClick}>+</button>
+                            <button
+                                className="rounded-full flex justify-center items-center w-8 h-8 bg-[#479E00] hover:bg-primary-300 text-white"
+                                onClick={handleAddClick}
+                            >
+                                +
+                            </button>
                             <span className="pl-3 font-normal text-sm">Add more Contributors</span>
                         </div>
-                    }
+                    )}
                 </div>
             </div>
-            
+
             {/* NFT Details */}
             <div className="mt-10 lg:mt-14 lg:w-1/2">
                 <div className="w-full mb-6">
@@ -127,12 +152,14 @@ const PricingAndSplits = ({numberOfCopies,setNumberOfCopies, nftPrice,setNftPric
                     <input
                         className="dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-100 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-100"
                         id="resale-royalty-percentage"
-                        // value={resaleRoyaltyPercent}
+                        value={resaleRoyaltyPercent}
                         onChange={(e) => {
                             setResaleRoyaltyPercent(e.target.value);
                         }}
                         type="number"
                         min={0}
+                        max={100}
+                        maxLength={3}
                         placeholder="Enter Resale Royalty Percentage"
                         required
                     />
@@ -143,15 +170,15 @@ const PricingAndSplits = ({numberOfCopies,setNumberOfCopies, nftPrice,setNftPric
                     <span>SCHEDULE LAUNCH</span>
                     <div className="flex items-center mt-2 space-x-10">
                         <div className="flex items-center">
-                            <input 
-                                id="release_now" 
+                            <input
+                                id="release_now"
                                 onChange={(e) => {
                                     setReleaseNow(true);
-                                }} 
-                                type="radio" 
-                                name="radio" 
-                                defaultChecked 
-                                className="hidden"    
+                                }}
+                                type="radio"
+                                name="radio"
+                                defaultChecked
+                                className="hidden"
                             />
                             <label htmlFor="release_now" className="flex items-center text-sm font-normal cursor-pointer font-secondary">
                                 <span className="inline-block w-6 h-6 mr-1 border-2 rounded-full border-[#363636] flex-no-shrink"></span>
@@ -159,14 +186,15 @@ const PricingAndSplits = ({numberOfCopies,setNumberOfCopies, nftPrice,setNftPric
                             </label>
                         </div>
                         <div className="flex items-center">
-                            <input 
-                                id="release_later" 
-                                type="radio" 
+                            <input
+                                id="release_later"
+                                type="radio"
                                 onChange={(e) => {
                                     setReleaseNow(false);
                                 }}
-                                name="radio" 
-                                className="hidden" />
+                                name="radio"
+                                className="hidden"
+                            />
                             <label htmlFor="release_later" className="flex items-center text-sm font-normal cursor-pointer font-secondary">
                                 <span className="inline-block w-6 h-6 mr-1 border-2 rounded-full border-[#363636] flex-no-shrink"></span>
                                 Schedule for later
@@ -175,8 +203,8 @@ const PricingAndSplits = ({numberOfCopies,setNumberOfCopies, nftPrice,setNftPric
                     </div>
                 </div>
             </div>
-       </div> 
-    );    
-}
+        </div>
+    );
+};
 
-export default PricingAndSplits;
+export default Step2Form;

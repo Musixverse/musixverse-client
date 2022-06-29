@@ -3,6 +3,13 @@ import Image from "next/image";
 import { useMoralis } from "react-moralis";
 
 export default function CoverPhoto({ coverImage, setCoverImage }) {
+    /**
+     * Doubts:
+     * Is the cover photo uploaded fitting the banner on the profile page?
+     * 
+     * On this page
+     * Maintain aspect ratio of the element being cropped
+    */
     const coverPicture = useRef(null);
     const { Moralis } = useMoralis();
 

@@ -1,19 +1,12 @@
-import React, { useState, useRef } from "react";
+import React, { useRef } from "react";
 import styles from "../../../styles/ReportABug/reportABug.module.css";
 
 export default function ReportABug() {
-	const [name, setName] = useState("");
-	const [email, setEmail] = useState("");
+	//Table Schema name: BugReports
 
 	const nameRef = useRef(null);
     const emailRef = useRef(null);
 	const bugDescripttionRef = useRef(null);
-
-	const onFocus = (event) => {
-		if (event.target.autocomplete) {
-			event.target.autocomplete = "No";
-		}
-	};
 
 	const handleFormSubmit = (e) => {
 		e.preventDefault();
@@ -105,12 +98,12 @@ export default function ReportABug() {
 								<div className="w-full md:w-1/3">
 									<div className={styles["inputBox"]}>
 										<label className="dark:opacity-50">Name&nbsp; (Optional)</label>
-										<input className="dark:bg-[#1a1a1a] mt-1" type="text" ref={nameRef} name="name" value={name} onChange={(e) => setName(e.target.value)} autoComplete="off" onFocus={onFocus} />
+										<input className="dark:bg-[#1a1a1a] mt-1" type="text" ref={nameRef} name="name" autoComplete="off" />
 									</div>
 
 									<div className={"mt-4 "+styles["inputBox"]}>
 										<label className="dark:opacity-50">Email Address&nbsp; (Optional)</label>
-										<input className="dark:bg-[#1a1a1a] mt-1" type="email" ref={emailRef} name="email" value={email} onChange={(e) => setEmail(e.target.value)} autoComplete="off" onFocus={onFocus} />
+										<input className="dark:bg-[#1a1a1a] mt-1" type="email" ref={emailRef} name="email" autoComplete="off" />
 									</div>
 
 									<div className="mt-5">

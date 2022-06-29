@@ -20,28 +20,28 @@
 }
 
 .contact_form {
-	@apply mt-10;
+	@apply mt-16 ;
 }
 
 .contact_us_box {
-	@apply h-[400px] p-12 border-2 border-[#afafaf] rounded-xl shadow;
+	@apply max-h-max md:h-[400px] p-8 md:p-12 border-2 border-[#afafaf] rounded-xl shadow;
 }
 
 .inputBox input {
-	@apply w-full p-2 text-sm text-primary-100 rounded-sm focus:border-[1px] border-primary-100 outline-none text-left; 
+	@apply w-full p-2 text-sm text-primary-100 rounded-sm focus:border-[2px] border-primary-100 outline-none text-left; 
 }
 
 .inputBox label {
-	@apply p-2 text-[1em] font-secondary;
+	@apply p-2 text-sm font-secondary;
 }
 
 .textarea_contact {
-	@apply w-full p-2 focus:border-[1px] border-primary-100 rounded-sm focus:outline-none focus:shadow-none focus:text-primary-100;
+	@apply w-full p-2 focus:border-[2px] border-primary-100 rounded-sm focus:outline-none focus:shadow-none focus:text-primary-100;
 }
 
 /* CSS for send message button */
 .send_message_btn {
-	@apply w-full font-primary font-medium shadow-sm px-3 py-3 mt-4 cursor-pointer text-center block border-0 outline-none rounded-md text-[#202020] bg-primary-100;
+	@apply w-full font-primary text-sm font-medium shadow-sm px-3 py-3 mt-4 cursor-pointer text-center block border-0 outline-none rounded-md bg-primary-100;
 
 }
 

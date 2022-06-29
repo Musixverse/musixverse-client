@@ -13,7 +13,7 @@ export default function CFB1() {
             </button>
             <p className="text-3xl font-semibold text-center font-primary text-primary-200">MXV COMMUNITY FEEDBACK BOARD</p>
             <p className="max-w-xs pt-6 text-xs text-center font-secondary sm:max-w-2xl">
-                The Community Feedback Board is a group of select individuals with exclusive access to Musixverse and its features before anyone else. In
+                The Community Feedback Board is a group of selected individuals with exclusive access to Musixverse and its features before anyone else. In
                 return, we will ask you to provide feedback about the platform as we continue to build and improve it
             </p>
         </div>

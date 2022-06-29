@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { Fragment } from 'react';
-import { Dialog, Transition } from '@headlessui/react';
+import { Fragment } from "react";
+import { Dialog, Transition } from "@headlessui/react";
 import ReactCrop from "react-image-crop";
 import "react-image-crop/dist/ReactCrop.css";
 
@@ -12,7 +12,7 @@ function ImageCrop({ imageToCrop, setCroppedImage, setShowModal }) {
         {
             unit: "%",
             width: 640,
-            aspect: 1 / 1
+            aspect: 1 / 1,
         }
     );
     const [imageRef, setImageRef] = useState();
@@ -59,17 +59,17 @@ function ImageCrop({ imageToCrop, setCroppedImage, setShowModal }) {
         // Method 2
         return new Promise((resolve, reject) => {
             canvas.toBlob((blob) => {
-            // returning an error
-            if (!blob) {
-                reject(new Error("Canvas is empty"));
-                return;
-            }
+                // returning an error
+                if (!blob) {
+                    reject(new Error("Canvas is empty"));
+                    return;
+                }
 
-            blob.name = fileName;
-            // creating a Object URL representing the Blob object given
-            const croppedImageUrl = URL.createObjectURL(blob);
+                blob.name = fileName;
+                // creating a Object URL representing the Blob object given
+                const croppedImageUrl = URL.createObjectURL(blob);
 
-            resolve(croppedImageUrl);
+                resolve(croppedImageUrl);
             }, "image/jpeg");
         });
     }
@@ -98,7 +98,7 @@ function ImageCrop({ imageToCrop, setCroppedImage, setShowModal }) {
                                     src={imageToCrop}
                                     crop={cropConfig}
                                     ruleOfThirds
-                                    imageStyle={{height: '270px'}}
+                                    imageStyle={{ height: "270px" }}
                                     onImageLoaded={(imageRef) => setImageRef(imageRef)}
                                     onChange={(cropConfig) => setCropConfig(cropConfig)}
                                     crossorigin="anonymous" // to avoid CORS-related problems
@@ -111,14 +111,20 @@ function ImageCrop({ imageToCrop, setCroppedImage, setShowModal }) {
                     <button
                         type="button"
                         className="inline-flex justify-center w-full px-4 py-2 text-base font-medium text-[#676767] border border-transparent rounded-md shadow-sm dark:text-[#323232] bg-light-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-light-300 sm:ml-3 sm:w-auto sm:text-sm"
-                        onClick={() => {URL.revokeObjectURL(imageToCrop);setShowModal(false);}}
+                        onClick={() => {
+                            URL.revokeObjectURL(imageToCrop);
+                            setShowModal(false);
+                        }}
                     >
                         Cancel
                     </button>
                     <button
                         type="button"
                         className="inline-flex justify-center w-full px-4 py-2 text-base font-medium text-white border border-transparent rounded-md shadow-sm bg-primary-100 hover:bg-primary-300 focus:outline-none sm:ml-3 sm:w-auto sm:text-sm"
-                        onClick={() => {setShowModal(false);cropImage(cropConfig);}}
+                        onClick={() => {
+                            setShowModal(false);
+                            cropImage(cropConfig);
+                        }}
                     >
                         Confirm
                     </button>
@@ -130,7 +136,7 @@ function ImageCrop({ imageToCrop, setCroppedImage, setShowModal }) {
 }
 
 ImageCrop.defaultProps = {
-  setCroppedImage: () => {}
+    setCroppedImage: () => {},
 };
 
 export default ImageCrop;

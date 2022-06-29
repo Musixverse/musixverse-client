@@ -15,6 +15,26 @@ export default function Confirm() {
 
     const { fetch } = useMoralisQuery("UserInfo", (query) => query.equalTo("user", user), [], { autoFetch: false });
 
+    const [checkCounter, setCheckCounter] = useState(0);
+    useEffect(() => {
+        const checkEmailVerified = setTimeout(() => {
+            setCheckCounter((prev) => prev + 1);
+            console.log("changeConfirmEmailPage");
+            if (user) {
+                refetchUserData();
+                if (user.attributes.emailVerified) {
+                    console.log("here");
+                    if (userInfo.attributes.isArtist) {
+                        Router.push(`/profile/${user.attributes.username}`, undefined, { shallow: true });
+                    } else {
+                        Router.push("/library", undefined, { shallow: true });
+                    }
+                }
+            }
+        }, 2000);
+        return () => clearTimeout(checkEmailVerified);
+    }, [checkCounter]);
+
     useEffect(() => {
         if (user) {
             refetchUserData();
@@ -22,10 +42,7 @@ export default function Confirm() {
                 onSuccess: (object) => {
                     setUserInfo(object[0]);
                 },
-                onError: (error) => {
-                    // The object was not retrieved successfully.
-                    // error is a Moralis.Error with an error code and message.
-                },
+                onError: (error) => {},
             });
         }
     }, [user]);

@@ -3,7 +3,7 @@ import { useEffect, useContext } from "react";
 import { useRouter } from "next/router";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
-import Watcher from "./Watcher";
+import Auth from "../../auth/Auth";
 import Loading from "../Loading";
 import ErrorBox from "../Modal/ErrorBox";
 import SuccessBox from "../Modal/SuccessBox";
@@ -34,7 +34,7 @@ const Layout = ({ children }) => {
 
     return (
         <div>
-            <Watcher />
+            <Auth />
             <Navbar />
             {children}
             {isLoading && <Loading />}

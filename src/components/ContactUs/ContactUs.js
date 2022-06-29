@@ -35,8 +35,8 @@ export default function ContactUs() {
 						<div>
 							Email us at:
 							<br />
-							<a href="mailto:Singhyuvraj179@gmail.com" target="_blank" rel="noopener noreferrer">
-								singhyuvraj179@gmail.com
+							<a href="mailto:contact@musixverse.com" target="_blank" rel="noopener noreferrer">
+								contact@musixverse.com
 							</a>
 							<br />
 							<br />
@@ -47,16 +47,16 @@ export default function ContactUs() {
 					<div className={styles["contact_form"]}>
 							<div className={styles["contact_us_box"]}>
 								<form action="https://getform.io/f/91471bcd-4363-49f9-9762-bb91ed85745b" method="POST">
-									<div className="flex space-x-10">
+									<div className="flex space-x-14">
 										<div className="w-1/3">
 											<div className={styles["inputBox"]}>
 												<label className="dark:opacity-50">Name&nbsp; (Optional)</label>
-												<input className="dark:bg-[#1a1a1a]" type="text" name="name" value={name} onChange={(e) => setName(e.target.value)} autoComplete="off" onFocus={onFocus} />
+												<input className="dark:bg-[#1a1a1a] mt-1" type="text" name="name" value={name} onChange={(e) => setName(e.target.value)} autoComplete="off" onFocus={onFocus} />
 											</div>
 
 											<div className={"mt-4 "+styles["inputBox"]}>
 												<label className="dark:opacity-50">Email Address&nbsp; (Optional)</label>
-												<input className="dark:bg-[#1a1a1a]" type="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} autoComplete="off" onFocus={onFocus} />
+												<input className="dark:bg-[#1a1a1a] mt-1" type="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} autoComplete="off" onFocus={onFocus} />
 											</div>
 
 											<div className="mt-5">
@@ -66,8 +66,8 @@ export default function ContactUs() {
 
 										<div className="w-2/3">
 											<div>
-												<label className="font-primary dark:opacity-50">Message</label>
-												<textarea className={"dark:bg-[#1a1a1a] "+styles["textarea_contact"]} name="message" rows="8" required></textarea>
+												<label className="text-sm font-primary dark:opacity-50">Message</label>
+												<textarea className={"dark:bg-[#1a1a1a] mt-1 "+styles["textarea_contact"]} name="message" rows="8" required></textarea>
 											</div>
 
 											<button className={styles["send_message_btn"]}>

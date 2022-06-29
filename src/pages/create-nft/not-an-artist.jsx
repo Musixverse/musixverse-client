@@ -1,28 +1,22 @@
 import Head from "next/head";
-import BannerCFB from "../../components/CFB/BannerCFB";
-import CFB1 from "../../components/CFB/CFB1";
-import CFB4 from "../../components/CFB/CFB4";
-import CFB5 from "../../components/CFB/CFB5";
+import NotAnArtist from "../../components/CreateNFT/not-an-artist";
 
-const CFB = ({}) => {
+const notanartist = ({}) => {
     return (
         <>
             <Head>
-                <title>Musixverse | Community Feedback Board</title>
+                <title>Musixverse | Not an Artist</title>
                 <meta name="description" content="Musixverse" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
             <div className="flex flex-col items-center justify-center w-full bg-light-200 dark:bg-dark-200">
                 <div className="overflow-x-hidden w-full max-w-[1920px]">
-                    <BannerCFB />
-                    <CFB1 />
-                    <CFB4 />
-                    <CFB5 />
+                    <NotAnArtist />
                 </div>
             </div>
         </>
     );
 };
 
-export default CFB;
+export default notanartist;

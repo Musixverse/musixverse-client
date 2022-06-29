@@ -18,7 +18,7 @@ export default function Profile() {
     const [profileUserInfo, setProfileUserInfo] = useState(false);
 
     const { fetch } = useMoralisCloudFunction("fetchUser", { username: username }, { autoFetch: false });
-    const { fetch: fetchInfo } = useMoralisCloudFunction("fetchUserInfo", { username: username }, { autoFetch: false });
+    const { fetch: fetchUserInfo } = useMoralisCloudFunction("fetchUserInfo", { username: username }, { autoFetch: false });
 
     const fetchUser = async () => {
         const results = await fetch({
@@ -29,9 +29,17 @@ export default function Profile() {
         }
     };
 
-    const fetchUserInfo = async () => {
-        const results = await fetchInfo({
-            onSuccess: (data) => console.log("profileUserInfo:", data),
+    const fetchInfo = async () => {
+        const results = await fetchUserInfo({
+            onSuccess: (data) => {
+                if (!data.attributes) {
+                    router.push({ pathname: `/profile/does-not-exist`, query: { username: username } });
+                }
+            },
+            onError: (error) => {
+                console.log("profileUserInfo Error:", error);
+                router.push({ pathname: `/profile/does-not-exist`, query: { username: username } });
+            },
         });
         if (results) {
             setProfileUserInfo(results.attributes);
@@ -40,12 +48,14 @@ export default function Profile() {
 
     useEffect(() => {
         setLoading(true);
-        fetchUser();
-        fetchUserInfo();
+        if (username) {
+            fetchUser();
+            fetchInfo();
+        }
         setLoading(false);
     }, [username]);
 
-    if (isLoading) return null;
+    if (isLoading || !profileUser) return null;
     return (
         <>
             {profileUserInfo.isArtist ? (

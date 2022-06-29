@@ -1,35 +1,42 @@
 import Head from "next/head";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useMoralis } from "react-moralis";
 import ScrollToTop from "../../utils/ScrollToTop";
+import CreateNFTIntro from "../../components/CreateNFT/step-0";
 import TrackDetails from "../../components/CreateNFT/step-1";
-import ComprehensiveDetails from "../../components/CreateNFT/step-2";
-import SplitsAndContributors from "../../components/CreateNFT/step-3";
-import NFTDetailsAndScheduling from "../../components/CreateNFT/step-4";
+import PricingAndSplits from "../../components/CreateNFT/step-2";
 import { mintTrackNFT, uri } from "../../utils/smart-contract/functions";
 
 const CreateNFT = () => {
+    // TODO: Add song background and unlockable content page in step 3
     const { Moralis, user } = useMoralis();
-    // TODO: Add song background to step 1 and links to second page. Also add unlockable content page in step 4
 
     // States
-    const [step, setStep] = useState(1);
-    const [imageHash, setImageHash] = useState("");
-    const [songHash, setSongHash] = useState("");
+    const [step, setStep] = useState(2);
+    const [uploadedImage, setUploadedImage] = useState(null);
+    const [uploadedSong, setUploadedSong] = useState(null);
     const [trackTitle, setTrackTitle] = useState("");
+    const [genre, setGenre] = useState("");
+    const [trackOrigin, setTrackOrigin] = useState("");
+    const [explicit, setExplicit] = useState("");
+    const [recordingYear, setRecordingYear] = useState(new Date().getFullYear());
+    const [vocals, setVocals] = useState(true);
     const [links, setLinks] = useState({
         spotifyLink: "",
         appleMusicLink: "",
         amazonMusicLink: "",
         youtubeMusicLink: "",
+        otherLink: "",
     });
-    const [recordingYear, setRecordingYear] = useState("");
-    const [vocals, setVocals] = useState(true);
-    const [otherContributors, setOtherContributors] = useState(true);
+    const [contributorList, setContributorList] = useState([{ ContributorName: "", Split: "", Role: "" }]);
     const [numberOfCopies, setNumberOfCopies] = useState("");
     const [nftPrice, setNftPrice] = useState("");
     const [resaleRoyaltyPercent, setResaleRoyaltyPercent] = useState("");
     const [releaseNow, setReleaseNow] = useState(true);
+
+    useEffect(() => {
+        console.log("releaseNow:", releaseNow);
+    }, [releaseNow]);
 
     // Continue to next step
     const nextStep = () => {
@@ -188,15 +195,40 @@ const CreateNFT = () => {
         //     onSale,
         //     user.attributes.accounts[0]
         // );
-        console.log(await uri(1));
+        console.log(await uri(2));
     };
 
-    const step1Values = { step, nextStep, prevStep, trackTitle, setTrackTitle, links, setLinks, imageHash, setImageHash, setSongHash, uploadFile };
-    const step2Values = { step, nextStep, prevStep, recordingYear, setRecordingYear, vocals, setVocals, otherContributors, setOtherContributors };
-    const step3Values = { step, nextStep, prevStep };
-    const step4Values = {
+    const step0Values = { nextStep };
+    const step1Values = {
+        step,
+        nextStep,
+        prevStep,
+        uploadedImage,
+        setUploadedImage,
+        uploadedSong,
+        setUploadedSong,
+        trackTitle,
+        setTrackTitle,
+        setGenre,
+        setTrackOrigin,
+        setExplicit,
+        recordingYear,
+        setRecordingYear,
+        vocals,
+        setVocals,
+        links,
+        setLinks,
+        nftPrice,
+        numberOfCopies,
+    };
+    const step2Values = {
         step,
         prevStep,
+        uploadedImage,
+        uploadedSong,
+        trackTitle,
+        contributorList,
+        setContributorList,
         numberOfCopies,
         setNumberOfCopies,
         nftPrice,
@@ -205,11 +237,23 @@ const CreateNFT = () => {
         setResaleRoyaltyPercent,
         releaseNow,
         setReleaseNow,
-        otherContributors,
         nftCreateFormOnSubmit,
     };
 
     switch (step) {
+        case 0:
+            return (
+                <>
+                    <Head>
+                        <title>Musixverse | Create NFT</title>
+                        <meta name="description" content="Musixverse" />
+                        <link rel="icon" href="/favicon.ico" />
+                    </Head>
+                    <ScrollToTop samePage={true} changingValue={step} />
+                    <CreateNFTIntro {...step0Values} />
+                </>
+            );
+
         case 1:
             return (
                 <>
@@ -227,38 +271,12 @@ const CreateNFT = () => {
             return (
                 <>
                     <Head>
-                        <title>Musixverse | Create NFT - Comprehensive Details</title>
+                        <title>Musixverse | Create NFT - Pricing and Splits</title>
                         <meta name="description" content="Musixverse" />
                         <link rel="icon" href="/favicon.ico" />
                     </Head>
                     <ScrollToTop samePage={true} changingValue={step} />
-                    <ComprehensiveDetails {...step2Values} />
-                </>
-            );
-
-        case 3:
-            return (
-                <>
-                    <Head>
-                        <title>Musixverse | Create NFT - Contributors</title>
-                        <meta name="description" content="Musixverse" />
-                        <link rel="icon" href="/favicon.ico" />
-                    </Head>
-                    <ScrollToTop samePage={true} changingValue={step} />
-                    <SplitsAndContributors {...step3Values} />
-                </>
-            );
-
-        case 4:
-            return (
-                <>
-                    <Head>
-                        <title>Musixverse | NFT Details & Scheduling</title>
-                        <meta name="description" content="Musixverse" />
-                        <link rel="icon" href="/favicon.ico" />
-                    </Head>
-                    <ScrollToTop samePage={true} changingValue={step} />
-                    <NFTDetailsAndScheduling {...step4Values} />
+                    <PricingAndSplits {...step2Values} />
                 </>
             );
     }

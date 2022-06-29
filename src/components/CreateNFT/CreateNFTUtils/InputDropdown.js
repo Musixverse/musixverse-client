@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { Fragment, useState, useEffect } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/solid";
 import styles from "../../../../styles/CreateNFT/InputDropdown.module.css";
@@ -7,18 +7,24 @@ function classNames(...classes) {
     return classes.filter(Boolean).join(" ");
 }
 
-export default function InputDropdown(props) {
-    const [currentFilter, setCurrentFilter] = useState(props.optionsArray[0]);
+export default function InputDropdown({ optionsArray, setChoice }) {
+    const [currentFilter, setCurrentFilter] = useState(optionsArray[0]);
+
+    useEffect(() => {
+        setChoice(currentFilter);
+    }, []);
+
     const handleOptionSelect = (e) => {
         //Currently, I have attached the idx with the selcted item
-        //So we can keep a track of indx instead of keeping the entire string 
+        //So we can keep a track of indx instead of keeping the entire string
         //In our main nft creation states...
         // console.log(e.target.value);
         setCurrentFilter(e.target.textContent);
+        setChoice(e.target.textContent);
     };
 
     // Map all the options into a items renderable array
-    const dropdownOptions = props.optionsArray.map((option, idx) => {
+    const dropdownOptions = optionsArray.map((option, idx) => {
         return (
             <Menu.Item key={idx}>
                 {({ active }) => (
@@ -41,7 +47,7 @@ export default function InputDropdown(props) {
         <Menu as="div" className="relative inline-block w-full text-left">
             {/* The visible dropdown button */}
             <div>
-                <Menu.Button className={"dark:bg-[#323232] hover:dark:border-[#6cc027] dark:text-light-100 dark:border-[#323232] "+ styles['menu-button']}>
+                <Menu.Button className={"dark:bg-[#323232] hover:dark:border-[#6cc027] dark:text-light-100 dark:border-[#323232] " + styles["menu-button"]}>
                     {currentFilter}
                     <ChevronDownIcon className="ml-2 h-5 w-5 text-[#6cc027]" aria-hidden="true" />
                 </Menu.Button>
@@ -57,7 +63,7 @@ export default function InputDropdown(props) {
                 leaveTo="transform opacity-0 scale-95"
             >
                 <Menu.Items className="absolute right-0 z-10 w-56 mt-3 origin-top-right rounded-md shadow-lg bg-light-300 dark:bg-dark-100 ring-1 ring-black ring-opacity-5 focus:outline-none">
-                    <div className={styles['menu-item-div']}>{dropdownOptions}</div>
+                    <div className={styles["menu-item-div"]}>{dropdownOptions}</div>
                 </Menu.Items>
             </Transition>
         </Menu>

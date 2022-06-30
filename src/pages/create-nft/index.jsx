@@ -1,14 +1,16 @@
 import Head from "next/head";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useMoralis } from "react-moralis";
-import ScrollToTop from "../../utils/ScrollToTop";
+import ScrollToPageTop from "../../utils/ScrollToPageTop";
 import CreateNFTIntro from "../../components/CreateNFT/step-0";
 import TrackDetails from "../../components/CreateNFT/step-1";
 import PricingAndSplits from "../../components/CreateNFT/step-2";
 import { mintTrackNFT, uri } from "../../utils/smart-contract/functions";
+import LoadingContext from "../../../store/loading-context";
 
 const CreateNFT = () => {
     // TODO: Add song background and unlockable content page in step 3
+    const [isLoading, setLoading] = useContext(LoadingContext);
     const { Moralis, user } = useMoralis();
 
     // States
@@ -35,8 +37,8 @@ const CreateNFT = () => {
     const [releaseNow, setReleaseNow] = useState(true);
 
     useEffect(() => {
-        console.log("releaseNow:", releaseNow);
-    }, [releaseNow]);
+        console.log("uploadedImage", uploadedImage);
+    }, [uploadedImage]);
 
     // Continue to next step
     const nextStep = () => {
@@ -48,16 +50,24 @@ const CreateNFT = () => {
         setStep((currStep) => currStep - 1);
     };
 
-    async function uploadFile(data) {
-        const file = new Moralis.File("file", data);
-        await file.saveIPFS();
-        console.log(file.ipfs(), file.hash());
-        return file;
-    }
-
     async function getLatestId() {
         // TODO: Write a function in the smart contract that returns the latest NFT ID
     }
+
+    useEffect(() => {
+        setTrackTitle("Die Hard");
+        setLinks({
+            spotifyLink: "https://open.spotify.com/track/6gI9b2VsoWhjhIuIeToDVs?si=abfe744344f04c4d",
+            appleMusicLink:
+                "https://music.apple.com/us/album/1626195790?app=music&at=11laLe&ct=LFV_a8488c4eb6c29dd9e04fa7ed8a69fad5&itscg=30440&itsct=catchall_p1&lId=25738567&cId=none&sr=1&src=Linkfire&ls=1",
+            amazonMusicLink:
+                "https://music.amazon.com/albums/B0B2CCS4WD?tag=univemuisc-central-21&ie=UTF8&linkCode=as2&ascsubtag=a8488c4eb6c29dd9e04fa7ed8a69fad5&ref=dmm_acq_soc_in_u_lfire_lp_x_a8488c4eb6c29dd9e04fa7ed8a69fad5",
+            youtubeMusicLink: "",
+            otherLink: "",
+        });
+        setUploadedImage("https://ipfs.moralis.io:2053/ipfs/QmQSTneVQ2Xde3XzuXKQWkwipdS8Voh9xDDWLGju83xJWa");
+        setUploadedSong("https://ipfs.moralis.io:2053/ipfs/QmUA4TiKp1AiiJhCmnPgij4B5cmFrmtUjsBPADEtgRZxaH");
+    }, []);
 
     const nftCreateFormOnSubmit = async () => {
         // const _id = getLatestId();
@@ -240,6 +250,7 @@ const CreateNFT = () => {
         nftCreateFormOnSubmit,
     };
 
+    if (isLoading) return null;
     switch (step) {
         case 0:
             return (
@@ -249,7 +260,7 @@ const CreateNFT = () => {
                         <meta name="description" content="Musixverse" />
                         <link rel="icon" href="/favicon.ico" />
                     </Head>
-                    <ScrollToTop samePage={true} changingValue={step} />
+                    <ScrollToPageTop samePage={true} changingValue={step} />
                     <CreateNFTIntro {...step0Values} />
                 </>
             );
@@ -262,7 +273,7 @@ const CreateNFT = () => {
                         <meta name="description" content="Musixverse" />
                         <link rel="icon" href="/favicon.ico" />
                     </Head>
-                    <ScrollToTop samePage={true} changingValue={step} />
+                    <ScrollToPageTop samePage={true} changingValue={step} />
                     <TrackDetails {...step1Values} />
                 </>
             );
@@ -275,7 +286,7 @@ const CreateNFT = () => {
                         <meta name="description" content="Musixverse" />
                         <link rel="icon" href="/favicon.ico" />
                     </Head>
-                    <ScrollToTop samePage={true} changingValue={step} />
+                    <ScrollToPageTop samePage={true} changingValue={step} />
                     <PricingAndSplits {...step2Values} />
                 </>
             );

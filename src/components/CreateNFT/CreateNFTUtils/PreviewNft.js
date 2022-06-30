@@ -47,15 +47,6 @@ export default function PreviewNft({ trackTitle, uploadedImage, uploadedSong, nf
         audio.current.currentTime = 0;
     };
 
-    /*
-        Things to be passed here as props:      
-        1. Uploaded Image url/blob (Done)
-        2. Uploaded audio file (Done)
-        3. Artist Name (Pre specified via Moralis)
-        4. NFT name (Done)
-        5. Price of NFT (Ayush)
-    */
-    // console.log("here",uploadedSong);
     return (
         <div className="flex-1 mt-14 lg:mt-0">
             <p className="mb-10 font-semibold font-secondary">STEP {step} OF 2</p>
@@ -73,6 +64,7 @@ export default function PreviewNft({ trackTitle, uploadedImage, uploadedSong, nf
                 {uploadedSong == null ? null : (
                     <div className="z-[1] p-2">
                         <button
+                            type="button"
                             ref={playBtn}
                             onClick={playSongHandler}
                             className="h-[40px] w-[40px] bg-primary-100 rounded-full flex items-center justify-center"
@@ -90,13 +82,15 @@ export default function PreviewNft({ trackTitle, uploadedImage, uploadedSong, nf
                         <p className="font-secondary text-[#1D1D1D] text-sm dark:text-light-200">{user && user.attributes.name}</p>
                         <p className="font-semibold font-secondary text-[#1D1D1D] dark:text-light-200 text-lg">{truncatedNftName}</p>
                     </div>
-                    <div className="flex flex-col">
-                        <p className="font-secondary text-sm">Price</p>
-                        <div className="flex items-center font-semibold">
-                            <Image src={"/assets/matic-logo.svg"} width={16} height={16} alt="ethereum logo" />
-                            <span className="ml-1 sm:text-lg">{truncatednftPrice == 0 ? 0 : truncatednftPrice}</span>
+                    {truncatednftPrice && (
+                        <div className="flex flex-col">
+                            <p className="font-secondary text-sm">Price</p>
+                            <div className="flex items-center font-semibold">
+                                <Image src={"/assets/matic-logo.svg"} width={16} height={16} alt="matic logo" />
+                                <span className="ml-1 sm:text-lg">{truncatednftPrice == 0 ? 0 : truncatednftPrice}</span>
+                            </div>
                         </div>
-                    </div>
+                    )}
                 </div>
                 {numberOfCopies == 0 ? (
                     <div className="w-[150px] h-2 dark:bg-[#363636] bg-light-300 self-center rounded-lg"></div>

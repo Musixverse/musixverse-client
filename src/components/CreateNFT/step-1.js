@@ -96,6 +96,7 @@ export default function TrackDetails({
                         {/* Reset and continue buttons */}
                         {/* NOTE: Revoke the image url at the create NFT button click */}
                         <button
+                            type="button"
                             onClick={() => {
                                 prevStep();
                             }}

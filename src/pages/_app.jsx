@@ -8,7 +8,7 @@ import StatusContext from "../../store/status-context";
 import LoadingContext from "../../store/loading-context";
 import "../../styles/globals.css";
 import Layout from "../layout/WrapLayout/Layout";
-import ScrollToTop from "../utils/ScrollToTop";
+import ScrollToPageTop from "../utils/ScrollToPageTop";
 import { connectSmartContract } from "../utils/smart-contract/functions";
 
 function App({ Component, pageProps }) {
@@ -71,7 +71,7 @@ function App({ Component, pageProps }) {
                     <LoadingContext.Provider value={[isLoading, setLoading]}>
                         <StatusContext.Provider value={[error, success, setSuccess, setError]}>
                             <Layout>
-                                <ScrollToTop />
+                                <ScrollToPageTop />
                                 <Component {...pageProps} />
                             </Layout>
                         </StatusContext.Provider>

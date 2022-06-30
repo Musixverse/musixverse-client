@@ -92,7 +92,7 @@ export default function TrackDetails({
                     </div>
 
                     {/* Button div */}
-                    <div className="flex mt-16 space-x-3 md:self-end justify-end">
+                    <div className="flex mt-16 mb-24 space-x-3 md:self-end justify-end">
                         {/* Reset and continue buttons */}
                         {/* NOTE: Revoke the image url at the create NFT button click */}
                         <button

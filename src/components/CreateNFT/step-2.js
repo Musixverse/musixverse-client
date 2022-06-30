@@ -1,5 +1,7 @@
+import { useEffect, useContext } from "react";
 import PreviewNft from "./CreateNFTUtils/PreviewNft";
 import Step2Form from "./CreateNFTUtils/Step2Form";
+import StatusContext from "../../../store/status-context";
 
 export default function PricingAndSplits({
     step,
@@ -19,6 +21,18 @@ export default function PricingAndSplits({
     setReleaseNow,
     nftCreateFormOnSubmit,
 }) {
+    const [, , , setError] = useContext(StatusContext);
+
+    useEffect(() => {
+        if (contributorList.reduce((total, currentSplit) => (total = total + Number(currentSplit.split)), 0) === 100) {
+            setError({
+                title: "",
+                message: "",
+                showErrorBox: false,
+            });
+        }
+    }, [contributorList]);
+
     const nftPreviewValues = { trackTitle, uploadedImage, uploadedSong, nftPrice, numberOfCopies, step };
     const step2FormValues = {
         numberOfCopies,
@@ -39,6 +53,14 @@ export default function PricingAndSplits({
                 <form
                     onSubmit={(e) => {
                         e.preventDefault();
+                        if (contributorList.reduce((total, currentSplit) => (total = total + Number(currentSplit.split)), 0) !== 100) {
+                            setError({
+                                title: "Splits aren't correct!",
+                                message: "Total should be 100% in order to proceed.",
+                                showErrorBox: true,
+                            });
+                            return;
+                        }
                         nftCreateFormOnSubmit();
                     }}
                 >
@@ -50,7 +72,7 @@ export default function PricingAndSplits({
                     </div>
 
                     {/* Button div */}
-                    <div className="flex mt-10 space-x-3 md:self-end lg:mt-16 justify-end">
+                    <div className="flex mt-16 mb-24 space-x-3 md:self-end lg:mt-16 justify-end">
                         <button
                             onClick={() => {
                                 prevStep();

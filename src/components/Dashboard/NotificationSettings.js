@@ -13,7 +13,7 @@ export default function NotificationSettings({ walletAddress }) {
     const [itemSold, setItemSold] = useState("");
 
     const { user } = useMoralis();
-    const { fetch } = useMoralisQuery("UserPreferences", (query) => query.equalTo("user", user), [], { autoFetch: false });
+    const { fetch } = useMoralisQuery("UserPreferences", (query) => query.equalTo("user", user), [user], { autoFetch: false });
 
     useEffect(() => {
         setLoading(true);
@@ -53,7 +53,6 @@ export default function NotificationSettings({ walletAddress }) {
         return;
     };
 
-    if (isLoading) return null;
     return (
         <div className="flex-1 p-10 mb-10 pb-14 bg-light-300 dark:bg-dark-100 rounded-xl">
             <div className="flex flex-col items-start justify-between w-full space-y-5 md:flex-row md:space-y-0">

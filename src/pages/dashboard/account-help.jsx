@@ -19,7 +19,6 @@ export default function AccountHelpSetting() {
             setLoading(false);
         };
     }, [isInitialized, user]);
-    if (isLoading) return null;
 
     return (
         <>

@@ -6,15 +6,13 @@ import CreateNFTIntro from "../../components/CreateNFT/step-0";
 import TrackDetails from "../../components/CreateNFT/step-1";
 import PricingAndSplits from "../../components/CreateNFT/step-2";
 import { mintTrackNFT, uri } from "../../utils/smart-contract/functions";
-import LoadingContext from "../../../store/loading-context";
 
 const CreateNFT = () => {
     // TODO: Add song background and unlockable content page in step 3
-    const [isLoading, setLoading] = useContext(LoadingContext);
     const { Moralis, user } = useMoralis();
 
     // States
-    const [step, setStep] = useState(1);
+    const [step, setStep] = useState(2);
     const [uploadedImage, setUploadedImage] = useState(null);
     const [uploadedSong, setUploadedSong] = useState(null);
     const [trackTitle, setTrackTitle] = useState("");
@@ -30,15 +28,11 @@ const CreateNFT = () => {
         youtubeMusicLink: "",
         otherLink: "",
     });
-    const [contributorList, setContributorList] = useState([{ ContributorName: "", Split: "", Role: "" }]);
+    const [contributorList, setContributorList] = useState([{ id: "", username: "", split: "", role: "" }]);
     const [numberOfCopies, setNumberOfCopies] = useState("");
     const [nftPrice, setNftPrice] = useState("");
     const [resaleRoyaltyPercent, setResaleRoyaltyPercent] = useState("");
     const [releaseNow, setReleaseNow] = useState(true);
-
-    useEffect(() => {
-        console.log("uploadedImage", uploadedImage);
-    }, [uploadedImage]);
 
     // Continue to next step
     const nextStep = () => {
@@ -55,19 +49,29 @@ const CreateNFT = () => {
     }
 
     useEffect(() => {
-        setTrackTitle("Die Hard");
-        setLinks({
-            spotifyLink: "https://open.spotify.com/track/6gI9b2VsoWhjhIuIeToDVs?si=abfe744344f04c4d",
-            appleMusicLink:
-                "https://music.apple.com/us/album/1626195790?app=music&at=11laLe&ct=LFV_a8488c4eb6c29dd9e04fa7ed8a69fad5&itscg=30440&itsct=catchall_p1&lId=25738567&cId=none&sr=1&src=Linkfire&ls=1",
-            amazonMusicLink:
-                "https://music.amazon.com/albums/B0B2CCS4WD?tag=univemuisc-central-21&ie=UTF8&linkCode=as2&ascsubtag=a8488c4eb6c29dd9e04fa7ed8a69fad5&ref=dmm_acq_soc_in_u_lfire_lp_x_a8488c4eb6c29dd9e04fa7ed8a69fad5",
-            youtubeMusicLink: "",
-            otherLink: "",
-        });
-        setUploadedImage("https://ipfs.moralis.io:2053/ipfs/QmQSTneVQ2Xde3XzuXKQWkwipdS8Voh9xDDWLGju83xJWa");
-        setUploadedSong("https://ipfs.moralis.io:2053/ipfs/QmUA4TiKp1AiiJhCmnPgij4B5cmFrmtUjsBPADEtgRZxaH");
-    }, []);
+        console.log("contributorList", contributorList);
+    }, [contributorList]);
+
+    useEffect(() => {
+        if (user) {
+            setTrackTitle("Die Hard");
+            setLinks({
+                spotifyLink: "https://open.spotify.com/track/6gI9b2VsoWhjhIuIeToDVs?si=abfe744344f04c4d",
+                appleMusicLink:
+                    "https://music.apple.com/us/album/1626195790?app=music&at=11laLe&ct=LFV_a8488c4eb6c29dd9e04fa7ed8a69fad5&itscg=30440&itsct=catchall_p1&lId=25738567&cId=none&sr=1&src=Linkfire&ls=1",
+                amazonMusicLink:
+                    "https://music.amazon.com/albums/B0B2CCS4WD?tag=univemuisc-central-21&ie=UTF8&linkCode=as2&ascsubtag=a8488c4eb6c29dd9e04fa7ed8a69fad5&ref=dmm_acq_soc_in_u_lfire_lp_x_a8488c4eb6c29dd9e04fa7ed8a69fad5",
+                youtubeMusicLink: "",
+                otherLink: "",
+            });
+            setUploadedImage("https://ipfs.moralis.io:2053/ipfs/QmQSTneVQ2Xde3XzuXKQWkwipdS8Voh9xDDWLGju83xJWa");
+            setUploadedSong("https://ipfs.moralis.io:2053/ipfs/QmUA4TiKp1AiiJhCmnPgij4B5cmFrmtUjsBPADEtgRZxaH");
+            setNumberOfCopies(5);
+            setNftPrice(10);
+            setResaleRoyaltyPercent(5);
+            setContributorList([{ id: user.id, username: user.attributes.username, split: 99, role: "Singer" }]);
+        }
+    }, [user]);
 
     const nftCreateFormOnSubmit = async () => {
         // const _id = getLatestId();
@@ -250,7 +254,6 @@ const CreateNFT = () => {
         nftCreateFormOnSubmit,
     };
 
-    if (isLoading) return null;
     switch (step) {
         case 0:
             return (

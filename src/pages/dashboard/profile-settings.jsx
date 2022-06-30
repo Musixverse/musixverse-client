@@ -112,7 +112,6 @@ export default function Dashboard() {
         return;
     };
 
-    if (isLoading) return null;
     return (
         <>
             <Head>

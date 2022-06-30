@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 
-export default function ScrollToTop({ samePage, changingValue }) {
+export default function ScrollToPageTop({ samePage, changingValue }) {
     const router = useRouter();
 
     useEffect(() => {

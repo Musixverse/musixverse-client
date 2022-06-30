@@ -62,7 +62,7 @@ function App({ Component, pageProps }) {
                     });
                 `}
             </Script>
-            <Script src="https://kit.fontawesome.com/0366dd7992.js" crossOrigin="anonymous"></Script>
+            <Script src="https://kit.fontawesome.com/8f4546bba1.js" crossorigin="anonymous"></Script>
             <Script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></Script>
             <Script src="/theme.js" strategy="beforeInteractive" />
 

@@ -1,4 +1,4 @@
-import { useState, Fragment, useRef, useContext } from "react";
+import { Fragment, useRef, useContext } from "react";
 import styles from "../../../styles/ContactUs/contactUs.module.css";
 import { useNewMoralisObject } from "react-moralis";
 import StatusContext from "../../../store/status-context";

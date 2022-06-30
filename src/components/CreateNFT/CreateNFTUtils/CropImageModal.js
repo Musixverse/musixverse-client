@@ -1,13 +1,13 @@
-import { Fragment, useRef } from 'react';
-import { Dialog, Transition } from '@headlessui/react';
-import ImageCrop from './ImageCrop';
+import { Fragment, useRef } from "react";
+import { Dialog, Transition } from "@headlessui/react";
+import ImageCrop from "./ImageCrop";
 
 export default function CropImageModal({showModal, setShowModal, imageToCrop, setCroppedImage, circularCrop}){
     const cancelButtonRef = useRef(null);
-    
-    return(
+
+    return (
         <Transition.Root show={showModal} as={Fragment}>
-            <Dialog as="div" className="fixed inset-0 z-10 overflow-y-auto" initialFocus={cancelButtonRef} onClose={()=>setShowModal(false)}>
+            <Dialog as="div" className="fixed inset-0 z-10 overflow-y-auto" initialFocus={cancelButtonRef} onClose={() => setShowModal(false)}>
                 <div className="flex items-end justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
                     {/* Background Grey Area */}
                     <Transition.Child

@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import uploadImage from "../../../../public/assets/create-nft/upload-image.svg";
 import CropImageModal from "./CropImageModal";
 
-export default function ImageUpload(props){
+export default function ImageUpload(props) {
     const [showModal, setShowModal] = useState(false);
     const [imageToCrop, setImageToCrop] = useState(undefined);
     const [croppedImage, setCroppedImage] = useState(undefined);
@@ -11,12 +11,11 @@ export default function ImageUpload(props){
     const circularCrop = false;
     const cropModalValues = {showModal, setShowModal, imageToCrop, setCroppedImage, circularCrop};
 
-    useEffect(()=>{
-        if(croppedImage !== undefined)
-            props.setUploadedImage(croppedImage);
-    },[croppedImage, props])
+    useEffect(() => {
+        if (croppedImage !== undefined) props.setUploadedImage(croppedImage);
+    }, [croppedImage, props]);
 
-    const handleImageUpload = (event)=>{
+    const handleImageUpload = (event) => {
         const imageURL = URL.createObjectURL(event.target.files[0]);
         console.log("triggered", imageURL, imageToCrop);
         nftCoverArt.current.value = "";
@@ -31,26 +30,38 @@ export default function ImageUpload(props){
         //         setImageToCrop(image);
         //         setShowModal(true);
         //     }
-            // reader.readAsDataURL(event.target.files[0]);
+        // reader.readAsDataURL(event.target.files[0]);
         // }
-    }
+    };
 
-    return(
+    return (
         <>
-            <input ref={nftCoverArt} onChange={handleImageUpload} accept="image/*" type="file" required className="hidden" id="uploadedNftImage"/>
-            <label className="flex items-center w-full p-2 space-x-5 rounded-lg cursor-pointer bg-light-100 dark:bg-[#2a2a2a] hover:border-[#6cc027] border-2 border-light-100 dark:border-[#2a2a2a] hover:dark:border-[#6cc027]" htmlFor="uploadedNftImage">
-                <div className={"flex relative items-center justify-center w-[65px] h-[65px] rounded-lg dark:bg-[#1d1d1d] bg-light-300 border-2 " + (props.uploadedImage === null? "border-light-300 dark:border-dark-100":"border-primary-200 dark:border-primary-200")}>
+            <input ref={nftCoverArt} onChange={handleImageUpload} accept="image/*" type="file" className="hidden" id="uploadedNftImage" name="coverArt" />
+            <label
+                className="flex items-center w-full p-2 space-x-5 rounded-lg cursor-pointer bg-light-100 dark:bg-[#2a2a2a] hover:border-[#6cc027] border-2 border-light-100 dark:border-[#2a2a2a] hover:dark:border-[#6cc027]"
+                htmlFor="uploadedNftImage"
+            >
+                <div
+                    className={
+                        "flex relative items-center justify-center w-[65px] h-[65px] rounded-lg dark:bg-[#1d1d1d] bg-light-300 border-2 " +
+                        (props.uploadedImage === null ? "border-light-300 dark:border-dark-100" : "border-primary-200 dark:border-primary-200")
+                    }
+                >
                     <Image src={uploadImage} objectFit="contain" alt="upload image art digital illustration"></Image>
-                    <div className={(props.uploadedImage === null? "hidden":"absolute bottom-2 right-1 bg-light-200 rounded-full h-[20px]")}>
+                    <div className={props.uploadedImage === null ? "hidden" : "absolute bottom-2 right-1 bg-light-200 rounded-full h-[20px]"}>
                         <i className={"text-xl text-primary-200 fas fa-check-circle"}></i>
                     </div>
                 </div>
                 <div className="flex-1 font-secondary">
                     <h3 className="font-semibold">UPLOAD COVER ART</h3>
-                    {props.uploadedImage !== null?  <p className="text-sm text-primary-200">Image Uploaded</p> : <p className="text-sm">Recommended size: 300px X 300px</p>}
+                    {props.uploadedImage !== null ? (
+                        <p className="text-sm text-primary-200">Image Uploaded</p>
+                    ) : (
+                        <p className="text-sm">Recommended size: 300px X 300px</p>
+                    )}
                 </div>
             </label>
-            <CropImageModal {...cropModalValues}/>
+            <CropImageModal {...cropModalValues} />
         </>
     );
 }

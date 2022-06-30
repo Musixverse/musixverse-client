@@ -1,6 +1,7 @@
-import { useRef } from "react";
+import { useRef, useContext } from "react";
 import Image from "next/image";
 import { useMoralis } from "react-moralis";
+import LoadingContext from "../../../../store/loading-context";
 
 export default function CoverPhoto({ coverImage, setCoverImage }) {
     /**
@@ -12,6 +13,7 @@ export default function CoverPhoto({ coverImage, setCoverImage }) {
     */
     const coverPicture = useRef(null);
     const { Moralis } = useMoralis();
+    const [isLoading, setLoading] = useContext(LoadingContext);
 
     async function uploadFile(data) {
         const file = new Moralis.File("file", data);
@@ -20,6 +22,7 @@ export default function CoverPhoto({ coverImage, setCoverImage }) {
     }
 
     const handleCoverChange = async (event) => {
+        setLoading(true);
         const output = coverPicture.current;
         output.src = URL.createObjectURL(event.target.files[0]);
         output.onload = function () {
@@ -28,6 +31,7 @@ export default function CoverPhoto({ coverImage, setCoverImage }) {
         };
         const file = await uploadFile(event.target.files[0]);
         setCoverImage(file.ipfs());
+        setLoading(false);
     };
 
     return (
@@ -38,7 +42,7 @@ export default function CoverPhoto({ coverImage, setCoverImage }) {
             <label className="relative w-full h-[130px] md:h-[150px]" htmlFor="upload-cover-image">
                 <div className={"w-full h-full hover:cursor-pointer"}>
                     <img
-                        src={coverImage || "https://ipfs.moralis.io:2053/ipfs/QmSQ2s8TEKBAdZy3Pm6oy7CPDLZ7dEUQZJ89azN4a2AVUE"}
+                        src={coverImage || "https://ipfs.moralis.io:2053/ipfs/Qmcn1aZ4PKUUzwpTncuSbruwLD98dtiNqvoJG5zm8EMwXZ"}
                         className="w-full h-full rounded-lg"
                         alt="cover photo"
                         ref={coverPicture}

@@ -12,7 +12,7 @@ const CreateNFT = () => {
     const { Moralis, user } = useMoralis();
 
     // States
-    const [step, setStep] = useState(2);
+    const [step, setStep] = useState(1);
     const [uploadedImage, setUploadedImage] = useState(null);
     const [uploadedSong, setUploadedSong] = useState(null);
     const [trackTitle, setTrackTitle] = useState("");

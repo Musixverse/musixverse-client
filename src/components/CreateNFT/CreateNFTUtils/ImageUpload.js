@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
 import convertDataURLtoFile from "../../../utils/image-crop/convertDataURLtoFile";
-import uploadToIPFS from "../../../utils/image-crop/uploadToIPFS";
+import uploadFileToIPFS from "../../../utils/image-crop/uploadFileToIPFS";
 import uploadImage from "../../../../public/assets/create-nft/upload-image.svg";
 import CropImageModal from "./CropImageModal";
 import { useMoralis } from "react-moralis";
@@ -20,28 +20,17 @@ export default function ImageUpload({ uploadedImage, setUploadedImage }) {
             // Get the File from DataURL
             const uploadedFile = convertDataURLtoFile(croppedImage, "file");
             // Get the uploadFileOnIPFS async function
-            const uploadFileOnIPFS = uploadToIPFS(Moralis, uploadedFile);
-            uploadFileOnIPFS().then((url) => console.log("Moralis file url: ", url));
+            uploadFileToIPFS(Moralis, uploadedFile).then((url) => setUploadedImage(url));
         }
     }, [croppedImage, setUploadedImage]);
 
     const handleImageUpload = (event) => {
+        // uploadFileToIPFS(Moralis, event.target.files[0]).then((url) => setUploadedImage(url));
         const imageURL = URL.createObjectURL(event.target.files[0]);
         console.log("triggered", imageURL, imageToCrop);
         nftCoverArt.current.value = "";
         setImageToCrop(imageURL);
         setShowModal(true);
-        // if (event.target.files && event.target.files.length > 0) {
-        //     const reader = new FileReader();
-        //     reader.onload = function (e) {
-        //         // setUploadedSong(e.target.result);
-        //         const image = e.target.result;
-        //         // Set the modal visible and set uploaded image state
-        //         setImageToCrop(image);
-        //         setShowModal(true);
-        //     }
-        // reader.readAsDataURL(event.target.files[0]);
-        // }
     };
 
     return (

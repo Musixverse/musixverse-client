@@ -1,6 +1,6 @@
 /**
- * If the dataurl is undefined, then the hook returns null
- * Else, the hook shall return the File
+ * If the dataurl is undefined, then the function returns null
+ * Else, the function shall return the File
  */
 
 export default function convertDataURLtoFile(dataurl, filename) {

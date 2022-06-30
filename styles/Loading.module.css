@@ -4,12 +4,11 @@
 
 .loading_container {
     height: 100vh;
-    width: 100vw;
-    /* height: 50vh;
-    width: 50vw; */
+    width: 99vw;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    justify-self: center;
     align-items: center;
 }
 

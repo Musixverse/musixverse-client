@@ -191,7 +191,7 @@ const Step2Form = ({
                                 </span>
                             ) : (
                                 <span className="text-error-200">
-                                    <i class="fa-solid fa-circle-xmark"></i>
+                                    <i className="fa-solid fa-circle-xmark"></i>
                                 </span>
                             )}
                             &nbsp;Total: {contributorList.reduce((total, currentSplit) => (total = total + Number(currentSplit.split)), 0)}%

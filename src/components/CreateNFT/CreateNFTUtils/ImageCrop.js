@@ -51,27 +51,28 @@ function ImageCrop({ imageToCrop, setCroppedImage, setShowModal }) {
             cropConfig.width,
             cropConfig.height
         );
+
         // Method 1
-        //DataURL(memory loaded based) is less efficient than ObjectURL(reference based)
-        // const base64Image = canvas.toDataURL("image/jpeg", 1);
-        // return base64Image;
+        // DataURL(memory loaded based) is less efficient than ObjectURL(reference based)
+        const base64Image = canvas.toDataURL("image/jpeg", 1);
+        return base64Image;
 
         // Method 2
-        return new Promise((resolve, reject) => {
-            canvas.toBlob((blob) => {
-                // returning an error
-                if (!blob) {
-                    reject(new Error("Canvas is empty"));
-                    return;
-                }
+        // return new Promise((resolve, reject) => {
+        //     canvas.toBlob((blob) => {
+        //         // returning an error
+        //         if (!blob) {
+        //             reject(new Error("Canvas is empty"));
+        //             return;
+        //         }
 
-                blob.name = fileName;
-                // creating a Object URL representing the Blob object given
-                const croppedImageUrl = URL.createObjectURL(blob);
+        //         blob.name = fileName;
+        //         // creating a Object URL representing the Blob object given
+        //         const croppedImageUrl = URL.createObjectURL(blob);
 
-                resolve(croppedImageUrl);
-            }, "image/jpeg");
-        });
+        //         resolve(croppedImageUrl);
+        //     }, "image/jpeg");
+        // });
     }
 
     return (

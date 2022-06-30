@@ -1,20 +1,15 @@
 import { useState, Fragment, useRef, useContext } from "react";
 import styles from "../../../styles/ContactUs/contactUs.module.css";
-import { useMoralis, useNewMoralisObject } from "react-moralis";
+import { useNewMoralisObject } from "react-moralis";
 import StatusContext from "../../../store/status-context";
 
 export default function ContactUs() {
 	const [, , setSuccess, setError] = useContext(StatusContext);
 	const { save: saveContactMessage } = useNewMoralisObject("ContactForm");
 
-	/*
-	Name and Email can be null check conditions add
-	name and email .length!=0 checks condition
-
-	*/
-	const nameRef = useRef(null);
-    const emailRef = useRef(null);
-	const messageRef = useRef(null);
+	const nameRef = useRef("");
+    const emailRef = useRef("");
+	const messageRef = useRef("");
 
 	const handleFormSubmit = (e) => {
 		e.preventDefault();
@@ -23,32 +18,36 @@ export default function ContactUs() {
         const email = emailRef.current.value;
 		const message = messageRef.current.value;
 
-        // EMAIL CHECKS
-        const emailRegex = new RegExp(
-            /^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i
-        );
-        if (!emailRegex.test(email)) {
-            setError({
-                title: "Invalid credentials!",
-                message: "Please enter a valid email",
-                showErrorBox: true,
-            });
-            emailRef.current.focus();
-            return;
-        }
+		if(email.length!=0){
+			// EMAIL CHECKS
+			const emailRegex = new RegExp(
+				/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i
+			);
+			if (!emailRegex.test(email)) {
+				setError({
+					title: "Invalid credentials!",
+					message: "Please enter a valid email",
+					showErrorBox: true,
+				});
+				emailRef.current.focus();
+				return;
+			}
+		}
 
-		// NAME CHECKS
-        if (name.length < 2) {
-            setError({
-                title: "Invalid credentials!",
-                message: "Please enter a valid name",
-                showErrorBox: true,
-            });
-            nameRef.current.focus();
-            return;
-        }
+		if(name.length!=0){
+			// NAME CHECKS
+			if (name.length < 2) {
+				setError({
+					title: "Invalid credentials!",
+					message: "Please enter a valid name",
+					showErrorBox: true,
+				});
+				nameRef.current.focus();
+				return;
+			}
+		}
 
-		// Message Check 
+		// Message Check  
         if (message.length < 5) {
             setError({
                 title: "Invalid credentials!",

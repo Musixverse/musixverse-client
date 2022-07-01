@@ -1,4 +1,4 @@
-import InputDropdown from "./InputDropdown";
+import ContributorRoleDropdown from "./ContributorRoleDropdown";
 
 const Step2Form = ({
     numberOfCopies,
@@ -12,6 +12,8 @@ const Step2Form = ({
     releaseNow,
     setReleaseNow,
 }) => {
+    const rolesArray = ["Singer", "Producer", "Mixer", "Composer", "Songwriter", "Lyricist", "Vocalist", "Other"];
+
     // handle input change
     const handleInputChange = (e, index) => {
         const { name, value } = e.target;
@@ -29,18 +31,19 @@ const Step2Form = ({
 
     // handle click event of the Add button
     const handleAddClick = () => {
-        setContributorList([...contributorList, { ContributorName: "", Split: "", Role: "" }]);
+        setContributorList([...contributorList, { id: "", username: "", split: "", role: "" }]);
     };
 
-    const setRole = (value) => {
-        console.log("contributorList:", contributorList);
-        console.log("setRole", value);
+    const setContributorRole = (index, role) => {
+        const list = [...contributorList];
+        list[index]["role"] = role;
+        setContributorList(list);
     };
 
     return (
-        <div className="flex flex-col lg:space-x-10 xl:space-x-20 lg:flex-auto lg:flex-row font-semibold font-secondary">
+        <div className="flex flex-col lg:space-x-10 xl:space-x-20 lg:flex-auto lg:flex-row font-semibold font-secondary justify-end">
             {/* Contributors Details */}
-            <div className="mt-10 md:mt-28 lg:mt-14 lg:w-1/2">
+            <div className="mt-10 md:mt-28 lg:mt-14 lg:w-7/12">
                 <div className="flex md:mb-6 gap-4">
                     <div className="w-full md:w-1/2 mb-6 md:mb-0">
                         <label htmlFor="nft-copies" className="block uppercase tracking-wide mb-2">
@@ -83,42 +86,80 @@ const Step2Form = ({
                 <div>
                     <span>ADD CONTRIBUTORS AND SPLITS</span>
                     <div className="mt-2 flex flex-col gap-4 text-gray-700">
-                        {contributorList.map((x, i) => {
+                        {contributorList.map((contributor, index) => {
                             return (
-                                <div key={i} className="flex gap-4">
-                                    <div className="flex-1">
-                                        <input
-                                            className="dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-100 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-100"
-                                            id="contributor-name"
-                                            name="ContributorName"
-                                            type="text"
-                                            placeholder="Name"
-                                            value={x.ContributorName}
-                                            onChange={(e) => handleInputChange(e, i)}
-                                        />
-                                    </div>
-                                    <div className="flex-1">
-                                        <input
-                                            className="dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-100 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-100"
-                                            name="Split"
-                                            type="number"
-                                            placeholder="Split %"
-                                            value={x.Split}
-                                            onChange={(e) => handleInputChange(e, i)}
-                                        />
-                                    </div>
-                                    <div className="flex-1">
-                                        <InputDropdown
-                                            name="Role"
-                                            // Need to change the optionsArray by Final data @Pushpit07
-                                            optionsArray={["Producer", "Composer", "Songwriter", "Lyricist", "Singer", "Vocalist", "Other"]}
-                                            setChoice={setRole}
+                                <div key={index} className="flex gap-4">
+                                    {index == 0 ? (
+                                        <>
+                                            <div className="basis-1/2">
+                                                <input
+                                                    className="bg-gray-100 dark:bg-[#272626] dark:text-light-100 dark:border-[#323232] w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777]"
+                                                    id="username"
+                                                    name="username"
+                                                    type="text"
+                                                    placeholder="Username"
+                                                    value={contributor.username}
+                                                    readOnly
+                                                    required
+                                                />
+                                            </div>
+                                            <div className="basis-1/4">
+                                                <input
+                                                    className="dark:bg-[#323232] dark:border-[#323232] dark:text-light-100 dark:focus:border-primary-100 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-100"
+                                                    name="split"
+                                                    type="number"
+                                                    min={0}
+                                                    max={100}
+                                                    placeholder="Split %"
+                                                    value={contributor.split}
+                                                    onChange={(e) => handleInputChange(e, index)}
+                                                    required
+                                                />
+                                            </div>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <div className="basis-1/2">
+                                                {/* TODO: Add search based on username on this input box @Pushpit07 */}
+                                                <input
+                                                    className="dark:text-light-100 dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-100 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-100"
+                                                    id="username"
+                                                    name="username"
+                                                    type="text"
+                                                    placeholder="Username"
+                                                    value={contributor.username}
+                                                    onChange={(e) => handleInputChange(e, index)}
+                                                    required
+                                                />
+                                            </div>
+                                            <div className="basis-1/4">
+                                                <input
+                                                    className="dark:bg-[#323232] dark:border-[#323232] dark:text-light-100 dark:focus:border-primary-100 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-100"
+                                                    name="split"
+                                                    type="number"
+                                                    min={0}
+                                                    max={100}
+                                                    placeholder="Split %"
+                                                    value={contributor.split}
+                                                    onChange={(e) => handleInputChange(e, index)}
+                                                    required
+                                                />
+                                            </div>
+                                        </>
+                                    )}
+
+                                    <div className="basis-1/4">
+                                        <ContributorRoleDropdown
+                                            // TODO: Need to change the optionsArray by Final data @Pushpit07
+                                            optionsArray={rolesArray}
+                                            setContributorRole={setContributorRole}
+                                            index={index}
                                         />
                                     </div>
                                     {/* Button to remove more contributors */}
                                     {contributorList.length !== 1 && (
                                         <div className="flex">
-                                            <button className="text-gray-400 hover:text-gray-600" onClick={() => handleRemoveClick(i)}>
+                                            <button type="button" className="text-gray-400 hover:text-gray-600" onClick={() => handleRemoveClick(index)}>
                                                 x
                                             </button>
                                         </div>
@@ -132,6 +173,7 @@ const Step2Form = ({
                     {contributorList.length < 4 && (
                         <div className="flex mt-4 justify-start items-center">
                             <button
+                                type="button"
                                 className="rounded-full flex justify-center items-center w-8 h-8 bg-[#479E00] hover:bg-primary-300 text-white"
                                 onClick={handleAddClick}
                             >
@@ -140,11 +182,26 @@ const Step2Form = ({
                             <span className="pl-3 font-normal text-sm">Add more Contributors</span>
                         </div>
                     )}
+
+                    <div className="flex w-full p-3 mt-6 rounded justify-center dark:text-gray-300 bg-light-300 dark:bg-dark-100 font-medium">
+                        <div className="">
+                            {contributorList.reduce((total, currentSplit) => (total = total + Number(currentSplit.split)), 0) === 100 ? (
+                                <span className="text-primary-200">
+                                    <i className="fa-solid fa-circle-check"></i>
+                                </span>
+                            ) : (
+                                <span className="text-error-200">
+                                    <i className="fa-solid fa-circle-xmark"></i>
+                                </span>
+                            )}
+                            &nbsp;Total: {contributorList.reduce((total, currentSplit) => (total = total + Number(currentSplit.split)), 0)}%
+                        </div>
+                    </div>
                 </div>
             </div>
 
             {/* NFT Details */}
-            <div className="mt-10 lg:mt-14 lg:w-1/2">
+            <div className="mt-10 lg:mt-14 lg:w-4/12">
                 <div className="w-full mb-6">
                     <label htmlFor="resale-royalty-percentage" className="block uppercase tracking-wide mb-2">
                         RESALE ROYALTY PERCENTAGE

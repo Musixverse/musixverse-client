@@ -13,7 +13,7 @@ export default function Confirm() {
     const { user, refetchUserData } = useMoralis();
     const [userInfo, setUserInfo] = useState("");
 
-    const { fetch } = useMoralisQuery("UserInfo", (query) => query.equalTo("user", user), [], { autoFetch: false });
+    const { fetch } = useMoralisQuery("UserInfo", (query) => query.equalTo("user", user), [user], { autoFetch: false });
 
     const [checkCounter, setCheckCounter] = useState(0);
     useEffect(() => {

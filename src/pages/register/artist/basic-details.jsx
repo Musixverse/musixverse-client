@@ -18,7 +18,6 @@ const ArtistBasicDetails = () => {
             setLoading(false);
         };
     }, [isInitialized, user]);
-    if (isLoading) return null;
 
     return (
         <>

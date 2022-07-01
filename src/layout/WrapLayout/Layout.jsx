@@ -33,7 +33,7 @@ const Layout = ({ children }) => {
     }, [authError]);
 
     return (
-        <div>
+        <>
             <Auth />
             <Navbar />
             {children}
@@ -41,7 +41,7 @@ const Layout = ({ children }) => {
             {error.showErrorBox && <ErrorBox />}
             {success.showSuccessBox && <SuccessBox />}
             {router.pathname !== "/cfh/cfb" && <Footer />}
-        </div>
+        </>
     );
 };
 

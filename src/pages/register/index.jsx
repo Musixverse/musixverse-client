@@ -18,7 +18,6 @@ const Register_Page = () => {
             setLoading(false);
         };
     }, [isInitialized, user]);
-    if (isLoading) return null;
 
     return (
         <>

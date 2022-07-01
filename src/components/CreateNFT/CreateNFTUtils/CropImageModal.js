@@ -2,7 +2,7 @@ import { Fragment, useRef } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import ImageCrop from "./ImageCrop";
 
-export default function CropImageModal({ showModal, setShowModal, imageToCrop, setCroppedImage }) {
+export default function CropImageModal({showModal, setShowModal, imageToCrop, setCroppedImage, circularCrop}){
     const cancelButtonRef = useRef(null);
 
     return (
@@ -26,7 +26,7 @@ export default function CropImageModal({ showModal, setShowModal, imageToCrop, s
                     <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">
                         &#8203;
                     </span>
-                    <ImageCrop imageToCrop={imageToCrop} setCroppedImage={setCroppedImage} setShowModal={setShowModal} />
+                    <ImageCrop imageToCrop={imageToCrop} setCroppedImage={setCroppedImage} setShowModal={setShowModal} circularCrop={circularCrop}/>
                 </div>
             </Dialog>
         </Transition.Root>

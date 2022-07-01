@@ -4,7 +4,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import ReactCrop from "react-image-crop";
 import "react-image-crop/dist/ReactCrop.css";
 
-function ImageCrop({ imageToCrop, setCroppedImage, setShowModal }) {
+function ImageCrop({ imageToCrop, setCroppedImage, setShowModal, circularCrop }) {
     //imageToCrop is the user selected image
     //setCroppedImage is the cropped image state setter function
     const [cropConfig, setCropConfig] = useState(
@@ -54,23 +54,23 @@ function ImageCrop({ imageToCrop, setCroppedImage, setShowModal }) {
 
         // Method 1
         // DataURL(memory loaded based) is less efficient than ObjectURL(reference based)
-        const base64Image = canvas.toDataURL("image/jpeg", 0.5);
+        const base64Image = canvas.toDataURL("image/jpeg", 1);
         return base64Image;
 
         // Method 2
         // return new Promise((resolve, reject) => {
         //     canvas.toBlob((blob) => {
-        //         // returning an error
-        //         if (!blob) {
-        //             reject(new Error("Canvas is empty"));
-        //             return;
-        //         }
+        //     // returning an error
+        //     if (!blob) {
+        //         reject(new Error("Canvas is empty"));
+        //         return;
+        //     }
 
-        //         blob.name = fileName;
-        //         // creating a Object URL representing the Blob object given
-        //         const croppedImageUrl = URL.createObjectURL(blob);
+        //     blob.name = fileName;
+        //     // creating a Object URL representing the Blob object given
+        //     const croppedImageUrl = URL.createObjectURL(blob);
 
-        //         resolve(croppedImageUrl);
+        //     resolve(croppedImageUrl);
         //     }, "image/jpeg");
         // });
     }
@@ -96,6 +96,7 @@ function ImageCrop({ imageToCrop, setCroppedImage, setShowModal }) {
                             {/* Crop Component */}
                             <div className="flex items-center justify-center">
                                 <ReactCrop
+                                    circularCrop={circularCrop}
                                     src={imageToCrop}
                                     crop={cropConfig}
                                     ruleOfThirds

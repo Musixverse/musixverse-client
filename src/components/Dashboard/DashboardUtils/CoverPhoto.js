@@ -4,6 +4,13 @@ import { useMoralis } from "react-moralis";
 import LoadingContext from "../../../../store/loading-context";
 
 export default function CoverPhoto({ coverImage, setCoverImage }) {
+    /**
+     * Doubts:
+     * Is the cover photo uploaded fitting the banner on the profile page?
+     * 
+     * On this page
+     * Maintain aspect ratio of the element being cropped
+    */
     const coverPicture = useRef(null);
     const { Moralis } = useMoralis();
     const [isLoading, setLoading] = useContext(LoadingContext);

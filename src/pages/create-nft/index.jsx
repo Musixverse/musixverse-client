@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { useState, useEffect, useContext } from "react";
-import { useMoralis } from "react-moralis";
+import { useMoralis, useMoralisQuery } from "react-moralis";
 import ScrollToPageTop from "../../utils/ScrollToPageTop";
 import CreateNFTIntro from "../../components/CreateNFT/step-0";
 import TrackDetails from "../../components/CreateNFT/step-1";
@@ -10,6 +10,7 @@ import { mintTrackNFT, uri } from "../../utils/smart-contract/functions";
 const CreateNFT = () => {
     // TODO: Add song background and unlockable content page in step 3
     const { Moralis, user } = useMoralis();
+    const { data: userInfo } = useMoralisQuery("UserInfo", (query) => query.equalTo("user", user), [user]);
 
     // States
     const [step, setStep] = useState(2);
@@ -28,7 +29,7 @@ const CreateNFT = () => {
         youtubeMusicLink: "",
         otherLink: "",
     });
-    const [contributorList, setContributorList] = useState([{ id: "", username: "", split: "", role: "" }]);
+    const [contributorList, setContributorList] = useState([{ id: "", username: "", split: "", role: "", walletAddress: "" }]);
     const [numberOfCopies, setNumberOfCopies] = useState("");
     const [nftPrice, setNftPrice] = useState("");
     const [resaleRoyaltyPercent, setResaleRoyaltyPercent] = useState("");
@@ -53,7 +54,7 @@ const CreateNFT = () => {
     }, [contributorList]);
 
     useEffect(() => {
-        if (user) {
+        if (user && userInfo[0]) {
             setTrackTitle("Die Hard");
             setLinks({
                 spotifyLink: "https://open.spotify.com/track/6gI9b2VsoWhjhIuIeToDVs?si=abfe744344f04c4d",
@@ -69,9 +70,18 @@ const CreateNFT = () => {
             setNumberOfCopies(5);
             setNftPrice(10);
             setResaleRoyaltyPercent(5);
-            setContributorList([{ id: user.id, username: user.attributes.username, split: 99, role: "Singer" }]);
+            setContributorList([
+                {
+                    id: user.id,
+                    username: user.attributes.username,
+                    split: 99,
+                    role: "Singer",
+                    walletAddress: user.attributes.ethAddress,
+                    avatar: userInfo[0].attributes.avatar,
+                },
+            ]);
         }
-    }, [user]);
+    }, [user, userInfo]);
 
     const nftCreateFormOnSubmit = async () => {
         // const _id = getLatestId();

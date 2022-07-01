@@ -36,11 +36,11 @@ export default function Step1Form({
     };
 
     return (
-        <div className="flex flex-col lg:space-x-10 xl:space-x-20 lg:flex-auto lg:flex-row font-semibold font-secondary justify-end">
+        <div className="flex flex-col space-y-20 lg:w-full lg:max-w-[1150px] lg:space-x-10 lg:space-y-0 xl:space-x-20 lg:flex-row">
             {/* Details */}
-            <div className="font-semibold font-secondary mt-10 md:mt-28 lg:mt-14 lg:w-6/12">
+            <div className="font-semibold lg:w-1/2 font-secondary">
                 <p className="mb-10">DETAILS</p>
-                <p>TRACK TITLE</p>
+                <p className="text-sm">TRACK TITLE</p>
                 <input
                     type={"text"}
                     value={trackTitle ?? ""}
@@ -57,7 +57,7 @@ export default function Step1Form({
                 {/* Input Group */}
                 <DetailsInputGroup {...detailsInputGroupValues} />
 
-                <p className="mt-14">Does this track contain any singing, rapping or any other vocals</p>
+                <p className="text-sm mt-14">Does this track contain any singing, rapping or any other vocals</p>
                 <div className="flex items-center mt-1 space-x-5">
                     <div className="flex items-center">
                         <input id="othervocalsyes" type="radio" name="vocals-radio" className="hidden" onClick={(e) => toggleVocalsRadio(e)} defaultChecked />
@@ -77,7 +77,7 @@ export default function Step1Form({
             </div>
 
             {/* Uploads */}
-            <div className="mt-10 lg:mt-14 lg:w-4/12">
+            <div className="mt-10 lg:w-1/2 lg:mt-14">
                 <p className="mb-10 font-semibold">UPLOADS</p>
                 {/* UPLOAD NFT ASSETS */}
                 <ImageUpload uploadedImage={uploadedImage} setUploadedImage={setUploadedImage} />
@@ -85,7 +85,7 @@ export default function Step1Form({
                 <AudioUpload uploadedSong={uploadedSong} setUploadedSong={setUploadedSong} />
 
                 {/* SHARE LINKS */}
-                <p className="mt-16 mb-3 font-semibold font-secondary">TRACK LINKS</p>
+                <p className="mt-16 mb-3 font-semibold font-secondary ">TRACK LINKS</p>
                 <div className="flex justify-between w-full space-x-3">
                     <input
                         type={"url"}

@@ -4,7 +4,7 @@
 
 .wrapper {
 	@apply w-[60%] font-primary rounded-xl font-semibold flex flex-col justify-center items-center m-0 absolute left-[50%] top-[50%] text-center;
-	@apply border-[4px] bg-nav-light border-solid border-primary-100 p-20;
+	@apply border-[4px] border-solid border-primary-100 p-20;
 	-ms-transform: translate(-50%, -50%);
 	transform: translate(-50%, -50%);
 	/* padding: 70px 40px 50px 40px; */

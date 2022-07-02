@@ -2,7 +2,7 @@ import Image from "next/image";
 import { useRef } from "react";
 import { useMoralis } from "react-moralis";
 
-export default function PreviewNft({ trackTitle, uploadedImage, uploadedSong, nftPrice, numberOfCopies, step }) {
+export default function PreviewNft({ trackTitle, uploadedImage, uploadedSong, nftPrice, numberOfCopies, step, contributorList }) {
     const { user } = useMoralis();
 
     const playBtn = useRef(null);
@@ -79,12 +79,12 @@ export default function PreviewNft({ trackTitle, uploadedImage, uploadedSong, nf
             <div className="dark:bg-[#1D1D1D] bg-light-100 w-[222px] h-[128px] p-4 rounded-b-xl flex flex-col justify-between">
                 <div className="flex justify-between w-full">
                     <div className="flex flex-col">
-                        <p className="font-secondary text-[#1D1D1D] text-sm dark:text-light-200">{user && user.attributes.name}</p>
-                        <p className="font-semibold font-secondary text-[#1D1D1D] dark:text-light-200 text-lg">{truncatedNftName}</p>
+                        <p className="font-secondary text-[#1D1D1D] text-xs dark:text-light-300">{user && user.attributes.name}</p>
+                        <p className="font-semibold font-primary text-[#1D1D1D] dark:text-light-200 text-lg">{truncatedNftName}</p>
                     </div>
                     {truncatednftPrice && (
                         <div className="flex flex-col">
-                            <p className="font-secondary text-sm">Price</p>
+                            <p className="font-secondary text-xs text-end dark:text-light-300">Price</p>
                             <div className="flex items-center font-semibold">
                                 <Image src={"/assets/matic-logo.svg"} width={16} height={16} alt="matic logo" />
                                 <span className="ml-1 sm:text-lg">{truncatednftPrice == 0 ? 0 : truncatednftPrice}</span>
@@ -95,8 +95,17 @@ export default function PreviewNft({ trackTitle, uploadedImage, uploadedSong, nf
                 {numberOfCopies == 0 ? (
                     <div className="w-[150px] h-2 dark:bg-[#363636] bg-light-300 self-center rounded-lg"></div>
                 ) : (
-                    <div className="flex justify-end font-secondary text-[#1D1D1D] dark:text-light-200 text-xs">
-                        {truncatedNftName ? <span>#1 of&nbsp;{numberOfCopies}</span> : ""}
+                    <div className="flex items-end justify-between font-secondary text-[#1D1D1D] dark:text-light-200 text-xs">
+                        <div className="flex -space-x-2 items-end">
+                            {contributorList.map((contributor, index) => {
+                                return contributor.avatar ? (
+                                    <div className={`rounded-full flex items-end relative z-${10 * (contributorList.length - index)}`}>
+                                        <Image src={contributor.avatar} height="30" width="30" className="rounded-full" />
+                                    </div>
+                                ) : null;
+                            })}
+                        </div>
+                        {truncatedNftName ? <span className="dark:text-light-300">#1 of&nbsp;{numberOfCopies}</span> : ""}
                     </div>
                 )}
             </div>

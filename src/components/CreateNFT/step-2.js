@@ -33,7 +33,7 @@ export default function PricingAndSplits({
         }
     }, [contributorList]);
 
-    const nftPreviewValues = { trackTitle, uploadedImage, uploadedSong, nftPrice, numberOfCopies, step };
+    const nftPreviewValues = { trackTitle, uploadedImage, uploadedSong, nftPrice, numberOfCopies, step, contributorList };
     const step2FormValues = {
         numberOfCopies,
         setNumberOfCopies,

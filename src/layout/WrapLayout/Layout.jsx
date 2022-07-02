@@ -1,10 +1,12 @@
 import { useMoralis } from "react-moralis";
 import { useEffect, useContext } from "react";
 import { useRouter } from "next/router";
+import { useTheme } from "next-themes";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import Auth from "../../auth/Auth";
-import Loading from "../Loading";
+import Loading from "../Loading/Loading";
+import LoadingDark from "../Loading/LoadingDark";
 import ErrorBox from "../Modal/ErrorBox";
 import SuccessBox from "../Modal/SuccessBox";
 import LoadingContext from "../../../store/loading-context";
@@ -15,6 +17,7 @@ const Layout = ({ children }) => {
     const [error, success, , setError] = useContext(StatusContext);
     const [isLoading] = useContext(LoadingContext);
     const router = useRouter();
+    const { theme } = useTheme();
 
     useEffect(() => {
         if (authError) {
@@ -37,7 +40,7 @@ const Layout = ({ children }) => {
             <Auth />
             <Navbar />
             {children}
-            {isLoading && <Loading />}
+            {isLoading && theme === "light" ? <Loading /> : <LoadingDark />}
             {error.showErrorBox && <ErrorBox />}
             {success.showSuccessBox && <SuccessBox />}
             {router.pathname !== "/cfh/cfb" && <Footer />}

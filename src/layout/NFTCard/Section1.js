@@ -10,17 +10,14 @@ export default function Section1(props) {
                     {props.artistName}
                     {props.isVerified ? <Image src={"/assets/mxv_tick.svg"} width={17} height={17} alt="MXV verified"></Image> : null}
                 </p>
-                <h6 className={styles["description--section1__songname"]}>
-                    {props.songName}
-                    <span className="ml-1">{"#" + `${props.songId}`}</span>
-                </h6>
+                <h6 className={styles["description--section1__songname"]}>{props.songName}</h6>
             </div>
             {/* CURRENT PRICE */}
             <div>
                 <p className={styles["description--section1__price"]}>Price</p>
-                <div className="flex items-center font-bold">
-                    <Image src={"/assets/Eth_logo.svg"} width={12.5} height={25} alt="ethereum logo" />
-                    <span className="ml-1 sm:text-lg">{props.nftPrice}</span>
+                <div className="flex items-center font-semibold">
+                    <Image src={"/assets/matic-logo.svg"} width={16} height={16} alt="matic logo" />
+                    <span className="ml-1 sm:text-lg">{props.price}</span>
                 </div>
             </div>
         </div>

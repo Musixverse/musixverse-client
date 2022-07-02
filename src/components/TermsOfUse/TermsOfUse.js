@@ -1,14 +1,14 @@
 
 export default function TermsOfUse() {
 	return (
-        <div className="w-full h-screen flex justify-center py-36">
+        <div className="w-full h-screen flex justify-center pt-36">
             <div className="w-full">
                 <div>
                     <div className="font-primary text-5xl font-semibold text-primary-100">Terms of Use</div>
                 </div>
 
                 <div className="mt-5">
-                    <div className="font-primary text-sm">
+                    <div className="font-primary text-base">
                         Please note that{" "}
                         <a href={"/"} className="text-primary-100">
                             musixverse.com

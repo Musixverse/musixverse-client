@@ -10,6 +10,7 @@ import "../../styles/globals.css";
 import Layout from "../layout/WrapLayout/Layout";
 import ScrollToPageTop from "../utils/ScrollToPageTop";
 import { connectSmartContract } from "../utils/smart-contract/functions";
+import "react-datepicker/dist/react-datepicker.css";
 
 function App({ Component, pageProps }) {
     const router = useRouter();

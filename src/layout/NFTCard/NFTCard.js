@@ -17,8 +17,13 @@ export default function NFTCard({
     isVerified,
 }) {
     let truncatedArtistName = artistName;
+    let truncatedNftName = songName;
 
-    if (artistName && artistName.length > 15) truncatedArtistName = artistName.substring(0, 15) + "...";
+    if (songName.length > 10) {
+        truncatedNftName = songName.substring(0, 10) + "...";
+    }
+
+    if (artistName && artistName.length > 15) truncatedArtistName = artistName.substring(0, 20) + "...";
 
     return (
         <div className={styles["nft-card"]}>
@@ -27,7 +32,7 @@ export default function NFTCard({
             {/* NFT Details */}
             <div className={"dark:bg-dark-100 " + styles["nft-card__description"]}>
                 {/* Artist, Music name and current price */}
-                <Section1 artistName={truncatedArtistName} songName={songName} songId={songId} price={price} isVerified={isVerified} />
+                <Section1 artistName={truncatedArtistName} songName={truncatedNftName} songId={songId} price={price} isVerified={isVerified} />
                 {/* LIKES and Prev Price Section */}
                 <Section2
                     contributorList={contributorList}

@@ -1,0 +1,83 @@
+@media (max-width: 600px) {
+	.team_page_container.team_page_container {
+		padding: 0px;
+		padding-top: 150px;
+	}
+}
+
+@media (max-width: 900px) {
+	.member_card.member_card {
+		width: 90%;
+	}
+}
+
+.team_page_container {
+	width: 100vw;
+	background-image: url("../../assets/hero.svg");
+	background-repeat: no-repeat;
+	background-size: cover;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding: 150px 60px 80px 60px;
+}
+
+.team_page_box {
+	width: 90%;
+	position: relative;
+	max-width: 1500px;
+	font-size: 16px;
+}
+
+.team_page_header {
+	font-family: var(--Poppins);
+	color: #6cc027;
+}
+
+.member_card {
+	width: 85%;
+	padding: 35px 15px 35px 15px !important;
+	transition: 0.2s ease-in-out;
+}
+
+.member_card:hover {
+	transform: scale(1.015);
+	transition: 0.2s ease-in-out;
+	cursor: pointer;
+}
+
+.member_card:hover .member_position,
+.member_card:hover .member_role {
+	color: #7ad132;
+}
+
+.member_card img {
+	width: 50%;
+	border-radius: 50%;
+}
+
+.member_name {
+	font-family: var(--Poppins);
+	font-size: 1.2em;
+	font-weight: 400;
+}
+
+.member_position {
+	font-family: var(--Poppins);
+	font-size: 0.9em;
+	font-weight: 300;
+	margin-bottom: 0px;
+}
+
+.member_role,
+.modal_member_role {
+	font-family: var(--Poppins);
+	font-size: 0.8em;
+	font-weight: 300;
+}
+
+.member_social_link a {
+	font-size: 1.2rem;
+	color: #fff;
+}

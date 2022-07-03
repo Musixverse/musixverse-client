@@ -1,6 +1,6 @@
 const generalData = [{
-    heading: "What is Musomatic?",
-    body: "Musomatic is a decentralized application(dApp) for musicians to create NFTs of their music. These NFTs can then be traded and each time an NFT gets traded, the musician will get 5% of the trade as royalty!",
+    heading: "What is Musixverse?",
+    body: "Musixverse is a decentralized application(dApp) for musicians to create NFTs of their music. These NFTs can then be traded and each time an NFT gets traded, the musician will get 5% of the trade as royalty!",
     content_id: "collapseOne"
 },{
     heading: "What is a decentralized application, aka dApp?",
@@ -11,12 +11,12 @@ const generalData = [{
     body: "This is a somewhat loaded question, but in simple terms the Polygon Network is faster and cheaper than the alternative smart contract platforms. It is more advanced and a better option for future projects to be built upon.",
     content_id: "collapseThree"
 },{
-    heading: "Who is behind Musomatic?",
+    heading: "Who is behind Musixverse?",
     body: "Everyone on the team page except Shivam Singh.",
     content_id: "collapseFour"
 },{
     heading: "Is this a platform like Spotify, just on blockchain? Or is it just a platform where users can trade individual songs?",
-    body: "Currently, Musomatic is a platform to trade individual NFTs of songs. NFTs from artists can be looked at as stocks in the market. Just as buying stocks of companies that people believe to perform good in the future can result in massive profits, similarly, the value of these NFTs can skyrocket if that artist grows to be successful over time.",
+    body: "Currently, Musixverse is a platform to trade individual NFTs of songs. NFTs from artists can be looked at as stocks in the market. Just as buying stocks of companies that people believe to perform good in the future can result in massive profits, similarly, the value of these NFTs can skyrocket if that artist grows to be successful over time.",
     content_id: "collapseFive"
 }];
 
@@ -25,9 +25,9 @@ const whatDoINeedData = [{
     body: 
         <>
             <p className="text-sm text-primary-200 sm:text-base">Can I play on a mobile device?</p>
-            <p>You sure can! We currently support the Metamask wallet, and plan to integrate with other wallets like the Coinbase Wallet and Trust Wallet in the future. Plus, we will be building a mobile app for Musomatic, so you&apos;ll soon be able to play anywhere!</p>
+            <p>You sure can! We currently support the Metamask wallet, and plan to integrate with other wallets like the Coinbase Wallet and Trust Wallet in the future. Plus, we will be building a mobile app for Musixverse, so you&apos;ll soon be able to play anywhere!</p>
             <p className="mt-5 text-sm text-primary-200 sm:text-base">Can I log in from multiple computers?</p>
-            <p>You can use Musomatic from multiple computers as long as you have your digital wallet installed on both.</p>
+            <p>You can use Musixverse from multiple computers as long as you have your digital wallet installed on both.</p>
         </>,
     content_id: "collapseOne"
 },{
@@ -36,7 +36,7 @@ const whatDoINeedData = [{
         <>
             <p className="text-sm text-primary-200 sm:text-base">Installing your digital wallet</p>
             <ul className="mt-1 list-disc pl-7">
-                <li>To use Musomatic, you need a digital wallet. We only support the Metamask wallet currently.</li>
+                <li>To use Musixverse, you need a digital wallet. We only support the Metamask wallet currently.</li>
                 <li>You&apos;ll need to put m1y in your wallet to make your first purchase. We can show you how to do that too. Just contact us through the contact page and we&apos;ll reach out to you!</li>
                 <li>A digital wallet acts like a bank account— make sure you don&apos;t forget your password or lose your recovery kit.</li>
             </ul>
@@ -50,29 +50,29 @@ const whatDoINeedData = [{
         <>
             <p className="text-sm text-primary-200 sm:text-base">What is MATIC? Why do I need it?</p>
             <ul className="mt-1 list-disc pl-7">
-                <li>MATIC is a digital currency that powers the Polygon network, which is what Musomatic is built on. MATIC acts like any other currency— its value fluctuates with the market.</li>
-                <li>You need to convert your currency (e.g. USD, INR, CAD, GBP) into MATIC to trade NFTs on Musomatic.</li>
+                <li>MATIC is a digital currency that powers the Polygon network, which is what Musixverse is built on. MATIC acts like any other currency— its value fluctuates with the market.</li>
+                <li>You need to convert your currency (e.g. USD, INR, CAD, GBP) into MATIC to trade NFTs on Musixverse.</li>
             </ul>
         </>,
     content_id: "collapseThree"
 }];
 
 const aboutMxvData = [{
-    heading: "Are Musomatic NFTs like Bitcoin?",
+    heading: "Are Musixverse NFTs like Bitcoin?",
     body: 
         <>
             <ul className="list-disc pl-7">
-                <li>NFTs on Musomatic are NOT a cryptocurrency. They&apos;re a cryptocollectibles. The real-world analogy for a cryptocurrency is dollars or rupees; a cryptocollectible&apos;s real world analogy is closer to assets like baseball cards or fine art.</li>
+                <li>NFTs on Musixverse are NOT a cryptocurrency. They&apos;re a cryptocollectibles. The real-world analogy for a cryptocurrency is dollars or rupees; a cryptocollectible&apos;s real world analogy is closer to assets like baseball cards or fine art.</li>
                 <li>As dictated by the smart contract, any NFT you own belongs to you. Like any product or property you can own, the market price is determined by supply and demand.</li>
             </ul>
         </>,
     content_id: "collapseOne"
 },{
-    heading: "Are Musomatic NFTs ERC-721 tokens?",
-    body: "This is quite ambiguous. We comply with the ERC-721 standard but Musomatic is a custom contract, which means that it doesn't comply completely with any standards.",
+    heading: "Are Musixverse NFTs ERC-721 tokens?",
+    body: "This is quite ambiguous. We comply with the ERC-721 standard but Musixverse is a custom contract, which means that it doesn't comply completely with any standards.",
     content_id: "collapseTwo"
 },{
-    heading: "Where are the songs and cover images for the Musomatic NFTs stored?",
+    heading: "Where are the songs and cover images for the Musixverse NFTs stored?",
     body: "The actual songs and images of the NFTs are too large to store on the blockchain, so we store the songs and images on IPFS, and then embed the hashes into our smart contract.",
     content_id: "collapseThree"
 },{
@@ -97,17 +97,17 @@ const aboutMxvData = [{
     content_id: "collapseEight"
 },{
     heading: "Why would a budding artist want to sell a NFT to a single person when their main objective is to create an audience by giving the song out for free for the world to listen to?",
-    body: "The artist will still be able to do that. It is true that the main objective of an artist is to expand their audience but they still require monetary support along the way. We, at Musomatic, enable artists to get this support.",
+    body: "The artist will still be able to do that. It is true that the main objective of an artist is to expand their audience but they still require monetary support along the way. We, at Musixverse, enable artists to get this support.",
     content_id: "collapseNine"
 }];
 
 const buyingAndSellingData = [{
-    heading: "How do I get an NFT on Musomatic?",
+    heading: "How do I get an NFT on Musixverse?",
     body: "Buy one from the Marketplace, which you can look through using the Library page. Click on one card and then purchase from the Song Info page.",
     content_id: "collapseOne"
 },{
     heading: "How can a buyer resell the NFT?",
-    body: "A buyer can put the NFT on the Musomatic marketplace and any interested buyer can purchase the NFT for the specified price.",
+    body: "A buyer can put the NFT on the Musixverse marketplace and any interested buyer can purchase the NFT for the specified price.",
     content_id: "collapseTwo"
 },{
     heading: "Where’s my NFT? I just bought one but it’s not showing up in my account!",
@@ -138,7 +138,7 @@ const buyingAndSellingData = [{
             <ul className="list-disc pl-7">
                 <li>Unfortunately, no.</li>
                 <li>If you lose access to your wallet, we can&apos;t recover your NFTs. It&apos;s not an issue of it being against our policy or being too difficult; it&apos;s literally impossible.</li>
-                <li>Our smart contracts secure each NFT on Musomatic so that the developers can&apos;t edit, access, or reassign them. This protects your NFTs from hackers and anyone else who would steal them. Unfortunately, it also means we can&apos;t simply ‘recover’ an NFT on Musomatic.</li>
+                <li>Our smart contracts secure each NFT on Musixverse so that the developers can&apos;t edit, access, or reassign them. This protects your NFTs from hackers and anyone else who would steal them. Unfortunately, it also means we can&apos;t simply ‘recover’ an NFT on Musixverse.</li>
             </ul>
         </>,
     content_id: "collapseSeven"
@@ -169,8 +169,8 @@ const TransactionsAndTechnicalData = [{
     body: 
         <>
             <ul className="list-disc pl-7">
-                <li>‘Gas’ is a shorthand used to describe the cost of powering a transaction or contract in Polygon, which is the blockchain network that Musomatic is built on.</li>
-                <li>Because blockchain is decentralized, every transaction is distributed through multiple computers, not a central server. This ensures each token — in this case, each NFT on Musomatic — is secure and one-of-a-kind. It also takes a lot of computational power, which is covered by the cost of gas.</li>
+                <li>‘Gas’ is a shorthand used to describe the cost of powering a transaction or contract in Polygon, which is the blockchain network that Musixverse is built on.</li>
+                <li>Because blockchain is decentralized, every transaction is distributed through multiple computers, not a central server. This ensures each token — in this case, each NFT on Musixverse — is secure and one-of-a-kind. It also takes a lot of computational power, which is covered by the cost of gas.</li>
                 <li>‘Gas’ is composed of two parts: Gas Price and Gas Limit. Gas Price is what you offer to pay the miners for each operation to execute the smart contract. Gas Limit is how many operations you let them to do before they run out of gas and drop the transaction.</li>
             </ul>
         </>,
@@ -180,11 +180,11 @@ const TransactionsAndTechnicalData = [{
     body: "The file size should remain below a 100MB limit.",
     content_id: "collapseFour"
 },{
-    heading: "Help! My problem wasn’t addressed here. How do I contact the Musomatic team?",
+    heading: "Help! My problem wasn’t addressed here. How do I contact the Musixverse team?",
     body: 
         <>
             <ul className="list-disc pl-7">
-                <li>You can contact us at <span className="font-medium text-primary-300">contact@musomatic.com</span>. Please include any relevant NFT IDs, links, or transaction hashes so we can support you as quickly as possible.</li>
+                <li>You can contact us at <span className="font-medium text-primary-300">contact@Musixverse.com</span>. Please include any relevant NFT IDs, links, or transaction hashes so we can support you as quickly as possible.</li>
                 <li>You can also check our Discord community channel. Your fellow NFT owners are often just as helpful as we are, and usually much quicker at addressing your concerns.</li>
             </ul>
         </>,
@@ -193,7 +193,7 @@ const TransactionsAndTechnicalData = [{
 
 const communityData = [{
     heading: "Is there an official Twitter/Discord?",
-    body: "We have an official Musomatic Discord group as well as a Twitter account. Check out by clicking the icons in the website footer.",
+    body: "We have an official Musixverse Discord group as well as a Twitter account. Check out by clicking the icons in the website footer.",
     content_id: "collapseOne"
 },{
     heading: "Why join Discord?",
@@ -204,8 +204,8 @@ const communityData = [{
     body: "We discuss all the happenings through our official Twitter handle and in the Discord group, including peeks into our development process and leaks about our newest features. You can access our handles anytime from the links at the footer of the site.",
     content_id: "collapseThree"
 },{
-    heading: "How do I contact the Musomatic team?",
-    body: <p>You can contact us at <span className="font-medium text-primary-300">contact@musomatic.com</span>. Please include any relevant NFT IDs, links, or transaction hashes so we can support you as quickly as possible.</p>,
+    heading: "How do I contact the Musixverse team?",
+    body: <p>You can contact us at <span className="font-medium text-primary-300">contact@Musixverse.com</span>. Please include any relevant NFT IDs, links, or transaction hashes so we can support you as quickly as possible.</p>,
     content_id: "collapseFour"
 }];
 

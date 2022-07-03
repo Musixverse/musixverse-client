@@ -48,10 +48,6 @@ const CreateNFT = () => {
         setStep((currStep) => currStep - 1);
     };
 
-    // useEffect(() => {
-    //     console.log("contributorList", contributorList);
-    // }, [contributorList]);
-
     useEffect(() => {
         if (user && userInfo[0]) {
             setTrackTitle("Die Hard");
@@ -78,15 +74,6 @@ const CreateNFT = () => {
                     role: "Singer",
                     walletAddress: user.attributes.ethAddress,
                     avatar: userInfo[0].attributes.avatar,
-                },
-                {
-                    id: "qgNxDQ3E5WQW7ZRMqE19hZ9q",
-                    name: "Billie Eilish",
-                    username: "billy_boy",
-                    role: "Singer",
-                    split: 20,
-                    walletAddress: "0xda2067217460a053a7a8fe63a71f42c997e6bef1",
-                    avatar: "https://ipfs.moralis.io:2053/ipfs/QmTPAzMyPwyNcYLLg6JPFRXypCSjbihcMEuxbf7gy6eyJX",
                 },
             ]);
         }

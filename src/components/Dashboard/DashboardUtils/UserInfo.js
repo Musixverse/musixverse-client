@@ -33,7 +33,7 @@ export default function UserInfo({ username, setUsername, name, setName, email, 
                         value={email}
                         id="email"
                         disabled
-                        className="dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-100 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-light-100 focus:border-primary-100"
+                        className="dark:bg-[#242424] dark:border-[#323232] dark:focus:border-primary-100 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-light-100 focus:border-primary-100"
                     />
                 </div>
             </div>

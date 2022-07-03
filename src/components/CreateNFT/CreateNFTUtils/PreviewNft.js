@@ -51,18 +51,18 @@ export default function PreviewNft({ trackTitle, uploadedImage, uploadedSong, nf
         <div className="flex-1 mt-14 lg:mt-0">
             <p className="mb-10 font-semibold font-secondary">STEP {step} OF 2</p>
             {/* Uploaded Art */}
-            <div className="relative flex items-end justify-end w-[222px] h-[190px]">
+            <div className="relative w-[222px] h-[190px] overflow-hidden rounded-t-xl">
                 {/* Cover art of NFT */}
                 {uploadedImage === null ? (
-                    <div className="dark:bg-[#363636] bg-light-300 w-full h-full rounded-t-xl absolute"></div>
+                    <div className="dark:bg-[#363636] bg-light-300 w-full h-full rounded-t-xl"></div>
                 ) : (
-                    <div className="absolute w-full h-full overflow-hidden rounded-t-md">
+                    <div className="relative w-full h-full">
                         <Image src={uploadedImage} alt="nft cover art" objectFit="cover" layout="fill" priority />
                     </div>
                 )}
                 {/* NFT audio file */}
                 {uploadedSong == null ? null : (
-                    <div className="z-[1] p-2">
+                    <div className="z-[1] absolute bottom-0 right-0 p-2">
                         <button
                             type="button"
                             ref={playBtn}
@@ -84,7 +84,7 @@ export default function PreviewNft({ trackTitle, uploadedImage, uploadedSong, nf
                     </div>
                     {truncatednftPrice && (
                         <div className="flex flex-col">
-                            <p className="font-secondary text-sm">Price</p>
+                            <p className="text-sm font-secondary">Price</p>
                             <div className="flex items-center font-semibold">
                                 <Image src={"/assets/matic-logo.svg"} width={16} height={16} alt="matic logo" />
                                 <span className="ml-1 sm:text-lg">{truncatednftPrice == 0 ? 0 : truncatednftPrice}</span>

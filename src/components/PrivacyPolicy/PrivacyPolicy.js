@@ -5,14 +5,14 @@ export default function PrivacyPolicy() {
         <div className={styles["privacy_policy_container"]}>
             <div className={styles["privacy_policy"]}>
                 <div>
-                    <div className={styles["contact_us_heading"]}>Privacy Policy</div>
+                    <div className={styles["privacy_policy_heading"]}>Privacy Policy</div>
                 </div>
                 <div>
                     <div className="text-primary-100">(Last Updated November 3, 2021)</div>
                 </div>
 
                 <div className="mt-5">
-                    <div className={styles["reportABug_notice"]}>
+                    <div className={styles["privacy_policy_content"]}>
                         <span className="text-primary-100">Musixverse Technologies, Inc.</span>, as well as any present or future affiliated or related company (“Musixverse”, “us” or “we”),
                         recognizes the importance of your privacy. This privacy policy will help you understand how we use and protect the data you provide us when you visit and use{" "}
                         <a href={"/"} className="text-primary-100">
@@ -25,11 +25,11 @@ export default function PrivacyPolicy() {
                 </div>
 
                 <div className="mt-10">
-                    <div className={styles["bugsPage_heading"]}>What data do we collect?</div>
+                    <div className={styles["privacy_policy_sub-heading"]}>What data do we collect?</div>
                 </div>
 
                 <div className="mt-4">
-                    <div className={styles["reportABug_notice"]}>
+                    <div className={styles["privacy_policy_content"]}>
                         <span className="text-primary-100">a. Personally-Identifiable Information:</span> We only collect personally identifiable information when you specifically and
                         knowingly provide it to us, for example when you provide personal information such as your email address, name, or other information like a wallet address. Personally
                         identifiable information includes, where applicable, “personal data”, “personal information” and/or “sensitive personal information” each as defined in applicable law, and
@@ -58,11 +58,11 @@ export default function PrivacyPolicy() {
                 </div>
 
                 <div className="mt-10">
-                    <div className={styles["bugsPage_heading"]}>What do we do with the information that we collect?</div>
+                    <div className={styles["privacy_policy_sub-heading"]}>What do we do with the information that we collect?</div>
                 </div>
 
                 <div className="mt-4">
-                    <div className={styles["reportABug_notice"]}>
+                    <div className={styles["privacy_policy_content"]}>
                         Except as disclosed in this policy, Musixverse does not share or sell your personal information to any outside parties.
                         <br />
                         <br />
@@ -82,22 +82,22 @@ export default function PrivacyPolicy() {
                 </div>
 
                 <div className="mt-10">
-                    <div className={styles["bugsPage_heading"]}>Links to other websites</div>
+                    <div className={styles["privacy_policy_sub-heading"]}>Links to other websites</div>
                 </div>
 
                 <div className="mt-4">
-                    <div className={styles["reportABug_notice"]}>
+                    <div className={styles["privacy_policy_content"]}>
                         Our website contains links that lead to other websites. If you click on these links Musixverse will not be held responsible for your data and privacy protection. Visiting
                         those websites is not governed by this privacy policy agreement. Make sure to read the privacy policy documentation of the website you go to from our website.
                     </div>
                 </div>
 
                 <div className="mt-10">
-                    <div className={styles["bugsPage_heading"]}>Safeguarding and Securing the data</div>
+                    <div className={styles["privacy_policy_sub-heading"]}>Safeguarding and Securing the data</div>
                 </div>
 
                 <div className="mt-4">
-                    <div className={styles["reportABug_notice"]}>
+                    <div className={styles["privacy_policy_content"]}>
                         Musixverse (MXV) is committed to securing your data and keeping it confidential. We follow generally accepted industry standards to help protect your personal information.
                         No method of transmission over the internet, mobile technology, or method of electronic storage, is completely secure. Musixverse (MXV) has done all in its power to prevent
                         data theft, unauthorized access, and disclosure by implementing the latest technologies and software, which help us safeguard all the information we collect online. If you
@@ -110,11 +110,11 @@ export default function PrivacyPolicy() {
                 </div>
 
                 <div className="mt-10">
-                    <div className={styles["bugsPage_heading"]}>Changes to our Privacy Policy</div>
+                    <div className={styles["privacy_policy_sub-heading"]}>Changes to our Privacy Policy</div>
                 </div>
 
                 <div className="mt-4">
-                    <div className={styles["reportABug_notice"]}>
+                    <div className={styles["privacy_policy_content"]}>
                         We reserve the right to update the terms of this privacy policy at any time whenever necessary to reflect customer feedback and changes to our platform.{" "}
                         <span className="text-primary-100">When we make changes, we will revise the “last updated” date at the top of the policy.</span> If there are material changes to this
                         policy or in how we will use your personal information, we will notify you by prominently posting a notice of such changes here or on our home page. We encourage you to
@@ -123,11 +123,11 @@ export default function PrivacyPolicy() {
                 </div>
 
                 <div className="mt-10">
-                    <div className={styles["bugsPage_heading"]}>Contact Us</div>
+                    <div className={styles["privacy_policy_sub-heading"]}>Contact Us</div>
                 </div>
 
                 <div className="mt-4">
-                    <div className={styles["reportABug_notice"]}>
+                    <div className={styles["privacy_policy_content"]}>
                         For general inquires or communications, or if you have a technical or support question, please send us an email at 
                         <a href="mailto:contact@musixverse.com" target="_blank" rel="noopener noreferrer" className="font-primary font-semibold dark:text-[#afafaf]">
                             contact@musixverse.com

@@ -22,24 +22,20 @@ export default function CoverPhoto({ coverImage, setCoverImage }) {
 
     useEffect(()=>{
         if(croppedImage !== undefined){
+            setLoading(true);
             coverPicture.current.src = croppedImage;
             // Get the File from DataURL
             const uploadedFile = convertDataURLtoFile(croppedImage, "file");
             // Get the uploadFileOnIPFS async function
             
-            //@Pushpit
-            //uploading now takes a lot of time
-            //If user uploads a different image and the prev uploaded was not resolved,
-            //What should we do?
             uploadFileToIPFS(Moralis, uploadedFile)
                 .then((url) => {
-                    //Crop wont appear if loading true
-                    // setLoading(false);
+                    setLoading(false);
                     console.log(url);
                     setCoverImage(url);
                 });
         }
-    },[Moralis, croppedImage, setCoverImage])
+    },[Moralis, croppedImage, setCoverImage, setLoading])
 
     const handleCoverChange = (event) => {
         const imageURL = URL.createObjectURL(event.target.files[0]);

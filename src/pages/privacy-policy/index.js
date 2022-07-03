@@ -1,5 +1,5 @@
 import Head from "next/head";
-import PrivacyComp from "../../components/ContactUs/ContactUs";
+import PrivacyComp from "../../components/PrivacyPolicy/PrivacyPolicy";
 
 const PrivacyPolicy = ({}) => {
     return (

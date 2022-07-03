@@ -19,6 +19,7 @@ export default function PricingAndSplits({
     setResaleRoyaltyPercent,
     releaseNow,
     setReleaseNow,
+    setUnlockTimestamp,
     nftCreateFormOnSubmit,
 }) {
     const [, , , setError] = useContext(StatusContext);
@@ -45,6 +46,7 @@ export default function PricingAndSplits({
         setResaleRoyaltyPercent,
         releaseNow,
         setReleaseNow,
+        setUnlockTimestamp,
     };
 
     return (

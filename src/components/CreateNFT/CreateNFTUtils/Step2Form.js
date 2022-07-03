@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { useMoralisCloudFunction } from "react-moralis";
+import DatePicker from "react-datepicker";
 import ContributorRoleDropdown from "./ContributorRoleDropdown";
 
 const Step2Form = ({
@@ -14,10 +15,23 @@ const Step2Form = ({
     setResaleRoyaltyPercent,
     releaseNow,
     setReleaseNow,
+    setUnlockTimestamp,
 }) => {
     const rolesArray = ["Singer", "Producer", "Mixer", "Composer", "Songwriter", "Lyricist", "Vocalist", "Other"];
     const [filteredUsers, setFilteredUsers] = useState("");
     const [searchedUsername, setSearchedUsername] = useState("");
+    const [unlockTimestampInMs, setUnlockTimestampInMs] = useState(new Date().getTime());
+
+    const changeTimesampToSeconds = (timestamp) => {
+        setUnlockTimestampInMs(timestamp);
+        setUnlockTimestamp(Math.round(timestamp / 1000));
+    };
+
+    const filterPassedTime = (time) => {
+        const currentDate = new Date();
+        const selectedDate = new Date(time);
+        return currentDate.getTime() < selectedDate.getTime();
+    };
 
     // handle input change
     const handleInputChange = (e, index) => {
@@ -398,6 +412,39 @@ const Step2Form = ({
                         </div>
                     </div>
                 </div>
+
+                {releaseNow ? (
+                    <div className="flex text-xs font-normal dark:text-light-300">
+                        Your music NFT will be available for buying/selling on the Musixverse marketplace as soon as you click the &quot;Create&quot; button.
+                    </div>
+                ) : (
+                    <>
+                        <div className="flex flex-col text-xs font-normal dark:text-light-300">
+                            You can decide to launch your NFT on a later date. Your NFT will be created right now and will appear on the Musixverse marketplace,
+                            but will not be available for buying/selling.
+                            <div className="flex flex-col mt-5 text-base">
+                                <span className="text-sm mb-2">Your NFT will be available for buying/selling on:</span>
+
+                                <DatePicker
+                                    selected={unlockTimestampInMs}
+                                    onChange={(date) => changeTimesampToSeconds(date.getTime())}
+                                    minDate={new Date()}
+                                    dateFormat="MMMM d, yyyy h:mm aa"
+                                    showTimeSelect
+                                    timeFormat="HH:mm"
+                                    timeIntervals={15}
+                                    timeCaption="Time"
+                                    filterTime={filterPassedTime}
+                                    // withPortal
+                                    fixedHeight
+                                    showDisabledMonthNavigation
+                                    disabledKeyboardNavigation
+                                    showPopperArrow={false}
+                                />
+                            </div>
+                        </div>
+                    </>
+                )}
             </div>
         </div>
     );

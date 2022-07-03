@@ -8,7 +8,7 @@ export default function NFTCard({
     artistName,
     image,
     songId,
-    price,
+    tokenId,
     numberOfCopies,
     contributorList,
     localTokenId,
@@ -19,8 +19,8 @@ export default function NFTCard({
     let truncatedArtistName = artistName;
     let truncatedNftName = songName;
 
-    if (songName.length > 10) {
-        truncatedNftName = songName.substring(0, 10) + "...";
+    if (songName.length > 8) {
+        truncatedNftName = songName.substring(0, 8) + "...";
     }
 
     if (artistName && artistName.length > 15) truncatedArtistName = artistName.substring(0, 20) + "...";
@@ -31,8 +31,8 @@ export default function NFTCard({
             <Image src={image || "/assets/nft_bg.jpg"} alt="nft image" height={256} width={256} priority></Image>
             {/* NFT Details */}
             <div className={"dark:bg-dark-100 " + styles["nft-card__description"]}>
-                {/* Artist, Music name and current price */}
-                <Section1 artistName={truncatedArtistName} songName={truncatedNftName} songId={songId} price={price} isVerified={isVerified} />
+                {/* Artist, Music name and tokenId */}
+                <Section1 artistName={truncatedArtistName} songName={truncatedNftName} songId={songId} tokenId={tokenId} isVerified={isVerified} />
                 {/* LIKES and Prev Price Section */}
                 <Section2
                     contributorList={contributorList}

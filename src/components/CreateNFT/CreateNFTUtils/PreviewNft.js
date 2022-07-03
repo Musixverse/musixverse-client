@@ -99,13 +99,13 @@ export default function PreviewNft({ trackTitle, uploadedImage, uploadedSong, nf
                         <div className="flex -space-x-2 items-end">
                             {contributorList.map((contributor, index) => {
                                 return contributor.avatar ? (
-                                    <div className={`rounded-full flex items-end relative z-${10 * (contributorList.length - index)}`}>
+                                    <div key={index} className={`rounded-full flex items-end relative z-${10 * (contributorList.length - index)}`}>
                                         <Image src={contributor.avatar} height="30" width="30" className="rounded-full" />
                                     </div>
                                 ) : null;
                             })}
                         </div>
-                        {truncatedNftName ? <span className="dark:text-light-300">#1 of&nbsp;{numberOfCopies}</span> : ""}
+                        {truncatedNftName && numberOfCopies ? <span className="dark:text-light-300">#1 of&nbsp;{numberOfCopies}</span> : ""}
                     </div>
                 )}
             </div>

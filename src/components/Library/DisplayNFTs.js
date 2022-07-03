@@ -18,6 +18,10 @@ const DisplayNFTs = () => {
     };
 
     useEffect(() => {
+        console.log("Tokens:", tokens);
+    }, [tokens]);
+
+    useEffect(() => {
         if (tokens) {
             const uniqueHashGroup = tokens.reduce((acc, token) => {
                 if (!acc[token.token_uri]) {
@@ -64,7 +68,6 @@ const DisplayNFTs = () => {
     useEffect(() => {
         if (isInitialized) {
             fetchTokens();
-            // fetchTokenIdMetadata();
         }
     }, [isInitialized]);
 
@@ -82,19 +85,21 @@ const DisplayNFTs = () => {
                                 localTokenId = Number(nft.token_id) + Number(metadata.attributes[0].value) - token.max_token_id;
                         });
 
-                        return (
-                            <NFTCard
-                                key={index}
-                                songName={metadata.name}
-                                artistName={metadata.artistName}
-                                image={metadata.image}
-                                songId={metadata.id}
-                                price={1.2}
-                                numberOfCopies={metadata.attributes[0].value}
-                                contributorList={metadata.contributors}
-                                localTokenId={localTokenId}
-                            />
-                        );
+                        if (metadata) {
+                            return (
+                                <NFTCard
+                                    key={index}
+                                    songName={metadata.name}
+                                    artistName={metadata.artistName}
+                                    image={metadata.image}
+                                    songId={metadata.id}
+                                    tokenId={nft.token_id}
+                                    numberOfCopies={metadata.attributes[0].value}
+                                    contributorList={metadata.contributors}
+                                    localTokenId={localTokenId}
+                                />
+                            );
+                        } else return null;
                     })}
             </div>
         </div>

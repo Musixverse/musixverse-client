@@ -15,13 +15,13 @@ const CreateNFT = () => {
     const { data: userInfo } = useMoralisQuery("UserInfo", (query) => query.equalTo("user", user), [user]);
 
     // States
-    const [step, setStep] = useState(2);
+    const [step, setStep] = useState(1);
     const [uploadedImage, setUploadedImage] = useState(null);
     const [uploadedSong, setUploadedSong] = useState(null);
     const [trackTitle, setTrackTitle] = useState("");
-    const [genre, setGenre] = useState("");
-    const [trackOrigin, setTrackOrigin] = useState("");
-    const [explicit, setExplicit] = useState("");
+    const [trackOrigin, setTrackOrigin] = useState("Original");
+    const [genre, setGenre] = useState("Afrobeat");
+    const [explicit, setExplicit] = useState("Explicit");
     const [recordingYear, setRecordingYear] = useState(new Date().getFullYear());
     const [vocals, setVocals] = useState(true);
     const [links, setLinks] = useState({
@@ -36,6 +36,7 @@ const CreateNFT = () => {
     const [nftPrice, setNftPrice] = useState("");
     const [resaleRoyaltyPercent, setResaleRoyaltyPercent] = useState("");
     const [releaseNow, setReleaseNow] = useState(true);
+    const [unlockTimestamp, setUnlockTimestamp] = useState(Math.round(new Date().getTime() / 1000));
 
     // Continue to next step
     const nextStep = () => {
@@ -65,15 +66,15 @@ const CreateNFT = () => {
             });
             setUploadedImage("https://ipfs.moralis.io:2053/ipfs/QmQSTneVQ2Xde3XzuXKQWkwipdS8Voh9xDDWLGju83xJWa");
             setUploadedSong("https://ipfs.moralis.io:2053/ipfs/QmUA4TiKp1AiiJhCmnPgij4B5cmFrmtUjsBPADEtgRZxaH");
-            setNumberOfCopies(5);
-            setNftPrice(0.12);
+            setNumberOfCopies(4);
+            setNftPrice(10.8);
             setResaleRoyaltyPercent(5);
             setContributorList([
                 {
                     id: user.id,
                     name: user.attributes.name,
                     username: user.attributes.username,
-                    split: 99,
+                    split: 80,
                     role: "Singer",
                     walletAddress: user.attributes.ethAddress,
                     avatar: userInfo[0].attributes.avatar,
@@ -83,7 +84,7 @@ const CreateNFT = () => {
                     name: "Billie Eilish",
                     username: "billy_boy",
                     role: "Singer",
-                    split: 1,
+                    split: 20,
                     walletAddress: "0xda2067217460a053a7a8fe63a71f42c997e6bef1",
                     avatar: "https://ipfs.moralis.io:2053/ipfs/QmTPAzMyPwyNcYLLg6JPFRXypCSjbihcMEuxbf7gy6eyJX",
                 },
@@ -99,11 +100,11 @@ const CreateNFT = () => {
         }, []);
 
         const nftMetadata = {
-            name: trackTitle, // "#" + "1 " + "I Spend Too Much Time!",
+            name: trackTitle,
             description:
                 "Lorem Ipsum is simply a dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic type",
             image: process.env.NEXT_PUBLIC_IPFS_NODE_URL + uploadedImage.replace("https://ipfs.moralis.io:2053/ipfs/", ""),
-            background_color: "6cc027",
+            background_color: "5AB510",
             animation_url: process.env.NEXT_PUBLIC_IPFS_NODE_URL + uploadedSong.replace("https://ipfs.moralis.io:2053/ipfs/", ""),
             artistName: user.attributes.name,
             artistAddress: user.attributes.ethAddress,
@@ -114,6 +115,7 @@ const CreateNFT = () => {
                 youtubeMusic: links.youtubeMusicLink,
             },
             contributors: reducedContributorList,
+            unlockTimestamp: unlockTimestamp,
             attributes: [
                 {
                     trait_type: "Number of copies",
@@ -155,10 +157,7 @@ const CreateNFT = () => {
         const file = new Moralis.File("file.json", { base64: btoa(JSON.stringify(nftMetadata)) });
         await file.saveIPFS();
 
-        var metadataURIs = [];
-        for (var i = 0; i < numberOfCopies; i++) {
-            metadataURIs.push(file.hash());
-        }
+        const metadataURI = file.hash();
         const contributors = contributorList.reduce((result, { walletAddress }) => {
             result.push(walletAddress);
             return result;
@@ -169,16 +168,15 @@ const CreateNFT = () => {
         }, []);
         const onSale = true;
 
-        console.log("user.attributes.ethAddress:", user.attributes.ethAddress);
-
         await mintTrackNFT(
             numberOfCopies,
             window.web3.utils.toWei(String(nftPrice), "Ether"),
-            metadataURIs,
+            metadataURI,
             contributors,
             percentageContributions,
             resaleRoyaltyPercent,
             onSale,
+            unlockTimestamp,
             user.attributes.ethAddress
         );
         setLoading(false);
@@ -224,6 +222,7 @@ const CreateNFT = () => {
         setResaleRoyaltyPercent,
         releaseNow,
         setReleaseNow,
+        setUnlockTimestamp,
         nftCreateFormOnSubmit,
     };
 

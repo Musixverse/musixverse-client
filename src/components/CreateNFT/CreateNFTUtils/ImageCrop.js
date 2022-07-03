@@ -4,7 +4,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import ReactCrop from "react-image-crop";
 import "react-image-crop/dist/ReactCrop.css";
 
-function ImageCrop({ imageToCrop, setCroppedImage, setShowModal }) {
+function ImageCrop({ imageToCrop, setCroppedImage, setShowModal, circularCrop, aspectRatio }) {
     //imageToCrop is the user selected image
     //setCroppedImage is the cropped image state setter function
     const [cropConfig, setCropConfig] = useState(
@@ -12,7 +12,7 @@ function ImageCrop({ imageToCrop, setCroppedImage, setShowModal }) {
         {
             unit: "%",
             width: 640,
-            aspect: 1 / 1,
+            aspect: `${aspectRatio.width}` / `${aspectRatio.height}`,
         }
     );
     const [imageRef, setImageRef] = useState();
@@ -96,6 +96,7 @@ function ImageCrop({ imageToCrop, setCroppedImage, setShowModal }) {
                             {/* Crop Component */}
                             <div className="flex items-center justify-center">
                                 <ReactCrop
+                                    circularCrop={circularCrop}
                                     src={imageToCrop}
                                     crop={cropConfig}
                                     ruleOfThirds
@@ -121,7 +122,7 @@ function ImageCrop({ imageToCrop, setCroppedImage, setShowModal }) {
                     </button>
                     <button
                         type="button"
-                        className="inline-flex justify-center w-full px-4 py-2 text-base font-medium text-white border border-transparent rounded-md shadow-sm bg-primary-100 hover:bg-primary-300 focus:outline-none sm:ml-3 sm:w-auto sm:text-sm mt-4 sm:mt-0"
+                        className="inline-flex justify-center w-full px-4 py-2 mt-4 text-base font-medium text-white border border-transparent rounded-md shadow-sm bg-primary-100 hover:bg-primary-300 focus:outline-none sm:ml-3 sm:w-auto sm:text-sm sm:mt-0"
                         onClick={() => {
                             setShowModal(false);
                             cropImage(cropConfig);

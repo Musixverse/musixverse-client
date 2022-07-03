@@ -8,7 +8,7 @@ export default function Accordion({data, category}){
             <div key={idx} className={"accordion-item "+styles['faq-item']}>
                 {/* FAQ Item Heading */}
                 <button 
-                    className={"relative flex items-center w-full px-5 py-4 text-sm sm:text-base text-left  transition border-b border-primary-100 rounded-none bg-light-100 focus:outline-none hover:text-primary-200 "+(idx === 0? "":"collapsed") + (currentlyExpanded === idx? " text-primary-200":"text-gray-800")} 
+                    className={"relative flex items-center w-full px-5 py-4 text-sm sm:text-base text-left  transition border-b border-primary-100 rounded-none bg-transparent focus:outline-none dark:hover:text-primary-200 hover:text-primary-200 "+(idx === 0? "":"collapsed") + (currentlyExpanded === idx? " text-primary-200":"text-gray-800 dark:text-light-200")} 
                     type="button" 
                     onClick={()=>{
                             if(currentlyExpanded !== idx)
@@ -41,7 +41,7 @@ export default function Accordion({data, category}){
     });
 
     return(
-        <div className="self-start w-full p-8 pb-12 bg-light-100 rounded-xl">
+        <div className="self-start w-full p-8 pb-12 dark:bg-dark-100 bg-light-100 rounded-xl">
             {/* FAQ Category Heading */}
             <h3 className="mb-5 text-lg font-medium sm:text-xl text-primary-200">{category}</h3>
             <div className="w-full rounded-none accordion" id="accordionExample">

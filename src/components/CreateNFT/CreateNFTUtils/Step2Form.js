@@ -1,3 +1,7 @@
+import { useState, useEffect } from "react";
+import Image from "next/image";
+import { useMoralisCloudFunction } from "react-moralis";
+import DatePicker from "react-datepicker";
 import ContributorRoleDropdown from "./ContributorRoleDropdown";
 
 const Step2Form = ({
@@ -11,8 +15,23 @@ const Step2Form = ({
     setResaleRoyaltyPercent,
     releaseNow,
     setReleaseNow,
+    setUnlockTimestamp,
 }) => {
     const rolesArray = ["Singer", "Producer", "Mixer", "Composer", "Songwriter", "Lyricist", "Vocalist", "Other"];
+    const [filteredUsers, setFilteredUsers] = useState("");
+    const [searchedUsername, setSearchedUsername] = useState("");
+    const [unlockTimestampInMs, setUnlockTimestampInMs] = useState(new Date().getTime());
+
+    const changeTimesampToSeconds = (timestamp) => {
+        setUnlockTimestampInMs(timestamp);
+        setUnlockTimestamp(Math.round(timestamp / 1000));
+    };
+
+    const filterPassedTime = (time) => {
+        const currentDate = new Date();
+        const selectedDate = new Date(time);
+        return currentDate.getTime() < selectedDate.getTime();
+    };
 
     // handle input change
     const handleInputChange = (e, index) => {
@@ -31,7 +50,7 @@ const Step2Form = ({
 
     // handle click event of the Add button
     const handleAddClick = () => {
-        setContributorList([...contributorList, { id: "", username: "", split: "", role: "" }]);
+        setContributorList([...contributorList, { id: "", name: "", username: "", split: "", role: "", walletAddress: "", avatar: "" }]);
     };
 
     const setContributorRole = (index, role) => {
@@ -39,6 +58,52 @@ const Step2Form = ({
         list[index]["role"] = role;
         setContributorList(list);
     };
+
+    const setContributorInfo = async (user, index) => {
+        const list = [...contributorList];
+        list[index]["id"] = user.objectId;
+        list[index]["name"] = user.name;
+        list[index]["username"] = user.username;
+        list[index]["walletAddress"] = user.ethAddress;
+        list[index]["avatar"] = user.userInfo[0].avatar;
+        setContributorList(list);
+        setFilteredUsers("");
+    };
+
+    const filterUsers = async (e) => {
+        const keyword = e.target.value;
+        if (keyword === "") {
+            // If the text field is empty, show no users
+            setFilteredUsers("");
+        }
+        setSearchedUsername(keyword);
+    };
+
+    const { fetch: fetchMatchingUsers } = useMoralisCloudFunction(
+        "fetchMatchingUsers",
+        { username: searchedUsername },
+        {
+            autoFetch: false,
+        }
+    );
+    useEffect(() => {
+        if (searchedUsername !== "") {
+            fetchMatchingUsers({
+                onSuccess: async (object) => {
+                    setFilteredUsers(
+                        await object.filter(function (userObj) {
+                            return !contributorList.some(function (contributorObj) {
+                                return userObj.username === contributorObj.username; // return the ones with equal id
+                            });
+                        })
+                    );
+                },
+                onError: (error) => {
+                    console.log("fetchMatchingUsers Error:", error);
+                },
+            });
+        }
+    }, [searchedUsername]);
 
     return (
         <div className="flex flex-col lg:space-x-10 xl:space-x-20 lg:flex-auto lg:flex-row font-semibold font-secondary justify-end">
@@ -90,63 +155,151 @@ const Step2Form = ({
                             return (
                                 <div key={index} className="flex gap-4">
                                     {index == 0 ? (
-                                        <>
-                                            <div className="basis-1/2">
-                                                <input
-                                                    className="bg-gray-100 dark:bg-[#272626] dark:text-light-100 dark:border-[#323232] w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777]"
-                                                    id="username"
-                                                    name="username"
-                                                    type="text"
-                                                    placeholder="Username"
-                                                    value={contributor.username}
-                                                    readOnly
-                                                    required
-                                                />
-                                            </div>
-                                            <div className="basis-1/4">
-                                                <input
-                                                    className="dark:bg-[#323232] dark:border-[#323232] dark:text-light-100 dark:focus:border-primary-100 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-100"
-                                                    name="split"
-                                                    type="number"
-                                                    min={0}
-                                                    max={100}
-                                                    placeholder="Split %"
-                                                    value={contributor.split}
-                                                    onChange={(e) => handleInputChange(e, index)}
-                                                    required
-                                                />
-                                            </div>
-                                        </>
+                                        <div className="basis-1/2 relative">
+                                            {contributor.avatar && (
+                                                <div className="absolute flex items-center h-full ml-2">
+                                                    <Image src={contributor.avatar} height="30" width="30" className="rounded-full" />
+                                                </div>
+                                            )}
+                                            <input
+                                                className="bg-gray-100 dark:bg-[#272626] dark:text-light-100 dark:border-[#323232] w-full px-12 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777]"
+                                                id="username"
+                                                name="username"
+                                                type="text"
+                                                placeholder="Username"
+                                                value={contributor.name}
+                                                readOnly
+                                                required
+                                            />
+                                        </div>
                                     ) : (
-                                        <>
-                                            <div className="basis-1/2">
-                                                {/* TODO: Add search based on username on this input box @Pushpit07 */}
+                                        <div className="basis-1/2 relative">
+                                            {contributor.username ? (
+                                                <>
+                                                    {contributor.avatar && (
+                                                        <div className="absolute flex items-center h-full ml-2">
+                                                            <Image src={contributor.avatar} height="30" width="30" className="rounded-full" />
+                                                        </div>
+                                                    )}
+                                                    <input
+                                                        className="bg-gray-100 dark:bg-[#272626] dark:text-light-100 dark:border-[#323232] w-full px-12 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777]"
+                                                        id="username"
+                                                        name="username"
+                                                        type="text"
+                                                        placeholder="Username"
+                                                        value={contributor.name}
+                                                        readOnly
+                                                        required
+                                                    />
+                                                </>
+                                            ) : (
                                                 <input
                                                     className="dark:text-light-100 dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-100 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-100"
                                                     id="username"
                                                     name="username"
                                                     type="text"
                                                     placeholder="Username"
-                                                    value={contributor.username}
-                                                    onChange={(e) => handleInputChange(e, index)}
+                                                    // value={contributor.username}
+                                                    autoComplete="off"
+                                                    onChange={(e) => {
+                                                        filterUsers(e);
+                                                    }}
                                                     required
                                                 />
-                                            </div>
-                                            <div className="basis-1/4">
-                                                <input
-                                                    className="dark:bg-[#323232] dark:border-[#323232] dark:text-light-100 dark:focus:border-primary-100 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-100"
-                                                    name="split"
-                                                    type="number"
-                                                    min={0}
-                                                    max={100}
-                                                    placeholder="Split %"
-                                                    value={contributor.split}
-                                                    onChange={(e) => handleInputChange(e, index)}
-                                                    required
-                                                />
-                                            </div>
-                                        </>
+                                            )}
+
+                                            {!contributor.username && filteredUsers ? (
+                                                <div className="absolute w-full">
+                                                    {filteredUsers.length > 0 ? (
+                                                        filteredUsers.map((user, idx) => (
+                                                            <a key={user.objectId} className="flex flex-col basis-full">
+                                                                {filteredUsers.length === 1 ? (
+                                                                    <button
+                                                                        type="button"
+                                                                        className="flex items-center rounded bg-light-100 dark:bg-dark-100 hover:text-light-100 dark:text-light-100 hover:bg-primary-100 dark:hover:bg-primary-100 py-2 px-3 justify-start text-start"
+                                                                        onClick={() => {
+                                                                            setContributorInfo(user, index);
+                                                                        }}
+                                                                    >
+                                                                        <Image src={user.userInfo[0].avatar} height="30" width="30" className="rounded-full" />
+                                                                        <span className="ml-2">{user.name}</span>
+                                                                        <div>
+                                                                            <span className="ml-2 text-xs font-normal">@{user.username}</span>
+                                                                        </div>
+                                                                    </button>
+                                                                ) : idx === 0 ? (
+                                                                    <button
+                                                                        type="button"
+                                                                        className="flex items-center rounded-t bg-light-100 dark:bg-dark-100 hover:text-light-100 dark:text-light-100 hover:bg-primary-100 dark:hover:bg-primary-100 py-2 px-3 justify-start text-start"
+                                                                        onClick={() => {
+                                                                            setContributorInfo(user, index);
+                                                                        }}
+                                                                    >
+                                                                        <Image src={user.userInfo[0].avatar} height="30" width="30" className="rounded-full" />
+                                                                        <span className="ml-2">{user.name}</span>
+                                                                        <div>
+                                                                            <span className="ml-2 text-xs font-normal">@{user.username}</span>
+                                                                        </div>
+                                                                    </button>
+                                                                ) : filteredUsers.length === idx + 1 ? (
+                                                                    <button
+                                                                        type="button"
+                                                                        className="flex items-center rounded-b bg-light-100 dark:bg-dark-100 hover:text-light-100 dark:text-light-100 hover:bg-primary-100 dark:hover:bg-primary-100 py-2 px-3 justify-start text-start"
+                                                                        onClick={() => {
+                                                                            setContributorInfo(user, index);
+                                                                        }}
+                                                                    >
+                                                                        <Image src={user.userInfo[0].avatar} height="30" width="30" className="rounded-full" />
+                                                                        <span className="ml-2">{user.name}</span>
+                                                                        <div>
+                                                                            <span className="ml-2 text-xs font-normal">@{user.username}</span>
+                                                                        </div>
+                                                                    </button>
+                                                                ) : (
+                                                                    <button
+                                                                        type="button"
+                                                                        className="flex items-center bg-light-100 dark:bg-dark-100 hover:text-light-100 dark:text-light-100 hover:bg-primary-100 dark:hover:bg-primary-100 py-2 px-3 justify-start text-start"
+                                                                        onClick={() => {
+                                                                            setContributorInfo(user, index);
+                                                                        }}
+                                                                    >
+                                                                        <Image src={user.userInfo[0].avatar} height="30" width="30" className="rounded-full" />
+                                                                        <span className="ml-2">{user.name}</span>
+                                                                        <div>
+                                                                            <span className="ml-2 text-xs font-normal">@{user.username}</span>
+                                                                        </div>
+                                                                    </button>
+                                                                )}
+                                                            </a>
+                                                        ))
+                                                    ) : (
+                                                        <a key={"no"} className="flex flex-col basis-full">
+                                                            <button
+                                                                type="button"
+                                                                className="bg-light-100 hover:bg-gray-200 dark:bg-dark-100 dark:text-light-100 py-2 px-6 justify-start text-start rounded"
+                                                            >
+                                                                <span className="text-xs">No results found!</span>
+                                                            </button>
+                                                        </a>
+                                                    )}
+                                                </div>
+                                            ) : null}
+                                        </div>
                                     )}
+
+                                    <div className="basis-1/4">
+                                        <input
+                                            className="dark:bg-[#323232] dark:border-[#323232] dark:text-light-100 dark:focus:border-primary-100 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-100"
+                                            name="split"
+                                            type="number"
+                                            min={0}
+                                            max={100}
+                                            placeholder="Split %"
+                                            value={contributor.split}
+                                            onChange={(e) => handleInputChange(e, index)}
+                                            required
+                                        />
+                                    </div>
 
                                     <div className="basis-1/4">
                                         <ContributorRoleDropdown
@@ -170,7 +323,7 @@ const Step2Form = ({
                     </div>
 
                     {/* Button to add more contributors */}
-                    {contributorList.length < 4 && (
+                    {contributorList.length < 5 && (
                         <div className="flex mt-4 justify-start items-center">
                             <button
                                 type="button"
@@ -259,6 +412,39 @@ const Step2Form = ({
                         </div>
                     </div>
                 </div>
+
+                {releaseNow ? (
+                    <div className="flex text-xs font-normal dark:text-light-300">
+                        Your music NFT will be available for buying/selling on the Musixverse marketplace as soon as you click the &quot;Create&quot; button.
+                    </div>
+                ) : (
+                    <>
+                        <div className="flex flex-col text-xs font-normal dark:text-light-300">
+                            You can decide to launch your NFT on a later date. Your NFT will be created right now and will appear on the Musixverse marketplace,
+                            but will not be available for buying/selling.
+                            <div className="flex flex-col mt-5 text-base">
+                                <span className="text-sm mb-2">Your NFT will be available for buying/selling on:</span>
+
+                                <DatePicker
+                                    selected={unlockTimestampInMs}
+                                    onChange={(date) => changeTimesampToSeconds(date.getTime())}
+                                    minDate={new Date()}
+                                    dateFormat="MMMM d, yyyy h:mm aa"
+                                    showTimeSelect
+                                    timeFormat="HH:mm"
+                                    timeIntervals={15}
+                                    timeCaption="Time"
+                                    filterTime={filterPassedTime}
+                                    // withPortal
+                                    fixedHeight
+                                    showDisabledMonthNavigation
+                                    disabledKeyboardNavigation
+                                    showPopperArrow={false}
+                                />
+                            </div>
+                        </div>
+                    </>
+                )}
             </div>
         </div>
     );

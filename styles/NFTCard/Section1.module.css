@@ -3,13 +3,13 @@
 }
 
 .description--section1__artistname {
-    @apply font-secondary text-sm text-[#818181];
+    @apply font-secondary text-xs text-[#818181];
 }
 
 .description--section1__songname {
-    @apply text-sm sm:text-lg md:text-xl font-bold font-secondary;
+    @apply text-sm sm:text-lg md:text-xl font-semibold font-primary;
 }
 
 .description--section1__price {
-    @apply text-sm md:text-xl text-right font-secondary text-[#818181];
+    @apply font-secondary text-xs text-right text-[#818181];
 }

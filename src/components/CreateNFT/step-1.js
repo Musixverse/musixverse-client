@@ -24,6 +24,7 @@ export default function TrackDetails({
     setLinks,
     nftPrice,
     numberOfCopies,
+    contributorList,
 }) {
     /**
      * TODO: Need to add the following-
@@ -40,7 +41,7 @@ export default function TrackDetails({
      */
     const [, , , setError] = useContext(StatusContext);
 
-    const nftPreviewValues = { trackTitle, uploadedImage, uploadedSong, nftPrice, numberOfCopies, step };
+    const nftPreviewValues = { trackTitle, uploadedImage, uploadedSong, nftPrice, numberOfCopies, step, contributorList };
     const step1FormValues = {
         uploadedImage,
         setUploadedImage,

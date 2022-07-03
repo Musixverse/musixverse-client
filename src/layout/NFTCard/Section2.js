@@ -1,42 +1,53 @@
-import Image from "next/image";
-import { useRef } from "react";
+import ContributorImage from "./ContributorImage";
 import styles from "../../../styles/NFTCard/Section2.module.css";
 
-export default function Section2(props){
-    const likeBtn = useRef();
-    let likeCount = props.likeCount;
+export default function Section2({ contributorList, numberOfCopies, localTokenId, lastPrice }) {
+    // const likeBtn = useRef();
+    // let likeCount = props.likeCount;
 
-    const handleLikeClick = ()=>{
-        const likeCounter = likeBtn.current.children[1];
-        const isLiked = likeBtn.current.classList.contains('text-red-500');
+    // const handleLikeClick = () => {
+    //     const likeCounter = likeBtn.current.children[1];
+    //     const isLiked = likeBtn.current.classList.contains("text-red-500");
 
-        if(!isLiked){
-            likeBtn.current.classList.add('text-red-500');
-            likeCounter.textContent = ++likeCount;
-            // NOTE: Make a call to Increment the likes on the moralis server also!
-        }
-        else{
-            likeBtn.current.classList.remove('text-red-500');
-            likeCounter.textContent = --likeCount;
-            // NOTE: Make a call to Decrement the likes on the server!
-        }
-    };
+    //     if (!isLiked) {
+    //         likeBtn.current.classList.add("text-red-500");
+    //         likeCounter.textContent = ++likeCount;
+    //         // NOTE: Make a call to Increment the likes on the moralis server also!
+    //     } else {
+    //         likeBtn.current.classList.remove("text-red-500");
+    //         likeCounter.textContent = --likeCount;
+    //         // NOTE: Make a call to Decrement the likes on the server!dzsf
+    //     }
+    // };
 
     return (
-        <div className={styles['nft-card__description--section2']}>
+        <div className={styles["nft-card__description--section2"]}>
             {/* Like button */}
-            <button className="text-sm bg-transparent " ref={likeBtn} onClick={handleLikeClick}>
+            {/* <button className="text-sm bg-transparent " ref={likeBtn} onClick={handleLikeClick}>
                 <i className="mr-2 far fa-heart"></i>
                 <span>{props.likeCount}</span>
-            </button>
-            {/* Last price */}
-            <div className="flex items-center">
-                <p className={styles['description__section2--lastprice']}>Last</p>
-                <div className="flex items-center">
-                    <Image src={"/assets/Eth_logo.svg"} width={9} height={18} alt="ethereum logo"/>
-                    <span className="ml-1 text-xs font-bold">{props.lastPrice}</span>
+            </button> */}
+
+            {/* Contributor Images */}
+            <div className="flex items-end justify-between font-secondary text-[#1D1D1D] dark:text-light-200 text-xs">
+                <div className="flex -space-x-2 items-end">
+                    {contributorList.map((contributor, index) => {
+                        return <ContributorImage key={index} index={index} contributorList={contributorList} contributor={contributor} />;
+                    })}
                 </div>
+                <span className="dark:text-light-300">
+                    #{localTokenId} of&nbsp;{numberOfCopies}
+                </span>
             </div>
+
+            {/* Last price */}
+            {/* <div className="flex items-center">
+                <p className={styles["description__section2--lastprice"]}>Last</p>
+                <div className="flex items-center">
+                    <Image src={"/assets/Eth_logo.svg"} width={9} height={18} alt="ethereum logo" />
+                    <span className="ml-1 text-xs font-bold">{lastPrice}</span>
+                </div>
+            </div> */}
         </div>
     );
 }

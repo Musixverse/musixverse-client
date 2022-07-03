@@ -31,17 +31,17 @@ export default function DetailsInputGroup({ setGenre, setTrackOrigin, setExplici
         <div className="flex flex-col flex-1 space-y-2 sm:space-y-4">
             <div className="flex flex-col w-full space-y-2 sm:flex-row sm:space-x-4 sm:space-y-0">
                 <div className="flex-1 text-sm font-semibold md:text-base font-secondary">
-                    <p className="mb-1">TRACK ORIGIN</p>
+                    <p className="mb-1 text-sm">TRACK ORIGIN</p>
                     <InputDropdown optionsArray={trackOriginArray} setChoice={setTrackOrigin} />
                 </div>
                 <div className="flex-1 text-sm font-semibold md:text-base font-secondary">
-                    <p className="mb-1">GENRE</p>
+                    <p className="mb-1 text-sm">GENRE</p>
                     <InputDropdown optionsArray={genreArray} setChoice={setGenre} />
                 </div>
             </div>
             <div className="flex flex-col w-full space-y-2 sm:flex-row sm:space-x-4 sm:space-y-0">
                 <div className="flex-1 text-sm font-semibold md:text-base font-secondary">
-                    <p className="mb-1">RECORDING YEAR</p>
+                    <p className="mb-1 text-sm">RECORDING YEAR</p>
                     <input
                         type="number"
                         min={"1860"}
@@ -58,7 +58,7 @@ export default function DetailsInputGroup({ setGenre, setTrackOrigin, setExplici
                     />
                 </div>
                 <div className="flex-1 text-sm font-semibold md:text-base font-secondary">
-                    <p className="mb-1">EXPLICIT CONTENT</p>
+                    <p className="mb-1 text-sm">EXPLICIT CONTENT</p>
                     <InputDropdown optionsArray={explicitArray} setChoice={setExplicit} />
                 </div>
             </div>

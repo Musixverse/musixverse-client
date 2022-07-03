@@ -10,8 +10,6 @@ export default function NFTs() {
     const [tokens, setTokens] = useState("");
     const [maxTokenIds, setMaxTokenIds] = useState([]);
     const [currentPage, setCurrentPage] = useState(0);
-    const [tempArray, setTempArray] = useState([]);
-    const [nftCards, setNftCards] = useState([]);
 
     const fetchTokens = async () => {
         const options = {
@@ -27,6 +25,8 @@ export default function NFTs() {
         console.log("nftCards:", nftCards);
     }, [tempArray, nftCards]);
 
+    let tempArray = [];
+    let nftCards = [];
     useEffect(() => {
         if (tokens) {
             console.log("Tokens:", tokens);
@@ -50,7 +50,7 @@ export default function NFTs() {
                 setMaxTokenIds((prev) => [...prev, maxIdObj]);
             });
 
-            tokens.map((nft, index) => {
+            const res = tokens.map((nft, index) => {
                 const metadata = JSON.parse(nft.metadata);
 
                 var localTokenId = "";
@@ -73,14 +73,16 @@ export default function NFTs() {
                             localTokenId={localTokenId}
                         />
                     );
-                    setTempArray((tempArray) => [...tempArray, cardElem]);
+
+                    tempArray.push(cardElem);
 
                     if (index % 3 === 2 || index == tokens.length - 1) {
-                        setNftCards((nftCards) => [...nftCards, tempArray]);
-                        setTempArray([]);
+                        nftCards.push(tempArray);
+                        tempArray = [];
                     }
                 } else return null;
             });
+            console.log("res", res);
         }
     }, [tokens]);
 

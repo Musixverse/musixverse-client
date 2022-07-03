@@ -221,7 +221,16 @@ const Step2Form = ({
                                                                             setContributorInfo(user, index);
                                                                         }}
                                                                     >
-                                                                        <Image src={user.userInfo[0].avatar} height="30" width="30" className="rounded-full" />
+                                                                        {user.userInfo[0] ? (
+                                                                            <Image
+                                                                                src={user.userInfo[0].avatar}
+                                                                                height="30"
+                                                                                width="30"
+                                                                                className="rounded-full"
+                                                                            />
+                                                                        ) : (
+                                                                            ""
+                                                                        )}
                                                                         <span className="ml-2">{user.name}</span>
                                                                         <div>
                                                                             <span className="ml-2 text-xs font-normal">@{user.username}</span>
@@ -235,7 +244,16 @@ const Step2Form = ({
                                                                             setContributorInfo(user, index);
                                                                         }}
                                                                     >
-                                                                        <Image src={user.userInfo[0].avatar} height="30" width="30" className="rounded-full" />
+                                                                        {user.userInfo[0] ? (
+                                                                            <Image
+                                                                                src={user.userInfo[0].avatar}
+                                                                                height="30"
+                                                                                width="30"
+                                                                                className="rounded-full"
+                                                                            />
+                                                                        ) : (
+                                                                            ""
+                                                                        )}
                                                                         <span className="ml-2">{user.name}</span>
                                                                         <div>
                                                                             <span className="ml-2 text-xs font-normal">@{user.username}</span>
@@ -249,7 +267,16 @@ const Step2Form = ({
                                                                             setContributorInfo(user, index);
                                                                         }}
                                                                     >
-                                                                        <Image src={user.userInfo[0].avatar} height="30" width="30" className="rounded-full" />
+                                                                        {user.userInfo[0] ? (
+                                                                            <Image
+                                                                                src={user.userInfo[0].avatar}
+                                                                                height="30"
+                                                                                width="30"
+                                                                                className="rounded-full"
+                                                                            />
+                                                                        ) : (
+                                                                            ""
+                                                                        )}
                                                                         <span className="ml-2">{user.name}</span>
                                                                         <div>
                                                                             <span className="ml-2 text-xs font-normal">@{user.username}</span>
@@ -263,7 +290,16 @@ const Step2Form = ({
                                                                             setContributorInfo(user, index);
                                                                         }}
                                                                     >
-                                                                        <Image src={user.userInfo[0].avatar} height="30" width="30" className="rounded-full" />
+                                                                        {user.userInfo[0] ? (
+                                                                            <Image
+                                                                                src={user.userInfo[0].avatar}
+                                                                                height="30"
+                                                                                width="30"
+                                                                                className="rounded-full"
+                                                                            />
+                                                                        ) : (
+                                                                            ""
+                                                                        )}
                                                                         <span className="ml-2">{user.name}</span>
                                                                         <div>
                                                                             <span className="ml-2 text-xs font-normal">@{user.username}</span>

@@ -11,7 +11,7 @@ export default function Dashboard() {
     const { user, setUserData, Moralis, isInitialized } = useMoralis();
     // Context Management
     const [isLoading, setLoading] = useContext(LoadingContext);
-    const [, , setSuccess] = useContext(StatusContext);
+    const [, , setSuccess, setError] = useContext(StatusContext);
     // State Management
     const [avatar, setAvatar] = useState("");
     const [coverImage, setCoverImage] = useState("");
@@ -77,7 +77,32 @@ export default function Dashboard() {
     const { fetch: updateUserInfo } = useMoralisCloudFunction("updateUserInfo", userData, { autoFetch: false });
     const handleSave = async () => {
         try {
-            if (name !== "" && username !== "" && email !== "") {
+            console.log("hi");
+            const usernameRegex = /^\w+$/;
+            if(name.length === 0){
+                setError({
+                    title: "Invalid credentials!",
+                    message: "Name field can't be empty",
+                    showErrorBox: true,
+                });
+                return;
+            }
+            else if (username.length < 2) {
+                setError({
+                    title: "Invalid credentials!",
+                    message: "Username length should be greater than 1",
+                    showErrorBox: true,
+                });
+                return;
+            } else if (!usernameRegex.test(username)) {
+                setError({
+                    title: "Invalid credentials!",
+                    message: "Username can only contain alphabets, numbers, and '_'",
+                    showErrorBox: true,
+                });
+                return;
+            }
+            else if (name !== "" && username !== "" && email !== "") {
                 if (email === user.attributes.email && username === user.attributes.username) {
                     setUserData({
                         name: name === "" ? undefined : name,

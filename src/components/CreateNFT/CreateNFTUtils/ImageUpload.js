@@ -12,7 +12,9 @@ export default function ImageUpload({ uploadedImage, setUploadedImage }) {
     const [imageToCrop, setImageToCrop] = useState(undefined);
     const [croppedImage, setCroppedImage] = useState(undefined);
     const nftCoverArt = useRef(null);
-    const cropModalValues = { showModal, setShowModal, imageToCrop, setCroppedImage };
+    const circularCrop = false;
+    const aspectRatio = {width: 1, height: 1};
+    const cropModalValues = { showModal, setShowModal, imageToCrop, setCroppedImage, circularCrop, aspectRatio };
 
     useEffect(() => {
         if (croppedImage !== undefined) {

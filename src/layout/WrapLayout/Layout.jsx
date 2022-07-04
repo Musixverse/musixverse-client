@@ -4,7 +4,6 @@ import { useRouter } from "next/router";
 import { useTheme } from "next-themes";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
-import Auth from "../../auth/Auth";
 import Loading from "../Loading/Loading";
 import LoadingDark from "../Loading/LoadingDark";
 import ErrorBox from "../Modal/ErrorBox";
@@ -37,7 +36,6 @@ const Layout = ({ children }) => {
 
     return (
         <>
-            <Auth />
             <Navbar />
             {children}
             {isLoading && theme === "light" ? <Loading /> : <LoadingDark />}

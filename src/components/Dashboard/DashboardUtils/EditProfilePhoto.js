@@ -15,26 +15,26 @@ export default function EditProfilePhoto({ avatar, setAvatar, handleSave }) {
     const [showModal, setShowModal] = useState(false);
     const [imageToCrop, setImageToCrop] = useState(undefined);
     const [croppedImage, setCroppedImage] = useState(undefined);
-    const aspectRatio = {width: 1, height: 1};
+    const aspectRatio = { width: 1, height: 1 };
     const circularCrop = true;
     const cropModalValues = { showModal, setShowModal, imageToCrop, setCroppedImage, circularCrop, aspectRatio };
 
-    useEffect(()=>{
-        if(croppedImage !== undefined){
+    useEffect(() => {
+        if (croppedImage !== undefined) {
             setLoading(true);
+            console.log("croppedImage");
             profilePicture.current.src = croppedImage;
             // Get the File from DataURL
             const uploadedFile = convertDataURLtoFile(croppedImage, "file");
             // Get the uploadFileOnIPFS async function
-            
-            uploadFileToIPFS(Moralis, uploadedFile)
-                .then((url) => {
-                    setLoading(false);
-                    console.log(url);
-                    setAvatar(url);
-                });
+
+            uploadFileToIPFS(Moralis, uploadedFile).then((url) => {
+                setLoading(false);
+                console.log(url);
+                setAvatar(url);
+            });
         }
-    },[Moralis, croppedImage, setAvatar, setLoading])
+    }, [Moralis, croppedImage, setAvatar, setLoading]);
 
     const handleAvatarChange = (event) => {
         const imageURL = URL.createObjectURL(event.target.files[0]);
@@ -57,7 +57,14 @@ export default function EditProfilePhoto({ avatar, setAvatar, handleSave }) {
                         alt="Current Avatar"
                     ></img>
 
-                    <input ref={profilePictureInput} type="file" id="upload-image-inp" onChange={handleAvatarChange} accept="image/*" className="hidden mt-2 mb-5" />
+                    <input
+                        ref={profilePictureInput}
+                        type="file"
+                        id="upload-image-inp"
+                        onChange={handleAvatarChange}
+                        accept="image/*"
+                        className="hidden mt-2 mb-5"
+                    />
                     <label
                         className="absolute flex items-center justify-center p-2 pr-1 rounded-lg cursor-pointer right-1 bottom-2 bg-dark-200"
                         htmlFor="upload-image-inp"
@@ -71,7 +78,7 @@ export default function EditProfilePhoto({ avatar, setAvatar, handleSave }) {
                     </div>
                 </div>
             </div>
-            <CropImageModal {...cropModalValues}/>
+            <CropImageModal {...cropModalValues} />
         </>
     );
 }

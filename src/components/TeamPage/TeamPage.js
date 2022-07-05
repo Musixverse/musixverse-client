@@ -79,7 +79,7 @@ export default function TeamPage() {
 						<h1 className="font-secondary text-5xl text-primary-100">Meet our Team</h1>
 					</div>
 
-					<div className="w-full mt-10 grid grid-cols-3 justify-items-center grid-rows-2 gap-10">
+					<div className="w-full mt-10 grid grid-cols-3 justify-items-center gap-10">
 						{membersArray.map((member, key) => {
 							return (
 								<button 

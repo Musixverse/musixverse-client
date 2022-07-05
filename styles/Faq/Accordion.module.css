@@ -1,5 +1,5 @@
 .faq-item{
-    @apply bg-light-100;
+    @apply bg-transparent;
     border-bottom-left-radius: 0px !important;
     border-bottom-right-radius: 0px !important;
 }

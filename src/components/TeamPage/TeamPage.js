@@ -1,5 +1,7 @@
+import {useState} from 'react';
 import Card from "./Card";
 import styles from "../../../styles/TeamPage/teampage.module.css";
+import TeamModal from "./TeamModal";
 
 export default function TeamPage() {
 	var membersArray = [
@@ -67,18 +69,24 @@ export default function TeamPage() {
 		}
 	];
 
+	const [showModal,setShowModal] = useState(false);
+
 	return (
 		<div>
 			<div className={styles["team_page_container"]}>
 				<div className="text-base">
 					<div className="justify-center text-center">
-						<h1 className="font-secondary text-5xl text-primary-100">Meet our Team.</h1>
+						<h1 className="font-secondary text-5xl text-primary-100">Meet our Team</h1>
 					</div>
 
 					<div className="w-full mt-10 grid grid-cols-3 justify-items-center grid-rows-2 gap-10">
 						{membersArray.map((member, key) => {
 							return (
-								<div key={key}>
+								<button 
+									onClick={()=> setShowModal(!showModal)}
+								 	key={key}
+									className="outline-none"	
+								>
 									<Card 
 										imgUrl={member.imgUrl}
 										name={member.name}
@@ -87,7 +95,17 @@ export default function TeamPage() {
 										socialLinks={member.socialLinks}
 										description={member.description}
 									/>
-								</div>
+									<TeamModal
+									 	imgUrl={member.imgUrl}
+										name={member.name}
+										position={member.position}
+										role={member.role}
+										socialLinks={member.socialLinks}
+										description={member.description}
+										showModal={showModal}
+										setShowModal={setShowModal}
+									/>
+								</button>
 							);
 						})}
 					</div>

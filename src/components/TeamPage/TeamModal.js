@@ -2,14 +2,14 @@ import { Fragment, useRef, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import Image from 'next/image';
 
-export default function TeamModal({imgUrl,name,position,role,socialLinks,description}) {
-  const [open, setOpen] = useState(true)
-
+export default function TeamModal({imgUrl,name,position,role,socialLinks,description,showModal,setShowModal}) {
   const cancelButtonRef = useRef(null)
 
+  
+
   return (
-    <Transition.Root show={open} as={Fragment}>
-      <Dialog as="div" className="relative z-10" initialFocus={cancelButtonRef} onClose={setOpen}>
+    <Transition.Root show={showModal} as={Fragment}>
+      <Dialog as="div" className="relative z-10" initialFocus={cancelButtonRef} onClose={() => setShowModal(false)}>
         <Transition.Child
           as={Fragment}
           enter="ease-out duration-300"
@@ -19,7 +19,7 @@ export default function TeamModal({imgUrl,name,position,role,socialLinks,descrip
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
+          <div className="fixed inset-0 backdrop-blur-2xl transition-opacity" />
         </Transition.Child>
 
         <div className="fixed z-10 inset-0 overflow-y-auto">
@@ -37,20 +37,20 @@ export default function TeamModal({imgUrl,name,position,role,socialLinks,descrip
                 <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                     <div className="flex space-x-5">
                         <div className="flex justify-content-center align-items-center">
-                            <Image src={imgUrl} alt="Team member" />
+                            <img src={imgUrl} width={150} height={150} className="rounded-full" alt="Team member" />
                         </div>
-                        <div className="flex flex-col font-primary">
+                        <div className="flex flex-col items-start justify-center font-primary">
                             <div className="font-bold">{name}</div>
-                            <div className="mt-2 px-3">{position}</div>
-                            <div className="mt-1 px-3">{role}</div>
+                            <div className="mt-2">{position}</div>
+                            <div className="mt-1">{role}</div>
                             <div className="flex mt-2">
                                 <a  href={socialLinks.twitter} target="_blank" rel="noopener noreferrer">
                                     <i className="fa fa-twitter me-4" aria-hidden="true"></i>
                                 </a>
-                                <a className="me-4" href={socialLinks.linkedin} target="_blank" rel="noopener noreferrer">
+                                <a className="ml-8" href={socialLinks.linkedin} target="_blank" rel="noopener noreferrer">
                                     <i className="fa fa-linkedin" aria-hidden="true"></i>
                                 </a>
-                                <a className="me-4" href={socialLinks.github} target="_blank" rel="noopener noreferrer">
+                                <a className="ml-8" href={socialLinks.github} target="_blank" rel="noopener noreferrer">
                                     <i className="fa fa-github" aria-hidden="true"></i>
                                 </a>
                             </div>
@@ -65,14 +65,14 @@ export default function TeamModal({imgUrl,name,position,role,socialLinks,descrip
                   <button
                     type="button"
                     className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm"
-                    onClick={() => setOpen(false)}
+                    onClick={() => setShowModal(false)}
                   >
                     Deactivate
                   </button>
                   <button
                     type="button"
                     className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
-                    onClick={() => setOpen(false)}
+                    onClick={() => setShowModal(false)}
                     ref={cancelButtonRef}
                   >
                     Cancel

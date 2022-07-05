@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from "react";
-import Notification from "./DashboardUtils/Notification";
+import Notification from "./SettingsUtils/Notification";
 import { useMoralis, useMoralisQuery, useMoralisCloudFunction } from "react-moralis";
 import StatusContext from "../../../store/status-context";
 import CustomButton from "../../layout/CustomButton";

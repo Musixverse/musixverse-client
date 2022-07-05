@@ -17,14 +17,14 @@ const ProtectedRoutes = ({ router, children }) => {
     // Identify authenticated user
     const { isAuthenticated, user, isInitialized, isWeb3Enabled, enableWeb3, refetchUserData } = useMoralis();
 
-    const protectedRoutes = [appRoutes.REGISTER, appRoutes.DASHBOARD, appRoutes.CREATE_NFT];
+    const protectedRoutes = [appRoutes.REGISTER, appRoutes.SETTINGS, appRoutes.CREATE_NFT];
     /**
      * @const pathIsProtected Checks if path exists in the protectedRoutes array
      */
     const pathIsProtected = protectedRoutes.some((route) => router.pathname.includes(route));
 
     // @dev These routes are protected until a user confirms their email
-    const protectedRoutesForAuthenticatedUserEmailUnverified = [appRoutes.REGISTER, appRoutes.DASHBOARD, appRoutes.CREATE_NFT];
+    const protectedRoutesForAuthenticatedUserEmailUnverified = [appRoutes.REGISTER, appRoutes.SETTINGS, appRoutes.CREATE_NFT];
     /**
      * @const pathIsProtectedForAuthenticatedUserEmailUnverified Checks if path exists in the protectedRoutesForAuthenticatedUserEmailUnverified array
      */

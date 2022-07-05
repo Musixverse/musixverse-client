@@ -5,7 +5,7 @@ import mxvverified from "../../../public/assets/mxv_verified.svg";
 import sharebtn from "../../../public/assets/SHARE.svg";
 import styles from "../../../styles/SongInfo/AudioPlayer.module.css";
 
-export default function AudioPlayer(){
+export default function AudioPlayer() {
     const playBtn = useRef();
     const audio = useRef();
     const progress = useRef();
@@ -14,65 +14,65 @@ export default function AudioPlayer(){
     const currTime = useRef();
 
     // Fetch the duration once component is loaded
-    useEffect(()=>{
+    useEffect(() => {
         console.log(audio.current.readyState);
-        const intervalId = setInterval(()=>{
-            if(audio.current.readyState >= 2){
-                getTime(false);
-                clearInterval(intervalId);
-                return;
-            }
-        },1000);
-    },[]);
+        if (audio.current) {
+            const intervalId = setInterval(() => {
+                if (audio.current.readyState >= 2) {
+                    getTime(false);
+                    clearInterval(intervalId);
+                    return;
+                }
+            }, 1000);
+        }
+    }, [audio.current]);
 
     //Function to get the current time and the duration time
     //for the song
-    const getTime = (queryForCurrTime) =>{
-        const duration = queryForCurrTime? audio.current.currentTime : audio.current.duration;
-        let min = (isNaN(duration) === true)? '0' : Math.floor(duration/60);
-        min = min <10 ? '0'+min:min;
+    const getTime = (queryForCurrTime) => {
+        const duration = queryForCurrTime ? audio.current.currentTime : audio.current.duration;
+        let min = isNaN(duration) === true ? "0" : Math.floor(duration / 60);
+        min = min < 10 ? "0" + min : min;
 
-        let sec= "00";
+        let sec = "00";
 
-        if(Math.floor(duration) >= 60){
-            for (var i = 1; i<=60; i++){
-                if(Math.floor(duration)>=(60*i) && Math.floor(duration)<(60*(i+1))) {
-                    sec = Math.floor(duration) - (60*i);
-                    sec = sec <10 ? '0'+sec:sec;
+        if (Math.floor(duration) >= 60) {
+            for (var i = 1; i <= 60; i++) {
+                if (Math.floor(duration) >= 60 * i && Math.floor(duration) < 60 * (i + 1)) {
+                    sec = Math.floor(duration) - 60 * i;
+                    sec = sec < 10 ? "0" + sec : sec;
                 }
             }
-        }else{
+        } else {
             sec = Math.floor(duration);
-            sec = sec <10 ? '0'+sec:sec;
+            sec = sec < 10 ? "0" + sec : sec;
         }
 
-        if(queryForCurrTime)
-            currTime.current.textContent = min +':'+ sec;
-        else
-            durTime.current.textContent = min +':'+ sec;
-    }
-    const resetProgress = ()=>{
+        if (queryForCurrTime) currTime.current.textContent = min + ":" + sec;
+        else durTime.current.textContent = min + ":" + sec;
+    };
+    const resetProgress = () => {
         pauseSong(playBtn.current.children[0]);
         audio.current.currentTime = 0;
-    }
+    };
 
     //Function to set the progress on Click
-    const setProgress = (e)=>{
+    const setProgress = (e) => {
         //Get the width to normalise in the width of clicked
         let toNormalise = progress.current.getBoundingClientRect().x;
         // Get the width of the progress bar
         const width = progressContainer.current.offsetWidth;
         //Normalise the clicked x-axis
-        const clickX = e.clientX-toNormalise;
+        const clickX = e.clientX - toNormalise;
         // Fetch the full duration
         const duration = audio.current.duration;
         // Update the playing time of audio
         audio.current.currentTime = (clickX / width) * duration;
         //The above line will further trigger the timeUpdate event
         //to update the progress bar
-    }
+    };
 
-    const updateProgress = (e)=>{
+    const updateProgress = (e) => {
         // fetch the duration
         const duration = e.target.duration;
         // fetch the current playing time
@@ -83,50 +83,50 @@ export default function AudioPlayer(){
         progress.current.style.width = `${progressPercent}%`;
         // Fetch the current time to update the dom tree
         getTime(true);
-    }
+    };
     //Function to control and drive the play pause events
     const playSongHandler = () => {
         const playPause = playBtn.current.children[0];
-        const isPaused = playPause.classList.contains('fa-play')
+        const isPaused = playPause.classList.contains("fa-play");
 
-        if (isPaused)
-            playSong(playPause);
-        else 
-            pauseSong(playPause);
+        if (isPaused) playSong(playPause);
+        else pauseSong(playPause);
     };
 
-    const pauseSong = (controller)=>{
-        controller.classList.add('fa-play');
-        controller.classList.remove('fa-pause');
+    const pauseSong = (controller) => {
+        controller.classList.add("fa-play");
+        controller.classList.remove("fa-pause");
 
         audio.current.pause();
     };
 
-    const playSong = (controller)=>{
-        controller.classList.remove('fa-play');
-        controller.classList.add('fa-pause');
+    const playSong = (controller) => {
+        controller.classList.remove("fa-play");
+        controller.classList.add("fa-pause");
 
         audio.current.play();
     };
 
-    return(
+    return (
         <div className="flex flex-row justify-between items-center pb-10">
-            <button ref={playBtn} onClick={playSongHandler} className={"dark:border-light-100 " +styles['play-btn']}>
+            <button ref={playBtn} onClick={playSongHandler} className={"dark:border-light-100 " + styles["play-btn"]}>
                 <i className="fas fa-play text-2xl"></i>
             </button>
             <div className="ml-5 flex flex-col flex-grow">
                 {/* MP3 Bar */}
-                <div className={styles['music-bar__container']}>
-                    <div className={styles['music-bar__container--info']}>
+                <div className={styles["music-bar__container"]}>
+                    <div className={styles["music-bar__container--info"]}>
                         {/* Time elapsed */}
-                        <p className={styles['container__info--duration']} ref={currTime}>00:00</p>
+                        <p className={styles["container__info--duration"]} ref={currTime}>
+                            00:00
+                        </p>
                         {/* MP3 Progress */}
-                        <div ref={progressContainer} className={styles['container__info--progress-container']} onClick={setProgress}>
-                            <div ref={progress} className={styles['info__progress-container--progress']}></div>
-                            <div className={styles['info__progress-container--slider-box']}></div>
+                        <div ref={progressContainer} className={styles["container__info--progress-container"]} onClick={setProgress}>
+                            <div ref={progress} className={styles["info__progress-container--progress"]}></div>
+                            <div className={styles["info__progress-container--slider-box"]}></div>
                         </div>
                         {/* Duration of song */}
-                        <p className={styles['container__info--duration']} ref={durTime}></p>
+                        <p className={styles["container__info--duration"]} ref={durTime}></p>
                     </div>
                     {/* Audio elem */}
                     <audio ref={audio} src="/sounds/rengoku.mp3" onTimeUpdate={updateProgress} onEnded={resetProgress}></audio>

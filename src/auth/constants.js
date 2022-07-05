@@ -1,6 +1,6 @@
 exports.appRoutes = {
     REGISTER: "/register",
-    DASHBOARD: "/dashboard",
+    SETTINGS: "/settings",
     CREATE_NFT: "/create-nft",
     HOMEPAGE: "/",
     CONFIRM_EMAIL: "/register/confirm-email",

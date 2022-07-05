@@ -205,9 +205,9 @@ const Navbar = () => {
                                     )}
                                     {user && isAuthenticated && (
                                         <li>
-                                            <Link href="/dashboard/profile-settings">
+                                            <Link href="/settings/profile-settings">
                                                 <div className="block w-full px-4 py-2 text-sm text-gray-700 bg-transparent cursor-pointer dropdown-item whitespace-nowrap hover:bg-gray-100">
-                                                    Dashboard
+                                                    Settings
                                                 </div>
                                             </Link>
                                         </li>

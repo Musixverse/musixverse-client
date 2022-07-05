@@ -1,13 +1,13 @@
 import { useState, useEffect, useContext } from "react";
 import Head from "next/head";
-import DashboardNav from "../../components/Dashboard/DashboardNav";
-import ProfileSettings from "../../components/Dashboard/ProfileSettings";
+import SettingsNav from "../../components/Settings/SettingsNav";
+import ProfileSettings from "../../components/Settings/ProfileSettings";
 import { useMoralis, useMoralisQuery, useMoralisCloudFunction } from "react-moralis";
 import StatusContext from "../../../store/status-context";
 import LoadingContext from "../../../store/loading-context";
 import { BLOCKCHAIN_NETWORK } from "../../utils/smart-contract/constants";
 
-export default function Dashboard() {
+export default function Settings() {
     const { user, setUserData, Moralis, isInitialized } = useMoralis();
     // Context Management
     const [isLoading, setLoading] = useContext(LoadingContext);
@@ -79,15 +79,14 @@ export default function Dashboard() {
         try {
             console.log("hi");
             const usernameRegex = /^\w+$/;
-            if(name.length === 0){
+            if (name.length === 0) {
                 setError({
                     title: "Invalid credentials!",
                     message: "Name field can't be empty",
                     showErrorBox: true,
                 });
                 return;
-            }
-            else if (username.length < 2) {
+            } else if (username.length < 2) {
                 setError({
                     title: "Invalid credentials!",
                     message: "Username length should be greater than 1",
@@ -101,8 +100,7 @@ export default function Dashboard() {
                     showErrorBox: true,
                 });
                 return;
-            }
-            else if (name !== "" && username !== "" && email !== "") {
+            } else if (name !== "" && username !== "" && email !== "") {
                 if (email === user.attributes.email && username === user.attributes.username) {
                     setUserData({
                         name: name === "" ? undefined : name,
@@ -140,14 +138,14 @@ export default function Dashboard() {
     return (
         <>
             <Head>
-                <title>Musixverse | Dashboard</title>
+                <title>Musixverse | Settings</title>
                 <meta name="description" content="Musixverse" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
             <div className="flex items-center justify-center bg-light-200 dark:bg-dark-200">
                 <div className="lg:flex-row flex-col flex w-full max-w-[1920px] mt-28 lg:mt-36 px-6 md:px-8 lg:px-16 xl:px-20 2xl:px-36">
-                    <DashboardNav />
+                    <SettingsNav />
                     <ProfileSettings
                         avatar={avatar}
                         setAvatar={setAvatar}

@@ -45,6 +45,7 @@ export default function DetailsInputGroup({ setGenre, setTrackOrigin, setExplici
                     <input
                         type="number"
                         min={"1860"}
+                        step="1"
                         value={recordingYear}
                         onChange={(e) => {
                             setRecordingYear(e.target.value);

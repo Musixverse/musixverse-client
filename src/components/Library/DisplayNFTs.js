@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useMoralis } from "react-moralis";
+import Link from "next/link";
 import { MXV_CONTRACT_ADDRESS, BLOCKCHAIN_NETWORK } from "../../utils/smart-contract/constants";
 import NFTCard from "../../layout/NFTCard/NFTCard";
 
@@ -87,17 +88,20 @@ const DisplayNFTs = () => {
 
                         if (metadata) {
                             return (
-                                <NFTCard
-                                    key={index}
-                                    songName={metadata.name}
-                                    artistName={metadata.artistName}
-                                    image={metadata.image}
-                                    songId={metadata.id}
-                                    tokenId={nft.token_id}
-                                    numberOfCopies={metadata.attributes[0].value}
-                                    contributorList={metadata.contributors}
-                                    localTokenId={localTokenId}
-                                />
+                                <Link key={index} href={`/song-info/polygon/${nft.token_id}`} passHref={true}>
+                                    <a>
+                                        <NFTCard
+                                            songName={metadata.name}
+                                            artistName={metadata.artistName}
+                                            image={metadata.image}
+                                            songId={metadata.id}
+                                            tokenId={nft.token_id}
+                                            numberOfCopies={metadata.attributes[0].value}
+                                            contributorList={metadata.contributors}
+                                            localTokenId={localTokenId}
+                                        />
+                                    </a>
+                                </Link>
                             );
                         } else return null;
                     })}

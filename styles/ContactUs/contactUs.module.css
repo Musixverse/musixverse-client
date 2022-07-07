@@ -28,7 +28,7 @@
 }
 
 .inputBox input {
-	@apply w-full p-2 text-sm text-primary-100 rounded-sm focus:border-[2px] border-primary-100 outline-none text-left; 
+	@apply w-full p-2 text-sm focus:text-primary-100 rounded-sm focus:border-[2px] border-primary-100 outline-none text-left; 
 }
 
 .inputBox label {

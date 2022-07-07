@@ -57,9 +57,19 @@ async function connectSmartContract() {
     console.log("Contract connected");
 }
 
-async function mintTrackNFT(numberOfCopies, price, metadataURIs, contributors, percentageContributions, resaleRoyaltyPercentage, onSale, callerAddress) {
+async function mintTrackNFT(
+    numberOfCopies,
+    price,
+    metadataURI,
+    contributors,
+    percentageContributions,
+    resaleRoyaltyPercentage,
+    onSale,
+    unlockTimestamp,
+    callerAddress
+) {
     await MUSIXVERSE.methods
-        .mintTrackNFT(numberOfCopies, price, metadataURIs, contributors, percentageContributions, resaleRoyaltyPercentage, onSale)
+        .mintTrackNFT(numberOfCopies, price, metadataURI, contributors, percentageContributions, resaleRoyaltyPercentage, onSale, unlockTimestamp)
         .send({ from: callerAddress });
 }
 
@@ -102,4 +112,30 @@ async function getRoyaltyInfo(tokenId) {
     return await MUSIXVERSE.methods.getRoyaltyInfo(_tokenId).call();
 }
 
-module.exports = { connectSmartContract, mintTrackNFT, purchaseMusicNFT, updatePrice, toggleOnSale, uri, ownerOf, contractURI, baseURI, getRoyaltyInfo };
+async function getCurrentNftPrice(tokenId) {
+    const _tokenId = parseInt(tokenId).toString();
+    if (MUSIXVERSE) {
+        var musicNft;
+        await MUSIXVERSE.methods
+            .musicNFTs(_tokenId)
+            .call()
+            .then(function (result) {
+                musicNft = result;
+            });
+        return musicNft;
+    }
+}
+
+module.exports = {
+    connectSmartContract,
+    mintTrackNFT,
+    purchaseMusicNFT,
+    updatePrice,
+    toggleOnSale,
+    uri,
+    ownerOf,
+    contractURI,
+    baseURI,
+    getRoyaltyInfo,
+    getCurrentNftPrice,
+};

@@ -18,8 +18,8 @@ const Confirm_Page = () => {
             setLoading(false);
         };
     }, [isInitialized, user]);
-    if (isLoading) return null;
 
+    if (user.attributes.emailVerified) return null;
     return (
         <>
             <Head>

@@ -18,8 +18,8 @@ const Register_Page = () => {
             setLoading(false);
         };
     }, [isInitialized, user]);
-    if (isLoading) return null;
 
+    if (user.attributes.email) return null;
     return (
         <>
             <Head>

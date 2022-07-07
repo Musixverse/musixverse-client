@@ -1,36 +1,38 @@
 import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
+import convertDataURLtoFile from "../../../utils/image-crop/convertDataURLtoFile";
+import uploadFileToIPFS from "../../../utils/image-crop/uploadFileToIPFS";
 import uploadImage from "../../../../public/assets/create-nft/upload-image.svg";
 import CropImageModal from "./CropImageModal";
+import { useMoralis } from "react-moralis";
 
-export default function ImageUpload(props) {
+export default function ImageUpload({ uploadedImage, setUploadedImage }) {
+    const { Moralis } = useMoralis();
     const [showModal, setShowModal] = useState(false);
     const [imageToCrop, setImageToCrop] = useState(undefined);
     const [croppedImage, setCroppedImage] = useState(undefined);
     const nftCoverArt = useRef(null);
-    const cropModalValues = { showModal, setShowModal, imageToCrop, setCroppedImage };
+    const circularCrop = false;
+    const aspectRatio = {width: 1, height: 1};
+    const cropModalValues = { showModal, setShowModal, imageToCrop, setCroppedImage, circularCrop, aspectRatio };
 
     useEffect(() => {
-        if (croppedImage !== undefined) props.setUploadedImage(croppedImage);
-    }, [croppedImage, props]);
+        if (croppedImage !== undefined) {
+            setUploadedImage(croppedImage);
+            // Get the File from DataURL
+            const uploadedFile = convertDataURLtoFile(croppedImage, "file");
+            // Get the uploadFileOnIPFS async function
+            uploadFileToIPFS(Moralis, uploadedFile).then((url) => setUploadedImage(url));
+        }
+    }, [croppedImage, setUploadedImage]);
 
     const handleImageUpload = (event) => {
+        // uploadFileToIPFS(Moralis, event.target.files[0]).then((url) => setUploadedImage(url));
         const imageURL = URL.createObjectURL(event.target.files[0]);
         console.log("triggered", imageURL, imageToCrop);
         nftCoverArt.current.value = "";
         setImageToCrop(imageURL);
         setShowModal(true);
-        // if (event.target.files && event.target.files.length > 0) {
-        //     const reader = new FileReader();
-        //     reader.onload = function (e) {
-        //         // props.setUploadedSong(e.target.result);
-        //         const image = e.target.result;
-        //         // Set the modal visible and set uploaded image state
-        //         setImageToCrop(image);
-        //         setShowModal(true);
-        //     }
-        // reader.readAsDataURL(event.target.files[0]);
-        // }
     };
 
     return (
@@ -43,17 +45,17 @@ export default function ImageUpload(props) {
                 <div
                     className={
                         "flex relative items-center justify-center w-[65px] h-[65px] rounded-lg dark:bg-[#1d1d1d] bg-light-300 border-2 " +
-                        (props.uploadedImage === null ? "border-light-300 dark:border-dark-100" : "border-primary-200 dark:border-primary-200")
+                        (uploadedImage === null ? "border-light-300 dark:border-dark-100" : "border-primary-200 dark:border-primary-200")
                     }
                 >
                     <Image src={uploadImage} objectFit="contain" alt="upload image art digital illustration"></Image>
-                    <div className={props.uploadedImage === null ? "hidden" : "absolute bottom-2 right-1 bg-light-200 rounded-full h-[20px]"}>
+                    <div className={uploadedImage === null ? "hidden" : "absolute bottom-2 right-1 bg-light-200 rounded-full h-[20px]"}>
                         <i className={"text-xl text-primary-200 fas fa-check-circle"}></i>
                     </div>
                 </div>
                 <div className="flex-1 font-secondary">
                     <h3 className="font-semibold">UPLOAD COVER ART</h3>
-                    {props.uploadedImage !== null ? (
+                    {uploadedImage !== null ? (
                         <p className="text-sm text-primary-200">Image Uploaded</p>
                     ) : (
                         <p className="text-sm">Recommended size: 300px X 300px</p>

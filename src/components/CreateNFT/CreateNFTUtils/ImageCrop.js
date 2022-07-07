@@ -4,7 +4,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import ReactCrop from "react-image-crop";
 import "react-image-crop/dist/ReactCrop.css";
 
-function ImageCrop({ imageToCrop, setCroppedImage, setShowModal }) {
+function ImageCrop({ imageToCrop, setCroppedImage, setShowModal, circularCrop, aspectRatio }) {
     //imageToCrop is the user selected image
     //setCroppedImage is the cropped image state setter function
     const [cropConfig, setCropConfig] = useState(
@@ -12,7 +12,7 @@ function ImageCrop({ imageToCrop, setCroppedImage, setShowModal }) {
         {
             unit: "%",
             width: 640,
-            aspect: 1 / 1,
+            aspect: `${aspectRatio.width}` / `${aspectRatio.height}`,
         }
     );
     const [imageRef, setImageRef] = useState();
@@ -36,8 +36,8 @@ function ImageCrop({ imageToCrop, setCroppedImage, setShowModal }) {
         const canvas = document.createElement("canvas");
         const scaleX = sourceImage.naturalWidth / sourceImage.width;
         const scaleY = sourceImage.naturalHeight / sourceImage.height;
-        canvas.width = cropConfig.width;
-        canvas.height = cropConfig.height;
+        canvas.width = Math.ceil(cropConfig.width * scaleX);
+        canvas.height = Math.ceil(cropConfig.height * scaleY);
         const ctx = canvas.getContext("2d");
 
         ctx.drawImage(
@@ -48,30 +48,31 @@ function ImageCrop({ imageToCrop, setCroppedImage, setShowModal }) {
             cropConfig.height * scaleY,
             0,
             0,
-            cropConfig.width,
-            cropConfig.height
+            cropConfig.width * scaleX,
+            cropConfig.height * scaleY
         );
+
         // Method 1
-        //DataURL(memory loaded based) is less efficient than ObjectURL(reference based)
-        // const base64Image = canvas.toDataURL("image/jpeg", 1);
-        // return base64Image;
+        // DataURL(memory loaded based) is less efficient than ObjectURL(reference based)
+        const base64Image = canvas.toDataURL("image/jpeg", 0.5);
+        return base64Image;
 
         // Method 2
-        return new Promise((resolve, reject) => {
-            canvas.toBlob((blob) => {
-                // returning an error
-                if (!blob) {
-                    reject(new Error("Canvas is empty"));
-                    return;
-                }
+        // return new Promise((resolve, reject) => {
+        //     canvas.toBlob((blob) => {
+        //         // returning an error
+        //         if (!blob) {
+        //             reject(new Error("Canvas is empty"));
+        //             return;
+        //         }
 
-                blob.name = fileName;
-                // creating a Object URL representing the Blob object given
-                const croppedImageUrl = URL.createObjectURL(blob);
+        //         blob.name = fileName;
+        //         // creating a Object URL representing the Blob object given
+        //         const croppedImageUrl = URL.createObjectURL(blob);
 
-                resolve(croppedImageUrl);
-            }, "image/jpeg");
-        });
+        //         resolve(croppedImageUrl);
+        //     }, "image/jpeg");
+        // });
     }
 
     return (
@@ -95,6 +96,7 @@ function ImageCrop({ imageToCrop, setCroppedImage, setShowModal }) {
                             {/* Crop Component */}
                             <div className="flex items-center justify-center">
                                 <ReactCrop
+                                    circularCrop={circularCrop}
                                     src={imageToCrop}
                                     crop={cropConfig}
                                     ruleOfThirds
@@ -107,7 +109,7 @@ function ImageCrop({ imageToCrop, setCroppedImage, setShowModal }) {
                         </div>
                     </div>
                 </div>
-                <div className="px-4 py-3 dark:bg-[rgba(255,255,255,0.06)] dark:backdrop-blur-[7px] backdrop-blur-[7px] bg-[rgba(255,255,255,0.7)] sm:px-6 sm:flex sm:flex-row-reverse">
+                <div className="px-4 py-6 dark:bg-[rgba(255,255,255,0.06)] dark:backdrop-blur-[7px] backdrop-blur-[7px] bg-[rgba(255,255,255,0.7)] sm:px-6 sm:flex justify-end">
                     <button
                         type="button"
                         className="inline-flex justify-center w-full px-4 py-2 text-base font-medium text-[#676767] border border-transparent rounded-md shadow-sm dark:text-[#323232] bg-light-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-light-300 sm:ml-3 sm:w-auto sm:text-sm"
@@ -120,7 +122,7 @@ function ImageCrop({ imageToCrop, setCroppedImage, setShowModal }) {
                     </button>
                     <button
                         type="button"
-                        className="inline-flex justify-center w-full px-4 py-2 text-base font-medium text-white border border-transparent rounded-md shadow-sm bg-primary-100 hover:bg-primary-300 focus:outline-none sm:ml-3 sm:w-auto sm:text-sm"
+                        className="inline-flex justify-center w-full px-4 py-2 mt-4 text-base font-medium text-white border border-transparent rounded-md shadow-sm bg-primary-100 hover:bg-primary-300 focus:outline-none sm:ml-3 sm:w-auto sm:text-sm sm:mt-0"
                         onClick={() => {
                             setShowModal(false);
                             cropImage(cropConfig);

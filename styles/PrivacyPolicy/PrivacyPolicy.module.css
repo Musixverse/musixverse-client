@@ -1,0 +1,19 @@
+.privacy_policy_container {
+    @apply w-full flex flex-col justify-center items-center py-36;
+}
+
+.privacy_policy {
+    @apply w-full relative text-base max-w-[1500px];
+}
+
+.privacy_policy_heading {	
+	@apply font-primary text-5xl font-semibold text-primary-100;
+}
+
+.privacy_policy_content {
+	@apply font-secondary text-[1em] tracking-[0.5px];
+}
+
+.privacy_policy_sub-heading {
+	@apply font-primary font-medium text-primary-100 text-[1.6em] mt-4;
+}

@@ -24,6 +24,7 @@ export default function TrackDetails({
     setLinks,
     nftPrice,
     numberOfCopies,
+    contributorList,
 }) {
     /**
      * TODO: Need to add the following-
@@ -40,7 +41,7 @@ export default function TrackDetails({
      */
     const [, , , setError] = useContext(StatusContext);
 
-    const nftPreviewValues = { trackTitle, uploadedImage, uploadedSong, nftPrice, numberOfCopies, step };
+    const nftPreviewValues = { trackTitle, uploadedImage, uploadedSong, nftPrice, numberOfCopies, step, contributorList };
     const step1FormValues = {
         uploadedImage,
         setUploadedImage,
@@ -92,17 +93,18 @@ export default function TrackDetails({
                     </div>
 
                     {/* Button div */}
-                    <div className="flex mt-16 space-x-3 md:self-end justify-end">
+                    <div className="flex mt-16 mb-24 space-x-3 md:self-end justify-end">
                         {/* Reset and continue buttons */}
                         {/* NOTE: Revoke the image url at the create NFT button click */}
-                        <button
+                        {/* <button
+                            type="button"
                             onClick={() => {
                                 prevStep();
                             }}
                             className="dark:bg-[#323232] dark:hover:bg-dark-100 dark:border-[#323232] rounded-md px-4 py-3 bg-[#D7E0DF] hover:bg-[#c9d1d0] text-sm font-primary font-bold"
                         >
                             Discard
-                        </button>
+                        </button> */}
                         <button
                             type="submit"
                             className="flex items-center px-4 py-3 text-sm font-bold rounded-md hover:bg-primary-200 bg-primary-100 text-light-100 font-primary"

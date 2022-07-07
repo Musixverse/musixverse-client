@@ -70,6 +70,13 @@ export default function TeamPage() {
 	];
 
 	const [showModal,setShowModal] = useState(false);
+	const [selectedMember,setSelectedMember] = useState({imgUrl: "",name: "",position: "",role: "",socialLinks: {twitter: "",linkedin: "",github: ""},description: ""});
+
+	const handleShowModal = (e,i) =>{
+		const member = membersArray[i];
+		setSelectedMember(member);
+		setShowModal(true);
+	}
 
 	return (
 		<div>
@@ -83,7 +90,7 @@ export default function TeamPage() {
 						{membersArray.map((member, key) => {
 							return (
 								<button 
-									onClick={()=> setShowModal(!showModal)}
+									onClick={handleShowModal(member,key)}
 								 	key={key}
 									className="outline-none"	
 								>
@@ -95,20 +102,20 @@ export default function TeamPage() {
 										socialLinks={member.socialLinks}
 										description={member.description}
 									/>
-									<TeamModal
-									 	imgUrl={member.imgUrl}
-										name={member.name}
-										position={member.position}
-										role={member.role}
-										socialLinks={member.socialLinks}
-										description={member.description}
-										showModal={showModal}
-										setShowModal={setShowModal}
-									/>
 								</button>
 							);
 						})}
 					</div>
+					<TeamModal
+						imgUrl={selectedMember.imgUrl}
+						name={selectedMember.name}
+						position={selectedMember.position}
+						role={selectedMember.role}
+						socialLinks={selectedMember.socialLinks}
+						description={selectedMember.description}
+						showModal={showModal}
+						setShowModal={setShowModal}
+					/>
 				</div>
 			</div>
 

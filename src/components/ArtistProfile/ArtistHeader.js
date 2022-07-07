@@ -52,7 +52,7 @@ export default function ArtistHeader({ avatar, name, isVerified, instagram, face
                     ) : null}
                 </div>
                 {/* Edit profile button (Make it render conditionally) */}
-                <Link href="/dashboard/profile-settings">
+                <Link href="/settings/profile-settings">
                     <div className="m-auto mt-6">
                         <CustomButton green={true}>
                             Edit profile <i className="ml-1 fas fa-edit"></i>

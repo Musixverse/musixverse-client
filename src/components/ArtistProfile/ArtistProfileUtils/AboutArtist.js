@@ -37,7 +37,7 @@ export default function AboutArtist({ name, bio, country, createdAt }) {
                         )}
                     </>
                 ) : (
-                    <Link href="/dashboard/profile-settings">
+                    <Link href="/settings/profile-settings">
                         <p className={"text-[12px] md:text-[15px] pt-2 cursor-pointer " + styles["about_us"]}>Add your Bio.</p>
                     </Link>
                 )}

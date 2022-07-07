@@ -5,6 +5,7 @@ import ScrollToPageTop from "../../utils/ScrollToPageTop";
 import CreateNFTIntro from "../../components/CreateNFT/step-0";
 import TrackDetails from "../../components/CreateNFT/step-1";
 import PricingAndSplits from "../../components/CreateNFT/step-2";
+import SuccessModal from "../../components/CreateNFT/CreateNFTUtils/SuccessModal";
 import { mintTrackNFT } from "../../utils/smart-contract/functions";
 import LoadingContext from "../../../store/loading-context";
 
@@ -15,7 +16,7 @@ const CreateNFT = () => {
     const { data: userInfo } = useMoralisQuery("UserInfo", (query) => query.equalTo("user", user), [user]);
 
     // States
-    const [step, setStep] = useState(1);
+    const [step, setStep] = useState(2);
     const [uploadedImage, setUploadedImage] = useState(null);
     const [uploadedSong, setUploadedSong] = useState(null);
     const [trackTitle, setTrackTitle] = useState("");
@@ -37,6 +38,8 @@ const CreateNFT = () => {
     const [resaleRoyaltyPercent, setResaleRoyaltyPercent] = useState("");
     const [releaseNow, setReleaseNow] = useState(true);
     const [unlockTimestamp, setUnlockTimestamp] = useState(Math.round(new Date().getTime() / 1000));
+
+    const [createNFTSuccess, setCreateNFTSuccess] = useState(false);
 
     // Continue to next step
     const nextStep = () => {
@@ -70,7 +73,7 @@ const CreateNFT = () => {
                     id: user.id,
                     name: user.attributes.name,
                     username: user.attributes.username,
-                    split: 80,
+                    split: 100,
                     role: "Singer",
                     walletAddress: user.attributes.ethAddress,
                     avatar: userInfo[0].attributes.avatar,
@@ -167,6 +170,7 @@ const CreateNFT = () => {
             user.attributes.ethAddress
         );
         setLoading(false);
+        setCreateNFTSuccess(true);
     };
 
     const step0Values = { nextStep };
@@ -249,6 +253,7 @@ const CreateNFT = () => {
                         <link rel="icon" href="/favicon.ico" />
                     </Head>
                     <ScrollToPageTop samePage={true} changingValue={step} />
+                    <SuccessModal isOpen={createNFTSuccess} />
                     <PricingAndSplits {...step2Values} />
                 </>
             );

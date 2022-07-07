@@ -1,6 +1,6 @@
-import ProfileSection1 from "./DashboardUtils/ProfileSection1";
-import ProfileSection2 from "./DashboardUtils/ProfileSection2";
-import ProfileSection3 from "./DashboardUtils/ProfileSection3";
+import ProfileSection1 from "./SettingsUtils/ProfileSection1";
+import ProfileSection2 from "./SettingsUtils/ProfileSection2";
+import ProfileSection3 from "./SettingsUtils/ProfileSection3";
 
 export default function ProfileSettings({
     avatar,

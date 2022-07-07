@@ -1,15 +1,97 @@
-import React, { useRef } from "react";
+import React, { useRef, useContext } from "react";
 import styles from "../../../styles/ReportABug/reportABug.module.css";
+import { useNewMoralisObject } from "react-moralis";
+import StatusContext from "../../../store/status-context";
 
 export default function ReportABug() {
-	//Table Schema name: BugReports
+	const [, , setSuccess, setError] = useContext(StatusContext);
+	const { save: saveContactMessage } = useNewMoralisObject("BugReports");
 
-	const nameRef = useRef(null);
-    const emailRef = useRef(null);
-	const bugDescripttionRef = useRef(null);
+	const nameRef = useRef("");
+    const emailRef = useRef("");
+	const bugDescriptionRef = useRef("");
 
 	const handleFormSubmit = (e) => {
 		e.preventDefault();
+
+        const name = nameRef.current.value;
+        const email = emailRef.current.value;
+		const bugDescription = bugDescriptionRef.current.value;
+
+		if(email.length!=0){
+			// EMAIL CHECKS
+			const emailRegex = new RegExp(
+				/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i
+			);
+			if (!emailRegex.test(email)) {
+				setError({
+					title: "Invalid credentials!",
+					message: "Please enter a valid email",
+					showErrorBox: true,
+				});
+				emailRef.current.focus();
+				return;
+			}
+		}
+
+		if(name.length!=0){
+			// NAME CHECKS
+			if (name.length < 2) {
+				setError({
+					title: "Invalid credentials!",
+					message: "Please enter a valid name",
+					showErrorBox: true,
+				});
+				nameRef.current.focus();
+				return;
+			}
+		}
+
+		// Message Check  
+        if (bugDescription.length < 5) {
+            setError({
+                title: "Invalid credentials!",
+                message: "Please enter a valid description",
+                showErrorBox: true,
+            });
+            messageRef.current.focus();
+            return;
+        }
+
+        if (bugDescription !== "") {
+            const userData = {
+                name: name,
+				email: email,
+                bugDescription: bugDescription
+            };
+            saveContactMessage(userData, {
+                onSuccess: (obj) => {
+                    // Execute any logic that should take place after the object is saved.
+					nameRef.current.value = "";
+					emailRef.current.value = "";
+					bugDescriptionRef.current.value = "";
+					setSuccess((prevState) => ({
+                        ...prevState,
+                        title: "Message sent!",
+                        message: "Your message has been recorded successfully",
+                        showSuccessBox: true,
+                    }));
+                    return;
+                },
+                onError: (error) => {
+                    // Execute any logic that should take place if the save fails.
+                    // error is a Moralis.Error with an error code and message.
+                    setError((prevState) => ({
+                        ...prevState,
+                        title: "Failed to save user information",
+                        message: JSON.stringify(error.message),
+                        showErrorBox: true,
+                    }));
+                    return;
+                },
+            });
+		}
+		return;
 	}
 
 	return (
@@ -114,7 +196,7 @@ export default function ReportABug() {
 								<div className="w-full mt-5 md:w-2/3 md:mt-0">
 									<div>
 										<label className="text-sm font-primary dark:opacity-50">Bug Description</label>
-										<textarea className={"dark:bg-[#1a1a1a] mt-1 "+styles["textarea_contact"]} ref={bugDescripttionRef} name="message" rows="8" required></textarea>
+										<textarea className={"dark:bg-[#1a1a1a] mt-1 "+styles["report_a_bug-textarea"]} ref={bugDescriptionRef} name="message" rows="8" required></textarea>
 									</div>
 
 									<button className={styles["send_message_btn"]}>

@@ -1,0 +1,63 @@
+.report_a_bug_container {
+	@apply w-[100xw] flex flex-col justify-center items-center py-36;
+}
+
+.report_a_bug {
+	@apply w-[100xw];
+}
+
+.report_a_bug_heading {	
+	@apply font-primary text-5xl font-semibold text-primary-100;
+}
+
+.report_a_bug_notice {
+    @apply font-secondary text-base;
+}
+
+.report_a_bug_form {
+	@apply mt-16 ;
+}
+
+.report_a_bug_box {
+	@apply max-h-max md:h-[400px] p-8 md:p-12 border-2 border-[#afafaf] rounded-xl shadow;
+}
+
+.inputBox input {
+	@apply w-full p-2 text-sm focus:text-primary-100 rounded-sm focus:border-[2px] border-primary-100 outline-none text-left; 
+}
+
+.inputBox label {
+	@apply p-2 text-sm font-secondary;
+}
+
+.report_a_bug-textarea {
+	@apply w-full p-2 focus:border-[2px] border-primary-100 rounded-sm focus:outline-none focus:shadow-none focus:text-primary-100;
+}
+
+/* CSS for send message button */
+.send_message_btn {
+	@apply w-full font-primary text-sm font-medium shadow-sm px-3 py-3 mt-4 cursor-pointer text-center block border-0 outline-none rounded-md bg-primary-100;
+
+}
+
+.send_message_btn span {
+	@apply inline-block cursor-pointer;
+	transition: 0.5s;
+}
+
+.send_message_btn i {
+	@apply absolute opacity-0 font-bold mt-1;
+	transition: 0.4s;
+}
+
+.send_message_btn:hover span {
+	@apply pr-6;
+}
+
+.send_message_btn:hover i {
+	@apply opacity-100 pl-2;
+}
+
+.send_message_btn{
+	@apply focus:text-[#202020] focus:bg-primary-100;
+}

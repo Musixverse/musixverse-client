@@ -74,6 +74,7 @@ export default function BasicDetails() {
 
             const userData = {
                 user: user,
+                userId: user.id,
                 avatar: avatar,
                 coverImage: "https://ipfs.moralis.io:2053/ipfs/QmSQ2s8TEKBAdZy3Pm6oy7CPDLZ7dEUQZJ89azN4a2AVUE",
                 isArtist: true,

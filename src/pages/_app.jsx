@@ -2,18 +2,17 @@ import { useState, useEffect } from "react";
 import { MoralisProvider } from "react-moralis";
 import Script from "next/script";
 import { ThemeProvider } from "next-themes";
-import { useRouter } from "next/router";
 import * as ga from "../../lib/google-analytics";
 import StatusContext from "../../store/status-context";
 import LoadingContext from "../../store/loading-context";
 import "../../styles/globals.css";
+import ProtectedRoutes from "../auth/ProtectedRoutes";
 import Layout from "../layout/WrapLayout/Layout";
 import ScrollToPageTop from "../utils/ScrollToPageTop";
 import { connectSmartContract } from "../utils/smart-contract/functions";
+import "react-datepicker/dist/react-datepicker.css";
 
-function App({ Component, pageProps }) {
-    const router = useRouter();
-
+function App({ Component, pageProps, router }) {
     useEffect(() => {
         const handleRouteChange = (url) => {
             ga.pageview(url);
@@ -70,10 +69,12 @@ function App({ Component, pageProps }) {
                 <ThemeProvider attribute="class" enableSystem={false}>
                     <LoadingContext.Provider value={[isLoading, setLoading]}>
                         <StatusContext.Provider value={[error, success, setSuccess, setError]}>
-                            <Layout>
-                                <ScrollToPageTop />
-                                <Component {...pageProps} />
-                            </Layout>
+                            <ProtectedRoutes router={router}>
+                                <Layout>
+                                    <ScrollToPageTop />
+                                    <Component {...pageProps} />
+                                </Layout>
+                            </ProtectedRoutes>
                         </StatusContext.Provider>
                     </LoadingContext.Provider>
                 </ThemeProvider>

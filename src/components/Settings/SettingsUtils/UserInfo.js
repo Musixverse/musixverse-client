@@ -1,6 +1,6 @@
 export default function UserInfo({ username, setUsername, name, setName, email, setEmail, bio, setBio }) {
     return (
-        <div className="flex-col flex-1 mt-5 md:mt-10">
+        <div className="flex-col flex-1 mt-5 md:mt-7">
             <div className="flex space-x-2 md:space-x-4">
                 <div className="flex-1 text-sm font-medium md:text-base font-secondary">
                     <p className="mb-1">Name</p>
@@ -31,10 +31,9 @@ export default function UserInfo({ username, setUsername, name, setName, email, 
                     <input
                         type="email"
                         value={email}
-                        onChange={(e) => setEmail(e.target.value)}
                         id="email"
-                        placeholder="Enter email address"
-                        className="dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-100 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-light-100 focus:border-primary-100"
+                        disabled
+                        className="dark:bg-[#242424] dark:border-[#323232] dark:focus:border-primary-100 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-light-100 focus:border-primary-100"
                     />
                 </div>
             </div>

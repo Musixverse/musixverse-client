@@ -19,6 +19,7 @@ const Collector_Page = () => {
         };
     }, [isInitialized, user]);
 
+    if (user.attributes.email) return null;
     return (
         <>
             <Head>

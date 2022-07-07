@@ -1,30 +1,49 @@
 import Image from "next/image";
+import { useTheme } from "next-themes";
 import styles from "../../../styles/NFTCard/Nftcard.module.css";
 import Section2 from "./Section2";
 import Section1 from "./Section1";
 
-export default function NFTCard(props) {
-    const songName = props.songName;
-    let artistName = props.artistName;
-    const imageSrc = props.image;
-    const songId = props.songId;
-    const nftPrice = props.nftPrice;
-    const likeCount = props.likeCount;
-    const lastPrice = props.lastPrice;
-    const isVerified = props.isVerified;
+export default function NFTCard({
+    songName,
+    artistName,
+    image,
+    songId,
+    tokenId,
+    numberOfCopies,
+    contributorList,
+    localTokenId,
+    likeCount,
+    lastPrice,
+    isVerified,
+}) {
+    const { theme } = useTheme();
 
-    if (artistName && artistName.length > 15) artistName = artistName.substring(0, 15) + "...";
+    let truncatedArtistName = artistName;
+    let truncatedNftName = songName;
+
+    if (songName.length > 8) {
+        truncatedNftName = songName.substring(0, 8) + "...";
+    }
+
+    if (artistName && artistName.length > 15) truncatedArtistName = artistName.substring(0, 20) + "...";
 
     return (
-        <div className={styles["nft-card"]}>
+        <div className={styles[theme === "light" ? "nft-card" : "nft-card-dark"]}>
             {/* NFT Image */}
-            <Image src={imageSrc || "/assets/nft_bg.jpg"} alt="nft image" height={256} width={256} priority></Image>
+            <Image src={image || "/assets/nft_bg.jpg"} alt="nft image" height={256} width={256} priority className={styles["nft-image"]} />
             {/* NFT Details */}
             <div className={"dark:bg-dark-100 " + styles["nft-card__description"]}>
-                {/* Artist, Music name and current price */}
-                <Section1 artistName={artistName} songName={songName} songId={songId} nftPrice={nftPrice} isVerified={isVerified} />
+                {/* Artist, Music name and tokenId */}
+                <Section1 artistName={truncatedArtistName} songName={truncatedNftName} songId={songId} tokenId={tokenId} isVerified={isVerified} />
                 {/* LIKES and Prev Price Section */}
-                <Section2 likeCount={likeCount} lastPrice={lastPrice} />
+                <Section2
+                    contributorList={contributorList}
+                    numberOfCopies={numberOfCopies}
+                    localTokenId={localTokenId}
+                    likeCount={likeCount}
+                    lastPrice={lastPrice}
+                />
             </div>
         </div>
     );

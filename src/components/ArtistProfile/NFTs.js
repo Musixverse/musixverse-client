@@ -1,91 +1,96 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useMoralis } from "react-moralis";
+import { MXV_CONTRACT_ADDRESS, BLOCKCHAIN_NETWORK } from "../../utils/smart-contract/constants";
 import NFTCard from "../../layout/NFTCard/NFTCard";
 import Pager from "./ArtistProfileUtils/Pager";
 
 export default function NFTs() {
-    //0-based indexing
+    const { Moralis, isInitialized } = useMoralis();
+    // 0-based indexing
+    const [tokens, setTokens] = useState("");
+    const [maxTokenIds, setMaxTokenIds] = useState([]);
     const [currentPage, setCurrentPage] = useState(0);
 
-    //Fetch data from moralis using SSR(preffered)
-    const nftData = [
-        {
-            songName: "Meridian",
-            songId: 65,
-            nftPrice: 0.3,
-            likeCount: 2,
-            lastPrice: 2,
-            isVerified: true,
-            artistName: "Monster KNY",
-        },
-        {
-            songName: "Meridian",
-            songId: 65,
-            nftPrice: 0.3,
-            likeCount: 2,
-            lastPrice: 2,
-            isVerified: true,
-            artistName: "Monster KNY",
-        },
-        {
-            songName: "Meridian",
-            songId: 65,
-            nftPrice: 0.3,
-            likeCount: 2,
-            lastPrice: 2,
-            isVerified: true,
-            artistName: "Monster KNY",
-        },
-        {
-            songName: "Waka Waka",
-            songId: 65,
-            nftPrice: 0.3,
-            likeCount: 2,
-            lastPrice: 2,
-            isVerified: true,
-            artistName: "Monster KNY",
-        },
-        {
-            songName: "Meridian",
-            songId: 65,
-            nftPrice: 0.3,
-            likeCount: 2,
-            lastPrice: 2,
-            isVerified: true,
-            artistName: "Monster KNY",
-        },
-        {
-            songName: "Meridian",
-            songId: 65,
-            nftPrice: 0.3,
-            likeCount: 2,
-            lastPrice: 2,
-            isVerified: true,
-            artistName: "Monster KNY",
-        },
-    ];
+    const fetchTokens = async () => {
+        const options = {
+            chain: BLOCKCHAIN_NETWORK,
+            token_address: MXV_CONTRACT_ADDRESS,
+        };
+        const nftData = await Moralis.Web3API.account.getNFTsForContract(options);
+        setTokens(nftData.result);
+    };
 
-    const n = nftData.length;
+    useEffect(() => {
+        console.log("tempArray:", tempArray);
+        console.log("nftCards:", nftCards);
+    }, [tempArray, nftCards]);
+
     let tempArray = [];
-    const nftCards = [];
-    for (let i = 0; i < n; i++) {
-        let nft = nftData[i];
-        tempArray.push(
-            <NFTCard
-                key={i}
-                songName={nft.songName}
-                songId={nft.songId}
-                nftPrice={nft.nftPrice}
-                likeCount={nft.likeCount}
-                lastPrice={nft.lastPrice}
-                isVerified={nft.isVerified}
-                artistName={nft.artistName}
-            />
-        );
-        if (i % 3 === 2 || i == n - 1) {
-            nftCards.push(tempArray);
-            tempArray = [];
+    let nftCards = [];
+    useEffect(() => {
+        if (tokens) {
+            console.log("Tokens:", tokens);
+
+            const uniqueHashGroup = tokens.reduce((acc, token) => {
+                if (!acc[token.token_uri]) {
+                    acc[token.token_uri] = [];
+                }
+
+                acc[token.token_uri].push(token);
+                return acc;
+            }, {});
+
+            setMaxTokenIds([]);
+            Object.keys(uniqueHashGroup).forEach((uniqueHash) => {
+                const result = uniqueHashGroup[uniqueHash].reduce((prev, curr) => {
+                    return Number(prev.token_id) > Number(curr.token_id) ? prev : curr;
+                }, {});
+
+                let maxIdObj = { token_uri: uniqueHash, max_token_id: result.token_id };
+                setMaxTokenIds((prev) => [...prev, maxIdObj]);
+            });
+
+            const res = tokens.map((nft, index) => {
+                const metadata = JSON.parse(nft.metadata);
+
+                var localTokenId = "";
+                maxTokenIds.forEach((token) => {
+                    if (nft.token_uri === token.token_uri) localTokenId = Number(nft.token_id) + Number(metadata.attributes[0].value) - token.max_token_id;
+                });
+
+                if (metadata) {
+                    console.log("tempArray:", tempArray);
+                    let cardElem = (
+                        <NFTCard
+                            key={index}
+                            songName={metadata.name}
+                            artistName={metadata.artistName}
+                            image={metadata.image}
+                            songId={metadata.id}
+                            tokenId={nft.token_id}
+                            numberOfCopies={metadata.attributes[0].value}
+                            contributorList={metadata.contributors}
+                            localTokenId={localTokenId}
+                        />
+                    );
+
+                    tempArray.push(cardElem);
+
+                    if (index % 3 === 2 || index == tokens.length - 1) {
+                        nftCards.push(tempArray);
+                        tempArray = [];
+                    }
+                } else return null;
+            });
+            console.log("res", res);
         }
-    }
+    }, [tokens]);
+
+    useEffect(() => {
+        if (isInitialized) {
+            fetchTokens();
+        }
+    }, [isInitialized]);
 
     return (
         <>

@@ -1,15 +1,16 @@
 import { useState, useEffect } from "react";
 import { useMoralis } from "react-moralis";
-import Router from "next/router";
 import Link from "next/link";
 import { useTheme } from "next-themes";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import logoBlack from "../../../public/logo-black.svg";
 import logoWhite from "../../../public/logo-white.svg";
 
 const Navbar = () => {
     const { theme, setTheme } = useTheme();
     const { authenticate, isAuthenticated, logout, user } = useMoralis();
+    const router = useRouter();
 
     const [watchWeb3AuthModal, setWatchWeb3AuthModal] = useState(false);
 
@@ -42,7 +43,7 @@ const Navbar = () => {
     };
 
     const handleLogout = async () => {
-        Router.push("/", undefined, { shallow: true });
+        if (router.pathname !== "/") router.push("/", undefined, { shallow: true });
         await logout();
     };
 
@@ -204,9 +205,9 @@ const Navbar = () => {
                                     )}
                                     {user && isAuthenticated && (
                                         <li>
-                                            <Link href="/dashboard/profile-settings">
+                                            <Link href="/settings/profile-settings">
                                                 <div className="block w-full px-4 py-2 text-sm text-gray-700 bg-transparent cursor-pointer dropdown-item whitespace-nowrap hover:bg-gray-100">
-                                                    Dashboard
+                                                    Settings
                                                 </div>
                                             </Link>
                                         </li>

@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useMoralis } from "react-moralis";
 import mxvB from "../../../public/assets/homepage/mxv_logo_b.svg";
 import mxvW from "../../../public/assets/homepage/mxv_logo_w.svg";
-import styles from "../../../styles/Newsletter.module.css";
+import styles from "../../../styles/NewsLetter.module.css";
 import discord from "../../../public/assets/social/discord.svg";
 import facebook from "../../../public/assets/social/facebook.svg";
 import twitter from "../../../public/assets/social/twitter.svg";

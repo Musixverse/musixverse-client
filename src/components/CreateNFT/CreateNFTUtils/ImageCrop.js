@@ -54,7 +54,7 @@ function ImageCrop({ imageToCrop, setCroppedImage, setShowModal, circularCrop, a
 
         // Method 1
         // DataURL(memory loaded based) is less efficient than ObjectURL(reference based)
-        const base64Image = canvas.toDataURL("image/jpeg", 0.5);
+        const base64Image = canvas.toDataURL("image/jpeg", 1);
         return base64Image;
 
         // Method 2

@@ -61,7 +61,7 @@ async function mintTrackNFT(
     numberOfCopies,
     price,
     metadataURI,
-    contributors,
+    collaborators,
     percentageContributions,
     resaleRoyaltyPercentage,
     onSale,
@@ -69,7 +69,7 @@ async function mintTrackNFT(
     callerAddress
 ) {
     await MUSIXVERSE.methods
-        .mintTrackNFT(numberOfCopies, price, metadataURI, contributors, percentageContributions, resaleRoyaltyPercentage, onSale, unlockTimestamp)
+        .mintTrackNFT(numberOfCopies, price, metadataURI, collaborators, percentageContributions, resaleRoyaltyPercentage, onSale, unlockTimestamp)
         .send({ from: callerAddress });
 }
 

@@ -1,6 +1,7 @@
 import InputDropdown from "./InputDropdown";
+import RequiredAsterisk from "./RequiredAsterisk";
 
-export default function DetailsInputGroup({ setGenre, setTrackOrigin, setExplicit, recordingYear, setRecordingYear }) {
+export default function DetailsInputGroup({ setTrackOrigin, setGenre, recordingYear, setRecordingYear, setParentalAdvisory }) {
     const trackOriginArray = ["Original", "Cover", "Remix", "Live", "Remastered", "Radio Edit"];
     const genreArray = [
         "Afrobeat",
@@ -25,23 +26,36 @@ export default function DetailsInputGroup({ setGenre, setTrackOrigin, setExplici
         "K-Pop",
         "Rap",
     ];
-    const explicitArray = ["Explicit", "Clean (There is another version of this track that is explicit, but this is the clean version)", "Not Explicit"];
+    const parentalAdvisoryArray = [
+        "Explicit",
+        "Clean (There is another version of this track that is explicit, but this is the clean version)",
+        "Not Explicit",
+    ];
 
     return (
         <div className="flex flex-col flex-1 space-y-2 sm:space-y-4">
             <div className="flex flex-col w-full space-y-2 sm:flex-row sm:space-x-4 sm:space-y-0">
                 <div className="flex-1 text-sm font-semibold md:text-base font-secondary">
-                    <p className="mb-1 text-sm">TRACK ORIGIN</p>
+                    <p className="mb-1 text-sm">
+                        TRACK ORIGIN
+                        <RequiredAsterisk />
+                    </p>
                     <InputDropdown optionsArray={trackOriginArray} setChoice={setTrackOrigin} />
                 </div>
                 <div className="flex-1 text-sm font-semibold md:text-base font-secondary">
-                    <p className="mb-1 text-sm">GENRE</p>
+                    <p className="mb-1 text-sm">
+                        GENRE
+                        <RequiredAsterisk />
+                    </p>
                     <InputDropdown optionsArray={genreArray} setChoice={setGenre} />
                 </div>
             </div>
             <div className="flex flex-col w-full space-y-2 sm:flex-row sm:space-x-4 sm:space-y-0">
                 <div className="flex-1 text-sm font-semibold md:text-base font-secondary">
-                    <p className="mb-1 text-sm">RECORDING YEAR</p>
+                    <p className="mb-1 text-sm">
+                        RECORDING YEAR
+                        <RequiredAsterisk />
+                    </p>
                     <input
                         type="number"
                         min={"1860"}
@@ -59,8 +73,11 @@ export default function DetailsInputGroup({ setGenre, setTrackOrigin, setExplici
                     />
                 </div>
                 <div className="flex-1 text-sm font-semibold md:text-base font-secondary">
-                    <p className="mb-1 text-sm">EXPLICIT CONTENT</p>
-                    <InputDropdown optionsArray={explicitArray} setChoice={setExplicit} />
+                    <p className="mb-1 text-sm">
+                        PARENTAL ADVISORY
+                        <RequiredAsterisk />
+                    </p>
+                    <InputDropdown optionsArray={parentalAdvisoryArray} setChoice={setParentalAdvisory} />
                 </div>
             </div>
         </div>

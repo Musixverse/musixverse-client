@@ -1,67 +1,53 @@
-import { useContext } from "react";
+import { useEffect, useContext } from "react";
 import PreviewNft from "./CreateNFTUtils/PreviewNft";
-import Step1Form from "./CreateNFTUtils/Step1Form";
+import Step3Form from "./CreateNFTUtils/Step3Form";
 import RequiredAsterisk from "./CreateNFTUtils/RequiredAsterisk";
 import StatusContext from "../../../store/status-context";
 
-export default function TrackDetails({
+export default function PricingAndSplits({
     step,
-    nextStep,
-    trackTitle,
-    setTrackTitle,
-    trackBackground,
-    setTrackBackground,
+    prevStep,
     coverArtUrl,
-    setCoverArtUrl,
-    setCoverArtMimeType,
-    creditCoverArtArtist,
-    setCreditCoverArtArtist,
-    coverArtArtist,
-    setCoverArtArtist,
     audioFileUrl,
-    setAudioFileUrl,
-    setAudioFileDuration,
-    setAudioFileMimeType,
-    lyrics,
-    setLyrics,
-    nftPrice,
+    trackTitle,
     numberOfCopies,
+    setNumberOfCopies,
+    nftPrice,
+    setNftPrice,
     collaboratorList,
+    setCollaboratorList,
+    resaleRoyaltyPercent,
+    setResaleRoyaltyPercent,
+    releaseNow,
+    setReleaseNow,
+    setUnlockTimestamp,
+    nftCreateFormOnSubmit,
 }) {
-    /**
-     * TODO: Need to add the following-
-     * Verfied artist check
-     * Artist name truncation
-     * Change ETH logo to MATIC
-     * Add states for the remaining input fields
-     * Add a form tag in this component to store data on Moralis
-     * Revoke Object URLs to avoid memo leak
-     * Refine the CSS for dark mode radio buttons
-     * Check for new navbar designs
-     * Responsiveness
-     * Move CSS from inline to external file
-     */
     const [, , , setError] = useContext(StatusContext);
 
+    useEffect(() => {
+        if (collaboratorList.reduce((total, currentSplit) => (total = total + Number(currentSplit.split)), 0) === 100) {
+            setError({
+                title: "",
+                message: "",
+                showErrorBox: false,
+            });
+        }
+    }, [collaboratorList]);
+
     const nftPreviewValues = { trackTitle, coverArtUrl, audioFileUrl, nftPrice, numberOfCopies, step, collaboratorList };
-    const step1FormValues = {
-        trackTitle,
-        setTrackTitle,
-        trackBackground,
-        setTrackBackground,
-        coverArtUrl,
-        setCoverArtUrl,
-        setCoverArtMimeType,
-        creditCoverArtArtist,
-        setCreditCoverArtArtist,
-        coverArtArtist,
-        setCoverArtArtist,
-        audioFileUrl,
-        setAudioFileUrl,
-        setAudioFileDuration,
-        setAudioFileMimeType,
-        lyrics,
-        setLyrics,
+    const step3FormValues = {
+        numberOfCopies,
+        setNumberOfCopies,
+        nftPrice,
+        setNftPrice,
+        collaboratorList,
+        setCollaboratorList,
+        resaleRoyaltyPercent,
+        setResaleRoyaltyPercent,
+        releaseNow,
+        setReleaseNow,
+        setUnlockTimestamp,
     };
 
     return (
@@ -70,39 +56,39 @@ export default function TrackDetails({
                 <form
                     onSubmit={(e) => {
                         e.preventDefault();
-                        if (!coverArtUrl) {
+                        if (collaboratorList.reduce((total, currentSplit) => (total = total + Number(currentSplit.split)), 0) !== 100) {
                             setError({
-                                title: "Image not uploaded!",
-                                message: "You need to upload an image to proceed.",
+                                title: "Splits aren't correct!",
+                                message: "Total should be 100% in order to proceed.",
                                 showErrorBox: true,
                             });
                             return;
-                        } else if (!audioFileUrl) {
-                            setError({
-                                title: "Audio file not uploaded!",
-                                message: "You need to upload an audio file to proceed.",
-                                showErrorBox: true,
-                            });
-                            return;
-                        } else {
-                            nextStep();
                         }
+                        nftCreateFormOnSubmit();
                     }}
                 >
                     <div className="flex flex-col w-full space-y-20 md:space-x-10 md:space-y-0 md:flex-row xl:space-x-20">
                         {/* Preview div */}
                         <PreviewNft {...nftPreviewValues} />
                         {/* Info div */}
-                        <Step1Form {...step1FormValues} />
+                        <Step3Form {...step3FormValues} />
                     </div>
 
                     {/* Button div */}
-                    <div className="flex mt-16 space-x-3 md:self-end justify-end">
+                    <div className="flex mt-16 space-x-3 md:self-end lg:mt-16 justify-end">
+                        <button
+                            onClick={() => {
+                                prevStep();
+                            }}
+                            className="dark:bg-[#323232] dark:hover:bg-dark-100 dark:border-[#323232] rounded-md px-4 py-3 bg-[#D7E0DF] hover:bg-[#c9d1d0] text-sm font-primary font-bold"
+                        >
+                            Back
+                        </button>
                         <button
                             type="submit"
                             className="flex items-center px-4 py-3 text-sm font-bold rounded-md hover:bg-primary-200 bg-primary-100 text-light-100 font-primary"
                         >
-                            Next
+                            Create
                             <span className="ml-24 font-semibold material-symbols-outlined">arrow_right_alt</span>
                         </button>
                     </div>

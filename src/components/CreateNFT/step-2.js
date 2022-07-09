@@ -1,52 +1,54 @@
-import { useEffect, useContext } from "react";
+import { useContext } from "react";
 import PreviewNft from "./CreateNFTUtils/PreviewNft";
 import Step2Form from "./CreateNFTUtils/Step2Form";
+import RequiredAsterisk from "./CreateNFTUtils/RequiredAsterisk";
 import StatusContext from "../../../store/status-context";
 
-export default function PricingAndSplits({
+export default function ComprehensiveDetails({
     step,
+    nextStep,
     prevStep,
-    uploadedImage,
-    uploadedSong,
     trackTitle,
-    contributorList,
-    setContributorList,
-    numberOfCopies,
-    setNumberOfCopies,
+    coverArtUrl,
+    audioFileUrl,
+    setTrackOrigin,
+    setGenre,
+    recordingYear,
+    setRecordingYear,
+    setParentalAdvisory,
+    vocals,
+    setVocals,
+    setLanguage,
+    setLocation,
+    isrc,
+    setIsrc,
+    tags,
+    setTags,
+    links,
+    setLinks,
     nftPrice,
-    setNftPrice,
-    resaleRoyaltyPercent,
-    setResaleRoyaltyPercent,
-    releaseNow,
-    setReleaseNow,
-    setUnlockTimestamp,
-    nftCreateFormOnSubmit,
+    numberOfCopies,
+    collaboratorList,
 }) {
     const [, , , setError] = useContext(StatusContext);
 
-    useEffect(() => {
-        if (contributorList.reduce((total, currentSplit) => (total = total + Number(currentSplit.split)), 0) === 100) {
-            setError({
-                title: "",
-                message: "",
-                showErrorBox: false,
-            });
-        }
-    }, [contributorList]);
-
-    const nftPreviewValues = { trackTitle, uploadedImage, uploadedSong, nftPrice, numberOfCopies, step, contributorList };
+    const nftPreviewValues = { trackTitle, coverArtUrl, audioFileUrl, nftPrice, numberOfCopies, step, collaboratorList };
     const step2FormValues = {
-        numberOfCopies,
-        setNumberOfCopies,
-        nftPrice,
-        setNftPrice,
-        contributorList,
-        setContributorList,
-        resaleRoyaltyPercent,
-        setResaleRoyaltyPercent,
-        releaseNow,
-        setReleaseNow,
-        setUnlockTimestamp,
+        setTrackOrigin,
+        setGenre,
+        recordingYear,
+        setRecordingYear,
+        setParentalAdvisory,
+        vocals,
+        setVocals,
+        setLanguage,
+        setLocation,
+        isrc,
+        setIsrc,
+        tags,
+        setTags,
+        links,
+        setLinks,
     };
 
     return (
@@ -55,15 +57,23 @@ export default function PricingAndSplits({
                 <form
                     onSubmit={(e) => {
                         e.preventDefault();
-                        if (contributorList.reduce((total, currentSplit) => (total = total + Number(currentSplit.split)), 0) !== 100) {
+                        if (!coverArtUrl) {
                             setError({
-                                title: "Splits aren't correct!",
-                                message: "Total should be 100% in order to proceed.",
+                                title: "Image not uploaded!",
+                                message: "You need to upload an image to proceed.",
                                 showErrorBox: true,
                             });
                             return;
+                        } else if (!audioFileUrl) {
+                            setError({
+                                title: "Audio file not uploaded!",
+                                message: "You need to upload an audio file to proceed.",
+                                showErrorBox: true,
+                            });
+                            return;
+                        } else {
+                            nextStep();
                         }
-                        nftCreateFormOnSubmit();
                     }}
                 >
                     <div className="flex flex-col w-full space-y-20 md:space-x-10 md:space-y-0 md:flex-row xl:space-x-20">
@@ -74,8 +84,11 @@ export default function PricingAndSplits({
                     </div>
 
                     {/* Button div */}
-                    <div className="flex mt-16 mb-24 space-x-3 md:self-end lg:mt-16 justify-end">
+                    <div className="flex mt-16 space-x-3 md:self-end justify-end">
+                        {/* Back and Next buttons */}
+                        {/* NOTE: Revoke the image url at the create NFT button click */}
                         <button
+                            type="button"
                             onClick={() => {
                                 prevStep();
                             }}
@@ -87,9 +100,17 @@ export default function PricingAndSplits({
                             type="submit"
                             className="flex items-center px-4 py-3 text-sm font-bold rounded-md hover:bg-primary-200 bg-primary-100 text-light-100 font-primary"
                         >
-                            Create
+                            Next
                             <span className="ml-24 font-semibold material-symbols-outlined">arrow_right_alt</span>
                         </button>
+                    </div>
+
+                    <div className="flex mt-4 mb-24 md:self-end justify-end text-xs text-[#777777]">
+                        Fields marked with
+                        <div className="mr-3">
+                            <RequiredAsterisk />
+                        </div>
+                        are required
                     </div>
                 </form>
             </div>

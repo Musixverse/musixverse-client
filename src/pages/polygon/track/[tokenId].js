@@ -34,7 +34,7 @@ export default function songInfo({ token }) {
     const metadata = JSON.parse(token.metadata);
 
     console.log("metadata", metadata);
-    console.log("tokenId", tokenId);
+    console.log("token", token);
 
     return (
         <>
@@ -46,16 +46,16 @@ export default function songInfo({ token }) {
             <div className="flex flex-col items-center justify-center w-full bg-light-100 dark:bg-dark-200 pt-28 pb-20">
                 <div className="w-full max-w-[1920px] px-16 xl:px-20 2xl:px-36">
                     <SongHeader
-                        image={metadata.image}
+                        image={metadata.artwork.uri.replace("ipfs://", process.env.NEXT_PUBLIC_IPFS_NODE_URL)}
                         artistAddress={metadata.artistAddress}
-                        name={metadata.name}
-                        animation_url={metadata.animation_url}
+                        title={metadata.title}
+                        audio_url={metadata.audio.replace("ipfs://", process.env.NEXT_PUBLIC_IPFS_NODE_URL)}
                         tokenId={tokenId}
                         unlockTimestamp={metadata.unlockTimestamp}
                     />
                     <SongDetails tokenId={tokenId} metadata={metadata} />
                     <div className="grid grid-cols-9 xl:grid-cols-5 gap-6 my-10">
-                        <PurchaseInfo />
+                        <PurchaseInfo tokenId={tokenId} metadata={metadata} currentOwnerAddress={token.owner_of} />
                         <SalesHistory />
                     </div>
                 </div>

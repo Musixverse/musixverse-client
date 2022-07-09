@@ -1,4 +1,4 @@
-/* .song-detail{
+/* .song-detail {
     @apply flex;
 } */
 
@@ -9,7 +9,7 @@
 
 .song-detail__song-details {
     @apply flex flex-col col-span-2;
-    /*song details col should span to 2 grid cols  */
+    /* song details col should span to 2 grid cols */
 }
 
 .song-details__title {
@@ -55,5 +55,5 @@
 }
 
 .footer__icons {
-    @apply space-x-4;
+    @apply space-x-4 flex content-center;
 }

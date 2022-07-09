@@ -6,7 +6,7 @@ import AudioPlayer from "./AudioPlayer";
 import mxv_verified from "../../../public/assets/mxv_tick.svg";
 import SongHeaderCta from "./SongInfoUtils/SongHeaderCta";
 
-export default function SongHeader({ image, artistAddress, name, animation_url, tokenId, unlockTimestamp }) {
+export default function SongHeader({ image, artistAddress, title, audio_url, tokenId, unlockTimestamp }) {
     const { data: artist } = useMoralisQuery("_User", (query) => query.equalTo("ethAddress", artistAddress), [artistAddress]);
 
     if (!artist[0]) return null;
@@ -30,12 +30,17 @@ export default function SongHeader({ image, artistAddress, name, animation_url, 
                                 {artist[0].attributes.name}
                             </a>
                         </Link>
-                        <Image src={mxv_verified} width={17} height={17} alt="MXV verified"></Image>
+                        <div className="ml-2 align-center flex">
+                            <Image src={mxv_verified} width={14} height={14} alt="MXV verified" />
+                        </div>
                     </div>
 
-                    <h2 className="font-tertiary text-6xl pb-8 w-[268px]">{name}</h2>
+                    <h2 className="font-tertiary text-6xl pb-8 w-[268px]">{title}</h2>
                     {/* Audio Player component */}
-                    <AudioPlayer animation_url={animation_url} />
+                    <AudioPlayer audio_url={audio_url} />
+
+                    <div className="pb-10">Tags</div>
+
                     {/* Song Header CTA */}
                     <SongHeaderCta tokenId={tokenId} unlockTimestamp={unlockTimestamp} />
                 </div>

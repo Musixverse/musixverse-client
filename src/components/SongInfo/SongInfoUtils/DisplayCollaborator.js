@@ -35,7 +35,7 @@ const DisplayCollaborator = ({ collaborator }) => {
                         <i className="ml-2 mr-2 fa-solid fa-arrow-right-long text-[10px]"></i>
                     </span>
                     <span>{collaborator.role}</span>
-                    <span className="ml-4">(Split: {collaborator.split}%)</span>
+                    <span className="ml-3">(Split: {collaborator.split}%)</span>
                 </div>
             </a>
         </Link>

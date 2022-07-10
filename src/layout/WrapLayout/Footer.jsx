@@ -66,27 +66,38 @@ const Footer = () => {
                         <Link href="/terms-and-conditions">Terms of Use</Link>
                         <Link href="/privacy-policy">Privacy Policy</Link>
                         <Link href="/">Trademarks</Link>
-                        {/* <Link href="https://discord.com/invite/rXKb7rCqjG" passHref={true}>
-                            <a target="_blank" rel="noopener noreferrer" className="hover:text-primary-200">
-                                Discord
-                            </a>
-                        </Link> */}
                     </div>
                     <div className={styles["newsletter__social"]}>
                         {/* <button className="flex justify-center items-center">
                             <Image src={redit} width={20} height={20} alt="redit"></Image>
                         </button> */}
                         <button className="flex justify-center items-center">
-                            <Image src={discord} width={20} height={20} alt="discord"></Image>
+                            <Link href="https://discord.com/invite/rXKb7rCqjG" passHref={true}>
+                                <a target="_blank" rel="noopener noreferrer" className="flex justify-center items-center">
+                                    <Image src={discord} width={20} height={20} alt="discord"></Image>
+                                </a>
+                            </Link>  
                         </button>
                         <button className="flex justify-center items-center">
-                            <Image src={facebook} width={20} height={20} alt="facebook"></Image>
+                            <Link href="https://www.facebook.com/Musixverse-104390125641359" passHref={true}>
+                                <a target="_blank" rel="noopener noreferrer" className="flex justify-center items-center">
+                                    <Image src={facebook} width={20} height={20} alt="facebook"></Image>
+                                </a>
+                            </Link>  
                         </button>
                         <button className="flex justify-center items-center">
-                            <Image src={twitter} width={20} height={20} alt="twitter"></Image>
+                            <Link href="https://twitter.com/musixverse" passHref={true}>
+                                <a target="_blank" rel="noopener noreferrer" className="flex justify-center items-center">
+                                    <Image src={twitter} width={20} height={20} alt="twitter"></Image>
+                                </a>
+                            </Link>  
                         </button>
                         <button className="flex justify-center items-center">
-                            <Image src={instagram} width={20} height={20} alt="instagram"></Image>
+                            <Link href="https://www.instagram.com/musixverse/" passHref={true}>
+                                <a target="_blank" rel="noopener noreferrer" className="flex justify-center items-center">
+                                    <Image src={instagram} width={20} height={20} alt="instagram"></Image>
+                                </a>
+                            </Link>  
                         </button>
                     </div>
                 </div>

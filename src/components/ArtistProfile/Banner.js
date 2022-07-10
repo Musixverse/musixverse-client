@@ -10,6 +10,7 @@ export default function Banner({ coverImage }) {
                 priority
                 src={coverImage || "https://ipfs.moralis.io:2053/ipfs/Qmcn1aZ4PKUUzwpTncuSbruwLD98dtiNqvoJG5zm8EMwXZ"}
                 layout="fill"
+                objectFit="cover"
                 alt="cover-image"
             ></Image>
             {/* <img src="/Artist_banner.png" className="w-full h-full"></img> */}

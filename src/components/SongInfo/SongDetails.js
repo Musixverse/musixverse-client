@@ -1,7 +1,7 @@
 import Image from "next/image";
+import Link from "next/Link";
 import styles from "../../../styles/SongInfo/SongDetails.module.css";
 import SongDetail from "./SongInfoUtils/SongDetail";
-import Link from "next/Link";
 
 export default function SongDetails({ tokenId, metadata }) {
     var date = new Date(metadata.unlockTimestamp * 1000);

@@ -1,16 +1,7 @@
-import { useEffect } from "react";
-import { useMoralisQuery } from "react-moralis";
+import DisplayCollaborator from "./DisplayCollaborator";
 import styles from "../../../../styles/SongInfo/SongDetails.module.css";
 
 export default function SongDetail({ description, collaborators }) {
-    const { data: collabora } = useMoralisQuery("UserInfo", (query) => query.equalTo("userId", collaborators[0].id), [collaborators]);
-
-    /* TODO: 
-        Write cloud function to get username and avatar based on id
-        Add covert art artist avatar and username below the artwork
-        Figure out sale history
-    */
-
     return (
         <div className={styles["song-detail__song-details"]}>
             {/* <div className={styles['song-details__title']}> */}
@@ -25,19 +16,7 @@ export default function SongDetail({ description, collaborators }) {
                 <div className="mt-16">
                     <h1 className="font-tertiary text-[36px]">COLLABORATORS</h1>
                     {collaborators.map((collaborator, key) => {
-                        return (
-                            <div className="space-x-16">
-                                {/* {" "}
-                            {collaborator.avatar && (
-                                <div className="absolute flex items-center h-full ml-2">
-                                    <Image src={collaborator.avatar} height="30" width="30" className="rounded-full" />
-                                </div>
-                            )} */}
-                                <span>{collaborator.name}</span>
-                                <span>{collaborator.split}%</span>
-                                <span>{collaborator.role}</span>
-                            </div>
-                        );
+                        return <DisplayCollaborator key={key} collaborator={collaborator} />;
                     })}
                 </div>
             ) : null}

@@ -28,7 +28,7 @@ export async function getServerSideProps({ query }) {
     };
 }
 
-export default function songInfo({ token }) {
+export default function SongInfo({ token }) {
     const router = useRouter();
     const { tokenId } = router.query;
     const metadata = JSON.parse(token.metadata);
@@ -47,6 +47,7 @@ export default function songInfo({ token }) {
                 <div className="w-full max-w-[1920px] px-16 xl:px-20 2xl:px-36">
                     <SongHeader
                         image={metadata.artwork.uri.replace("ipfs://", process.env.NEXT_PUBLIC_IPFS_NODE_URL)}
+                        artworkArtistId={metadata.artwork.artistId}
                         artistAddress={metadata.artistAddress}
                         title={metadata.title}
                         audio_url={metadata.audio.replace("ipfs://", process.env.NEXT_PUBLIC_IPFS_NODE_URL)}

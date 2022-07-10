@@ -1,25 +1,58 @@
 import Image from "next/image";
 import Link from "next/link";
-import { useMoralisQuery } from "react-moralis";
+import { useState, useEffect } from "react";
+import { useMoralisQuery, useMoralisCloudFunction } from "react-moralis";
 import styles from "../../../styles/SongInfo/SongHeader.module.css";
 import AudioPlayer from "./AudioPlayer";
 import mxv_verified from "../../../public/assets/mxv_tick.svg";
 import SongHeaderCta from "./SongInfoUtils/SongHeaderCta";
 
-export default function SongHeader({ image, artistAddress, title, audio_url, tokenId, unlockTimestamp }) {
+export default function SongHeader({ image, artworkArtistId, artistAddress, title, audio_url, tokenId, unlockTimestamp }) {
     const { data: artist } = useMoralisQuery("_User", (query) => query.equalTo("ethAddress", artistAddress), [artistAddress]);
+    const [artworkArtistInfo, setArtworkArtistInfo] = useState("");
+
+    const { fetch: fetchCollaborator } = useMoralisCloudFunction(
+        "fetchCollaborator",
+        { id: artworkArtistId },
+        {
+            autoFetch: false,
+        }
+    );
+
+    useEffect(() => {
+        fetchCollaborator({
+            onSuccess: async (object) => {
+                setArtworkArtistInfo(object[0]);
+            },
+            onError: (error) => {
+                console.log("fetchCollaborator Error:", error);
+            },
+        });
+    }, [artworkArtistId]);
 
     if (!artist[0]) return null;
     return (
         <div className={styles["song-header"]}>
             <div className={styles["song-header__container"]}>
                 {/* Image section */}
-                <div className={styles["song-header__container--songImage"]}>
+                <div className={"group " + styles["song-header__container--songImage"]}>
                     <Link href={image}>
                         <a target="_blank" rel="noopener noreferrer">
                             <Image src={image} className="rounded-lg" alt="songImage" width={500} height={500} priority={true} />
                         </a>
                     </Link>
+                    <div className="absolute hidden group-hover:block">
+                        <Link href={`/profile/${artworkArtistInfo.username}`} className="cursor-pointer">
+                            <a target="_blank" rel="noopener noreferrer">
+                                <div className="flex items-end mb-2 font-secondary text-sm">
+                                    {artworkArtistInfo.userInfo && (
+                                        <Image src={artworkArtistInfo.userInfo[0].avatar} height="25" width="25" className="rounded-full" />
+                                    )}
+                                    <span className="ml-1">@{artworkArtistInfo.username}</span>
+                                </div>
+                            </a>
+                        </Link>
+                    </div>
                 </div>
 
                 {/* Song Details section */}

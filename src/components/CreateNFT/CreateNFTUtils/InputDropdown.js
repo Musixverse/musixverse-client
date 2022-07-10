@@ -21,7 +21,7 @@ export default function InputDropdown({ optionsArray, setChoice }) {
         // console.log(e.target.value);
         let selectedValue = e.target.textContent;
         setChoice(selectedValue);
-        selectedValue = (selectedValue.length > 20? (selectedValue.substring(0,17)+"..."):selectedValue);
+        selectedValue = selectedValue.length > 20 ? selectedValue.substring(0, 17) + "..." : selectedValue;
         setCurrentFilter(selectedValue);
     };
 

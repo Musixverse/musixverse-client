@@ -8,7 +8,6 @@ export default function NFTs() {
     const { Moralis, isInitialized } = useMoralis();
     // 0-based indexing
     const [tokens, setTokens] = useState("");
-    const [maxTokenIds, setMaxTokenIds] = useState([]);
     const [currentPage, setCurrentPage] = useState(0);
 
     const fetchTokens = async () => {
@@ -31,32 +30,8 @@ export default function NFTs() {
         if (tokens) {
             console.log("Tokens:", tokens);
 
-            const uniqueHashGroup = tokens.reduce((acc, token) => {
-                if (!acc[token.token_uri]) {
-                    acc[token.token_uri] = [];
-                }
-
-                acc[token.token_uri].push(token);
-                return acc;
-            }, {});
-
-            setMaxTokenIds([]);
-            Object.keys(uniqueHashGroup).forEach((uniqueHash) => {
-                const result = uniqueHashGroup[uniqueHash].reduce((prev, curr) => {
-                    return Number(prev.token_id) > Number(curr.token_id) ? prev : curr;
-                }, {});
-
-                let maxIdObj = { token_uri: uniqueHash, max_token_id: result.token_id };
-                setMaxTokenIds((prev) => [...prev, maxIdObj]);
-            });
-
             const res = tokens.map((nft, index) => {
                 const metadata = JSON.parse(nft.metadata);
-
-                var localTokenId = "";
-                maxTokenIds.forEach((token) => {
-                    if (nft.token_uri === token.token_uri) localTokenId = Number(nft.token_id) + Number(metadata.attributes[0].value) - token.max_token_id;
-                });
 
                 if (metadata) {
                     console.log("tempArray:", tempArray);

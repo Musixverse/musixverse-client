@@ -13,14 +13,18 @@ export default function ArtistHeader({ avatar, name, isVerified, instagram, face
             {/* Left section */}
             <div className={styles["artist-banner__section1"]}>
                 <div className={styles["section1__artist-image"]}>
-                    <Image
-                        priority
-                        src={avatar || "https://ipfs.moralis.io:2053/ipfs/Qmcn1aZ4PKUUzwpTncuSbruwLD98dtiNqvoJG5zm8EMwXZ"}
-                        objectFit="contain"
-                        width="200"
-                        height="200"
-                        alt="artist profile"
-                    ></Image>
+                    {avatar ? (
+                        <Image
+                            priority
+                            src={avatar || "https://ipfs.moralis.io:2053/ipfs/Qmcn1aZ4PKUUzwpTncuSbruwLD98dtiNqvoJG5zm8EMwXZ"}
+                            objectFit="contain"
+                            width="200"
+                            height="200"
+                            alt="artist profile"
+                        />
+                    ) : (
+                        <div className="bg-gray-300 w-full h-full animate-pulse rounded-full"></div>
+                    )}
                 </div>
                 <p className="mt-4 mb-4 text-4xl md:text-5xl md:hidden font-tertiary xl:mb-0 xl:mt-2">
                     {name}&nbsp;{isVerified ? <Image src={mxv_tick} width={21} height={21} alt="mxv_verified"></Image> : null}

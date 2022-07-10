@@ -1,59 +1,59 @@
-/* .song-detail{
+/* .song-detail {
     @apply flex;
 } */
 
-.song-detail__container{
-    @apply grid grid-cols-5 gap-6 p-8 border-2 bg-light-200 rounded-xl border-light-300;
+.song-detail__container {
+    @apply grid grid-cols-5 gap-10 p-8 border-2 bg-light-200 rounded-xl border-light-300;
     /* grid to appear in this div */
 }
 
-.song-detail__song-details{
-    @apply flex flex-col col-span-2;  
-      /*song details col should span to 2 grid cols  */
+.song-detail__song-details {
+    @apply flex flex-col col-span-2;
+    /* song details col should span to 2 grid cols */
 }
 
-.song-details__title{
+.song-details__title {
     @apply font-semibold text-xl;
 }
 
-.song-details__subtitle{
+.song-details__subtitle {
     @apply text-sm;
 }
 
-.song-details__artist-notes{
+.song-details__artist-notes {
     @apply text-sm;
 }
 
-.song-info__other-details{
+.song-info__other-details {
     @apply flex flex-col font-secondary text-[15px] col-span-3;
 }
 
-.other-details__title{
+.other-details__title {
     @apply font-semibold text-xl;
 }
 
-.other-details__section1{
+.other-details__section1 {
     /* @apply flex flex-row space-x-16 py-3; */
-    @apply grid grid-cols-4 py-3
+    @apply grid grid-cols-4 py-3;
 }
 
-.other-details__section2{
+.other-details__section2 {
     /* @apply flex flex-row space-x-10 py-3; */
-    @apply grid grid-cols-5 gap-4 py-3;
+    @apply grid grid-cols-4 py-3;
 }
 
-.other-details__section3{
+.other-details__section3 {
     @apply flex flex-row;
 }
 
-.other-details__Icons{
+.other-details__Icons {
     @apply flex flex-row space-x-4 py-2;
 }
 
-.other-details__footer{
+.other-details__footer {
     @apply flex flex-1 h-[60px] bg-white rounded-md items-center justify-between p-3;
 }
 
-.footer__icons{
-    @apply space-x-4;
+.footer__icons {
+    @apply space-x-4 flex content-center;
 }

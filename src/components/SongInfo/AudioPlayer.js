@@ -5,7 +5,7 @@ import mxvverified from "../../../public/assets/mxv_verified.svg";
 import sharebtn from "../../../public/assets/SHARE.svg";
 import styles from "../../../styles/SongInfo/AudioPlayer.module.css";
 
-export default function AudioPlayer() {
+export default function AudioPlayer({ audio_url }) {
     const playBtn = useRef();
     const audio = useRef();
     const progress = useRef();
@@ -15,8 +15,7 @@ export default function AudioPlayer() {
 
     // Fetch the duration once component is loaded
     useEffect(() => {
-        console.log(audio.current.readyState);
-        if (audio.current) {
+        if (audio.current !== null) {
             const intervalId = setInterval(() => {
                 if (audio.current.readyState >= 2) {
                     getTime(false);
@@ -129,13 +128,13 @@ export default function AudioPlayer() {
                         <p className={styles["container__info--duration"]} ref={durTime}></p>
                     </div>
                     {/* Audio elem */}
-                    <audio ref={audio} src="/sounds/rengoku.mp3" onTimeUpdate={updateProgress} onEnded={resetProgress}></audio>
+                    <audio ref={audio} src={audio_url} onTimeUpdate={updateProgress} onEnded={resetProgress}></audio>
                 </div>
 
                 <div className="flex flex-row space-x-8 pt-3 text-xs">
                     <button className="flex justify-center items-center space-x-2">
                         <Image src={favourite} width={18} height={18} alt="Add to favourites"></Image>
-                        <span>Added to Favourite</span>
+                        <span>Add to Favourites</span>
                     </button>
                     <button className="flex justify-center items-center space-x-2">
                         <Image src={sharebtn} width={18} height={18} alt="Share Button"></Image>

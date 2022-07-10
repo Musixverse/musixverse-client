@@ -1,7 +1,7 @@
-import ContributorImage from "./ContributorImage";
+import CollaboratorImage from "./CollaboratorImage";
 import styles from "../../../styles/NFTCard/Section2.module.css";
 
-export default function Section2({ contributorList, numberOfCopies, localTokenId, lastPrice }) {
+export default function Section2({ collaboratorList, numberOfCopies, localTokenId, lastPrice }) {
     // const likeBtn = useRef();
     // let likeCount = props.likeCount;
 
@@ -28,11 +28,11 @@ export default function Section2({ contributorList, numberOfCopies, localTokenId
                 <span>{props.likeCount}</span>
             </button> */}
 
-            {/* Contributor Images */}
+            {/* Collaborator Images */}
             <div className="flex items-end justify-between font-secondary text-[#1D1D1D] dark:text-light-200 text-xs">
                 <div className="flex -space-x-2 items-end">
-                    {contributorList.map((contributor, index) => {
-                        return <ContributorImage key={index} index={index} contributorList={contributorList} contributor={contributor} />;
+                    {collaboratorList.map((collaborator, index) => {
+                        return <CollaboratorImage key={index} index={index} collaboratorList={collaboratorList} collaborator={collaborator} />;
                     })}
                 </div>
                 <span className="dark:text-light-300">

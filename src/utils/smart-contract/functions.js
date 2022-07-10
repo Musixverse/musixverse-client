@@ -1,4 +1,5 @@
 import Web3 from "web3";
+import Moralis from "moralis";
 // Importing contract abi, address, and other variables
 import { MXV_CONTRACT_ABI, MXV_CONTRACT_ADDRESS } from "./constants";
 var MUSIXVERSE;
@@ -46,7 +47,8 @@ async function connectSmartContract() {
         window.web3 = new Web3(window.web3.currentProvider);
         await addPolygonTestnetNetwork();
     } else {
-        window.web3 = new Web3(new Web3.providers.HttpProvider("https://speedy-nodes-nyc.moralis.io/9aef181628e87a4be542999f/polygon/mumbai"));
+        const provider = new Web3.providers.HttpProvider("https://speedy-nodes-nyc.moralis.io/9aef181628e87a4be542999f/polygon/mumbai");
+        window.web3 = new Web3(provider);
         // window.alert(
         //     "Non-Ethereum browser detected. You cannot perform any transactions on the blockchain, however you will still be able to watch all content present on the blockchain. To make transactions you should consider installing Metamask"
         // );
@@ -61,16 +63,32 @@ async function mintTrackNFT(
     numberOfCopies,
     price,
     metadataURI,
-    contributors,
+    collaborators,
     percentageContributions,
     resaleRoyaltyPercentage,
     onSale,
     unlockTimestamp,
     callerAddress
 ) {
-    await MUSIXVERSE.methods
-        .mintTrackNFT(numberOfCopies, price, metadataURI, contributors, percentageContributions, resaleRoyaltyPercentage, onSale, unlockTimestamp)
-        .send({ from: callerAddress });
+    const sendOptions = {
+        contractAddress: MXV_CONTRACT_ADDRESS,
+        functionName: "mintTrackNFT",
+        abi: MXV_CONTRACT_ABI,
+        params: {
+            amount: numberOfCopies,
+            price: price,
+            URIHash: metadataURI,
+            collaborators: collaborators,
+            percentageContributions: percentageContributions,
+            resaleRoyaltyPercentage: resaleRoyaltyPercentage,
+            onSale: onSale,
+            unlockTimestamp: unlockTimestamp,
+        },
+    };
+
+    const transaction = await Moralis.executeFunction(sendOptions);
+    // Wait until the transaction is confirmed
+    await transaction.wait();
 }
 
 async function purchaseMusicNFT(tokenId, price, callerAddress) {

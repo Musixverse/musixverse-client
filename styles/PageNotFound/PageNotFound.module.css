@@ -75,12 +75,12 @@
 }
 
 .disk .inner-circle {
-	@apply w-[90px] h-[90px] bg-[#ef7d08] rounded-full flex justify-center items-center;
+	@apply w-[90px] h-[90px] bg-primary-100 rounded-full flex justify-center items-center;
 	z-index: 2;
 }
 
 .disk .inner-circle span {
-	@apply font-black text-[25px] text-[#c13017];
+	@apply font-semibold text-[25px] text-white;
 }
 
 .disk .inner-circle .dot {

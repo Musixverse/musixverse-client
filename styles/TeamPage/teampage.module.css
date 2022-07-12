@@ -1,0 +1,4 @@
+
+.team_page_container {
+	@apply w-full flex flex-col justify-center items-center py-36;
+}

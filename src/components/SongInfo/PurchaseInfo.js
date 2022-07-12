@@ -1,14 +1,28 @@
+import { useState, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
+import { useMoralisQuery, useMoralis } from "react-moralis";
 import styles from "../../../styles/SongInfo/PurchaseInfo.module.css";
-import ethLogo from "../../../public/assets/Eth_logo.svg";
 import CustomButton from "../../layout/CustomButton";
+import { getCurrentNftPrice } from "../../utils/smart-contract/functions";
 
-export default function PurchaseInfo() {
-    // Fetch data and replace the hard-coded constant values
-    const creatorShare = 20;
-    const currentOwner = "benkessler";
+export default function PurchaseInfo({ tokenId, metadata, currentOwnerAddress }) {
     const NFTPrice = 0.3;
+    const [price, setPrice] = useState("");
+    const { Moralis } = useMoralis();
+    const { data: currentOwner } = useMoralisQuery("_User", (query) => query.equalTo("ethAddress", currentOwnerAddress), [currentOwnerAddress]);
 
+    const getPriceOf = async (tokenId) => {
+        const result = await getCurrentNftPrice(tokenId);
+        return result;
+    };
+
+    useEffect(async () => {
+        const musicNft = await getPriceOf(tokenId);
+        setPrice(Moralis.Units.FromWei(musicNft.price));
+    }, [tokenId]);
+
+    if (!currentOwner[0]) return null;
     return (
         <div className={"dark:bg-dark-100 " + styles["purchase-info"]}>
             {/* Heading DIV */}
@@ -16,31 +30,38 @@ export default function PurchaseInfo() {
                 <h1 className="font-tertiary text-3xl">PURCHASE INFO</h1>
 
                 <p className={styles["purchase-info__heading--p"]}>
-                    Creator Share
-                    <i className="ml-2 mr-2 fas fa-arrow-right"></i>
-                    {creatorShare}%
+                    {metadata.attributes[1].trait_type}
+                    <i className="ml-2 mr-2 fa-solid fa-arrow-right-long"></i>
+                    {metadata.attributes[1].value}%
                 </p>
             </div>
+
             {/* Border Line Div */}
-            <div className="flex-grow border-t-[3px] border-[#9a9a9a]"></div>
+            <div className="flex-grow border-t-[3px] border-[#9a9a9a] mt-2 mb-2"></div>
+
             {/* Current Owner DIV*/}
             <div className={styles["purchase-info__current-owner"]}>
                 <p className={styles["purchase-info__heading--p"]}>Current Owner</p>
-                <p className="font-secondary">@{currentOwner}</p>
+                {currentOwner[0] ? (
+                    <Link href={`/profile/${currentOwner[0].attributes.username}`} className="cursor-pointer">
+                        <a target="_blank" rel="noopener noreferrer">
+                            <p className="font-secondary">@{currentOwner[0].attributes.username}</p>
+                        </a>
+                    </Link>
+                ) : null}
             </div>
 
-            <div className="flex-grow border-t-[3px] border-[#9a9a9a]"></div>
+            <div className="flex-grow border-t-[3px] border-[#9a9a9a] mt-2 mb-2"></div>
             {/* Price Options */}
             <div className={styles["purchase-info__price-div"]}>
                 <div className="flex flex-col">
-                    <p className={styles["purchase-info__heading--p"]}>Price (x3 -3Copies)</p>
+                    <p className={styles["purchase-info__heading--p"]}>Price</p>
                     <div className="flex items-center">
-                        <Image src={ethLogo} width={25} height={50} alt="ethereum" />
-                        <p className="ml-2 font-bold text-pricing font-primary">{NFTPrice}</p>
+                        <Image src={"/assets/matic-logo.svg"} width={25} height={50} alt="matic" />
+                        <p className="ml-2 font-bold text-pricing font-primary">{price}</p>
                     </div>
                 </div>
                 <div className={styles["purchase-info__price-div--cta"]}>
-                    <CustomButton green={false}>Make Offer</CustomButton>
                     <CustomButton green={true}>Buy Now</CustomButton>
                 </div>
             </div>

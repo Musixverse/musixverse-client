@@ -79,7 +79,7 @@
         },
         {
           "internalType": "address[]",
-          "name": "contributors",
+          "name": "collaborators",
           "type": "address[]"
         },
         {

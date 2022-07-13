@@ -75,7 +75,7 @@ module.exports = ({ isOpen = "", onClose = "" }) => {
                 });
         }
     };
-
+   
     const magicLogin = async () => {
         if (!isAuthenticated) {
             await authenticate({

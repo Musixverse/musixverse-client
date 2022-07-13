@@ -75,7 +75,7 @@ module.exports = ({ isOpen = "", onClose = "" }) => {
                 });
         }
     };
-   
+
     const magicLogin = async () => {
         if (!isAuthenticated) {
             await authenticate({
@@ -147,38 +147,40 @@ module.exports = ({ isOpen = "", onClose = "" }) => {
                                                 Connecting your wallet is the simplest way to log in to the world of Web3!
                                             </p>
                                         </div>
-                                        <div className="w-3/5 -mt-12">
+                                        <div className="w-3/5 -mt-10">
                                             <div className="text-sm">Available Wallets</div>
-                                            <div className="flex space-x-4 justify-between mt-6">
+                                            <div className="mt-6 w-full space-y-4">
                                                 <button
                                                     onClick={() => metamaskLogin()}
-                                                    className="bg-light-200 hover:bg-light-300 dark:bg-dark-200 dark:hover:bg-[#000] rounded-lg flex items-center p-4 w-1/2 text-sm"
+                                                    className="w-full bg-light-200 hover:bg-light-300 dark:bg-dark-200 dark:hover:bg-[#000] rounded-lg flex items-center p-4 text-sm"
                                                 >
                                                     <Image src="/assets/metamask.png" alt="Metamask Logo" width="40" height="40" />
-                                                    <span className="ml-4">Metamask</span>
+                                                    <div className="flex justify-between items-center w-full">
+                                                        <span className="ml-4">Metamask</span>
+                                                        <span className="ml-2 font-semibold material-symbols-outlined">arrow_right_alt</span>
+                                                    </div>
                                                 </button>
                                                 <button
                                                     onClick={() => walletconnectLogin()}
-                                                    className="bg-light-200 hover:bg-light-300 dark:bg-dark-200 dark:hover:bg-[#000] rounded-lg flex items-center p-4 w-1/2 text-sm"
+                                                    className="w-full bg-light-200 hover:bg-light-300 dark:bg-dark-200 dark:hover:bg-[#000] rounded-lg flex items-center p-4 text-sm"
                                                 >
-                                                    <Image src="/assets/walletconnect.png" alt="WalletConnect Logo" width="30" height="30" />
-                                                    <span className="ml-4">WalletConnect</span>
+                                                    <Image src="/assets/walletconnect.png" alt="WalletConnect Logo" width="40" height="40" />
+                                                    <div className="flex justify-between items-center w-full">
+                                                        <span className="ml-4">WalletConnect</span>
+                                                        <span className="ml-2 font-semibold material-symbols-outlined">arrow_right_alt</span>
+                                                    </div>
                                                 </button>
-                                            </div>
-                                            <div className="flex space-x-4 justify-between mt-6">
-                                                <button
+                                                {/* <button
                                                     onClick={() => setMagicFormOpen(true)}
-                                                    className="bg-light-200 hover:bg-light-300 dark:bg-dark-200 dark:hover:bg-[#000] rounded-lg flex items-center p-4 w-1/2 text-sm"
+                                                    className="w-full bg-light-200 hover:bg-light-300 dark:bg-dark-200 dark:hover:bg-[#000] rounded-lg flex items-center p-4 text-sm"
                                                 >
                                                     <Image src="/assets/magic.svg" alt="Magic Logo" width="35" height="35" />
-                                                    <span className="ml-4">Magic</span>
-                                                </button>
-                                                {/* Empty button to make layout consistent */}
-                                                <button className="rounded-lg flex items-center p-4 w-1/2 text-sm"></button>
+                                                    <div className="flex justify-between items-center w-full">
+                                                        <span className="ml-4">Magic</span>
+                                                        <span className="ml-2 font-semibold material-symbols-outlined">arrow_right_alt</span>
+                                                    </div>
+                                                </button> */}
                                             </div>
-                                            {/* <div className="flex space-x-4 justify-between ml-1 mt-2">
-                                                <p className="text-xs text-gray-400">Coming Soon!</p>
-                                            </div> */}
                                         </div>
                                     </div>
                                 </>

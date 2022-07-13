@@ -1,15 +1,16 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import { useMoralisQuery, useMoralisCloudFunction } from "react-moralis";
+import { useMoralisCloudFunction } from "react-moralis";
 import styles from "../../../styles/SongInfo/SongHeader.module.css";
 import AudioPlayer from "./AudioPlayer";
 import mxv_verified from "../../../public/assets/mxv_tick.svg";
 import SongHeaderCta from "./SongInfoUtils/SongHeaderCta";
 
 export default function SongHeader({ image, artworkArtistId, artistAddress, title, audio_url, tokenId, unlockTimestamp }) {
-    const { data: artist } = useMoralisQuery("_User", (query) => query.equalTo("ethAddress", artistAddress), [artistAddress]);
     const [artworkArtistInfo, setArtworkArtistInfo] = useState("");
+
+    const { data: artist } = useMoralisCloudFunction("fetchUsernameFromAddress", { artistAddress: artistAddress });
 
     const { fetch: fetchCollaborator } = useMoralisCloudFunction(
         "fetchCollaborator",
@@ -30,7 +31,7 @@ export default function SongHeader({ image, artworkArtistId, artistAddress, titl
         });
     }, [artworkArtistId]);
 
-    if (!artist[0]) return null;
+    if (!artist) return null;
     return (
         <div className={styles["song-header"]}>
             <div className={styles["song-header__container"]}>
@@ -42,27 +43,31 @@ export default function SongHeader({ image, artworkArtistId, artistAddress, titl
                         </a>
                     </Link>
                     <div className="absolute hidden group-hover:block">
-                        <Link href={`/profile/${artworkArtistInfo.username}`} className="cursor-pointer">
-                            <a target="_blank" rel="noopener noreferrer">
-                                <div className="flex items-end mb-2 font-secondary text-sm">
-                                    {artworkArtistInfo.userInfo && (
-                                        <Image src={artworkArtistInfo.userInfo[0].avatar} height="25" width="25" className="rounded-full" />
-                                    )}
-                                    <span className="ml-1">@{artworkArtistInfo.username}</span>
-                                </div>
-                            </a>
-                        </Link>
+                        {artworkArtistInfo ? (
+                            <Link href={`/profile/${artworkArtistInfo.username}`} className="cursor-pointer">
+                                <a target="_blank" rel="noopener noreferrer">
+                                    <div className="flex items-end mb-2 font-secondary text-sm">
+                                        {artworkArtistInfo.userInfo && (
+                                            <Image src={artworkArtistInfo.userInfo[0].avatar} height="25" width="25" className="rounded-full" />
+                                        )}
+                                        <span className="ml-1">@{artworkArtistInfo.username}</span>
+                                    </div>
+                                </a>
+                            </Link>
+                        ) : null}
                     </div>
                 </div>
 
                 {/* Song Details section */}
                 <div className={styles["song-header__container--song-detail"]}>
                     <div className="font-bold pb-2 items-center flex">
-                        <Link href={`/profile/${artist[0].attributes.username}`} className="cursor-pointer">
-                            <a target="_blank" rel="noopener noreferrer">
-                                {artist[0].attributes.name}
-                            </a>
-                        </Link>
+                        {artist[0] ? (
+                            <Link href={`/profile/${artist[0].username}`} className="cursor-pointer">
+                                <a target="_blank" rel="noopener noreferrer">
+                                    {artist[0].name}
+                                </a>
+                            </Link>
+                        ) : null}
                         <div className="ml-2 align-center flex">
                             <Image src={mxv_verified} width={14} height={14} alt="MXV verified" />
                         </div>

@@ -97,10 +97,10 @@ export default function PreviewNft({ trackTitle, coverArtUrl, audioFileUrl, nftP
                 ) : (
                     <div className="flex items-end justify-between font-secondary text-[#1D1D1D] dark:text-light-200 text-xs">
                         <div className="flex -space-x-2 items-end">
-                            {collaboratorList.map((contributor, index) => {
-                                return contributor.avatar ? (
+                            {collaboratorList.map((collaborator, index) => {
+                                return collaborator.avatar ? (
                                     <div key={index} className={`rounded-full flex items-end relative z-${10 * (collaboratorList.length - index)}`}>
-                                        <Image src={contributor.avatar} height="30" width="30" className="rounded-full" />
+                                        <Image src={collaborator.avatar} height="30" width="30" className="rounded-full" />
                                     </div>
                                 ) : null;
                             })}

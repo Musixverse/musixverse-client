@@ -56,6 +56,12 @@ input[type="radio"]:checked + label span {
 /***************************    Scrollbar   *******************************/
 /**************************************************************************/
 
+html {
+    overflow: auto !important;
+    overflow-y: scroll !important;
+    overflow-y: overlay !important;
+}
+
 /* Scroll bar width */
 ::-webkit-scrollbar {
     width: 4px;

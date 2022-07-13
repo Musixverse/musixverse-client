@@ -30,34 +30,28 @@ export default function NFTs() {
         if (tokens) {
             console.log("Tokens:", tokens);
 
-            const res = tokens.map((nft, index) => {
-                const metadata = JSON.parse(nft.metadata);
+            for (let index in tokens) {
+                const metadata = JSON.parse(tokens[index].metadata);
 
                 if (metadata) {
-                    console.log("tempArray:", tempArray);
-                    let cardElem = (
+                    tempArray.push(
                         <NFTCard
-                            key={index}
-                            songName={metadata.name}
-                            artistName={metadata.artistName}
-                            image={metadata.image}
-                            songId={metadata.id}
-                            tokenId={nft.token_id}
+                            songName={metadata.title}
+                            artistName={metadata.artist}
+                            image={metadata.artwork.uri.replace("ipfs://", process.env.NEXT_PUBLIC_IPFS_NODE_URL)}
+                            tokenId={tokens[index].token_id}
                             numberOfCopies={metadata.attributes[0].value}
-                            contributorList={metadata.contributors}
-                            localTokenId={localTokenId}
+                            collaboratorList={metadata.collaborators}
                         />
                     );
 
-                    tempArray.push(cardElem);
-
                     if (index % 3 === 2 || index == tokens.length - 1) {
                         nftCards.push(tempArray);
+                        console.log("nftCards::::", nftCards);
                         tempArray = [];
                     }
-                } else return null;
-            });
-            console.log("res", res);
+                }
+            }
         }
     }, [tokens]);
 

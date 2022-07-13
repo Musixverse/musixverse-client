@@ -45,27 +45,6 @@ const DisplayNFTs = () => {
         }
     }, [tokens]);
 
-    // const fetchTokenIdMetadata = async () => {
-    //     const options = {
-    //         address: MXV_CONTRACT_ADDRESS,
-    //         token_id: "1",
-    //         chain: BLOCKCHAIN_NETWORK,
-    //     };
-    //     const tokenIdMetadata = await Moralis.Web3API.token.getTokenIdMetadata(options);
-    //     console.log("tokenIdMetadata:", tokenIdMetadata);
-    // };
-
-    // const fetchTokensForCurrentAccount = async () => {
-    //     const options = {
-    //         chain: BLOCKCHAIN_NETWORK,
-    //         token_id: "1",
-    //         token_address: MXV_CONTRACT_ADDRESS,
-    //     };
-    //     const nftData = await Moralis.Web3API.account.getNFTsForContract(options);
-    //     console.log("nftData:", nftData);asf
-    //     setTokens(nftData.result);
-    // };
-
     useEffect(() => {
         if (isInitialized) {
             fetchTokens();

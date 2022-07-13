@@ -16,7 +16,6 @@ export default function Section1({ artistName, isVerified, songName, tokenId }) 
 
     useEffect(async () => {
         if (isWeb3Active) {
-            console.log("here");
             const musicNft = await getPriceOf(tokenId);
             setPrice(Moralis.Units.FromWei(musicNft.price));
         }

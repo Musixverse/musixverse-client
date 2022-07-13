@@ -6,6 +6,7 @@ import { getCurrentNftPrice } from "../../utils/smart-contract/functions";
 
 export default function Section1({ artistName, isVerified, songName, tokenId }) {
     const { Moralis } = useMoralis();
+    const isWeb3Active = Moralis.ensureWeb3IsInstalled();
     const [price, setPrice] = useState("");
 
     const getPriceOf = async (tokenId) => {
@@ -14,9 +15,12 @@ export default function Section1({ artistName, isVerified, songName, tokenId }) 
     };
 
     useEffect(async () => {
-        const musicNft = await getPriceOf(tokenId);
-        setPrice(Moralis.Units.FromWei(musicNft.price));
-    }, []);
+        if (isWeb3Active) {
+            console.log("here");
+            const musicNft = await getPriceOf(tokenId);
+            setPrice(Moralis.Units.FromWei(musicNft.price));
+        }
+    }, [isWeb3Active]);
 
     let truncatednftPrice = price;
     if (price >= 1000000) {

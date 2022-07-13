@@ -2,7 +2,7 @@ import Image from "next/image";
 import { useRef } from "react";
 import { useMoralis } from "react-moralis";
 
-export default function PreviewNft({ trackTitle, uploadedImage, uploadedSong, nftPrice, numberOfCopies, step, contributorList }) {
+export default function PreviewNft({ trackTitle, coverArtUrl, audioFileUrl, nftPrice, numberOfCopies, step, collaboratorList }) {
     const { user } = useMoralis();
 
     const playBtn = useRef(null);
@@ -48,20 +48,20 @@ export default function PreviewNft({ trackTitle, uploadedImage, uploadedSong, nf
     };
 
     return (
-        <div className="flex-1 mt-14 lg:mt-0">
-            <p className="mb-10 font-semibold font-secondary">STEP {step} OF 2</p>
+        <div className="flex-1 lg:mt-0">
+            <p className="mb-16 font-semibold font-secondary">STEP {step} OF 3</p>
             {/* Uploaded Art */}
             <div className="relative w-[222px] h-[190px] overflow-hidden rounded-t-xl">
                 {/* Cover art of NFT */}
-                {uploadedImage === null ? (
+                {coverArtUrl === null ? (
                     <div className="dark:bg-[#363636] bg-light-300 w-full h-full rounded-t-xl"></div>
                 ) : (
                     <div className="relative w-full h-full">
-                        <Image src={uploadedImage} alt="nft cover art" objectFit="cover" layout="fill" priority />
+                        <Image src={coverArtUrl} alt="nft cover art" objectFit="cover" layout="fill" priority />
                     </div>
                 )}
                 {/* NFT audio file */}
-                {uploadedSong == null ? null : (
+                {audioFileUrl == null ? null : (
                     <div className="z-[1] absolute bottom-0 right-0 p-2">
                         <button
                             type="button"
@@ -71,7 +71,7 @@ export default function PreviewNft({ trackTitle, uploadedImage, uploadedSong, nf
                         >
                             <i className="text-lg fas fa-play text-dark-200"></i>
                         </button>
-                        <audio ref={audio} className="hidden" src={uploadedSong} onEnded={resetProgress}></audio>
+                        <audio ref={audio} className="hidden" src={audioFileUrl} onEnded={resetProgress}></audio>
                     </div>
                 )}
             </div>
@@ -97,10 +97,10 @@ export default function PreviewNft({ trackTitle, uploadedImage, uploadedSong, nf
                 ) : (
                     <div className="flex items-end justify-between font-secondary text-[#1D1D1D] dark:text-light-200 text-xs">
                         <div className="flex -space-x-2 items-end">
-                            {contributorList.map((contributor, index) => {
-                                return contributor.avatar ? (
-                                    <div key={index} className={`rounded-full flex items-end relative z-${10 * (contributorList.length - index)}`}>
-                                        <Image src={contributor.avatar} height="30" width="30" className="rounded-full" />
+                            {collaboratorList.map((collaborator, index) => {
+                                return collaborator.avatar ? (
+                                    <div key={index} className={`rounded-full flex items-end relative z-${10 * (collaboratorList.length - index)}`}>
+                                        <Image src={collaborator.avatar} height="30" width="30" className="rounded-full" />
                                     </div>
                                 ) : null;
                             })}
@@ -109,6 +109,8 @@ export default function PreviewNft({ trackTitle, uploadedImage, uploadedSong, nf
                     </div>
                 )}
             </div>
+
+            <p className="text-[#777777] mt-4 font-normal text-xs text-center">NFT Preview</p>
         </div>
     );
 }

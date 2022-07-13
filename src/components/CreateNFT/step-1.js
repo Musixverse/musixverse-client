@@ -1,30 +1,32 @@
 import { useContext } from "react";
 import PreviewNft from "./CreateNFTUtils/PreviewNft";
 import Step1Form from "./CreateNFTUtils/Step1Form";
+import RequiredAsterisk from "./CreateNFTUtils/RequiredAsterisk";
 import StatusContext from "../../../store/status-context";
 
 export default function TrackDetails({
     step,
     nextStep,
-    prevStep,
-    uploadedImage,
-    setUploadedImage,
-    uploadedSong,
-    setUploadedSong,
     trackTitle,
     setTrackTitle,
-    setGenre,
-    setTrackOrigin,
-    setExplicit,
-    recordingYear,
-    setRecordingYear,
-    vocals,
-    setVocals,
-    links,
-    setLinks,
+    trackBackground,
+    setTrackBackground,
+    coverArtUrl,
+    setCoverArtUrl,
+    setCoverArtMimeType,
+    creditCoverArtArtist,
+    setCreditCoverArtArtist,
+    coverArtArtist,
+    setCoverArtArtist,
+    audioFileUrl,
+    setAudioFileUrl,
+    setAudioFileDuration,
+    setAudioFileMimeType,
+    lyrics,
+    setLyrics,
     nftPrice,
     numberOfCopies,
-    contributorList,
+    collaboratorList,
 }) {
     /**
      * TODO: Need to add the following-
@@ -41,23 +43,25 @@ export default function TrackDetails({
      */
     const [, , , setError] = useContext(StatusContext);
 
-    const nftPreviewValues = { trackTitle, uploadedImage, uploadedSong, nftPrice, numberOfCopies, step, contributorList };
+    const nftPreviewValues = { trackTitle, coverArtUrl, audioFileUrl, nftPrice, numberOfCopies, step, collaboratorList };
     const step1FormValues = {
-        uploadedImage,
-        setUploadedImage,
-        uploadedSong,
-        setUploadedSong,
         trackTitle,
         setTrackTitle,
-        setGenre,
-        setTrackOrigin,
-        setExplicit,
-        recordingYear,
-        setRecordingYear,
-        vocals,
-        setVocals,
-        links,
-        setLinks,
+        trackBackground,
+        setTrackBackground,
+        coverArtUrl,
+        setCoverArtUrl,
+        setCoverArtMimeType,
+        creditCoverArtArtist,
+        setCreditCoverArtArtist,
+        coverArtArtist,
+        setCoverArtArtist,
+        audioFileUrl,
+        setAudioFileUrl,
+        setAudioFileDuration,
+        setAudioFileMimeType,
+        lyrics,
+        setLyrics,
     };
 
     return (
@@ -66,14 +70,14 @@ export default function TrackDetails({
                 <form
                     onSubmit={(e) => {
                         e.preventDefault();
-                        if (!uploadedImage) {
+                        if (!coverArtUrl) {
                             setError({
                                 title: "Image not uploaded!",
                                 message: "You need to upload an image to proceed.",
                                 showErrorBox: true,
                             });
                             return;
-                        } else if (!uploadedSong) {
+                        } else if (!audioFileUrl) {
                             setError({
                                 title: "Audio file not uploaded!",
                                 message: "You need to upload an audio file to proceed.",
@@ -93,18 +97,7 @@ export default function TrackDetails({
                     </div>
 
                     {/* Button div */}
-                    <div className="flex mt-16 mb-24 space-x-3 md:self-end justify-end">
-                        {/* Reset and continue buttons */}
-                        {/* NOTE: Revoke the image url at the create NFT button click */}
-                        {/* <button
-                            type="button"
-                            onClick={() => {
-                                prevStep();
-                            }}
-                            className="dark:bg-[#323232] dark:hover:bg-dark-100 dark:border-[#323232] rounded-md px-4 py-3 bg-[#D7E0DF] hover:bg-[#c9d1d0] text-sm font-primary font-bold"
-                        >
-                            Discard
-                        </button> */}
+                    <div className="flex mt-16 space-x-3 md:self-end justify-end">
                         <button
                             type="submit"
                             className="flex items-center px-4 py-3 text-sm font-bold rounded-md hover:bg-primary-200 bg-primary-100 text-light-100 font-primary"
@@ -112,6 +105,14 @@ export default function TrackDetails({
                             Next
                             <span className="ml-24 font-semibold material-symbols-outlined">arrow_right_alt</span>
                         </button>
+                    </div>
+
+                    <div className="flex mt-4 mb-24 md:self-end justify-end text-xs text-[#777777]">
+                        Fields marked with
+                        <div className="mr-3">
+                            <RequiredAsterisk />
+                        </div>
+                        are required
                     </div>
                 </form>
             </div>

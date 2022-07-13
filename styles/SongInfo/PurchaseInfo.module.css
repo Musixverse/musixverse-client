@@ -1,32 +1,28 @@
-.purchase-info{
+.purchase-info {
     @apply p-8 xl:p-10 bg-light-300 rounded-xl xl:col-span-2 col-span-4;
 }
 /* divide-y-2 divide-gray-400 */
 
-.purchase-info__heading{
+.purchase-info__heading {
     @apply flex justify-between items-center;
 }
 
-.purchase-info__heading--p{
+.purchase-info__heading--p {
     @apply font-secondary font-medium text-base;
 }
 
-.purchase-info__heading--p i{
-    @apply text-[10px] text-[#6b6b6b];
+.purchase-info__heading--p i {
+    @apply text-[10px];
 }
 
-.purchase-info__current-owner{
+.purchase-info__current-owner {
     @apply my-3 flex justify-between items-center;
 }
 
-.purchase-info__price-div{
+.purchase-info__price-div {
     @apply mt-3 flex justify-between items-end;
 }
 
-.purchase-info__price-div--cta button{
+.purchase-info__price-div--cta button {
     @apply xl:px-5 px-4;
-}
-
-.purchase-info__price-div--cta button:first-child{
-    @apply mr-2;
 }

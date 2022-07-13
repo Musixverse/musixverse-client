@@ -8,7 +8,6 @@ export default function NFTs() {
     const { Moralis, isInitialized } = useMoralis();
     // 0-based indexing
     const [tokens, setTokens] = useState("");
-    const [maxTokenIds, setMaxTokenIds] = useState([]);
     const [currentPage, setCurrentPage] = useState(0);
 
     const fetchTokens = async () => {
@@ -31,58 +30,28 @@ export default function NFTs() {
         if (tokens) {
             console.log("Tokens:", tokens);
 
-            const uniqueHashGroup = tokens.reduce((acc, token) => {
-                if (!acc[token.token_uri]) {
-                    acc[token.token_uri] = [];
-                }
-
-                acc[token.token_uri].push(token);
-                return acc;
-            }, {});
-
-            setMaxTokenIds([]);
-            Object.keys(uniqueHashGroup).forEach((uniqueHash) => {
-                const result = uniqueHashGroup[uniqueHash].reduce((prev, curr) => {
-                    return Number(prev.token_id) > Number(curr.token_id) ? prev : curr;
-                }, {});
-
-                let maxIdObj = { token_uri: uniqueHash, max_token_id: result.token_id };
-                setMaxTokenIds((prev) => [...prev, maxIdObj]);
-            });
-
-            const res = tokens.map((nft, index) => {
-                const metadata = JSON.parse(nft.metadata);
-
-                var localTokenId = "";
-                maxTokenIds.forEach((token) => {
-                    if (nft.token_uri === token.token_uri) localTokenId = Number(nft.token_id) + Number(metadata.attributes[0].value) - token.max_token_id;
-                });
+            for (let index in tokens) {
+                const metadata = JSON.parse(tokens[index].metadata);
 
                 if (metadata) {
-                    console.log("tempArray:", tempArray);
-                    let cardElem = (
+                    tempArray.push(
                         <NFTCard
-                            key={index}
-                            songName={metadata.name}
-                            artistName={metadata.artistName}
-                            image={metadata.image}
-                            songId={metadata.id}
-                            tokenId={nft.token_id}
+                            songName={metadata.title}
+                            artistName={metadata.artist}
+                            image={metadata.artwork.uri.replace("ipfs://", process.env.NEXT_PUBLIC_IPFS_NODE_URL)}
+                            tokenId={tokens[index].token_id}
                             numberOfCopies={metadata.attributes[0].value}
-                            contributorList={metadata.contributors}
-                            localTokenId={localTokenId}
+                            collaboratorList={metadata.collaborators}
                         />
                     );
 
-                    tempArray.push(cardElem);
-
                     if (index % 3 === 2 || index == tokens.length - 1) {
                         nftCards.push(tempArray);
+                        console.log("nftCards::::", nftCards);
                         tempArray = [];
                     }
-                } else return null;
-            });
-            console.log("res", res);
+                }
+            }
         }
     }, [tokens]);
 

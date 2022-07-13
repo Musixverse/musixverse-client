@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import { useMoralis } from "react-moralis";
+import Link from "next/link";
 import { MXV_CONTRACT_ADDRESS, BLOCKCHAIN_NETWORK } from "../../utils/smart-contract/constants";
 import NFTCard from "../../layout/NFTCard/NFTCard";
 
 const DisplayNFTs = () => {
     const { Moralis, isInitialized } = useMoralis();
-    const [tokens, setTokens] = useState("");
+    const [tokens, setTokens] = useState([]);
     const [maxTokenIds, setMaxTokenIds] = useState([]);
 
     const fetchTokens = async () => {
@@ -85,19 +86,22 @@ const DisplayNFTs = () => {
                                 localTokenId = Number(nft.token_id) + Number(metadata.attributes[0].value) - token.max_token_id;
                         });
 
+                        console.log("metadata", metadata);
                         if (metadata) {
                             return (
-                                <NFTCard
-                                    key={index}
-                                    songName={metadata.name}
-                                    artistName={metadata.artistName}
-                                    image={metadata.image}
-                                    songId={metadata.id}
-                                    tokenId={nft.token_id}
-                                    numberOfCopies={metadata.attributes[0].value}
-                                    contributorList={metadata.contributors}
-                                    localTokenId={localTokenId}
-                                />
+                                <Link key={index} href={`/polygon/track/${nft.token_id}`} passHref={true}>
+                                    <a>
+                                        <NFTCard
+                                            songName={metadata.title}
+                                            artistName={metadata.artist}
+                                            image={metadata.artwork.uri.replace("ipfs://", process.env.NEXT_PUBLIC_IPFS_NODE_URL)}
+                                            tokenId={nft.token_id}
+                                            numberOfCopies={metadata.attributes[0].value}
+                                            collaboratorList={metadata.collaborators}
+                                            localTokenId={localTokenId}
+                                        />
+                                    </a>
+                                </Link>
                             );
                         } else return null;
                     })}

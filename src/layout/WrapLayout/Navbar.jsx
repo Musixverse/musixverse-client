@@ -1,4 +1,5 @@
 import Link from "next/link";
+import {useState, useEffect} from "react";
 import { useRouter } from "next/router";
 import { useTheme } from "next-themes";
 import Image from "next/image";
@@ -16,9 +17,24 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
         await logout();
     };
 
+    const [clientWindowHeight, setClientWindowHeight] = useState("");
+    const customStyles = "";
+    const handleScroll = () => {
+    setClientWindowHeight(window.scrollY);
+    };
+
+    useEffect(() => {
+    window.addEventListener("scroll", handleScroll); 
+    return () => window.removeEventListener("scroll", handleScroll);
+    });
+
+    if(clientWindowHeight>50){
+        customStyles = "rounded-full top-2.5 shadow-lg";
+    }
+
     return (
-        <nav className="navbar">
-            <div className="flex flex-wrap items-center justify-between w-full max-w-[1920px] px-6 md:px-8 lg:px-16 xl:px-20 2xl:px-36">
+        <nav className={" top-0 navbar rounded-b-full place-self-center mx-auto duration-300 ease-in "+ customStyles}>
+            <div className="flex flex-wrap items-center sticky justify-between w-full max-w-[1500px] px-6 md:px-8 lg:px-10 xl:px-10 2xl:px-16">
                 <Link href="/">
                     <a href="#" className="flex">
                         {theme === "light" ? (
@@ -187,7 +203,6 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
                     </ul>
                 </div>
             </div>
-            <div className="w-full h-1 bg-gradient-to-r from-primary-100 to-primary-300"></div>
         </nav>
     );
 };

@@ -76,45 +76,25 @@ module.exports = ({ isOpen = "", onClose = "" }) => {
         }
     };
 
-    const magicLogin = async () => {
-        if (!isAuthenticated) {
-            await authenticate({
-                provider: "magicLink",
-                email: emailRef.current.value,
-                apiKey: process.env.NEXT_PUBLIC_MAGICLINK_API_KEY,
-                network: "mumbai",
-            })
-                .then(function (user) {
-                    if (user) {
-                        closeModal();
-                        Router.push("/library", undefined, { shallow: true });
-                    }
-                })
-                .catch(function (error) {
-                    console.log("Magic authentication error:", error);
-                });
-        }
-    };
-
-    const magicLogin = async () => {
-        if (!isAuthenticated) {
-            await authenticate({
-                provider: "magicLink",
-                email: emailRef.current.value,
-                apiKey: process.env.NEXT_PUBLIC_MAGICLINK_API_KEY,
-                network: "mumbai",
-            })
-                .then(function (user) {
-                    if (user) {
-                        closeModal();
-                        Router.push("/library", undefined, { shallow: true });
-                    }
-                })
-                .catch(function (error) {
-                    console.log("Magic authentication error:", error);
-                });
-        }
-    };
+    // const magicLogin = async () => {
+    //     if (!isAuthenticated) {
+    //         await authenticate({
+    //             provider: "magicLink",
+    //             email: emailRef.current.value,
+    //             apiKey: process.env.NEXT_PUBLIC_MAGICLINK_API_KEY,
+    //             network: "mumbai",
+    //         })
+    //             .then(function (user) {
+    //                 if (user) {
+    //                     closeModal();
+    //                     Router.push("/library", undefined, { shallow: true });
+    //                 }
+    //             })
+    //             .catch(function (error) {
+    //                 console.log("Magic authentication error:", error);
+    //             });
+    //     }
+    // };
 
     return (
         <>

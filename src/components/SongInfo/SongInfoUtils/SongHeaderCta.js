@@ -3,10 +3,11 @@ import { useMoralis } from "react-moralis";
 import Image from "next/image";
 import CtaButtons from "./CtaButtons";
 import { getCurrentNftPrice } from "../../../utils/smart-contract/functions";
-import styles from "../../../../styles/SongInfo/PurchaseInfo.module.css";
 
 export default function SongHeaderCta({ tokenId, unlockTimestamp }) {
     const { Moralis } = useMoralis();
+    const isWeb3Active = Moralis.ensureWeb3IsInstalled();
+
     const [price, setPrice] = useState("");
     const [maticUSD, setMaticUSD] = useState("");
     const [maticINR, setMaticINR] = useState("");
@@ -41,8 +42,10 @@ export default function SongHeaderCta({ tokenId, unlockTimestamp }) {
     }
 
     useEffect(async () => {
-        const musicNft = await getPriceOf(tokenId);
-        setPrice(Moralis.Units.FromWei(musicNft.price));
+        if (isWeb3Active) {
+            const musicNft = await getPriceOf(tokenId);
+            setPrice(Moralis.Units.FromWei(musicNft.price));
+        }
 
         var date = new Date(unlockTimestamp * 1000);
         var dateStr =
@@ -57,7 +60,7 @@ export default function SongHeaderCta({ tokenId, unlockTimestamp }) {
             date.toLocaleTimeString() +
             " IST";
         setSaleStart(dateStr.toString());
-    }, []);
+    }, [isWeb3Active]);
 
     useEffect(async () => {
         fetchMaticUSD();

@@ -71,11 +71,11 @@ module.exports = ({ isOpen = "", onClose = "" }) => {
                     }
                 })
                 .catch(function (error) {
-                    console.log("Metamask authentication error:", error);
+                    console.log("WalletConnect authentication error:", error);
                 });
         }
     };
-   
+
     const magicLogin = async () => {
         if (!isAuthenticated) {
             await authenticate({

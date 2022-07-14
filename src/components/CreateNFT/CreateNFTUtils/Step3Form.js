@@ -23,6 +23,42 @@ const Step3Form = ({
     const [searchedUsername, setSearchedUsername] = useState("");
     const [unlockTimestampInMs, setUnlockTimestampInMs] = useState(new Date().getTime());
 
+    const [maticUSD, setMaticUSD] = useState("");
+    const [maticINR, setMaticINR] = useState("");
+
+    async function fetchMaticUSD() {
+        const COINBASE_BASE_URL = "https://api.coinbase.com/v2";
+        const res = await fetch(`${COINBASE_BASE_URL}/prices/MATIC-USD/buy`);
+        const result = await res.json();
+        setMaticUSD((result.data.amount * Number(nftPrice)).toFixed(2));
+    }
+
+    async function fetchMaticINR() {
+        const COINBASE_BASE_URL = "https://api.coinbase.com/v2";
+        const res = await fetch(`${COINBASE_BASE_URL}/prices/MATIC-INR/buy`);
+        const result = await res.json();
+        setMaticINR((result.data.amount * Number(nftPrice)).toFixed(0));
+    }
+
+    let truncatedmaticUSDPrice = maticUSD;
+    if (maticUSD >= 1000000) {
+        truncatedmaticUSDPrice = Number((maticUSD / 1000000).toFixed(2)) + " M";
+    } else if (maticUSD >= 1000) {
+        truncatedmaticUSDPrice = Number((maticUSD / 1000).toFixed(2)) + " K";
+    }
+
+    let truncatedmaticINRPrice = maticINR;
+    if (maticINR >= 1000000) {
+        truncatedmaticINRPrice = Number((maticINR / 1000000).toFixed(2)) + " M";
+    } else if (maticINR >= 1000) {
+        truncatedmaticINRPrice = Number((maticINR / 1000).toFixed(2)) + " K";
+    }
+
+    useEffect(async () => {
+        fetchMaticUSD();
+        fetchMaticINR();
+    }, [nftPrice]);
+
     const changeTimesampToSeconds = (timestamp) => {
         setUnlockTimestampInMs(timestamp);
         setUnlockTimestamp(Math.round(timestamp / 1000));
@@ -136,7 +172,11 @@ const Step3Form = ({
                             <label htmlFor="individual-nft-price" className="block uppercase tracking-wide mb-1 text-sm">
                                 PRICE OF EACH COPY
                                 <RequiredAsterisk />
+                                <span className="inline-block text-gray-500 text-xs font-normal lowercase ml-4">
+                                    (approx. ₹{truncatedmaticINRPrice} or ${truncatedmaticUSDPrice})
+                                </span>
                             </label>
+
                             <input
                                 className="dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-100 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-100"
                                 id="individual-nft-price"
@@ -147,7 +187,7 @@ const Step3Form = ({
                                 type="number"
                                 min={0}
                                 step="0.01"
-                                placeholder="Enter NFT price"
+                                placeholder="Enter price in MATIC"
                                 required
                             />
                         </div>

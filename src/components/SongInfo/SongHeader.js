@@ -6,11 +6,17 @@ import styles from "../../../styles/SongInfo/SongHeader.module.css";
 import AudioPlayer from "./AudioPlayer";
 import mxv_verified from "../../../public/assets/mxv_tick.svg";
 import SongHeaderCta from "./SongInfoUtils/SongHeaderCta";
+import { MXV_CONTRACT_ADDRESS, BLOCKCHAIN_NETWORK } from "../../utils/smart-contract/constants";
 
-export default function SongHeader({ image, artworkArtistId, artistAddress, title, audio_url, tokenId, unlockTimestamp }) {
+export default function SongHeader({ image, artworkArtistId, artistAddress, title, audio_url, tokenId, unlockTimestamp, price }) {
     const [artworkArtistInfo, setArtworkArtistInfo] = useState("");
 
     const { data: artist } = useMoralisCloudFunction("fetchUsernameFromAddress", { artistAddress: artistAddress });
+    const { data: localTokenId } = useMoralisCloudFunction("fetchLocalTokenId", {
+        tokenId: tokenId,
+        contractAddress: MXV_CONTRACT_ADDRESS,
+        chain: BLOCKCHAIN_NETWORK,
+    });
 
     const { fetch: fetchCollaborator } = useMoralisCloudFunction(
         "fetchCollaborator",
@@ -73,14 +79,21 @@ export default function SongHeader({ image, artworkArtistId, artistAddress, titl
                         </div>
                     </div>
 
-                    <h2 className="font-tertiary text-6xl pb-8 w-[268px]">{title}</h2>
+                    <h2 className="font-tertiary text-7xl pb-8">
+                        {title}&nbsp;
+                        {localTokenId ? (
+                            <span className="font-primary text-xs">
+                                #{localTokenId[0]} of {localTokenId[1]}
+                            </span>
+                        ) : null}
+                    </h2>
                     {/* Audio Player component */}
                     <AudioPlayer audio_url={audio_url} />
 
                     <div className="pb-10">Tags</div>
 
                     {/* Song Header CTA */}
-                    <SongHeaderCta tokenId={tokenId} unlockTimestamp={unlockTimestamp} />
+                    <SongHeaderCta tokenId={tokenId} unlockTimestamp={unlockTimestamp} price={price} />
                 </div>
             </div>
         </div>

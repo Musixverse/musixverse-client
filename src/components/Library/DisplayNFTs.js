@@ -58,7 +58,7 @@ const DisplayNFTs = () => {
                     tokens.map((nft, index) => {
                         const metadata = JSON.parse(nft.metadata);
 
-                        // tokenid + total - maxTokenId
+                        // tokenId + total - maxTokenId
                         var localTokenId = "";
                         maxTokenIds.forEach((token) => {
                             if (nft.token_uri === token.token_uri)

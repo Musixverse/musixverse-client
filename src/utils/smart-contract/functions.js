@@ -45,6 +45,11 @@ async function connectSmartContract() {
     const provider = new Web3.providers.HttpProvider(RPC_URL);
     window.web3 = new Web3(provider);
 
+    const web3 = window.web3;
+    MUSIXVERSE = await new web3.eth.Contract(MXV_CONTRACT_ABI, MXV_CONTRACT_ADDRESS);
+    await Moralis.enableWeb3();
+    console.log("Contract connected");
+
     if (ethereum && (await ethereum.request({ method: "net_version" })) !== BLOCKCHAIN_NETWORK_ID.toString()) {
         await addPolygonTestnetNetwork();
     } else if (ethereum) {
@@ -52,12 +57,11 @@ async function connectSmartContract() {
         window.web3 = new Web3(ethereum);
     }
 
-    const web3 = window.web3;
-    if ((await web3.eth.net.getId()) === BLOCKCHAIN_NETWORK_ID) {
-        MUSIXVERSE = await new web3.eth.Contract(MXV_CONTRACT_ABI, MXV_CONTRACT_ADDRESS);
-        await Moralis.enableWeb3();
-        console.log("Contract connected");
-    }
+    // if ((await web3.eth.net.getId()) === BLOCKCHAIN_NETWORK_ID) {
+    //     MUSIXVERSE = await new web3.eth.Contract(MXV_CONTRACT_ABI, MXV_CONTRACT_ADDRESS);
+    //     await Moralis.enableWeb3();
+    //     console.log("Contract connected");
+    // }
 
     // if ((navigator.userAgent.indexOf("Opera") || navigator.userAgent.indexOf("OPR")) != -1) {
     //     alert("Opera");

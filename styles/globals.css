@@ -36,7 +36,7 @@ a {
 /**************************************************************************/
 
 .navbar {
-    @apply dark:bg-[rgba(19,19,19,0.4)] flex flex-col items-center justify-center dark:backdrop-blur-[24px] dark:backdrop-brightness-105 fixed top-0 z-40 w-full backdrop-blur-[40px] backdrop-brightness-200 bg-[rgba(255,255,255,0.8)];
+    @apply dark:bg-[rgba(19,19,19,0.4)] dark:backdrop-blur-[24px] dark:backdrop-brightness-105 sticky z-40 max-w-[1500px] backdrop-blur-[40px] backdrop-brightness-200 bg-[rgba(255,255,255,0.8)];
 }
 
 /**************************************************************************/

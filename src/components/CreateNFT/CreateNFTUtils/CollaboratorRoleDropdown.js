@@ -7,16 +7,16 @@ function classNames(...classes) {
     return classes.filter(Boolean).join(" ");
 }
 
-export default function ContributorRoleDropdown({ optionsArray, setContributorRole, index }) {
+export default function CollaboratorRoleDropdown({ optionsArray, setCollaboratorRole, index }) {
     const [currentFilter, setCurrentFilter] = useState(optionsArray[0]);
 
     useEffect(() => {
-        setContributorRole(index, currentFilter);
+        setCollaboratorRole(index, currentFilter);
     }, []);
 
     const handleOptionSelect = (e) => {
         setCurrentFilter(e.target.textContent);
-        setContributorRole(index, e.target.textContent);
+        setCollaboratorRole(index, e.target.textContent);
     };
 
     // Map all the options into a items renderable array

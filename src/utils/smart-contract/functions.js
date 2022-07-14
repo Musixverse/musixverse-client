@@ -1,76 +1,112 @@
 import Web3 from "web3";
+import Moralis from "moralis";
 // Importing contract abi, address, and other variables
-import { MXV_CONTRACT_ABI, MXV_CONTRACT_ADDRESS } from "./constants";
+import { MXV_CONTRACT_ABI, MXV_CONTRACT_ADDRESS, BLOCKCHAIN_NETWORK_ID, RPC_URL } from "./constants";
 var MUSIXVERSE;
+
+async function addPolygonTestnetNetwork() {
+    const { ethereum } = window;
+
+    try {
+        await ethereum.request({
+            method: "wallet_switchEthereumChain",
+            params: [{ chainId: "0x13881" }], // Hexadecimal version of 80001, prefixed with 0x
+        });
+    } catch (error) {
+        if (error.code === 4902) {
+            try {
+                await ethereum.request({
+                    method: "wallet_addEthereumChain",
+                    params: [
+                        {
+                            chainId: "0x13881", // Hexadecimal version of 80001, prefixed with 0x
+                            chainName: "POLYGON Testnet",
+                            nativeCurrency: {
+                                name: "MATIC",
+                                symbol: "MATIC",
+                                decimals: 18,
+                            },
+                            rpcUrls: ["https://matic-mumbai.chainstacklabs.com/"],
+                            blockExplorerUrls: ["https://mumbai.polygonscan.com/"],
+                            iconUrls: [""],
+                        },
+                    ],
+                });
+            } catch (addError) {
+                console.log("Did not add network");
+            }
+        }
+    }
+}
 
 async function connectSmartContract() {
     const { ethereum } = window;
 
-    async function addPolygonTestnetNetwork() {
-        try {
-            await ethereum.request({
-                method: "wallet_switchEthereumChain",
-                params: [{ chainId: "0x13881" }], // Hexadecimal version of 80001, prefixed with 0x
-            });
-        } catch (error) {
-            if (error.code === 4902) {
-                try {
-                    await ethereum.request({
-                        method: "wallet_addEthereumChain",
-                        params: [
-                            {
-                                chainId: "0x13881", // Hexadecimal version of 80001, prefixed with 0x
-                                chainName: "POLYGON Testnet",
-                                nativeCurrency: {
-                                    name: "MATIC",
-                                    symbol: "MATIC",
-                                    decimals: 18,
-                                },
-                                rpcUrls: ["https://matic-mumbai.chainstacklabs.com/"],
-                                blockExplorerUrls: ["https://mumbai.polygonscan.com/"],
-                                iconUrls: [""],
-                            },
-                        ],
-                    });
-                } catch (addError) {
-                    console.log("Did not add network");
-                }
-            }
-        }
-    }
+    const provider = new Web3.providers.HttpProvider(RPC_URL);
+    window.web3 = new Web3(provider);
 
-    if (ethereum) {
+    if (ethereum && (await ethereum.request({ method: "net_version" })) !== BLOCKCHAIN_NETWORK_ID.toString()) {
+        await addPolygonTestnetNetwork();
+    } else if (ethereum) {
+        await addPolygonTestnetNetwork();
         window.web3 = new Web3(ethereum);
-        await addPolygonTestnetNetwork();
-    } else if (ethereum && (await ethereum.request({ method: "net_version" })) !== "80001") {
-        window.web3 = new Web3(window.web3.currentProvider);
-        await addPolygonTestnetNetwork();
-    } else {
-        window.web3 = new Web3(new Web3.providers.HttpProvider("https://speedy-nodes-nyc.moralis.io/9aef181628e87a4be542999f/polygon/mumbai"));
-        // window.alert(
-        //     "Non-Ethereum browser detected. You cannot perform any transactions on the blockchain, however you will still be able to watch all content present on the blockchain. To make transactions you should consider installing Metamask"
-        // );
     }
 
     const web3 = window.web3;
-    MUSIXVERSE = await new web3.eth.Contract(MXV_CONTRACT_ABI, MXV_CONTRACT_ADDRESS);
-    console.log("Contract connected");
+    if ((await web3.eth.net.getId()) === BLOCKCHAIN_NETWORK_ID) {
+        MUSIXVERSE = await new web3.eth.Contract(MXV_CONTRACT_ABI, MXV_CONTRACT_ADDRESS);
+        await Moralis.enableWeb3();
+        console.log("Contract connected");
+    }
+
+    // if ((navigator.userAgent.indexOf("Opera") || navigator.userAgent.indexOf("OPR")) != -1) {
+    //     alert("Opera");
+    // } else if (navigator.userAgent.indexOf("Edg") != -1) {
+    //     alert("Edge");
+    // } else if (navigator.userAgent.indexOf("Chrome") != -1) {
+    //     alert("Chrome");
+    // } else if (navigator.userAgent.indexOf("Safari") != -1) {
+    //     alert("Safari");
+    // } else if (navigator.userAgent.indexOf("Firefox") != -1) {
+    //     alert("Firefox");
+    // } else if (navigator.userAgent.indexOf("MSIE") != -1 || !!document.documentMode == true) {
+    //     //IF IE > 10
+    //     alert("IE");
+    // } else {
+    //     alert("unknown");
+    // }
 }
 
 async function mintTrackNFT(
     numberOfCopies,
     price,
     metadataURI,
-    contributors,
+    collaborators,
     percentageContributions,
     resaleRoyaltyPercentage,
     onSale,
     unlockTimestamp,
     callerAddress
 ) {
-    await MUSIXVERSE.methods
-        .mintTrackNFT(numberOfCopies, price, metadataURI, contributors, percentageContributions, resaleRoyaltyPercentage, onSale, unlockTimestamp)
-        .send({ from: callerAddress });
+    const sendOptions = {
+        contractAddress: MXV_CONTRACT_ADDRESS,
+        functionName: "mintTrackNFT",
+        abi: MXV_CONTRACT_ABI,
+        params: {
+            amount: numberOfCopies,
+            price: price,
+            URIHash: metadataURI,
+            collaborators: collaborators,
+            percentageContributions: percentageContributions,
+            resaleRoyaltyPercentage: resaleRoyaltyPercentage,
+            onSale: onSale,
+            unlockTimestamp: unlockTimestamp,
+        },
+    };
+
+    const transaction = await Moralis.executeFunction(sendOptions);
+    // Wait until the transaction is confirmed
+    await transaction.wait();
 }
 
 async function purchaseMusicNFT(tokenId, price, callerAddress) {
@@ -127,6 +163,7 @@ async function getCurrentNftPrice(tokenId) {
 }
 
 module.exports = {
+    addPolygonTestnetNetwork,
     connectSmartContract,
     mintTrackNFT,
     purchaseMusicNFT,

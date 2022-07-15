@@ -9,7 +9,7 @@ const ToggleOnSaleModal = ({ isOpen, setToggleOnSaleModalOpen }) => {
             isOpen={isOpen}
             image={
                 <div className="mx-auto flex items-center relative justify-center h-24 w-24 text-5xl text-primary-100">
-                    <i class="fa-solid fa-sliders"></i>
+                    <i className="fa-solid fa-sliders"></i>
                 </div>
             }
             title={"Toggle the availability of your NFT on Musixverse"}

@@ -19,6 +19,7 @@ export default function NFTs() {
                     token_address: MXV_CONTRACT_ADDRESS,
                 };
                 const nftData = await Moralis.Web3API.account.getNFTsForContract(options);
+                console.log(nftData);
                 setTokens(nftData.result);
             })();
         }
@@ -35,13 +36,21 @@ export default function NFTs() {
                     tempArray.push(
                         <NFTCard
                             key={idx}
-                            songName={metadata.name}
-                            artistName={metadata.artistName}
-                            image={metadata.image}
-                            songId={metadata.id}
+                            trackName={metadata.title}
+                            artistName={metadata.artist}
+                            image={metadata.artwork.uri.replace("ipfs://", process.env.NEXT_PUBLIC_IPFS_NODE_URL)}
+                            // songId={metadata.id}
                             tokenId={nft.token_id}
                             numberOfCopies={metadata.attributes[0].value}
-                            contributorList={metadata.contributors}
+                            collaboratorList={metadata.collaborators}
+                            
+                            // trackName={metadata.title}
+                            // artistName={metadata.artist}
+                            // image={metadata.artwork.uri.replace("ipfs://", process.env.NEXT_PUBLIC_IPFS_NODE_URL)}
+                            // tokenId={nft.token_id}
+                            // numberOfCopies={metadata.attributes[0].value}
+                            // collaboratorList={metadata.collaborators}
+                            // localTokenId={localTokenId}
                         />
                     );
                     if(tempArray.length%3 == 0 || idx == tokens.length-1){

@@ -1,29 +1,11 @@
-import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useMoralisQuery, useMoralis } from "react-moralis";
+import { useMoralisQuery } from "react-moralis";
 import styles from "../../../styles/SongInfo/PurchaseInfo.module.css";
 import CustomButton from "../../layout/CustomButton";
-import { getCurrentNftPrice } from "../../utils/smart-contract/functions";
 
-export default function PurchaseInfo({ tokenId, metadata, currentOwnerAddress }) {
-    const [price, setPrice] = useState("");
-    const { Moralis } = useMoralis();
-    const isWeb3Active = Moralis.ensureWeb3IsInstalled();
-
+export default function PurchaseInfo({ metadata, currentOwnerAddress, price }) {
     const { data: currentOwner } = useMoralisQuery("_User", (query) => query.equalTo("ethAddress", currentOwnerAddress), [currentOwnerAddress]);
-
-    const getPriceOf = async (tokenId) => {
-        const result = await getCurrentNftPrice(tokenId);
-        return result;
-    };
-
-    useEffect(async () => {
-        if (isWeb3Active) {
-            const musicNft = await getPriceOf(tokenId);
-            setPrice(Moralis.Units.FromWei(musicNft.price));
-        }
-    }, [isWeb3Active, tokenId]);
 
     if (!currentOwner[0]) return null;
     return (

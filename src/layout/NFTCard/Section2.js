@@ -35,9 +35,11 @@ export default function Section2({ collaboratorList, numberOfCopies, localTokenI
                         return <CollaboratorImage key={index} index={index} collaboratorList={collaboratorList} collaborator={collaborator} />;
                     })}
                 </div>
-                <span className="dark:text-light-300">
-                    #{localTokenId} of&nbsp;{numberOfCopies}
-                </span>
+                {localTokenId ? (
+                    <span className="dark:text-light-300">
+                        #{localTokenId} of&nbsp;{numberOfCopies}
+                    </span>
+                ) : null}
             </div>
 
             {/* Last price */}

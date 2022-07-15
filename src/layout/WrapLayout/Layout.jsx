@@ -16,11 +16,15 @@ import AuthModal from "../Modal/AuthModal";
 const Layout = ({ children }) => {
     const { authError } = useMoralis();
     const [error, success, , setError] = useContext(StatusContext);
-    const [isLoading] = useContext(LoadingContext);
+    const [isLoading, setLoading] = useContext(LoadingContext);
     const [authModalOpen, setAuthModalOpen] = useContext(AuthModalContext);
 
     const router = useRouter();
     const { theme } = useTheme();
+
+    router.events.on("routeChangeStart", () => setLoading(true));
+    router.events.on("routeChangeComplete", () => setLoading(false));
+    router.events.on("routeChangeError", () => setLoading(false));
 
     useEffect(() => {
         if (authError) {

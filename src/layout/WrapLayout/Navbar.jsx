@@ -18,7 +18,7 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
     };
 
     const [clientWindowHeight, setClientWindowHeight] = useState("");
-    const customStyles = "";
+    const customStyles = "top-0 rounded-b-[50px]";
     const handleScroll = () => {
     setClientWindowHeight(window.scrollY);
     };
@@ -33,43 +33,21 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
     }
 
     return (
-        <nav className={" top-0 navbar rounded-b-full place-self-center mx-auto duration-300 ease-in "+ customStyles}>
-            <div className="flex flex-wrap items-center sticky justify-between w-full max-w-[1500px] px-6 md:px-8 lg:px-10 xl:px-10 2xl:px-16">
+        <nav className={"navbar place-self-center mx-auto duration-300 ease-in "+ customStyles}>
+            <div className="flex flex-wrap items-center sticky justify-center w-full max-w-[1500px] px-16 py-4">
                 <Link href="/">
                     <a href="#" className="flex">
                         {theme === "light" ? (
-                            <Image src={logoBlack} alt="MXV Logo" width="70" height="70" />
+                            <Image src={logoBlack} alt="MXV Logo" width="104" height="20" />
                         ) : (
-                            <Image src={logoWhite} alt="MXV Logo" width="70" height="70" />
+                            <Image src={logoWhite} alt="MXV Logo" width="104" height="20" />
                         )}
                     </a>
                 </Link>
 
-                {/* <div className="hidden w-full ml-auto md:block md:w-auto" id="mobile-menu"></div> */}
-
-                <div className="block ml-auto">
-                    <ul className="flex flex-row items-center text-xs font-medium md:space-x-8 md:mt-0 sm:text-sm">
-                        <li>
-                            <div className="flex items-center justify-center text-xs rounded text-search-200 bg-light-100 dark:text-search-300 dark:bg-search-200">
-                                <div className="flex overflow-hidden border rounded dark:border-dark-100">
-                                    <input
-                                        type="text"
-                                        className="px-4 py-2 w-60 border-1 border-light-300 bg-search-100 dark:text-search-300 dark:bg-search-200 focus:outline-none"
-                                        placeholder="Search items, and accounts"
-                                    />
-                                    <button className="flex items-center justify-center px-4 border-l border-light-300 dark:border-dark-100 bg-search-100 dark:bg-search-200">
-                                        <svg
-                                            className="w-4 h-4 text-search-200 dark:text-search-300"
-                                            fill="currentColor"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 24 24"
-                                        >
-                                            <path d="M16.32 14.9l5.39 5.4a1 1 0 0 1-1.42 1.4l-5.38-5.38a8 8 0 1 1 1.41-1.41zM10 16a6 6 0 1 0 0-12 6 6 0 0 0 0 12z" />
-                                        </svg>
-                                    </button>
-                                </div>
-                            </div>
-                        </li>
+                {/* Internal links */}
+                <div className="block ml-10">
+                    <ul className="flex flex-row items-center md:text-base font-semibold md:space-x-8 md:mt-0 sm:text-sm">
                         <li className="hidden hover:text-primary-200 md:block">
                             <Link
                                 href="/"
@@ -81,28 +59,57 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
                         </li>
                         <li className="hover:text-primary-200">
                             <Link
-                                href="/cfh/cfb"
-                                className="block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:text-primary-100 md:hover:bg-transparent md:border-0 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-                            >
-                                Musixverse Community
-                            </Link>
-                        </li>
-                        <li className="hover:text-primary-200">
-                            <Link
                                 href="/library"
                                 className="block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:text-primary-100 md:hover:bg-transparent md:border-0 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
                             >
-                                Library
+                                Explore
                             </Link>
                         </li>
                         <li className="hover:text-primary-200">
                             <Link
-                                href="/trending"
+                                href="/create-nft"
                                 className="block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:text-primary-100 md:hover:bg-transparent md:border-0 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
                             >
-                                Trending
+                                Create
                             </Link>
                         </li>
+                        <li className="hover:text-primary-200">
+                            <Link
+                                href="/cfh/cfb"
+                                className="block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:text-primary-100 md:hover:bg-transparent md:border-0 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                            >
+                                Community
+                            </Link>
+                        </li>
+                    </ul>
+                </div>
+
+                <div className="block ml-auto">
+                    <ul className="flex flex-row items-center text-sm font-medium md:space-x-8 md:mt-0 sm:text-sm">
+                        {/* Search bar */}
+                        <li>
+                            <div className="flex items-center justify-center text-xs rounded text-dark-200 dark:text-search-300">
+                                <div className="flex overflow-hidden border rounded-full dark:border-dark-100">
+                                    <button className="flex items-center justify-center px-4 border-l border-light-300 dark:border-dark-100 bg-search-100 dark:bg-search-200">
+                                        <svg
+                                            className="w-4 h-4 dark:text-search-300"
+                                            fill="currentColor"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 24 24"
+                                        >
+                                            <path d="M16.32 14.9l5.39 5.4a1 1 0 0 1-1.42 1.4l-5.38-5.38a8 8 0 1 1 1.41-1.41zM10 16a6 6 0 1 0 0-12 6 6 0 0 0 0 12z" />
+                                        </svg>
+                                    </button>
+                                    <input
+                                        type="text"
+                                        className="px-4 py-2 w-72 border-1 border-light-300 bg-search-100 dark:text-search-300 dark:bg-search-200 focus:outline-none"
+                                        placeholder="Search items, collections and accounts"
+                                    />
+                                </div>
+                            </div>
+                        </li>
+                        
+                        {/* Toggle theme button */}
                         <li className="ml-2">
                             <button
                                 aria-label="Toggle Dark Mode"
@@ -135,6 +142,8 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
                                 </svg>
                             </button>
                         </li>
+
+                        {/* Dropdowm Menu */}
                         <li>
                             <ul className="relative group dropdown">
                                 <a

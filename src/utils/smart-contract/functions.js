@@ -131,9 +131,22 @@ async function purchaseTrackNFT(tokenId, price) {
     await transaction.wait();
 }
 
-async function updatePrice(tokenId, newPrice, callerAddress) {
+async function updatePrice(tokenId, newPrice) {
     const _tokenId = parseInt(tokenId).toString();
-    await MUSIXVERSE.methods.updatePrice(_tokenId, newPrice).send({ from: callerAddress });
+
+    const sendOptions = {
+        contractAddress: MXV_CONTRACT_ADDRESS,
+        functionName: "updatePrice",
+        abi: MXV_CONTRACT_ABI,
+        params: {
+            tokenId: _tokenId,
+            newPrice: Moralis.Units.Token(String(newPrice), "18"),
+        },
+    };
+
+    const transaction = await Moralis.executeFunction(sendOptions);
+    // Wait until the transaction is confirmed
+    await transaction.wait();
 }
 
 async function toggleOnSale(tokenId, callerAddress) {

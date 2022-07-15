@@ -1,7 +1,7 @@
 import Image from "next/image";
 import CustomButton from "../../layout/CustomButton";
 import ethLogo from "../../../public/assets/Eth_logo.svg";
-import styles from "../../../styles/SongInfo/Banner.module.css";
+import styles from "../../../styles/TrackInfo/Banner.module.css";
 
 export default function Banner() {
     const price = 0.3;
@@ -9,7 +9,7 @@ export default function Banner() {
     return (
         <div className={"dark:bg-[#6ec726] " + styles["banner"]}>
             <div className={styles["banner__container"]}>
-                <p>This Song is available to buy</p>
+                <p>This Track is available to buy</p>
                 {/* CTA */}
                 <div className={styles["banner__container--cta"]}>
                     <p className="mr-2">Reserved Price</p>

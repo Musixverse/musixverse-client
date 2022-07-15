@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import CtaButtons from "./CtaButtons";
 
-export default function SongHeaderCta({ unlockTimestamp, price }) {
+export default function TrackHeaderCta({ tokenId, unlockTimestamp, price, currentOwnerAddress }) {
     const [maticUSD, setMaticUSD] = useState("");
     const [maticINR, setMaticINR] = useState("");
     const [saleStart, setSaleStart] = useState("");
@@ -150,7 +150,7 @@ export default function SongHeaderCta({ unlockTimestamp, price }) {
                 </div>
             </div>
 
-            <CtaButtons />
+            <CtaButtons currentOwnerAddress={currentOwnerAddress} tokenId={tokenId} price={price} />
         </div>
     );
 }

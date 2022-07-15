@@ -62,7 +62,7 @@ const ProtectedRoutes = ({ router, children }) => {
             setShowContent(true);
             setLoading(false);
         }
-    }, [router.pathname, isInitialized]);
+    }, [router.pathname, isInitialized, isAuthenticated]);
 
     useEffect(() => {
         if (!isWeb3Enabled && isAuthenticated) enableWeb3();

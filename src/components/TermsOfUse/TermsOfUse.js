@@ -1,6 +1,5 @@
-
 export default function TermsOfUse() {
-	return (
+    return (
         <div className="w-full h-screen flex justify-center pt-36">
             <div className="w-full">
                 <div>
@@ -13,12 +12,12 @@ export default function TermsOfUse() {
                         <a href={"/"} className="text-primary-100">
                             musixverse.com
                         </a>{" "}
-                        aggregates all songs that users put up as NFTs and is not partnering with any of the artists displayed on the website. If you want to contact one of the artists listed
-                        here, you must contact them directly through other social media platforms. We are not responsible if someone else puts up an artists&apos; song as an NFT on our platform and
-                        cannot assist you regarding the same.
+                        aggregates all tracks that users put up as NFTs and is not partnering with any of the artists displayed on the website. If you want to
+                        contact one of the artists listed here, you must contact them directly through other social media platforms. We are not responsible if
+                        someone else puts up an artists&apos; track as an NFT on our platform and cannot assist you regarding the same.
                     </div>
                 </div>
             </div>
         </div>
-	);
+    );
 }

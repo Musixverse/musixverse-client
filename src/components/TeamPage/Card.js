@@ -17,22 +17,22 @@ export default function PreviewNft({ imgUrl, name, position, role, socialLinks, 
     //     truncatednftPrice = Number((nftPrice / 1000).toFixed(2)) + " K";
     // }
 
-    // const playSongHandler = () => {
+    // const playTrackHandler = () => {
     //     const playPause = playBtn.current.children[0];
     //     const isPaused = playPause.classList.contains("fa-play");
 
-    //     if (isPaused) playSong(playPause);
-    //     else pauseSong(playPause);
+    //     if (isPaused) playTrack(playPause);
+    //     else pauseTrack(playPause);
     // };
 
-    // const pauseSong = (controller) => {
+    // const pauseTrack = (controller) => {
     //     controller.classList.add("fa-play");
     //     controller.classList.remove("fa-pause");
 
     //     audio.current.pause();
     // };
 
-    const playSong = (controller) => {
+    const playTrack = (controller) => {
         controller.classList.remove("fa-play");
         controller.classList.add("fa-pause");
 
@@ -40,7 +40,7 @@ export default function PreviewNft({ imgUrl, name, position, role, socialLinks, 
     };
 
     const resetProgress = () => {
-        pauseSong(playBtn.current.children[0]);
+        pauseTrack(playBtn.current.children[0]);
         audio.current.currentTime = 0;
     };
 

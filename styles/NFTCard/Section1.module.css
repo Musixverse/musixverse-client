@@ -6,7 +6,7 @@
     @apply font-secondary text-xs text-[#818181];
 }
 
-.description--section1__songname {
+.description--section1__trackname {
     @apply text-sm sm:text-lg md:text-xl font-semibold font-primary;
 }
 

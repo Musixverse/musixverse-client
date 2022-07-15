@@ -2,13 +2,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { useMoralisCloudFunction } from "react-moralis";
-import styles from "../../../styles/SongInfo/SongHeader.module.css";
+import styles from "../../../styles/TrackInfo/TrackHeader.module.css";
 import AudioPlayer from "./AudioPlayer";
 import mxv_verified from "../../../public/assets/mxv_tick.svg";
-import SongHeaderCta from "./SongInfoUtils/SongHeaderCta";
+import TrackHeaderCta from "./TrackInfoUtils/TrackHeaderCta";
 import { MXV_CONTRACT_ADDRESS, BLOCKCHAIN_NETWORK } from "../../utils/smart-contract/constants";
 
-export default function SongHeader({ image, artworkArtistId, artistAddress, title, audio_url, tokenId, unlockTimestamp, price }) {
+export default function TrackHeader({ image, artworkArtistId, artistAddress, title, audio_url, tokenId, unlockTimestamp, price, currentOwnerAddress }) {
     const [artworkArtistInfo, setArtworkArtistInfo] = useState("");
 
     const { data: artist } = useMoralisCloudFunction("fetchUsernameFromAddress", { artistAddress: artistAddress });
@@ -39,13 +39,13 @@ export default function SongHeader({ image, artworkArtistId, artistAddress, titl
 
     if (!artist) return null;
     return (
-        <div className={styles["song-header"]}>
-            <div className={styles["song-header__container"]}>
+        <div className={styles["track-header"]}>
+            <div className={styles["track-header__container"]}>
                 {/* Image section */}
-                <div className={"group " + styles["song-header__container--songImage"]}>
+                <div className={"group " + styles["track-header__container--trackImage"]}>
                     <Link href={image}>
                         <a target="_blank" rel="noopener noreferrer">
-                            <Image src={image} className="rounded-lg" alt="songImage" width={500} height={500} priority={true} />
+                            <Image src={image} className="rounded-lg" alt="trackImage" width={500} height={500} priority={true} />
                         </a>
                     </Link>
                     <div className="absolute hidden group-hover:block">
@@ -64,8 +64,8 @@ export default function SongHeader({ image, artworkArtistId, artistAddress, titl
                     </div>
                 </div>
 
-                {/* Song Details section */}
-                <div className={styles["song-header__container--song-detail"]}>
+                {/* Track Details section */}
+                <div className={styles["track-header__container--track-detail"]}>
                     <div className="font-bold pb-2 items-center flex">
                         {artist[0] ? (
                             <Link href={`/profile/${artist[0].username}`} className="cursor-pointer">
@@ -92,8 +92,8 @@ export default function SongHeader({ image, artworkArtistId, artistAddress, titl
 
                     <div className="pb-10">Tags</div>
 
-                    {/* Song Header CTA */}
-                    <SongHeaderCta tokenId={tokenId} unlockTimestamp={unlockTimestamp} price={price} />
+                    {/* Track Header CTA */}
+                    <TrackHeaderCta tokenId={tokenId} unlockTimestamp={unlockTimestamp} price={price} currentOwnerAddress={currentOwnerAddress} />
                 </div>
             </div>
         </div>

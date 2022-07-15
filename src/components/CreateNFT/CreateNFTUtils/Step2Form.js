@@ -1,5 +1,6 @@
 import DetailsInputGroup from "./DetailsInputGroup";
 import GeographicDetailsInputGroup from "./GeographicDetailsInputGroup";
+import MultiSelect from "./MultiSelect";
 import RequiredAsterisk from "./RequiredAsterisk";
 
 export default function Step2Form({
@@ -18,9 +19,14 @@ export default function Step2Form({
     setTags,
     links,
     setLinks,
+    genre,
+    trackOrigin,
+    parentalAdvisory,
+    language,
+    location,
 }) {
-    const detailsInputGroupValues = { setTrackOrigin, setGenre, recordingYear, setRecordingYear, setParentalAdvisory };
-    const geographicDetailsInputGroupValues = { setLanguage, setLocation };
+    const detailsInputGroupValues = { setTrackOrigin, setGenre, recordingYear, setRecordingYear, setParentalAdvisory, genre, trackOrigin, parentalAdvisory};
+    const geographicDetailsInputGroupValues = { setLanguage, setLocation, language, location };
 
     const toggleVocalsRadio = (e) => {
         if ((e.target.id === "othervocalsyes" && vocals === false) || (e.target.id === "othervocalsno" && vocals === true)) {
@@ -38,14 +44,14 @@ export default function Step2Form({
 
     return (
         <div className="w-full">
-            <p className="mb-10 font-tertiary text-5xl font-normal">COMPREHENSIVE DETAILS</p>
+            <p className="mb-10 text-5xl font-normal font-tertiary">COMPREHENSIVE DETAILS</p>
             <div className="flex flex-col space-y-20 lg:w-full lg:max-w-[1150px] lg:space-x-10 lg:space-y-0 xl:space-x-20 lg:flex-row">
                 {/* Details */}
                 <div className="font-semibold lg:w-1/2 font-secondary">
                     {/* Input Group */}
                     <DetailsInputGroup {...detailsInputGroupValues} />
 
-                    <p className="text-sm mt-12">
+                    <p className="mt-12 text-sm">
                         Does this track contain any singing, rapping or any other vocals?
                         <RequiredAsterisk />
                     </p>
@@ -88,14 +94,15 @@ export default function Step2Form({
                         className="w-full px-4 py-1 mt-1 border-2 border-[#777777] rounded-md shadow-sm outline-none focus:border-primary-100 focus:dark:border-primary-100 dark:bg-[#323232] dark:border-[#323232]"
                     ></input>
 
-                    <p className="text-sm mt-4">
+                    <p className="mt-4 text-sm">
                         TAGS
                         <RequiredAsterisk />
                     </p>
-                    <input
+                    <MultiSelect/>
+                    {/* <input
                         type={"text"}
                         className="w-full px-4 py-1 mt-1 border-2 border-[#777777] rounded-md shadow-sm outline-none focus:border-primary-100 focus:dark:border-primary-100 dark:bg-[#323232] dark:border-[#323232]"
-                    ></input>
+                    ></input> */}
                     <p className="text-[#777777] mt-1 mb-10 font-normal text-xs">@Sparsh: Multi-select dropdown as you did in Musomatic</p>
 
                     {/* SHARE LINKS */}

@@ -276,6 +276,11 @@ const CreateNFT = () => {
         nftPrice,
         numberOfCopies,
         collaboratorList,
+        genre,
+        trackOrigin,
+        parentalAdvisory,
+        language,
+        location,
     };
     const step3Values = {
         step,

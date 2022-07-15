@@ -1,14 +1,14 @@
 import minted from "../../../public/assets/MINTED.svg";
 import auction from "../../../public/assets/auction.svg";
 import Image from "next/image";
-import styles from "../../../styles/SongInfo/SalesHistory.module.css";
+import styles from "../../../styles/TrackInfo/SalesHistory.module.css";
 
 export default function SalesHistory() {
     const minter = "benkessler";
     const currentOwner = "benkessler";
     return (
         <div className={"dark:bg-dark-100 " + styles["sales-history"]}>
-            <h1 className={styles["sales-history__heading"]}>SALE HISTORY</h1>
+            <h1 className={styles["sales-history__heading"]}>Activity</h1>
             {/* TO map div */}
             <div className="flex mb-4">
                 <div className={"dark:bg-dark-200 " + styles["sales-history__action"]}>
@@ -16,7 +16,7 @@ export default function SalesHistory() {
                 </div>
 
                 <div className="ml-3 font-secondary">
-                    <p className="font-medium">@{currentOwner} started auction for this song</p>
+                    <p className="font-medium">@{currentOwner} started auction for this track</p>
                     <p className="text-[#8a8a8a] text-sm">Feburary 2022</p>
                 </div>
             </div>
@@ -27,7 +27,7 @@ export default function SalesHistory() {
                 </div>
 
                 <div className="ml-3 font-secondary">
-                    <p className="font-medium">@{minter} minted this song</p>
+                    <p className="font-medium">@{minter} minted this track</p>
                     <p className="text-[#8a8a8a] text-sm">January 2022</p>
                 </div>
             </div>

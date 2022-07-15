@@ -3,7 +3,7 @@ import Image from "next/image";
 import favourite from "../../../public/assets/Favourite.svg";
 import mxvverified from "../../../public/assets/mxv_verified.svg";
 import sharebtn from "../../../public/assets/SHARE.svg";
-import styles from "../../../styles/SongInfo/AudioPlayer.module.css";
+import styles from "../../../styles/TrackInfo/AudioPlayer.module.css";
 
 export default function AudioPlayer({ audio_url }) {
     const playBtn = useRef();
@@ -27,7 +27,7 @@ export default function AudioPlayer({ audio_url }) {
     }, [audio.current]);
 
     //Function to get the current time and the duration time
-    //for the song
+    //for the track
     const getTime = (queryForCurrTime) => {
         const duration = queryForCurrTime ? audio.current.currentTime : audio.current.duration;
         let min = isNaN(duration) === true ? "0" : Math.floor(duration / 60);
@@ -51,7 +51,7 @@ export default function AudioPlayer({ audio_url }) {
         else durTime.current.textContent = min + ":" + sec;
     };
     const resetProgress = () => {
-        pauseSong(playBtn.current.children[0]);
+        pauseTrack(playBtn.current.children[0]);
         audio.current.currentTime = 0;
     };
 
@@ -84,22 +84,22 @@ export default function AudioPlayer({ audio_url }) {
         getTime(true);
     };
     //Function to control and drive the play pause events
-    const playSongHandler = () => {
+    const playTrackHandler = () => {
         const playPause = playBtn.current.children[0];
         const isPaused = playPause.classList.contains("fa-play");
 
-        if (isPaused) playSong(playPause);
-        else pauseSong(playPause);
+        if (isPaused) playTrack(playPause);
+        else pauseTrack(playPause);
     };
 
-    const pauseSong = (controller) => {
+    const pauseTrack = (controller) => {
         controller.classList.add("fa-play");
         controller.classList.remove("fa-pause");
 
         audio.current.pause();
     };
 
-    const playSong = (controller) => {
+    const playTrack = (controller) => {
         controller.classList.remove("fa-play");
         controller.classList.add("fa-pause");
 
@@ -108,7 +108,7 @@ export default function AudioPlayer({ audio_url }) {
 
     return (
         <div className="flex flex-row justify-between items-center pb-10">
-            <button ref={playBtn} onClick={playSongHandler} className={"dark:border-light-100 " + styles["play-btn"]}>
+            <button ref={playBtn} onClick={playTrackHandler} className={"dark:border-light-100 " + styles["play-btn"]}>
                 <i className="fas fa-play text-2xl"></i>
             </button>
             <div className="ml-5 flex flex-col flex-grow">
@@ -124,7 +124,7 @@ export default function AudioPlayer({ audio_url }) {
                             <div ref={progress} className={styles["info__progress-container--progress"]}></div>
                             <div className={styles["info__progress-container--slider-box"]}></div>
                         </div>
-                        {/* Duration of song */}
+                        {/* Duration of track */}
                         <p className={styles["container__info--duration"]} ref={durTime}></p>
                     </div>
                     {/* Audio elem */}

@@ -36,7 +36,7 @@ export default function NFTs() {
                 if (metadata) {
                     tempArray.push(
                         <NFTCard
-                            songName={metadata.title}
+                            trackName={metadata.title}
                             artistName={metadata.artist}
                             image={metadata.artwork.uri.replace("ipfs://", process.env.NEXT_PUBLIC_IPFS_NODE_URL)}
                             tokenId={tokens[index].token_id}

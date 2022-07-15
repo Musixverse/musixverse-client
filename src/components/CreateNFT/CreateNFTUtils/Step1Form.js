@@ -35,6 +35,13 @@ export default function Step1Form({
         }
     };
 
+    const setCoverArtArtistEmail = async (e) => {
+        setCoverArtArtist({
+            email: e.target.value,
+        });
+        setFilteredUsers([]);
+    };
+
     const setCoverArtArtistInfo = async (user) => {
         setCoverArtArtist({
             id: user.objectId,
@@ -173,7 +180,7 @@ export default function Step1Form({
                     {creditCoverArtArtist ? (
                         <div className="basis-1/2 relative">
                             {coverArtArtist.username ? (
-                                <>
+                                <div className="flex items-center">
                                     {coverArtArtist.avatar && (
                                         <div className="absolute flex items-center h-full ml-2">
                                             <Image src={coverArtArtist.avatar} height="30" width="30" className="rounded-full" />
@@ -186,24 +193,53 @@ export default function Step1Form({
                                         type="text"
                                         placeholder="Username"
                                         value={coverArtArtist.name}
-                                        onClick={() => setCoverArtArtist({ id: "jajgkn", name: "", username: "", address: "", avatar: "" })}
+                                        onClick={() => setCoverArtArtist({ id: "", name: "", username: "", address: "", avatar: "" })}
                                         readOnly
                                         required
                                     />
-                                </>
+                                    <div
+                                        onClick={() => {
+                                            setCoverArtArtist({ id: "", name: "", username: "", address: "", avatar: "" });
+                                            setSearchedUsername("");
+                                        }}
+                                        className="w-8 h-8 ml-2 flex justify-center items-center rounded-lg transition-all duration-200 cursor-pointer hover:bg-zinc-500/20 "
+                                    >
+                                        <i className="fa-solid fa-xmark"></i>
+                                    </div>
+                                </div>
                             ) : (
-                                <input
-                                    className="dark:text-light-100 dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-100 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-100"
-                                    id="username"
-                                    name="username"
-                                    type="text"
-                                    placeholder="Username"
-                                    autoComplete="off"
-                                    onChange={(e) => {
-                                        filterUsers(e);
-                                    }}
-                                    required
-                                />
+                                <>
+                                    <p className="text-xs text-[#777777] font-normal mb-2">
+                                        Enter their username if they are on the platform or just enter their email
+                                    </p>
+                                    <div className="flex space-x-2">
+                                        <input
+                                            className="dark:text-light-100 dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-100 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-100"
+                                            id="username"
+                                            name="username"
+                                            type="text"
+                                            placeholder="Username"
+                                            autoComplete="off"
+                                            onChange={(e) => {
+                                                filterUsers(e);
+                                            }}
+                                        />
+                                        <div className="flex items-center text-sm text-[#777777] font-normal">or</div>
+                                        <input
+                                            className="dark:text-light-100 dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-100 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-100"
+                                            id="email"
+                                            name="email"
+                                            type="text"
+                                            placeholder="Email"
+                                            autoComplete="off"
+                                            value={coverArtArtist.email}
+                                            onChange={(e) => {
+                                                setCoverArtArtistEmail(e);
+                                            }}
+                                            required
+                                        />
+                                    </div>
+                                </>
                             )}
 
                             {!coverArtArtist.username && filteredUsers ? (

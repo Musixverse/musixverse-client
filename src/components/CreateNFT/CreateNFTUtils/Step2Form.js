@@ -86,7 +86,6 @@ export default function Step2Form({
                             setIsrc(e.target.value);
                         }}
                         className="w-full px-4 py-1 mt-1 border-2 border-[#777777] rounded-md shadow-sm outline-none focus:border-primary-100 focus:dark:border-primary-100 dark:bg-[#323232] dark:border-[#323232]"
-                        required
                     ></input>
 
                     <p className="text-sm mt-4">

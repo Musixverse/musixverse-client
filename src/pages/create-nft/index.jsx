@@ -23,7 +23,7 @@ const CreateNFT = () => {
     const [coverArtUrl, setCoverArtUrl] = useState(null);
     const [coverArtMimeType, setCoverArtMimeType] = useState(null);
     const [creditCoverArtArtist, setCreditCoverArtArtist] = useState(false);
-    const [coverArtArtist, setCoverArtArtist] = useState({ id: "", name: "", username: "", address: "", avatar: "" });
+    const [coverArtArtist, setCoverArtArtist] = useState({ id: "", name: "", username: "", address: "", avatar: "", email: "" });
     const [audioFileUrl, setAudioFileUrl] = useState(null);
     const [audioFileDuration, setAudioFileDuration] = useState(null);
     const [audioFileMimeType, setAudioFileMimeType] = useState(null);
@@ -66,7 +66,7 @@ const CreateNFT = () => {
 
     useEffect(() => {
         if (user && userInfo[0]) {
-            setTrackTitle("Die Hard");
+            setTrackTitle("Rap God");
             setTrackBackground(
                 "Lorem Ipsum is simply a dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic type"
             );
@@ -84,7 +84,7 @@ const CreateNFT = () => {
                 amazonMusicLink:
                     "https://music.amazon.com/albums/B0B2CCS4WD?tag=univemuisc-central-21&ie=UTF8&linkCode=as2&ascsubtag=a8488c4eb6c29dd9e04fa7ed8a69fad5&ref=dmm_acq_soc_in_u_lfire_lp_x_a8488c4eb6c29dd9e04fa7ed8a69fad5",
                 youtubeMusicLink: "",
-                other: "https://www.jiosaavn.com/song/die-hard/H1AvZE1lYwY",
+                other: "https://www.jiosaavn.com/track/die-hard/H1AvZE1lYwY",
             });
             setNumberOfCopies(4);
             setNftPrice(12.4);
@@ -132,6 +132,7 @@ const CreateNFT = () => {
                 artistId: creditCoverArtArtist ? coverArtArtist.id : "",
                 artist: creditCoverArtArtist ? coverArtArtist.name : "",
                 artistAddress: creditCoverArtArtist ? coverArtArtist.address : "",
+                artistEmail: creditCoverArtArtist ? coverArtArtist.email : "",
             },
             unlockTimestamp: unlockTimestamp,
             collaborators: reducedCollaboratorList,
@@ -212,7 +213,7 @@ const CreateNFT = () => {
 
         await mintTrackNFT(
             numberOfCopies,
-            window.web3.utils.toWei(String(nftPrice), "Ether"),
+            nftPrice,
             metadataHash,
             collaborators,
             percentageContributions,

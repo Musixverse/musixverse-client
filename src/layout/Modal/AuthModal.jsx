@@ -1,7 +1,7 @@
 const { Fragment, useState, useEffect, useRef } = require("react");
 import { useTheme } from "next-themes";
 import Image from "next/image";
-import Router from "next/router";
+import { useRouter } from "next/router";
 import { useMoralis } from "react-moralis";
 const { Transition } = require("@headlessui/react");
 import { BLOCKCHAIN_NETWORK_ID } from "../../utils/smart-contract/constants";
@@ -10,6 +10,7 @@ import logoBlack from "../../../public/logo-black.svg";
 import logoWhite from "../../../public/logo-white.svg";
 
 module.exports = ({ isOpen = "", onClose = "" }) => {
+    const router = useRouter();
     const { authenticate, isAuthenticated, user } = useMoralis();
     const [isModalOpen, setIsModalOpen] = useState(isOpen);
     const [magicFormOpen, setMagicFormOpen] = useState(false);
@@ -52,7 +53,7 @@ module.exports = ({ isOpen = "", onClose = "" }) => {
                 .then(function (user) {
                     if (user) {
                         closeModal();
-                        Router.push("/library", undefined, { shallow: true });
+                        if (router.pathname === "/") router.push("/library", undefined, { shallow: true });
                     }
                 })
                 .catch(function (error) {
@@ -67,31 +68,11 @@ module.exports = ({ isOpen = "", onClose = "" }) => {
                 .then(function (user) {
                     if (user) {
                         closeModal();
-                        Router.push("/library", undefined, { shallow: true });
+                        if (router.pathname === "/") router.push("/library", undefined, { shallow: true });
                     }
                 })
                 .catch(function (error) {
-                    console.log("Metamask authentication error:", error);
-                });
-        }
-    };
-   
-    const magicLogin = async () => {
-        if (!isAuthenticated) {
-            await authenticate({
-                provider: "magicLink",
-                email: emailRef.current.value,
-                apiKey: process.env.NEXT_PUBLIC_MAGICLINK_API_KEY,
-                network: "mumbai",
-            })
-                .then(function (user) {
-                    if (user) {
-                        closeModal();
-                        Router.push("/library", undefined, { shallow: true });
-                    }
-                })
-                .catch(function (error) {
-                    console.log("Magic authentication error:", error);
+                    console.log("WalletConnect authentication error:", error);
                 });
         }
     };
@@ -107,7 +88,7 @@ module.exports = ({ isOpen = "", onClose = "" }) => {
                 .then(function (user) {
                     if (user) {
                         closeModal();
-                        Router.push("/library", undefined, { shallow: true });
+                        if (router.pathname === "/") router.push("/library", undefined, { shallow: true });
                     }
                 })
                 .catch(function (error) {

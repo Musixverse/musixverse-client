@@ -1,30 +1,30 @@
-/* .song-detail {
+/* .track-detail {
     @apply flex;
 } */
 
-.song-detail__container {
+.track-detail__container {
     @apply grid grid-cols-5 gap-10 p-8 border-2 bg-light-200 rounded-xl border-light-300;
     /* grid to appear in this div */
 }
 
-.song-detail__song-details {
+.track-detail__track-details {
     @apply flex flex-col col-span-2;
-    /* song details col should span to 2 grid cols */
+    /* track details col should span to 2 grid cols */
 }
 
-.song-details__title {
+.track-details__title {
     @apply font-semibold text-xl;
 }
 
-.song-details__subtitle {
+.track-details__subtitle {
     @apply text-sm;
 }
 
-.song-details__artist-notes {
+.track-details__artist-notes {
     @apply text-sm;
 }
 
-.song-info__other-details {
+.track-info__other-details {
     @apply flex flex-col font-secondary text-[15px] col-span-3;
 }
 

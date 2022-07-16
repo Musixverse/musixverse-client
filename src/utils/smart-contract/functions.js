@@ -45,6 +45,11 @@ async function connectSmartContract() {
     const provider = new Web3.providers.HttpProvider(RPC_URL);
     window.web3 = new Web3(provider);
 
+    const web3 = window.web3;
+    MUSIXVERSE = await new web3.eth.Contract(MXV_CONTRACT_ABI, MXV_CONTRACT_ADDRESS);
+    await Moralis.enableWeb3();
+    console.log("Contract connected");
+
     if (ethereum && (await ethereum.request({ method: "net_version" })) !== BLOCKCHAIN_NETWORK_ID.toString()) {
         await addPolygonTestnetNetwork();
     } else if (ethereum) {
@@ -52,12 +57,11 @@ async function connectSmartContract() {
         window.web3 = new Web3(ethereum);
     }
 
-    const web3 = window.web3;
-    if ((await web3.eth.net.getId()) === BLOCKCHAIN_NETWORK_ID) {
-        MUSIXVERSE = await new web3.eth.Contract(MXV_CONTRACT_ABI, MXV_CONTRACT_ADDRESS);
-        await Moralis.enableWeb3();
-        console.log("Contract connected");
-    }
+    // if ((await web3.eth.net.getId()) === BLOCKCHAIN_NETWORK_ID) {
+    //     MUSIXVERSE = await new web3.eth.Contract(MXV_CONTRACT_ABI, MXV_CONTRACT_ADDRESS);
+    //     await Moralis.enableWeb3();
+    //     console.log("Contract connected");
+    // }
 
     // if ((navigator.userAgent.indexOf("Opera") || navigator.userAgent.indexOf("OPR")) != -1) {
     //     alert("Opera");
@@ -94,7 +98,7 @@ async function mintTrackNFT(
         abi: MXV_CONTRACT_ABI,
         params: {
             amount: numberOfCopies,
-            price: price,
+            price: Moralis.Units.Token(String(price), "18"),
             URIHash: metadataURI,
             collaborators: collaborators,
             percentageContributions: percentageContributions,
@@ -109,15 +113,40 @@ async function mintTrackNFT(
     await transaction.wait();
 }
 
-async function purchaseMusicNFT(tokenId, price, callerAddress) {
+async function purchaseTrackNFT(tokenId, price) {
     const _tokenId = parseInt(tokenId).toString();
-    // const _price = web3.utils.fromWei(price.toString(), 'Ether')
-    await MUSIXVERSE.methods.purchaseMusicNFT(_tokenId).send({ from: callerAddress, value: price });
+
+    const sendOptions = {
+        contractAddress: MXV_CONTRACT_ADDRESS,
+        functionName: "purchaseTrackNFT",
+        abi: MXV_CONTRACT_ABI,
+        params: {
+            tokenId: _tokenId,
+        },
+        msgValue: Moralis.Units.Token(String(price), "18"),
+    };
+
+    const transaction = await Moralis.executeFunction(sendOptions);
+    // Wait until the transaction is confirmed
+    await transaction.wait();
 }
 
-async function updatePrice(tokenId, newPrice, callerAddress) {
+async function updatePrice(tokenId, newPrice) {
     const _tokenId = parseInt(tokenId).toString();
-    await MUSIXVERSE.methods.updatePrice(_tokenId, newPrice).send({ from: callerAddress });
+
+    const sendOptions = {
+        contractAddress: MXV_CONTRACT_ADDRESS,
+        functionName: "updatePrice",
+        abi: MXV_CONTRACT_ABI,
+        params: {
+            tokenId: _tokenId,
+            newPrice: Moralis.Units.Token(String(newPrice), "18"),
+        },
+    };
+
+    const transaction = await Moralis.executeFunction(sendOptions);
+    // Wait until the transaction is confirmed
+    await transaction.wait();
 }
 
 async function toggleOnSale(tokenId, callerAddress) {
@@ -166,7 +195,7 @@ module.exports = {
     addPolygonTestnetNetwork,
     connectSmartContract,
     mintTrackNFT,
-    purchaseMusicNFT,
+    purchaseTrackNFT,
     updatePrice,
     toggleOnSale,
     uri,

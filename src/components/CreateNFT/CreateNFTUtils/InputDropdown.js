@@ -7,8 +7,8 @@ function classNames(...classes) {
     return classes.filter(Boolean).join(" ");
 }
 
-export default function InputDropdown({ optionsArray, setChoice }) {
-    const [currentFilter, setCurrentFilter] = useState(optionsArray[0]);
+export default function InputDropdown({ optionsArray, setChoice, initialValue }) {
+    const [currentFilter, setCurrentFilter] = useState(initialValue);
 
     useEffect(() => {
         setChoice(currentFilter);
@@ -21,7 +21,7 @@ export default function InputDropdown({ optionsArray, setChoice }) {
         // console.log(e.target.value);
         let selectedValue = e.target.textContent;
         setChoice(selectedValue);
-        selectedValue = selectedValue.length > 20 ? selectedValue.substring(0, 17) + "..." : selectedValue;
+        // selectedValue = selectedValue.length > 20 ? selectedValue.substring(0, 17) + "..." : selectedValue;
         setCurrentFilter(selectedValue);
     };
 
@@ -50,7 +50,7 @@ export default function InputDropdown({ optionsArray, setChoice }) {
             {/* The visible dropdown button */}
             <div>
                 <Menu.Button className={"dark:bg-[#323232] hover:dark:border-[#6cc027] dark:text-light-100 dark:border-[#323232] " + styles["menu-button"]}>
-                    {currentFilter}
+                    {currentFilter.length > 20 ? currentFilter.substring(0, 17) + "..." : currentFilter}
                     <ChevronDownIcon className="ml-2 h-5 w-5 text-[#6cc027]" aria-hidden="true" />
                 </Menu.Button>
             </div>

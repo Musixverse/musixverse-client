@@ -391,6 +391,7 @@ const Step3Form = ({
                                                 optionsArray={rolesArray}
                                                 setCollaboratorRole={setCollaboratorRole}
                                                 index={index}
+                                                collaboratorList={collaboratorList}
                                             />
                                         </div>
                                         {/* Button to remove more collaborators */}
@@ -475,7 +476,7 @@ const Step3Form = ({
                                     }}
                                     type="radio"
                                     name="radio"
-                                    defaultChecked
+                                    checked={releaseNow}
                                     className="hidden"
                                 />
                                 <label htmlFor="release_now" className="flex items-center text-sm font-normal cursor-pointer font-secondary">
@@ -491,6 +492,7 @@ const Step3Form = ({
                                         setReleaseNow(false);
                                     }}
                                     name="radio"
+                                    checked={!releaseNow}
                                     className="hidden"
                                 />
                                 <label htmlFor="release_later" className="flex items-center text-sm font-normal cursor-pointer font-secondary">

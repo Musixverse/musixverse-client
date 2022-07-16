@@ -116,6 +116,8 @@ const CreateNFT = () => {
             await lyricsFile.saveIPFS();
         }
 
+        const _tags = tags.map((tag) => tag.value);
+
         const nftMetadata = {
             version: "1.0",
             title: trackTitle,
@@ -144,7 +146,7 @@ const CreateNFT = () => {
                 other: links.other,
             },
             genre: genre,
-            tags: tags,
+            tags: _tags,
             lyrics: lyrics ? "ipfs://" + lyricsFile.hash() : "",
             license: "ipfs://" + coverArtUrl.replace("https://ipfs.moralis.io:2053/ipfs/", ""), // TODO
             isrc: isrc,

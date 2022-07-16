@@ -1,6 +1,6 @@
 import DetailsInputGroup from "./DetailsInputGroup";
 import GeographicDetailsInputGroup from "./GeographicDetailsInputGroup";
-import MultiSelect from "./MultiSelect";
+import TagsMultiSelect from "./TagsMultiSelect";
 import RequiredAsterisk from "./RequiredAsterisk";
 
 export default function Step2Form({
@@ -25,7 +25,7 @@ export default function Step2Form({
     language,
     location,
 }) {
-    const detailsInputGroupValues = { setTrackOrigin, setGenre, recordingYear, setRecordingYear, setParentalAdvisory, genre, trackOrigin, parentalAdvisory};
+    const detailsInputGroupValues = { setTrackOrigin, setGenre, recordingYear, setRecordingYear, setParentalAdvisory, genre, trackOrigin, parentalAdvisory };
     const geographicDetailsInputGroupValues = { setLanguage, setLocation, language, location };
 
     const toggleVocalsRadio = (e) => {
@@ -91,19 +91,14 @@ export default function Step2Form({
                         onChange={(e) => {
                             setIsrc(e.target.value);
                         }}
-                        className="w-full px-4 py-1 mt-1 border-2 border-[#777777] rounded-md shadow-sm outline-none focus:border-primary-100 focus:dark:border-primary-100 dark:bg-[#323232] dark:border-[#323232]"
+                        className="w-full px-4 py-2 mt-1 border-2 border-[#777777] rounded-md shadow-sm outline-none focus:border-primary-100 focus:dark:border-primary-100 dark:bg-[#323232] dark:border-[#323232]"
                     ></input>
 
                     <p className="mt-4 text-sm">
                         TAGS
                         <RequiredAsterisk />
                     </p>
-                    <MultiSelect/>
-                    {/* <input
-                        type={"text"}
-                        className="w-full px-4 py-1 mt-1 border-2 border-[#777777] rounded-md shadow-sm outline-none focus:border-primary-100 focus:dark:border-primary-100 dark:bg-[#323232] dark:border-[#323232]"
-                    ></input> */}
-                    <p className="text-[#777777] mt-1 mb-10 font-normal text-xs">@Sparsh: Multi-select dropdown as you did in Musomatic</p>
+                    <TagsMultiSelect tags={tags} setTags={setTags} />
 
                     {/* SHARE LINKS */}
                     <p className="mt-6 mb-1 text-sm">TRACK LINKS</p>

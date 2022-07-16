@@ -90,7 +90,7 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
                     <ul className="flex flex-row items-center text-sm font-medium md:space-x-8 md:mt-0 sm:text-sm">
                         {/* Search bar */}
                         <li>
-                            <div className="flex items-center justify-center text-xs rounded text-dark-200 dark:text-white">
+                            {/* <div className="flex items-center justify-center text-xs rounded text-dark-200 dark:text-white">
                                 <div className="flex overflow-hidden border rounded-full dark:border-dark-100">
                                     <button className="flex items-center justify-center px-4 border-l border-light-300 dark:border-dark-100 bg-search-100 dark:bg-search-200">
                                         <svg
@@ -108,13 +108,19 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
                                         placeholder="Search items, collections and accounts"
                                     />
                                 </div>
+                            </div> */}
+                            <div className="search-box">
+                                <input className="search-text" type="text" placeholder="Search items, collections and accounts" />
+                                <a href="#" className= "search-btn">
+                                    <i className="fas fa-search"></i>
+                                </a>
                             </div>
                         </li>
                         
                         {/* Notification button */}
                         <li>
                             <button
-                                className="flex items-center relative justify-center text-base p-2 rounded-full bg-search-100 dark:bg-search-200 text-dark-200 dark:text-white">
+                                className="flex items-center relative justify-center text-lg p-2.5 rounded-full bg-search-100 dark:bg-search-200 text-dark-200 dark:text-white">
                                 {/* Notification icon - when notification is ON */}
                                 <i className="fa fa-bell"></i>
                                 {/* Notification icon - when notification is OFF */}

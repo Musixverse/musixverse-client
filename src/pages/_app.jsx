@@ -5,6 +5,7 @@ import { ThemeProvider } from "next-themes";
 import * as ga from "../../lib/google-analytics";
 import StatusContext from "../../store/status-context";
 import LoadingContext from "../../store/loading-context";
+import AuthModalContext from "../../store/authModal-context";
 import "../../styles/globals.css";
 import ProtectedRoutes from "../auth/ProtectedRoutes";
 import Layout from "../layout/WrapLayout/Layout";
@@ -35,6 +36,7 @@ function App({ Component, pageProps, router }) {
         message: "",
         showSuccessBox: false,
     });
+    const [authModalOpen, setAuthModalOpen] = useState(false);
     const MORALIS_APP_ID = process.env.NEXT_PUBLIC_MORALIS_APP_ID;
     const MORALIS_SERVER_URL = process.env.NEXT_PUBLIC_MORALIS_SERVER_URL;
 
@@ -68,14 +70,16 @@ function App({ Component, pageProps, router }) {
             <MoralisProvider appId={MORALIS_APP_ID} serverUrl={MORALIS_SERVER_URL}>
                 <ThemeProvider attribute="class" enableSystem={false}>
                     <LoadingContext.Provider value={[isLoading, setLoading]}>
-                        <StatusContext.Provider value={[error, success, setSuccess, setError]}>
-                            <ProtectedRoutes router={router}>
-                                <Layout>
-                                    <ScrollToPageTop />
-                                    <Component {...pageProps} />
-                                </Layout>
-                            </ProtectedRoutes>
-                        </StatusContext.Provider>
+                        <AuthModalContext.Provider value={[authModalOpen, setAuthModalOpen]}>
+                            <StatusContext.Provider value={[error, success, setSuccess, setError]}>
+                                <ProtectedRoutes router={router}>
+                                    <Layout>
+                                        <ScrollToPageTop />
+                                        <Component {...pageProps} />
+                                    </Layout>
+                                </ProtectedRoutes>
+                            </StatusContext.Provider>
+                        </AuthModalContext.Provider>
                     </LoadingContext.Provider>
                 </ThemeProvider>
             </MoralisProvider>

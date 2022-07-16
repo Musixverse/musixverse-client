@@ -98,7 +98,7 @@ async function mintTrackNFT(
         abi: MXV_CONTRACT_ABI,
         params: {
             amount: numberOfCopies,
-            price: price,
+            price: Moralis.Units.Token(String(price), "18"),
             URIHash: metadataURI,
             collaborators: collaborators,
             percentageContributions: percentageContributions,
@@ -113,15 +113,40 @@ async function mintTrackNFT(
     await transaction.wait();
 }
 
-async function purchaseMusicNFT(tokenId, price, callerAddress) {
+async function purchaseTrackNFT(tokenId, price) {
     const _tokenId = parseInt(tokenId).toString();
-    // const _price = web3.utils.fromWei(price.toString(), 'Ether')
-    await MUSIXVERSE.methods.purchaseMusicNFT(_tokenId).send({ from: callerAddress, value: price });
+
+    const sendOptions = {
+        contractAddress: MXV_CONTRACT_ADDRESS,
+        functionName: "purchaseTrackNFT",
+        abi: MXV_CONTRACT_ABI,
+        params: {
+            tokenId: _tokenId,
+        },
+        msgValue: Moralis.Units.Token(String(price), "18"),
+    };
+
+    const transaction = await Moralis.executeFunction(sendOptions);
+    // Wait until the transaction is confirmed
+    await transaction.wait();
 }
 
-async function updatePrice(tokenId, newPrice, callerAddress) {
+async function updatePrice(tokenId, newPrice) {
     const _tokenId = parseInt(tokenId).toString();
-    await MUSIXVERSE.methods.updatePrice(_tokenId, newPrice).send({ from: callerAddress });
+
+    const sendOptions = {
+        contractAddress: MXV_CONTRACT_ADDRESS,
+        functionName: "updatePrice",
+        abi: MXV_CONTRACT_ABI,
+        params: {
+            tokenId: _tokenId,
+            newPrice: Moralis.Units.Token(String(newPrice), "18"),
+        },
+    };
+
+    const transaction = await Moralis.executeFunction(sendOptions);
+    // Wait until the transaction is confirmed
+    await transaction.wait();
 }
 
 async function toggleOnSale(tokenId, callerAddress) {
@@ -170,7 +195,7 @@ module.exports = {
     addPolygonTestnetNetwork,
     connectSmartContract,
     mintTrackNFT,
-    purchaseMusicNFT,
+    purchaseTrackNFT,
     updatePrice,
     toggleOnSale,
     uri,

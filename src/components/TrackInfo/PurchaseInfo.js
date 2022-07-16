@@ -1,13 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useMoralisQuery } from "react-moralis";
-import styles from "../../../styles/SongInfo/PurchaseInfo.module.css";
+import styles from "../../../styles/TrackInfo/PurchaseInfo.module.css";
 import CustomButton from "../../layout/CustomButton";
 
 export default function PurchaseInfo({ metadata, currentOwnerAddress, price }) {
     const { data: currentOwner } = useMoralisQuery("_User", (query) => query.equalTo("ethAddress", currentOwnerAddress), [currentOwnerAddress]);
 
-    if (!currentOwner[0]) return null;
+    // if (!currentOwner[0]) return null;
     return (
         <div className={"dark:bg-dark-100 " + styles["purchase-info"]}>
             {/* Heading DIV */}

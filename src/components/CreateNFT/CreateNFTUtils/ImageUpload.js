@@ -1,13 +1,16 @@
 import Image from "next/image";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useContext } from "react";
+import { useMoralis } from "react-moralis";
 import convertDataURLtoFile from "../../../utils/image-crop/convertDataURLtoFile";
 import uploadFileToIPFS from "../../../utils/image-crop/uploadFileToIPFS";
 import uploadImage from "../../../../public/assets/create-nft/upload-image.svg";
 import CropImageModal from "./CropImageModal";
-import { useMoralis } from "react-moralis";
+import LoadingContext from "../../../../store/loading-context";
 
 export default function ImageUpload({ coverArtUrl, setCoverArtUrl, setCoverArtMimeType }) {
     const { Moralis } = useMoralis();
+    const [isLoading, setLoading] = useContext(LoadingContext);
+
     const [showModal, setShowModal] = useState(false);
     const [imageToCrop, setImageToCrop] = useState(undefined);
     const [croppedImage, setCroppedImage] = useState(undefined);
@@ -16,13 +19,15 @@ export default function ImageUpload({ coverArtUrl, setCoverArtUrl, setCoverArtMi
     const aspectRatio = { width: 1, height: 1 };
     const cropModalValues = { showModal, setShowModal, imageToCrop, setCroppedImage, circularCrop, aspectRatio };
 
-    useEffect(() => {
+    useEffect(async () => {
         if (croppedImage !== undefined) {
             setCoverArtUrl(croppedImage);
             // Get the File from DataURL
             const uploadedFile = convertDataURLtoFile(croppedImage, "file");
+            setLoading(true);
             // Get the uploadFileOnIPFS async function
-            uploadFileToIPFS(Moralis, uploadedFile).then((url) => setCoverArtUrl(url));
+            await uploadFileToIPFS(Moralis, uploadedFile).then((url) => setCoverArtUrl(url));
+            setLoading(false);
         }
     }, [croppedImage, setCoverArtUrl]);
 

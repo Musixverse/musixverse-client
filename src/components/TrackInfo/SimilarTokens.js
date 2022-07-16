@@ -16,7 +16,7 @@ const SimilarTokens = ({ similarTokens, tokenId }) => {
 
     return (
         <>
-            <h1 className="font-tertiary text-4xl mt-20 mb-8">OTHER NFTs OF THIS TRACK</h1>
+            <h1 className="font-tertiary text-4xl mt-20 mb-8">MORE OF THIS TRACK</h1>
             <div className="flex max-w-[1920px] mx-auto dark:bg-dark-200">
                 <div className="grid grid-cols-5 gap-10">
                     {similarTokens &&
@@ -31,7 +31,7 @@ const SimilarTokens = ({ similarTokens, tokenId }) => {
                                     <Link key={index} href={`/polygon/track/${nft.token_id}`} passHref={true}>
                                         <a>
                                             <NFTCard
-                                                songName={metadata.title}
+                                                trackName={metadata.title}
                                                 artistName={metadata.artist}
                                                 image={metadata.artwork.uri.replace("ipfs://", process.env.NEXT_PUBLIC_IPFS_NODE_URL)}
                                                 tokenId={nft.token_id}

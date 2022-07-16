@@ -58,20 +58,19 @@ const DisplayNFTs = () => {
                     tokens.map((nft, index) => {
                         const metadata = JSON.parse(nft.metadata);
 
-                        // tokenId + total - maxTokenId
-                        var localTokenId = "";
-                        maxTokenIds.forEach((token) => {
-                            if (nft.token_uri === token.token_uri)
-                                localTokenId = Number(nft.token_id) + Number(metadata.attributes[0].value) - token.max_token_id;
-                        });
-
                         console.log("metadata", metadata);
                         if (metadata) {
+                            // tokenId + total - maxTokenId
+                            var localTokenId = "";
+                            maxTokenIds.forEach((token) => {
+                                if (nft.token_uri === token.token_uri)
+                                    localTokenId = Number(nft.token_id) + Number(metadata.attributes[0].value) - token.max_token_id;
+                            });
                             return (
                                 <Link key={index} href={`/polygon/track/${nft.token_id}`} passHref={true}>
                                     <a>
                                         <NFTCard
-                                            songName={metadata.title}
+                                            trackName={metadata.title}
                                             artistName={metadata.artist}
                                             image={metadata.artwork.uri.replace("ipfs://", process.env.NEXT_PUBLIC_IPFS_NODE_URL)}
                                             tokenId={nft.token_id}

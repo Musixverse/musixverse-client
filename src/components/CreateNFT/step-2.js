@@ -29,6 +29,11 @@ export default function ComprehensiveDetails({
     nftPrice,
     numberOfCopies,
     collaboratorList,
+    genre,
+    trackOrigin,
+    parentalAdvisory,
+    language,
+    location,
 }) {
     const [, , , setError] = useContext(StatusContext);
 
@@ -49,6 +54,11 @@ export default function ComprehensiveDetails({
         setTags,
         links,
         setLinks,
+        genre,
+        trackOrigin,
+        parentalAdvisory,
+        language,
+        location,
     };
 
     return (
@@ -84,7 +94,7 @@ export default function ComprehensiveDetails({
                     </div>
 
                     {/* Button div */}
-                    <div className="flex mt-16 space-x-3 md:self-end justify-end">
+                    <div className="flex justify-end mt-16 space-x-3 md:self-end">
                         {/* Back and Next buttons */}
                         {/* NOTE: Revoke the image url at the create NFT button click */}
                         <button

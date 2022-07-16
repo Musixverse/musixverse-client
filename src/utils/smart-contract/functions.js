@@ -118,7 +118,7 @@ async function purchaseTrackNFT(tokenId, price) {
 
     const sendOptions = {
         contractAddress: MXV_CONTRACT_ADDRESS,
-        functionName: "purchaseMusicNFT",
+        functionName: "purchaseTrackNFT",
         abi: MXV_CONTRACT_ABI,
         params: {
             tokenId: _tokenId,

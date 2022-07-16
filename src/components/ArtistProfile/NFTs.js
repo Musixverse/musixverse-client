@@ -1,4 +1,5 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect } from "react";
+import Link from "next/link";
 import { useMoralis } from "react-moralis";
 import { MXV_CONTRACT_ADDRESS, BLOCKCHAIN_NETWORK } from "../../utils/smart-contract/constants";
 import NFTCard from "../../layout/NFTCard/NFTCard";
@@ -12,7 +13,6 @@ export default function NFTs() {
 
     useEffect(() => {
         if (isInitialized) {
-            console.log("HI");
             (async function () {
                 const options = {
                     chain: BLOCKCHAIN_NETWORK,
@@ -30,30 +30,25 @@ export default function NFTs() {
             let tempArray = [];
             const nftCardsTemp = [];
 
-            tokens.map((nft, idx)=>{
+            tokens.map((nft, idx) => {
                 const metadata = JSON.parse(nft.metadata);
-                if(metadata){
+                if (metadata) {
                     tempArray.push(
-                        <NFTCard
-                            key={idx}
-                            trackName={metadata.title}
-                            artistName={metadata.artist}
-                            image={metadata.artwork.uri.replace("ipfs://", process.env.NEXT_PUBLIC_IPFS_NODE_URL)}
-                            // songId={metadata.id}
-                            tokenId={nft.token_id}
-                            numberOfCopies={metadata.attributes[0].value}
-                            collaboratorList={metadata.collaborators}
-                            
-                            // trackName={metadata.title}
-                            // artistName={metadata.artist}
-                            // image={metadata.artwork.uri.replace("ipfs://", process.env.NEXT_PUBLIC_IPFS_NODE_URL)}
-                            // tokenId={nft.token_id}
-                            // numberOfCopies={metadata.attributes[0].value}
-                            // collaboratorList={metadata.collaborators}
-                            // localTokenId={localTokenId}
-                        />
+                        <Link key={idx} href={`/polygon/track/${nft.token_id}`} passHref={true}>
+                            <a>
+                                <NFTCard
+                                    trackName={metadata.title}
+                                    artistName={metadata.artist}
+                                    image={metadata.artwork.uri.replace("ipfs://", process.env.NEXT_PUBLIC_IPFS_NODE_URL)}
+                                    tokenId={nft.token_id}
+                                    numberOfCopies={metadata.attributes[0].value}
+                                    collaboratorList={metadata.collaborators}
+                                    // localTokenId={localTokenId}
+                                />
+                            </a>
+                        </Link>
                     );
-                    if(tempArray.length%3 == 0 || idx == tokens.length-1){
+                    if (tempArray.length % 5 == 0 || idx == tokens.length - 1) {
                         nftCardsTemp.push(tempArray);
                         tempArray = [];
                     }
@@ -65,7 +60,7 @@ export default function NFTs() {
     return (
         <>
             <div className="grid grid-cols-2 gap-6 my-8 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 md:my-11 md:gap-11">{nftCards[currentPage]}</div>
-            {nftCards.length > 1? <Pager onPageChange={setCurrentPage} maxPages={nftCards.length} />: null}
+            {nftCards.length > 1 ? <Pager onPageChange={setCurrentPage} maxPages={nftCards.length} /> : null}
         </>
     );
 }

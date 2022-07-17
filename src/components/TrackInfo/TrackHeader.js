@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect } from "react";
 import { useMoralisCloudFunction } from "react-moralis";
 import styles from "../../../styles/TrackInfo/TrackHeader.module.css";
 import AudioPlayer from "./AudioPlayer";

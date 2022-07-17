@@ -163,16 +163,16 @@ button.tooltip-button:active {
 	width: -moz-max-content;
 	border: 1.5px solid #6cc027;
 	border-radius: 6px;
-	font-size: 12px;
+	font-size: 14px;
 	background-color: rgba(255, 255, 255, 0);
-	backdrop-filter: blur(6px);
-	background-image: linear-gradient(30deg, rgba(44, 53, 59, 0.9), rgba(48, 54, 59, 0.9), rgba(42, 56, 59, 0.9));
-	box-shadow: 0px 0px 24px rgba(0, 0, 0, 0.2);
+	backdrop-filter: blur(4px);
+	/* background-image: linear-gradient(30deg, rgba(44, 53, 59, 0.9), rgba(48, 54, 59, 0.9), rgba(42, 56, 59, 0.9)); */
+	box-shadow: 0px 0px 24px rgba(0, 0, 0, 0.1);
 	font-family: var(--Poppins);
-	color: #e0e0e0;
 	text-align: center;
 	white-space: pre-wrap;
 	transform: translate(-50%, -5px) scale(0.5);
+    @apply text-black dark:text-white;
 }
 
 .sample_based_tooltip > [data-tooltip]:before {
@@ -240,7 +240,7 @@ button.tooltip-button:active {
 /* Arrow */
 [data-tooltip-location="left"]:after {
 	border-width: 5px 0px 5px 5px;
-	border-color: transparent transparent transparent #3b3b3b;
+	border-color: transparent transparent transparent #6cc027;
 	transform-origin: left;
 	transform: translateY(50%) scaleX(0);
 }

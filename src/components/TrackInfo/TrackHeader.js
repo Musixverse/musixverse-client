@@ -12,6 +12,7 @@ export default function TrackHeader({
     artistAddress,
     title,
     audio_url,
+    tags,
     tokenId,
     unlockTimestamp,
     price,
@@ -29,19 +30,31 @@ export default function TrackHeader({
         <div className={styles["track-header"]}>
             <div className={styles["track-header__container"]}>
                 {/* Image section */}
-                <div className={"group " + styles["track-header__container--trackImage"]}>
-                    <Link href={image}>
-                        <a target="_blank" rel="noopener noreferrer">
-                            <Image src={image} className="rounded-lg" alt="trackImage" width={500} height={500} priority={true} />
-                        </a>
-                    </Link>
-                    <div className="absolute hidden group-hover:block">
+                <div className={"group pr-4 " + styles["track-header__container--trackImage"]}>
+                    <div className="h-full w-full relative">
+                        <Link href={image}>
+                            <a target="_blank" rel="noopener noreferrer">
+                                <Image
+                                    src={image}
+                                    className="rounded-lg"
+                                    alt="trackImage"
+                                    width="100%"
+                                    height="100%"
+                                    layout="responsive"
+                                    objectFit="cover"
+                                    priority={true}
+                                />
+                            </a>
+                        </Link>
+                    </div>
+
+                    <div className="absolute hidden group-hover:block mt-1">
                         {artworkInfo.invitedArtistId && artworkArtistInfo && artworkArtistInfo.user[0] ? (
                             <Link href={`/profile/${artworkArtistInfo.user[0].username}`} className="cursor-pointer">
                                 <a target="_blank" rel="noopener noreferrer">
                                     <div className="flex items-end mb-2 font-secondary text-sm">
                                         <span className="mr-2">Artwork by-</span>
-                                        {artworkArtistInfo.userInfo && (
+                                        {artworkArtistInfo.userInfo[0] && (
                                             <Image src={artworkArtistInfo.userInfo[0].avatar} height="25" width="25" className="rounded-full" />
                                         )}
                                         <span className="ml-1">@{artworkArtistInfo.user[0].username}</span>
@@ -53,7 +66,7 @@ export default function TrackHeader({
                                 <a target="_blank" rel="noopener noreferrer">
                                     <div className="flex items-end mb-2 font-secondary text-sm">
                                         <span className="mr-2">Artwork by-</span>
-                                        {artworkArtistInfo.userInfo && (
+                                        {artworkArtistInfo.userInfo[0] && (
                                             <Image src={artworkArtistInfo.userInfo[0].avatar} height="25" width="25" className="rounded-full" />
                                         )}
                                         <span className="ml-1">@{artworkArtistInfo.username}</span>
@@ -84,7 +97,7 @@ export default function TrackHeader({
                         </div>
                     </div>
 
-                    <h2 className="font-tertiary text-7xl pb-8">
+                    <h2 className="font-tertiary text-7xl pb-6">
                         {title}&nbsp;
                         {localTokenId ? (
                             <span className="font-primary text-xs">
@@ -95,10 +108,20 @@ export default function TrackHeader({
                     {/* Audio Player component */}
                     <AudioPlayer audio_url={audio_url} />
 
-                    <div className="pb-10">Tags</div>
+                    <div className="w-full h-full grid content-between pt-6">
+                        <div className="pb-6 w-full">
+                            {tags.map((tag, index) => {
+                                return (
+                                    <button key={index} type="button" className="px-6 py-2 mr-2 rounded-full bg-light-200 dark:bg-dark-100 text-sm">
+                                        {tag}
+                                    </button>
+                                );
+                            })}
+                        </div>
 
-                    {/* Track Header CTA */}
-                    <TrackHeaderCta tokenId={tokenId} unlockTimestamp={unlockTimestamp} price={price} currentOwnerAddress={currentOwnerAddress} />
+                        {/* Track Header CTA */}
+                        <TrackHeaderCta tokenId={tokenId} unlockTimestamp={unlockTimestamp} price={price} currentOwnerAddress={currentOwnerAddress} />
+                    </div>
                 </div>
             </div>
         </div>

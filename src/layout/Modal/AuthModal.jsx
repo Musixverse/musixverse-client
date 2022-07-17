@@ -53,7 +53,7 @@ module.exports = ({ isOpen = "", onClose = "" }) => {
                 .then(function (user) {
                     if (user) {
                         closeModal();
-                        if (router.pathname === "/") router.push("/library", undefined, { shallow: true });
+                        if (router.pathname === "/") router.push("/marketplace/explore", undefined, { shallow: true });
                     }
                 })
                 .catch(function (error) {
@@ -68,7 +68,7 @@ module.exports = ({ isOpen = "", onClose = "" }) => {
                 .then(function (user) {
                     if (user) {
                         closeModal();
-                        if (router.pathname === "/") router.push("/library", undefined, { shallow: true });
+                        if (router.pathname === "/") router.push("/marketplace/explore", undefined, { shallow: true });
                     }
                 })
                 .catch(function (error) {
@@ -88,7 +88,7 @@ module.exports = ({ isOpen = "", onClose = "" }) => {
                 .then(function (user) {
                     if (user) {
                         closeModal();
-                        if (router.pathname === "/") router.push("/library", undefined, { shallow: true });
+                        if (router.pathname === "/") router.push("/marketplace/explore", undefined, { shallow: true });
                     }
                 })
                 .catch(function (error) {

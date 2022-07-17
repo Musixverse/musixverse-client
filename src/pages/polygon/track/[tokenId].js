@@ -82,7 +82,7 @@ export default function TrackInfo({ token, similarTokens }) {
                 <div className="w-full max-w-[1920px] px-16 xl:px-20 2xl:px-36">
                     <TrackHeader
                         image={metadata.artwork.uri.replace("ipfs://", process.env.NEXT_PUBLIC_IPFS_NODE_URL)}
-                        artworkArtistId={metadata.artwork.artistId}
+                        artworkInfo={metadata.artwork}
                         artistAddress={metadata.artistAddress}
                         title={metadata.title}
                         audio_url={metadata.audio.replace("ipfs://", process.env.NEXT_PUBLIC_IPFS_NODE_URL)}
@@ -90,6 +90,7 @@ export default function TrackInfo({ token, similarTokens }) {
                         unlockTimestamp={metadata.unlockTimestamp}
                         price={price}
                         currentOwnerAddress={token.owner_of}
+                        numberOfCopies={metadata.attributes[0].value}
                     />
                     <TrackDetails tokenId={tokenId} metadata={metadata} />
                     <div className="grid grid-cols-9 xl:grid-cols-5 gap-6 my-10">

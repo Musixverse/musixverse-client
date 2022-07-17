@@ -63,7 +63,8 @@ export default function Step2Form({
                                 name="vocals-radio"
                                 className="hidden"
                                 onClick={(e) => toggleVocalsRadio(e)}
-                                defaultChecked
+                                checked={vocals}
+                                onChange={(e) => {}}
                             />
                             <label htmlFor="othervocalsyes" className="flex items-center text-sm font-normal cursor-pointer font-secondary">
                                 <span className="inline-block w-6 h-6 mr-1 border-2 rounded-full border-[#363636] flex-no-shrink"></span>
@@ -71,7 +72,15 @@ export default function Step2Form({
                             </label>
                         </div>
                         <div className="flex items-center">
-                            <input id="othervocalsno" type="radio" name="vocals-radio" className="hidden" onClick={(e) => toggleVocalsRadio(e)} />
+                            <input
+                                id="othervocalsno"
+                                type="radio"
+                                name="vocals-radio"
+                                className="hidden"
+                                onClick={(e) => toggleVocalsRadio(e)}
+                                checked={!vocals}
+                                onChange={(e) => {}}
+                            />
                             <label htmlFor="othervocalsno" className="flex items-center text-sm font-normal cursor-pointer font-secondary">
                                 <span className="inline-block w-6 h-6 mr-1 border-2 rounded-full border-[#363636] flex-no-shrink"></span>
                                 No

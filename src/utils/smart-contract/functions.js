@@ -180,14 +180,14 @@ async function getRoyaltyInfo(tokenId) {
 async function getCurrentNftPrice(tokenId) {
     const _tokenId = parseInt(tokenId).toString();
     if (MUSIXVERSE) {
-        var musicNft;
+        var trackNft;
         await MUSIXVERSE.methods
-            .musicNFTs(_tokenId)
+            .trackNFTs(_tokenId)
             .call()
             .then(function (result) {
-                musicNft = result;
+                trackNft = result;
             });
-        return musicNft;
+        return trackNft;
     }
 }
 

@@ -1,18 +1,11 @@
-import { useState, useEffect } from "react";
 import Link from "next/link";
+import { useMoralisCloudFunction } from "react-moralis";
 import NFTCard from "../../layout/NFTCard/NFTCard";
 
 const SimilarTokens = ({ similarTokens, tokenId }) => {
-    const [maxTokenId, setMaxTokenId] = useState("");
-
-    useEffect(() => {
-        if (similarTokens) {
-            const result = similarTokens.reduce((prev, curr) => {
-                return Number(prev.token_id) > Number(curr.token_id) ? prev : curr;
-            }, {});
-            setMaxTokenId(result.token_id);
-        }
-    }, [similarTokens]);
+    const { data: localTokenId } = useMoralisCloudFunction("fetchLocalTokenId", {
+        tokenId: tokenId,
+    });
 
     return (
         <>
@@ -22,9 +15,6 @@ const SimilarTokens = ({ similarTokens, tokenId }) => {
                     {similarTokens &&
                         similarTokens.map((nft, index) => {
                             const metadata = JSON.parse(nft.metadata);
-
-                            // tokenid + total - maxTokenId
-                            var localTokenId = Number(nft.token_id) + Number(metadata.attributes[0].value) - maxTokenId;
 
                             if (metadata && nft.token_id !== tokenId) {
                                 return (

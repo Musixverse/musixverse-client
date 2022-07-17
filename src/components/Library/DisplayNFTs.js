@@ -7,7 +7,6 @@ import NFTCard from "../../layout/NFTCard/NFTCard";
 const DisplayNFTs = () => {
     const { Moralis, isInitialized } = useMoralis();
     const [tokens, setTokens] = useState([]);
-    const [maxTokenIds, setMaxTokenIds] = useState([]);
 
     const fetchTokens = async () => {
         const options = {
@@ -23,29 +22,6 @@ const DisplayNFTs = () => {
     }, [tokens]);
 
     useEffect(() => {
-        if (tokens) {
-            const uniqueHashGroup = tokens.reduce((acc, token) => {
-                if (!acc[token.token_uri]) {
-                    acc[token.token_uri] = [];
-                }
-
-                acc[token.token_uri].push(token);
-                return acc;
-            }, {});
-
-            setMaxTokenIds([]);
-            Object.keys(uniqueHashGroup).forEach((uniqueHash) => {
-                const result = uniqueHashGroup[uniqueHash].reduce((prev, curr) => {
-                    return Number(prev.token_id) > Number(curr.token_id) ? prev : curr;
-                }, {});
-
-                let maxIdObj = { token_uri: uniqueHash, max_token_id: result.token_id };
-                setMaxTokenIds((prev) => [...prev, maxIdObj]);
-            });
-        }
-    }, [tokens]);
-
-    useEffect(() => {
         if (isInitialized) {
             fetchTokens();
         }
@@ -57,15 +33,9 @@ const DisplayNFTs = () => {
                 {tokens &&
                     tokens.map((nft, index) => {
                         const metadata = JSON.parse(nft.metadata);
-
                         console.log("metadata", metadata);
+
                         if (metadata) {
-                            // tokenId + total - maxTokenId
-                            var localTokenId = "";
-                            maxTokenIds.forEach((token) => {
-                                if (nft.token_uri === token.token_uri)
-                                    localTokenId = Number(nft.token_id) + Number(metadata.attributes[0].value) - token.max_token_id;
-                            });
                             return (
                                 <Link key={index} href={`/polygon/track/${nft.token_id}`} passHref={true}>
                                     <a>
@@ -76,7 +46,6 @@ const DisplayNFTs = () => {
                                             tokenId={nft.token_id}
                                             numberOfCopies={metadata.attributes[0].value}
                                             collaboratorList={metadata.collaborators}
-                                            localTokenId={localTokenId}
                                         />
                                     </a>
                                 </Link>

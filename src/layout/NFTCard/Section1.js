@@ -4,8 +4,9 @@ import { useMoralis } from "react-moralis";
 import styles from "../../../styles/NFTCard/Section1.module.css";
 import { getCurrentNftPrice } from "../../utils/smart-contract/functions";
 
-export default function Section1({ artistName, isVerified, songName, tokenId }) {
+export default function Section1({ artistName, isVerified, trackName, tokenId }) {
     const { Moralis } = useMoralis();
+    const isWeb3Active = Moralis.ensureWeb3IsInstalled();
     const [price, setPrice] = useState("");
 
     const getPriceOf = async (tokenId) => {
@@ -14,9 +15,11 @@ export default function Section1({ artistName, isVerified, songName, tokenId }) 
     };
 
     useEffect(async () => {
-        const musicNft = await getPriceOf(tokenId);
-        setPrice(Moralis.Units.FromWei(musicNft.price));
-    }, []);
+        if (isWeb3Active) {
+            const musicNft = await getPriceOf(tokenId);
+            setPrice(Moralis.Units.FromWei(musicNft.price));
+        }
+    }, [isWeb3Active]);
 
     let truncatednftPrice = price;
     if (price >= 1000000) {
@@ -33,7 +36,7 @@ export default function Section1({ artistName, isVerified, songName, tokenId }) 
                     {artistName}
                     {isVerified ? <Image src={"/assets/mxv_tick.svg"} width={17} height={17} alt="MXV verified"></Image> : null}
                 </p>
-                <h6 className={styles["description--section1__songname"]}>{songName}</h6>
+                <h6 className={styles["description--section1__trackname"]}>{trackName}</h6>
             </div>
             {/* CURRENT PRICE */}
             <div>

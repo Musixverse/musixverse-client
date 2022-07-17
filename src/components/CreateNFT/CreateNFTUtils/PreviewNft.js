@@ -20,22 +20,22 @@ export default function PreviewNft({ trackTitle, coverArtUrl, audioFileUrl, nftP
         truncatednftPrice = Number((nftPrice / 1000).toFixed(2)) + " K";
     }
 
-    const playSongHandler = () => {
+    const playTrackHandler = () => {
         const playPause = playBtn.current.children[0];
         const isPaused = playPause.classList.contains("fa-play");
 
-        if (isPaused) playSong(playPause);
-        else pauseSong(playPause);
+        if (isPaused) playTrack(playPause);
+        else pauseTrack(playPause);
     };
 
-    const pauseSong = (controller) => {
+    const pauseTrack = (controller) => {
         controller.classList.add("fa-play");
         controller.classList.remove("fa-pause");
 
         audio.current.pause();
     };
 
-    const playSong = (controller) => {
+    const playTrack = (controller) => {
         controller.classList.remove("fa-play");
         controller.classList.add("fa-pause");
 
@@ -43,7 +43,7 @@ export default function PreviewNft({ trackTitle, coverArtUrl, audioFileUrl, nftP
     };
 
     const resetProgress = () => {
-        pauseSong(playBtn.current.children[0]);
+        pauseTrack(playBtn.current.children[0]);
         audio.current.currentTime = 0;
     };
 
@@ -66,7 +66,7 @@ export default function PreviewNft({ trackTitle, coverArtUrl, audioFileUrl, nftP
                         <button
                             type="button"
                             ref={playBtn}
-                            onClick={playSongHandler}
+                            onClick={playTrackHandler}
                             className="h-[40px] w-[40px] bg-primary-100 rounded-full flex items-center justify-center"
                         >
                             <i className="text-lg fas fa-play text-dark-200"></i>
@@ -97,10 +97,10 @@ export default function PreviewNft({ trackTitle, coverArtUrl, audioFileUrl, nftP
                 ) : (
                     <div className="flex items-end justify-between font-secondary text-[#1D1D1D] dark:text-light-200 text-xs">
                         <div className="flex -space-x-2 items-end">
-                            {collaboratorList.map((contributor, index) => {
-                                return contributor.avatar ? (
+                            {collaboratorList.map((collaborator, index) => {
+                                return collaborator.avatar ? (
                                     <div key={index} className={`rounded-full flex items-end relative z-${10 * (collaboratorList.length - index)}`}>
-                                        <Image src={contributor.avatar} height="30" width="30" className="rounded-full" />
+                                        <Image src={collaborator.avatar} height="30" width="30" className="rounded-full" />
                                     </div>
                                 ) : null;
                             })}

@@ -1,9 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
-import styles from "../../../styles/SongInfo/SongDetails.module.css";
-import SongDetail from "./SongInfoUtils/SongDetail";
+import styles from "../../../styles/TrackInfo/TrackDetails.module.css";
+import TrackDetail from "./TrackInfoUtils/TrackDetail";
 
-export default function SongDetails({ tokenId, metadata }) {
+export default function TrackDetails({ tokenId, metadata }) {
     var date = new Date(metadata.unlockTimestamp * 1000);
     var dateStr =
         date.toLocaleString("default", {
@@ -18,11 +18,11 @@ export default function SongDetails({ tokenId, metadata }) {
         " IST";
 
     return (
-        <div className={"dark:bg-dark-100 dark:border-dark-100 " + styles["song-detail__container"]}>
-            <SongDetail description={metadata.description} collaborators={metadata.collaborators} />
+        <div className={"dark:bg-dark-100 dark:border-dark-100 " + styles["track-detail__container"]}>
+            <TrackDetail description={metadata.description} collaborators={metadata.collaborators} />
 
             {/* OTHER DETAILS */}
-            <div className={styles["song-info__other-details"]}>
+            <div className={styles["track-info__other-details"]}>
                 {/* <div className={styles['other-details__title']}> */}
                 <h1 className="font-tertiary text-[36px]">OTHER DETAILS</h1>
                 {/* </div> */}

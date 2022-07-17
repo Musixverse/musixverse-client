@@ -1,55 +1,40 @@
-import { useState, useEffect } from "react";
-import { useMoralis } from "react-moralis";
 import Link from "next/link";
+import {useState, useEffect} from "react";
+import { useRouter } from "next/router";
 import { useTheme } from "next-themes";
 import Image from "next/image";
-import { useRouter } from "next/router";
+import { useMoralis } from "react-moralis";
 import logoBlack from "../../../public/logo-black.svg";
 import logoWhite from "../../../public/logo-white.svg";
 
-const Navbar = () => {
+const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
     const { theme, setTheme } = useTheme();
-    const { authenticate, isAuthenticated, logout, user } = useMoralis();
+    const { isAuthenticated, logout, user } = useMoralis();
     const router = useRouter();
-
-    const [watchWeb3AuthModal, setWatchWeb3AuthModal] = useState(false);
-
-    var checkWeb3AuthModalTimeout;
-    useEffect(() => {
-        checkWeb3AuthModalTimeout = setTimeout(changeWeb3AuthModalVisibility, 100);
-    }, [watchWeb3AuthModal]);
-
-    function changeWeb3AuthModalVisibility() {
-        if (typeof window !== "undefined" && document.getElementById("w3a-modal")) {
-            document.getElementById("w3a-modal").style.zIndex = "500";
-            clearTimeout(checkWeb3AuthModalTimeout);
-        }
-    }
-
-    const handleLogin = async () => {
-        setWatchWeb3AuthModal(true);
-        await authenticate({
-            provider: "web3Auth",
-            clientId: process.env.NEXT_PUBLIC_WEB3_AUTH_CLIENT_ID,
-            theme: theme === "light" ? "light" : "dark",
-            chainId: 0x13881,
-            appLogo:
-                theme === "light"
-                    ? "https://musixverse.vercel.app/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Flogo-black.ab1ae84f.svg&w=256&q=75"
-                    : "https://musixverse.vercel.app/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Flogo-white.510d7439.svg&w=256&q=75",
-            loginMethodsOrder: ["google", "facebook", "twitter", "github", "linkedin", "discord", "apple", "email_passwordless"],
-            signingMessage: "Musixverse Authentication",
-        });
-    };
 
     const handleLogout = async () => {
         if (router.pathname !== "/") router.push("/", undefined, { shallow: true });
         await logout();
     };
 
+    const [clientWindowHeight, setClientWindowHeight] = useState("");
+    const customStyles = "";
+    const handleScroll = () => {
+    setClientWindowHeight(window.scrollY);
+    };
+
+    useEffect(() => {
+    window.addEventListener("scroll", handleScroll); 
+    return () => window.removeEventListener("scroll", handleScroll);
+    });
+
+    if(clientWindowHeight>50){
+        customStyles = "rounded-full top-2.5 shadow-lg";
+    }
+
     return (
-        <nav className="navbar">
-            <div className="flex flex-wrap items-center justify-between w-full max-w-[1920px] px-6 md:px-8 lg:px-16 xl:px-20 2xl:px-36">
+        <nav className={" top-0 navbar rounded-b-full place-self-center mx-auto duration-300 ease-in "+ customStyles}>
+            <div className="flex flex-wrap items-center sticky justify-between w-full max-w-[1500px] px-6 md:px-8 lg:px-10 xl:px-10 2xl:px-16">
                 <Link href="/">
                     <a href="#" className="flex">
                         {theme === "light" ? (
@@ -187,7 +172,7 @@ const Navbar = () => {
                                             <a
                                                 className="block w-full text-sm dropdown-item whitespace-nowrap hover:bg-primary-100 active:bg-primary-100"
                                                 href="#"
-                                                onClick={handleLogin}
+                                                onClick={() => setAuthModalOpen(true)}
                                             >
                                                 Sign Up / Log In
                                             </a>
@@ -218,7 +203,6 @@ const Navbar = () => {
                     </ul>
                 </div>
             </div>
-            <div className="w-full h-1 bg-gradient-to-r from-primary-100 to-primary-300"></div>
         </nav>
     );
 };

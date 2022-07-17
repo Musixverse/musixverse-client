@@ -1,28 +1,13 @@
-import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useMoralisQuery, useMoralis } from "react-moralis";
-import styles from "../../../styles/SongInfo/PurchaseInfo.module.css";
+import { useMoralisQuery } from "react-moralis";
+import styles from "../../../styles/TrackInfo/PurchaseInfo.module.css";
 import CustomButton from "../../layout/CustomButton";
-import { getCurrentNftPrice } from "../../utils/smart-contract/functions";
 
-export default function PurchaseInfo({ tokenId, metadata, currentOwnerAddress }) {
-    const NFTPrice = 0.3;
-    const [price, setPrice] = useState("");
-    const { Moralis } = useMoralis();
+export default function PurchaseInfo({ metadata, currentOwnerAddress, price }) {
     const { data: currentOwner } = useMoralisQuery("_User", (query) => query.equalTo("ethAddress", currentOwnerAddress), [currentOwnerAddress]);
 
-    const getPriceOf = async (tokenId) => {
-        const result = await getCurrentNftPrice(tokenId);
-        return result;
-    };
-
-    useEffect(async () => {
-        const musicNft = await getPriceOf(tokenId);
-        setPrice(Moralis.Units.FromWei(musicNft.price));
-    }, [tokenId]);
-
-    if (!currentOwner[0]) return null;
+    // if (!currentOwner[0]) return null;
     return (
         <div className={"dark:bg-dark-100 " + styles["purchase-info"]}>
             {/* Heading DIV */}

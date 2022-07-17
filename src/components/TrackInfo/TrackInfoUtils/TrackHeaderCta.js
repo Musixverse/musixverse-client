@@ -1,13 +1,8 @@
 import { useState, useEffect } from "react";
-import { useMoralis } from "react-moralis";
 import Image from "next/image";
 import CtaButtons from "./CtaButtons";
-import { getCurrentNftPrice } from "../../../utils/smart-contract/functions";
-import styles from "../../../../styles/SongInfo/PurchaseInfo.module.css";
 
-export default function SongHeaderCta({ tokenId, unlockTimestamp }) {
-    const { Moralis } = useMoralis();
-    const [price, setPrice] = useState("");
+export default function TrackHeaderCta({ tokenId, unlockTimestamp, price, currentOwnerAddress }) {
     const [maticUSD, setMaticUSD] = useState("");
     const [maticINR, setMaticINR] = useState("");
     const [saleStart, setSaleStart] = useState("");
@@ -20,11 +15,6 @@ export default function SongHeaderCta({ tokenId, unlockTimestamp }) {
         }, 1000);
         return () => clearTimeout(timer);
     }, [timeNow]);
-
-    const getPriceOf = async (tokenId) => {
-        const result = await getCurrentNftPrice(tokenId);
-        return result;
-    };
 
     async function fetchMaticUSD() {
         const COINBASE_BASE_URL = "https://api.coinbase.com/v2";
@@ -41,9 +31,6 @@ export default function SongHeaderCta({ tokenId, unlockTimestamp }) {
     }
 
     useEffect(async () => {
-        const musicNft = await getPriceOf(tokenId);
-        setPrice(Moralis.Units.FromWei(musicNft.price));
-
         var date = new Date(unlockTimestamp * 1000);
         var dateStr =
             date.toLocaleString("default", {
@@ -57,7 +44,7 @@ export default function SongHeaderCta({ tokenId, unlockTimestamp }) {
             date.toLocaleTimeString() +
             " IST";
         setSaleStart(dateStr.toString());
-    }, []);
+    }, [unlockTimestamp]);
 
     useEffect(async () => {
         fetchMaticUSD();
@@ -163,7 +150,7 @@ export default function SongHeaderCta({ tokenId, unlockTimestamp }) {
                 </div>
             </div>
 
-            <CtaButtons />
+            <CtaButtons currentOwnerAddress={currentOwnerAddress} tokenId={tokenId} price={price} />
         </div>
     );
 }

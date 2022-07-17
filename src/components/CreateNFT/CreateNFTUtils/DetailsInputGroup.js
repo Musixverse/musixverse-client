@@ -1,7 +1,7 @@
 import InputDropdown from "./InputDropdown";
 import RequiredAsterisk from "./RequiredAsterisk";
 
-export default function DetailsInputGroup({ setTrackOrigin, setGenre, recordingYear, setRecordingYear, setParentalAdvisory }) {
+export default function DetailsInputGroup({ setTrackOrigin, setGenre, recordingYear, setRecordingYear, setParentalAdvisory, genre, trackOrigin, parentalAdvisory, language, location }) {
     const trackOriginArray = ["Original", "Cover", "Remix", "Live", "Remastered", "Radio Edit"];
     const genreArray = [
         "Afrobeat",
@@ -40,14 +40,14 @@ export default function DetailsInputGroup({ setTrackOrigin, setGenre, recordingY
                         TRACK ORIGIN
                         <RequiredAsterisk />
                     </p>
-                    <InputDropdown optionsArray={trackOriginArray} setChoice={setTrackOrigin} />
+                    <InputDropdown optionsArray={trackOriginArray} setChoice={setTrackOrigin} initialValue={trackOrigin} />
                 </div>
                 <div className="flex-1 text-sm font-semibold md:text-base font-secondary">
                     <p className="mb-1 text-sm">
                         GENRE
                         <RequiredAsterisk />
                     </p>
-                    <InputDropdown optionsArray={genreArray} setChoice={setGenre} />
+                    <InputDropdown optionsArray={genreArray} setChoice={setGenre} initialValue={genre}/>
                 </div>
             </div>
             <div className="flex flex-col w-full space-y-2 sm:flex-row sm:space-x-4 sm:space-y-0">
@@ -77,7 +77,7 @@ export default function DetailsInputGroup({ setTrackOrigin, setGenre, recordingY
                         PARENTAL ADVISORY
                         <RequiredAsterisk />
                     </p>
-                    <InputDropdown optionsArray={parentalAdvisoryArray} setChoice={setParentalAdvisory} />
+                    <InputDropdown optionsArray={parentalAdvisoryArray} setChoice={setParentalAdvisory} initialValue={parentalAdvisory}/>
                 </div>
             </div>
         </div>

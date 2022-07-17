@@ -1,7 +1,7 @@
 import InputDropdown from "./InputDropdown";
 import RequiredAsterisk from "./RequiredAsterisk";
 
-export default function GeographicDetailsInputGroup({ setLanguage, setLocation }) {
+export default function GeographicDetailsInputGroup({ setLanguage, setLocation, language, location }) {
     const languageArray = ["Hindi", "English", "Punjabi"];
     const locationArray = ["India", "United States of America", "Germany", "France"];
 
@@ -13,14 +13,14 @@ export default function GeographicDetailsInputGroup({ setLanguage, setLocation }
                         LANGUAGE
                         <RequiredAsterisk />
                     </p>
-                    <InputDropdown optionsArray={languageArray} setChoice={setLanguage} />
+                    <InputDropdown optionsArray={languageArray} setChoice={setLanguage} initialValue={language}  />
                 </div>
                 <div className="flex-1 text-sm font-semibold md:text-base font-secondary">
                     <p className="mb-1 text-sm">
                         LOCATION
                         <RequiredAsterisk />
                     </p>
-                    <InputDropdown optionsArray={locationArray} setChoice={setLocation} />
+                    <InputDropdown optionsArray={locationArray} setChoice={setLocation} initialValue={location} />
                 </div>
             </div>
         </div>

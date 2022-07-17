@@ -52,7 +52,11 @@ module.exports = ({
                     leaveTo="opacity-0"
                     leaveFrom="opacity-100"
                 >
-                    <div style={{ zIndex: "50" }} onClick={() => handleChange()} className="w-full h-full left-0 top-0 bg-black/50 backdrop-blur-sm fixed" />
+                    <div
+                        style={{ zIndex: "50" }}
+                        onClick={() => handleChange()}
+                        className="w-screen h-screen left-0 top-0 bg-black/50 backdrop-blur-sm fixed"
+                    />
                 </Transition.Child>
                 <Transition.Child
                     as={Fragment}
@@ -63,7 +67,7 @@ module.exports = ({
                     leaveTo="opacity-0 scale-75"
                     leaveFrom="opacity-100 scale-100"
                 >
-                    <div style={{ zIndex: "50" }} className="flex justify-center items-center h-full w-full fixed">
+                    <div style={{ zIndex: "50" }} className="flex left-0 top-0 justify-center items-center h-full w-full fixed">
                         <div className={`max-w-[32rem] sm:w-full w-11/12 ${classes ? classes : "p-4 bg-white dark:bg-dark-100 rounded-lg"}`}>
                             <div className="w-full flex justify-end items-center">
                                 <div
@@ -90,7 +94,7 @@ module.exports = ({
                             </div>
                             <div className="w-full flex flex-col justify-between items-center mb-4">
                                 {image}
-                                <div className="font-medium text-xl">{title}</div>
+                                <div className="font-medium text-xl text-center">{title}</div>
                             </div>
                             <div className="text-sm py-6 px-8 text-center">{content}</div>
                             <div className="mt-6 flex justify-end items-center gap-2">

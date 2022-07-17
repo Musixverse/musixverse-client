@@ -44,7 +44,15 @@ a {
 /**************************************************************************/
 
 .footer {
-    @apply w-full max-w-[1920px] pb-20 px-10 md:px-8 lg:px-16 xl:px-20 2xl:px-36 bg-nav-light backdrop-blur-2xl backdrop-brightness-150;
+    @apply w-full max-w-[1920px] pb-20 px-10 md:px-8 lg:px-16 xl:px-20 2xl:px-52 bg-nav-light backdrop-blur-2xl backdrop-brightness-150;
+}
+
+.footer__social {
+    @apply flex space-x-5 md:justify-end;
+}
+
+.footer__social button {
+    @apply bg-dark-200 border-none p-2 rounded-md hover:bg-dark-100 hover:animate-bounce;
 }
 
 input[type="radio"]:checked + label span {

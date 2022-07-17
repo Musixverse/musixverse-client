@@ -110,9 +110,9 @@ export default function TrackHeader({
 
                     <div className="w-full h-full grid content-between pt-6">
                         <div className="pb-6 w-full">
-                            {tags.map((tag) => {
+                            {tags.map((tag, index) => {
                                 return (
-                                    <button type="button" className="px-6 py-2 mr-2 rounded-full bg-light-200 dark:bg-dark-100 text-sm">
+                                    <button key={index} type="button" className="px-6 py-2 mr-2 rounded-full bg-light-200 dark:bg-dark-100 text-sm">
                                         {tag}
                                     </button>
                                 );

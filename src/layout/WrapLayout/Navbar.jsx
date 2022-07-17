@@ -185,7 +185,7 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
                                     <li></li>
                                     {user && isAuthenticated && (
                                         <li>
-                                            <Link href={`/profile/${user.attributes.username}`}>
+                                            <Link href={`/profile/${user.attributes.username}`} passHref={true}>
                                                 <div className="block w-full px-4 py-2 bg-transparent cursor-pointer dropdown-item whitespace-nowrap hover:bg-gray-100 dark:hover:bg-dark-200">
                                                     Profile
                                                 </div>
@@ -194,7 +194,7 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
                                     )}
                                     {user && isAuthenticated && (
                                         <li>
-                                            <Link href="/settings/profile-settings">
+                                            <Link href="/settings/profile-settings" passHref={true}>
                                                 <div className="block w-full px-4 py-2 bg-transparent cursor-pointer dropdown-item whitespace-nowrap hover:bg-gray-100 dark:hover:bg-dark-200">
                                                     Dashboard
                                                 </div>
@@ -203,7 +203,7 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
                                     )}
                                     {user && isAuthenticated && (
                                         <li>
-                                            <Link href="/settings/notifications-settings">
+                                            <Link href="/settings/notifications-settings" passHref={true}>
                                                 <div className="block w-full px-4 py-2 bg-transparent cursor-pointer dropdown-item whitespace-nowrap hover:bg-gray-100 dark:hover:bg-dark-200">
                                                     Notification Settings
                                                 </div>
@@ -212,7 +212,7 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
                                     )}
                                     {user && isAuthenticated && (
                                         <li>
-                                            <Link href="/settings/account-help">
+                                            <Link href="/settings/account-help" passHref={true}>
                                                 <div className="block w-full px-4 py-2 bg-transparent cursor-pointer dropdown-item whitespace-nowrap hover:bg-gray-100 dark:hover:bg-dark-200">
                                                     Account Help
                                                 </div>
@@ -221,7 +221,7 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
                                     )}
                                     {user && isAuthenticated && (
                                         <li>
-                                            <Link href="/contact-us">
+                                            <Link href="/contact-us" passHref={true}>
                                                 <div className="block w-full px-4 py-2 bg-transparent cursor-pointer dropdown-item whitespace-nowrap hover:bg-gray-100 dark:hover:bg-dark-200">
                                                     Contact Us
                                                 </div>

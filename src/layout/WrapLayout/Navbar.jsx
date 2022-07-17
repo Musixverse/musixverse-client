@@ -35,8 +35,8 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
     }
 
     return (
-        <nav className={"navbar place-self-center mx-auto duration-300 ease-in "+ customStyles}>
-            <div className="flex flex-wrap items-center sticky justify-center w-full max-w-[1500px] px-16 py-4">
+        <nav className={"navbar duration-300 ease-in mx-auto "+ customStyles}>
+            <div className="flex flex-wrap items-center justify-center w-full px-16 py-4">
                 <Link href="/">
                     <a href="#" className="flex">
                         {theme === "light" ? (

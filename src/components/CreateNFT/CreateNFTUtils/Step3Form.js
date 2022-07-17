@@ -172,9 +172,6 @@ const Step3Form = ({
                             <label htmlFor="individual-nft-price" className="block uppercase tracking-wide mb-1 text-sm">
                                 PRICE OF EACH COPY
                                 <RequiredAsterisk />
-                                <span className="inline-block text-gray-500 text-xs font-normal lowercase ml-4">
-                                    (approx. ₹{truncatedmaticINRPrice} or ${truncatedmaticUSDPrice})
-                                </span>
                             </label>
 
                             <input
@@ -190,6 +187,9 @@ const Step3Form = ({
                                 placeholder="Enter price in MATIC"
                                 required
                             />
+                            <p className="inline-block text-gray-500 text-xs font-normal lowercase">
+                                (approx. ₹{truncatedmaticINRPrice} or ${truncatedmaticUSDPrice})
+                            </p>
                         </div>
                     </div>
 

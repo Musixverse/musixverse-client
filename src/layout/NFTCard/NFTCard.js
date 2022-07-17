@@ -4,7 +4,7 @@ import styles from "../../../styles/NFTCard/Nftcard.module.css";
 import Section2 from "./Section2";
 import Section1 from "./Section1";
 
-export default function NFTCard({ trackName, artistName, image, tokenId, numberOfCopies, collaboratorList, localTokenId, likeCount, lastPrice, isVerified }) {
+export default function NFTCard({ trackName, artistName, image, tokenId, numberOfCopies, collaboratorList, likeCount, lastPrice, isVerified }) {
     const { theme } = useTheme();
 
     let truncatedArtistName = artistName;
@@ -25,13 +25,7 @@ export default function NFTCard({ trackName, artistName, image, tokenId, numberO
                 {/* Artist, Music name and tokenId */}
                 <Section1 artistName={truncatedArtistName} trackName={truncatedNftName} tokenId={tokenId} isVerified={isVerified} />
                 {/* LIKES and Prev Price Section */}
-                <Section2
-                    collaboratorList={collaboratorList}
-                    numberOfCopies={numberOfCopies}
-                    localTokenId={localTokenId}
-                    likeCount={likeCount}
-                    lastPrice={lastPrice}
-                />
+                <Section2 collaboratorList={collaboratorList} numberOfCopies={numberOfCopies} tokenId={tokenId} likeCount={likeCount} lastPrice={lastPrice} />
             </div>
         </div>
     );

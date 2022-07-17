@@ -1,41 +1,28 @@
 import Image from "next/image";
 import Link from "next/link";
-import { useState, useEffect } from "react";
 import { useMoralisCloudFunction } from "react-moralis";
 import styles from "../../../styles/TrackInfo/TrackHeader.module.css";
 import AudioPlayer from "./AudioPlayer";
 import mxv_verified from "../../../public/assets/mxv_tick.svg";
 import TrackHeaderCta from "./TrackInfoUtils/TrackHeaderCta";
-import { MXV_CONTRACT_ADDRESS, BLOCKCHAIN_NETWORK } from "../../utils/smart-contract/constants";
 
-export default function TrackHeader({ image, artworkArtistId, artistAddress, title, audio_url, tokenId, unlockTimestamp, price, currentOwnerAddress }) {
-    const [artworkArtistInfo, setArtworkArtistInfo] = useState("");
-
+export default function TrackHeader({
+    image,
+    artworkInfo,
+    artistAddress,
+    title,
+    audio_url,
+    tokenId,
+    unlockTimestamp,
+    price,
+    currentOwnerAddress,
+    numberOfCopies,
+}) {
     const { data: artist } = useMoralisCloudFunction("fetchUsernameFromAddress", { artistAddress: artistAddress });
     const { data: localTokenId } = useMoralisCloudFunction("fetchLocalTokenId", {
         tokenId: tokenId,
-        contractAddress: MXV_CONTRACT_ADDRESS,
-        chain: BLOCKCHAIN_NETWORK,
     });
-
-    const { fetch: fetchCollaborator } = useMoralisCloudFunction(
-        "fetchCollaborator",
-        { id: artworkArtistId },
-        {
-            autoFetch: false,
-        }
-    );
-
-    useEffect(() => {
-        fetchCollaborator({
-            onSuccess: async (object) => {
-                setArtworkArtistInfo(object[0]);
-            },
-            onError: (error) => {
-                console.log("fetchCollaborator Error:", error);
-            },
-        });
-    }, [artworkArtistId]);
+    const { data: artworkArtistInfo } = useMoralisCloudFunction("fetchArtworkArtist", { artworkInfo: artworkInfo });
 
     if (!artist) return null;
     return (
@@ -49,10 +36,23 @@ export default function TrackHeader({ image, artworkArtistId, artistAddress, tit
                         </a>
                     </Link>
                     <div className="absolute hidden group-hover:block">
-                        {artworkArtistInfo ? (
+                        {artworkInfo.invitedArtistId && artworkArtistInfo && artworkArtistInfo.user[0] ? (
+                            <Link href={`/profile/${artworkArtistInfo.user[0].username}`} className="cursor-pointer">
+                                <a target="_blank" rel="noopener noreferrer">
+                                    <div className="flex items-end mb-2 font-secondary text-sm">
+                                        <span className="mr-2">Artwork by-</span>
+                                        {artworkArtistInfo.userInfo && (
+                                            <Image src={artworkArtistInfo.userInfo[0].avatar} height="25" width="25" className="rounded-full" />
+                                        )}
+                                        <span className="ml-1">@{artworkArtistInfo.user[0].username}</span>
+                                    </div>
+                                </a>
+                            </Link>
+                        ) : artworkInfo.artistAddress && artworkArtistInfo ? (
                             <Link href={`/profile/${artworkArtistInfo.username}`} className="cursor-pointer">
                                 <a target="_blank" rel="noopener noreferrer">
                                     <div className="flex items-end mb-2 font-secondary text-sm">
+                                        <span className="mr-2">Artwork by-</span>
                                         {artworkArtistInfo.userInfo && (
                                             <Image src={artworkArtistInfo.userInfo[0].avatar} height="25" width="25" className="rounded-full" />
                                         )}
@@ -60,6 +60,11 @@ export default function TrackHeader({ image, artworkArtistId, artistAddress, tit
                                     </div>
                                 </a>
                             </Link>
+                        ) : artworkInfo.artist ? (
+                            <div className="flex items-end mb-2 font-secondary text-sm">
+                                <span className="mr-2">Artwork by-</span>
+                                <span>{artworkInfo.artist}</span>
+                            </div>
                         ) : null}
                     </div>
                 </div>
@@ -83,7 +88,7 @@ export default function TrackHeader({ image, artworkArtistId, artistAddress, tit
                         {title}&nbsp;
                         {localTokenId ? (
                             <span className="font-primary text-xs">
-                                #{localTokenId[0]} of {localTokenId[1]}
+                                #{localTokenId} of {numberOfCopies}
                             </span>
                         ) : null}
                     </h2>

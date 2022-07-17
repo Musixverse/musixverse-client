@@ -1,25 +1,18 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import { useMoralis } from "react-moralis";
+import { useMoralis, useMoralisCloudFunction } from "react-moralis";
 import styles from "../../../styles/NFTCard/Section1.module.css";
-import { getCurrentNftPrice } from "../../utils/smart-contract/functions";
 
 export default function Section1({ artistName, isVerified, trackName, tokenId }) {
     const { Moralis } = useMoralis();
-    const isWeb3Active = Moralis.ensureWeb3IsInstalled();
+    const { data: tokenPrice } = useMoralisCloudFunction("fetchTokenPrice", { tokenId: tokenId });
     const [price, setPrice] = useState("");
 
-    const getPriceOf = async (tokenId) => {
-        const result = await getCurrentNftPrice(tokenId);
-        return result;
-    };
-
     useEffect(async () => {
-        if (isWeb3Active) {
-            const musicNft = await getPriceOf(tokenId);
-            setPrice(Moralis.Units.FromWei(musicNft.price));
+        if (tokenPrice) {
+            setPrice(Moralis.Units.FromWei(tokenPrice));
         }
-    }, [isWeb3Active]);
+    }, [tokenPrice]);
 
     let truncatednftPrice = price;
     if (price >= 1000000) {

@@ -73,9 +73,9 @@
           "type": "uint256"
         },
         {
-          "internalType": "string[]",
-          "name": "URIHashes",
-          "type": "string[]"
+          "internalType": "string",
+          "name": "URIHash",
+          "type": "string"
         },
         {
           "internalType": "address[]",
@@ -96,6 +96,11 @@
           "internalType": "bool",
           "name": "onSale",
           "type": "bool"
+        },
+        {
+          "internalType": "uint256",
+          "name": "unlockTimestamp",
+          "type": "uint256"
         }
       ],
       "name": "mintTrackNFT",

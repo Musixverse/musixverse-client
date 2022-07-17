@@ -13,7 +13,7 @@ const TrackNFTs = () => {
         <div className="col-span-9 grid grid-cols-4 gap-10">
             {allTracks &&
                 allTracks.map((token, index) => {
-                    return <TrackNFT token={token} index={index} />;
+                    return <TrackNFT key={index} token={token} index={index} />;
                 })}
         </div>
     );

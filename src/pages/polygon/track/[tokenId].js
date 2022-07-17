@@ -9,8 +9,6 @@ import TrackDetails from "../../../components/TrackInfo/TrackDetails";
 import PurchaseInfo from "../../../components/TrackInfo/PurchaseInfo";
 import SalesHistory from "../../../components/TrackInfo/SalesHistory";
 import SimilarTokens from "../../../components/TrackInfo/SimilarTokens";
-import LoadingContext from "../../../../store/loading-context";
-import { ownerOf } from "../../../utils/smart-contract/functions";
 
 // Fetching data over here using SSR and then passing in the components as props
 export async function getServerSideProps({ query }) {
@@ -77,6 +75,7 @@ export default function TrackInfo({ token, otherTokensOfTrack }) {
                         artistAddress={metadata.artistAddress}
                         title={metadata.title}
                         audio_url={metadata.audio.replace("ipfs://", process.env.NEXT_PUBLIC_IPFS_NODE_URL)}
+                        tags={metadata.tags}
                         tokenId={tokenId}
                         unlockTimestamp={metadata.unlockTimestamp}
                         price={price}

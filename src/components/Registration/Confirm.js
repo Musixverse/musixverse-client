@@ -26,7 +26,7 @@ export default function Confirm() {
                     if (userInfo[0] && userInfo[0].attributes.isArtist) {
                         Router.push(`/profile/${user.attributes.username}`, undefined, { shallow: true });
                     } else {
-                        Router.push("/library", undefined, { shallow: true });
+                        Router.push("/marketplace/explore", undefined, { shallow: true });
                     }
                 }
             }
@@ -41,7 +41,7 @@ export default function Confirm() {
         if (userInfo[0].attributes.isArtist) {
             Router.push(`/profile/${user.attributes.username}`, undefined, { shallow: true });
         } else {
-            Router.push("/library", undefined, { shallow: true });
+            Router.push("/marketplace/explore", undefined, { shallow: true });
         }
         return;
     };
@@ -87,7 +87,7 @@ export default function Confirm() {
                                 type="submit"
                                 className="flex justify-center items-center space-x-3 bg-light-100 hover:bg-light-200 text-[14px] text-dark-100 py-2 px-6 rounded-lg mt-6 font-primary font-semibold max-w-[210px]"
                             >
-                                Go to Library
+                                Go to Explore
                             </button>
                         )}
                     </form>

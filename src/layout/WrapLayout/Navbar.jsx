@@ -1,5 +1,5 @@
 import Link from "next/link";
-import {useState, useEffect} from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { useTheme } from "next-themes";
 import Image from "next/image";
@@ -20,20 +20,20 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
     const [clientWindowHeight, setClientWindowHeight] = useState("");
     const customStyles = "";
     const handleScroll = () => {
-    setClientWindowHeight(window.scrollY);
+        setClientWindowHeight(window.scrollY);
     };
 
     useEffect(() => {
-    window.addEventListener("scroll", handleScroll); 
-    return () => window.removeEventListener("scroll", handleScroll);
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
     });
 
-    if(clientWindowHeight>50){
+    if (clientWindowHeight > 50) {
         customStyles = "rounded-full top-2.5 shadow-lg";
     }
 
     return (
-        <nav className={" top-0 navbar rounded-b-full place-self-center mx-auto duration-300 ease-in "+ customStyles}>
+        <nav className={" top-0 navbar rounded-b-full place-self-center mx-auto duration-300 ease-in " + customStyles}>
             <div className="flex flex-wrap items-center sticky justify-between w-full max-w-[1500px] px-6 md:px-8 lg:px-10 xl:px-10 2xl:px-16">
                 <Link href="/">
                     <a href="#" className="flex">
@@ -89,10 +89,10 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
                         </li>
                         <li className="hover:text-primary-200">
                             <Link
-                                href="/library"
+                                href="/marketplace/explore"
                                 className="block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:text-primary-100 md:hover:bg-transparent md:border-0 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
                             >
-                                Library
+                                Explore
                             </Link>
                         </li>
                         <li className="hover:text-primary-200">

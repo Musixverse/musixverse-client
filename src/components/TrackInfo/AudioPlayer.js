@@ -107,7 +107,7 @@ export default function AudioPlayer({ audio_url }) {
     };
 
     return (
-        <div className="flex flex-row justify-between items-center pb-10">
+        <div className="flex flex-row justify-between items-center">
             <button ref={playBtn} onClick={playTrackHandler} className={"dark:border-light-100 " + styles["play-btn"]}>
                 <i className="fas fa-play text-2xl"></i>
             </button>

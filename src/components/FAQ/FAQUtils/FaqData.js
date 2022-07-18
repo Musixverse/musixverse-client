@@ -147,7 +147,7 @@ const aboutMxvData = [
 const buyingAndSellingData = [
     {
         heading: "How do I get an NFT on Musixverse?",
-        body: "Buy one from the Marketplace, which you can look through using the Library page. Click on one card and then purchase from the Track Info page.",
+        body: "Buy one from the Marketplace, which you can look through using the Explore page. Click on one card and then purchase from the Track Info page.",
         content_id: "collapseOne",
     },
     {

@@ -67,17 +67,10 @@ export default function ComprehensiveDetails({
                 <form
                     onSubmit={(e) => {
                         e.preventDefault();
-                        if (!coverArtUrl) {
+                        if (tags.length < 1) {
                             setError({
-                                title: "Image not uploaded!",
-                                message: "You need to upload an image to proceed.",
-                                showErrorBox: true,
-                            });
-                            return;
-                        } else if (!audioFileUrl) {
-                            setError({
-                                title: "Audio file not uploaded!",
-                                message: "You need to upload an audio file to proceed.",
+                                title: "Tags not selected!",
+                                message: "You need to select at least 1 tag to proceed.",
                                 showErrorBox: true,
                             });
                             return;

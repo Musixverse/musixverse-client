@@ -1,4 +1,5 @@
 import React, { useRef, useContext } from "react";
+import Link from "next/link";
 import styles from "../../../styles/ReportABug/reportABug.module.css";
 import { useNewMoralisObject } from "react-moralis";
 import StatusContext from "../../../store/status-context";
@@ -148,8 +149,15 @@ export default function ReportABug() {
 						totally different way to accomplish the same thing. Simply saying that something “doesn’t work” isn’t very helpful; spell it out for us as simply and clearly as possible.
 						<br />
 						<br />
-						Any supporting information you can think of adding will be appreciated. Attach anything you think might be helpful. Eg. A screenshot or screen recording may be the clearest
-						way to explain your bug.
+						Any supporting information you can think of adding will be appreciated. Eg. A screenshot or screen recording may be the clearest way to explain your bug. 
+						<br />
+						Head over to discord and report your issue.{" "} 
+						    {/* Link added to the product-feedback channel on discord server */}
+							<Link href="https://discord.gg/MdSVC8Bfpw" passHref={true}>
+                                <a target="_blank" rel="noopener noreferrer" className="font-medium text-primary-100 hover:text-primary-300">
+                                    Click here
+                                </a>
+                            </Link>{" "} 
 					</div>
 				</div>
 

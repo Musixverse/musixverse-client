@@ -36,9 +36,18 @@ export default function Step1Form({
     };
 
     const setCoverArtArtistEmail = async (e) => {
-        setCoverArtArtist({
+        setCoverArtArtist((prevState) => ({
+            ...prevState,
             email: e.target.value,
-        });
+        }));
+        setFilteredUsers([]);
+    };
+
+    const setCoverArtArtistName = async (e) => {
+        setCoverArtArtist((prevState) => ({
+            ...prevState,
+            name: e.target.value,
+        }));
         setFilteredUsers([]);
     };
 
@@ -49,6 +58,7 @@ export default function Step1Form({
             username: user.username,
             address: user.ethAddress,
             avatar: user.userInfo[0].avatar,
+            email: "",
         });
         setFilteredUsers([]);
     };
@@ -155,6 +165,8 @@ export default function Step1Form({
                                 name="cover-art-artist-radio"
                                 className="hidden"
                                 onClick={(e) => toggleCoverArtArtistRadio(e)}
+                                checked={creditCoverArtArtist}
+                                onChange={(e) => {}}
                             />
                             <label htmlFor="coverArtArtistYes" className="flex items-center text-sm font-normal cursor-pointer font-secondary">
                                 <span className="inline-block w-6 h-6 mr-1 border-2 rounded-full border-[#363636] flex-no-shrink"></span>
@@ -168,7 +180,8 @@ export default function Step1Form({
                                 name="cover-art-artist-radio"
                                 className="hidden"
                                 onClick={(e) => toggleCoverArtArtistRadio(e)}
-                                defaultChecked
+                                checked={!creditCoverArtArtist}
+                                onChange={(e) => {}}
                             />
                             <label htmlFor="coverArtArtistNo" className="flex items-center text-sm font-normal cursor-pointer font-secondary">
                                 <span className="inline-block w-6 h-6 mr-1 border-2 rounded-full border-[#363636] flex-no-shrink"></span>
@@ -210,9 +223,9 @@ export default function Step1Form({
                             ) : (
                                 <>
                                     <p className="text-xs text-[#777777] font-normal mb-2">
-                                        Enter their username if they are on the platform or just enter their email
+                                        Enter their username if they are on Musixverse or just enter their name and email
                                     </p>
-                                    <div className="flex space-x-2">
+                                    <div className="flex flex-col">
                                         <input
                                             className="dark:text-light-100 dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-100 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-100"
                                             id="username"
@@ -224,116 +237,134 @@ export default function Step1Form({
                                                 filterUsers(e);
                                             }}
                                         />
-                                        <div className="flex items-center text-sm text-[#777777] font-normal">or</div>
-                                        <input
-                                            className="dark:text-light-100 dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-100 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-100"
-                                            id="email"
-                                            name="email"
-                                            type="text"
-                                            placeholder="Email"
-                                            autoComplete="off"
-                                            value={coverArtArtist.email}
-                                            onChange={(e) => {
-                                                setCoverArtArtistEmail(e);
-                                            }}
-                                            required
-                                        />
+                                    </div>
+
+                                    {!coverArtArtist.username && filteredUsers ? (
+                                        <div className="absolute w-full">
+                                            {filteredUsers.length > 0 ? (
+                                                filteredUsers.map((user, idx) => (
+                                                    <a key={user.objectId} className="flex flex-col basis-full">
+                                                        {filteredUsers.length === 1 ? (
+                                                            <button
+                                                                type="button"
+                                                                className="flex items-center rounded bg-light-100 dark:bg-dark-100 hover:text-light-100 dark:text-light-100 hover:bg-primary-100 dark:hover:bg-primary-100 py-2 px-3 justify-start text-start"
+                                                                onClick={() => {
+                                                                    setCoverArtArtistInfo(user);
+                                                                }}
+                                                            >
+                                                                {user.userInfo[0] ? (
+                                                                    <Image src={user.userInfo[0].avatar} height="30" width="30" className="rounded-full" />
+                                                                ) : (
+                                                                    ""
+                                                                )}
+                                                                <span className="ml-2">{user.name}</span>
+                                                                <div>
+                                                                    <span className="ml-2 text-xs font-normal">@{user.username}</span>
+                                                                </div>
+                                                            </button>
+                                                        ) : idx === 0 ? (
+                                                            <button
+                                                                type="button"
+                                                                className="flex items-center rounded-t bg-light-100 dark:bg-dark-100 hover:text-light-100 dark:text-light-100 hover:bg-primary-100 dark:hover:bg-primary-100 py-2 px-3 justify-start text-start"
+                                                                onClick={() => {
+                                                                    setCoverArtArtistInfo(user);
+                                                                }}
+                                                            >
+                                                                {user.userInfo[0] ? (
+                                                                    <Image src={user.userInfo[0].avatar} height="30" width="30" className="rounded-full" />
+                                                                ) : (
+                                                                    ""
+                                                                )}
+                                                                <span className="ml-2">{user.name}</span>
+                                                                <div>
+                                                                    <span className="ml-2 text-xs font-normal">@{user.username}</span>
+                                                                </div>
+                                                            </button>
+                                                        ) : filteredUsers.length === idx + 1 ? (
+                                                            <button
+                                                                type="button"
+                                                                className="flex items-center rounded-b bg-light-100 dark:bg-dark-100 hover:text-light-100 dark:text-light-100 hover:bg-primary-100 dark:hover:bg-primary-100 py-2 px-3 justify-start text-start"
+                                                                onClick={() => {
+                                                                    setCoverArtArtistInfo(user);
+                                                                }}
+                                                            >
+                                                                {user.userInfo[0] ? (
+                                                                    <Image src={user.userInfo[0].avatar} height="30" width="30" className="rounded-full" />
+                                                                ) : (
+                                                                    ""
+                                                                )}
+                                                                <span className="ml-2">{user.name}</span>
+                                                                <div>
+                                                                    <span className="ml-2 text-xs font-normal">@{user.username}</span>
+                                                                </div>
+                                                            </button>
+                                                        ) : (
+                                                            <button
+                                                                type="button"
+                                                                className="flex items-center bg-light-100 dark:bg-dark-100 hover:text-light-100 dark:text-light-100 hover:bg-primary-100 dark:hover:bg-primary-100 py-2 px-3 justify-start text-start"
+                                                                onClick={() => {
+                                                                    setCoverArtArtistInfo(user);
+                                                                }}
+                                                            >
+                                                                {user.userInfo[0] ? (
+                                                                    <Image src={user.userInfo[0].avatar} height="30" width="30" className="rounded-full" />
+                                                                ) : (
+                                                                    ""
+                                                                )}
+                                                                <span className="ml-2">{user.name}</span>
+                                                                <div>
+                                                                    <span className="ml-2 text-xs font-normal">@{user.username}</span>
+                                                                </div>
+                                                            </button>
+                                                        )}
+                                                    </a>
+                                                ))
+                                            ) : searchedUsername.length > 0 ? (
+                                                <a key={"no"} className="flex flex-col basis-full">
+                                                    <button
+                                                        type="button"
+                                                        className="bg-light-100 hover:bg-gray-200 dark:bg-dark-100 dark:text-light-100 py-2 px-6 justify-start text-start rounded"
+                                                    >
+                                                        <span className="text-xs">No results found!</span>
+                                                    </button>
+                                                </a>
+                                            ) : null}
+                                        </div>
+                                    ) : null}
+
+                                    <div className="flex flex-col justify-center items-center">
+                                        <p className="text-sm text-[#777777] font-normal mt-2 mb-2">or</p>
+                                        <div className="flex space-x-2 w-full">
+                                            <input
+                                                className="dark:text-light-100 dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-100 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-100"
+                                                type="text"
+                                                id="name"
+                                                name="name"
+                                                placeholder="Name"
+                                                autoComplete="off"
+                                                value={coverArtArtist.name}
+                                                onChange={(e) => {
+                                                    setCoverArtArtistName(e);
+                                                }}
+                                                required
+                                            />
+                                            <input
+                                                className="dark:text-light-100 dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-100 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-100"
+                                                type="email"
+                                                id="email"
+                                                name="email"
+                                                placeholder="Email"
+                                                autoComplete="off"
+                                                value={coverArtArtist.email}
+                                                onChange={(e) => {
+                                                    setCoverArtArtistEmail(e);
+                                                }}
+                                                required
+                                            />
+                                        </div>
                                     </div>
                                 </>
                             )}
-
-                            {!coverArtArtist.username && filteredUsers ? (
-                                <div className="absolute w-full">
-                                    {filteredUsers.length > 0 ? (
-                                        filteredUsers.map((user, idx) => (
-                                            <a key={user.objectId} className="flex flex-col basis-full">
-                                                {filteredUsers.length === 1 ? (
-                                                    <button
-                                                        type="button"
-                                                        className="flex items-center rounded bg-light-100 dark:bg-dark-100 hover:text-light-100 dark:text-light-100 hover:bg-primary-100 dark:hover:bg-primary-100 py-2 px-3 justify-start text-start"
-                                                        onClick={() => {
-                                                            setCoverArtArtistInfo(user);
-                                                        }}
-                                                    >
-                                                        {user.userInfo[0] ? (
-                                                            <Image src={user.userInfo[0].avatar} height="30" width="30" className="rounded-full" />
-                                                        ) : (
-                                                            ""
-                                                        )}
-                                                        <span className="ml-2">{user.name}</span>
-                                                        <div>
-                                                            <span className="ml-2 text-xs font-normal">@{user.username}</span>
-                                                        </div>
-                                                    </button>
-                                                ) : idx === 0 ? (
-                                                    <button
-                                                        type="button"
-                                                        className="flex items-center rounded-t bg-light-100 dark:bg-dark-100 hover:text-light-100 dark:text-light-100 hover:bg-primary-100 dark:hover:bg-primary-100 py-2 px-3 justify-start text-start"
-                                                        onClick={() => {
-                                                            setCoverArtArtistInfo(user);
-                                                        }}
-                                                    >
-                                                        {user.userInfo[0] ? (
-                                                            <Image src={user.userInfo[0].avatar} height="30" width="30" className="rounded-full" />
-                                                        ) : (
-                                                            ""
-                                                        )}
-                                                        <span className="ml-2">{user.name}</span>
-                                                        <div>
-                                                            <span className="ml-2 text-xs font-normal">@{user.username}</span>
-                                                        </div>
-                                                    </button>
-                                                ) : filteredUsers.length === idx + 1 ? (
-                                                    <button
-                                                        type="button"
-                                                        className="flex items-center rounded-b bg-light-100 dark:bg-dark-100 hover:text-light-100 dark:text-light-100 hover:bg-primary-100 dark:hover:bg-primary-100 py-2 px-3 justify-start text-start"
-                                                        onClick={() => {
-                                                            setCoverArtArtistInfo(user);
-                                                        }}
-                                                    >
-                                                        {user.userInfo[0] ? (
-                                                            <Image src={user.userInfo[0].avatar} height="30" width="30" className="rounded-full" />
-                                                        ) : (
-                                                            ""
-                                                        )}
-                                                        <span className="ml-2">{user.name}</span>
-                                                        <div>
-                                                            <span className="ml-2 text-xs font-normal">@{user.username}</span>
-                                                        </div>
-                                                    </button>
-                                                ) : (
-                                                    <button
-                                                        type="button"
-                                                        className="flex items-center bg-light-100 dark:bg-dark-100 hover:text-light-100 dark:text-light-100 hover:bg-primary-100 dark:hover:bg-primary-100 py-2 px-3 justify-start text-start"
-                                                        onClick={() => {
-                                                            setCoverArtArtistInfo(user);
-                                                        }}
-                                                    >
-                                                        {user.userInfo[0] ? (
-                                                            <Image src={user.userInfo[0].avatar} height="30" width="30" className="rounded-full" />
-                                                        ) : (
-                                                            ""
-                                                        )}
-                                                        <span className="ml-2">{user.name}</span>
-                                                        <div>
-                                                            <span className="ml-2 text-xs font-normal">@{user.username}</span>
-                                                        </div>
-                                                    </button>
-                                                )}
-                                            </a>
-                                        ))
-                                    ) : searchedUsername.length > 0 ? (
-                                        <a key={"no"} className="flex flex-col basis-full">
-                                            <button
-                                                type="button"
-                                                className="bg-light-100 hover:bg-gray-200 dark:bg-dark-100 dark:text-light-100 py-2 px-6 justify-start text-start rounded"
-                                            >
-                                                <span className="text-xs">No results found!</span>
-                                            </button>
-                                        </a>
-                                    ) : null}
-                                </div>
-                            ) : null}
                         </div>
                     ) : null}
 

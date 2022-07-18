@@ -1,5 +1,5 @@
 import Link from "next/link";
-import {useState, useEffect} from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { useTheme } from "next-themes";
 import Image from "next/image";
@@ -22,15 +22,15 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
     const [clientWindowHeight, setClientWindowHeight] = useState("");
     const customStyles = "top-0 rounded-b-[50px]";
     const handleScroll = () => {
-    setClientWindowHeight(window.scrollY);
+        setClientWindowHeight(window.scrollY);
     };
 
     useEffect(() => {
-    window.addEventListener("scroll", handleScroll); 
-    return () => window.removeEventListener("scroll", handleScroll);
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
     });
 
-    if(clientWindowHeight>50){
+    if (clientWindowHeight > 50) {
         customStyles = "rounded-full top-2.5 shadow-lg";
     }
 

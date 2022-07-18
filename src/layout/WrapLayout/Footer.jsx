@@ -25,7 +25,7 @@ const Footer = () => {
                     <div className="flex flex-col space-y-2">
                         <p className="font-semibold text">Quick Links</p>
                         <Link href="/">Home</Link>
-                        <Link href="/library">Explore</Link>
+                        <Link href="/marketplace/explore">Explore</Link>
                         <Link href="/trending">Trending</Link>
                         <Link href="/create-nft">Create</Link>
                         <Link href="/cfh/cfb">Community</Link>
@@ -76,32 +76,32 @@ const Footer = () => {
                                 <a target="_blank" rel="noopener noreferrer" className="flex justify-center items-center">
                                     <Image src={discord} width={20} height={20} alt="discord"></Image>
                                 </a>
-                            </Link>  
+                            </Link>
                         </button>
                         <button className="flex justify-center items-center">
                             <Link href="https://www.facebook.com/Musixverse-104390125641359" passHref={true}>
                                 <a target="_blank" rel="noopener noreferrer" className="flex justify-center items-center">
                                     <Image src={facebook} width={20} height={20} alt="facebook"></Image>
                                 </a>
-                            </Link>  
+                            </Link>
                         </button>
                         <button className="flex justify-center items-center">
                             <Link href="https://twitter.com/musixverse" passHref={true}>
                                 <a target="_blank" rel="noopener noreferrer" className="flex justify-center items-center">
                                     <Image src={twitter} width={20} height={20} alt="twitter"></Image>
                                 </a>
-                            </Link>  
+                            </Link>
                         </button>
                         <button className="flex justify-center items-center">
                             <Link href="https://www.instagram.com/musixverse/" passHref={true}>
                                 <a target="_blank" rel="noopener noreferrer" className="flex justify-center items-center">
                                     <Image src={instagram} width={20} height={20} alt="instagram"></Image>
                                 </a>
-                            </Link>  
+                            </Link>
                         </button>
                     </div>
                 </div>
-            </div>    
+            </div>
         </div>
     );
 };

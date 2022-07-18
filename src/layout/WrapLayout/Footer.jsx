@@ -142,7 +142,7 @@ const Footer = () => {
                         <Image src={theme === "dark" ? MXV_emblemW : MXV_emblemB} width={95} height={95} objectFit="contain" alt="MXV emblem"></Image>
                     </div>
                 </div>
-            </div>    
+            </div>
         </div>
     );
 };

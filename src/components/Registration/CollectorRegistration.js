@@ -98,6 +98,7 @@ export default function CollectorRegistration() {
 
             const userPreferences = {
                 user: user,
+                userId: user.id,
                 newsletter: true,
                 itemSold: true,
             };

@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { useState, useEffect, useContext } from "react";
-import { useMoralis, useMoralisQuery } from "react-moralis";
+import { useMoralis, useMoralisQuery, useNewMoralisObject } from "react-moralis";
 import ScrollToPageTop from "../../utils/ScrollToPageTop";
 import CreateNFTIntro from "../../components/CreateNFT/step-0";
 import TrackDetails from "../../components/CreateNFT/step-1";
@@ -103,20 +103,42 @@ const CreateNFT = () => {
         }
     }, [user, userInfo]);
 
+    const { save: saveInvitedArtworkArtist } = useNewMoralisObject("InvitedArtworkArtist");
     const nftCreateFormOnSubmit = async () => {
         setLoading(true);
-        const reducedCollaboratorList = collaboratorList.reduce((result, { id, name, address, split, role }) => {
-            result.push({ id, name, address, split, role });
+        const reducedCollaboratorList = collaboratorList.reduce((result, { name, address, split, role }) => {
+            result.push({ name, address, split, role });
             return result;
         }, []);
 
         var lyricsFile;
         if (lyrics) {
-            lyricsFile = new Moralis.File("lyricsFile.txt", { base64: btoa(lyrics) });
+            lyricsFile = new Moralis.File("lyricsFile.txt", { base64: btoa(unescape(encodeURIComponent(lyrics))) });
             await lyricsFile.saveIPFS();
         }
 
         const _tags = tags.map((tag) => tag.value);
+
+        let invitedArtworkArtistId;
+        if (creditCoverArtArtist && !coverArtArtist.address) {
+            const invitedArtworkArtistInfo = {
+                user: user,
+                userId: user.id,
+                invitedArtistName: coverArtArtist.name,
+                invitedArtistEmail: coverArtArtist.email,
+            };
+            await saveInvitedArtworkArtist(invitedArtworkArtistInfo, {
+                onSuccess: (obj) => {
+                    invitedArtworkArtistId = obj.id;
+                },
+                onError: (error) => {
+                    // Execute any logic that should take place if the save fails.
+                    // error is a Moralis.Error with an error code and message.
+                    console.log("saveInvitedArtworkArtist error:", error);
+                    return;
+                },
+            });
+        }
 
         const nftMetadata = {
             version: "1.0",
@@ -131,10 +153,9 @@ const CreateNFT = () => {
             artwork: {
                 uri: "ipfs://" + coverArtUrl.replace("https://ipfs.moralis.io:2053/ipfs/", ""),
                 mimeType: coverArtMimeType,
-                artistId: creditCoverArtArtist ? coverArtArtist.id : "",
                 artist: creditCoverArtArtist ? coverArtArtist.name : "",
                 artistAddress: creditCoverArtArtist ? coverArtArtist.address : "",
-                artistEmail: creditCoverArtArtist ? coverArtArtist.email : "",
+                invitedArtistId: coverArtArtist.address ? "" : invitedArtworkArtistId,
             },
             unlockTimestamp: unlockTimestamp,
             collaborators: reducedCollaboratorList,

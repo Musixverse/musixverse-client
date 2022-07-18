@@ -8,10 +8,10 @@ import EditPriceModal from "./EditPriceModal";
 import ToggleOnSaleModal from "./ToggleOnSaleModal";
 
 export default function CtaButtons({ currentOwnerAddress, tokenId, price }) {
-    const [authModalOpen, setAuthModalOpen] = useContext(AuthModalContext);
-    const [loading, setLoading] = useContext(LoadingContext);
     const { user } = useMoralis();
 
+    const [authModalOpen, setAuthModalOpen] = useContext(AuthModalContext);
+    const [loading, setLoading] = useContext(LoadingContext);
     // Purchase success modal
     const [purchaseNFTSuccess, setPurchaseNFTSuccess] = useState(false);
     // Edit price modal
@@ -50,7 +50,7 @@ export default function CtaButtons({ currentOwnerAddress, tokenId, price }) {
         <>
             <div className="bg-light-100 w-full rounded-lg p-2 flex justify-between items-center dark:bg-dark-200 ">
                 <div>
-                    {user && user.attributes.ethAddress === currentOwnerAddress ? (
+                    {user && user.attributes.ethAddress == currentOwnerAddress ? (
                         <>
                             <button
                                 onClick={() => editPrice()}

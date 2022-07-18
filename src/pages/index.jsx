@@ -13,7 +13,7 @@ function Home() {
                 <meta name="description" content="Powering music ownership and provenance across the web and beyond" />
             </Head>
 
-            <div className="relative -top-20 flex flex-col items-center justify-center bg-light-200 dark:bg-dark-200">
+            <div className="relative flex flex-col items-center justify-center bg-light-200 dark:bg-dark-200">
                 <Banner />
                 <div className="flex flex-col w-full max-w-[1920px] px-6 md:px-8 lg:px-16 xl:px-20 2xl:px-36">
                     <Section2New />

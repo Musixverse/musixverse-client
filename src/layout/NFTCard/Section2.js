@@ -1,7 +1,12 @@
+import { useMoralisCloudFunction } from "react-moralis";
 import CollaboratorImage from "./CollaboratorImage";
 import styles from "../../../styles/NFTCard/Section2.module.css";
 
-export default function Section2({ collaboratorList, numberOfCopies, localTokenId, lastPrice }) {
+export default function Section2({ collaboratorList, numberOfCopies, tokenId, primaryMarketplacePrice, lastPrice }) {
+    const { data: localTokenId } = useMoralisCloudFunction("fetchLocalTokenId", {
+        tokenId: tokenId,
+    });
+
     // const likeBtn = useRef();
     // let likeCount = props.likeCount;
 
@@ -29,27 +34,24 @@ export default function Section2({ collaboratorList, numberOfCopies, localTokenI
             </button> */}
 
             {/* Collaborator Images */}
-            <div className="flex items-end justify-between font-secondary text-[#1D1D1D] dark:text-light-200 text-xs">
-                <div className="flex -space-x-2 items-end">
-                    {collaboratorList.map((collaborator, index) => {
-                        return <CollaboratorImage key={index} index={index} collaboratorList={collaboratorList} collaborator={collaborator} />;
-                    })}
+            {localTokenId && collaboratorList ? (
+                <div className="flex items-end justify-between font-secondary text-[#1D1D1D] dark:text-light-200 text-xs">
+                    <div className="flex -space-x-2 items-end">
+                        {collaboratorList.map((collaborator, index) => {
+                            return <CollaboratorImage key={index} index={index} collaboratorList={collaboratorList} collaborator={collaborator} />;
+                        })}
+                    </div>
+                    {!primaryMarketplacePrice ? (
+                        <span className="dark:text-[#818181]">
+                            #{localTokenId} of&nbsp;{numberOfCopies}
+                        </span>
+                    ) : (
+                        <span className="dark:text-[#818181]">{numberOfCopies} copies</span>
+                    )}
                 </div>
-                {localTokenId ? (
-                    <span className="dark:text-light-300">
-                        #{localTokenId} of&nbsp;{numberOfCopies}
-                    </span>
-                ) : null}
-            </div>
-
-            {/* Last price */}
-            {/* <div className="flex items-center">
-                <p className={styles["description__section2--lastprice"]}>Last</p>
-                <div className="flex items-center">
-                    <Image src={"/assets/Eth_logo.svg"} width={9} height={18} alt="ethereum logo" />
-                    <span className="ml-1 text-xs font-bold">{lastPrice}</span>
-                </div>
-            </div> */}
+            ) : (
+                <div className="w-full h-4 mt-3 dark:bg-[#363636] bg-light-300 animate-pulse self-center rounded-lg"></div>
+            )}
         </div>
     );
 }

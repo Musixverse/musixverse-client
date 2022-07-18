@@ -36,7 +36,39 @@ a {
 /**************************************************************************/
 
 .navbar {
-    @apply dark:bg-[rgba(19,19,19,0.4)] dark:backdrop-blur-[24px] dark:backdrop-brightness-105 sticky z-40 max-w-[1500px] backdrop-blur-[40px] backdrop-brightness-200 bg-[rgba(255,255,255,0.8)];
+    @apply dark:bg-[rgba(19,19,19,0.4)] dark:backdrop-blur-[24px] w-full dark:backdrop-brightness-105 fixed z-40 max-w-[1500px] backdrop-blur-[40px] backdrop-brightness-200 bg-[rgba(255,255,255,0.8)];
+}
+
+.search-box {
+    @apply h-[40px] bg-search-100 dark:bg-search-200 rounded-full p-1.5;
+}
+
+.search-box:hover > .search-text{
+  @apply w-[280px] px-4;
+}
+
+.search-box:hover > .search-btn{
+  @apply text-black bg-white;
+}
+
+.search-btn {
+  @apply flex items-center justify-center float-right p-2 duration-300 rounded-full cursor-pointer dark:text-white w-7 h-7 bg-search-100 dark:bg-dark-100 hover:bg-dark-200;
+  text-decoration: none;
+}
+
+.search-text {
+  border: none;
+  background: none;
+  outline: none;
+  float: left;
+  padding: 0;
+  color: white;
+  font-size: 14px;
+  font-weight: normal;
+  transition: 0.4s;
+  line-height: 25px;
+  width: 0px;
+  @apply text-black dark:text-white;
 }
 
 /**************************************************************************/

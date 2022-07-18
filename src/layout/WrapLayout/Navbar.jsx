@@ -154,35 +154,32 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
                                  )}   
                                 </a>
                                 <ul
-                                    className="absolute right-0 left-auto z-10 hidden text-base float-left py-2 m-0 mt-4 text-left list-none border-none rounded-xl shadow-lg dropdown-menu min-w-[250px] 
+                                    className="absolute right-0 left-auto z-10 hidden text-base font-medium float-left py-2 m-0 mt-4 text-left list-none border-none rounded-xl shadow-lg dropdown-menu min-w-[250px] 
                                     backdrop-blur-[40px] backdrop-brightness-200 bg-[rgba(255,255,255,0.8)] dark:bg-[rgba(19,19,19,0.4)] dark:backdrop-blur-[24px] dark:backdrop-brightness-105
                                     bg-clip-padding group-hover:block"
                                     aria-labelledby="dropdownMenuButton2"
                                 >
-                                    {isAuthenticated && user ? (
-                                        <button
-                                            className="w-full px-4 py-2 font-medium transition-all bg-transparent border-b cursor-pointer border-dark-200 dark:border-light-300 hover:bg-primary-100 hover:text-light-100"
-                                            onClick={handleLogout}
-                                        >
-                                            <Link
-                                                className="block w-full text-sm dropdown-item whitespace-nowrap hover:bg-primary-100 active:bg-primary-100"
-                                                href="#"
-                                            >
-                                                Logout
-                                            </Link>
-                                        </button>
-                                    ) : (
-                                        <div className="px-4 py-2 bg-transparent border-b border-dark-200 dark:border-light-300 hover:bg-primary-100 hover:text-light-100">
-                                            <a
-                                                className="block w-full text-sm dropdown-item whitespace-nowrap hover:bg-primary-100 active:bg-primary-100"
-                                                href="#"
-                                                onClick={() => setAuthModalOpen(true)}
-                                            >
-                                                Sign Up / Log In
-                                            </a>
-                                        </div>
-                                    )}
-                                    <li></li>
+                                    <li>
+                                        {isAuthenticated && user ? (
+                                            <div className="w-full flex justify-between items-center px-4 py-2 bg-transparent cursor-pointer dropdown-item whitespace-nowrap hover:bg-gray-100 dark:hover:bg-dark-200">
+                                                    <div>
+                                                        <p>Wallet Address</p>
+                                                        <p>0xc186s853yfe4gvx...</p>
+                                                    </div>
+                                                    <Image src={navIcon2} alt={user.walletAddress} width={46} height={44} objectFit="contain" />
+                                            </div>
+                                        ) : (
+                                            <div className="px-4 py-2 bg-transparent hover:bg-primary-100 hover:text-light-100">
+                                                <a
+                                                    className="block w-full dropdown-item whitespace-nowrap hover:bg-primary-100 active:bg-primary-100"
+                                                    href="#"
+                                                    onClick={() => setAuthModalOpen(true)}
+                                                >
+                                                    Sign Up / Log In
+                                                </a>
+                                            </div>
+                                        )}
+                                    </li>
                                     {user && isAuthenticated && (
                                         <li>
                                             <Link href={`/profile/${user.attributes.username}`} passHref={true}>
@@ -263,7 +260,7 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
                                                 <button
                                                     aria-label="Toggle Dark Mode"
                                                     type="button"
-                                                    className="flex items-center justify-center w-12 h-12 rounded-full hover:bg-[#bdbdbd] dark:hover:bg-zinc-800"
+                                                    className="flex items-center justify-center w-12 h-12 rounded-full hover:bg-[#bdbdbd] dark:hover:bg-dark-200"
                                                     onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
                                                 >
                                                     <svg
@@ -283,6 +280,24 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
                                                 </button>
                                             </div>
                                         )}     
+                                    </li>
+                                    {/* Logout Button */}
+                                    <li>
+                                        {isAuthenticated && user ? (
+                                            <button
+                                                className="w-full px-4 py-2 font-medium transition-all bg-transparent cursor-pointer dark:border-light-300 hover:bg-gray-100 dark:hover:bg-dark-200"
+                                                onClick={handleLogout}
+                                            >
+                                                <Link
+                                                    className="block w-full text-sm dropdown-item whitespace-nowrap hover:bg-primary-100 active:bg-primary-100"
+                                                    href="#"
+                                                >
+                                                    Logout
+                                                </Link>
+                                            </button>
+                                        ) : (
+                                            <span></span>
+                                        )}
                                     </li>
                                 </ul>
                             </ul>

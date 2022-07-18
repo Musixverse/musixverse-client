@@ -11,7 +11,8 @@ import instagram from "../../../public/assets/social/instagram.svg";
 import youtube from "../../../public/assets/social/youtube.svg";
 import telegram from "../../../public/assets/social/telegram.svg";
 import linkedin from "../../../public/assets/social/linkedin.svg";
-import MXV_emblem from "../../../public/assets/MXV_emblem.png";
+import MXV_emblemW from "../../../public/assets/MXV_emblem_white.png";
+import MXV_emblemB from "../../../public/assets/MXV_emblem_black.png";
 
 const Footer = () => {
     const { theme } = useTheme();
@@ -132,13 +133,13 @@ const Footer = () => {
                         </div>
                     </div>
                     <div className="flex justify-between space-x-28 font-primary">
-                            <li className="hover:font-bold list-none"><Link href="/privacy-policy">Privacy Policy</Link></li>
-                            <li className="hover:font-bold list-none"><Link href="/terms-and-conditions">Terms of Use</Link></li>
-                            <li className="hover:font-bold list-none"><Link href="/">Trademark</Link></li>
-                            <li className="hover:font-bold list-none"><Link href="/contact-us">Contact Us</Link></li>
+                            <li className="hover:font-semibold list-none"><Link href="/privacy-policy">Privacy Policy</Link></li>
+                            <li className="hover:font-semibold list-none"><Link href="/terms-and-conditions">Terms of Use</Link></li>
+                            <li className="hover:font-semibold list-none"><Link href="/">Trademark</Link></li>
+                            <li className="hover:font-semibold list-none"><Link href="/contact-us">Contact Us</Link></li>
                     </div>
                     <div className="flex justify-center items-center">
-                        <Image src={MXV_emblem} width={95} height={95} objectFit="contain" alt="MXV emblem"></Image>
+                        <Image src={theme === "dark" ? MXV_emblemW : MXV_emblemB} width={95} height={95} objectFit="contain" alt="MXV emblem"></Image>
                     </div>
                 </div>
             </div>    

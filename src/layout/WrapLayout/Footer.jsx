@@ -22,10 +22,10 @@ const Footer = () => {
         <div className="flex justify-center w-full dark:bg-dark-200">
             <div className="footer dark:bg-dark-100">
                 <div className="w-full flex justify-between items-center">
-                    <Image src={theme === "dark" ? mxvW : mxvB} alt="MXV logo" width={120} height={120} objectFit="contain"></Image>
+                    <Image src={theme === "dark" ? mxvW : mxvB} alt="MXV logo" width="90" height="20"></Image>
                     <p className="font-primary text-lg text-primary-100">Hear it.Own it. Live it.</p>
                 </div>
-                <div className="flex font-primary justify-between border-t-2 border-b-2 border-[#afafaf] w-full py-8">
+                <div className="flex font-primary justify-between border-t-2 border-b-2 border-[#afafaf] w-full py-8 mt-5">
                     <div className="flex flex-col space-y-2">
                         <p className="font-semibold text">Quick Links</p>
                         <ul className="space-y-2">

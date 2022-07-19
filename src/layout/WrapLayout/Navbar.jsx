@@ -155,7 +155,7 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
                                         )}   
                                     </a>
                                     <ul
-                                        className="absolute right-0 left-auto z-10 hidden text-sm font-medium float-left py-2 m-0 mt-4 text-left list-none border-none rounded-xl shadow-lg dropdown-menu min-w-[250px] 
+                                        className="absolute right-0 left-auto z-10 hidden text-sm font-medium float-left py-2 m-0 text-left list-none border-none rounded-xl shadow-lg dropdown-menu min-w-[250px] 
                                         backdrop-blur-[40px] backdrop-brightness-200 bg-[rgba(255,255,255,0.8)] dark:bg-[rgba(19,19,19,0.4)] dark:backdrop-blur-[24px] dark:backdrop-brightness-105
                                         bg-clip-padding group-hover:block"
                                         aria-labelledby="dropdownMenuButton2"

@@ -2,7 +2,7 @@ import { useMoralisCloudFunction } from "react-moralis";
 import CollaboratorImage from "./CollaboratorImage";
 import styles from "../../../styles/NFTCard/Section2.module.css";
 
-export default function Section2({ collaboratorList, numberOfCopies, tokenId, primaryMarketplacePrice, lastPrice }) {
+export default function Section2({ collaboratorList, numberOfCopies, tokenId, unsoldTrackData, lastPrice }) {
     const { data: localTokenId } = useMoralisCloudFunction("fetchLocalTokenId", {
         tokenId: tokenId,
     });
@@ -41,12 +41,15 @@ export default function Section2({ collaboratorList, numberOfCopies, tokenId, pr
                             return <CollaboratorImage key={index} index={index} collaboratorList={collaboratorList} collaborator={collaborator} />;
                         })}
                     </div>
-                    {!primaryMarketplacePrice ? (
+                    {unsoldTrackData ? (
+                        <div className="flex flex-col justify-end items-end">
+                            <span className="dark:text-[#818181]">{numberOfCopies == 1 ? "Single Drop" : <>{numberOfCopies} copies</>}</span>
+                            <span className="dark:text-[#818181]">Only {unsoldTrackData.unsoldTokens_size} remaining. Hurry!</span>
+                        </div>
+                    ) : (
                         <span className="dark:text-[#818181]">
                             #{localTokenId} of&nbsp;{numberOfCopies}
                         </span>
-                    ) : (
-                        <span className="dark:text-[#818181]">{numberOfCopies} copies</span>
                     )}
                 </div>
             ) : (

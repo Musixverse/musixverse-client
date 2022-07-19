@@ -7,7 +7,7 @@ const MarketplaceChooser = () => {
     const [active, setActive] = useState("");
 
     useEffect(() => {
-        if (router.pathname.startsWith("/marketplace/latest-releases")) setActive("latest-releases");
+        if (router.pathname.startsWith("/marketplace/new-releases")) setActive("new-releases");
         else if (router.pathname.startsWith("/marketplace/explore")) setActive("explore");
     }, [router.pathname]);
 
@@ -16,15 +16,15 @@ const MarketplaceChooser = () => {
             <div className="flex justify-center">
                 <ul className="nav nav-tabs flex flex-row space-x-8">
                     <li className="nav-item flex-auto text-center">
-                        <Link href="/marketplace/latest-releases" passHref>
+                        <Link href="/marketplace/new-releases" passHref>
                             <a
                                 className={
-                                    active == "latest-releases"
+                                    active == "new-releases"
                                         ? "w-full px-10 py-3 my-2 rounded-md bg-primary-100 text-light-100"
                                         : "w-full px-10 py-3 my-2 rounded-md hover:bg-light-300 dark:hover:bg-dark-100"
                                 }
                             >
-                                Latest Releases
+                                New Releases
                             </a>
                         </Link>
                     </li>

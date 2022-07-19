@@ -2,13 +2,7 @@ import Image from "next/image";
 import { useMoralisCloudFunction } from "react-moralis";
 
 const CollaboratorImage = ({ index, collaboratorList, collaborator }) => {
-    const { data: collaboratorAvatar } = useMoralisCloudFunction(
-        "fetchUserAvatarFromAddress",
-        { address: collaborator.address },
-        {
-            autoFetch: true,
-        }
-    );
+    const { data: collaboratorAvatar } = useMoralisCloudFunction("fetchUserAvatarFromAddress", { address: collaborator.address });
 
     return (
         <div className={`rounded-full flex items-end relative z-${10 * (collaboratorList.length - index)}`}>

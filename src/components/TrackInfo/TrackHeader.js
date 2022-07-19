@@ -19,7 +19,7 @@ export default function TrackHeader({
     currentOwnerAddress,
     numberOfCopies,
 }) {
-    const { data: artist } = useMoralisCloudFunction("fetchUsernameFromAddress", { artistAddress: artistAddress });
+    const { data: artist } = useMoralisCloudFunction("fetchUsernameFromAddress", { address: artistAddress });
     const { data: localTokenId } = useMoralisCloudFunction("fetchLocalTokenId", {
         tokenId: tokenId,
     });
@@ -85,10 +85,10 @@ export default function TrackHeader({
                 {/* Track Details section */}
                 <div className={styles["track-header__container--track-detail"]}>
                     <div className="font-bold pb-2 items-center flex">
-                        {artist[0] ? (
-                            <Link href={`/profile/${artist[0].username}`} className="cursor-pointer">
+                        {artist ? (
+                            <Link href={`/profile/${artist.username}`} className="cursor-pointer">
                                 <a target="_blank" rel="noopener noreferrer">
-                                    {artist[0].name}
+                                    {artist.name}
                                 </a>
                             </Link>
                         ) : null}

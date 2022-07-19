@@ -5,7 +5,7 @@ import LoadingContext from "../../../../store/loading-context";
 import { purchaseTrackNFT } from "../../../utils/smart-contract/functions";
 import PurchaseSuccessModal from "./PurchaseSuccessModal";
 import EditPriceModal from "./EditPriceModal";
-import ToggleOnSaleModal from "./ToggleOnSaleModal";
+import ToggleOnSaleButtons from "./ToggleOnSaleButtons";
 
 export default function CtaButtons({ currentOwnerAddress, tokenId, price }) {
     const { user } = useMoralis();
@@ -58,12 +58,12 @@ export default function CtaButtons({ currentOwnerAddress, tokenId, price }) {
                             >
                                 Edit Price
                             </button>
-                            <button
-                                onClick={() => toggleOnSale()}
-                                className="rounded-lg px-8 py-2 mr-3 bg-light-200 font-primary font-semibold text-lg text-dark-100 dark:bg-dark-100 dark:text-light-100 hover:bg-[#dedede]"
-                            >
-                                Take Down from Sale
-                            </button>
+                            <ToggleOnSaleButtons
+                                tokenId={tokenId}
+                                toggleOnSale={toggleOnSale}
+                                toggleOnSaleModalOpen={toggleOnSaleModalOpen}
+                                setToggleOnSaleModalOpen={setToggleOnSaleModalOpen}
+                            />
                         </>
                     ) : (
                         <button
@@ -81,7 +81,6 @@ export default function CtaButtons({ currentOwnerAddress, tokenId, price }) {
 
             <PurchaseSuccessModal isOpen={purchaseNFTSuccess} />
             <EditPriceModal isOpen={editPriceModalOpen} setEditPriceModalOpen={setEditPriceModalOpen} tokenId={tokenId} currentPrice={price} />
-            <ToggleOnSaleModal isOpen={toggleOnSaleModalOpen} setToggleOnSaleModalOpen={setToggleOnSaleModalOpen} />
         </>
     );
 }

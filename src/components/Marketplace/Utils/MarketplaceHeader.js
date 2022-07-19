@@ -6,7 +6,7 @@ const MarketplaceHeader = () => {
     const [heading, setHeading] = useState("");
 
     useEffect(() => {
-        if (router.pathname.startsWith("/marketplace/latest-releases")) setHeading("Latest Releases");
+        if (router.pathname.startsWith("/marketplace/new-releases")) setHeading("New Releases");
         else if (router.pathname.startsWith("/marketplace/explore")) setHeading("Explore");
     }, [router.pathname]);
 

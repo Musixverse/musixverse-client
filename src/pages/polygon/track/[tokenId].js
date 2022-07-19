@@ -7,7 +7,7 @@ import { MXV_CONTRACT_ADDRESS, BLOCKCHAIN_NETWORK } from "../../../utils/smart-c
 import TrackHeader from "../../../components/TrackInfo/TrackHeader";
 import TrackDetails from "../../../components/TrackInfo/TrackDetails";
 import PurchaseInfo from "../../../components/TrackInfo/PurchaseInfo";
-import SalesHistory from "../../../components/TrackInfo/SalesHistory";
+import Activity from "../../../components/TrackInfo/Activity";
 import SimilarTokens from "../../../components/TrackInfo/SimilarTokens";
 
 // Fetching data over here using SSR and then passing in the components as props
@@ -57,8 +57,8 @@ export default function TrackInfo({ token, otherTokensOfTrack }) {
         }
     }, [tokenPrice]);
 
-    console.log("metadata", metadata);
-    console.log("token", token);
+    // console.log("metadata", metadata);
+    // console.log("token", token);
 
     return (
         <>
@@ -85,7 +85,7 @@ export default function TrackInfo({ token, otherTokensOfTrack }) {
                     <TrackDetails tokenId={tokenId} metadata={metadata} />
                     <div className="grid grid-cols-9 xl:grid-cols-5 gap-6 my-10">
                         <PurchaseInfo tokenId={tokenId} metadata={metadata} currentOwnerAddress={currentOwnerAddress} price={price} />
-                        <SalesHistory />
+                        <Activity tokenId={tokenId} artistAddress={metadata.artistAddress} />
                     </div>
                     <SimilarTokens otherTokensOfTrack={otherTokensOfTrack} tokenId={tokenId} metadata={metadata} />
                 </div>

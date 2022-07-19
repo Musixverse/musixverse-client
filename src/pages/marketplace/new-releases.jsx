@@ -2,9 +2,9 @@ import Head from "next/head";
 import MarketplaceHeader from "../../components/Marketplace/Utils/MarketplaceHeader";
 import MarketplaceChooser from "../../components/Marketplace/Utils/MarketplaceChooser";
 import FilterSection from "../../components/Marketplace/Utils/FilterSection";
-import TrackNFTs from "../../components/Marketplace/LatestReleases/TrackNFTs";
+import TrackNFTs from "../../components/Marketplace/NewReleases/TrackNFTs";
 
-const LatestReleases = ({}) => {
+const NewReleases = ({}) => {
     return (
         <>
             <Head>
@@ -26,4 +26,4 @@ const LatestReleases = ({}) => {
     );
 };
 
-export default LatestReleases;
+export default NewReleases;

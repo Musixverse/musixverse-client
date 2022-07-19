@@ -1,13 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
-import { useMoralisQuery } from "react-moralis";
+import { useMoralisCloudFunction } from "react-moralis";
 import styles from "../../../styles/TrackInfo/PurchaseInfo.module.css";
 import CustomButton from "../../layout/CustomButton";
 
 export default function PurchaseInfo({ metadata, currentOwnerAddress, price }) {
-    const { data: currentOwner } = useMoralisQuery("_User", (query) => query.equalTo("ethAddress", currentOwnerAddress), [currentOwnerAddress]);
+    const { data: currentOwner } = useMoralisCloudFunction("fetchUsernameFromAddress", { address: currentOwnerAddress });
+    const { data: currentOwnerAvatar } = useMoralisCloudFunction("fetchUserAvatarFromAddress", { address: currentOwnerAddress });
 
-    // if (!currentOwner[0]) return null;
     return (
         <div className={"dark:bg-dark-100 " + styles["purchase-info"]}>
             {/* Heading DIV */}
@@ -27,13 +27,18 @@ export default function PurchaseInfo({ metadata, currentOwnerAddress, price }) {
             {/* Current Owner DIV*/}
             <div className={styles["purchase-info__current-owner"]}>
                 <p className={styles["purchase-info__heading--p"]}>Current Owner</p>
-                {currentOwner[0] ? (
-                    <Link href={`/profile/${currentOwner[0].attributes.username}`} className="cursor-pointer">
-                        <a target="_blank" rel="noopener noreferrer">
-                            <p className="font-secondary">@{currentOwner[0].attributes.username}</p>
-                        </a>
-                    </Link>
-                ) : null}
+                <div className="flex items-center">
+                    {currentOwner ? (
+                        <Link href={`/profile/${currentOwner.username}`} className="cursor-pointer">
+                            <a target="_blank" rel="noopener noreferrer" className="flex items-center space-x-1">
+                                <div className="rounded-full flex relative">
+                                    {currentOwnerAvatar ? <Image priority src={currentOwnerAvatar} height="20" width="20" className="rounded-full" /> : null}
+                                </div>
+                                <p className="font-secondary">@{currentOwner.username}</p>
+                            </a>
+                        </Link>
+                    ) : null}
+                </div>
             </div>
 
             <div className="flex-grow border-t-[3px] border-[#9a9a9a] mt-2 mb-2"></div>

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useMoralis, useMoralisCloudFunction } from "react-moralis";
+import { useMoralis } from "react-moralis";
 import Link from "next/link";
 import { MXV_CONTRACT_ADDRESS, BLOCKCHAIN_NETWORK } from "../../../utils/smart-contract/constants";
 import NFTCard from "../../../layout/NFTCard/NFTCard";

@@ -151,7 +151,19 @@ async function updatePrice(tokenId, newPrice) {
 
 async function toggleOnSale(tokenId, callerAddress) {
     const _tokenId = parseInt(tokenId).toString();
-    await MUSIXVERSE.methods.toggleOnSale(_tokenId).send({ from: callerAddress });
+
+    const sendOptions = {
+        contractAddress: MXV_CONTRACT_ADDRESS,
+        functionName: "toggleOnSale",
+        abi: MXV_CONTRACT_ABI,
+        params: {
+            tokenId: _tokenId,
+        },
+    };
+
+    const transaction = await Moralis.executeFunction(sendOptions);
+    // Wait until the transaction is confirmed
+    await transaction.wait();
 }
 
 async function uri(tokenId) {

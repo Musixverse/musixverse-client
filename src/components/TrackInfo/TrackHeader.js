@@ -41,21 +41,21 @@ export default function TrackHeader({
                                     width="100%"
                                     height="100%"
                                     layout="responsive"
-                                    objectFit="cover"
-                                    priority={true}
+                                    objectFit="contain"
+                                    priority
                                 />
                             </a>
                         </Link>
                     </div>
 
-                    <div className="absolute hidden group-hover:block mt-1">
+                    <div className="absolute hidden group-hover:block mt-2">
                         {artworkInfo.invitedArtistId && artworkArtistInfo && artworkArtistInfo.user[0] ? (
                             <Link href={`/profile/${artworkArtistInfo.user[0].username}`} className="cursor-pointer">
                                 <a target="_blank" rel="noopener noreferrer">
                                     <div className="flex items-end mb-2 font-secondary text-sm">
                                         <span className="mr-2">Artwork by-</span>
                                         {artworkArtistInfo.userInfo[0] && (
-                                            <Image src={artworkArtistInfo.userInfo[0].avatar} height="25" width="25" className="rounded-full" />
+                                            <Image src={artworkArtistInfo.userInfo[0].avatar} height="20" width="20" className="rounded-full" />
                                         )}
                                         <span className="ml-1">@{artworkArtistInfo.user[0].username}</span>
                                     </div>
@@ -67,7 +67,7 @@ export default function TrackHeader({
                                     <div className="flex items-end mb-2 font-secondary text-sm">
                                         <span className="mr-2">Artwork by-</span>
                                         {artworkArtistInfo.userInfo[0] && (
-                                            <Image src={artworkArtistInfo.userInfo[0].avatar} height="25" width="25" className="rounded-full" />
+                                            <Image src={artworkArtistInfo.userInfo[0].avatar} height="20" width="20" className="rounded-full" />
                                         )}
                                         <span className="ml-1">@{artworkArtistInfo.username}</span>
                                     </div>

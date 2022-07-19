@@ -3,14 +3,14 @@ import Image from "next/image";
 import { useMoralis, useMoralisCloudFunction } from "react-moralis";
 import styles from "../../../styles/NFTCard/Section1.module.css";
 
-export default function Section1({ artistName, isVerified, trackName, tokenId, primaryMarketplacePrice }) {
+export default function Section1({ artistName, isVerified, trackName, tokenId, unsoldTrackData }) {
     const { Moralis } = useMoralis();
     const { data: tokenPrice } = useMoralisCloudFunction("fetchTokenPrice", { tokenId: tokenId });
     const [price, setPrice] = useState("");
 
     useEffect(async () => {
-        if (primaryMarketplacePrice) {
-            setPrice(Moralis.Units.FromWei(primaryMarketplacePrice));
+        if (unsoldTrackData) {
+            setPrice(Moralis.Units.FromWei(unsoldTrackData.primaryMarketplacePrice));
         } else if (tokenPrice) {
             setPrice(Moralis.Units.FromWei(tokenPrice));
         }

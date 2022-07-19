@@ -11,7 +11,7 @@ export default function NFTCard({
     tokenId,
     numberOfCopies,
     collaboratorList,
-    primaryMarketplacePrice,
+    unsoldTrackData,
     likeCount,
     lastPrice,
     isVerified,
@@ -38,7 +38,7 @@ export default function NFTCard({
                     artistName={truncatedArtistName}
                     trackName={truncatedNftName}
                     tokenId={tokenId}
-                    primaryMarketplacePrice={primaryMarketplacePrice}
+                    unsoldTrackData={unsoldTrackData}
                     isVerified={isVerified}
                 />
                 {/* LIKES and Prev Price Section */}
@@ -46,7 +46,7 @@ export default function NFTCard({
                     collaboratorList={collaboratorList}
                     numberOfCopies={numberOfCopies}
                     tokenId={tokenId}
-                    primaryMarketplacePrice={primaryMarketplacePrice}
+                    unsoldTrackData={unsoldTrackData}
                     likeCount={likeCount}
                     lastPrice={lastPrice}
                 />

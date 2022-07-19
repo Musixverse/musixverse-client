@@ -3,7 +3,7 @@ import { useMoralisCloudFunction } from "react-moralis";
 import TrackNFT from "./TrackNFT";
 
 const TrackNFTs = () => {
-    const { data: allTracks } = useMoralisCloudFunction("fetchAllTracks", { autoFetch: true });
+    const { data: allTracks } = useMoralisCloudFunction("fetchTracksWhoseAllCopiesAreNotSold", { autoFetch: true });
 
     useEffect(() => {
         console.log("allTracks:", allTracks);

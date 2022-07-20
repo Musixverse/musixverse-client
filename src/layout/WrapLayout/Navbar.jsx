@@ -16,8 +16,8 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 
     let truncatedName;
     if (user) {
-        truncatedName = user.attributes.name;
-        if (user.attributes.name.length > 10) {
+        truncatedName = user.attributes.name ?? "";
+        if (user.attributes.name && user.attributes.name.length > 10) {
             truncatedName = truncatedName.substring(0, 8) + "...";
         }
     }
@@ -159,7 +159,7 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
                                         data-bs-toggle="dropdown"
                                         aria-expanded="false"
                                     >
-                                        {isAuthenticated && user ? (
+                                        {isAuthenticated && user.attributes.name ? (
                                             <div className="flex items-center justify-center px-4 py-2 text-sm rounded-full bg-search-100 dark:bg-search-200">
                                                 <span className="mr-4">{truncatedName}</span>
                                                 {avatarUrl ? <Image src={avatarUrl} alt="avatar" width="24" height="24" className="rounded-full" /> : null}
@@ -210,7 +210,7 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
                                                 </div>
                                             )}
                                         </li>
-                                        {user && isAuthenticated && (
+                                        {user.attributes.email && isAuthenticated && (
                                             <li>
                                                 <Link href={`/profile/${user.attributes.username}`} passHref={true}>
                                                     <div className="block w-full px-4 py-2 bg-transparent cursor-pointer dropdown-item whitespace-nowrap hover:bg-gray-100 dark:hover:bg-dark-200">
@@ -219,7 +219,7 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
                                                 </Link>
                                             </li>
                                         )}
-                                        {user && isAuthenticated && (
+                                        {user.attributes.email && isAuthenticated && (
                                             <li>
                                                 <Link href="/settings/profile-settings" passHref={true}>
                                                     <div className="block w-full px-4 py-2 bg-transparent cursor-pointer dropdown-item whitespace-nowrap hover:bg-gray-100 dark:hover:bg-dark-200">
@@ -228,7 +228,7 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
                                                 </Link>
                                             </li>
                                         )}
-                                        {user && isAuthenticated && (
+                                        {user.attributes.email && isAuthenticated && (
                                             <li>
                                                 <Link href="/settings/notifications-settings" passHref={true}>
                                                     <div className="block w-full px-4 py-2 bg-transparent cursor-pointer dropdown-item whitespace-nowrap hover:bg-gray-100 dark:hover:bg-dark-200">

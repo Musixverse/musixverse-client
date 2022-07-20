@@ -19,8 +19,8 @@ const Footer = () => {
     const { isAuthenticated, user } = useMoralis();
 
     return (
-        <div className="flex justify-center w-full dark:bg-dark-200">
-            <div className="footer dark:bg-dark-100">
+        <div className="flex justify-center w-full bg-nav-light dark:bg-dark-100 backdrop-blur-2xl backdrop-brightness-150">
+            <div className="w-full max-w-[1500px] py-20">
                 <div className="w-full flex justify-between items-center">
                     <Image src={theme === "dark" ? mxvW : mxvB} alt="MXV logo" width="90" height="20"></Image>
                     <p className="font-primary text-lg text-primary-100">Hear it. Own it. Live it.</p>

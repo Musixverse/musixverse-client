@@ -12,6 +12,7 @@ export default function NFTCard({
     numberOfCopies,
     collaboratorList,
     unsoldTrackData,
+    soldOnceTrackData,
     likeCount,
     lastPrice,
     isVerified,
@@ -25,7 +26,7 @@ export default function NFTCard({
         truncatedNftName = trackName.substring(0, 8) + "...";
     }
 
-    if (artistName && artistName.length > 15) truncatedArtistName = artistName.substring(0, 20) + "...";
+    if (artistName && artistName.length > 15) truncatedArtistName = artistName.substring(0, 15) + "...";
 
     return (
         <div className={styles[theme === "light" ? "nft-card" : "nft-card-dark"]}>
@@ -39,6 +40,7 @@ export default function NFTCard({
                     trackName={truncatedNftName}
                     tokenId={tokenId}
                     unsoldTrackData={unsoldTrackData}
+                    soldOnceTrackData={soldOnceTrackData}
                     isVerified={isVerified}
                 />
                 {/* LIKES and Prev Price Section */}

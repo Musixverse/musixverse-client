@@ -48,7 +48,7 @@ export default function TrackHeader({
                         </Link>
                     </div>
 
-                    <div className="absolute hidden group-hover:block mt-2">
+                    <div className="absolute hidden group-hover:block pt-2">
                         {artworkInfo.invitedArtistId && artworkArtistInfo && artworkArtistInfo.user[0] ? (
                             <Link href={`/profile/${artworkArtistInfo.user[0].username}`} className="cursor-pointer">
                                 <a target="_blank" rel="noopener noreferrer">

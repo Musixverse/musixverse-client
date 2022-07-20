@@ -3,17 +3,17 @@ import { useMoralisCloudFunction } from "react-moralis";
 import TrackNFT from "./TrackNFT";
 
 const TrackNFTs = () => {
-    const { data: allTracks } = useMoralisCloudFunction("fetchTracksWhoseAllCopiesAreNotSold", { autoFetch: true });
+    const { data: tracksWhoseAllCopiesAreNotSold } = useMoralisCloudFunction("fetchTracksWhoseAllCopiesAreNotSold", { autoFetch: true });
 
     useEffect(() => {
-        console.log("allTracks:", allTracks);
-    }, [allTracks]);
+        console.log("tracksWhoseAllCopiesAreNotSold:", tracksWhoseAllCopiesAreNotSold);
+    }, [tracksWhoseAllCopiesAreNotSold]);
 
     return (
         <div className="col-span-9 grid grid-cols-4 gap-10">
-            {allTracks &&
-                allTracks.map((token, index) => {
-                    return <TrackNFT key={index} token={token} index={index} />;
+            {tracksWhoseAllCopiesAreNotSold &&
+                tracksWhoseAllCopiesAreNotSold.map((track, index) => {
+                    return <TrackNFT key={index} track={track} index={index} />;
                 })}
         </div>
     );

@@ -3,7 +3,7 @@ import Image from "next/image";
 import { useMoralis, useMoralisCloudFunction } from "react-moralis";
 import styles from "../../../styles/NFTCard/Section1.module.css";
 
-export default function Section1({ artistName, isVerified, trackName, tokenId, unsoldTrackData }) {
+export default function Section1({ artistName, isVerified, trackName, tokenId, unsoldTrackData, soldOnceTrackData }) {
     const { Moralis } = useMoralis();
     const { data: tokenPrice } = useMoralisCloudFunction("fetchTokenPrice", { tokenId: tokenId });
     const [price, setPrice] = useState("");
@@ -34,9 +34,9 @@ export default function Section1({ artistName, isVerified, trackName, tokenId, u
                 <h6 className={styles["description--section1__trackname"]}>{trackName}</h6>
             </div>
             {/* CURRENT PRICE */}
-            <div>
-                <p className={styles["description--section1__price"]}>Price</p>
-                <div className="flex items-center font-semibold">
+            <div className="flex flex-col justify-end">
+                <p className={styles["description--section1__price"]}>{soldOnceTrackData ? "Lowest Price" : "Price"}</p>
+                <div className="flex items-center justify-end font-semibold">
                     <Image src={"/assets/matic-logo.svg"} width={16} height={16} alt="matic logo" />
                     <span className="ml-1 sm:text-lg">{truncatednftPrice}</span>
                 </div>

@@ -87,7 +87,7 @@ export default function Profile() {
                         createdAt={profileUser.createdAt}
                     />
                     <Filter />
-                    <NFTs />
+                    <NFTs username={username} />
                 </div>
                 <NewsLetter />
             </div>

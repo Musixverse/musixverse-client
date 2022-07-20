@@ -1,7 +1,7 @@
 import Musixverse from "./contracts/v1/MusixverseV1.sol/MusixverseV1.json";
 
 export const MXV_CONTRACT_ABI = Musixverse.abi;
-export const MXV_CONTRACT_ADDRESS = "0x9181CfAB066B9D33c3a1Af6A089a24E53a0906Ba"; // Proxy
+export const MXV_CONTRACT_ADDRESS = "0x71A140Fb984a37300c7B589BDE0fa55097a6e872"; // Proxy
 export const BLOCKCHAIN_NETWORK = "mumbai";
 export const BLOCK_EXPLORER_URL = "https://mumbai.polygonscan.com";
 export const BLOCKCHAIN_NETWORK_ID = 80001;

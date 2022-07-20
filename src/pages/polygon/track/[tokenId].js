@@ -25,6 +25,17 @@ export async function getServerSideProps({ query }) {
     };
     const token = await Moralis.Web3API.token.getTokenIdMetadata(options);
 
+    if (token.metadata == null) {
+        fetch(token.token_uri)
+            .then((response) => {
+                return response.json();
+            })
+            .then((data) => {
+                token.metadata = data;
+                console.log("data", data);
+            });
+    }
+
     // Fetch similar tokens
     let otherTokensOfTrack = [];
     await Moralis.Cloud.run("fetchOtherTokensOfTrack", { tokenId: tokenId }).then((result) => {
@@ -40,7 +51,13 @@ export async function getServerSideProps({ query }) {
 export default function TrackInfo({ token, otherTokensOfTrack }) {
     const router = useRouter();
     const { tokenId } = router.query;
-    const metadata = JSON.parse(token.metadata);
+
+    let metadata = "";
+    if (typeof token.metadata === "string") {
+        metadata = JSON.parse(token.metadata);
+    } else {
+        metadata = token.metadata;
+    }
 
     const { Moralis } = useMoralis();
     const { data: tokenPrice } = useMoralisCloudFunction("fetchTokenPrice", { tokenId: tokenId });

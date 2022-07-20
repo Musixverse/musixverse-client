@@ -3,16 +3,29 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { useTheme } from "next-themes";
 import Image from "next/image";
-import { useMoralis } from "react-moralis";
+import { useMoralis, useMoralisCloudFunction } from "react-moralis";
 import logoBlack from "../../../public/logo-black.svg";
 import logoWhite from "../../../public/logo-white.svg";
-import navIcon1 from "../../../public/nav-icon-1.png";
-import navIcon2 from "../../../public/nav-icon-2.png";
 
 const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
     const { theme, setTheme } = useTheme();
     const { isAuthenticated, logout, user } = useMoralis();
     const router = useRouter();
+
+    const { data: avatarUrl } = useMoralisCloudFunction("fetchUserAvatarFromAddress", { address: user ? user.attributes.ethAddress : null });
+
+    let truncatedName;
+    if (user) {
+        truncatedName = user.attributes.name;
+        if (user.attributes.name.length > 10) {
+            truncatedName = truncatedName.substring(0, 8) + "...";
+        }
+    }
+
+    let truncatedWalletAddress;
+    if (user) {
+        truncatedWalletAddress = user.attributes.ethAddress.substring(0, 10) + "..." + user.attributes.ethAddress.substring(36, 42);
+    }
 
     const handleLogout = async () => {
         if (router.pathname !== "/") router.push("/", undefined, { shallow: true });
@@ -36,21 +49,17 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 
     return (
         <div className="absolute flex justify-center w-screen">
-            <nav className={"navbar duration-300 ease-in mx-auto "+ customStyles}>
+            <nav className={"navbar duration-300 ease-in mx-auto " + customStyles}>
                 <div className="flex flex-wrap items-center justify-center w-full px-16 py-2">
                     <Link href="/">
                         <a href="#" className="flex">
-                            {theme === "light" ? (
-                                <Image src={logoBlack} alt="MXV Logo" width="75" />
-                            ) : (
-                                <Image src={logoWhite} alt="MXV Logo" width="75" />
-                            )}
+                            {theme === "light" ? <Image src={logoBlack} alt="MXV Logo" width="75" /> : <Image src={logoWhite} alt="MXV Logo" width="75" />}
                         </a>
                     </Link>
 
                     {/* Internal links */}
                     <div className="block ml-10">
-                        <ul className="flex flex-row items-center font-semibold md:text-sm md:space-x-8 md:mt-0 sm:text-sm">
+                        <ul className="flex flex-row items-center font-medium md:text-base md:space-x-8 md:mt-0 sm:text-sm">
                             <li className="hidden hover:text-primary-200 md:block">
                                 <Link
                                     href="/"
@@ -62,7 +71,15 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
                             </li>
                             <li className="hover:text-primary-200">
                                 <Link
-                                    href="/library"
+                                    href="/marketplace/new-releases"
+                                    className="block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:text-primary-100 md:hover:bg-transparent md:border-0 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                                >
+                                    New Releases
+                                </Link>
+                            </li>
+                            <li className="hover:text-primary-200">
+                                <Link
+                                    href="/marketplace/explore"
                                     className="block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:text-primary-100 md:hover:bg-transparent md:border-0 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
                                 >
                                     Explore
@@ -112,16 +129,15 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
                                 </div> */}
                                 <div className="search-box">
                                     <input className="search-text" type="text" placeholder="Search items, collections and accounts" />
-                                    <a href="#" className= "search-btn">
+                                    <a href="#" className="search-btn">
                                         <i className="fas fa-search"></i>
                                     </a>
                                 </div>
                             </li>
-                            
+
                             {/* Notification button */}
                             <li>
-                                <button
-                                    className="flex items-center relative justify-center text-lg p-2.5 rounded-full bg-search-100 dark:bg-search-200 text-dark-200 dark:text-white">
+                                <button className="flex items-center relative justify-center text-lg p-2.5 rounded-full bg-search-100 dark:bg-search-200 text-dark-200 dark:text-white">
                                     {/* Notification icon - when notification is ON */}
                                     <i className="fa fa-bell"></i>
                                     {/* Notification icon - when notification is OFF */}
@@ -131,7 +147,7 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
                                     <div className="bg-red-600 rounded-full w-1.5 h-1.5 absolute top-1/3 right-1/4" />
                                 </button>
                             </li>
-                            
+
                             {/* Dropdowm Menu */}
                             <li>
                                 <ul className="relative group dropdown">
@@ -145,32 +161,45 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
                                     >
                                         {isAuthenticated && user ? (
                                             <div className="flex items-center justify-center px-4 py-2 text-sm rounded-full bg-search-100 dark:bg-search-200">
-                                                <span className="mr-4">Mathew S.</span>
-                                                <Image src={navIcon1} alt="avatar" width="24" height="24" />
+                                                <span className="mr-4">{truncatedName}</span>
+                                                {avatarUrl ? <Image src={avatarUrl} alt="avatar" width="24" height="24" className="rounded-full" /> : null}
                                             </div>
-                                        ):(
-                                            <div className="flex items-center justify-center px-10 py-2 text-base font-semibold rounded-full bg-search-100 dark:bg-search-200">
-                                                Sign in 
-                                            </div>    
-                                        )}   
+                                        ) : (
+                                            <div
+                                                onClick={() => setAuthModalOpen(true)}
+                                                className="flex items-center justify-center px-10 py-2 text-base font-semibold rounded-full bg-search-100 dark:bg-search-200"
+                                            >
+                                                Sign Up / Log In
+                                            </div>
+                                        )}
                                     </a>
+
                                     <ul
-                                        className="absolute right-0 left-auto z-10 hidden text-sm font-medium float-left py-2 m-0 text-left list-none border-none rounded-xl shadow-lg dropdown-menu min-w-[250px] 
+                                        className="absolute right-0 left-auto z-10 hidden text-sm font-medium float-left m-0 text-left list-none border-none rounded-xl shadow-lg dropdown-menu min-w-[250px] 
                                         backdrop-blur-[40px] backdrop-brightness-200 bg-[rgba(255,255,255,0.8)] dark:bg-[rgba(19,19,19,0.4)] dark:backdrop-blur-[24px] dark:backdrop-brightness-105
                                         bg-clip-padding group-hover:block"
                                         aria-labelledby="dropdownMenuButton2"
                                     >
                                         <li>
                                             {isAuthenticated && user ? (
-                                                <div className="flex items-center justify-between w-full px-4 py-2 bg-transparent cursor-pointer dropdown-item whitespace-nowrap hover:bg-gray-100 dark:hover:bg-dark-200">
-                                                        <div>
-                                                            <p>Wallet Address</p>
-                                                            <p>0xc186s853yfe4gvx...</p>
-                                                        </div>
-                                                        <Image src={navIcon2} alt={user.walletAddress} width={46} height={44} objectFit="contain" />
+                                                <div className="flex items-center justify-between w-full rounded-t-xl px-4 py-3 bg-transparent cursor-pointer dropdown-item whitespace-nowrap hover:bg-gray-100 dark:hover:bg-dark-200">
+                                                    <div>
+                                                        <p>Wallet Address</p>
+                                                        <p>{truncatedWalletAddress}</p>
+                                                    </div>
+                                                    {avatarUrl ? (
+                                                        <Image
+                                                            src={avatarUrl}
+                                                            alt={user.walletAddress}
+                                                            width={40}
+                                                            height={40}
+                                                            objectFit="contain"
+                                                            className="rounded-lg"
+                                                        />
+                                                    ) : null}
                                                 </div>
                                             ) : (
-                                                <div className="px-4 py-2 bg-transparent hover:bg-primary-100 hover:text-light-100">
+                                                <div className="px-4 py-3 rounded-t-xl bg-transparent hover:bg-primary-100 hover:text-light-100">
                                                     <a
                                                         className="block w-full dropdown-item whitespace-nowrap hover:bg-primary-100 active:bg-primary-100"
                                                         href="#"
@@ -227,18 +256,19 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
                                             </li>
                                         )}
 
-
                                         {/* Toggle theme button */}
                                         <li>
-                                            {theme === "dark" ? (
-                                                <button
-                                                    aria-label="Toggle Dark Mode"
-                                                    type="button"
-                                                    className="flex items-center justify-between w-full px-4 rounded-full bg-search-100 dark:bg-search-200"
-                                                    onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                                                >
-                                                    <p>Switch to Light mode</p>
-                                                    <div className="flex items-center justify-center w-12 h-12 rounded-full hover:bg-[#bdbdbd] dark:hover:bg-zinc-800">
+                                            <button
+                                                aria-label="Toggle Dark Mode"
+                                                type="button"
+                                                className={`flex items-center justify-between w-full px-4 hover:bg-gray-100 dark:hover:bg-dark-200 " + ${
+                                                    user && isAuthenticated ? "" : "rounded-b-xl py-1"
+                                                } `}
+                                                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                                            >
+                                                {theme === "dark" ? <p>Switch to Light mode</p> : <p>Switch to Dark mode</p>}
+                                                <div className="flex items-center justify-center w-10 h-10 rounded-full hover:bg-[#bdbdbd] dark:hover:bg-dark-200">
+                                                    {theme === "dark" ? (
                                                         <svg
                                                             xmlns="http://www.w3.org/2000/svg"
                                                             viewBox="0 0 24 24"
@@ -253,41 +283,30 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
                                                                 d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
                                                             />
                                                         </svg>
-                                                    </div>
-                                                </button>
-                                                
-                                            ):(
-                                                <button
-                                                    aria-label="Toggle Dark Mode"
-                                                    type="button"
-                                                    className="flex items-center justify-between w-full px-4 rounded-full bg-search-100 dark:bg-search-200"
-                                                    onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                                                >
-                                                    <p>Switch to Dark mode</p>
-                                                    <div className="flex items-center justify-center w-12 h-12 rounded-full hover:bg-[#bdbdbd] dark:hover:bg-dark-200">
+                                                    ) : (
                                                         <svg
                                                             xmlns="http://www.w3.org/2000/svg"
                                                             viewBox="0 0 24 24"
                                                             fill="currentColor"
                                                             stroke="currentColor"
                                                             className="w-6 h-6 text-gray-800 dark:text-gray-200"
-                                                            >
+                                                        >
                                                             <path
                                                                 strokeLinecap="round"
                                                                 strokeLinejoin="round"
                                                                 strokeWidth={2}
                                                                 d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
-                                                            />   
+                                                            />
                                                         </svg>
-                                                    </div>
-                                                </button>
-                                            )}     
+                                                    )}
+                                                </div>
+                                            </button>
                                         </li>
                                         {/* Logout Button */}
                                         <li>
                                             {isAuthenticated && user ? (
                                                 <button
-                                                    className="w-full px-4 py-2 font-medium transition-all bg-transparent cursor-pointer dark:border-light-300 hover:bg-gray-100 dark:hover:bg-dark-200"
+                                                    className="w-full px-4 pt-2 pb-3 rounded-b-xl font-medium transition-all bg-transparent cursor-pointer dark:border-light-300 hover:bg-gray-100 dark:hover:bg-dark-200"
                                                     onClick={handleLogout}
                                                 >
                                                     <Link

@@ -1,29 +1,48 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { useMoralis } from "react-moralis";
+import { useMoralis, useMoralisCloudFunction } from "react-moralis";
 import { MXV_CONTRACT_ADDRESS, BLOCKCHAIN_NETWORK } from "../../utils/smart-contract/constants";
 import NFTCard from "../../layout/NFTCard/NFTCard";
 import Pager from "./ArtistProfileUtils/Pager";
 
-export default function NFTs() {
+export default function NFTs({ username }) {
     const { Moralis, isInitialized } = useMoralis();
     const [tokens, setTokens] = useState("");
     const [currentPage, setCurrentPage] = useState(0);
     const [nftCards, setNftCards] = useState([]);
 
+    const { data: profileUser } = useMoralisCloudFunction("fetchAddressFromUsername", { username: username });
+
     useEffect(() => {
-        if (isInitialized) {
+        if (tokens) {
+            tokens.map(async (token) => {
+                if (token.metadata == null) {
+                    await fetch(token.token_uri)
+                        .then((response) => {
+                            return response.json();
+                        })
+                        .then((data) => {
+                            token.metadata = JSON.stringify(data);
+                        });
+                }
+            });
+        }
+    }, [tokens]);
+
+    useEffect(() => {
+        if (isInitialized && profileUser) {
             (async function () {
                 const options = {
                     chain: BLOCKCHAIN_NETWORK,
                     token_address: MXV_CONTRACT_ADDRESS,
+                    address: profileUser.ethAddress,
                 };
                 const nftData = await Moralis.Web3API.account.getNFTsForContract(options);
                 console.log(nftData);
                 setTokens(nftData.result);
             })();
         }
-    }, [isInitialized, Moralis.Web3API.account]);
+    }, [isInitialized, profileUser]);
 
     useEffect(() => {
         if (tokens) {

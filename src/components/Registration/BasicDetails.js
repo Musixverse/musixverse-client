@@ -4,7 +4,7 @@ import styles from "../../../styles/Registration/Artist.module.css";
 import Button from "./ArtistRegUtils/Button";
 import SelectAvatar from "./ArtistRegUtils/SelectAvatar";
 import Router from "next/router";
-import { useMoralis, useNewMoralisObject } from "react-moralis";
+import { useMoralis, useNewMoralisObject, useMoralisCloudFunction } from "react-moralis";
 import StatusContext from "../../../store/status-context";
 
 export default function BasicDetails() {
@@ -14,9 +14,17 @@ export default function BasicDetails() {
     const { save: saveUserPreferences } = useNewMoralisObject("UserPreferences");
 
     const [avatar, setAvatar] = useState("");
+
     const nameRef = useRef(null);
     const usernameRef = useRef(null);
     const emailRef = useRef(null);
+
+    const [name, setName] = useState("");
+    const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
+
+    const { fetch: checkUsernameAvailability } = useMoralisCloudFunction("checkUsernameAvailability", { username: username }, { autoFetch: false });
+    const { fetch: checkEmailExists } = useMoralisCloudFunction("checkEmailExists", { email: email }, { autoFetch: false });
 
     async function uploadFile(data) {
         const file = new Moralis.File("file", data);
@@ -26,10 +34,6 @@ export default function BasicDetails() {
 
     const handleBasicDetailsSave = async (e) => {
         e.preventDefault();
-
-        const name = nameRef.current.value;
-        const username = usernameRef.current.value;
-        const email = emailRef.current.value;
 
         // USERNAME CHECKS
         const usernameRegex = /^\w+$/;
@@ -65,6 +69,43 @@ export default function BasicDetails() {
             return;
         }
 
+        let usernameExists = false;
+        await checkUsernameAvailability({
+            onSuccess: async (object) => {
+                console.log("object", object, user);
+                if (object) {
+                    setError({
+                        title: object,
+                        message: "Please choose another username.",
+                        showErrorBox: true,
+                    });
+                    usernameExists = true;
+                }
+            },
+            onError: (error) => {
+                console.log("checkUsernameAvailability Error:", error);
+            },
+        });
+        if (usernameExists) return;
+
+        let emailExists = false;
+        await checkEmailExists({
+            onSuccess: async (object) => {
+                if (object) {
+                    setError({
+                        title: object,
+                        message: "Please sign up using another email address.",
+                        showErrorBox: true,
+                    });
+                    emailExists = true;
+                }
+            },
+            onError: (error) => {
+                console.log("checkEmailExists Error:", error);
+            },
+        });
+        if (emailExists) return;
+
         if (name !== "" && username !== "" && email !== "") {
             await setUserData({
                 name: name === "" ? undefined : name,
@@ -98,6 +139,7 @@ export default function BasicDetails() {
 
             const userPreferences = {
                 user: user,
+                userId: user.id,
                 newsletter: true,
                 itemSold: true,
             };
@@ -156,6 +198,8 @@ export default function BasicDetails() {
                         <input
                             type="text"
                             ref={nameRef}
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
                             required
                             className="w-full p-1 border-2 border-gray-500 rounded-md shadow-sm outline-none font-secondary focus:border-primary-100"
                         />
@@ -165,6 +209,8 @@ export default function BasicDetails() {
                                 <input
                                     type="text"
                                     ref={usernameRef}
+                                    value={username}
+                                    onChange={(e) => setUsername(e.target.value)}
                                     required
                                     className="w-full p-1 border-2 border-gray-500 rounded-md shadow-sm outline-none focus:border-primary-100"
                                 />
@@ -174,6 +220,8 @@ export default function BasicDetails() {
                                 <input
                                     type="email"
                                     ref={emailRef}
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
                                     required
                                     className="w-full p-1 border-2 border-gray-500 rounded-md shadow-sm outline-none focus:border-primary-100"
                                 />

@@ -34,6 +34,7 @@ export default function ComprehensiveDetails({
 	parentalAdvisory,
 	language,
 	location,
+	setSaveDraftSuccess,
 }) {
 	const [, , , setError] = useContext(StatusContext);
 
@@ -59,7 +60,6 @@ export default function ComprehensiveDetails({
 		parentalAdvisory,
 		language,
 		location,
-		setSaveDraftSuccess,
 	};
 
 	return (

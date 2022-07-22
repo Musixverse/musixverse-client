@@ -30,6 +30,9 @@ export default function Step1Form({
 	const [searchedUsername, setSearchedUsername] = useState("");
 
 	const toggleCoverArtArtistRadio = (e) => {
+		if (e.target.id === "coverArtArtistNo" && creditCoverArtArtist === true) {
+			setCoverArtArtist({ id: "", name: "", username: "", address: "", avatar: "", email: "" });
+		}
 		if ((e.target.id === "coverArtArtistYes" && creditCoverArtArtist === false) || (e.target.id === "coverArtArtistNo" && creditCoverArtArtist === true)) {
 			setCreditCoverArtArtist(!creditCoverArtArtist);
 		}
@@ -212,7 +215,7 @@ export default function Step1Form({
 									/>
 									<div
 										onClick={() => {
-											setCoverArtArtist({ id: "", name: "", username: "", address: "", avatar: "" });
+											setCoverArtArtist({ id: "", name: "", username: "", address: "", avatar: "", email: "" });
 											setSearchedUsername("");
 										}}
 										className="w-8 h-8 ml-2 flex justify-center items-center rounded-lg transition-all duration-200 cursor-pointer hover:bg-zinc-500/20 "

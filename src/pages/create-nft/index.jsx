@@ -19,8 +19,6 @@ const CreateNFT = () => {
 
 	const router = useRouter();
 	const { draft } = router.query;
-	console.log(draft);
-
 	const { fetch: getDraftNftData } = useMoralisCloudFunction(
 		"getDraftNftData",
 		{ objectId: draft },
@@ -33,21 +31,22 @@ const CreateNFT = () => {
 		if (draft) {
 			getDraftNftData({
 				onSuccess: async (draft) => {
-					console.log(draft);
 					setTrackTitle(draft.attributes.title);
 					setTrackBackground(draft.attributes.description);
 					setAudioFileUrl(draft.attributes.audio);
 					setAudioFileDuration(draft.attributes.duration);
-					setLyrics(draft.attributes.lyrics);
 					setAudioFileMimeType(draft.attributes.mimeType);
 					setCoverArtUrl(draft.attributes.artwork.uri);
 					setCoverArtMimeType(draft.attributes.artwork.mimeType);
+					setCreditCoverArtArtist(draft.attributes.creditCoverArtArtist);
+					setCoverArtArtist(draft.attributes.coverArtArtist);
+					setLyrics(draft.attributes.lyrics);
+					setStep(1);
 				},
 				onError: (error) => {
 					console.log("deleteNftDraft Error:", error);
 				},
 			});
-			setStep(1);
 		}
 	}, [draft]);
 
@@ -57,13 +56,13 @@ const CreateNFT = () => {
 	const [step, setStep] = useState(0);
 	const [trackTitle, setTrackTitle] = useState("");
 	const [trackBackground, setTrackBackground] = useState("");
+	const [audioFileUrl, setAudioFileUrl] = useState(null);
+	const [audioFileDuration, setAudioFileDuration] = useState(null);
+	const [audioFileMimeType, setAudioFileMimeType] = useState(null);
 	const [coverArtUrl, setCoverArtUrl] = useState(null);
 	const [coverArtMimeType, setCoverArtMimeType] = useState(null);
 	const [creditCoverArtArtist, setCreditCoverArtArtist] = useState(false);
 	const [coverArtArtist, setCoverArtArtist] = useState({ id: "", name: "", username: "", address: "", avatar: "", email: "" });
-	const [audioFileUrl, setAudioFileUrl] = useState(null);
-	const [audioFileDuration, setAudioFileDuration] = useState(null);
-	const [audioFileMimeType, setAudioFileMimeType] = useState(null);
 	const [lyrics, setLyrics] = useState(null);
 	const [trackOrigin, setTrackOrigin] = useState("Original");
 	const [genre, setGenre] = useState("Afrobeat");
@@ -88,8 +87,9 @@ const CreateNFT = () => {
 	const [releaseNow, setReleaseNow] = useState(true);
 	const [unlockTimestamp, setUnlockTimestamp] = useState(Math.round(new Date().getTime() / 1000));
 
-	// Creation success modal
+	// Creation success modal state
 	const [createNFTSuccess, setCreateNFTSuccess] = useState(false);
+	// Draft saved modal state
 	const [saveDraftSuccess, setSaveDraftSuccess] = useState(false);
 
 	// Continue to next step
@@ -187,7 +187,6 @@ const CreateNFT = () => {
 			audio: "ipfs://" + audioFileUrl.replace("https://ipfs.moralis.io:2053/ipfs/", ""),
 			duration: audioFileDuration,
 			mimeType: audioFileMimeType,
-			language: language,
 			artwork: {
 				uri: "ipfs://" + coverArtUrl.replace("https://ipfs.moralis.io:2053/ipfs/", ""),
 				mimeType: coverArtMimeType,
@@ -195,8 +194,12 @@ const CreateNFT = () => {
 				artistAddress: creditCoverArtArtist ? coverArtArtist.address : "",
 				invitedArtistId: coverArtArtist.address ? "" : invitedArtworkArtistId,
 			},
-			unlockTimestamp: unlockTimestamp,
-			collaborators: reducedCollaboratorList,
+			lyrics: lyrics ? "ipfs://" + lyricsFile.hash() : "",
+			genre: genre,
+			language: language,
+			locationCreated: location,
+			isrc: isrc,
+			tags: _tags,
 			links: {
 				spotify: links.spotifyLink,
 				appleMusic: links.appleMusicLink,
@@ -204,12 +207,9 @@ const CreateNFT = () => {
 				youtubeMusic: links.youtubeMusicLink,
 				other: links.other,
 			},
-			genre: genre,
-			tags: _tags,
-			lyrics: lyrics ? "ipfs://" + lyricsFile.hash() : "",
+			collaborators: reducedCollaboratorList,
 			license: "ipfs://" + coverArtUrl.replace("https://ipfs.moralis.io:2053/ipfs/", ""), // TODO
-			isrc: isrc,
-			locationCreated: location,
+			unlockTimestamp: unlockTimestamp,
 			chainDetails: {
 				chainId: BLOCKCHAIN_NETWORK_ID,
 				contractAddress: MXV_CONTRACT_ADDRESS,

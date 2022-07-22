@@ -55,9 +55,9 @@ export default function PreviewDraft({
 
 	return (
 		<>
-			<div className="w-fit group">
+			<div className="w-fit group flex flex-col overflow-hidden rounded-2xl hover:shadow-2xl duration-300 cursor-pointer">
 				{/* Uploaded Art */}
-				<div className="relative w-[222px] h-[190px] overflow-hidden rounded-t-xl cursor-pointer">
+				<div className="relative w-[222px] h-[200px] overflow-hidden rounded-t-xl cursor-pointer">
 					{/* Cover art of NFT */}
 					{coverArtUrl === null ? (
 						<div className="dark:bg-[#363636] bg-light-300 w-full h-full rounded-t-xl"></div>

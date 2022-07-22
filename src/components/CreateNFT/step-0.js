@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import { useMoralis, useMoralisCloudFunction } from "react-moralis";
+import { useMoralisCloudFunction } from "react-moralis";
 import PreviewDraft from "./CreateNFTUtils/PreviewDraft";
 import styles from "../../../styles/CreateNFT/createNFT.module.css";
 import DeleteDraftModal from "./CreateNFTUtils/DeleteDraftModal";
@@ -14,8 +14,8 @@ const CreateNFTIntro = ({ nextStep }) => {
 	const [deleteModalOpen, setDeleteModalOpen] = useState(false);
 
 	useEffect(() => {
-		console.log("nftDrafts:", nftDrafts);
-	}, [nftDrafts]);
+		router.replace("/create-nft", undefined, { shallow: true });
+	}, []);
 
 	const { fetch: deleteNftDraft } = useMoralisCloudFunction(
 		"deleteNftDraft",
@@ -40,7 +40,7 @@ const CreateNFTIntro = ({ nextStep }) => {
 		<>
 			<div className="flex flex-col items-center justify-center w-full bg-light-200 dark:bg-dark-200">
 				<div className="overflow-x-hidden w-full max-w-[1920px] pt-24 pb-20 px-16 xl:px-20 2xl:px-36">
-					{nftDrafts && (
+					{nftDrafts && nftDrafts.length > 0 && (
 						<div className="flex flex-col mt-10">
 							<p className="font-tertiary text-4xl">Your Drafts</p>
 							<div className="grid grid-cols-5 gap-2 mt-4">

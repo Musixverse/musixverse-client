@@ -1,5 +1,6 @@
 import { useState, useContext } from "react";
 import { useMoralisCloudFunction } from "react-moralis";
+import { useRouter } from "next/router";
 import PreviewNft from "./CreateNFTUtils/PreviewNft";
 import Step1Form from "./CreateNFTUtils/Step1Form";
 import RequiredAsterisk from "./CreateNFTUtils/RequiredAsterisk";
@@ -73,6 +74,8 @@ export default function TrackDetails({
 		setLyrics,
 	};
 
+	const router = useRouter();
+	const { draft } = router.query;
 	// Save Draft Feature
 	const metadata = {
 		title: trackTitle,
@@ -87,9 +90,11 @@ export default function TrackDetails({
 			artistAddress: creditCoverArtArtist ? coverArtArtist.address : "",
 			invitedArtistId: "",
 		},
+		creditCoverArtArtist: creditCoverArtArtist,
+		coverArtArtist: coverArtArtist,
 		lyrics: lyrics,
 	};
-	const { fetch: saveNftCreationDraft } = useMoralisCloudFunction("saveNftDraft", { metadata: metadata }, { autoFetch: false });
+	const { fetch: saveNftCreationDraft } = useMoralisCloudFunction("saveNftDraft", { metadata: metadata, draftId: draft }, { autoFetch: false });
 	const saveNftDraft = () => {
 		setLoading(true);
 		saveNftCreationDraft({

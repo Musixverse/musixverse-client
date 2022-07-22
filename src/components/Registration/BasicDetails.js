@@ -139,6 +139,7 @@ export default function BasicDetails() {
 
             const userPreferences = {
                 user: user,
+                userId: user.id,
                 newsletter: true,
                 itemSold: true,
             };

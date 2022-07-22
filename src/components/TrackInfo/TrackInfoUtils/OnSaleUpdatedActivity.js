@@ -34,7 +34,7 @@ const PurchasedActivity = ({ activity }) => {
 
             <div className="ml-3 font-secondary">
                 <p className="font-medium">
-                    {activity.onSale ? <>Put up for sale</> : <>Taken down from sale</>}
+                    {activity.onSale ? <>Listed for sale</> : <>Taken down from sale</>}
                     &nbsp;
                 </p>
 

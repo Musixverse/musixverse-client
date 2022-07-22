@@ -1,14 +1,13 @@
-
-.createNFT__container{
-    @apply flex items-end min-h-full;
+.createNFT__container {
+	@apply flex items-end min-h-full;
 }
 
-.background-img__container{
-    @apply bg-[url('../../public/assets/create-nft/pexels-M.png')] sm:bg-[url('../../public/assets/create-nft/pexels-T.png')] lg:bg-[url('../../public/assets/create-nft/pexels-D.png')];
-    @apply w-[80vw] h-[80vh] rounded-t-2xl bg-no-repeat bg-cover;
-    @apply flex items-center mt-12;
+.background-img__container {
+	@apply bg-[url('../../public/assets/create-nft/pexels-M.png')] sm:bg-[url('../../public/assets/create-nft/pexels-T.png')] lg:bg-[url('../../public/assets/create-nft/pexels-D.png')];
+	@apply w-[80vw] h-[50vh] rounded-2xl bg-no-repeat bg-cover;
+	@apply flex items-center mt-12;
 }
 
-.background-blur__container{
-    @apply w-full p-10 backdrop-blur-xl;
+.background-blur__container {
+	@apply w-full p-10 backdrop-blur-xl;
 }

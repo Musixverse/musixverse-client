@@ -47,7 +47,7 @@ export default function PreviewNft({ trackTitle, coverArtUrl, audioFileUrl, nftP
 		<div className="flex-1 lg:mt-0">
 			<p className="mb-16 font-semibold font-secondary">STEP {step} OF 3</p>
 			{/* Uploaded Art */}
-			<div className="relative w-[222px] h-[190px] overflow-hidden rounded-t-xl">
+			<div className="relative w-[220px] h-[220px] overflow-hidden rounded-t-xl">
 				{/* Cover art of NFT */}
 				{coverArtUrl === null ? (
 					<div className="dark:bg-[#363636] bg-light-300 w-full h-full rounded-t-xl"></div>

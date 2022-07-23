@@ -1,19 +1,11 @@
 .nft-card {
-    @apply flex flex-col overflow-hidden rounded-2xl hover:shadow-2xl duration-300 cursor-pointer;
+	@apply flex flex-col overflow-hidden rounded-2xl hover:shadow-2xl duration-300 cursor-pointer;
 }
 
 .nft-card-dark {
-    @apply flex flex-col overflow-hidden rounded-2xl hover:shadow-2xl duration-300 cursor-pointer hover:shadow-neutral-900;
-}
-
-.nft-image {
-    @apply hover:scale-110 duration-500;
+	@apply flex flex-col overflow-hidden rounded-2xl hover:shadow-2xl duration-300 cursor-pointer hover:shadow-neutral-900;
 }
 
 .nft-card__description {
-    @apply p-5 bg-light-100;
-}
-
-.nft-card__description:hover ~ .nft-image {
-    @apply hover:scale-110 duration-500;
+	@apply p-5 bg-light-100;
 }

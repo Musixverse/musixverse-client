@@ -39,7 +39,7 @@ export async function getServerSideProps({ query }) {
 	// Fetch similar tokens
 	let otherTokensOfTrack = [];
 	await Moralis.Cloud.run("fetchOtherTokensOfTrack", { tokenId: tokenId }).then((result) => {
-		otherTokensOfTrack = result;
+		otherTokensOfTrack = JSON.parse(JSON.stringify(result));
 	});
 
 	// Passing data to the Page using props
@@ -98,6 +98,7 @@ export default function TrackInfo({ token, otherTokensOfTrack }) {
 						price={price}
 						currentOwnerAddress={currentOwnerAddress}
 						numberOfCopies={metadata.attributes[0].value}
+						otherTokensOfTrack={otherTokensOfTrack}
 					/>
 					<TrackDetails tokenId={tokenId} metadata={metadata} />
 					<div className="grid grid-cols-9 xl:grid-cols-5 gap-6 my-10">

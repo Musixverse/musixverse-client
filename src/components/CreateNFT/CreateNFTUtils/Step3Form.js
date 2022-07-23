@@ -134,6 +134,7 @@ const Step3Form = ({
 								}}
 								type="number"
 								min={1}
+								max={100}
 								step="1"
 								placeholder="No. of copies"
 								required

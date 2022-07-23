@@ -1,7 +1,7 @@
 const { Fragment, useState, useEffect } = require("react");
 const { Transition } = require("@headlessui/react");
 
-module.exports = ({ isOpen = "", onClose = "", deleteDraft = "" }) => {
+export default function DeleteDraftModal({ isOpen = "", onClose = "", deleteDraft = "" }) {
 	const [isModalOpen, setIsModalOpen] = useState(isOpen);
 
 	useEffect(() => {
@@ -93,4 +93,4 @@ module.exports = ({ isOpen = "", onClose = "", deleteDraft = "" }) => {
 			</Transition>
 		</>
 	);
-};
+}

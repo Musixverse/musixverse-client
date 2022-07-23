@@ -4,6 +4,8 @@ import Step2Form from "./CreateNFTUtils/Step2Form";
 import ActionButtons from "./CreateNFTUtils/ActionButtons";
 import RequiredAsterisk from "./CreateNFTUtils/RequiredAsterisk";
 import StatusContext from "../../../store/status-context";
+import { useRouter } from "next/router";
+import { saveNftCreationProgress } from "./CreateNFTUtils/SaveNftCreationProgress";
 
 export default function ComprehensiveDetails({
 	step,
@@ -65,11 +67,13 @@ export default function ComprehensiveDetails({
 	};
 	const actionButtonProps = { step, prevStep, setSaveDraftSuccess, nftDraftMetadata };
 
+	const router = useRouter();
+	const { draft } = router.query;
 	return (
 		<div className="flex items-center justify-center mb-28 lg:mb-36 bg-light-200 dark:bg-dark-200">
 			<div className="flex-col flex w-full max-w-[1920px] mt-28 lg:mt-36 px-6 md:px-8 lg:px-16 xl:px-20 2xl:px-36">
 				<form
-					onSubmit={(e) => {
+					onSubmit={async (e) => {
 						e.preventDefault();
 						if (tags.length < 1) {
 							setError({
@@ -79,6 +83,7 @@ export default function ComprehensiveDetails({
 							});
 							return;
 						} else {
+							await saveNftCreationProgress(nftDraftMetadata, draft);
 							nextStep();
 						}
 					}}

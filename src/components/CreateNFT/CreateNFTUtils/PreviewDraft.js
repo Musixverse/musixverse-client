@@ -3,17 +3,7 @@ import { useRef } from "react";
 import { useMoralis } from "react-moralis";
 import { truncatePrice } from "../../../utils/GetMarketPrice";
 
-export default function PreviewDraft({
-	draftId,
-	trackTitle,
-	coverArtUrl,
-	audioFileUrl,
-	nftPrice,
-	numberOfCopies,
-	collaboratorList,
-	setDeleteModalOpen,
-	setDraftToDelete,
-}) {
+export default function PreviewDraft({ draftId, trackTitle, coverArtUrl, audioFileUrl, nftPrice, collaboratorList, setDeleteModalOpen, setDraftToDelete }) {
 	const { user } = useMoralis();
 
 	const playBtn = useRef(null);

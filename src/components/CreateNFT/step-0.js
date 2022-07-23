@@ -6,7 +6,7 @@ import PreviewDraft from "./CreateNFTUtils/PreviewDraft";
 import styles from "../../../styles/CreateNFT/createNFT.module.css";
 import DeleteDraftModal from "./CreateNFTUtils/DeleteDraftModal";
 
-const CreateNFTIntro = ({ nextStep }) => {
+const CreateNFTIntro = ({ nextStep, nftDraftMetadata }) => {
 	const router = useRouter();
 	const { data: nftDrafts } = useMoralisCloudFunction("fetchNftDrafts");
 
@@ -36,6 +36,7 @@ const CreateNFTIntro = ({ nextStep }) => {
 		});
 	};
 
+	const { fetch: createNftDraft } = useMoralisCloudFunction("saveNftDraft", { metadata: nftDraftMetadata }, { autoFetch: false });
 	return (
 		<>
 			<div className="flex flex-col items-center justify-center w-full bg-light-200 dark:bg-dark-200">
@@ -75,8 +76,14 @@ const CreateNFTIntro = ({ nextStep }) => {
 									Creating an NFT is easier than ever! By creating NFT you can also unlock and enjoy several benefits and rewards!
 								</p>
 								<form
-									onSubmit={(e) => {
+									onSubmit={async (e) => {
 										e.preventDefault();
+										await createNftDraft({
+											onSuccess: (draftId) => {
+												router.replace("/create-nft?draft=" + draftId, undefined, { shallow: true });
+											},
+											onError: (error) => {},
+										});
 										nextStep();
 									}}
 								>

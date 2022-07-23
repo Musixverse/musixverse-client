@@ -17,6 +17,56 @@ const CreateNFT = () => {
 	const [isLoading, setLoading] = useContext(LoadingContext);
 	const { Moralis, user } = useMoralis();
 
+	// States
+	const [step, setStep] = useState(draft ? 1 : 0);
+	const [trackTitle, setTrackTitle] = useState("");
+	const [trackBackground, setTrackBackground] = useState("");
+	const [audioFileUrl, setAudioFileUrl] = useState(null);
+	const [audioFileDuration, setAudioFileDuration] = useState(null);
+	const [audioFileMimeType, setAudioFileMimeType] = useState(null);
+	const [coverArtUrl, setCoverArtUrl] = useState(null);
+	const [coverArtMimeType, setCoverArtMimeType] = useState(null);
+	const [creditCoverArtArtist, setCreditCoverArtArtist] = useState(false);
+	const [coverArtArtist, setCoverArtArtist] = useState({ id: "", name: "", username: "", address: "", avatar: "", email: "" });
+	const [lyrics, setLyrics] = useState(null);
+	const [trackOrigin, setTrackOrigin] = useState("Original");
+	const [genre, setGenre] = useState("Afrobeat");
+	const [recordingYear, setRecordingYear] = useState(new Date().getFullYear());
+	const [parentalAdvisory, setParentalAdvisory] = useState("Explicit");
+	const [vocals, setVocals] = useState(true);
+	const [language, setLanguage] = useState("Hindi");
+	const [location, setLocation] = useState("India");
+	const [isrc, setIsrc] = useState("");
+	const [tags, setTags] = useState([]);
+	const [links, setLinks] = useState({
+		spotifyLink: "",
+		appleMusicLink: "",
+		amazonMusicLink: "",
+		youtubeMusicLink: "",
+		other: "",
+	});
+	const [numberOfCopies, setNumberOfCopies] = useState("");
+	const [nftPrice, setNftPrice] = useState("");
+	const [collaboratorList, setCollaboratorList] = useState([{ id: "", name: "", username: "", split: "", role: "", address: "", avatar: "" }]);
+	const [resaleRoyaltyPercent, setResaleRoyaltyPercent] = useState("");
+	const [releaseNow, setReleaseNow] = useState(true);
+	const [unlockTimestamp, setUnlockTimestamp] = useState(new Date().getTime());
+	// Creation success modal state
+	const [createNFTSuccess, setCreateNFTSuccess] = useState(false);
+	// Draft saved modal state
+	const [saveDraftSuccess, setSaveDraftSuccess] = useState(false);
+
+	// Continue to next step
+	const nextStep = () => {
+		setStep((currStep) => currStep + 1);
+	};
+
+	// Revert to previous step
+	const prevStep = () => {
+		setStep((currStep) => currStep - 1);
+	};
+
+	// Setting data if a draft is opened
 	const router = useRouter();
 	const { draft } = router.query;
 	const { fetch: getDraftNftData } = useMoralisCloudFunction(
@@ -26,7 +76,6 @@ const CreateNFT = () => {
 			autoFetch: false,
 		}
 	);
-
 	useEffect(() => {
 		if (draft) {
 			getDraftNftData({
@@ -71,69 +120,20 @@ const CreateNFT = () => {
 		}
 	}, [draft]);
 
-	// States
-	const [step, setStep] = useState(draft ? 1 : 0);
-	const [trackTitle, setTrackTitle] = useState("");
-	const [trackBackground, setTrackBackground] = useState("");
-	const [audioFileUrl, setAudioFileUrl] = useState(null);
-	const [audioFileDuration, setAudioFileDuration] = useState(null);
-	const [audioFileMimeType, setAudioFileMimeType] = useState(null);
-	const [coverArtUrl, setCoverArtUrl] = useState(null);
-	const [coverArtMimeType, setCoverArtMimeType] = useState(null);
-	const [creditCoverArtArtist, setCreditCoverArtArtist] = useState(false);
-	const [coverArtArtist, setCoverArtArtist] = useState({ id: "", name: "", username: "", address: "", avatar: "", email: "" });
-	const [lyrics, setLyrics] = useState(null);
-	const [trackOrigin, setTrackOrigin] = useState("Original");
-	const [genre, setGenre] = useState("Afrobeat");
-	const [recordingYear, setRecordingYear] = useState(new Date().getFullYear());
-	const [parentalAdvisory, setParentalAdvisory] = useState("Explicit");
-	const [vocals, setVocals] = useState(true);
-	const [language, setLanguage] = useState("Hindi");
-	const [location, setLocation] = useState("India");
-	const [isrc, setIsrc] = useState("");
-	const [tags, setTags] = useState("");
-	const [links, setLinks] = useState({
-		spotifyLink: "",
-		appleMusicLink: "",
-		amazonMusicLink: "",
-		youtubeMusicLink: "",
-		other: "",
-	});
-	const [numberOfCopies, setNumberOfCopies] = useState("");
-	const [nftPrice, setNftPrice] = useState("");
-	const [collaboratorList, setCollaboratorList] = useState([{ id: "", name: "", username: "", split: "", role: "", address: "", avatar: "" }]);
-	const [resaleRoyaltyPercent, setResaleRoyaltyPercent] = useState("");
-	const [releaseNow, setReleaseNow] = useState(true);
-	const [unlockTimestamp, setUnlockTimestamp] = useState(new Date().getTime());
-
-	// Creation success modal state
-	const [createNFTSuccess, setCreateNFTSuccess] = useState(false);
-	// Draft saved modal state
-	const [saveDraftSuccess, setSaveDraftSuccess] = useState(false);
-
-	// Continue to next step
-	const nextStep = () => {
-		setStep((currStep) => currStep + 1);
-	};
-
-	// Revert to previous step
-	const prevStep = () => {
-		setStep((currStep) => currStep - 1);
-	};
-
+	// Adding logged in user as default to the collaboratorList
 	const { data: userInfo } = useMoralisQuery("UserInfo", (query) => query.equalTo("user", user), [user]);
 	useEffect(() => {
 		if (user && userInfo[0]) {
-			// 		setTrackTitle("Rap God");
-			// 		setTrackBackground(
-			// 			"Lorem Ipsum is simply a dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic type"
-			// 		);
-			// 		setCoverArtUrl("https://ipfs.moralis.io:2053/ipfs/QmQSTneVQ2Xde3XzuXKQWkwipdS8Voh9xDDWLGju83xJWa");
-			// 		setCoverArtMimeType("image/jpeg");
-			// 		setAudioFileUrl("https://ipfs.moralis.io:2053/ipfs/QmUA4TiKp1AiiJhCmnPgij4B5cmFrmtUjsBPADEtgRZxaH");
-			// 		setAudioFileDuration("90.30");
-			// 		setAudioFileMimeType("audio/mpeg");
-			// 		setLyrics("");
+			// setTrackTitle("Rap God");
+			// setTrackBackground(
+			// 	"Lorem Ipsum is simply a dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic type"
+			// );
+			// setCoverArtUrl("https://ipfs.moralis.io:2053/ipfs/QmQSTneVQ2Xde3XzuXKQWkwipdS8Voh9xDDWLGju83xJWa");
+			// setCoverArtMimeType("image/jpeg");
+			// setAudioFileUrl("https://ipfs.moralis.io:2053/ipfs/QmUA4TiKp1AiiJhCmnPgij4B5cmFrmtUjsBPADEtgRZxaH");
+			// setAudioFileDuration("90.30");
+			// setAudioFileMimeType("audio/mpeg");
+			// setLyrics("");
 			// 		setIsrc("USUM72208965");
 			// 		setLinks({
 			// 			spotifyLink: "https://open.spotify.com/track/6gI9b2VsoWhjhIuIeToDVs?si=abfe744344f04c4d",
@@ -146,6 +146,7 @@ const CreateNFT = () => {
 			// 		});
 			// 		setNumberOfCopies(4);
 			// 		setNftPrice(12.4);
+			// 		setResaleRoyaltyPercent(5);
 			setCollaboratorList([
 				{
 					id: user.id,
@@ -157,11 +158,31 @@ const CreateNFT = () => {
 					avatar: userInfo[0].attributes.avatar,
 				},
 			]);
-			// 		setResaleRoyaltyPercent(5);
 		}
 	}, [user, userInfo]);
 
+	// Delete draft from the database after NFT is created
+	const { fetch: deleteNftDraft } = useMoralisCloudFunction(
+		"deleteNftDraft",
+		{ objectId: draft },
+		{
+			autoFetch: false,
+		}
+	);
+	const deleteDraft = async () => {
+		await deleteNftDraft({
+			onSuccess: async (object) => {
+				// Draft deleted from database
+			},
+			onError: (error) => {
+				console.log("deleteNftDraft Error:", error);
+			},
+		});
+	};
+
+	// Save invited artwork artist if they are not on Musixverse yet
 	const { save: saveInvitedArtworkArtist } = useNewMoralisObject("InvitedArtworkArtist");
+	// Function to run when Create NFT button is pressed
 	const nftCreateFormOnSubmit = async () => {
 		setLoading(true);
 		const reducedCollaboratorList = collaboratorList.reduce((result, { name, address, split, role }) => {
@@ -265,7 +286,7 @@ const CreateNFT = () => {
 				},
 				{
 					trait_type: "Parental Advisory",
-					value: parentalAdvisory,
+					value: parentalAdvisory.startsWith("Clean") ? "Clean" : parentalAdvisory,
 				},
 				{
 					trait_type: "Vocals",
@@ -292,9 +313,14 @@ const CreateNFT = () => {
 		}, []);
 		const onSale = true;
 
-		await mintTrackNFT(numberOfCopies, nftPrice, metadataHash, collaborators, percentageContributions, resaleRoyaltyPercent, onSale, _unlockTimestamp);
-		setLoading(false);
-		setCreateNFTSuccess(true);
+		try {
+			await mintTrackNFT(numberOfCopies, nftPrice, metadataHash, collaborators, percentageContributions, resaleRoyaltyPercent, onSale, _unlockTimestamp);
+			await deleteDraft();
+			setLoading(false);
+			setCreateNFTSuccess(true);
+		} catch (error) {
+			setLoading(false);
+		}
 	};
 
 	const nftDraftMetadata = {
@@ -331,7 +357,7 @@ const CreateNFT = () => {
 		releaseNow: releaseNow,
 		unlockTimestamp: unlockTimestamp,
 	};
-	const step0Values = { nextStep };
+	const step0Values = { nextStep, nftDraftMetadata };
 	const step1Values = {
 		step,
 		prevStep,

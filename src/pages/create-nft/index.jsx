@@ -30,30 +30,49 @@ const CreateNFT = () => {
 	useEffect(() => {
 		if (draft) {
 			getDraftNftData({
-				onSuccess: async (draft) => {
-					setTrackTitle(draft.attributes.title);
-					setTrackBackground(draft.attributes.description);
-					setAudioFileUrl(draft.attributes.audio);
-					setAudioFileDuration(draft.attributes.duration);
-					setAudioFileMimeType(draft.attributes.mimeType);
-					setCoverArtUrl(draft.attributes.artwork.uri);
-					setCoverArtMimeType(draft.attributes.artwork.mimeType);
-					setCreditCoverArtArtist(draft.attributes.creditCoverArtArtist);
-					setCoverArtArtist(draft.attributes.coverArtArtist);
-					setLyrics(draft.attributes.lyrics);
-					setStep(1);
+				onSuccess: async (_draft) => {
+					if (_draft) {
+						setTrackTitle(_draft.attributes.title);
+						setTrackBackground(_draft.attributes.description);
+						setAudioFileUrl(_draft.attributes.audio);
+						setAudioFileDuration(_draft.attributes.duration);
+						setAudioFileMimeType(_draft.attributes.mimeType);
+						setCoverArtUrl(_draft.attributes.artwork.uri);
+						setCoverArtMimeType(_draft.attributes.artwork.mimeType);
+						setCreditCoverArtArtist(_draft.attributes.creditCoverArtArtist);
+						setCoverArtArtist(_draft.attributes.coverArtArtist);
+						setLyrics(_draft.attributes.lyrics);
+						setTrackOrigin(_draft.attributes.trackOrigin);
+						setGenre(_draft.attributes.genre);
+						setRecordingYear(_draft.attributes.recordingYear);
+						setParentalAdvisory(_draft.attributes.parentalAdvisory);
+						setVocals(_draft.attributes.vocals);
+						setLanguage(_draft.attributes.language);
+						setLocation(_draft.attributes.location);
+						setIsrc(_draft.attributes.isrc);
+						setTags(_draft.attributes.tags);
+						setLinks(_draft.attributes.links);
+						setNumberOfCopies(_draft.attributes.numberOfCopies);
+						setNftPrice(_draft.attributes.nftPrice);
+						setCollaboratorList(_draft.attributes.collaboratorList);
+						setResaleRoyaltyPercent(_draft.attributes.resaleRoyaltyPercent);
+						setReleaseNow(_draft.attributes.releaseNow);
+						setUnlockTimestamp(_draft.attributes.unlockTimestamp);
+
+						setStep(1);
+						router.replace("/create-nft?draft=" + _draft.id, undefined, { shallow: true });
+					}
 				},
 				onError: (error) => {
 					console.log("deleteNftDraft Error:", error);
+					router.replace("/create-nft", undefined, { shallow: true });
 				},
 			});
 		}
 	}, [draft]);
 
-	const { data: userInfo } = useMoralisQuery("UserInfo", (query) => query.equalTo("user", user), [user]);
-
 	// States
-	const [step, setStep] = useState(0);
+	const [step, setStep] = useState(draft ? 1 : 0);
 	const [trackTitle, setTrackTitle] = useState("");
 	const [trackBackground, setTrackBackground] = useState("");
 	const [audioFileUrl, setAudioFileUrl] = useState(null);
@@ -85,7 +104,7 @@ const CreateNFT = () => {
 	const [collaboratorList, setCollaboratorList] = useState([{ id: "", name: "", username: "", split: "", role: "", address: "", avatar: "" }]);
 	const [resaleRoyaltyPercent, setResaleRoyaltyPercent] = useState("");
 	const [releaseNow, setReleaseNow] = useState(true);
-	const [unlockTimestamp, setUnlockTimestamp] = useState(Math.round(new Date().getTime() / 1000));
+	const [unlockTimestamp, setUnlockTimestamp] = useState(new Date().getTime());
 
 	// Creation success modal state
 	const [createNFTSuccess, setCreateNFTSuccess] = useState(false);
@@ -102,44 +121,45 @@ const CreateNFT = () => {
 		setStep((currStep) => currStep - 1);
 	};
 
-	// useEffect(() => {
-	// 	if (user && userInfo[0]) {
-	// 		setTrackTitle("Rap God");
-	// 		setTrackBackground(
-	// 			"Lorem Ipsum is simply a dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic type"
-	// 		);
-	// 		setCoverArtUrl("https://ipfs.moralis.io:2053/ipfs/QmQSTneVQ2Xde3XzuXKQWkwipdS8Voh9xDDWLGju83xJWa");
-	// 		setCoverArtMimeType("image/jpeg");
-	// 		setAudioFileUrl("https://ipfs.moralis.io:2053/ipfs/QmUA4TiKp1AiiJhCmnPgij4B5cmFrmtUjsBPADEtgRZxaH");
-	// 		setAudioFileDuration("90.30");
-	// 		setAudioFileMimeType("audio/mpeg");
-	// 		setLyrics("");
-	// 		setIsrc("USUM72208965");
-	// 		setLinks({
-	// 			spotifyLink: "https://open.spotify.com/track/6gI9b2VsoWhjhIuIeToDVs?si=abfe744344f04c4d",
-	// 			appleMusicLink:
-	// 				"https://music.apple.com/us/album/1626195790?app=music&at=11laLe&ct=LFV_a8488c4eb6c29dd9e04fa7ed8a69fad5&itscg=30440&itsct=catchall_p1&lId=25738567&cId=none&sr=1&src=Linkfire&ls=1",
-	// 			amazonMusicLink:
-	// 				"https://music.amazon.com/albums/B0B2CCS4WD?tag=univemuisc-central-21&ie=UTF8&linkCode=as2&ascsubtag=a8488c4eb6c29dd9e04fa7ed8a69fad5&ref=dmm_acq_soc_in_u_lfire_lp_x_a8488c4eb6c29dd9e04fa7ed8a69fad5",
-	// 			youtubeMusicLink: "",
-	// 			other: "https://www.jiosaavn.com/track/die-hard/H1AvZE1lYwY",
-	// 		});
-	// 		setNumberOfCopies(4);
-	// 		setNftPrice(12.4);
-	// 		setCollaboratorList([
-	// 			{
-	// 				id: user.id,
-	// 				name: user.attributes.name,
-	// 				username: user.attributes.username,
-	// 				split: 100,
-	// 				role: "Singer",
-	// 				address: user.attributes.ethAddress,
-	// 				avatar: userInfo[0].attributes.avatar,
-	// 			},
-	// 		]);
-	// 		setResaleRoyaltyPercent(5);
-	// 	}
-	// }, [user, userInfo]);
+	const { data: userInfo } = useMoralisQuery("UserInfo", (query) => query.equalTo("user", user), [user]);
+	useEffect(() => {
+		if (user && userInfo[0]) {
+			// 		setTrackTitle("Rap God");
+			// 		setTrackBackground(
+			// 			"Lorem Ipsum is simply a dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic type"
+			// 		);
+			// 		setCoverArtUrl("https://ipfs.moralis.io:2053/ipfs/QmQSTneVQ2Xde3XzuXKQWkwipdS8Voh9xDDWLGju83xJWa");
+			// 		setCoverArtMimeType("image/jpeg");
+			// 		setAudioFileUrl("https://ipfs.moralis.io:2053/ipfs/QmUA4TiKp1AiiJhCmnPgij4B5cmFrmtUjsBPADEtgRZxaH");
+			// 		setAudioFileDuration("90.30");
+			// 		setAudioFileMimeType("audio/mpeg");
+			// 		setLyrics("");
+			// 		setIsrc("USUM72208965");
+			// 		setLinks({
+			// 			spotifyLink: "https://open.spotify.com/track/6gI9b2VsoWhjhIuIeToDVs?si=abfe744344f04c4d",
+			// 			appleMusicLink:
+			// 				"https://music.apple.com/us/album/1626195790?app=music&at=11laLe&ct=LFV_a8488c4eb6c29dd9e04fa7ed8a69fad5&itscg=30440&itsct=catchall_p1&lId=25738567&cId=none&sr=1&src=Linkfire&ls=1",
+			// 			amazonMusicLink:
+			// 				"https://music.amazon.com/albums/B0B2CCS4WD?tag=univemuisc-central-21&ie=UTF8&linkCode=as2&ascsubtag=a8488c4eb6c29dd9e04fa7ed8a69fad5&ref=dmm_acq_soc_in_u_lfire_lp_x_a8488c4eb6c29dd9e04fa7ed8a69fad5",
+			// 			youtubeMusicLink: "",
+			// 			other: "https://www.jiosaavn.com/track/die-hard/H1AvZE1lYwY",
+			// 		});
+			// 		setNumberOfCopies(4);
+			// 		setNftPrice(12.4);
+			setCollaboratorList([
+				{
+					id: user.id,
+					name: user.attributes.name,
+					username: user.attributes.username,
+					split: 100,
+					role: "Singer",
+					address: user.attributes.ethAddress,
+					avatar: userInfo[0].attributes.avatar,
+				},
+			]);
+			// 		setResaleRoyaltyPercent(5);
+		}
+	}, [user, userInfo]);
 
 	const { save: saveInvitedArtworkArtist } = useNewMoralisObject("InvitedArtworkArtist");
 	const nftCreateFormOnSubmit = async () => {
@@ -178,6 +198,8 @@ const CreateNFT = () => {
 			});
 		}
 
+		const _unlockTimestamp = Math.round(unlockTimestamp / 1000);
+
 		const nftMetadata = {
 			version: "1.0",
 			title: trackTitle,
@@ -209,7 +231,7 @@ const CreateNFT = () => {
 			},
 			collaborators: reducedCollaboratorList,
 			license: "ipfs://" + coverArtUrl.replace("https://ipfs.moralis.io:2053/ipfs/", ""), // TODO
-			unlockTimestamp: unlockTimestamp,
+			unlockTimestamp: _unlockTimestamp,
 			chainDetails: {
 				chainId: BLOCKCHAIN_NETWORK_ID,
 				contractAddress: MXV_CONTRACT_ADDRESS,
@@ -256,8 +278,6 @@ const CreateNFT = () => {
 			],
 		};
 
-		console.log("nftMetadata:", nftMetadata);
-
 		const file = new Moralis.File("file.json", { base64: btoa(JSON.stringify(nftMetadata)) });
 		await file.saveIPFS();
 
@@ -272,21 +292,45 @@ const CreateNFT = () => {
 		}, []);
 		const onSale = true;
 
-		await mintTrackNFT(
-			numberOfCopies,
-			nftPrice,
-			metadataHash,
-			collaborators,
-			percentageContributions,
-			resaleRoyaltyPercent,
-			onSale,
-			unlockTimestamp,
-			user.attributes.ethAddress
-		);
+		await mintTrackNFT(numberOfCopies, nftPrice, metadataHash, collaborators, percentageContributions, resaleRoyaltyPercent, onSale, _unlockTimestamp);
 		setLoading(false);
 		setCreateNFTSuccess(true);
 	};
 
+	const nftDraftMetadata = {
+		step: step,
+		title: trackTitle,
+		description: trackBackground,
+		audio: audioFileUrl,
+		duration: audioFileDuration,
+		mimeType: audioFileMimeType,
+		artwork: {
+			uri: coverArtUrl,
+			mimeType: coverArtMimeType,
+			artist: creditCoverArtArtist ? coverArtArtist.name : "",
+			artistAddress: creditCoverArtArtist ? coverArtArtist.address : "",
+			invitedArtistId: "",
+		},
+		creditCoverArtArtist: creditCoverArtArtist,
+		coverArtArtist: coverArtArtist,
+		lyrics: lyrics,
+		trackOrigin: trackOrigin,
+		genre: genre,
+		recordingYear: recordingYear,
+		parentalAdvisory: parentalAdvisory,
+		vocals: vocals,
+		language: language,
+		location: location,
+		isrc: isrc,
+		tags: tags,
+		links: links,
+		numberOfCopies: numberOfCopies,
+		nftPrice: nftPrice,
+		collaboratorList: collaboratorList,
+		resaleRoyaltyPercent: resaleRoyaltyPercent,
+		releaseNow: releaseNow,
+		unlockTimestamp: unlockTimestamp,
+	};
 	const step0Values = { nextStep };
 	const step1Values = {
 		step,
@@ -316,6 +360,7 @@ const CreateNFT = () => {
 		numberOfCopies,
 		collaboratorList,
 		setSaveDraftSuccess,
+		nftDraftMetadata,
 	};
 	const step2Values = {
 		step,
@@ -348,6 +393,7 @@ const CreateNFT = () => {
 		language,
 		location,
 		setSaveDraftSuccess,
+		nftDraftMetadata,
 	};
 	const step3Values = {
 		step,
@@ -365,9 +411,11 @@ const CreateNFT = () => {
 		setResaleRoyaltyPercent,
 		releaseNow,
 		setReleaseNow,
+		unlockTimestamp,
 		setUnlockTimestamp,
 		nftCreateFormOnSubmit,
 		setSaveDraftSuccess,
+		nftDraftMetadata,
 	};
 
 	switch (step) {

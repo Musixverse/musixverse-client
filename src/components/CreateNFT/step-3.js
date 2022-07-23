@@ -1,6 +1,7 @@
 import { useEffect, useContext } from "react";
 import PreviewNft from "./CreateNFTUtils/PreviewNft";
 import Step3Form from "./CreateNFTUtils/Step3Form";
+import ActionButtons from "./CreateNFTUtils/ActionButtons";
 import RequiredAsterisk from "./CreateNFTUtils/RequiredAsterisk";
 import StatusContext from "../../../store/status-context";
 
@@ -20,8 +21,11 @@ export default function PricingAndSplits({
 	setResaleRoyaltyPercent,
 	releaseNow,
 	setReleaseNow,
+	unlockTimestamp,
 	setUnlockTimestamp,
 	nftCreateFormOnSubmit,
+	setSaveDraftSuccess,
+	nftDraftMetadata,
 }) {
 	const [, , , setError] = useContext(StatusContext);
 
@@ -47,8 +51,10 @@ export default function PricingAndSplits({
 		setResaleRoyaltyPercent,
 		releaseNow,
 		setReleaseNow,
+		unlockTimestamp,
 		setUnlockTimestamp,
 	};
+	const actionButtonProps = { step, prevStep, setSaveDraftSuccess, nftDraftMetadata };
 
 	return (
 		<div className="flex items-center justify-center mb-28 lg:mb-36 bg-light-200 dark:bg-dark-200">
@@ -75,34 +81,7 @@ export default function PricingAndSplits({
 					</div>
 
 					{/* Button div */}
-					<div className="flex mt-16 space-x-3 md:self-end lg:mt-16 justify-end">
-						<button
-							type="button"
-							onClick={() => {
-								prevStep();
-							}}
-							className="flex items-center px-4 py-3 text-sm font-primary font-bold rounded-md bg-light-100 hover:bg-[#dde7e7e3] dark:bg-[#323232] dark:hover:bg-dark-100 dark:border-[#323232]"
-						>
-							<span className="mr-10 text-xl">
-								<i className="fa-solid fa-arrow-left-long"></i>
-							</span>
-							Back
-						</button>
-						<button
-							type="button"
-							onClick={() => {}}
-							className="flex items-center px-10 py-3 text-sm font-primary font-bold rounded-md bg-[#dde7e7e3] hover:bg-[#D7E0DF] dark:bg-[#323232] dark:hover:bg-dark-100 dark:border-[#323232]"
-						>
-							Save Draft
-						</button>
-						<button
-							type="submit"
-							className="flex items-center px-4 py-3 text-sm font-bold rounded-md hover:bg-primary-200 bg-primary-100 text-light-100 font-primary"
-						>
-							Create
-							<span className="ml-24"></span>
-						</button>
-					</div>
+					<ActionButtons {...actionButtonProps} />
 
 					<div className="flex mt-4 mb-24 md:self-end justify-end text-xs text-[#777777]">
 						Fields marked with

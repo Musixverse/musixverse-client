@@ -17,12 +17,12 @@ const Step3Form = ({
 	setResaleRoyaltyPercent,
 	releaseNow,
 	setReleaseNow,
+	unlockTimestamp,
 	setUnlockTimestamp,
 }) => {
 	const rolesArray = ["Singer", "Producer", "Mixer", "Composer", "Trackwriter", "Lyricist", "Vocalist", "Other"];
 	const [filteredUsers, setFilteredUsers] = useState("");
 	const [searchedUsername, setSearchedUsername] = useState("");
-	const [unlockTimestampInMs, setUnlockTimestampInMs] = useState(new Date().getTime());
 
 	const [maticUSD, setMaticUSD] = useState("");
 	const [maticINR, setMaticINR] = useState("");
@@ -34,11 +34,6 @@ const Step3Form = ({
 
 	const truncatedmaticUSDPrice = truncatePrice(maticUSD);
 	const truncatedmaticINRPrice = truncatePrice(maticINR);
-
-	const changeTimesampToSeconds = (timestamp) => {
-		setUnlockTimestampInMs(timestamp);
-		setUnlockTimestamp(Math.round(timestamp / 1000));
-	};
 
 	const filterPassedTime = (time) => {
 		const currentDate = new Date();
@@ -493,8 +488,8 @@ const Step3Form = ({
 									<span className="text-sm mb-2">Your NFT will be available for buying/selling on:</span>
 
 									<DatePicker
-										selected={unlockTimestampInMs}
-										onChange={(date) => changeTimesampToSeconds(date.getTime())}
+										selected={unlockTimestamp}
+										onChange={(date) => setUnlockTimestamp(date.getTime())}
 										minDate={new Date()}
 										dateFormat="MMMM d, yyyy h:mm aa"
 										showTimeSelect

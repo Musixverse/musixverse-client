@@ -105,37 +105,33 @@ export default function PreviewDraft({
 							</div>
 						)}
 					</div>
-					{numberOfCopies == 0 ? (
-						<div className="w-[150px] h-2 dark:bg-[#363636] bg-light-300 self-center rounded-lg"></div>
-					) : (
-						<div className="flex items-end justify-between font-secondary text-[#1D1D1D] dark:text-light-200 text-xs">
-							<div className="flex -space-x-2 items-end">
-								{collaboratorList &&
-									collaboratorList.map((collaborator, index) => {
-										return collaborator.avatar ? (
-											<div key={index} className={`rounded-full flex items-end relative z-${10 * (collaboratorList.length - index)}`}>
-												<Image src={collaborator.avatar} height="30" width="30" className="rounded-full" />
-											</div>
-										) : null;
-									})}
-							</div>
-							{truncatedNftName && numberOfCopies ? <span className="dark:text-light-300">#1 of&nbsp;{numberOfCopies}</span> : ""}
 
-							<button
-								type="button"
-								onClick={(e) => {
-									e.preventDefault();
-									setDeleteModalOpen(true);
-									setDraftToDelete(draftId);
-								}}
-								className=""
-							>
-								<div className="hidden group-hover:block justify-center items-center text-base hover:text-error-200">
-									<i className="fa-solid fa-trash"></i>
-								</div>
-							</button>
+					<div className="flex items-end justify-between font-secondary text-[#1D1D1D] dark:text-light-200 text-xs">
+						<div className="flex -space-x-2 items-end">
+							{collaboratorList &&
+								collaboratorList.map((collaborator, index) => {
+									return collaborator.avatar ? (
+										<div key={index} className={`rounded-full flex items-end relative z-${10 * (collaboratorList.length - index)}`}>
+											<Image src={collaborator.avatar} height="30" width="30" className="rounded-full" />
+										</div>
+									) : null;
+								})}
 						</div>
-					)}
+
+						<button
+							type="button"
+							onClick={(e) => {
+								e.preventDefault();
+								setDeleteModalOpen(true);
+								setDraftToDelete(draftId);
+							}}
+							className=""
+						>
+							<div className="hidden group-hover:block justify-center items-center text-base hover:text-error-200">
+								<i className="fa-solid fa-trash"></i>
+							</div>
+						</button>
+					</div>
 				</div>
 			</div>
 		</>

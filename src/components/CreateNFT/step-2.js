@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import PreviewNft from "./CreateNFTUtils/PreviewNft";
 import Step2Form from "./CreateNFTUtils/Step2Form";
+import ActionButtons from "./CreateNFTUtils/ActionButtons";
 import RequiredAsterisk from "./CreateNFTUtils/RequiredAsterisk";
 import StatusContext from "../../../store/status-context";
 
@@ -35,6 +36,7 @@ export default function ComprehensiveDetails({
 	language,
 	location,
 	setSaveDraftSuccess,
+	nftDraftMetadata,
 }) {
 	const [, , , setError] = useContext(StatusContext);
 
@@ -61,6 +63,7 @@ export default function ComprehensiveDetails({
 		language,
 		location,
 	};
+	const actionButtonProps = { step, prevStep, setSaveDraftSuccess, nftDraftMetadata };
 
 	return (
 		<div className="flex items-center justify-center mb-28 lg:mb-36 bg-light-200 dark:bg-dark-200">
@@ -88,38 +91,7 @@ export default function ComprehensiveDetails({
 					</div>
 
 					{/* Button div */}
-					<div className="flex mt-16 space-x-3 md:self-end justify-end">
-						{/* Back and Next buttons */}
-						{/* NOTE: Revoke the image url at the create NFT button click */}
-						<button
-							type="button"
-							onClick={() => {
-								prevStep();
-							}}
-							className="flex items-center px-4 py-3 text-sm font-primary font-bold rounded-md bg-light-100 hover:bg-[#dde7e7e3] dark:bg-[#323232] dark:hover:bg-dark-100 dark:border-[#323232]"
-						>
-							<span className="mr-10 text-xl">
-								<i className="fa-solid fa-arrow-left-long"></i>
-							</span>
-							Back
-						</button>
-						<button
-							type="button"
-							onClick={() => {}}
-							className="flex items-center px-10 py-3 text-sm font-primary font-bold rounded-md bg-[#dde7e7e3] hover:bg-[#D7E0DF] dark:bg-[#323232] dark:hover:bg-dark-100 dark:border-[#323232]"
-						>
-							Save Draft
-						</button>
-						<button
-							type="submit"
-							className="flex items-center px-4 py-3 text-sm font-primary font-bold rounded-md bg-primary-100 hover:bg-primary-200 text-light-100"
-						>
-							Next
-							<span className="ml-24 text-xl">
-								<i className="fa-solid fa-arrow-right-long"></i>
-							</span>
-						</button>
-					</div>
+					<ActionButtons {...actionButtonProps} />
 
 					<div className="flex mt-4 mb-24 md:self-end justify-end text-xs text-[#777777]">
 						Fields marked with

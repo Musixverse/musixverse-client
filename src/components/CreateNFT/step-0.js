@@ -54,7 +54,7 @@ const CreateNFTIntro = ({ nextStep }) => {
 													coverArtUrl={draft.attributes.artwork.uri}
 													audioFileUrl={draft.attributes.audio}
 													nftPrice={draft.attributes.nftPrice}
-													numberOfCopies={draft.attributes.numberOfCopies}
+													collaboratorList={draft.attributes.collaboratorList}
 													setDeleteModalOpen={setDeleteModalOpen}
 													setDraftToDelete={setDraftToDelete}
 												/>

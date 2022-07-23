@@ -5,215 +5,205 @@ import { MXV_CONTRACT_ABI, MXV_CONTRACT_ADDRESS, BLOCKCHAIN_NETWORK_ID, RPC_URL 
 var MUSIXVERSE;
 
 async function addPolygonTestnetNetwork() {
-    const { ethereum } = window;
+	const { ethereum } = window;
 
-    try {
-        await ethereum.request({
-            method: "wallet_switchEthereumChain",
-            params: [{ chainId: "0x13881" }], // Hexadecimal version of 80001, prefixed with 0x
-        });
-    } catch (error) {
-        if (error.code === 4902) {
-            try {
-                await ethereum.request({
-                    method: "wallet_addEthereumChain",
-                    params: [
-                        {
-                            chainId: "0x13881", // Hexadecimal version of 80001, prefixed with 0x
-                            chainName: "POLYGON Testnet",
-                            nativeCurrency: {
-                                name: "MATIC",
-                                symbol: "MATIC",
-                                decimals: 18,
-                            },
-                            rpcUrls: ["https://matic-mumbai.chainstacklabs.com/"],
-                            blockExplorerUrls: ["https://mumbai.polygonscan.com/"],
-                            iconUrls: [""],
-                        },
-                    ],
-                });
-            } catch (addError) {
-                console.log("Did not add network");
-            }
-        }
-    }
+	try {
+		await ethereum.request({
+			method: "wallet_switchEthereumChain",
+			params: [{ chainId: "0x13881" }], // Hexadecimal version of 80001, prefixed with 0x
+		});
+	} catch (error) {
+		if (error.code === 4902) {
+			try {
+				await ethereum.request({
+					method: "wallet_addEthereumChain",
+					params: [
+						{
+							chainId: "0x13881", // Hexadecimal version of 80001, prefixed with 0x
+							chainName: "POLYGON Testnet",
+							nativeCurrency: {
+								name: "MATIC",
+								symbol: "MATIC",
+								decimals: 18,
+							},
+							rpcUrls: ["https://matic-mumbai.chainstacklabs.com/"],
+							blockExplorerUrls: ["https://mumbai.polygonscan.com/"],
+							iconUrls: [""],
+						},
+					],
+				});
+			} catch (addError) {
+				console.log("Did not add network");
+			}
+		}
+	}
 }
 
 async function connectSmartContract() {
-    const { ethereum } = window;
+	const { ethereum } = window;
 
-    const provider = new Web3.providers.HttpProvider(RPC_URL);
-    window.web3 = new Web3(provider);
+	const provider = new Web3.providers.HttpProvider(RPC_URL);
+	window.web3 = new Web3(provider);
 
-    const web3 = window.web3;
-    MUSIXVERSE = await new web3.eth.Contract(MXV_CONTRACT_ABI, MXV_CONTRACT_ADDRESS);
-    await Moralis.enableWeb3();
-    console.log("Contract connected");
+	const web3 = window.web3;
+	MUSIXVERSE = await new web3.eth.Contract(MXV_CONTRACT_ABI, MXV_CONTRACT_ADDRESS);
+	await Moralis.enableWeb3();
+	console.log("Contract connected");
 
-    if (ethereum && (await ethereum.request({ method: "net_version" })) !== BLOCKCHAIN_NETWORK_ID.toString()) {
-        await addPolygonTestnetNetwork();
-    } else if (ethereum) {
-        await addPolygonTestnetNetwork();
-        window.web3 = new Web3(ethereum);
-    }
+	if (ethereum && (await ethereum.request({ method: "net_version" })) !== BLOCKCHAIN_NETWORK_ID.toString()) {
+		await addPolygonTestnetNetwork();
+	} else if (ethereum) {
+		await addPolygonTestnetNetwork();
+		window.web3 = new Web3(ethereum);
+	}
 
-    // if ((await web3.eth.net.getId()) === BLOCKCHAIN_NETWORK_ID) {
-    //     MUSIXVERSE = await new web3.eth.Contract(MXV_CONTRACT_ABI, MXV_CONTRACT_ADDRESS);
-    //     await Moralis.enableWeb3();
-    //     console.log("Contract connected");
-    // }
+	// if ((await web3.eth.net.getId()) === BLOCKCHAIN_NETWORK_ID) {
+	//     MUSIXVERSE = await new web3.eth.Contract(MXV_CONTRACT_ABI, MXV_CONTRACT_ADDRESS);
+	//     await Moralis.enableWeb3();
+	//     console.log("Contract connected");
+	// }
 
-    // if ((navigator.userAgent.indexOf("Opera") || navigator.userAgent.indexOf("OPR")) != -1) {
-    //     alert("Opera");
-    // } else if (navigator.userAgent.indexOf("Edg") != -1) {
-    //     alert("Edge");
-    // } else if (navigator.userAgent.indexOf("Chrome") != -1) {
-    //     alert("Chrome");
-    // } else if (navigator.userAgent.indexOf("Safari") != -1) {
-    //     alert("Safari");
-    // } else if (navigator.userAgent.indexOf("Firefox") != -1) {
-    //     alert("Firefox");
-    // } else if (navigator.userAgent.indexOf("MSIE") != -1 || !!document.documentMode == true) {
-    //     //IF IE > 10
-    //     alert("IE");
-    // } else {
-    //     alert("unknown");
-    // }
+	// if ((navigator.userAgent.indexOf("Opera") || navigator.userAgent.indexOf("OPR")) != -1) {
+	//     alert("Opera");
+	// } else if (navigator.userAgent.indexOf("Edg") != -1) {
+	//     alert("Edge");
+	// } else if (navigator.userAgent.indexOf("Chrome") != -1) {
+	//     alert("Chrome");
+	// } else if (navigator.userAgent.indexOf("Safari") != -1) {
+	//     alert("Safari");
+	// } else if (navigator.userAgent.indexOf("Firefox") != -1) {
+	//     alert("Firefox");
+	// } else if (navigator.userAgent.indexOf("MSIE") != -1 || !!document.documentMode == true) {
+	//     //IF IE > 10
+	//     alert("IE");
+	// } else {
+	//     alert("unknown");
+	// }
 }
 
-async function mintTrackNFT(
-    numberOfCopies,
-    price,
-    metadataURI,
-    collaborators,
-    percentageContributions,
-    resaleRoyaltyPercentage,
-    onSale,
-    unlockTimestamp,
-    callerAddress
-) {
-    const sendOptions = {
-        contractAddress: MXV_CONTRACT_ADDRESS,
-        functionName: "mintTrackNFT",
-        abi: MXV_CONTRACT_ABI,
-        params: {
-            amount: numberOfCopies,
-            price: Moralis.Units.Token(String(price), "18"),
-            URIHash: metadataURI,
-            collaborators: collaborators,
-            percentageContributions: percentageContributions,
-            resaleRoyaltyPercentage: resaleRoyaltyPercentage,
-            onSale: onSale,
-            unlockTimestamp: unlockTimestamp,
-        },
-    };
+async function mintTrackNFT(numberOfCopies, price, metadataURI, collaborators, percentageContributions, resaleRoyaltyPercentage, onSale, unlockTimestamp) {
+	const sendOptions = {
+		contractAddress: MXV_CONTRACT_ADDRESS,
+		functionName: "mintTrackNFT",
+		abi: MXV_CONTRACT_ABI,
+		params: {
+			amount: numberOfCopies,
+			price: Moralis.Units.Token(String(price), "18"),
+			URIHash: metadataURI,
+			collaborators: collaborators,
+			percentageContributions: percentageContributions,
+			resaleRoyaltyPercentage: resaleRoyaltyPercentage,
+			onSale: onSale,
+			unlockTimestamp: unlockTimestamp,
+		},
+	};
 
-    const transaction = await Moralis.executeFunction(sendOptions);
-    // Wait until the transaction is confirmed
-    await transaction.wait();
+	const transaction = await Moralis.executeFunction(sendOptions);
+	// Wait until the transaction is confirmed
+	await transaction.wait();
 }
 
 async function purchaseTrackNFT(tokenId, price) {
-    const _tokenId = parseInt(tokenId).toString();
+	const _tokenId = parseInt(tokenId).toString();
 
-    const sendOptions = {
-        contractAddress: MXV_CONTRACT_ADDRESS,
-        functionName: "purchaseTrackNFT",
-        abi: MXV_CONTRACT_ABI,
-        params: {
-            tokenId: _tokenId,
-        },
-        msgValue: Moralis.Units.Token(String(price), "18"),
-    };
+	const sendOptions = {
+		contractAddress: MXV_CONTRACT_ADDRESS,
+		functionName: "purchaseTrackNFT",
+		abi: MXV_CONTRACT_ABI,
+		params: {
+			tokenId: _tokenId,
+		},
+		msgValue: Moralis.Units.Token(String(price), "18"),
+	};
 
-    const transaction = await Moralis.executeFunction(sendOptions);
-    // Wait until the transaction is confirmed
-    await transaction.wait();
+	const transaction = await Moralis.executeFunction(sendOptions);
+	// Wait until the transaction is confirmed
+	await transaction.wait();
 }
 
 async function updatePrice(tokenId, newPrice) {
-    const _tokenId = parseInt(tokenId).toString();
+	const _tokenId = parseInt(tokenId).toString();
 
-    const sendOptions = {
-        contractAddress: MXV_CONTRACT_ADDRESS,
-        functionName: "updatePrice",
-        abi: MXV_CONTRACT_ABI,
-        params: {
-            tokenId: _tokenId,
-            newPrice: Moralis.Units.Token(String(newPrice), "18"),
-        },
-    };
+	const sendOptions = {
+		contractAddress: MXV_CONTRACT_ADDRESS,
+		functionName: "updatePrice",
+		abi: MXV_CONTRACT_ABI,
+		params: {
+			tokenId: _tokenId,
+			newPrice: Moralis.Units.Token(String(newPrice), "18"),
+		},
+	};
 
-    const transaction = await Moralis.executeFunction(sendOptions);
-    // Wait until the transaction is confirmed
-    await transaction.wait();
+	const transaction = await Moralis.executeFunction(sendOptions);
+	// Wait until the transaction is confirmed
+	await transaction.wait();
 }
 
 async function toggleOnSale(tokenId, callerAddress) {
-    const _tokenId = parseInt(tokenId).toString();
+	const _tokenId = parseInt(tokenId).toString();
 
-    const sendOptions = {
-        contractAddress: MXV_CONTRACT_ADDRESS,
-        functionName: "toggleOnSale",
-        abi: MXV_CONTRACT_ABI,
-        params: {
-            tokenId: _tokenId,
-        },
-    };
+	const sendOptions = {
+		contractAddress: MXV_CONTRACT_ADDRESS,
+		functionName: "toggleOnSale",
+		abi: MXV_CONTRACT_ABI,
+		params: {
+			tokenId: _tokenId,
+		},
+	};
 
-    const transaction = await Moralis.executeFunction(sendOptions);
-    // Wait until the transaction is confirmed
-    await transaction.wait();
+	const transaction = await Moralis.executeFunction(sendOptions);
+	// Wait until the transaction is confirmed
+	await transaction.wait();
 }
 
 async function uri(tokenId) {
-    const _tokenUri = await MUSIXVERSE.methods.uri(tokenId).call();
-    return _tokenUri;
+	const _tokenUri = await MUSIXVERSE.methods.uri(tokenId).call();
+	return _tokenUri;
 }
 
 async function ownerOf(tokenId) {
-    const _tokenId = parseInt(tokenId).toString();
-    return await MUSIXVERSE.methods.ownerOf(_tokenId).call();
+	const _tokenId = parseInt(tokenId).toString();
+	return await MUSIXVERSE.methods.ownerOf(_tokenId).call();
 }
 
 async function contractURI() {
-    return await MUSIXVERSE.methods.contractURI().call();
+	return await MUSIXVERSE.methods.contractURI().call();
 }
 
 async function baseURI() {
-    return await MUSIXVERSE.methods.baseURI().call();
+	return await MUSIXVERSE.methods.baseURI().call();
 }
 
 async function getRoyaltyInfo(tokenId) {
-    const _tokenId = parseInt(tokenId).toString();
-    return await MUSIXVERSE.methods.getRoyaltyInfo(_tokenId).call();
+	const _tokenId = parseInt(tokenId).toString();
+	return await MUSIXVERSE.methods.getRoyaltyInfo(_tokenId).call();
 }
 
 async function getCurrentNftPrice(tokenId) {
-    const _tokenId = parseInt(tokenId).toString();
-    if (MUSIXVERSE) {
-        var trackNft;
-        await MUSIXVERSE.methods
-            .trackNFTs(_tokenId)
-            .call()
-            .then(function (result) {
-                trackNft = result;
-            });
-        return trackNft;
-    }
+	const _tokenId = parseInt(tokenId).toString();
+	if (MUSIXVERSE) {
+		var trackNft;
+		await MUSIXVERSE.methods
+			.trackNFTs(_tokenId)
+			.call()
+			.then(function (result) {
+				trackNft = result;
+			});
+		return trackNft;
+	}
 }
 
 module.exports = {
-    addPolygonTestnetNetwork,
-    connectSmartContract,
-    mintTrackNFT,
-    purchaseTrackNFT,
-    updatePrice,
-    toggleOnSale,
-    uri,
-    ownerOf,
-    contractURI,
-    baseURI,
-    getRoyaltyInfo,
-    getCurrentNftPrice,
+	addPolygonTestnetNetwork,
+	connectSmartContract,
+	mintTrackNFT,
+	purchaseTrackNFT,
+	updatePrice,
+	toggleOnSale,
+	uri,
+	ownerOf,
+	contractURI,
+	baseURI,
+	getRoyaltyInfo,
+	getCurrentNftPrice,
 };

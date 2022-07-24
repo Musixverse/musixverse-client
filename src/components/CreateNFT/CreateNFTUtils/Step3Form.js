@@ -422,7 +422,7 @@ const Step3Form = ({
 						</div>
 
 						<p className="text-sm text-[#777777] font-normal mt-2">
-							Can't find your collaborator here? Invite them to Musixverse-{" "}
+							Can&apos;t find your collaborator here? Invite them to Musixverse-&nbsp;
 							<a onClick={() => setInvitationModalOpen(true)} className="text-primary-200 cursor-pointer hover:underline">
 								Send an invite
 							</a>

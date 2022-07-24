@@ -46,7 +46,7 @@ const SendInviteModal = ({ isOpen, setOpen, invitedArtistEmail, onEmailChange })
 			content={
 				<div>
 					<form onSubmit={onFormSubmit}>
-						<div>Enter your friend's/collaborator's email to send an invite</div>
+						<div>Enter your friend&apos;s/collaborator&apos;s email to send an invite</div>
 						<input
 							className="mt-2 dark:text-light-100 dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-100 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-100"
 							type="email"

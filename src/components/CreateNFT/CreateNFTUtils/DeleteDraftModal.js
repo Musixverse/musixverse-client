@@ -85,7 +85,7 @@ export default function DeleteDraftModal({ isOpen = "", onClose = "", draftToDel
 											/>
 										) : (
 											<div className="flex">
-												<div class="rounded-md bg-light-300 h-28 w-28"></div>
+												<div className="rounded-md bg-light-300 h-28 w-28"></div>
 											</div>
 										)}
 										<div className="grid content-between">

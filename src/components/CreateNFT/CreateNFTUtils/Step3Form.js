@@ -19,9 +19,11 @@ const Step3Form = ({
 	setReleaseNow,
 	unlockTimestamp,
 	setUnlockTimestamp,
+	setInvitationModalOpen,
 }) => {
 	const rolesArray = ["Singer", "Producer", "Mixer", "Composer", "Trackwriter", "Lyricist", "Vocalist", "Other"];
 	const [filteredUsers, setFilteredUsers] = useState("");
+	const [usernameEntered, setUsernameEntered] = useState("");
 	const [searchedUsername, setSearchedUsername] = useState("");
 
 	const [maticUSD, setMaticUSD] = useState("");
@@ -219,9 +221,10 @@ const Step3Form = ({
 														name="username"
 														type="text"
 														placeholder="Username"
-														// value={collaborator.username}
+														value={usernameEntered}
 														autoComplete="off"
 														onChange={(e) => {
+															setUsernameEntered(e.target.value);
 															filterUsers(e);
 														}}
 														required
@@ -332,9 +335,19 @@ const Step3Form = ({
 															<a key={"no"} className="flex flex-col basis-full">
 																<button
 																	type="button"
-																	className="bg-light-100 hover:bg-gray-200 dark:bg-dark-100 dark:text-light-100 py-2 px-6 justify-start text-start rounded"
+																	onClick={() => {
+																		setInvitationModalOpen(true);
+																		setUsernameEntered("");
+																		setSearchedUsername("");
+																	}}
+																	className="bg-light-100 hover:bg-gray-200 dark:bg-dark-100 dark:text-light-100 py-3 px-6 justify-start text-start rounded"
 																>
-																	<span className="text-xs">No results found!</span>
+																	<span className="text-sm">
+																		No results found.&nbsp;&nbsp;
+																		<a className="text-primary-200 cursor-pointer hover:underline">
+																			Send an Invite <i className="fa-solid fa-arrow-right"></i>
+																		</a>
+																	</span>
 																</button>
 															</a>
 														)}
@@ -407,6 +420,13 @@ const Step3Form = ({
 								&nbsp;Total: {collaboratorList.reduce((total, currentSplit) => (total = total + Number(currentSplit.split)), 0)}%
 							</div>
 						</div>
+
+						<p className="text-sm text-[#777777] font-normal mt-2">
+							Can't find your collaborator here? Invite them to Musixverse-{" "}
+							<a onClick={() => setInvitationModalOpen(true)} className="text-primary-200 cursor-pointer hover:underline">
+								Send an invite
+							</a>
+						</p>
 					</div>
 				</div>
 

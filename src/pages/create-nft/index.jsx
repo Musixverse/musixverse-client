@@ -26,7 +26,7 @@ const CreateNFT = () => {
 	const [audioFileMimeType, setAudioFileMimeType] = useState(null);
 	const [coverArtUrl, setCoverArtUrl] = useState(null);
 	const [coverArtMimeType, setCoverArtMimeType] = useState(null);
-	const [creditCoverArtArtist, setCreditCoverArtArtist] = useState(false);
+	const [creditCoverArtArtist, setCreditCoverArtArtist] = useState(true);
 	const [coverArtArtist, setCoverArtArtist] = useState({ id: "", name: "", username: "", address: "", avatar: "", email: "" });
 	const [lyrics, setLyrics] = useState(null);
 	const [trackOrigin, setTrackOrigin] = useState("Original");

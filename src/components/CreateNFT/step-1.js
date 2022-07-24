@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useState, useContext } from "react";
 import PreviewNft from "./CreateNFTUtils/PreviewNft";
 import Step1Form from "./CreateNFTUtils/Step1Form";
 import ActionButtons from "./CreateNFTUtils/ActionButtons";
@@ -6,6 +6,7 @@ import RequiredAsterisk from "./CreateNFTUtils/RequiredAsterisk";
 import StatusContext from "../../../store/status-context";
 import { useRouter } from "next/router";
 import { saveNftCreationProgress } from "./CreateNFTUtils/SaveNftCreationProgress";
+import SendInviteModal from "./CreateNFTUtils/SendInviteModal";
 
 export default function TrackDetails({
 	step,
@@ -48,6 +49,7 @@ export default function TrackDetails({
 	 * Move CSS from inline to external file
 	 */
 	const [, , , setError] = useContext(StatusContext);
+	const [isInvitationModalOpen, setInvitationModalOpen] = useState(false);
 
 	const nftPreviewValues = { trackTitle, coverArtUrl, audioFileUrl, nftPrice, numberOfCopies, step, collaboratorList };
 	const step1FormValues = {
@@ -68,6 +70,7 @@ export default function TrackDetails({
 		setAudioFileMimeType,
 		lyrics,
 		setLyrics,
+		setInvitationModalOpen,
 	};
 	const actionButtonProps = { step, prevStep, setSaveDraftSuccess, nftDraftMetadata };
 
@@ -120,6 +123,17 @@ export default function TrackDetails({
 					</form>
 				</div>
 			</div>
+			<SendInviteModal
+				isOpen={isInvitationModalOpen}
+				setOpen={setInvitationModalOpen}
+				invitedArtistEmail={coverArtArtist.email}
+				onEmailChange={(value) =>
+					setCoverArtArtist((prevState) => ({
+						...prevState,
+						email: value,
+					}))
+				}
+			/>
 		</>
 	);
 }

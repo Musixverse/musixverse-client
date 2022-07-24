@@ -119,6 +119,7 @@ const CreateNFTIntro = ({ nextStep, nftDraftMetadata }) => {
 				onClose={() => {
 					setDeleteModalOpen(false);
 				}}
+				draftToDelete={draftToDelete}
 				deleteDraft={deleteDraft}
 			/>
 		</>

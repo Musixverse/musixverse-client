@@ -1,8 +1,13 @@
 const { Fragment, useState, useEffect } = require("react");
+import Image from "next/image";
 const { Transition } = require("@headlessui/react");
+import { useMoralis, useMoralisCloudFunction } from "react-moralis";
 
-export default function DeleteDraftModal({ isOpen = "", onClose = "", deleteDraft = "" }) {
+export default function DeleteDraftModal({ isOpen = "", onClose = "", draftToDelete = "", deleteDraft = "" }) {
+	const { user } = useMoralis();
+
 	const [isModalOpen, setIsModalOpen] = useState(isOpen);
+	const { data: selectedDraft } = useMoralisCloudFunction("getDraftNftData", { objectId: draftToDelete });
 
 	useEffect(() => {
 		setIsModalOpen(isModalOpen);
@@ -16,6 +21,10 @@ export default function DeleteDraftModal({ isOpen = "", onClose = "", deleteDraf
 	useEffect(() => {
 		setIsModalOpen(isOpen);
 	}, [isOpen]);
+
+	useEffect(() => {
+		console.log("selectedDraft", selectedDraft);
+	}, [selectedDraft]);
 
 	const handleChange = () => {
 		setIsModalOpen(!isModalOpen);
@@ -62,8 +71,30 @@ export default function DeleteDraftModal({ isOpen = "", onClose = "", deleteDraf
 
 							<div className="w-full flex justify-center space-x-4 mt-4">
 								<div className="w-4/5">
-									<div className="text-sm text-center mt-8">Are you sure you want to delete this draft?</div>
-									<div className="flex flex-row mt-20 w-full space-x-4">
+									<div className="text-base font-semibold text-center mt-8">Are you sure you want to delete this draft?</div>
+
+									<div className="flex mt-12 space-x-8 justify-center">
+										{selectedDraft && selectedDraft.attributes.artwork.uri ? (
+											<Image
+												src={selectedDraft.attributes.artwork.uri}
+												className="group-hover:scale-110 group-hover:duration-500 duration-500 rounded-md"
+												alt="nft cover art"
+												height={120}
+												width={120}
+												priority
+											/>
+										) : (
+											<div className="flex">
+												<div className="rounded-md bg-light-300 h-28 w-28"></div>
+											</div>
+										)}
+										<div className="grid content-between">
+											<p className="text-sm">{user && user.attributes.name}</p>
+											<p className="text-2xl font-semibold flex">{selectedDraft && selectedDraft.attributes.title}</p>
+										</div>
+									</div>
+
+									<div className="flex flex-row mt-12 w-full space-x-4">
 										<button
 											onClick={() => closeModal()}
 											className="w-full bg-light-200 dark:bg-dark-200 hover:bg-gray-200 rounded-lg flex justify-center items-center p-4 text-sm"

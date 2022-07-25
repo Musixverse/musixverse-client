@@ -15,7 +15,7 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 	const { data: avatarUrl } = useMoralisCloudFunction("fetchUserAvatarFromAddress", { address: user ? user.attributes.ethAddress : null });
 
 	let truncatedName;
-	if (user) {
+	if (user && user.attributes.name) {
 		truncatedName = user.attributes.name ?? "";
 		if (user.attributes.name && user.attributes.name.length > 10) {
 			truncatedName = truncatedName.substring(0, 8) + "...";
@@ -23,13 +23,14 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 	}
 
 	let truncatedWalletAddress;
-	if (user) {
+	if (user && user.attributes.ethAddress) {
 		truncatedWalletAddress = user.attributes.ethAddress.substring(0, 10) + "..." + user.attributes.ethAddress.substring(36, 42);
 	}
 
 	const handleLogout = async () => {
 		if (router.pathname !== "/") router.push("/", undefined, { shallow: true });
 		await logout();
+		router.reload(window.location.pathname);
 	};
 
 	const [clientWindowHeight, setClientWindowHeight] = useState("");
@@ -71,18 +72,10 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 							</li>
 							<li className="hover:text-primary-200">
 								<Link
-									href="/marketplace/new-releases"
+									href="/mxcatalog/new-releases"
 									className="block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:text-primary-100 md:hover:bg-transparent md:border-0 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
 								>
-									New Releases
-								</Link>
-							</li>
-							<li className="hover:text-primary-200">
-								<Link
-									href="/marketplace/explore"
-									className="block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:text-primary-100 md:hover:bg-transparent md:border-0 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-								>
-									Explore
+									Mx Catalog
 								</Link>
 							</li>
 							<li className="hover:text-primary-200">

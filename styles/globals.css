@@ -14,21 +14,21 @@
 
 html,
 body {
-    padding: 0 !important;
-    margin: 0 !important;
-    @apply font-primary;
-    @apply bg-light-200 dark:bg-dark-100 scroll-smooth;
-    @apply text-dark-100 dark:text-light-100;
-    z-index: -2 !important;
+	padding: 0 !important;
+	margin: 0 !important;
+	@apply font-primary;
+	@apply bg-light-200 dark:bg-dark-100 scroll-smooth;
+	@apply text-dark-100 dark:text-light-100;
+	z-index: -2 !important;
 }
 
 a {
-    color: inherit;
-    text-decoration: none;
+	color: inherit;
+	text-decoration: none;
 }
 
 * {
-    box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 /**************************************************************************/
@@ -36,39 +36,39 @@ a {
 /**************************************************************************/
 
 .navbar {
-    @apply dark:bg-[rgba(19,19,19,0.4)] dark:backdrop-blur-[24px] w-full dark:backdrop-brightness-105 fixed z-40 max-w-[1500px] backdrop-blur-[40px] backdrop-brightness-200 bg-[rgba(255,255,255,0.8)];
+	@apply dark:bg-[rgba(19,19,19,0.4)] dark:backdrop-blur-[24px] w-full dark:backdrop-brightness-105 fixed z-40 max-w-[1500px] backdrop-blur-[40px] backdrop-brightness-200 bg-[rgba(255,255,255,0.8)];
 }
 
 .search-box {
-    @apply h-[40px] bg-search-100 dark:bg-search-200 rounded-full p-1.5;
+	@apply h-[40px] bg-search-100 dark:bg-search-200 rounded-full p-1.5;
 }
 
 .search-box:hover > .search-text {
-    @apply w-[280px] px-4;
+	@apply w-[280px] px-4;
 }
 
 .search-box:hover > .search-btn {
-    @apply text-black bg-white;
+	@apply text-black bg-white;
 }
 
 .search-btn {
-    @apply flex items-center justify-center float-right p-2 duration-300 rounded-full cursor-pointer dark:text-white w-7 h-7 bg-search-100 dark:bg-dark-100 hover:bg-dark-200;
-    text-decoration: none;
+	@apply flex items-center justify-center float-right p-2 duration-300 rounded-full cursor-pointer dark:text-white w-7 h-7 bg-search-100 dark:bg-dark-100 hover:bg-dark-200;
+	text-decoration: none;
 }
 
 .search-text {
-    border: none;
-    background: none;
-    outline: none;
-    float: left;
-    padding: 0;
-    color: white;
-    font-size: 14px;
-    font-weight: normal;
-    transition: 0.4s;
-    line-height: 25px;
-    width: 0px;
-    @apply text-black dark:text-white;
+	border: none;
+	background: none;
+	outline: none;
+	float: left;
+	padding: 0;
+	color: white;
+	font-size: 14px;
+	font-weight: normal;
+	transition: 0.4s;
+	line-height: 25px;
+	width: 0px;
+	@apply text-black dark:text-white;
 }
 
 /**************************************************************************/
@@ -76,20 +76,20 @@ a {
 /**************************************************************************/
 
 .footer {
-    @apply w-full max-w-[1920px] py-20 px-10 md:px-8 lg:px-16 xl:px-20 2xl:px-52 bg-nav-light backdrop-blur-2xl backdrop-brightness-150;
+	@apply w-full max-w-[1920px] py-20 px-10 md:px-8 lg:px-16 xl:px-20 2xl:px-52 bg-nav-light backdrop-blur-2xl backdrop-brightness-150;
 }
 
 .footer__social {
-    @apply flex space-x-5 md:justify-end;
+	@apply flex space-x-5 md:justify-end;
 }
 
 .footer__social button {
-    @apply bg-dark-200 border-none p-2 rounded-md hover:bg-dark-100 hover:animate-bounce;
+	@apply bg-dark-200 border-none p-2 rounded-md hover:bg-dark-100 hover:animate-bounce;
 }
 
 input[type="radio"]:checked + label span {
-    background-color: #479e00;
-    box-shadow: 0px 0px 0px 2px white inset;
+	background-color: #479e00;
+	box-shadow: 0px 0px 0px 2px white inset;
 }
 
 /**************************************************************************/
@@ -97,44 +97,44 @@ input[type="radio"]:checked + label span {
 /**************************************************************************/
 
 html {
-    overflow: auto !important;
-    overflow-y: scroll !important;
-    overflow-y: overlay !important;
+	overflow: auto !important;
+	overflow-y: scroll !important;
+	overflow-y: overlay !important;
 }
 
 /* Scroll bar width */
 ::-webkit-scrollbar {
-    width: 4px;
+	width: 4px;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-    background: transparent;
+	background: transparent;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    border-radius: 50px;
-    background: rgb(83, 194, 75);
+	border-radius: 50px;
+	background: rgb(83, 194, 75);
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-    background: rgb(83, 194, 75);
+	background: rgb(83, 194, 75);
 }
 
 /**************************************************************************/
 /************************    React Datepicker   ***************************/
 /**************************************************************************/
 .react-datepicker__input-container > input {
-    padding: 4px 16px 4px 20px;
-    border-radius: 4px;
-    border: 2px solid transparent;
+	padding: 4px 16px 4px 20px;
+	border-radius: 4px;
+	border: 2px solid transparent;
 }
 
 .react-datepicker__input-container > input:focus {
-    outline: none;
-    border: 2px solid #6cc027;
+	outline: none;
+	border: 2px solid #6cc027;
 }
 
 /**************************************************************************/
@@ -142,115 +142,115 @@ html {
 /**************************************************************************/
 
 .tooltip-button {
-    background: none;
-    font-family: var(--Poppins);
-    font-weight: 400;
-    font-size: 0.75rem;
-    color: #7a7a7a;
-    border: none;
-    padding: 0px;
-    /* height: fit-content !important; */
-    min-width: fit-content;
+	background: none;
+	font-family: var(--Poppins);
+	font-weight: 400;
+	font-size: 0.75rem;
+	color: #7a7a7a;
+	border: none;
+	padding: 0px;
+	/* height: fit-content !important; */
+	min-width: fit-content;
 }
 
 .tooltip-button:hover {
-    background: none;
-    border: none;
-    color: #9c9c9c;
+	background: none;
+	border: none;
+	color: #9c9c9c;
 }
 
 button.tooltip-button:focus,
 button.tooltip-button:active {
-    /* Removes the button outline on click */
-    outline: none !important;
-    box-shadow: none !important;
-    background: none;
-    border: none;
-    color: #7a7a7a;
+	/* Removes the button outline on click */
+	outline: none !important;
+	box-shadow: none !important;
+	background: none;
+	border: none;
+	color: #7a7a7a;
 }
 
 .tooltip-button i {
-    margin-right: 5px;
+	margin-right: 5px;
 }
 
 /* Custom Tooltip */
 
 [data-tooltip] {
-    position: relative;
-    z-index: 10;
+	position: relative;
+	z-index: 10;
 }
 
 /* Positioning and visibility settings of the tooltip */
 [data-tooltip]:before,
 [data-tooltip]:after {
-    position: absolute;
-    visibility: hidden;
-    opacity: 0;
-    left: 50%;
-    bottom: calc(80% + 5px); /* 5px is the size of the arrow */
-    pointer-events: none;
-    transition: 0.12s;
-    will-change: transform;
+	position: absolute;
+	visibility: hidden;
+	opacity: 0;
+	left: 50%;
+	bottom: calc(80% + 5px); /* 5px is the size of the arrow */
+	pointer-events: none;
+	transition: 0.12s;
+	will-change: transform;
 }
 
 /* The actual tooltip with a dynamic width */
 [data-tooltip]:before {
-    content: attr(data-tooltip);
-    padding: 10px 18px;
-    min-width: 50px;
-    max-width: 250px;
-    width: max-content;
-    width: -moz-max-content;
-    border: 1.5px solid #6cc027;
-    border-radius: 6px;
-    font-size: 14px;
-    background-color: rgba(255, 255, 255, 0);
-    backdrop-filter: blur(4px);
-    /* background-image: linear-gradient(30deg, rgba(44, 53, 59, 0.9), rgba(48, 54, 59, 0.9), rgba(42, 56, 59, 0.9)); */
-    box-shadow: 0px 0px 24px rgba(0, 0, 0, 0.1);
-    font-family: var(--Poppins);
-    text-align: center;
-    white-space: pre-wrap;
-    transform: translate(-50%, -5px) scale(0.5);
-    @apply text-black dark:text-white;
+	content: attr(data-tooltip);
+	padding: 10px 18px;
+	min-width: 50px;
+	max-width: 250px;
+	width: max-content;
+	width: -moz-max-content;
+	border: 1.5px solid #6cc027;
+	border-radius: 6px;
+	font-size: 14px;
+	background-color: rgba(255, 255, 255, 0);
+	backdrop-filter: blur(4px);
+	/* background-image: linear-gradient(30deg, rgba(44, 53, 59, 0.9), rgba(48, 54, 59, 0.9), rgba(42, 56, 59, 0.9)); */
+	box-shadow: 0px 0px 24px rgba(0, 0, 0, 0.1);
+	font-family: var(--Poppins);
+	text-align: center;
+	white-space: pre-wrap;
+	transform: translate(-50%, -5px) scale(0.5);
+	@apply text-black dark:text-white;
 }
 
 .sample_based_tooltip > [data-tooltip]:before {
-    max-width: 180px !important;
+	max-width: 180px !important;
 }
 
 /* Tooltip arrow */
 [data-tooltip]:after {
-    content: "";
-    border-style: solid;
-    border-width: 5px 5px 0px 5px; /* CSS triangle */
-    border-color: #6cc027 transparent transparent transparent;
-    transition-duration: 0s; /* If the mouse leaves the element, 
+	content: "";
+	border-style: solid;
+	border-width: 5px 5px 0px 5px; /* CSS triangle */
+	border-color: #6cc027 transparent transparent transparent;
+	transition-duration: 0s; /* If the mouse leaves the element, 
 								the transition effects for the 
 								tooltip arrow are "turned off" */
-    transform-origin: top; /* Orientation setting for the
+	transform-origin: top; /* Orientation setting for the
 								slide-down effect */
-    transform: translateX(-50%) scaleY(0);
+	transform: translateX(-50%) scaleY(0);
 }
 
 /* Tooltip becomes visible at hover */
 [data-tooltip]:hover:before,
 [data-tooltip]:hover:after {
-    visibility: visible;
-    opacity: 1;
+	visibility: visible;
+	opacity: 1;
 }
 
 /* Scales from 0.5 to 1 -> grow effect */
 [data-tooltip]:hover:before {
-    transition-delay: 0.1s;
-    transform: translate(-50%, -5px) scale(1);
+	transition-delay: 0.1s;
+	transform: translate(-50%, -5px) scale(1);
 }
 
 /* Arrow slide down effect only on mouseenter (NOT on mouseleave) */
 [data-tooltip]:hover:after {
-    transition-delay: 0.1s; /* Starting after the grow effect */
-    transition-duration: 0.1s;
-    transform: translateX(-50%) scaleY(1);
+	transition-delay: 0.1s; /* Starting after the grow effect */
+	transition-duration: 0.1s;
+	transform: translateX(-50%) scaleY(1);
 }
 
 /*
@@ -264,70 +264,70 @@ button.tooltip-button:active {
 /* Tooltip + arrow */
 [data-tooltip-location="left"]:before,
 [data-tooltip-location="left"]:after {
-    left: auto;
-    right: calc(100% + 5px);
-    bottom: 50%;
+	left: auto;
+	right: calc(100% + 5px);
+	bottom: 50%;
 }
 
 /* Tooltip */
 [data-tooltip-location="left"]:before {
-    transform: translate(-5px, 50%) scale(0.5);
+	transform: translate(-5px, 50%) scale(0.5);
 }
 [data-tooltip-location="left"]:hover:before {
-    transform: translate(-5px, 50%) scale(1);
+	transform: translate(-5px, 50%) scale(1);
 }
 
 /* Arrow */
 [data-tooltip-location="left"]:after {
-    border-width: 5px 0px 5px 5px;
-    border-color: transparent transparent transparent #6cc027;
-    transform-origin: left;
-    transform: translateY(50%) scaleX(0);
+	border-width: 5px 0px 5px 5px;
+	border-color: transparent transparent transparent #6cc027;
+	transform-origin: left;
+	transform: translateY(50%) scaleX(0);
 }
 [data-tooltip-location="left"]:hover:after {
-    transform: translateY(50%) scaleX(1);
+	transform: translateY(50%) scaleX(1);
 }
 
 /* RIGHT */
 [data-tooltip-location="right"]:before,
 [data-tooltip-location="right"]:after {
-    left: calc(100% + 5px);
-    bottom: 50%;
+	left: calc(100% + 5px);
+	bottom: 50%;
 }
 
 [data-tooltip-location="right"]:before {
-    transform: translate(5px, 50%) scale(0.5);
+	transform: translate(5px, 50%) scale(0.5);
 }
 [data-tooltip-location="right"]:hover:before {
-    transform: translate(5px, 50%) scale(1);
+	transform: translate(5px, 50%) scale(1);
 }
 
 [data-tooltip-location="right"]:after {
-    border-width: 5px 5px 5px 0px;
-    border-color: transparent #6cc027 transparent transparent;
-    transform-origin: right;
-    transform: translateY(50%) scaleX(0);
+	border-width: 5px 5px 5px 0px;
+	border-color: transparent #6cc027 transparent transparent;
+	transform-origin: right;
+	transform: translateY(50%) scaleX(0);
 }
 [data-tooltip-location="right"]:hover:after {
-    transform: translateY(50%) scaleX(1);
+	transform: translateY(50%) scaleX(1);
 }
 
 /* BOTTOM */
 [data-tooltip-location="bottom"]:before,
 [data-tooltip-location="bottom"]:after {
-    top: calc(80% + 5px);
-    bottom: auto;
+	top: calc(80% + 5px);
+	bottom: auto;
 }
 
 [data-tooltip-location="bottom"]:before {
-    transform: translate(-50%, 5px) scale(0.5);
+	transform: translate(-50%, 5px) scale(0.5);
 }
 [data-tooltip-location="bottom"]:hover:before {
-    transform: translate(-50%, 5px) scale(1);
+	transform: translate(-50%, 5px) scale(1);
 }
 
 [data-tooltip-location="bottom"]:after {
-    border-width: 0px 5px 5px 5px;
-    border-color: transparent transparent #6cc027 transparent;
-    transform-origin: bottom;
+	border-width: 0px 5px 5px 5px;
+	border-color: transparent transparent #6cc027 transparent;
+	transform-origin: bottom;
 }

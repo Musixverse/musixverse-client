@@ -101,7 +101,7 @@ export default function PreviewDraft({ draftId, trackTitle, coverArtUrl, audioFi
 							{collaboratorList &&
 								collaboratorList.map((collaborator, index) => {
 									return collaborator.avatar ? (
-										<div key={index} className={`rounded-full flex items-end relative z-${10 * (collaboratorList.length - index)}`}>
+										<div key={index} className={`rounded-full flex items-end relative`}>
 											<Image src={collaborator.avatar} height="30" width="30" className="rounded-full" />
 										</div>
 									) : null;

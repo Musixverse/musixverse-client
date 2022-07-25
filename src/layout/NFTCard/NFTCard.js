@@ -30,14 +30,16 @@ export default function NFTCard({
 	return (
 		<div className={"group " + styles[theme === "light" ? "nft-card" : "nft-card-dark"]}>
 			{/* NFT Image */}
-			<Image
-				src={image || "/assets/nft_bg.jpg"}
-				alt="nft image"
-				height={256}
-				width={256}
-				priority
-				className={"group-hover:scale-110 group-hover:duration-500 duration-500 " + styles["nft-image"]}
-			/>
+			<div className="relative w-full h-60">
+				<Image
+					src={image || "/assets/nft_bg.jpg"}
+					alt="nft image"
+					objectFit="cover"
+					layout="fill"
+					priority
+					className={"group-hover:scale-110 group-hover:duration-500 duration-500 " + styles["nft-image"]}
+				/>
+			</div>
 			{/* NFT Details */}
 			<div className={"dark:bg-dark-100 " + styles["nft-card__description"]}>
 				{/* Artist, Music name and tokenId */}

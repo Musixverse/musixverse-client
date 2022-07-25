@@ -38,7 +38,7 @@ export default function Section2({ collaboratorList, numberOfCopies, tokenId, un
 				<div className="flex items-end justify-between font-secondary text-[#1D1D1D] dark:text-light-200 text-xs">
 					<div className="flex -space-x-2 items-end">
 						{collaboratorList.map((collaborator, index) => {
-							return <CollaboratorImage key={index} index={index} collaboratorList={collaboratorList} collaborator={collaborator} />;
+							return <CollaboratorImage key={index} collaborator={collaborator} />;
 						})}
 					</div>
 					{unsoldTrackData ? (

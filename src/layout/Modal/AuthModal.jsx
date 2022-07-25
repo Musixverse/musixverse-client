@@ -53,7 +53,7 @@ module.exports = ({ isOpen = "", onClose = "" }) => {
 				.then(function (user) {
 					if (user) {
 						closeModal();
-						if (router.pathname === "/") router.push("/marketplace/explore", undefined, { shallow: true });
+						if (router.pathname === "/") router.push("/mxcatalog/explore", undefined, { shallow: true });
 					}
 				})
 				.catch(function (error) {
@@ -68,7 +68,7 @@ module.exports = ({ isOpen = "", onClose = "" }) => {
 				.then(function (user) {
 					if (user) {
 						closeModal();
-						if (router.pathname === "/") router.push("/marketplace/explore", undefined, { shallow: true });
+						if (router.pathname === "/") router.push("/mxcatalog/explore", undefined, { shallow: true });
 					}
 				})
 				.catch(function (error) {
@@ -88,7 +88,7 @@ module.exports = ({ isOpen = "", onClose = "" }) => {
 				.then(function (user) {
 					if (user) {
 						closeModal();
-						if (router.pathname === "/") router.push("/marketplace/explore", undefined, { shallow: true });
+						if (router.pathname === "/") router.push("/mxcatalog/explore", undefined, { shallow: true });
 					}
 				})
 				.catch(function (error) {
@@ -109,7 +109,7 @@ module.exports = ({ isOpen = "", onClose = "" }) => {
 					leaveTo="opacity-0"
 					leaveFrom="opacity-100"
 				>
-					<div style={{ zIndex: "50" }} onClick={() => handleChange()} className="w-full h-full left-0 top-0 bg-black/50 backdrop-blur fixed" />
+					<div style={{ zIndex: "50" }} onClick={() => handleChange()} className="w-full h-full left-0 top-0 bg-black/80 backdrop-blur fixed" />
 				</Transition.Child>
 				<Transition.Child
 					as={Fragment}

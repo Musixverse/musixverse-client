@@ -2,7 +2,6 @@ import { useState, useContext } from "react";
 import PreviewNft from "./CreateNFTUtils/PreviewNft";
 import Step1Form from "./CreateNFTUtils/Step1Form";
 import ActionButtons from "./CreateNFTUtils/ActionButtons";
-import RequiredAsterisk from "./CreateNFTUtils/RequiredAsterisk";
 import StatusContext from "../../../store/status-context";
 import { useRouter } from "next/router";
 import { saveNftCreationProgress } from "./CreateNFTUtils/SaveNftCreationProgress";
@@ -112,14 +111,6 @@ export default function TrackDetails({
 
 						{/* Button div */}
 						<ActionButtons {...actionButtonProps} />
-
-						<div className="flex mt-4 mb-24 md:self-end justify-end text-xs text-[#777777]">
-							Fields marked with
-							<div className="mr-3">
-								<RequiredAsterisk />
-							</div>
-							are required
-						</div>
 					</form>
 				</div>
 			</div>

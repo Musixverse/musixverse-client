@@ -14,48 +14,48 @@ import Footer from "./Footer";
 import AuthModal from "../Modal/AuthModal";
 
 const Layout = ({ children }) => {
-    const { authError } = useMoralis();
-    const [error, success, , setError] = useContext(StatusContext);
-    const [isLoading, setLoading] = useContext(LoadingContext);
-    const [authModalOpen, setAuthModalOpen] = useContext(AuthModalContext);
+	const { user, authError } = useMoralis();
+	const [error, success, , setError] = useContext(StatusContext);
+	const [isLoading, setLoading] = useContext(LoadingContext);
+	const [authModalOpen, setAuthModalOpen] = useContext(AuthModalContext);
 
-    const router = useRouter();
-    const { theme } = useTheme();
+	const router = useRouter();
+	const { theme } = useTheme();
 
-    router.events.on("routeChangeStart", () => setLoading(true));
-    router.events.on("routeChangeComplete", () => setLoading(false));
-    router.events.on("routeChangeError", () => setLoading(false));
+	router.events.on("routeChangeStart", () => setLoading(true));
+	router.events.on("routeChangeComplete", () => setLoading(false));
+	router.events.on("routeChangeError", () => setLoading(false));
 
-    useEffect(() => {
-        if (authError) {
-            if (
-                authError.message !== "Web3Auth: User closed login modal." &&
-                authError.message !==
-                    "Cannot execute Moralis.enableWeb3(), as Moralis Moralis.enableWeb3() already has been called, but is not finished yet " &&
-                authError.message !== "MetaMask Message Signature: User denied message signature." &&
-                authError.message !== "User closed modal"
-            ) {
-                setError((prevState) => ({
-                    ...prevState,
-                    title: "Auth failed!",
-                    message: authError.message,
-                    showErrorBox: true,
-                }));
-            }
-        }
-    }, [authError]);
+	useEffect(() => {
+		if (authError) {
+			if (
+				authError.message !== "Web3Auth: User closed login modal." &&
+				authError.message !==
+					"Cannot execute Moralis.enableWeb3(), as Moralis Moralis.enableWeb3() already has been called, but is not finished yet " &&
+				authError.message !== "MetaMask Message Signature: User denied message signature." &&
+				authError.message !== "User closed modal"
+			) {
+				setError((prevState) => ({
+					...prevState,
+					title: "Auth failed!",
+					message: authError.message,
+					showErrorBox: true,
+				}));
+			}
+		}
+	}, [authError]);
 
-    return (
-        <>
-            <Navbar authModalOpen={authModalOpen} setAuthModalOpen={setAuthModalOpen} />
-            <AuthModal isOpen={authModalOpen} onClose={() => setAuthModalOpen(false)} />
-            {children}
-            {isLoading && theme === "light" ? <Loading /> : <LoadingDark />}
-            {error.showErrorBox && <ErrorBox />}
-            {success.showSuccessBox && <SuccessBox />}
-            {router.pathname !== "/cfh/cfb" && <Footer />}
-        </>
-    );
+	return (
+		<>
+			<Navbar authModalOpen={authModalOpen} setAuthModalOpen={setAuthModalOpen} />
+			<AuthModal isOpen={authModalOpen} onClose={() => setAuthModalOpen(false)} />
+			{children}
+			{isLoading && theme === "light" ? <Loading /> : <LoadingDark />}
+			{error.showErrorBox && <ErrorBox />}
+			{success.showSuccessBox && <SuccessBox />}
+			{router.pathname !== "/cfh/cfb" && <Footer />}
+		</>
+	);
 };
 
 export default Layout;

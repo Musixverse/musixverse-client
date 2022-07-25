@@ -21,7 +21,28 @@ const Step3Form = ({
 	setUnlockTimestamp,
 	setInvitationModalOpen,
 }) => {
-	const rolesArray = ["Singer", "Producer", "Mixer", "Composer", "Trackwriter", "Lyricist", "Vocalist", "Other"];
+	const rolesArray = [
+		"Composer",
+		"Instrumentalist",
+		"Lyricist",
+		"Mastering Engineer",
+		"Mentor",
+		"Mixer",
+		"Mixing Engineer",
+		"Music Arranger",
+		"Music Director",
+		"Music Manager",
+		"Music Producer",
+		"Musician",
+		"Recording Engineer",
+		"Remixer",
+		"Singer",
+		"Songwriter",
+		"Studio Engineer",
+		"Vocalist",
+		"Writer",
+	];
+
 	const [filteredUsers, setFilteredUsers] = useState("");
 	const [usernameEntered, setUsernameEntered] = useState("");
 	const [searchedUsername, setSearchedUsername] = useState("");

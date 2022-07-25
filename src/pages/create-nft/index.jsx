@@ -30,7 +30,7 @@ const CreateNFT = () => {
 	const [coverArtArtist, setCoverArtArtist] = useState({ id: "", name: "", username: "", address: "", avatar: "", email: "" });
 	const [lyrics, setLyrics] = useState(null);
 	const [trackOrigin, setTrackOrigin] = useState("Original");
-	const [genre, setGenre] = useState("Afrobeat");
+	const [genre, setGenre] = useState("Hip-Hop");
 	const [recordingYear, setRecordingYear] = useState(new Date().getFullYear());
 	const [parentalAdvisory, setParentalAdvisory] = useState("Explicit");
 	const [vocals, setVocals] = useState(true);
@@ -117,6 +117,8 @@ const CreateNFT = () => {
 					router.replace("/create-nft", undefined, { shallow: true });
 				},
 			});
+		} else if (draft == undefined) {
+			setStep(0);
 		}
 	}, [draft]);
 

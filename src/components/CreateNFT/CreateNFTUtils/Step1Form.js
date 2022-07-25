@@ -170,7 +170,7 @@ export default function Step1Form({
 
 						<ImageUpload coverArtUrl={coverArtUrl} setCoverArtUrl={setCoverArtUrl} setCoverArtMimeType={setCoverArtMimeType} />
 
-						<p className="text-sm mt-8">
+						<p className="text-sm mt-5">
 							Would you like to tell the world about who created this amazing cover art?
 							<RequiredAsterisk />
 						</p>

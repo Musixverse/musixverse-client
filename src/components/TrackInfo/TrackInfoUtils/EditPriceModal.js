@@ -19,11 +19,14 @@ const EditPriceModal = ({ isOpen, setEditPriceModalOpen, tokenId, currentPrice }
 
 	const [editPriceSuccess, setEditPriceSuccess] = useState(false);
 
-	useEffect(async () => {
-		setMaticUSD(await convertMaticToUSD(currentPrice));
-		setMaticINR(await convertMaticToINR(currentPrice));
-		setUpdatedMaticUSD(await convertMaticToUSD(updatedPrice));
-		setUpdatedMaticINR(await convertMaticToINR(updatedPrice));
+	useEffect(() => {
+		async function setPrices() {
+			setMaticUSD(await convertMaticToUSD(currentPrice));
+			setMaticINR(await convertMaticToINR(currentPrice));
+			setUpdatedMaticUSD(await convertMaticToUSD(updatedPrice));
+			setUpdatedMaticINR(await convertMaticToINR(updatedPrice));
+		}
+		setPrices();
 	}, [currentPrice, updatedPrice]);
 
 	const truncatednftPrice = truncatePrice(currentPrice);

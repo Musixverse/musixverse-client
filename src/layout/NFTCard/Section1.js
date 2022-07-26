@@ -9,7 +9,7 @@ export default function Section1({ artistName, isVerified, trackName, tokenId, u
 	const { data: tokenPrice } = useMoralisCloudFunction("fetchTokenPrice", { tokenId: tokenId });
 	const [price, setPrice] = useState("");
 
-	useEffect(async () => {
+	useEffect(() => {
 		if (unsoldTrackData) {
 			setPrice(Moralis.Units.FromWei(unsoldTrackData.primaryMarketplacePrice));
 		} else if (tokenPrice) {

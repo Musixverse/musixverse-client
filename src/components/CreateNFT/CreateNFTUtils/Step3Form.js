@@ -50,9 +50,12 @@ const Step3Form = ({
 	const [maticUSD, setMaticUSD] = useState("");
 	const [maticINR, setMaticINR] = useState("");
 
-	useEffect(async () => {
-		setMaticUSD(await convertMaticToUSD(nftPrice));
-		setMaticINR(await convertMaticToINR(nftPrice));
+	useEffect(() => {
+		async function setPrices() {
+			setMaticUSD(await convertMaticToUSD(nftPrice));
+			setMaticINR(await convertMaticToINR(nftPrice));
+		}
+		setPrices();
 	}, [nftPrice]);
 
 	const truncatedmaticUSDPrice = truncatePrice(maticUSD);
@@ -377,7 +380,7 @@ const Step3Form = ({
 											</div>
 										)}
 
-										<div className="basis-1/4">
+										<div className="basis-1/5">
 											<input
 												className="dark:bg-[#323232] dark:border-[#323232] dark:text-light-100 dark:focus:border-primary-100 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-100"
 												name="split"
@@ -391,7 +394,7 @@ const Step3Form = ({
 											/>
 										</div>
 
-										<div className="basis-1/4">
+										<div className="basis-2/5">
 											<CollaboratorRoleDropdown
 												// TODO: Need to change the optionsArray by Final data @Pushpit07
 												optionsArray={rolesArray}

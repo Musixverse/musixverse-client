@@ -68,10 +68,13 @@ export default function TrackInfo({ token, otherTokensOfTrack }) {
 	});
 
 	const [price, setPrice] = useState("");
-	useEffect(async () => {
-		if (tokenPrice) {
-			setPrice(Moralis.Units.FromWei(tokenPrice));
+	useEffect(() => {
+		async function setPrices() {
+			if (tokenPrice) {
+				setPrice(Moralis.Units.FromWei(tokenPrice));
+			}
 		}
+		setPrices();
 	}, [tokenPrice]);
 
 	// console.log("metadata", metadata);

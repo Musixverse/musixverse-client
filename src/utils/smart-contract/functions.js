@@ -47,7 +47,6 @@ async function connectSmartContract() {
 
 	const web3 = window.web3;
 	MUSIXVERSE = await new web3.eth.Contract(MXV_CONTRACT_ABI, MXV_CONTRACT_ADDRESS);
-	await Moralis.enableWeb3();
 	console.log("Contract connected");
 
 	if (ethereum && (await ethereum.request({ method: "net_version" })) !== BLOCKCHAIN_NETWORK_ID.toString()) {
@@ -59,7 +58,6 @@ async function connectSmartContract() {
 
 	// if ((await web3.eth.net.getId()) === BLOCKCHAIN_NETWORK_ID) {
 	//     MUSIXVERSE = await new web3.eth.Contract(MXV_CONTRACT_ABI, MXV_CONTRACT_ADDRESS);
-	//     await Moralis.enableWeb3();
 	//     console.log("Contract connected");
 	// }
 

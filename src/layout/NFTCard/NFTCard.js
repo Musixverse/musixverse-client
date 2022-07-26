@@ -20,25 +20,29 @@ export default function NFTCard({
 	const { theme } = useTheme();
 
 	let truncatedArtistName = artistName;
-	if (artistName && artistName.length > 15) truncatedArtistName = artistName.substring(0, 15) + "...";
+	if (artistName && artistName.length > 17) truncatedArtistName = artistName.substring(0, 17) + "...";
 
 	let truncatedNftName = trackName;
-	if (trackName.length > 8) {
-		truncatedNftName = trackName.substring(0, 8) + "...";
+	if (trackName && trackName.length > 10) {
+		truncatedNftName = trackName.substring(0, 10) + "...";
 	}
 
 	return (
 		<div className={"group " + styles[theme === "light" ? "nft-card" : "nft-card-dark"]}>
 			{/* NFT Image */}
 			<div className="relative w-full h-60">
-				<Image
-					src={image || "/assets/nft_bg.jpg"}
-					alt="nft image"
-					objectFit="cover"
-					layout="fill"
-					priority
-					className={"group-hover:scale-110 group-hover:duration-500 duration-500 " + styles["nft-image"]}
-				/>
+				{image ? (
+					<Image
+						src={image}
+						alt="nft image"
+						objectFit="cover"
+						layout="fill"
+						priority
+						className={"group-hover:scale-110 group-hover:duration-500 duration-500 " + styles["nft-image"]}
+					/>
+				) : (
+					<div className="bg-gray-300 w-full h-full animate-pulse"></div>
+				)}
 			</div>
 			{/* NFT Details */}
 			<div className={"dark:bg-dark-100 " + styles["nft-card__description"]}>

@@ -86,12 +86,12 @@ function ImageCrop({ imageToCrop, setCroppedImage, setShowModal, circularCrop, a
 			leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
 		>
 			<div className="relative inline-block overflow-hidden text-left align-bottom transition-all transform rounded-xl shadow-xl bg-none sm:my-8 sm:align-middle sm:max-w-3xl sm:w-full">
-				<div className="px-4 pt-5 pb-6 dark:bg-[rgba(255,255,255,0.06)] dark:backdrop-blur-[7px] backdrop-blur-[7px] bg-[rgba(255,255,255,0.7)] sm:p-8 sm:pb-6">
+				<div className="px-5 pt-7 pb-6 dark:bg-dark-100 dark:backdrop-blur-[7px] backdrop-blur-[7px] bg-[rgba(255,255,255,0.9)]">
 					<div>
 						<div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
 							{/* Modal Heading */}
 							<Dialog.Title as="h3" className="mb-4 text-lg font-medium leading-6 text-gray-900 dark:text-light-100">
-								Crop NFT Cover Art
+								Crop your image
 							</Dialog.Title>
 							{/* Crop Component */}
 							<div className="flex items-center justify-center">
@@ -109,10 +109,10 @@ function ImageCrop({ imageToCrop, setCroppedImage, setShowModal, circularCrop, a
 						</div>
 					</div>
 				</div>
-				<div className="px-4 py-6 dark:bg-[rgba(255,255,255,0.06)] dark:backdrop-blur-[7px] backdrop-blur-[7px] bg-[rgba(255,255,255,0.7)] sm:px-6 sm:flex justify-end">
+				<div className="px-4 py-6 dark:bg-dark-100 dark:backdrop-blur-[7px] backdrop-blur-[7px] bg-[rgba(255,255,255,0.9)] sm:px-6 sm:flex justify-end">
 					<button
 						type="button"
-						className="inline-flex justify-center w-full px-8 py-3 text-base font-medium text-[#676767] border border-transparent rounded-md shadow-sm dark:text-[#323232] bg-light-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-light-300 sm:ml-3 sm:w-auto sm:text-sm"
+						className="inline-flex justify-center w-full px-8 py-3 text-base font-medium text-[#676767] border border-transparent rounded-md shadow-sm dark:text-[#323232] bg-[#e2e1e1] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-light-300 sm:ml-3 sm:w-auto sm:text-sm"
 						onClick={() => {
 							URL.revokeObjectURL(imageToCrop);
 							setShowModal(false);

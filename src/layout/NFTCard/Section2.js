@@ -45,12 +45,12 @@ export default function Section2({ collaboratorList, numberOfCopies, tokenId, un
 						<div className="flex flex-col justify-end items-end">
 							<span className="dark:text-[#818181]">{numberOfCopies == 1 ? "Single Drop" : <>{numberOfCopies} copies</>}</span>
 							<span className="dark:text-[#818181] text-end">
-								{collaboratorList.length < 4 ? (
-									<>Only {unsoldTrackData.unsoldTokens_size} remaining. Hurry!</>
-								) : collaboratorList.length === 4 ? (
-									<>Only {unsoldTrackData.unsoldTokens_size} remaining</>
-								) : collaboratorList.length === 5 ? (
+								{collaboratorList.length === 5 ? (
 									<>{unsoldTrackData.unsoldTokens_size} remaining</>
+								) : collaboratorList.length === 4 || collaboratorList.length === 3 ? (
+									<>Only {unsoldTrackData.unsoldTokens_size} remaining</>
+								) : collaboratorList.length < 3 ? (
+									<>Only {unsoldTrackData.unsoldTokens_size} remaining. Hurry!</>
 								) : null}
 							</span>
 						</div>

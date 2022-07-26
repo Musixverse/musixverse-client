@@ -1,13 +1,8 @@
-import { useEffect } from "react";
 import { useMoralisCloudFunction } from "react-moralis";
 import TrackNFT from "./TrackNFT";
 
 const TrackNFTs = () => {
 	const { data: tracksWhoseAllCopiesAreNotSold } = useMoralisCloudFunction("fetchTracksWhoseAllCopiesAreNotSold", { autoFetch: true });
-
-	useEffect(() => {
-		console.log("tracksWhoseAllCopiesAreNotSold:", tracksWhoseAllCopiesAreNotSold);
-	}, [tracksWhoseAllCopiesAreNotSold]);
 
 	return (
 		<div className="col-span-9 grid 2xl:grid-cols-4 xl:grid-cols-3 md:grid-cols-2 gap-10">

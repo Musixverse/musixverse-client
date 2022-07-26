@@ -43,7 +43,7 @@ const Layout = ({ children }) => {
 				}));
 			}
 		}
-	}, [authError]);
+	}, [authError, setError]);
 
 	return (
 		<>

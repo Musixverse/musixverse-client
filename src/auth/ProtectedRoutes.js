@@ -10,71 +10,74 @@ import LoadingContext from "../../store/loading-context";
 const isBrowser = () => typeof window !== "undefined";
 
 const ProtectedRoutes = ({ router, children }) => {
-    const { theme } = useTheme();
-    const [isLoading, setLoading] = useContext(LoadingContext);
-    const [showContent, setShowContent] = useState(false);
+	const { theme } = useTheme();
+	const [isLoading, setLoading] = useContext(LoadingContext);
+	const [showContent, setShowContent] = useState(false);
 
-    // Identify authenticated user
-    const { isAuthenticated, user, isInitialized, isWeb3Enabled, enableWeb3, refetchUserData } = useMoralis();
+	// Identify authenticated user
+	const { isAuthenticated, user, isInitialized, isWeb3Enabled, enableWeb3, refetchUserData } = useMoralis();
 
-    const protectedRoutes = [appRoutes.REGISTER, appRoutes.SETTINGS, appRoutes.CREATE_NFT];
-    /**
-     * @const pathIsProtected Checks if path exists in the protectedRoutes array
-     */
-    const pathIsProtected = protectedRoutes.some((route) => router.pathname.includes(route));
+	const protectedRoutes = [appRoutes.REGISTER, appRoutes.SETTINGS, appRoutes.CREATE_NFT];
+	/**
+	 * @const pathIsProtected Checks if path exists in the protectedRoutes array
+	 */
+	const pathIsProtected = protectedRoutes.some((route) => router.pathname.includes(route));
 
-    // @dev These routes are protected until a user confirms their email
-    const protectedRoutesForAuthenticatedUserEmailUnverified = [appRoutes.REGISTER, appRoutes.SETTINGS, appRoutes.CREATE_NFT];
-    /**
-     * @const pathIsProtectedForAuthenticatedUserEmailUnverified Checks if path exists in the protectedRoutesForAuthenticatedUserEmailUnverified array
-     */
-    const pathIsProtectedForAuthenticatedUserEmailUnverified = protectedRoutesForAuthenticatedUserEmailUnverified.some((route) =>
-        router.pathname.includes(route)
-    );
+	// @dev These routes are protected until a user confirms their email
+	const protectedRoutesForAuthenticatedUserEmailUnverified = [appRoutes.REGISTER, appRoutes.SETTINGS, appRoutes.CREATE_NFT];
+	/**
+	 * @const pathIsProtectedForAuthenticatedUserEmailUnverified Checks if path exists in the protectedRoutesForAuthenticatedUserEmailUnverified array
+	 */
+	const pathIsProtectedForAuthenticatedUserEmailUnverified = protectedRoutesForAuthenticatedUserEmailUnverified.some((route) =>
+		router.pathname.includes(route)
+	);
 
-    // @dev These routes are protected for a logged in user
-    const protectedRoutesForAuthenticatedUser = [appRoutes.REGISTER];
-    /**
-     * @const pathIsProtectedForAuthenticatedUser Checks if path exists in the protectedRoutesForAuthenticatedUser array
-     */
-    const pathIsProtectedForAuthenticatedUser = protectedRoutesForAuthenticatedUser.some((route) => router.pathname.includes(route));
+	// @dev These routes are protected for a logged in user
+	const protectedRoutesForAuthenticatedUser = [appRoutes.REGISTER];
+	/**
+	 * @const pathIsProtectedForAuthenticatedUser Checks if path exists in the protectedRoutesForAuthenticatedUser array
+	 */
+	const pathIsProtectedForAuthenticatedUser = protectedRoutesForAuthenticatedUser.some((route) => router.pathname.includes(route));
 
-    useEffect(async () => {
-        if (isInitialized) {
-            setShowContent(false);
+	useEffect(() => {
+		async function checkPath() {
+			if (isInitialized) {
+				setShowContent(false);
 
-            if (!isAuthenticated) {
-                if (isBrowser() && pathIsProtected) {
-                    router.push(appRoutes.HOMEPAGE);
-                }
-            } else {
-                // Authenticated
-                await refetchUserData();
-                if (isBrowser() && !user.attributes.email) {
-                    if (!router.pathname.startsWith(appRoutes.REGISTER)) router.push(appRoutes.REGISTER);
-                } else if (isBrowser() && pathIsProtectedForAuthenticatedUserEmailUnverified && !user.attributes.emailVerified) {
-                    router.push(appRoutes.CONFIRM_EMAIL);
-                } else if (isBrowser() && pathIsProtectedForAuthenticatedUser) {
-                    router.push(appRoutes.HOMEPAGE);
-                }
-            }
+				if (!isAuthenticated) {
+					if (isBrowser() && pathIsProtected) {
+						router.push(appRoutes.HOMEPAGE);
+					}
+				} else {
+					// Authenticated
+					await refetchUserData();
+					if (isBrowser() && !user.attributes.email) {
+						if (!router.pathname.startsWith(appRoutes.REGISTER)) router.push(appRoutes.REGISTER);
+					} else if (isBrowser() && pathIsProtectedForAuthenticatedUserEmailUnverified && !user.attributes.emailVerified) {
+						router.push(appRoutes.CONFIRM_EMAIL);
+					} else if (isBrowser() && pathIsProtectedForAuthenticatedUser) {
+						router.push(appRoutes.HOMEPAGE);
+					}
+				}
 
-            setShowContent(true);
-            setLoading(false);
-        }
-    }, [router.pathname, isInitialized, isAuthenticated]);
+				setShowContent(true);
+				setLoading(false);
+			}
+		}
+		checkPath();
+	}, [router.pathname, isInitialized, isAuthenticated]);
 
-    useEffect(() => {
-        if (!isWeb3Enabled && isAuthenticated) enableWeb3();
-    }, [isWeb3Enabled, isAuthenticated]);
+	useEffect(() => {
+		if (!isWeb3Enabled && isAuthenticated) enableWeb3();
+	}, [isWeb3Enabled, isAuthenticated, enableWeb3]);
 
-    if (showContent) {
-        return children;
-    } else {
-        // setLoading(true);
-        isLoading && theme === "light" ? <Loading /> : <LoadingDark />;
-        return null;
-    }
+	if (showContent) {
+		return children;
+	} else {
+		// setLoading(true);
+		isLoading && theme === "light" ? <Loading /> : <LoadingDark />;
+		return null;
+	}
 };
 
 export default ProtectedRoutes;

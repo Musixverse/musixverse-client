@@ -10,9 +10,12 @@ export default function TrackHeaderCta({ tokenId, unlockTimestamp, price, curren
 	const [timeNow, setTimeNow] = useState(new Date());
 	const unlockTime = new Date(unlockTimestamp * 1000);
 
-	useEffect(async () => {
-		setMaticUSD(await convertMaticToUSD(price));
-		setMaticINR(await convertMaticToINR(price));
+	useEffect(() => {
+		async function setPrices() {
+			setMaticUSD(await convertMaticToUSD(price));
+			setMaticINR(await convertMaticToINR(price));
+		}
+		setPrices();
 	}, [price]);
 
 	const truncatedmaticUSDPrice = truncatePrice(maticUSD);
@@ -26,7 +29,7 @@ export default function TrackHeaderCta({ tokenId, unlockTimestamp, price, curren
 		return () => clearTimeout(timer);
 	}, [timeNow]);
 
-	useEffect(async () => {
+	useEffect(() => {
 		var date = new Date(unlockTimestamp * 1000);
 		var dateStr =
 			date.toLocaleString("default", {

@@ -54,10 +54,10 @@ export default function TrackHeader({
 						{artworkInfo.invitedArtistId && artworkArtistInfo && artworkArtistInfo.user[0] ? (
 							<Link href={`/profile/${artworkArtistInfo.user[0].username}`} className="cursor-pointer">
 								<a target="_blank" rel="noopener noreferrer">
-									<div className="flex items-end mb-2 font-secondary text-sm">
+									<div className="flex items-center mb-2 font-secondary text-sm">
 										<span className="mr-2">Artwork by-</span>
 										{artworkArtistInfo.userInfo[0] && artworkArtistInfo.userInfo[0].avatar && (
-											<Image src={artworkArtistInfo.userInfo[0].avatar} height="20" width="20" className="rounded-full" />
+											<Image src={artworkArtistInfo.userInfo[0].avatar} height="25" width="25" className="rounded-full" />
 										)}
 										<span className="ml-1">@{artworkArtistInfo.user[0].username}</span>
 									</div>
@@ -66,17 +66,17 @@ export default function TrackHeader({
 						) : artworkInfo.artistAddress && artworkArtistInfo ? (
 							<Link href={`/profile/${artworkArtistInfo.username}`} className="cursor-pointer">
 								<a target="_blank" rel="noopener noreferrer">
-									<div className="flex items-end mb-2 font-secondary text-sm">
+									<div className="flex items-center mb-2 font-secondary text-sm">
 										<span className="mr-2">Artwork by-</span>
 										{artworkArtistInfo.userInfo[0] && artworkArtistInfo.userInfo[0].avatar && (
-											<Image src={artworkArtistInfo.userInfo[0].avatar} height="20" width="20" className="rounded-full" />
+											<Image src={artworkArtistInfo.userInfo[0].avatar} height="25" width="25" className="rounded-full" />
 										)}
 										<span className="ml-1">@{artworkArtistInfo.username}</span>
 									</div>
 								</a>
 							</Link>
 						) : artworkInfo.artist ? (
-							<div className="flex items-end mb-2 font-secondary text-sm">
+							<div className="flex items-center mb-2 font-secondary text-sm">
 								<span className="mr-2">Artwork by-</span>
 								<span>{artworkInfo.artist}</span>
 							</div>

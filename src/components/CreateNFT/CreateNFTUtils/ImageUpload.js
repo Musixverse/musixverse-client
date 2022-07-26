@@ -19,16 +19,19 @@ export default function ImageUpload({ coverArtUrl, setCoverArtUrl, setCoverArtMi
 	const aspectRatio = { width: 1, height: 1 };
 	const cropModalValues = { showModal, setShowModal, imageToCrop, setCroppedImage, circularCrop, aspectRatio };
 
-	useEffect(async () => {
-		if (croppedImage !== undefined) {
-			setCoverArtUrl(croppedImage);
-			// Get the File from DataURL
-			const uploadedFile = convertDataURLtoFile(croppedImage, "file");
-			setLoading(true);
-			// Get the uploadFileOnIPFS async function
-			await uploadFileToIPFS(Moralis, uploadedFile).then((url) => setCoverArtUrl(url));
-			setLoading(false);
+	useEffect(() => {
+		async function setCoverArt() {
+			if (croppedImage !== undefined) {
+				setCoverArtUrl(croppedImage);
+				// Get the File from DataURL
+				const uploadedFile = convertDataURLtoFile(croppedImage, "file");
+				setLoading(true);
+				// Get the uploadFileOnIPFS async function
+				await uploadFileToIPFS(Moralis, uploadedFile).then((url) => setCoverArtUrl(url));
+				setLoading(false);
+			}
 		}
+		setCoverArt();
 	}, [croppedImage, setCoverArtUrl]);
 
 	const handleImageUpload = (event) => {

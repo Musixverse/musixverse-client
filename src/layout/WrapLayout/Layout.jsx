@@ -51,8 +51,8 @@ const Layout = ({ children }) => {
 			<AuthModal isOpen={authModalOpen} onClose={() => setAuthModalOpen(false)} />
 			{children}
 			{isLoading && theme === "light" ? <Loading /> : <LoadingDark />}
-			{error.showErrorBox && <ErrorBox />}
-			{success.showSuccessBox && <SuccessBox />}
+			<ErrorBox />
+			<SuccessBox />
 			{router.pathname !== "/cfh/cfb" && <Footer />}
 		</>
 	);

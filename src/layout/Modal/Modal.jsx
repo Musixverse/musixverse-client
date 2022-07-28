@@ -2,7 +2,7 @@ const { Fragment, useState, useEffect } = require("react");
 const { Transition } = require("@headlessui/react");
 
 // Inspiration from- https://gist.github.com/clqu/32883b5bc2146bdc545a261b49c3c5eb
-module.exports = ({
+export default function Modal({
 	isOpen = "",
 	image = "",
 	title = "",
@@ -13,7 +13,7 @@ module.exports = ({
 	onConfirm = "",
 	onDiscard = "",
 	children,
-}) => {
+}) {
 	let [isModalOpen, setIsModalOpen] = useState(isOpen);
 
 	useEffect(() => {
@@ -112,4 +112,4 @@ module.exports = ({
 			</Transition>
 		</>
 	);
-};
+}

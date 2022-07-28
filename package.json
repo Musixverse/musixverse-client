@@ -18,12 +18,14 @@
     "next": "^12.0.7",
     "next-pwa": "^5.4.4",
     "next-themes": "^0.0.15",
+    "persona": "^4.6.0",
     "react": "^17.0.2",
     "react-datepicker": "^4.8.0",
     "react-dom": "17.0.2",
     "react-image-crop": "^8.6.12",
     "react-moralis": "^1.4.0",
     "react-select": "^5.4.0",
+    "styled-components": "^5.3.5",
     "web3": "^1.7.4"
   },
   "devDependencies": {

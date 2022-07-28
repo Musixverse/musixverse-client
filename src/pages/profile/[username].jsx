@@ -2,10 +2,10 @@ import { useEffect, useState, useContext } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useMoralisCloudFunction } from "react-moralis";
-import Banner from "../../components/ArtistProfile/Banner";
-import ArtistHeader from "../../components/ArtistProfile/ArtistHeader";
-import Filter from "../../components/ArtistProfile/Filter";
-import NFTs from "../../components/ArtistProfile/NFTs";
+import Banner from "../../components/Profile/Banner";
+import ArtistHeader from "../../components/Profile/ArtistHeader";
+import Filter from "../../components/Profile/Filter";
+import NFTs from "../../components/Profile/NFTs";
 import NewsLetter from "../../layout/NewsLetter";
 import LoadingContext from "../../../store/loading-context";
 
@@ -76,7 +76,7 @@ export default function Profile() {
 					<ArtistHeader
 						avatar={profileUserInfo.avatar}
 						name={profileUser.name}
-						isVerified={profileUserInfo.isVerified}
+						isArtistVerified={profileUserInfo.isArtistVerified}
 						instagram={profileUserInfo.instagram}
 						facebook={profileUserInfo.facebook}
 						twitter={profileUserInfo.twitter}

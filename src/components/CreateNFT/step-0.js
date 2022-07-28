@@ -6,7 +6,7 @@ import PreviewDraft from "./CreateNFTUtils/PreviewDraft";
 import styles from "../../../styles/CreateNFT/createNFT.module.css";
 import DeleteDraftModal from "./CreateNFTUtils/DeleteDraftModal";
 
-const CreateNFTIntro = ({ nextStep, nftDraftMetadata }) => {
+const CreateNFTIntro = ({ nextStep }) => {
 	const router = useRouter();
 	const { data: nftDrafts } = useMoralisCloudFunction("fetchNftDrafts");
 
@@ -36,7 +36,48 @@ const CreateNFTIntro = ({ nextStep, nftDraftMetadata }) => {
 		});
 	};
 
-	const { fetch: createNftDraft } = useMoralisCloudFunction("saveNftDraft", { metadata: nftDraftMetadata }, { autoFetch: false });
+	const _nftDraftMetadata = {
+		step: 1,
+		title: "",
+		description: "",
+		audio: null,
+		duration: null,
+		mimeType: null,
+		artwork: {
+			uri: null,
+			mimeType: "",
+			artist: "",
+			artistAddress: "",
+			invitedArtistId: "",
+		},
+		creditCoverArtArtist: true,
+		coverArtArtist: { id: "", name: "", username: "", address: "", avatar: "", email: "" },
+		lyrics: null,
+		trackOrigin: "Original",
+		genre: "Hip-Hop",
+		recordingYear: new Date().getFullYear(),
+		parentalAdvisory: "Explicit",
+		vocals: true,
+		language: "Hindi",
+		location: "India",
+		isrc: "",
+		tags: [],
+		links: {
+			spotifyLink: "",
+			appleMusicLink: "",
+			amazonMusicLink: "",
+			youtubeMusicLink: "",
+			other: "",
+		},
+		numberOfCopies: "",
+		nftPrice: "",
+		collaboratorList: [{ id: "", name: "", username: "", split: "", role: "", address: "", avatar: "" }],
+		resaleRoyaltyPercent: "",
+		releaseNow: true,
+		unlockTimestamp: new Date().getTime(),
+	};
+
+	const { fetch: createNftDraft } = useMoralisCloudFunction("saveNftDraft", { metadata: _nftDraftMetadata }, { autoFetch: false });
 	return (
 		<>
 			<div className="flex flex-col items-center justify-center w-full bg-light-200 dark:bg-dark-200">

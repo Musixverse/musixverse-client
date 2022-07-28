@@ -39,8 +39,12 @@ const ProtectedRoutes = ({ router, children }) => {
 	 */
 	const pathIsProtectedForAuthenticatedUser = protectedRoutesForAuthenticatedUser.some((route) => router.pathname.includes(route));
 
+	async function refetchData() {
+		await refetchUserData();
+	}
+
 	useEffect(() => {
-		async function checkPath() {
+		function checkPath() {
 			if (isInitialized) {
 				setShowContent(false);
 
@@ -50,7 +54,7 @@ const ProtectedRoutes = ({ router, children }) => {
 					}
 				} else {
 					// Authenticated
-					await refetchUserData();
+					refetchData();
 					if (isBrowser() && !user.attributes.email) {
 						if (!router.pathname.startsWith(appRoutes.REGISTER)) router.push(appRoutes.REGISTER);
 					} else if (isBrowser() && pathIsProtectedForAuthenticatedUserEmailUnverified && !user.attributes.emailVerified) {

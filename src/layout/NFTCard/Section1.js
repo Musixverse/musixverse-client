@@ -6,8 +6,19 @@ import { truncatePrice } from "../../utils/GetMarketPrice";
 
 export default function Section1({ artistName, isVerified, trackName, tokenId, unsoldTrackData, soldOnceTrackData }) {
 	const { Moralis } = useMoralis();
-	const { data: tokenPrice } = useMoralisCloudFunction("fetchTokenPrice", { tokenId: tokenId });
+	const { fetch: fetchTokenPrice, data: tokenPrice } = useMoralisCloudFunction("fetchTokenPrice", { tokenId: tokenId }, { autoFetch: false });
 	const [price, setPrice] = useState("");
+
+	useEffect(() => {
+		if (tokenId) {
+			fetchTokenPrice({
+				onSuccess: async (object) => {},
+				onError: (error) => {
+					console.log("fetchTokenPrice Error:", error);
+				},
+			});
+		}
+	}, [tokenId, fetchTokenPrice]);
 
 	useEffect(() => {
 		if (unsoldTrackData) {

@@ -28,7 +28,7 @@ const ActionButtons = ({ step, prevStep, setSaveDraftSuccess, nftDraftMetadata }
 
 	return (
 		<>
-			<div className="flex mt-16 space-x-3 md:self-end justify-end">
+			<div className="flex flex-col justify-end max-w-xs mt-16 space-x-0 space-y-3 sm:max-w-none sm:flex-row sm:space-y-0 sm:space-x-3 md:self-end">
 				<button
 					type="button"
 					onClick={() => {
@@ -52,7 +52,7 @@ const ActionButtons = ({ step, prevStep, setSaveDraftSuccess, nftDraftMetadata }
 				</button>
 				<button
 					type="submit"
-					className="flex items-center px-4 py-3 text-sm font-primary font-bold rounded-md bg-primary-100 hover:bg-primary-200 text-light-100"
+					className="flex items-center justify-between px-4 py-3 text-sm font-bold rounded-md font-primary bg-primary-100 hover:bg-primary-200 text-light-100"
 				>
 					{step === 3 ? "Create" : "Next"}
 					<span className="ml-24 text-xl">
@@ -61,7 +61,7 @@ const ActionButtons = ({ step, prevStep, setSaveDraftSuccess, nftDraftMetadata }
 				</button>
 			</div>
 
-			<div className="flex mt-4 mb-24 md:self-end justify-end text-xs text-[#777777]">
+			<div className="flex mt-4 mb-24 md:self-end sm:justify-end text-xs text-[#777777]">
 				Fields marked with
 				<div className="mr-3">
 					<RequiredAsterisk />

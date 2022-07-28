@@ -126,6 +126,35 @@ html {
 /**************************************************************************/
 /************************    React Datepicker   ***************************/
 /**************************************************************************/
+.react-datepicker {
+	@apply border-none border-r-2 overflow-hidden !important;
+}
+
+.react-datepicker__header {
+	@apply dark:bg-[#3f3f3f] dark:text-light-100 rounded-sm;
+}
+
+.react-datepicker__current-month,
+.react-datepicker__day-name,
+.react-datepicker__day,
+.react-datepicker-time__header,
+.react-datepicker__time-list-item {
+	@apply dark:text-light-100;
+}
+
+.react-datepicker__day:hover,
+.react-datepicker__time-list-item:hover {
+	@apply bg-primary-200 text-light-100 !important;
+}
+/* 
+.react-datepicker__day--today{
+    @apply font-bold dark:text-primary-100;
+} */
+
+.react-datepicker__day--disabled {
+	@apply dark:text-[#7a7a7a];
+}
+
 .react-datepicker__input-container > input {
 	padding: 4px 16px 4px 20px;
 	border-radius: 4px;
@@ -135,6 +164,19 @@ html {
 .react-datepicker__input-container > input:focus {
 	outline: none;
 	border: 2px solid #6cc027;
+}
+
+.react-datepicker__day--selected {
+	@apply dark:bg-primary-200 !important;
+}
+
+.react-datepicker__month-container,
+.react-datepicker__time-list {
+	@apply dark:bg-[#323232];
+}
+
+.react-datepicker__navigation-icon {
+	@apply dark:text-primary-200 !important;
 }
 
 /**************************************************************************/

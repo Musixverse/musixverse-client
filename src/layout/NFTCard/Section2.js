@@ -1,11 +1,27 @@
+import { useEffect } from "react";
 import { useMoralisCloudFunction } from "react-moralis";
 import CollaboratorImage from "./CollaboratorImage";
 import styles from "../../../styles/NFTCard/Section2.module.css";
 
 export default function Section2({ collaboratorList, numberOfCopies, tokenId, unsoldTrackData, lastPrice }) {
-	const { data: localTokenId } = useMoralisCloudFunction("fetchLocalTokenId", {
-		tokenId: tokenId,
-	});
+	const { fetch: fetchLocalTokenId, data: localTokenId } = useMoralisCloudFunction(
+		"fetchLocalTokenId",
+		{
+			tokenId: tokenId,
+		},
+		{ autoFetch: false }
+	);
+
+	useEffect(() => {
+		if (tokenId) {
+			fetchLocalTokenId({
+				onSuccess: async (object) => {},
+				onError: (error) => {
+					console.log("fetchLocalTokenId Error:", error);
+				},
+			});
+		}
+	}, [tokenId, fetchLocalTokenId]);
 
 	// const likeBtn = useRef();
 	// let likeCount = props.likeCount;

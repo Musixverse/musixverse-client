@@ -10,7 +10,7 @@ function Home() {
         <>
             <Head>
                 <title>Musixverse</title>
-                <meta name="description" content="Powering music ownership and provenance across the web and beyond" />
+                <meta name="description" content="Musixverse is a Music NFT marketplace that will bring Artists and Fans together like never before and unlock novel models of communications and commerce." />
             </Head>
 
             <div className="relative flex flex-col items-center justify-center bg-light-200 dark:bg-dark-200">

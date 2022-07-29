@@ -15,7 +15,7 @@ function contractMetadataURI() {
         <>
             <Head>
                 <title>Musixverse | Contract Metadata URI</title>
-                <meta name="description" content="Powering music ownership and provenance across the web and beyond" />
+                <meta name="description" content="Musixverse is a Music NFT marketplace that will bring Artists and Fans together like never before and unlock novel models of communications and commerce." />
             </Head>
 
             <div className="mt-20">{JSON.stringify(contractMetadata)}</div>

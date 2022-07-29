@@ -9,7 +9,7 @@ function Home() {
     return (
         <>
             <Head>
-                <title>Musixverse</title>
+                <title>Musixverse | An Ultimate Music NFT Marketplace</title>
                 <meta name="description" content="Musixverse is a Music NFT marketplace that will bring Artists and Fans together like never before and unlock novel models of communications and commerce." />
             </Head>
 

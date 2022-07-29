@@ -11,7 +11,7 @@ function ThankYou() {
         <>
             <Head>
                 <title>Musixverse | Thank You</title>
-                <meta name="description" content="Powering music ownership and provenance across the web and beyond" />
+                <meta name="description" content="Musixverse is a Music NFT marketplace that will bring Artists and Fans together like never before and unlock novel models of communications and commerce." />
             </Head>
 
             <main className="m-auto max-w-screen-2xl md:w-11/12 px-4 md:px-20 py-24 text-center">

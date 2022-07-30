@@ -1,4 +1,5 @@
 import Head from "next/head";
+import { meta_description } from "../../constants/index";
 import CoreTeam from "../../components/NewTeamPage/CoreTeam";
 
 const TeamPage = ({}) => {
@@ -6,7 +7,7 @@ const TeamPage = ({}) => {
         <>
             <Head>
                 <title>Musixverse | Team Page</title>
-                <meta name="description" content="Musixverse" />
+                <meta name="description" content={meta_description} />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 

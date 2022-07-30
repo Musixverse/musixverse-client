@@ -1,5 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import Head from "next/head";
+import { meta_description } from "../../constants/index";
 import SettingsNav from "../../components/Settings/SettingsNav";
 import ProfileSettings from "../../components/Settings/ProfileSettings";
 import { useMoralis, useMoralisQuery, useMoralisCloudFunction } from "react-moralis";
@@ -140,7 +141,7 @@ export default function Settings() {
 		<>
 			<Head>
 				<title>Musixverse | Settings</title>
-				<meta name="description" content="Musixverse" />
+				<meta name="description" content={meta_description} />
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 

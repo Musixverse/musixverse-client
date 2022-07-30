@@ -1,4 +1,5 @@
 import Head from "next/head";
+import { meta_description } from "../../constants/index";
 import BannerCFB from "../../components/CFB/BannerCFB";
 import CFB1 from "../../components/CFB/CFB1";
 import CFB4 from "../../components/CFB/CFB4";
@@ -9,7 +10,7 @@ const CFB = ({}) => {
         <>
             <Head>
                 <title>Musixverse | Community Feedback Board</title>
-                <meta name="description" content="Musixverse" />
+                <meta name="description" content={meta_description} />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 

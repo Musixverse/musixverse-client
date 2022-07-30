@@ -1,4 +1,5 @@
 import Head from "next/head";
+import { meta_description } from "../../constants/index";
 import MarketplaceHeader from "../../components/MxCatalog/Utils/MarketplaceHeader";
 import MarketplaceChooser from "../../components/MxCatalog/Utils/MarketplaceChooser";
 import FilterSection from "../../components/MxCatalog/Utils/FilterSection";
@@ -9,7 +10,7 @@ const Explore = ({}) => {
 		<>
 			<Head>
 				<title>Musixverse | Explore</title>
-				<meta name="description" content="Musixverse" />
+				<meta name="description" content={meta_description} />
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 

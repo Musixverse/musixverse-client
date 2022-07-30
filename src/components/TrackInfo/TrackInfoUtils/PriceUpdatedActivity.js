@@ -38,10 +38,10 @@ const PriceUpdatedActivity = ({ activity }) => {
 			<div className="ml-3 font-secondary">
 				<p className="font-medium">
 					Updated price from &nbsp;
-					<Image src={"/assets/matic-logo.svg"} width={15} height={15} alt="matic" />
+					<Image src={"/assets/matic-logo.svg"} width={15} height={15} alt="matic icon" />
 					<span className="ml-1 font-primary font-semibold">{Moralis.Units.FromWei(activity.oldPrice)}</span>
 					<span className="ml-2 mr-2">to</span>
-					<Image src={"/assets/matic-logo.svg"} width={15} height={15} alt="matic" />
+					<Image src={"/assets/matic-logo.svg"} width={15} height={15} alt="matic icon" />
 					<span className="ml-1 font-primary font-semibold">{Moralis.Units.FromWei(activity.newPrice)}</span>
 				</p>
 

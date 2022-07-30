@@ -44,7 +44,7 @@ export default function Section1({ artistName, isVerified, trackName, tokenId, u
 			<div className="flex flex-col justify-end">
 				<p className={styles["description--section1__price"]}>{soldOnceTrackData ? "Lowest Price" : "Price"}</p>
 				<div className="flex items-center justify-end font-semibold">
-					<Image src={"/assets/matic-logo.svg"} width={16} height={16} alt="matic logo" />
+					<Image src={"/assets/matic-logo.svg"} width={16} height={16} alt="matic icon" />
 					<span className="ml-1 sm:text-lg">{truncatednftPrice}</span>
 				</div>
 			</div>

@@ -45,7 +45,7 @@ export default function Section2New() {
                 <Image src={singer} alt="singer" objectFit="contain" priority></Image>
                 <a href="#section_3">
                     <button className="absolute bottom-1/4 left-[12px] md:left-[28px]">
-                        <Image src="/assets/homepage/dropdown_arrow_red.svg" width={50} height={50} alt="circle dropdown"></Image>
+                        <Image src="/assets/homepage/dropdown_arrow_red.svg" width={50} height={50} alt="button to move to next section"></Image>
                         {/* <img src="/assets/homepage/dropdown_arrow_red.svg" className="w-[50px] h-[50px]" alt="circle dropdown" /> */}
                     </button>
                 </a>

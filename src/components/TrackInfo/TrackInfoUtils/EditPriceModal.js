@@ -76,7 +76,7 @@ const EditPriceModal = ({ isOpen, setEditPriceModalOpen, tokenId, currentPrice }
 							<div className="flex items-center justify-center mt-10">
 								<div className="text-lg font-semibold mr-4">Current Price:</div>
 								<div className="flex">
-									<Image src={"/assets/matic-logo.svg"} width={20} height={20} alt="matic" />
+									<Image src={"/assets/matic-logo.svg"} width={20} height={20} alt="matic icon" />
 									<p className="mx-2 font-bold text-lg font-primary">{truncatednftPrice}</p>
 								</div>
 								<p className="text-xs font-primary">
@@ -91,7 +91,7 @@ const EditPriceModal = ({ isOpen, setEditPriceModalOpen, tokenId, currentPrice }
 							<div className="flex items-center justify-center">
 								<div className="text-lg font-semibold mr-4">New Price:</div>
 								<div className="flex">
-									<Image src={"/assets/matic-logo.svg"} width={20} height={20} alt="matic" />
+									<Image src={"/assets/matic-logo.svg"} width={20} height={20} alt="matic icon" />
 									<p className="mx-2 font-bold text-lg font-primary">{updatedPrice ? updatedPrice : 0}</p>
 								</div>
 								<p className="text-xs font-primary">

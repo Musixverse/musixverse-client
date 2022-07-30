@@ -39,7 +39,7 @@ export default function TrackHeader({
 								<Image
 									src={image}
 									className="rounded-lg"
-									alt="trackImage"
+									alt="Track Image"
 									width="100%"
 									height="100%"
 									layout="responsive"
@@ -57,7 +57,7 @@ export default function TrackHeader({
 									<div className="flex items-center mb-2 font-secondary text-sm">
 										<span className="mr-2">Artwork by-</span>
 										{artworkArtistInfo.userInfo[0] && artworkArtistInfo.userInfo[0].avatar && (
-											<Image src={artworkArtistInfo.userInfo[0].avatar} height="25" width="25" className="rounded-full" />
+											<Image src={artworkArtistInfo.userInfo[0].avatar} alt="Artwork Artist avatar" height="25" width="25" className="rounded-full" />
 										)}
 										<span className="ml-1">@{artworkArtistInfo.user[0].username}</span>
 									</div>
@@ -69,7 +69,7 @@ export default function TrackHeader({
 									<div className="flex items-center mb-2 font-secondary text-sm">
 										<span className="mr-2">Artwork by-</span>
 										{artworkArtistInfo.userInfo[0] && artworkArtistInfo.userInfo[0].avatar && (
-											<Image src={artworkArtistInfo.userInfo[0].avatar} height="25" width="25" className="rounded-full" />
+											<Image src={artworkArtistInfo.userInfo[0].avatar} alt="Artwork Artist avatar" height="25" width="25" className="rounded-full" />
 										)}
 										<span className="ml-1">@{artworkArtistInfo.username}</span>
 									</div>
@@ -95,7 +95,7 @@ export default function TrackHeader({
 							</Link>
 						) : null}
 						<div className="ml-2 align-center flex">
-							<Image src={mxv_verified} width={14} height={14} alt="MXV verified" />
+							<Image src={mxv_verified} width={14} height={14} alt="MXV verified tick" />
 						</div>
 					</div>
 

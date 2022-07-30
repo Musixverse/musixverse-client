@@ -38,7 +38,7 @@ const PurchasedActivity = ({ activity }) => {
 			<div className="ml-3 font-secondary">
 				<p className="font-medium">
 					Purchased for &nbsp;
-					<Image src={"/assets/matic-logo.svg"} width={15} height={15} alt="matic" />
+					<Image src={"/assets/matic-logo.svg"} width={15} height={15} alt="matic icon" />
 					<span className="ml-1 font-primary font-semibold">{Moralis.Units.FromWei(activity.price)}</span>
 				</p>
 

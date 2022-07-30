@@ -115,7 +115,7 @@ export default function TrackHeaderCta({ tokenId, unlockTimestamp, price, curren
 			<div className="flex flex-col my-3">
 				<p className="font-secondary font-normal text-base">Price</p>
 				<div className="flex items-center">
-					<Image src={"/assets/matic-logo.svg"} width={25} height={25} alt="matic" />
+					<Image src={"/assets/matic-logo.svg"} width={25} height={25} alt="matic icon" />
 					<p className="mx-2 font-bold text-3xl font-primary">{truncatednftPrice}</p>
 					<p className="text-sm font-primary">
 						(approx. ₹{truncatedmaticINRPrice} or ${truncatedmaticUSDPrice})

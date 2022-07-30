@@ -26,7 +26,7 @@ export default function ArtistHeader({ avatar, name, isArtistVerified, instagram
 					)}
 				</div>
 				<p className="mt-4 mb-4 text-4xl md:text-5xl md:hidden font-tertiary xl:mb-0 xl:mt-2">
-					{name}&nbsp;{isArtistVerified ? <Image src={mxv_tick} width={20} height={20} alt="mxv_verified"></Image> : null}
+					{name}&nbsp;{isArtistVerified ? <Image src={mxv_tick} width={20} height={20} alt="MXV verified tick"></Image> : null}
 				</p>
 				{/* links to music platforms */}
 				<div className={styles["section1__social-icons"]}>
@@ -71,7 +71,7 @@ export default function ArtistHeader({ avatar, name, isArtistVerified, instagram
 						{name}
 						&nbsp;
 						{isArtistVerified ? (
-							<Image src={mxv_tick} width={20} height={20} alt="mxv_verified" className="ml-10" />
+							<Image src={mxv_tick} width={20} height={20} alt="MXV verified tick" className="ml-10" />
 						) : (
 							<Link href="/profile/verify" passHref>
 								<a className="ml-4 font-primary text-sm hover:text-primary-100 cursor-pointer hover:underline">Verify your profile</a>

@@ -133,7 +133,7 @@ export default function AudioPlayer({ audio_url }) {
 
 				<div className="flex flex-row space-x-8 pt-3 text-xs">
 					<button className="flex justify-center items-center space-x-2">
-						<Image src={favourite} width={18} height={18} alt="Add to favourites"></Image>
+						<Image src={favourite} width={18} height={18} alt="Add to favourites button"></Image>
 						<span>Add to Favourites</span>
 					</button>
 					<button className="flex justify-center items-center space-x-2">

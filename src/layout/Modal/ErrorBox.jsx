@@ -36,11 +36,11 @@ const ErrorBox = () => {
 			<Transition.Child
 				as={Fragment}
 				enter="transition-all ease-in-out duration-400"
-				enterFrom="opacity-0 scale-75 translate-x-1/3"
+				enterFrom="opacity-0 scale-75 translate-x-full"
 				enterTo="opacity-100 scale-100"
 				leave="transition-all ease-out duration-200"
 				leaveFrom="opacity-100 scale-100"
-				leaveTo="opacity-0 scale-75 translate-x-1/3"
+				leaveTo="opacity-0 scale-75 translate-x-full"
 			>
 				<div
 					className="fixed bottom-0 right-0 z-50 xl:w-4/12 lg:w-5/12 md:w-8/12 px-5 py-4 text-light-200 -translate-x-4 -translate-y-4 bg-error-200 border border-none rounded-lg shadow-2xl"

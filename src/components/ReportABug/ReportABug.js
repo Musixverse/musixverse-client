@@ -1,6 +1,6 @@
 import React, { useRef, useContext } from "react";
 import Link from "next/link";
-import styles from "../../../styles/ReportABug/reportABug.module.css";
+import styles from "../../../styles/ReportABug/ReportABug.module.css";
 import { useNewMoralisObject } from "react-moralis";
 import StatusContext from "../../../store/status-context";
 

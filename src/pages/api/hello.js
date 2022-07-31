@@ -1,6 +1,6 @@
 export default function handler(req, res) {
 	res.status(200).json({
-		name: "Nikhil Kumar Singh",
+		name: "Shivam x Sparsh",
 	});
 	console.log("Webhook called");
 }

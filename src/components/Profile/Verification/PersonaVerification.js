@@ -1,51 +1,11 @@
 import { useState, useEffect, useRef } from "react";
-import { useMoralisCloudFunction } from "react-moralis";
-import dynamic from "next/dynamic";
-// const Persona = dynamic(() => import("persona"), { ssr: false });
-// import Persona from "persona";
+import { useMoralis } from "react-moralis";
 
-const PersonaVerification = ({ isOpen = "", onClose = "" }) => {
+const PersonaVerification = ({ isOpen = "", onClose = "", personaInquiryIdData }) => {
+	const { user } = useMoralis();
+
 	const [isModalOpen, setIsModalOpen] = useState(isOpen);
-	const [personaInquiryId, setPersonaInquiryId] = useState(null);
-	const [kycStatus, setKycStatus] = useState(null);
 	const embeddedClientRef = useRef(null);
-
-	const { fetch: setPersonaInquiryIdData } = useMoralisCloudFunction("setPersonaInquiryIdData", { inquiryId: personaInquiryId }, { autoFetch: false });
-	const { data: artistPersonaInquiryId } = useMoralisCloudFunction("getPersonaInquiryId");
-	const { fetch: setArtistVerified } = useMoralisCloudFunction("setArtistVerified", { status: kycStatus }, { autoFetch: false });
-
-	useEffect(() => {
-		const setInquiryIdData = async () => {
-			await setPersonaInquiryIdData({
-				onSuccess: (data) => {
-					console.log("setPersonaInquiryId success");
-				},
-				onError: (error) => {
-					console.log("setPersonaInquiryId Error:", error);
-				},
-			});
-		};
-		if (personaInquiryId) {
-			setInquiryIdData();
-		}
-	}, [personaInquiryId, setPersonaInquiryIdData]);
-
-	useEffect(() => {
-		const setIsArtistVerified = async () => {
-			await setArtistVerified({
-				onSuccess: (data) => {
-					console.log("setArtistVerified success");
-				},
-				onError: (error) => {
-					console.log("setArtistVerified Error:", error);
-				},
-			});
-		};
-		if (kycStatus) {
-			console.log(`Sending finishe`);
-			setIsArtistVerified();
-		}
-	}, [kycStatus, setArtistVerified]);
 
 	useEffect(() => {
 		setIsModalOpen(isModalOpen);
@@ -62,10 +22,10 @@ const PersonaVerification = ({ isOpen = "", onClose = "" }) => {
 
 	const createClient = () => {
 		const client = new Persona.Client({
-			templateId: artistPersonaInquiryId ? null : "itmpl_3tUhatahnDKLS5djDurSAz2i",
-			environment: "sandbox",
-			inquiryId: artistPersonaInquiryId ?? null,
-			frameWidth: "768px",
+			templateId: personaInquiryIdData && personaInquiryIdData.personaInquiryId ? null : process.env.NEXT_PUBLIC_PERSONA_TEMPLATE_ID,
+			environment: process.env.NEXT_PUBLIC_PERSONA_ENVIRONMENT,
+			inquiryId: personaInquiryIdData && personaInquiryIdData.personaInquiryId ? personaInquiryIdData.personaInquiryId : null,
+			referenceId: user.id,
 			fields: {
 				address_country_code: "IN",
 			},
@@ -77,9 +37,8 @@ const PersonaVerification = ({ isOpen = "", onClose = "" }) => {
 			},
 			onCancel: ({ inquiryId, sessionToken }) => {
 				closeModal();
-				setPersonaInquiryId(inquiryId);
 			},
-			onError: (status, code) => console.log("Error:", code),
+			onError: (status, code) => console.error("Error:", code),
 			onEvent: (name, meta) => {
 				switch (name) {
 					case "start":
@@ -91,10 +50,7 @@ const PersonaVerification = ({ isOpen = "", onClose = "" }) => {
 			},
 			onComplete: (inquiryId, status, fields) => {
 				if (inquiryId.status == "completed") {
-					console.log(`Sending finished inquiry ${JSON.stringify(inquiryId)} to backend: ${status}`);
 					closeModal();
-					setPersonaInquiryId(inquiryId.inquiryId);
-					setKycStatus(inquiryId.status);
 				}
 			},
 		});

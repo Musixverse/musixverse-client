@@ -48,6 +48,10 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 		customStyles = "lg:rounded-full lg:top-2.5 lg:shadow-lg";
 	}
 
+	function closeNavbar() {
+		document.getElementById("hamburgerToggler").click();
+	}
+
 	return (
 		<div className="absolute flex justify-center w-screen">
 			<nav className={"navbar duration-300 ease-in mx-auto " + customStyles}>
@@ -317,6 +321,134 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 								</ul>
 							</li>
 						</ul>
+					</div>
+					
+					{/* Hamburger Menu */}
+					<div className="navbar-nav lg:hidden">
+						<div id="menuToggle">
+							<input type="checkbox" className="toggler" id="hamburgerToggler" />
+							<div className="hamburger">
+								<div></div>
+							</div>
+
+							<div id="menu">
+								<div className="hamburger_container">
+									<div className="menu_box">
+										<div className="row">
+											<div className="offset-lg-1 col-lg-2 offset-md-1 col-md-2 offset-0 col-12 logo_div_anim">
+												<Link href={'/'} onClick={closeNavbar} passHref={true}>
+													<a href="#" className="flex">
+														{theme === "light" ? <Image src={logoBlack} alt="MXV Logo" width="75" /> : <Image src={logoWhite} alt="MXV Logo" width="75" />}
+													</a>
+												</Link>
+											</div>
+											<div className="offset-lg-4 col-lg-2 offset-md-4 col-md-2 col-6 mt-md-5 mt-1 create_left_anim">
+												<div className="mt-md-4 quick_hamburger_nav_div">
+													<Link href={"/create-nft"} onClick={closeNavbar} className="quick_hamburger_nav" passHref={true}>
+														Create
+													</Link>
+												</div>
+											</div>
+											<div className="offset-lg-0 col-lg-2 offset-md-0 col-md-2 col-6 mt-md-5 mt-1 dashboard_left_anim">
+												<div className="mt-md-4 quick_hamburger_nav_div">
+													<Link href={"/settings/profile-settings"} onClick={closeNavbar} className="quick_hamburger_nav" passHref={true}>
+														Dashboard
+													</Link>
+												</div>
+											</div>
+										</div>
+
+										<div className="hamburger_menu justify-content-center">
+											<div className="row justify-content-center">
+												<div className="col-lg-12 col-md-10 offset-0 col-12 mt-md-0">
+													<div className="row justify-content-center">
+														<div className="col-md-3 col-6 text-center">
+															<div className="row ham_menu_heading justify-content-center">Quick Links</div>
+															<div className="row ham_menu_hover_effect_row mt-md-5 mt-4 justify-content-center">
+																<Link href={"/trending"} onClick={closeNavbar} className="ham_menu_link ham_menu_hover_effect text-center" passHref={true}>
+																	<div>Library</div>
+																</Link>
+															</div>
+															<div className="row ham_menu_hover_effect_row justify-content-center">
+																<Link href={"/trending"} onClick={closeNavbar} className="ham_menu_link ham_menu_hover_effect text-center" passHref={true}>
+																	<div>Trending</div>
+																</Link>
+															</div>
+															<div className="row ham_menu_hover_effect_row justify-content-center">
+																<Link href={"/faq"} onClick={closeNavbar} className="ham_menu_link ham_menu_hover_effect text-center" passHref={true}>
+																	<div>FAQ</div>
+																</Link>
+															</div>
+															<div className="row ham_menu_hover_effect_row justify-content-center">
+																<Link href={"/team"} onClick={closeNavbar} className="ham_menu_link ham_menu_hover_effect text-center" passHref={true}>
+																	<div>Team</div>
+																</Link>
+															</div>
+														</div>
+
+														<div className="col-md-3 col-6 text-center">
+															<div className="row ham_menu_heading mt-0 justify-content-center">Account</div>
+															<div className="row ham_menu_hover_effect_row mt-md-5 mt-4 justify-content-center">
+																<Link href={"/settings/profile-settings"} onClick={closeNavbar} className="ham_menu_link ham_menu_hover_effect text-center" passHref={true}>
+																	<div>Dashboard</div>
+																</Link>
+															</div>
+															<div className="row ham_menu_hover_effect_row justify-content-center">
+																<Link href={"/"} onClick={closeNavbar} className="ham_menu_link ham_menu_hover_effect text-center" passHref={true}>
+																	<div>Home</div>
+																</Link>
+															</div>
+															<div className="row ham_menu_hover_effect_row justify-content-center">
+																<Link href={"/create-nft"} onClick={closeNavbar} className="ham_menu_link ham_menu_hover_effect text-center" passHref={true}>
+																	<div>Create</div>
+																</Link>
+															</div>
+														</div>
+
+														<div className="col-md-3 col-12 text-center">
+															<div className="row ham_menu_heading mt-5 mt-md-0 justify-content-center">Support</div>
+															<div className="row ham_menu_hover_effect_row mt-md-5 mt-4 justify-content-center">
+																<Link href={"/contact-us"} onClick={closeNavbar} className="ham_menu_link ham_menu_hover_effect text-center" passHref={true}>
+																	<div>Contact Us</div>
+																</Link>
+															</div>
+															<div className="row ham_menu_hover_effect_row justify-content-center">
+																<Link href={"/report-a-bug"} onClick={closeNavbar} className="ham_menu_link ham_menu_hover_effect text-center" passHref={true}>
+																	<div>Report a Bug</div>
+																</Link>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+
+										<div className="row">
+											<div className="offset-md-2 col-md-8 col-12 mt-5 mb-4 horizontal_line_to_right"></div>
+										</div>
+
+										<div className="row justify-content-center mt-md-5 mb-5 harmburger_menu_connect">
+											<div className="ham_menu_connect_links_md col-md-2 offset-0 col-12 mt-md-0 mt-4">
+												<div className="row justify-content-center">
+													<div className="ham_menu_heading ham_menu_connect_heading text-center">Connect with us</div>
+												</div>
+												<div className="row justify-content-center mt-3">
+													<a href="https://twitter.com/musixverse" target="_blank" rel="noopener noreferrer" className="connect_link cursor_ptr text-center col p-0">
+														<i className="fab fa-twitter fa-lg"></i>
+													</a>
+													<a href="https://discord.gg/HSKayad3NM" target="_blank" rel="noopener noreferrer" className="connect_link cursor_ptr text-center col p-0">
+														<i className="fab fa-discord fa-lg"></i>
+													</a>
+													<a href="https://www.instagram.com/musixverse" target="_blank" rel="noopener noreferrer" className="connect_link cursor_ptr text-center col p-0">
+														<i className="fab fa-instagram fa-lg"></i>
+													</a>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</nav>

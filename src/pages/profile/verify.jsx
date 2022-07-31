@@ -69,7 +69,7 @@ const Verify = () => {
 	};
 
 	const verifyIdentityVerificationTweet = async () => {
-		if (!personaInquiryIdData.isPersonaVerified) {
+		if (!personaInquiryIdData || !personaInquiryIdData.isPersonaVerified) {
 			setError({
 				title: "KYC is not complete",
 				message: "Please finish your KYC to continue",
@@ -130,14 +130,12 @@ const Verify = () => {
 				<div className="mt-4">
 					<p className="text-4xl font-tertiary mt-16">1. KYC</p>
 
-					{personaInquiryIdData && (
-						<VerificationButton
-							onClick={() => setIsVerificationModalOpen(true)}
-							verifiedStatus={personaInquiryIdData.isPersonaVerified}
-							buttonText="Verify your profile"
-							verifiedText="Verified successfully"
-						/>
-					)}
+					<VerificationButton
+						onClick={() => setIsVerificationModalOpen(true)}
+						verifiedStatus={personaInquiryIdData ? personaInquiryIdData.isPersonaVerified : false}
+						buttonText="Verify your profile"
+						verifiedText="Verified successfully"
+					/>
 
 					<p className="text-4xl font-tertiary mt-16">2. Connect Twitter account</p>
 

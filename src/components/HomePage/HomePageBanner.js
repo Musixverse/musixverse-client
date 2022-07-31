@@ -1,8 +1,6 @@
 import styles from "../../../styles/HomePage/heroSection.module.css";
 import { useTheme } from "next-themes";
 import StayInLoop from "./HomePageUtils/StayInLoop";
-import lightBanner from "../../../public/assets/homepage/home_light.png";
-import darkBanner from "../../../public/assets/homepage/home_dark.png";
 
 export default function Banner() {
     const { theme } = useTheme();

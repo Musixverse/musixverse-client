@@ -34,7 +34,7 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 	};
 
 	const [clientWindowHeight, setClientWindowHeight] = useState("");
-	const customStyles = "top-0 rounded-b-[50px]";
+	const customStyles = "lg:top-0 lg:rounded-b-[50px]";
 	const handleScroll = () => {
 		setClientWindowHeight(window.scrollY);
 	};
@@ -45,13 +45,13 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 	});
 
 	if (clientWindowHeight > 50) {
-		customStyles = "rounded-full top-2.5 shadow-lg";
+		customStyles = "lg:rounded-full lg:top-2.5 lg:shadow-lg";
 	}
 
 	return (
 		<div className="absolute flex justify-center w-screen">
 			<nav className={"navbar duration-300 ease-in mx-auto " + customStyles}>
-				<div className="flex flex-wrap items-center justify-center w-full px-16 py-2">
+				<div className="flex flex-wrap items-center justify-start sm:justify-center w-full px-16 py-2">
 					<Link href="/">
 						<a href="#" className="flex">
 							{theme === "light" ? <Image src={logoBlack} alt="MXV Logo" width="75" /> : <Image src={logoWhite} alt="MXV Logo" width="75" />}
@@ -59,7 +59,7 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 					</Link>
 
 					{/* Internal links */}
-					<div className="block ml-10">
+					<div className="ml-10 hidden lg:block">
 						<ul className="flex flex-row items-center font-medium md:text-base md:space-x-8 md:mt-0 sm:text-sm">
 							<li className="hidden hover:text-primary-200 md:block">
 								<Link
@@ -97,10 +97,10 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 						</ul>
 					</div>
 
-					<div className="block ml-auto">
+					<div className="hidden md:block ml-auto">
 						<ul className="flex flex-row items-center text-sm font-medium md:space-x-8 md:mt-0 sm:text-sm">
 							{/* Search bar */}
-							<li>
+							<li className="hidden md:block">
 								{/* <div className="flex items-center justify-center text-xs rounded text-dark-200 dark:text-white">
                                     <div className="flex overflow-hidden border rounded-full dark:border-dark-100">
                                         <button className="flex items-center justify-center px-4 border-l border-light-300 dark:border-dark-100 bg-search-100 dark:bg-search-200">
@@ -129,7 +129,7 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 							</li>
 
 							{/* Notification button */}
-							<li>
+							<li className="hidden lg:block">
 								<button className="flex items-center relative justify-center text-lg p-2.5 rounded-full bg-search-100 dark:bg-search-200 text-dark-200 dark:text-white">
 									{/* Notification icon - when notification is ON */}
 									<i className="fa fa-bell"></i>
@@ -142,7 +142,7 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 							</li>
 
 							{/* Dropdowm Menu */}
-							<li>
+							<li className="hidden md:block">
 								<ul className="relative group dropdown">
 									<a
 										className="flex items-center dropdown-toggle hidden-arrow"

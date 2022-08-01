@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import Image from "next/image";
 import { useTheme } from "next-themes";
 import Router from "next/router";
-import { useMoralis, useMoralisQuery } from "react-moralis";
+import { useMoralis } from "react-moralis";
 import styles from "../../../styles/Registration/Confirm.module.css";
 import B_blackhole from "../../../public/assets/registration/dark_black_hole.svg";
 import W_blackhole from "../../../public/assets/registration/white_black_hole.svg";
@@ -13,8 +13,6 @@ export default function Confirm() {
 	const { user, Moralis, refetchUserData } = useMoralis();
 	const [, , setSuccess] = useContext(StatusContext);
 
-	const { data: userInfo } = useMoralisQuery("UserInfo", (query) => query.equalTo("user", user), [user]);
-
 	const [checkCounter, setCheckCounter] = useState(0);
 	useEffect(() => {
 		const checkEmailVerified = setTimeout(() => {
@@ -23,7 +21,7 @@ export default function Confirm() {
 			if (user) {
 				refetchUserData();
 				if (user.attributes.emailVerified) {
-					if (userInfo[0] && userInfo[0].attributes.isArtist) {
+					if (user && user.attributes.isArtist) {
 						Router.push(`/profile/${user.attributes.username}`, undefined, { shallow: true });
 					} else {
 						Router.push("/mxcatalog/explore", undefined, { shallow: true });
@@ -38,7 +36,7 @@ export default function Confirm() {
 		e.preventDefault();
 		await refetchUserData();
 
-		if (userInfo[0].attributes.isArtist) {
+		if (user.attributes.isArtist) {
 			Router.push(`/profile/${user.attributes.username}`, undefined, { shallow: true });
 		} else {
 			Router.push("/mxcatalog/explore", undefined, { shallow: true });
@@ -75,7 +73,7 @@ export default function Confirm() {
 						<p className="font-secondary text-[12px] text-center">You will automatically be redirected once you confirm your email</p>
 					</span>
 					<form onSubmit={backToApp} className="mt-12">
-						{user && userInfo[0] && userInfo[0].attributes.isArtist ? (
+						{user && user.attributes.isArtist ? (
 							<button
 								type="submit"
 								className="flex justify-center items-center space-x-3 bg-light-100 hover:bg-light-200 text-[14px] text-dark-100 py-2 px-6 rounded-lg font-primary font-semibold max-w-[210px]"

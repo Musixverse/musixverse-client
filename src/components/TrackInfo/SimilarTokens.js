@@ -11,11 +11,12 @@ const SimilarTokens = ({ otherTokensOfTrack, metadata }) => {
 						otherTokensOfTrack.map((token, index) => {
 							if (metadata) {
 								return (
-									<Link key={index} href={`/polygon/track/${token.tokenId}`} passHref={true}>
+									<Link key={index} href={`/track/polygon/${token.tokenId}`} passHref={true}>
 										<a>
 											<NFTCard
 												trackName={metadata.title}
 												artistName={metadata.artist}
+												artistAddress={metadata.artistAddress}
 												image={metadata.artwork.uri.replace("ipfs://", process.env.NEXT_PUBLIC_IPFS_NODE_URL)}
 												tokenId={token.tokenId}
 												numberOfCopies={metadata.attributes[0].value}

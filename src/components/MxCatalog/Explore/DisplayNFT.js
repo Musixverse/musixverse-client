@@ -71,11 +71,12 @@ const DisplayNFT = ({ track, index }) => {
 		};
 
 		return (
-			<Link key={index} href={`/polygon/track/${track.purchasedTokens.at(0)}`} passHref={true}>
+			<Link key={index} href={`/track/polygon/${track.purchasedTokens.at(0)}`} passHref={true}>
 				<a>
 					<NFTCard
 						trackName={metadata.title}
 						artistName={metadata.artist}
+						artistAddress={metadata.artistAddress}
 						image={metadata.artwork.uri.replace("ipfs://", process.env.NEXT_PUBLIC_IPFS_NODE_URL)}
 						tokenId={track.purchasedTokens.at(0)}
 						numberOfCopies={metadata.attributes[0].value}

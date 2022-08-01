@@ -5,6 +5,7 @@ import { useTheme } from "next-themes";
 import Loading from "../layout/Loading/Loading";
 import LoadingDark from "../layout/Loading/LoadingDark";
 import LoadingContext from "../../store/loading-context";
+import AccessLevelContext from "../../store/accessLevel-context";
 
 // Check if user is on the client (browser) or server
 const isBrowser = () => typeof window !== "undefined";
@@ -12,6 +13,15 @@ const isBrowser = () => typeof window !== "undefined";
 const ProtectedRoutes = ({ router, children }) => {
 	const { theme } = useTheme();
 	const [isLoading, setLoading] = useContext(LoadingContext);
+	// Level 0: New user who is not signed in
+	// Level 1: Signed up user who hasn't chosen between a collector/artist profile
+	// Level 2: Signed up collector who hasn't verified email
+	// Level 3: Signed up collector with verified email
+	// Level 4: Signed up artist who hasn't verified email
+	// Level 5: Signed up artist with verified email who does not have a verified artist profile
+	// Level 6: Signed up artist with a verified artist profile
+	const [accessLevel, setAccessLevel] = useContext(AccessLevelContext);
+
 	const [showContent, setShowContent] = useState(false);
 
 	// Identify authenticated user
@@ -69,6 +79,31 @@ const ProtectedRoutes = ({ router, children }) => {
 			}
 		}
 		checkPath();
+	}, [router.pathname, isInitialized, isAuthenticated]);
+
+	// Setting access level
+	useEffect(() => {
+		if (isInitialized) {
+			if (!isAuthenticated) {
+				setAccessLevel(0);
+			} else {
+				// Authenticated
+				refetchData();
+				if (isBrowser() && !user.attributes.email) {
+					setAccessLevel(1);
+				} else if (isBrowser() && !user.attributes.emailVerified && !user.attributes.isArtist) {
+					setAccessLevel(2);
+				} else if (isBrowser() && user.attributes.emailVerified && !user.attributes.isArtist) {
+					setAccessLevel(3);
+				} else if (isBrowser() && !user.attributes.emailVerified && user.attributes.isArtist) {
+					setAccessLevel(4);
+				} else if (isBrowser() && user.attributes.emailVerified && user.attributes.isArtist && user.attributes.isArtistVerified) {
+					setAccessLevel(6);
+				} else if (isBrowser() && user.attributes.emailVerified && user.attributes.isArtist) {
+					setAccessLevel(5);
+				}
+			}
+		}
 	}, [router.pathname, isInitialized, isAuthenticated]);
 
 	useEffect(() => {

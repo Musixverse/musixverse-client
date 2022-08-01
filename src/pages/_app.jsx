@@ -6,6 +6,7 @@ import * as ga from "../../lib/google-analytics";
 import StatusContext from "../../store/status-context";
 import LoadingContext from "../../store/loading-context";
 import AuthModalContext from "../../store/authModal-context";
+import AccessLevelContext from "../../store/accessLevel-context";
 import "../../styles/globals.css";
 import ProtectedRoutes from "../auth/ProtectedRoutes";
 import Layout from "../layout/WrapLayout/Layout";
@@ -26,6 +27,7 @@ function App({ Component, pageProps, router }) {
 	}, [router.events]);
 
 	const [isLoading, setLoading] = useState(false);
+	const [accessLevel, setAccessLevel] = useState(0);
 	const [error, setError] = useState({
 		title: "",
 		message: "",
@@ -71,16 +73,18 @@ function App({ Component, pageProps, router }) {
 			<MoralisProvider appId={MORALIS_APP_ID} serverUrl={MORALIS_SERVER_URL}>
 				<ThemeProvider attribute="class" enableSystem={false}>
 					<LoadingContext.Provider value={[isLoading, setLoading]}>
-						<AuthModalContext.Provider value={[authModalOpen, setAuthModalOpen]}>
-							<StatusContext.Provider value={[error, success, setSuccess, setError]}>
-								<ProtectedRoutes router={router}>
-									<Layout>
-										<ScrollToPageTop />
-										<Component {...pageProps} />
-									</Layout>
-								</ProtectedRoutes>
-							</StatusContext.Provider>
-						</AuthModalContext.Provider>
+						<AccessLevelContext.Provider value={[accessLevel, setAccessLevel]}>
+							<AuthModalContext.Provider value={[authModalOpen, setAuthModalOpen]}>
+								<StatusContext.Provider value={[error, success, setSuccess, setError]}>
+									<ProtectedRoutes router={router}>
+										<Layout>
+											<ScrollToPageTop />
+											<Component {...pageProps} />
+										</Layout>
+									</ProtectedRoutes>
+								</StatusContext.Provider>
+							</AuthModalContext.Provider>
+						</AccessLevelContext.Provider>
 					</LoadingContext.Provider>
 				</ThemeProvider>
 			</MoralisProvider>

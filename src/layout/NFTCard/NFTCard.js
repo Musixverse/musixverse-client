@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { useTheme } from "next-themes";
+import { useMoralisCloudFunction } from "react-moralis";
 import styles from "../../../styles/NFTCard/Nftcard.module.css";
 import Section2 from "./Section2";
 import Section1 from "./Section1";
@@ -7,6 +8,7 @@ import Section1 from "./Section1";
 export default function NFTCard({
 	trackName,
 	artistName,
+	artistAddress,
 	image,
 	tokenId,
 	numberOfCopies,
@@ -15,12 +17,12 @@ export default function NFTCard({
 	soldOnceTrackData,
 	likeCount,
 	lastPrice,
-	isVerified,
 }) {
 	const { theme } = useTheme();
+	const { data: artist } = useMoralisCloudFunction("fetchUsernameFromAddress", { address: artistAddress });
 
 	let truncatedArtistName = artistName;
-	if (artistName && artistName.length > 17) truncatedArtistName = artistName.substring(0, 17) + "...";
+	if (artistName && artistName.length > 14) truncatedArtistName = artistName.substring(0, 14) + "...";
 
 	let truncatedNftName = trackName;
 	if (trackName && trackName.length > 10) {
@@ -53,7 +55,7 @@ export default function NFTCard({
 					tokenId={tokenId}
 					unsoldTrackData={unsoldTrackData}
 					soldOnceTrackData={soldOnceTrackData}
-					isVerified={isVerified}
+					isVerified={artist ? artist.isArtistVerified : false}
 				/>
 				{/* LIKES and Prev Price Section */}
 				<Section2

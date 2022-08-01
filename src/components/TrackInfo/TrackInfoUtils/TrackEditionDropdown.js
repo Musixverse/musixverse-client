@@ -20,7 +20,7 @@ export default function TrackEditionDropdown({ optionsArray, localTokenId, numbe
 		return (
 			<Menu.Item key={idx}>
 				{({ active }) => (
-					<Link key={idx} href={`/polygon/track/${option.tokenId}`} passHref={true}>
+					<Link key={idx} href={`/track/polygon/${option.tokenId}`} passHref={true}>
 						<a>
 							<li
 								className={classNames(

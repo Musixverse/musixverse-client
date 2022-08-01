@@ -1,8 +1,10 @@
 import { useState, useEffect, useRef } from "react";
 import { useMoralis } from "react-moralis";
+import { useRouter } from "next/router";
 
 const PersonaVerification = ({ isOpen = "", onClose = "", personaInquiryIdData }) => {
 	const { user } = useMoralis();
+	const router = useRouter();
 
 	const [isModalOpen, setIsModalOpen] = useState(isOpen);
 	const embeddedClientRef = useRef(null);
@@ -51,6 +53,7 @@ const PersonaVerification = ({ isOpen = "", onClose = "", personaInquiryIdData }
 			onComplete: (inquiryId, status, fields) => {
 				if (inquiryId.status == "completed") {
 					closeModal();
+					router.reload(window.location.pathname);
 				}
 			},
 		});

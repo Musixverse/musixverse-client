@@ -113,6 +113,7 @@ export default function BasicDetails() {
 				name: name === "" ? undefined : name,
 				username: username === "" ? undefined : username,
 				email: email === "" ? undefined : email,
+				isArtist: true,
 			});
 
 			const userData = {
@@ -120,7 +121,6 @@ export default function BasicDetails() {
 				userId: user.id,
 				avatar: avatar,
 				coverImage: "https://ipfs.moralis.io:2053/ipfs/QmSQ2s8TEKBAdZy3Pm6oy7CPDLZ7dEUQZJ89azN4a2AVUE",
-				isArtist: true,
 			};
 			await saveUserInfo(userData, {
 				onSuccess: (obj) => {

@@ -76,7 +76,8 @@ export default function Profile() {
 					<ArtistHeader
 						avatar={profileUserInfo.avatar}
 						name={profileUser.name}
-						isArtistVerified={profileUserInfo.isArtistVerified}
+						username={username}
+						isArtistVerified={profileUser.isArtistVerified}
 						instagram={profileUserInfo.instagram}
 						facebook={profileUserInfo.facebook}
 						twitter={profileUserInfo.twitter}

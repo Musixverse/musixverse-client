@@ -48,7 +48,7 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 		customStyles = "lg:rounded-full lg:top-2.5 lg:shadow-lg";
 	}
 
-	function closeNavbar() {
+	const closeNavbar = () => {
 		document.getElementById("hamburgerToggler").click();
 	}
 
@@ -324,7 +324,7 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 					</div>
 					
 					{/* Hamburger Menu */}
-					<div className="navbar-nav lg:hidden">
+					{/* <div className="navbar-nav ml-2 lg:hidden">
 						<div id="menuToggle">
 							<input type="checkbox" className="toggler" id="hamburgerToggler" />
 							<div className="hamburger">
@@ -334,7 +334,7 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 							<div id="menu">
 								<div className="hamburger_container">
 									<div className="menu_box">
-										<div className="row">
+										<div className="flex">
 											<div className="offset-lg-1 col-lg-2 offset-md-1 col-md-2 offset-0 col-12 logo_div_anim">
 												<Link href={'/'} onClick={closeNavbar} passHref={true}>
 													<a href="#" className="flex">
@@ -440,6 +440,144 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 														<i className="fab fa-discord fa-lg"></i>
 													</a>
 													<a href="https://www.instagram.com/musixverse" target="_blank" rel="noopener noreferrer" className="connect_link cursor_ptr text-center col p-0">
+														<i className="fab fa-instagram fa-lg"></i>
+													</a>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div> */}
+					<div className="flex flex-wrap list-reset pl-0 mb-0 ml-2 lg:hidden">
+						<div id="menuToggle">
+							<input type="checkbox" className="toggler" id="hamburgerToggler" />
+							<div className="hamburger">
+								<div></div>
+							</div>
+
+							<div id="menu">
+								<div className="hamburger_container">
+									<div className="menu_box">
+										<div className="flex">
+											<div className="lg:mx-1/6 lg:w-1/5 md:mx-1/6 md:w-1/5 pr-4 pl-4 offset-0 w-full logo_div_anim">
+												<Link href={'/'} onClick={closeNavbar} passHref={true}>
+													<a href="#" className="flex">
+														{theme === "light" ? <Image src={logoBlack} alt="MXV Logo" width="75" /> : <Image src={logoWhite} alt="MXV Logo" width="75" />}
+													</a>
+												</Link>
+											</div>
+											<div className="lg:mx-1/3 lg:w-1/5 md:mx-1/3 md:w-1/5 pr-4 pl-4 w-1/2 md:mt-12 mt-1 create_left_anim">
+												<div className="md:mt-6 quick_hamburger_nav_div">
+													<Link href={"/create-nft"} onClick={closeNavbar} className="quick_hamburger_nav" passHref={true}>
+														Create
+													</Link>
+												</div>
+											</div>
+											<div className="offset-lg-0 lg:w-1/5 offset-md-0 md:w-1/5 pr-4 pl-4 w-1/2 md:mt-12 mt-1 dashboard_left_anim">
+												<div className="md:mt-6 quick_hamburger_nav_div">
+													<Link href={"/settings/profile-settings"} onClick={closeNavbar} className="quick_hamburger_nav" passHref={true}>
+														Dashboard
+													</Link>
+												</div>
+											</div>
+										</div>
+
+										<div className="hamburger_menu justify-center">
+											<div className="flex flex-wrap  justify-center">
+												<div className="lg:w-full md:w-4/5 pr-4 pl-4 offset-0 w-full md:mt-0">
+													<div className="flex flex-wrap  justify-center">
+														<div className="md:w-1/4 pr-4 pl-4 w-1/2 text-center">
+															<div className="flex flex-wrap  ham_menu_heading justify-center">Quick Links</div>
+															<div className="flex flex-wrap  ham_menu_hover_effect_row mt-4 justify-center">
+																<Link href={"/mxcatalog/explore"} onClick={closeNavbar} className="ham_menu_link ham_menu_hover_effect text-center" passHref={true}>
+																	<div>Library</div>
+																</Link>
+															</div>
+															<div className="flex flex-wrap  ham_menu_hover_effect_row justify-center">
+																<Link href={"/trending"} onClick={closeNavbar} className="ham_menu_link ham_menu_hover_effect text-center" passHref={true}>
+																	<div>Trending</div>
+																</Link>
+															</div>
+															<div className="flex flex-wrap  ham_menu_hover_effect_row justify-center">
+																<Link href={"/faq"} onClick={closeNavbar} className="ham_menu_link ham_menu_hover_effect text-center" passHref={true}>
+																	<div>FAQ</div>
+																</Link>
+															</div>
+															<div className="flex flex-wrap  ham_menu_hover_effect_row justify-center">
+																<Link href={"/team"} onClick={closeNavbar} className="ham_menu_link ham_menu_hover_effect text-center" passHref={true}>
+																	<div>Team</div>
+																</Link>
+															</div>
+														</div>
+
+														<div className="md:w-1/4 pr-4 pl-4 w-1/2 text-center">
+															<div className="flex flex-wrap  ham_menu_heading mt-0 justify-center">Account</div>
+															<div className="flex flex-wrap  ham_menu_hover_effect_row md:mt-12 mt-4 justify-center">
+																<Link href={"/settings/profile-settings"} onClick={closeNavbar} className="ham_menu_link ham_menu_hover_effect text-center" passHref={true}>
+																	<div>Dashboard</div>
+																</Link>
+															</div>
+															<div className="flex flex-wrap  ham_menu_hover_effect_row justify-center">
+																<Link href={"/"} onClick={closeNavbar} className="ham_menu_link ham_menu_hover_effect text-center" passHref={true}>
+																	<div>Home</div>
+																</Link>
+															</div>
+															<div className="flex flex-wrap  ham_menu_hover_effect_row justify-center">
+																<Link href={"/create-nft"} onClick={closeNavbar} className="ham_menu_link ham_menu_hover_effect text-center" passHref={true}>
+																	<div>Create</div>
+																</Link>
+															</div>
+														</div>
+
+														<div className="md:w-1/4 pr-4 pl-4 w-full text-center">
+															<div className="flex flex-wrap  ham_menu_heading mt-5 md:mt-0 justify-center">Support</div>
+															<div className="flex flex-wrap  ham_menu_hover_effect_row md:mt-12 mt-4 justify-center">
+																<Link href={"/contact-us"} onClick={closeNavbar} className="ham_menu_link ham_menu_hover_effect text-center" passHref={true}>
+																	<div>Contact Us</div>
+																</Link>
+															</div>
+															<div className="flex flex-wrap  ham_menu_hover_effect_row justify-center">
+																<Link href={"/report-a-bug"} onClick={closeNavbar} className="ham_menu_link ham_menu_hover_effect text-center" passHref={true}>
+																	<div>Report a Bug</div>
+																</Link>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+
+										<div className="flex flex-wrap ">
+											<div className="md:mx-1/5 pr-4 pl-4 w-full mt-5 mb-4 horizontal_line_to_right"></div>
+										</div>
+
+										<div className="flex flex-wrap  justify-center mb-5 harmburger_menu_connect">
+											<div className="ham_menu_connect_links_md pr-4 pl-4 offset-0 w-full md:mt-0 mt-4">
+												<div className="flex flex-wrap justify-center">
+													<div className="ham_menu_heading ham_menu_connect_heading text-center">Connect with us</div>
+												</div>
+												<div className="flex flex-wrap justify-center mt-3">
+													<a href="https://www.youtube.com/channel/UCloNloMRDKaB-0e-xeaTdXw" target="_blank" rel="noopener noreferrer" className="connect_link cursor_ptr text-center relative flex-grow max-w-full flex-1 px-4 p-0">
+														<i className="fab fa-youtube fa-lg"></i>
+													</a>
+													<a href="https://t.me/+7e4mG5yhutswNWVl" target="_blank" rel="noopener noreferrer" className="connect_link cursor_ptr text-center relative flex-grow max-w-full flex-1 px-4 p-0">
+														<i className="fab fa-telegram fa-lg"></i>
+													</a>
+													<a href="https://www.linkedin.com/company/musomatic" target="_blank" rel="noopener noreferrer" className="connect_link cursor_ptr text-center relative flex-grow max-w-full flex-1 px-4 p-0">
+														<i className="fab fa-linkedin fa-lg"></i>
+													</a>
+													<a href="https://discord.gg/HSKayad3NM" target="_blank" rel="noopener noreferrer" className="connect_link cursor_ptr text-center relative flex-grow max-w-full flex-1 px-4 p-0">
+														<i className="fab fa-discord fa-lg"></i>
+													</a>
+													<a href="https://www.facebook.com/Musixverse-104390125641359" target="_blank" rel="noopener noreferrer" className="connect_link cursor_ptr text-center relative flex-grow max-w-full flex-1 px-4 p-0">
+														<i className="fab fa-meta fa-lg"></i>
+													</a>
+													<a href="https://twitter.com/musixverse" target="_blank" rel="noopener noreferrer" className="connect_link cursor_ptr text-center relative flex-grow max-w-full flex-1 px-4 p-0">
+														<i className="fab fa-twitter fa-lg"></i>
+													</a>
+													<a href="https://www.instagram.com/musixverse" target="_blank" rel="noopener noreferrer" className="connect_link cursor_ptr text-center relative flex-grow max-w-full flex-1 px-4 p-0">
 														<i className="fab fa-instagram fa-lg"></i>
 													</a>
 												</div>

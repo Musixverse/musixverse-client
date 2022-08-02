@@ -146,6 +146,8 @@ const Verify = () => {
 						verifiedText="Twitter account connected successfully"
 					/>
 
+					{/* https://www.instagram.com/musixverse/ */}
+
 					<div className="w-2/3 text-sm mt-10">Is your stage name different from your real name?</div>
 
 					<div className="flex flex-col mb-6">

@@ -21,86 +21,86 @@ export default function HamburgerMenu(){
                     <div className="hamburger_container">
                         <div className="menu_box">
                             <div className="flex">
-                                <div className="lg:mx-1/6 lg:w-1/5 md:mx-1/6 md:w-1/5 pr-4 pl-4 offset-0 w-full logo_div_anim">
+                                <div className="md:mx-1/6 md:w-1/5 pr-4 pl-4 offset-0 w-full logo_div_anim">
                                     <Link href={'/'} onClick={closeNavbar} passHref={true}>
                                         <a href="#" className="flex">
                                             <Image src={logoWhite} alt="MXV Logo" width="75" />
                                         </a>
                                     </Link>
                                 </div>
-                                <div className="lg:mx-1/3 lg:w-1/5 md:mx-1/3 md:w-1/5 pr-4 pl-4 w-1/2 md:mt-12 mt-1 create_left_anim">
+                                <div className="md:mx-1/3 md:w-1/5 px-4 w-1/2 md:mt-12 mt-1 create_left_anim">
                                     <div className="md:mt-6 quick_hamburger_nav_div">
                                         <Link href={"/create-nft"} onClick={closeNavbar} className="quick_hamburger_nav" passHref={true}>
-                                            Create
+                                            <div className="text-white hover:text-primary-100">Create</div>
                                         </Link>
                                     </div>
                                 </div>
-                                <div className="offset-lg-0 lg:w-1/5 offset-md-0 md:w-1/5 pr-4 pl-4 w-1/2 md:mt-12 mt-1 dashboard_left_anim">
+                                <div className="offset-md-0 md:w-1/5 px-4 w-1/2 md:mt-12 mt-1 dashboard_left_anim">
                                     <div className="md:mt-6 quick_hamburger_nav_div">
                                         <Link href={"/settings/profile-settings"} onClick={closeNavbar} className="quick_hamburger_nav" passHref={true}>
-                                            Dashboard
+                                           <div className="text-white hover:text-primary-100">Settings</div> 
                                         </Link>
                                     </div>
                                 </div>
                             </div>
 
                             <div className="hamburger_menu justify-center">
-                                <div className="flex flex-wrap  justify-center">
-                                    <div className="lg:w-full md:w-4/5 pr-4 pl-4 offset-0 w-full md:mt-0">
-                                        <div className="flex flex-wrap  justify-center">
-                                            <div className="md:w-1/4 pr-4 pl-4 w-1/2 text-center">
+                                <div className="flex flex-wrap justify-center">
+                                    <div className="lg:w-full md:w-4/5 px-4 offset-0 w-full md:mt-0">
+                                        <div className="flex flex-wrap justify-center">
+                                            <div className="md:w-1/4 px-4 w-1/2 text-center">
                                                 <div className="flex flex-wrap  ham_menu_heading justify-center">Quick Links</div>
                                                 <div className="flex flex-wrap  ham_menu_hover_effect_row mt-4 justify-center">
                                                     <Link href={"/mxcatalog/explore"} onClick={closeNavbar} className="ham_menu_link ham_menu_hover_effect text-center" passHref={true}>
-                                                        <div>Library</div>
+                                                        <div className="text-white hover:text-primary-100">Library</div>
                                                     </Link>
                                                 </div>
                                                 <div className="flex flex-wrap  ham_menu_hover_effect_row justify-center">
                                                     <Link href={"/trending"} onClick={closeNavbar} className="ham_menu_link ham_menu_hover_effect text-center" passHref={true}>
-                                                        <div>Trending</div>
+                                                        <div className="text-white hover:text-primary-100">Trending</div>
                                                     </Link>
                                                 </div>
                                                 <div className="flex flex-wrap  ham_menu_hover_effect_row justify-center">
                                                     <Link href={"/faq"} onClick={closeNavbar} className="ham_menu_link ham_menu_hover_effect text-center" passHref={true}>
-                                                        <div>FAQ</div>
+                                                        <div className="text-white hover:text-primary-100">FAQ</div>
                                                     </Link>
                                                 </div>
                                                 <div className="flex flex-wrap  ham_menu_hover_effect_row justify-center">
                                                     <Link href={"/team"} onClick={closeNavbar} className="ham_menu_link ham_menu_hover_effect text-center" passHref={true}>
-                                                        <div>Team</div>
+                                                        <div className="text-white hover:text-primary-100">Team</div>
                                                     </Link>
                                                 </div>
                                             </div>
 
-                                            <div className="md:w-1/4 pr-4 pl-4 w-1/2 text-center">
+                                            <div className="md:w-1/4 px-4 w-1/2 text-center">
                                                 <div className="flex flex-wrap  ham_menu_heading mt-0 justify-center">Account</div>
                                                 <div className="flex flex-wrap  ham_menu_hover_effect_row md:mt-12 mt-4 justify-center">
                                                     <Link href={"/settings/profile-settings"} onClick={closeNavbar} className="ham_menu_link ham_menu_hover_effect text-center" passHref={true}>
-                                                        <div>Dashboard</div>
+                                                        <div className="text-white hover:text-primary-100">Settings</div>
                                                     </Link>
                                                 </div>
                                                 <div className="flex flex-wrap  ham_menu_hover_effect_row justify-center">
                                                     <Link href={"/"} onClick={closeNavbar} className="ham_menu_link ham_menu_hover_effect text-center" passHref={true}>
-                                                        <div>Home</div>
+                                                        <div className="text-white hover:text-primary-100">Home</div>
                                                     </Link>
                                                 </div>
                                                 <div className="flex flex-wrap  ham_menu_hover_effect_row justify-center">
                                                     <Link href={"/create-nft"} onClick={closeNavbar} className="ham_menu_link ham_menu_hover_effect text-center" passHref={true}>
-                                                        <div>Create</div>
+                                                        <div className="text-white hover:text-primary-100">Create</div>
                                                     </Link>
                                                 </div>
                                             </div>
 
-                                            <div className="md:w-1/4 pr-4 pl-4 w-full text-center">
-                                                <div className="flex flex-wrap  ham_menu_heading mt-5 md:mt-0 justify-center">Support</div>
+                                            <div className="md:w-1/4 px-4 w-full text-center">
+                                                <div className="flex flex-wrap  ham_menu_heading mt-5 justify-center">Support</div>
                                                 <div className="flex flex-wrap  ham_menu_hover_effect_row md:mt-12 mt-4 justify-center">
                                                     <Link href={"/contact-us"} onClick={closeNavbar} className="ham_menu_link ham_menu_hover_effect text-center" passHref={true}>
-                                                        <div>Contact Us</div>
+                                                        <div className="text-white hover:text-primary-100">Contact Us</div>
                                                     </Link>
                                                 </div>
                                                 <div className="flex flex-wrap  ham_menu_hover_effect_row justify-center">
                                                     <Link href={"/report-a-bug"} onClick={closeNavbar} className="ham_menu_link ham_menu_hover_effect text-center" passHref={true}>
-                                                        <div>Report a Bug</div>
+                                                        <div className="text-white hover:text-primary-100">Report a Bug</div>
                                                     </Link>
                                                 </div>
                                             </div>
@@ -110,18 +110,18 @@ export default function HamburgerMenu(){
                             </div>
 
                             <div className="flex flex-wrap ">
-                                <div className="md:mx-1/5 pr-4 pl-4 w-full mt-5 mb-4 horizontal_line_to_right"></div>
+                                <div className="md:mx-1/5 px-4 w-full mt-5 mb-4 horizontal_line_to_right"></div>
                             </div>
 
-                            <div className="flex flex-wrap  justify-center mb-5 harmburger_menu_connect">
-                                <div className="ham_menu_connect_links_md pr-4 pl-4 offset-0 w-full md:mt-0 mt-4">
+                            <div className="flex flex-wrap justify-center mb-5 harmburger_menu_connect">
+                                <div className="ham_menu_connect_links_md px-4 offset-0 w-full md:mt-0 mt-5">
                                     <div className="flex flex-wrap justify-center">
                                         <div className="ham_menu_heading ham_menu_connect_heading text-center">Connect with us</div>
                                     </div>
-                                    <div className="flex flex-wrap justify-center mt-3">
-                                        <a href="https://www.youtube.com/channel/UCloNloMRDKaB-0e-xeaTdXw" target="_blank" rel="noopener noreferrer" className="connect_link cursor_ptr text-center relative flex-grow max-w-full flex-1 px-4 p-0">
+                                    <div className="grid grid-cols-3 gap-4 sm:flex sm:flex-wrap sm:justify-center mt-5">
+                                        {/* <a href="https://www.youtube.com/channel/UCloNloMRDKaB-0e-xeaTdXw" target="_blank" rel="noopener noreferrer" className="connect_link cursor_ptr text-center relative flex-grow max-w-full flex-1 px-4 p-0">
                                             <i className="fab fa-youtube fa-lg"></i>
-                                        </a>
+                                        </a> */}
                                         <a href="https://t.me/+7e4mG5yhutswNWVl" target="_blank" rel="noopener noreferrer" className="connect_link cursor_ptr text-center relative flex-grow max-w-full flex-1 px-4 p-0">
                                             <i className="fab fa-telegram fa-lg"></i>
                                         </a>

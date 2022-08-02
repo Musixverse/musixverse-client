@@ -97,7 +97,7 @@ a {
 	}
 
 	.quick_hamburger_nav_div {
-		margin-top: -25px !important;
+		margin-top: 25px !important;
 	}
 
 	.quick_hamburger_nav.quick_hamburger_nav {
@@ -435,10 +435,14 @@ a:hover {
 }
 
 .ham_menu_link {
-	color: #a9a9a9;
+	color: #fff;
 	font-size: 1.1em;
 	font-family: var(--Poppins);
 	text-align: left;
+}
+
+.ham_menu_link:hover{
+	color: rgb(83, 194, 75);
 }
 
 @keyframes ham_menu_text_glow {
@@ -457,6 +461,9 @@ a:hover {
 	height: 1.3px !important;
 }
 
+.connect_link{
+	@apply text-white hover:text-primary-100;
+}
 /**************************************************************************/
 /*****************************    Footer   ********************************/
 /**************************************************************************/

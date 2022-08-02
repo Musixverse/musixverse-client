@@ -1,6 +1,6 @@
 export default function CatalogNav({currentSelection, setCurrentSelection}){
     return(
-        <div className="flex flex-col items-center justify-center w-full h-[280px] bg-light-300 fixed z-30">
+        <div className="flex flex-col items-center justify-center w-full h-[280px] bg-light-300">
             <h3 className="text-[#1D1D1D] text-5xl font-medium">M<span className="font-semibold text-primary-100">x</span> Catalog</h3>
             <ul className="flex mt-6 space-x-12 font-semibold">
                 <li 

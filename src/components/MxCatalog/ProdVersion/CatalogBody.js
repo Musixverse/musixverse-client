@@ -12,13 +12,16 @@ export default function CatalogBody({currentSelection}){
         catalogType = "TRENDING NFTs ON MUSIXVERSE MARKETPLACE";
         
     return(
-        <div className="flex flex-col items-center w-full mt-[350px]">
-            <Filter/>
+        <div className="flex flex-col items-center w-full mt-[70px]">
+            {/* <Filter/> */}
             <div className="flex text-[#1d1d1d] mb-[70px] items-center space-x-2 text-4xl font-tertiary">
                 <Image src={theme === "light" ? "/assets/record_b.svg" : "/assets/record_w.svg"} alt="vinyl disc" height={30} width={30}/>
                 <p>{catalogType}</p> 
             </div>
-            <TrackNFTs/>
+            <div className="flex items-start justify-between w-full">
+                <Filter/>
+                <TrackNFTs/>
+            </div>
         </div>
     );
 }

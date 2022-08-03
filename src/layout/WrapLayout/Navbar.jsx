@@ -46,14 +46,14 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 	});
 
 	if (clientWindowHeight > 50) {
-		customStyles = "lg:rounded-full lg:top-2.5 lg:shadow-lg";
+		customStyles = "lg:rounded-full lg:mt-2 lg:shadow-lg";
 	}
 
 	return (
 		<div className="absolute flex justify-center w-screen">
-			<div className="w-full fixed z-40 max-w-[1920px] px-6 md:px-8 lg:px-16 xl:px-20 2xl:px-36">
-				<nav className={"navbar duration-300 ease-in mx-auto " + customStyles}>
-					<div className="flex flex-wrap items-center justify-start w-full px-16 py-2 sm:justify-center">
+			<div className="w-full fixed z-40 max-w-[1920px] lg:px-16 xl:px-20 2xl:px-36">
+				<nav className={"navbar duration-500 ease-in mx-auto " + customStyles}>
+					<div className="flex flex-wrap items-center justify-start w-full pl-7 sm:pl-9 pr-16 lg:px-16 py-2">
 						<Link href="/">
 							<a href="#" className="flex">
 								{theme === "light" ? <Image src={logoBlack} alt="MXV Logo" width="75" /> : <Image src={logoWhite} alt="MXV Logo" width="75" />}

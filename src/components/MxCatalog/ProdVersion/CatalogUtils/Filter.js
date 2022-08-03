@@ -5,6 +5,7 @@ import mxvLogo from "../../../../../public/assets/Catalog/MXVlogo.svg";
 import { Dialog, Transition } from '@headlessui/react'
 import FilterNftTraits from "./FilterNftTraits";
 import ShowHide from "./ShowHide";
+import SortBy from "./SortBy";
 
 export default function Filter(){
     const [currentFilter, setCurrentFilter] = useState(0);
@@ -47,7 +48,7 @@ export default function Filter(){
                 </div>
                 {/* MXV LOGO */}
                 <div
-                    className="flex items-center mt-8 mb-2"
+                    className="flex items-center mt-32 mb-2"
                 >
                     <Image src={mxvLogo} height={37} width={37} objectFit="contain" alt="mxv logo"/>
                 </div>
@@ -67,29 +68,18 @@ export default function Filter(){
                         <h3 className="text-4xl font-tertiary">MARKETPLACE FILTERS</h3> 
 
                         {/* Conditional Rendering of filterOptions */}
-                        {currentFilter === 1? <FilterNftTraits/>:<ShowHide/>}
+                        {currentFilter === 1? 
+                            <FilterNftTraits/>
+                            :
+                            <>
+                                {
+                                    currentFilter === 2? <ShowHide/>:<SortBy/>
+                                }
+                            </>
+                        }
                     </div>
                 </Transition.Child>
             </Transition>
         </div>
     );
 }
-
-/*
-<div
-                        className="fixed bottom-0 right-0 z-50 px-5 py-4 -translate-x-4 -translate-y-4 border border-none rounded-lg shadow-2xl xl:w-4/12 lg:w-5/12 md:w-8/12 text-light-200 bg-primary-100"
-                        role="alert"
-                    >
-                        <strong className="font-semibold">{success.title}</strong>
-                        <br />
-                        <br />
-                        <span className="block sm:inline">{success.message}</span>
-                        <div
-                            onClick={handleClose}
-                            className="absolute flex items-center justify-center w-8 h-8 transition-all duration-200 rounded-md cursor-pointer top-1 right-1 hover:bg-primary-200"
-                        >
-                            <i className="fa-solid fa-xmark"></i>
-                        </div>
-                    </div>
-
-*/

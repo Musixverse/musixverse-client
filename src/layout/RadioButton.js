@@ -6,9 +6,9 @@ export default function RadioButton({radioId, radioLabel}){
                 type="radio"
                 name="cover-art-artist-radio"
                 className="hidden"
-                onClick={(e) => toggleCoverArtArtistRadio(e)}
-                checked={creditCoverArtArtist}
-                onChange={(e) => {}}
+                // onClick={(e) => toggleCoverArtArtistRadio(e)}
+                // checked={creditCoverArtArtist}
+                // onChange={(e) => {}}
             />
             <label htmlFor={radioId} className="flex items-center text-sm font-normal cursor-pointer font-secondary">
                 <span className="inline-block w-6 h-6 mr-1 border-2 rounded-full border-[#363636] flex-no-shrink"></span>

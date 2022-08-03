@@ -21,24 +21,24 @@ export default function HamburgerMenu(){
                     <div className="hamburger_container">
                         <div className="menu_box">
                             <div className="flex">
-                                <div className="md:mx-1/6 md:w-1/5 pr-4 pl-4 offset-0 w-full logo_div_anim">
+                                <div className="md:mx-1/6 md:w-1/5 px-4 offset-0 w-full flex justify-center sm:block logo_div_anim">
                                     <Link href={'/'} onClick={closeNavbar} passHref={true}>
                                         <a href="#" className="flex">
-                                            <Image src={logoWhite} alt="MXV Logo" width="75" />
+                                            <Image src={logoWhite} alt="MXV Logo" width="75" objectFit="contain" />
                                         </a>
                                     </Link>
                                 </div>
-                                <div className="md:mx-1/3 md:w-1/5 px-4 w-1/2 md:mt-12 mt-1 create_left_anim">
+                                <div className="hidden sm:block md:mx-1/3 md:w-1/5 px-4 w-1/2 md:mt-12 mt-1 create_left_anim">
                                     <div className="md:mt-6 quick_hamburger_nav_div">
                                         <Link href={"/create-nft"} onClick={closeNavbar} className="quick_hamburger_nav" passHref={true}>
-                                            <div className="text-white hover:text-primary-100">Create</div>
+                                            <div className="text-primary-100">Create</div>
                                         </Link>
                                     </div>
                                 </div>
-                                <div className="offset-md-0 md:w-1/5 px-4 w-1/2 md:mt-12 mt-1 dashboard_left_anim">
+                                <div className="hidden sm:block offset-md-0 md:w-1/5 px-4 w-1/2 md:mt-12 mt-1 dashboard_left_anim">
                                     <div className="md:mt-6 quick_hamburger_nav_div">
                                         <Link href={"/settings/profile-settings"} onClick={closeNavbar} className="quick_hamburger_nav" passHref={true}>
-                                           <div className="text-white hover:text-primary-100">Settings</div> 
+                                           <div className="text-primary-100">Settings</div> 
                                         </Link>
                                     </div>
                                 </div>
@@ -49,7 +49,7 @@ export default function HamburgerMenu(){
                                     <div className="lg:w-full md:w-4/5 px-4 offset-0 w-full md:mt-0">
                                         <div className="flex flex-wrap justify-center">
                                             <div className="md:w-1/4 px-4 w-1/2 text-center">
-                                                <div className="flex flex-wrap  ham_menu_heading justify-center">Quick Links</div>
+                                                <div className="flex flex-wrap  ham_menu_heading mt-5 sm:mt-0  justify-center">Quick Links</div>
                                                 <div className="flex flex-wrap  ham_menu_hover_effect_row mt-4 justify-center">
                                                     <Link href={"/mxcatalog/explore"} onClick={closeNavbar} className="ham_menu_link ham_menu_hover_effect text-center" passHref={true}>
                                                         <div className="text-white hover:text-primary-100">Library</div>
@@ -73,7 +73,7 @@ export default function HamburgerMenu(){
                                             </div>
 
                                             <div className="md:w-1/4 px-4 w-1/2 text-center">
-                                                <div className="flex flex-wrap  ham_menu_heading mt-0 justify-center">Account</div>
+                                                <div className="flex flex-wrap  ham_menu_heading mt-5 sm:mt-0 justify-center">Account</div>
                                                 <div className="flex flex-wrap  ham_menu_hover_effect_row md:mt-12 mt-4 justify-center">
                                                     <Link href={"/settings/profile-settings"} onClick={closeNavbar} className="ham_menu_link ham_menu_hover_effect text-center" passHref={true}>
                                                         <div className="text-white hover:text-primary-100">Settings</div>

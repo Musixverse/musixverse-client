@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import { useMoralisCloudFunction } from "react-moralis";
 import PreviewDraft from "./CreateNFTUtils/PreviewDraft";
-import styles from "../../../styles/CreateNFT/CreateNFT.module.css";
+import styles from "../../../styles/CreateNFT/createNFT.module.css";
 import DeleteDraftModal from "./CreateNFTUtils/DeleteDraftModal";
 
 const CreateNFTIntro = ({ nextStep }) => {

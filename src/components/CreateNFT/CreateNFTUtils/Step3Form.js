@@ -141,13 +141,13 @@ const Step3Form = ({
 
 	return (
 		<div className="w-full">
-			<p className="mb-10 font-tertiary text-5xl font-normal">PRICING & SPLITS</p>
-			<div className="flex flex-col space-y-20 lg:w-full lg:max-w-[1150px] lg:space-x-10 lg:space-y-0 xl:space-x-20 lg:flex-row">
+			<p className="mb-10 text-5xl font-normal font-tertiary">PRICING & SPLITS</p>
+			<div className="flex flex-col space-y-20 lg:w-full lg:space-x-10 lg:space-y-0 xl:space-x-20 lg:flex-row">
 				{/* Collaborators Details */}
-				<div className="lg:w-7/12 font-semibold font-secondary">
-					<div className="flex md:mb-6 gap-4">
-						<div className="w-full md:w-1/2 mb-6 md:mb-0">
-							<label htmlFor="nft-copies" className="block uppercase tracking-wide mb-1 text-sm">
+				<div className="font-semibold lg:w-7/12 font-secondary">
+					<div className="flex gap-4 md:mb-6">
+						<div className="w-full mb-6 md:w-1/2 md:mb-0">
+							<label htmlFor="nft-copies" className="block mb-1 text-sm tracking-wide uppercase">
 								NO. OF COPIES
 								<RequiredAsterisk />
 							</label>
@@ -167,7 +167,7 @@ const Step3Form = ({
 							/>
 						</div>
 						<div className="w-full md:w-1/2">
-							<label htmlFor="individual-nft-price" className="block uppercase tracking-wide mb-1 text-sm">
+							<label htmlFor="individual-nft-price" className="block mb-1 text-sm tracking-wide uppercase">
 								PRICE OF EACH COPY
 								<RequiredAsterisk />
 							</label>
@@ -185,7 +185,7 @@ const Step3Form = ({
 								placeholder="Enter price in MATIC"
 								required
 							/>
-							<p className="inline-block text-gray-500 text-xs font-normal lowercase">
+							<p className="inline-block text-xs font-normal text-gray-500 lowercase">
 								(approx. ₹{truncatedmaticINRPrice} or ${truncatedmaticUSDPrice})
 							</p>
 						</div>
@@ -201,7 +201,7 @@ const Step3Form = ({
 								return (
 									<div key={index} className="flex gap-4">
 										{index == 0 ? (
-											<div className="basis-1/2 relative">
+											<div className="relative basis-1/2">
 												{collaborator.avatar && (
 													<div className="absolute flex items-center h-full ml-2">
 														<Image src={collaborator.avatar} height="30" width="30" className="rounded-full" />
@@ -219,7 +219,7 @@ const Step3Form = ({
 												/>
 											</div>
 										) : (
-											<div className="basis-1/2 relative">
+											<div className="relative basis-1/2">
 												{collaborator.username ? (
 													<>
 														{collaborator.avatar && (
@@ -263,7 +263,7 @@ const Step3Form = ({
 																	{filteredUsers.length === 1 ? (
 																		<button
 																			type="button"
-																			className="flex items-center rounded bg-light-100 dark:bg-dark-100 hover:text-light-100 dark:text-light-100 hover:bg-primary-100 dark:hover:bg-primary-100 py-2 px-3 justify-start text-start"
+																			className="flex items-center justify-start px-3 py-2 rounded bg-light-100 dark:bg-dark-100 hover:text-light-100 dark:text-light-100 hover:bg-primary-100 dark:hover:bg-primary-100 text-start"
 																			onClick={() => {
 																				setCollaboratorInfo(user, index);
 																			}}
@@ -286,7 +286,7 @@ const Step3Form = ({
 																	) : idx === 0 ? (
 																		<button
 																			type="button"
-																			className="flex items-center rounded-t bg-light-100 dark:bg-dark-100 hover:text-light-100 dark:text-light-100 hover:bg-primary-100 dark:hover:bg-primary-100 py-2 px-3 justify-start text-start"
+																			className="flex items-center justify-start px-3 py-2 rounded-t bg-light-100 dark:bg-dark-100 hover:text-light-100 dark:text-light-100 hover:bg-primary-100 dark:hover:bg-primary-100 text-start"
 																			onClick={() => {
 																				setCollaboratorInfo(user, index);
 																			}}
@@ -309,7 +309,7 @@ const Step3Form = ({
 																	) : filteredUsers.length === idx + 1 ? (
 																		<button
 																			type="button"
-																			className="flex items-center rounded-b bg-light-100 dark:bg-dark-100 hover:text-light-100 dark:text-light-100 hover:bg-primary-100 dark:hover:bg-primary-100 py-2 px-3 justify-start text-start"
+																			className="flex items-center justify-start px-3 py-2 rounded-b bg-light-100 dark:bg-dark-100 hover:text-light-100 dark:text-light-100 hover:bg-primary-100 dark:hover:bg-primary-100 text-start"
 																			onClick={() => {
 																				setCollaboratorInfo(user, index);
 																			}}
@@ -332,7 +332,7 @@ const Step3Form = ({
 																	) : (
 																		<button
 																			type="button"
-																			className="flex items-center bg-light-100 dark:bg-dark-100 hover:text-light-100 dark:text-light-100 hover:bg-primary-100 dark:hover:bg-primary-100 py-2 px-3 justify-start text-start"
+																			className="flex items-center justify-start px-3 py-2 bg-light-100 dark:bg-dark-100 hover:text-light-100 dark:text-light-100 hover:bg-primary-100 dark:hover:bg-primary-100 text-start"
 																			onClick={() => {
 																				setCollaboratorInfo(user, index);
 																			}}
@@ -364,11 +364,11 @@ const Step3Form = ({
 																		setUsernameEntered("");
 																		setSearchedUsername("");
 																	}}
-																	className="bg-light-100 hover:bg-gray-200 dark:bg-dark-100 dark:text-light-100 py-3 px-6 justify-start text-start rounded"
+																	className="justify-start px-6 py-3 rounded bg-light-100 hover:bg-gray-200 dark:bg-dark-100 dark:text-light-100 text-start"
 																>
 																	<span className="text-sm">
 																		No results found.&nbsp;&nbsp;
-																		<a className="text-primary-200 cursor-pointer hover:underline">
+																		<a className="cursor-pointer text-primary-200 hover:underline">
 																			Send an Invite <i className="fa-solid fa-arrow-right"></i>
 																		</a>
 																	</span>
@@ -418,7 +418,7 @@ const Step3Form = ({
 
 						{/* Button to add more collaborators */}
 						{collaboratorList.length < 5 && (
-							<div className="flex mt-4 justify-start items-center">
+							<div className="flex items-center justify-start mt-4">
 								<button
 									type="button"
 									className="rounded-full flex justify-center items-center w-8 h-8 bg-[#479E00] hover:bg-primary-300 text-white"
@@ -426,11 +426,11 @@ const Step3Form = ({
 								>
 									+
 								</button>
-								<span className="pl-3 font-normal text-sm">Add more Collaborators</span>
+								<span className="pl-3 text-sm font-normal">Add more Collaborators</span>
 							</div>
 						)}
 
-						<div className="flex w-full p-3 mt-6 rounded justify-center dark:text-gray-300 bg-light-300 dark:bg-dark-100 font-medium">
+						<div className="flex justify-center w-full p-3 mt-6 font-medium rounded dark:text-gray-300 bg-light-300 dark:bg-dark-100">
 							<div className="">
 								{collaboratorList.reduce((total, currentSplit) => (total = total + Number(currentSplit.split)), 0) === 100 ? (
 									<span className="text-primary-200">
@@ -447,7 +447,7 @@ const Step3Form = ({
 
 						<p className="text-sm text-[#777777] font-normal mt-2">
 							Can&apos;t find your collaborator here? Invite them to Musixverse-&nbsp;
-							<a onClick={() => setInvitationModalOpen(true)} className="text-primary-200 cursor-pointer hover:underline">
+							<a onClick={() => setInvitationModalOpen(true)} className="cursor-pointer text-primary-200 hover:underline">
 								Send an invite
 							</a>
 						</p>
@@ -455,9 +455,9 @@ const Step3Form = ({
 				</div>
 
 				{/* Royalty and Launch */}
-				<div className="mt-10 lg:mt-14 lg:w-4/12 font-semibold font-secondary">
+				<div className="mt-10 font-semibold lg:mt-14 lg:w-4/12 font-secondary">
 					<div className="w-full mb-6">
-						<label htmlFor="resale-royalty-percentage" className="block uppercase tracking-wide mb-1 text-sm">
+						<label htmlFor="resale-royalty-percentage" className="block mb-1 text-sm tracking-wide uppercase">
 							RESALE ROYALTY PERCENTAGE
 							<RequiredAsterisk />
 						</label>
@@ -530,7 +530,7 @@ const Step3Form = ({
 								You can decide to launch your NFT on a later date. Your NFT will be created right now and will appear on the Musixverse
 								marketplace, but will not be available for buying/selling.
 								<div className="flex flex-col mt-5 text-base">
-									<span className="text-sm mb-2">Your NFT will be available for buying/selling on:</span>
+									<span className="mb-2 text-sm">Your NFT will be available for buying/selling on:</span>
 
 									<DatePicker
 										selected={unlockTimestamp}

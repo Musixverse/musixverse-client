@@ -1,12 +1,28 @@
 import Image from "next/image";
 import Link from "next/link";
+import { useMoralis } from "react-moralis";
 import styles from "../../../styles/Profile/ArtistHeader.module.css";
 import mxv_tick from "../../../public/assets/mxv_tick.svg";
 import AboutArtist from "./ProfileUtils/AboutArtist";
 import CustomButton from "../../layout/CustomButton";
 import Stats from "./ProfileUtils/Stats";
 
-export default function ArtistHeader({ avatar, name, isArtistVerified, instagram, facebook, twitter, followerCount, tracksReleased, bio, country, createdAt }) {
+export default function ArtistHeader({
+	avatar,
+	name,
+	username,
+	isArtistVerified,
+	instagram,
+	facebook,
+	twitter,
+	followerCount,
+	tracksReleased,
+	bio,
+	country,
+	createdAt,
+}) {
+	const { user } = useMoralis();
+
 	return (
 		<div className={"dark:bg-nav-dark dark:backdrop-blur-xl dark:backdrop-brightness-150 " + styles["artist-banner__container"]}>
 			{/* Left section */}
@@ -26,7 +42,15 @@ export default function ArtistHeader({ avatar, name, isArtistVerified, instagram
 					)}
 				</div>
 				<p className="mt-4 mb-4 text-4xl md:text-5xl md:hidden font-tertiary xl:mb-0 xl:mt-2">
-					{name}&nbsp;{isArtistVerified ? <Image src={mxv_tick} width={20} height={20} alt="MXV verified tick"></Image> : null}
+					{name}
+					&nbsp;
+					{isArtistVerified ? (
+						<Image src={mxv_tick} width={20} height={20} alt="MXV verified tick" className="ml-10" />
+					) : user && username === user.attributes.username ? (
+						<Link href="/profile/verify" passHref>
+							<a className="ml-4 font-primary text-sm hover:text-primary-100 cursor-pointer hover:underline">Verify your profile</a>
+						</Link>
+					) : null}
 				</p>
 				{/* links to music platforms */}
 				<div className={styles["section1__social-icons"]}>
@@ -72,11 +96,11 @@ export default function ArtistHeader({ avatar, name, isArtistVerified, instagram
 						&nbsp;
 						{isArtistVerified ? (
 							<Image src={mxv_tick} width={20} height={20} alt="MXV verified tick" className="ml-10" />
-						) : (
+						) : user && username === user.attributes.username ? (
 							<Link href="/profile/verify" passHref>
 								<a className="ml-4 font-primary text-sm hover:text-primary-100 cursor-pointer hover:underline">Verify your profile</a>
 							</Link>
-						)}
+						) : null}
 					</div>
 					{/* Artist's Stats Section */}
 					<Stats followerCount={followerCount} tracksReleased={tracksReleased} />

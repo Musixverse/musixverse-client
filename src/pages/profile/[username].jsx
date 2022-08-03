@@ -18,11 +18,11 @@ export default function Profile() {
 	const [profileUser, setProfileUser] = useState(false);
 	const [profileUserInfo, setProfileUserInfo] = useState(false);
 
-	const { fetch } = useMoralisCloudFunction("fetchUser", { username: username }, { autoFetch: false });
+	const { fetch: fetchUser } = useMoralisCloudFunction("fetchUser", { username: username }, { autoFetch: false });
 	const { fetch: fetchUserInfo } = useMoralisCloudFunction("fetchUserInfo", { username: username }, { autoFetch: false });
 
-	const fetchUser = async () => {
-		const results = await fetch({
+	const fetchUserData = async () => {
+		const results = await fetchUser({
 			onSuccess: (data) => console.log("profileUser:", data.attributes),
 		});
 		if (results) {
@@ -50,7 +50,7 @@ export default function Profile() {
 	useEffect(() => {
 		setLoading(true);
 		if (username) {
-			fetchUser();
+			fetchUserData();
 			fetchInfo();
 		}
 		setLoading(false);
@@ -59,7 +59,7 @@ export default function Profile() {
 	if (isLoading || !profileUser) return null;
 	return (
 		<>
-			{profileUserInfo.isArtist ? (
+			{profileUser.isArtist ? (
 				<Head>
 					<title>Musixverse | Artist Profile</title>
 					<meta name="description" content={meta_description} />
@@ -77,7 +77,8 @@ export default function Profile() {
 					<ArtistHeader
 						avatar={profileUserInfo.avatar}
 						name={profileUser.name}
-						isArtistVerified={profileUserInfo.isArtistVerified}
+						username={username}
+						isArtistVerified={profileUser.isArtistVerified}
 						instagram={profileUserInfo.instagram}
 						facebook={profileUserInfo.facebook}
 						twitter={profileUserInfo.twitter}

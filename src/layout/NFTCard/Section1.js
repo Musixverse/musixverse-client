@@ -36,7 +36,11 @@ export default function Section1({ artistName, isVerified, trackName, tokenId, u
 			<div>
 				<p className={styles["description--section1__artistname"]}>
 					{artistName}
-					{isVerified ? <Image src={"/assets/mxv_tick.svg"} width={17} height={17} alt="MXV verified"></Image> : null}
+					{isVerified ? (
+						<span className="ml-1 flex items-center">
+							<Image src={"/assets/mxv_tick.svg"} width={14} height={14} alt="MXV verified" />
+						</span>
+					) : null}
 				</p>
 				<h6 className={styles["description--section1__trackname"]}>{trackName}</h6>
 			</div>

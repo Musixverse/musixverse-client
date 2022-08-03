@@ -57,7 +57,13 @@ export default function TrackHeader({
 									<div className="flex items-center mb-2 font-secondary text-sm">
 										<span className="mr-2">Artwork by-</span>
 										{artworkArtistInfo.userInfo[0] && artworkArtistInfo.userInfo[0].avatar && (
-											<Image src={artworkArtistInfo.userInfo[0].avatar} alt="Artwork Artist avatar" height="25" width="25" className="rounded-full" />
+											<Image
+												src={artworkArtistInfo.userInfo[0].avatar}
+												height="25"
+												width="25"
+												className="rounded-full"
+												alt="Artwork Artist Profile Avatar"
+											/>
 										)}
 										<span className="ml-1">@{artworkArtistInfo.user[0].username}</span>
 									</div>
@@ -69,7 +75,13 @@ export default function TrackHeader({
 									<div className="flex items-center mb-2 font-secondary text-sm">
 										<span className="mr-2">Artwork by-</span>
 										{artworkArtistInfo.userInfo[0] && artworkArtistInfo.userInfo[0].avatar && (
-											<Image src={artworkArtistInfo.userInfo[0].avatar} alt="Artwork Artist avatar" height="25" width="25" className="rounded-full" />
+											<Image
+												src={artworkArtistInfo.userInfo[0].avatar}
+												height="25"
+												width="25"
+												className="rounded-full"
+												alt="Artwork Artist Profile Avatar"
+											/>
 										)}
 										<span className="ml-1">@{artworkArtistInfo.username}</span>
 									</div>
@@ -94,9 +106,11 @@ export default function TrackHeader({
 								</a>
 							</Link>
 						) : null}
-						<div className="ml-2 align-center flex">
-							<Image src={mxv_verified} width={14} height={14} alt="MXV verified tick" />
-						</div>
+						{artist.isArtistVerified && (
+							<div className="ml-2 align-center flex">
+								<Image src={mxv_verified} width={14} height={14} alt="MXV verified" />
+							</div>
+						)}
 					</div>
 
 					<div className="flex justify-between items-end pb-6">
@@ -120,7 +134,7 @@ export default function TrackHeader({
 						</div>
 					</div>
 					{/* Audio Player component */}
-					<AudioPlayer audio_url={audio_url} />
+					<AudioPlayer audio_url={audio_url} artistName={artist.name} title={title} />
 
 					<div className="w-full h-full grid content-between pt-6">
 						<div className="pb-6 w-full">

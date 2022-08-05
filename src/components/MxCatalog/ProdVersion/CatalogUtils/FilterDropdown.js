@@ -7,12 +7,16 @@ function classNames(...classes) {
     return classes.filter(Boolean).join(" ");
 }
 
-export default function FilterDropdown({ optionsArray }) {
+export default function FilterDropdown({ optionsArray, initialValue, setChoice, dropdownType}) {
     const [currentFilter, setCurrentFilter] = useState(optionsArray[0]);
-
+    console.log(currentFilter);
     const handleOptionSelect = (e) => {
         let selectedValue = e.target.textContent;
         setCurrentFilter(selectedValue);
+        setChoice({
+            type: dropdownType, 
+            selectedChoice: selectedValue
+        });
     };
 
     // Map all the options into a items renderable array

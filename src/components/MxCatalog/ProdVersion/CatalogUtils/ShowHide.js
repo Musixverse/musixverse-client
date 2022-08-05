@@ -1,7 +1,7 @@
 import HorizontalRuler from "../../../../layout/HorizontalRuler";
 import ToggleButton from "../../../../layout/ToggleButton/ToggleButton";
 
-export default function ShowHide(){
+export default function ShowHide({appliedFilter, setAppliedFilter}){
     return(
         <div className="flex w-[657px] flex-col mt-8 max-h-[425px] overflow-y-scroll">
             <h5 className="text-lg font-bold font-secondary">Show & Hide NFTs</h5>
@@ -10,29 +10,34 @@ export default function ShowHide(){
 
             <div className="flex items-center justify-between my-2">
 				<p className="font-secondary">Vocals</p>
-				<ToggleButton/>
+				<ToggleButton toggleState={appliedFilter.vocals} toggleType={"VOCALS"} setToggleState={setAppliedFilter}/>
 			</div>
             <HorizontalRuler/>
-            <div className="flex items-center justify-between my-2">
-				<p className="font-secondary">Recorfing Year</p>
+            {/* <div className="flex items-center justify-between my-2">
+				<p className="font-secondary">Recording Year</p>
 				<ToggleButton/>
 			</div>
-			<HorizontalRuler/>
+			<HorizontalRuler/> */}
             <div className="flex items-center justify-between my-2">
 				<p className="font-secondary">Verified Only</p>
-				<ToggleButton/>
+				<ToggleButton toggleState={appliedFilter.verifiedOnly} toggleType={"VERIFIED"} setToggleState={setAppliedFilter}/>
 			</div>
 			<HorizontalRuler/>
             <div className="flex items-center justify-between my-2">
 				<p className="font-secondary">Has Splits</p>
-				<ToggleButton/>
+				<ToggleButton toggleState={appliedFilter.hasSplits} toggleType={"HASSPLITS"} setToggleState={setAppliedFilter}/>
 			</div>
 			<HorizontalRuler/>
-            <div className="flex items-center justify-between my-2">
+            {/* <div className="flex items-center justify-between my-2">
 				<p className="font-secondary">Track Version</p>
 				<ToggleButton/>
 			</div>
-			<HorizontalRuler/>
+			<HorizontalRuler/> */}
+			<div className="flex items-center justify-between my-2">
+				<p className="font-secondary">Lyrics</p>
+				<ToggleButton toggleState={appliedFilter.lyrics} toggleType={"LYRICS"} setToggleState={setAppliedFilter}/>
+			</div>
+            <HorizontalRuler/>
         </div>
     );
 }

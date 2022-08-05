@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="37.313" height="33.882" viewBox="0 0 37.313 33.882">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+        stroke: #1d1d1d;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 3px;
+      }
+    </style>
+  </defs>
+  <path id="FILTER_ICON" data-name="FILTER ICON" class="cls-1" d="M36.313,3H2L15.725,19.23V30.45l6.863,3.431V19.23Z" transform="translate(-0.5 -1.5)"/>
+</svg>

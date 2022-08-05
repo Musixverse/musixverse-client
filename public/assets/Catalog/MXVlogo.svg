@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50.001" viewBox="0 0 50 50.001">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #79ca25;
+      }
+    </style>
+  </defs>
+  <path id="record-audio-svgrepo-com" class="cls-1" d="M27,2A25,25,0,1,0,52,27,25.074,25.074,0,0,0,27,2Zm0,40A15,15,0,1,1,42,27,15.044,15.044,0,0,1,27,42Z" transform="translate(-2 -2)"/>
+</svg>

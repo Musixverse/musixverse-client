@@ -102,8 +102,8 @@ export default function Step1Form({
 	return (
 		<>
 			<div className="w-full">
-				<p className="mb-10 font-tertiary text-5xl font-normal">TRACK DETAILS</p>
-				<div className="flex flex-col space-y-20 lg:w-full lg:max-w-[1150px] lg:space-x-10 lg:space-y-0 xl:space-x-20 lg:flex-row">
+				<p className="mb-10 text-5xl font-normal font-tertiary">TRACK DETAILS</p>
+				<div className="flex flex-col space-y-20 lg:w-full lg:space-x-10 lg:space-y-0 xl:space-x-20 lg:flex-row">
 					{/* Details */}
 					<div className="font-semibold lg:w-1/2 font-secondary">
 						<p className="text-sm">
@@ -121,7 +121,7 @@ export default function Step1Form({
 						></input>
 						<p className="text-[#777777] mt-1 font-normal text-xs">Feel free to include featured artists and version info in the track title</p>
 
-						<div className="flex flex-col flex-1 space-y-2 sm:space-y-4 mt-6">
+						<div className="flex flex-col flex-1 mt-6 space-y-2 sm:space-y-4">
 							<div className="flex flex-col w-full space-y-2 sm:flex-row sm:space-x-4 sm:space-y-0">
 								<div className="flex-1 text-sm font-semibold md:text-base">
 									<p className="text-sm">
@@ -161,7 +161,7 @@ export default function Step1Form({
 
 					{/* Uploads */}
 					<div className="font-semibold lg:w-1/2 font-secondary">
-						<p className="text-sm mb-1">
+						<p className="mb-1 text-sm">
 							UPLOADS
 							<RequiredAsterisk />
 						</p>
@@ -170,7 +170,7 @@ export default function Step1Form({
 
 						<ImageUpload coverArtUrl={coverArtUrl} setCoverArtUrl={setCoverArtUrl} setCoverArtMimeType={setCoverArtMimeType} />
 
-						<p className="text-sm mt-5">
+						<p className="mt-5 text-sm">
 							Would you like to tell the world about who created this amazing cover art?
 							<RequiredAsterisk />
 						</p>
@@ -208,7 +208,7 @@ export default function Step1Form({
 						</div>
 
 						{creditCoverArtArtist ? (
-							<div className="basis-1/2 relative">
+							<div className="relative basis-1/2">
 								{coverArtArtist.username ? (
 									<div className="flex items-center">
 										{coverArtArtist.avatar && (
@@ -232,7 +232,7 @@ export default function Step1Form({
 												setCoverArtArtist({ id: "", name: "", username: "", address: "", avatar: "", email: "" });
 												setSearchedUsername("");
 											}}
-											className="w-8 h-8 ml-2 flex justify-center items-center rounded-lg transition-all duration-200 cursor-pointer hover:bg-zinc-500/20 "
+											className="flex items-center justify-center w-8 h-8 ml-2 transition-all duration-200 rounded-lg cursor-pointer hover:bg-zinc-500/20 "
 										>
 											<i className="fa-solid fa-xmark"></i>
 										</div>
@@ -266,7 +266,7 @@ export default function Step1Form({
 															{filteredUsers.length === 1 ? (
 																<button
 																	type="button"
-																	className="flex items-center rounded bg-light-100 dark:bg-dark-100 hover:text-light-100 dark:text-light-100 hover:bg-primary-100 dark:hover:bg-primary-100 py-2 px-3 justify-start text-start"
+																	className="flex items-center justify-start px-3 py-2 rounded bg-light-100 dark:bg-dark-100 hover:text-light-100 dark:text-light-100 hover:bg-primary-100 dark:hover:bg-primary-100 text-start"
 																	onClick={() => {
 																		setCoverArtArtistInfo(user);
 																	}}
@@ -284,7 +284,7 @@ export default function Step1Form({
 															) : idx === 0 ? (
 																<button
 																	type="button"
-																	className="flex items-center rounded-t bg-light-100 dark:bg-dark-100 hover:text-light-100 dark:text-light-100 hover:bg-primary-100 dark:hover:bg-primary-100 py-2 px-3 justify-start text-start"
+																	className="flex items-center justify-start px-3 py-2 rounded-t bg-light-100 dark:bg-dark-100 hover:text-light-100 dark:text-light-100 hover:bg-primary-100 dark:hover:bg-primary-100 text-start"
 																	onClick={() => {
 																		setCoverArtArtistInfo(user);
 																	}}
@@ -302,7 +302,7 @@ export default function Step1Form({
 															) : filteredUsers.length === idx + 1 ? (
 																<button
 																	type="button"
-																	className="flex items-center rounded-b bg-light-100 dark:bg-dark-100 hover:text-light-100 dark:text-light-100 hover:bg-primary-100 dark:hover:bg-primary-100 py-2 px-3 justify-start text-start"
+																	className="flex items-center justify-start px-3 py-2 rounded-b bg-light-100 dark:bg-dark-100 hover:text-light-100 dark:text-light-100 hover:bg-primary-100 dark:hover:bg-primary-100 text-start"
 																	onClick={() => {
 																		setCoverArtArtistInfo(user);
 																	}}
@@ -320,7 +320,7 @@ export default function Step1Form({
 															) : (
 																<button
 																	type="button"
-																	className="flex items-center bg-light-100 dark:bg-dark-100 hover:text-light-100 dark:text-light-100 hover:bg-primary-100 dark:hover:bg-primary-100 py-2 px-3 justify-start text-start"
+																	className="flex items-center justify-start px-3 py-2 bg-light-100 dark:bg-dark-100 hover:text-light-100 dark:text-light-100 hover:bg-primary-100 dark:hover:bg-primary-100 text-start"
 																	onClick={() => {
 																		setCoverArtArtistInfo(user);
 																	}}
@@ -347,11 +347,11 @@ export default function Step1Form({
 																setUsernameEntered("");
 																setSearchedUsername("");
 															}}
-															className="bg-light-100 hover:bg-gray-200 dark:bg-dark-100 dark:text-light-100 py-3 px-6 justify-start text-start rounded"
+															className="justify-start px-6 py-3 rounded bg-light-100 hover:bg-gray-200 dark:bg-dark-100 dark:text-light-100 text-start"
 														>
 															<span className="text-sm">
 																No results found.&nbsp;&nbsp;
-																<a className="text-primary-200 cursor-pointer hover:underline">
+																<a className="cursor-pointer text-primary-200 hover:underline">
 																	Send an Invite <i className="fa-solid fa-arrow-right"></i>
 																</a>
 															</span>
@@ -361,9 +361,9 @@ export default function Step1Form({
 											</div>
 										) : null}
 
-										<div className="flex flex-col justify-center items-center">
+										<div className="flex flex-col items-center justify-center">
 											<p className="text-sm text-[#777777] font-normal mt-2 mb-2">or</p>
-											<div className="flex space-x-2 w-full">
+											<div className="flex w-full space-x-2">
 												<input
 													className="dark:text-light-100 dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-100 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-100"
 													type="text"
@@ -395,7 +395,7 @@ export default function Step1Form({
 
 										<p className="text-sm text-[#777777] font-normal mt-2">
 											You can also invite them by clicking here-{" "}
-											<a onClick={() => setInvitationModalOpen(true)} className="text-primary-200 cursor-pointer hover:underline">
+											<a onClick={() => setInvitationModalOpen(true)} className="cursor-pointer text-primary-200 hover:underline">
 												Invite artist
 											</a>
 										</p>

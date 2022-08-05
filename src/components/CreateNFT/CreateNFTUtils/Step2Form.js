@@ -45,7 +45,7 @@ export default function Step2Form({
     return (
         <div className="w-full">
             <p className="mb-10 text-5xl font-normal font-tertiary">COMPREHENSIVE DETAILS</p>
-            <div className="flex flex-col space-y-20 lg:w-full lg:max-w-[1150px] lg:space-x-10 lg:space-y-0 xl:space-x-20 lg:flex-row">
+            <div className="flex flex-col space-y-20 lg:w-full lg:space-x-10 lg:space-y-0 xl:space-x-20 lg:flex-row">
                 {/* Details */}
                 <div className="font-semibold lg:w-1/2 font-secondary">
                     {/* Input Group */}

@@ -3,7 +3,7 @@ import { useTheme } from "next-themes";
 import TrackNFTs from "../NewReleases/TrackNFTs";
 import Filter from "./CatalogUtils/Filter";
 
-export default function CatalogBody({currentSelection}){
+export default function CatalogBody({currentSelection, setAppliedFilter, appliedFilter}){
     const {theme} = useTheme();
     let catalogType = "NEW RELEASES ON MUSIXVERSE MARKETPLACE";
     if(currentSelection === 2)
@@ -18,7 +18,7 @@ export default function CatalogBody({currentSelection}){
                 <p>{catalogType}</p> 
             </div>
             <div className="flex items-start justify-between w-full">
-                <Filter/>
+                <Filter setAppliedFilter={setAppliedFilter} appliedFilter={appliedFilter}/>
                 <TrackNFTs/>
             </div>
         </div>

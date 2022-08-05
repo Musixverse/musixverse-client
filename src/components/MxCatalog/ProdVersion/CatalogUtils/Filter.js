@@ -7,9 +7,8 @@ import FilterNftTraits from "./FilterNftTraits";
 import ShowHide from "./ShowHide";
 import SortBy from "./SortBy";
 
-export default function Filter(){
+export default function Filter({appliedFilter, setAppliedFilter}){
     const [currentFilter, setCurrentFilter] = useState(0);
-
     return(
         <div className="sticky z-10 flex top-24">
             {/* Filter CTA */}
@@ -69,11 +68,23 @@ export default function Filter(){
 
                         {/* Conditional Rendering of filterOptions */}
                         {currentFilter === 1? 
-                            <FilterNftTraits/>
+                            <FilterNftTraits 
+                                appliedFilter={appliedFilter} 
+                                setAppliedFilter={setAppliedFilter}
+                            />
                             :
                             <>
                                 {
-                                    currentFilter === 2? <ShowHide/>:<SortBy/>
+                                    currentFilter === 2? 
+                                        <ShowHide 
+                                            appliedFilter={appliedFilter} 
+                                            setAppliedFilter={setAppliedFilter}
+                                        />
+                                        :
+                                        <SortBy 
+                                            appliedFilter={appliedFilter} 
+                                            setAppliedFilter={setAppliedFilter}
+                                        />
                                 }
                             </>
                         }

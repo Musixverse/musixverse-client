@@ -49,7 +49,7 @@ const TrackNFT = ({ track, index }) => {
 		};
 
 		return (
-			<Link key={index} href={`/track/polygon/${track.unsoldTokens.at(0)}`} passHref={true}>
+			// <Link key={index} href={`/track/polygon/${track.unsoldTokens.at(0)}`} passHref={true}>
 				<a>
 					<NFTCard
 						trackName={metadata.title}
@@ -62,7 +62,7 @@ const TrackNFT = ({ track, index }) => {
 						unsoldTrackData={unsoldTrackData}
 					/>
 				</a>
-			</Link>
+			// </Link>
 		);
 	} else return <NFTCard />;
 };

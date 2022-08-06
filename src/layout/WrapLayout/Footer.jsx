@@ -25,7 +25,7 @@ const Footer = () => {
 					<Image src={theme === "dark" ? mxvW : mxvB} alt="MXV logo" width="90" height="20"></Image>
 					<p className="font-primary text-lg text-primary-100">Hear it. Own it. Live it.</p>
 				</div>
-				<div className="flex font-primary justify-between border-t-2 border-b-2 border-[#afafaf] w-full py-8 mt-5">
+				<div className="grid grid-cols-2 gap-y-10 md:gap-y-0 md:flex flex-wrap font-primary justify-between border-t-2 border-b-2 border-[#afafaf] w-full py-8 mt-5">
 					<div className="flex flex-col space-y-2">
 						<p className="font-semibold text">Quick Links</p>
 						<ul className="space-y-2">
@@ -120,9 +120,9 @@ const Footer = () => {
 					</div>
 				</div>
 
-				<div className="flex justify-between items-center w-full mt-3 space-y-2">
+				<div className="flex flex-col justify-center items-center space-y-5 mb-4 sm:flex-row sm:justify-between sm:items-center w-full mt-3 sm:space-y-2 sm:mb-0">
 					<div className="space-y-2">
-						<p className="font-semibold text-lg">Follow us on</p>
+						<p className="font-semibold text-lg text-center sm:text-left">Follow us on</p>
 						<div className="footer__social mt-2">
 							<button className="flex justify-center items-center">
 								<Link href="https://www.youtube.com/channel/UCloNloMRDKaB-0e-xeaTdXw" passHref={true}>
@@ -175,7 +175,7 @@ const Footer = () => {
 							</button>
 						</div>
 					</div>
-					<div className="flex justify-between space-x-28 font-primary">
+					<div className="grid grid-cols-2 gap-2 gap-x-10 md:gap-x-8 md:pt-6 lg:gap-0 lg:flex justify-between lg:space-x-6 xl:space-x-28 font-primary">
 						<li className="text-xs text-neutral-400 list-none">
 							<Link href="/privacy-policy">Privacy Policy</Link>
 						</li>
@@ -189,10 +189,11 @@ const Footer = () => {
 							<Link href="/contact-us">Contact Us</Link>
 						</li>
 					</div>
-					<div className="flex justify-center items-center">
+					<div className="flex md:justify-center items-center">
 						<Image src={theme === "dark" ? MXV_emblemW : MXV_emblemB} width={95} height={95} objectFit="contain" alt="MXV emblem"></Image>
 					</div>
 				</div>
+				<p className="font-primary text-xs max-w-sm text-center sm:text-left mx-auto sm:mx-0">©2021 All Rights Reserved. Musixverse logo is a registered trademark of Musixverse Company.</p>
 			</div>
 		</div>
 	);

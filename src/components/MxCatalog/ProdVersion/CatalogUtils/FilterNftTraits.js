@@ -1,7 +1,7 @@
 import HorizontalRuler from "../../../../layout/HorizontalRuler";
-import ToggleButton from "../../../../layout/ToggleButton/ToggleButton";
 import FilterDropdown from "./FilterDropdown";
 import { genre , parentalAdvisory , countryOfOrigin ,trackOrigin, duration, numberOfCollaborators, numberOfCopies, nftStatus, resaleRoyalty  } from "../../../../utils/DropdownValues";
+import TagsMultiSelect from "../../../CreateNFT/CreateNFTUtils/TagsMultiSelect";
 
 export default function FilterNftTraits({appliedFilter, setAppliedFilter}){
     const languageOptions = ["Any", "This", "Other"];
@@ -11,7 +11,7 @@ export default function FilterNftTraits({appliedFilter, setAppliedFilter}){
 	// const [currLanguage, setCurrLanguage] = useState();
 
     return(
-        <div className="flex flex-col mt-8 max-h-[425px] overflow-y-scroll">
+        <div className="flex flex-col mt-8 max-h-[425px] overflow-y-scroll pr-10">
             <h5 className="text-lg font-bold font-secondary">Filter NFT Traits</h5>
             <p className="font-secondary text-[#7F7F7F] text-[15px]">Select NFT Traits such as Genres, Languages and others</p>
 			<HorizontalRuler/>
@@ -52,7 +52,7 @@ export default function FilterNftTraits({appliedFilter, setAppliedFilter}){
 					<p className="mb-1 text-sm">No. Of Collaborators</p>
                     <FilterDropdown 
 						optionsArray={numberOfCollaborators}
-						initialValue={appliedFilter.numberOfCollaborators} 
+						initialValue={appliedFilter.numberOfCollborators} 
 						setChoice={setAppliedFilter} 
 						dropdownType={"NUMCOLLAB"}
 					/>
@@ -62,12 +62,12 @@ export default function FilterNftTraits({appliedFilter, setAppliedFilter}){
             <div className="flex w-[657px] flex-col mt-5 space-y-2 sm:flex-row sm:space-x-10 sm:space-y-0">
 				{/* Can make a component of the div below */}
                 <div className="flex-1 text-sm font-semibold md:text-base font-secondary">
-					<p className="mb-1 text-sm">Tags</p>
+					<p className="mb-1 text-sm">No. Of Copies</p>
                     <FilterDropdown 
-						optionsArray={languageOptions}
-						initialValue={appliedFilter.tags} 
+						optionsArray={numberOfCopies}
+						initialValue={appliedFilter.numberOfCopies} 
 						setChoice={setAppliedFilter} 
-						dropdownType={"TAGS"}
+						dropdownType={"NUMCOPIES"}
 					/>
 				</div>
 				<div className="flex-1 text-sm font-semibold md:text-base font-secondary">
@@ -105,14 +105,19 @@ export default function FilterNftTraits({appliedFilter, setAppliedFilter}){
 
             <div className="flex w-[657px] flex-col mt-5 space-y-2 sm:flex-row sm:space-x-10 sm:space-y-0">
 				{/* Can make a component of the div below */}
-                <div className="flex-1 text-sm font-semibold md:text-base font-secondary">
-					<p className="mb-1 text-sm">No. Of Copies</p>
-                    <FilterDropdown 
-						optionsArray={numberOfCopies}
-						initialValue={appliedFilter.numberOfCopies} 
-						setChoice={setAppliedFilter} 
-						dropdownType={"NUMCOPIES"}
+				<div className="flex-1 text-sm font-semibold md:text-base font-secondary">
+					<p className="mb-1 text-sm">Tags</p>
+					<TagsMultiSelect 
+						tags={appliedFilter.tags} 
+						setAppliedFilter={setAppliedFilter} 
+						dropdownType={"TAGS"}
 					/>
+                    {/* <FilterDropdown 
+						optionsArray={languageOptions}
+						initialValue={appliedFilter.tags} 
+						setChoice={setAppliedFilter} 
+						dropdownType={"TAGS"}
+					/> */}
 				</div>
 				<div className="flex-1 text-sm font-semibold md:text-base font-secondary">
 					<p className="mb-1 text-sm">Resale Royalty Percentage</p>

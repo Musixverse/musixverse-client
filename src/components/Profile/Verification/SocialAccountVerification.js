@@ -1,6 +1,6 @@
-import { useState, useEffect, useContext } from "react";
+import { useContext } from "react";
 import Link from "next/link";
-import { useMoralis, useMoralisCloudFunction } from "react-moralis";
+import { useMoralis } from "react-moralis";
 import VerificationButton from "./VerificationButton";
 import StatusContext from "../../../../store/status-context";
 import LoadingContext from "../../../../store/loading-context";

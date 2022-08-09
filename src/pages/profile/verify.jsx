@@ -1,15 +1,16 @@
 import { useState, useEffect } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { useMoralisCloudFunction } from "react-moralis";
+import { useMoralis, useMoralisCloudFunction } from "react-moralis";
 import NameAndIdVerification from "../../components/Profile/Verification/NameAndIdVerification";
 import SocialAccountVerification from "../../components/Profile/Verification/SocialAccountVerification";
 import InstagramManualVerification from "../../components/Profile/Verification/InstagramManualVerification";
 import ScrollToPageTop from "../../utils/ScrollToPageTop";
 
 const Verify = () => {
-	const [step, setStep] = useState(1);
+	const { user } = useMoralis();
 
+	const [step, setStep] = useState(1);
 	const [isStageNameDifferent, setIsStageNameDifferent] = useState(false);
 	const [artistStageName, setArtistStageName] = useState("");
 

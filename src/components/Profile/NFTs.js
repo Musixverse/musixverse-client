@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useMoralis, useMoralisCloudFunction } from "react-moralis";
-import { MXV_CONTRACT_ADDRESS, BLOCKCHAIN_NETWORK } from "../../utils/smart-contract/constants";
+import { MXV_DIAMOND_ADDRESS, BLOCKCHAIN_NETWORK } from "../../constants";
 import NFTCard from "../../layout/NFTCard/NFTCard";
 import Pager from "./ProfileUtils/Pager";
 import NoNfts from "./NoNfts";
@@ -12,7 +12,7 @@ export default function NFTs({ username }) {
 	const [currentPage, setCurrentPage] = useState(0);
 	const [nftCards, setNftCards] = useState([]);
 
-	const { data: profileUser } = useMoralisCloudFunction("fetchAddressFromUsername", { username: username });
+	const { data: profileUserAddress } = useMoralisCloudFunction("fetchAddressFromUsername", { username: username });
 
 	useEffect(() => {
 		if (tokens) {
@@ -31,19 +31,19 @@ export default function NFTs({ username }) {
 	}, [tokens]);
 
 	useEffect(() => {
-		if (isInitialized && profileUser) {
+		if (isInitialized && profileUserAddress) {
 			(async function () {
 				const options = {
 					chain: BLOCKCHAIN_NETWORK,
-					token_address: MXV_CONTRACT_ADDRESS,
-					address: profileUser.ethAddress,
+					token_address: MXV_DIAMOND_ADDRESS,
+					address: profileUserAddress,
 				};
 				const nftData = await Moralis.Web3API.account.getNFTsForContract(options);
 				console.log(nftData);
 				setTokens(nftData.result);
 			})();
 		}
-	}, [isInitialized, profileUser, Moralis]);
+	}, [isInitialized, profileUserAddress, Moralis]);
 
 	useEffect(() => {
 		if (tokens) {
@@ -80,11 +80,11 @@ export default function NFTs({ username }) {
 	}, [tokens]);
 	return (
 		<>
-			{nftCards.length  === 0? 
-				<NoNfts/>
-				: 
+			{nftCards.length === 0 ? (
+				<NoNfts />
+			) : (
 				<div className="grid grid-cols-2 gap-6 my-8 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 md:my-11 md:gap-11">{nftCards[currentPage]}</div>
-			}
+			)}
 			{nftCards.length > 1 ? <Pager onPageChange={setCurrentPage} maxPages={nftCards.length} /> : null}
 		</>
 	);

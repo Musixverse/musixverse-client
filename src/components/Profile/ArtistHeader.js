@@ -24,7 +24,7 @@ export default function ArtistHeader({
 	const { user } = useMoralis();
 
 	return (
-		<div className={"dark:bg-nav-dark dark:backdrop-blur-xl dark:backdrop-brightness-150 " + styles["artist-banner__container"]}>
+		<div className={"dark:bg-nav-dark dark:backdrop-blur-xl dark:backdrop-brightness-150 z-10 relative " + styles["artist-banner__container"]}>
 			{/* Left section */}
 			<div className={styles["artist-banner__section1"]}>
 				<div className={styles["section1__artist-image"]}>

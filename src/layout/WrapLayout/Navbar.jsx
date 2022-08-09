@@ -29,7 +29,7 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 	}
 
 	const handleLogout = async () => {
-		if (router.pathname !== "/") router.push("/", undefined, { shallow: true });
+		if (router.pathname != "/") router.push("/", undefined, { shallow: true });
 		await logout();
 		router.reload(window.location.pathname);
 	};
@@ -320,7 +320,7 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 								</li>
 							</ul>
 						</div>
-						
+
 						{/* Hamburger Menu */}
 						<HamburgerMenu />
 					</div>

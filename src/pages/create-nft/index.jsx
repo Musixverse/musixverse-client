@@ -10,7 +10,7 @@ import PricingAndSplits from "../../components/CreateNFT/step-3";
 import SuccessModal from "../../components/CreateNFT/CreateNFTUtils/SuccessModal";
 import SaveDraftSuccessModal from "../../components/CreateNFT/CreateNFTUtils/SaveDraftSuccessModal";
 import { mintTrackNFT } from "../../utils/smart-contract/functions";
-import { BLOCKCHAIN_NETWORK_ID, MXV_CONTRACT_ADDRESS } from "../../utils/smart-contract/constants";
+import { BLOCKCHAIN_NETWORK_ID, MXV_DIAMOND_ADDRESS } from "../../constants";
 import LoadingContext from "../../../store/loading-context";
 
 const CreateNFT = () => {
@@ -257,7 +257,7 @@ const CreateNFT = () => {
 			unlockTimestamp: _unlockTimestamp,
 			chainDetails: {
 				chainId: BLOCKCHAIN_NETWORK_ID,
-				contractAddress: MXV_CONTRACT_ADDRESS,
+				contractAddress: MXV_DIAMOND_ADDRESS,
 			},
 			// OpenSea standard ⬇️
 			name: user.attributes.name + " - " + trackTitle,

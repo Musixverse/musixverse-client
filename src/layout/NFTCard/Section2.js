@@ -77,7 +77,7 @@ export default function Section2({ collaboratorList, numberOfCopies, tokenId, un
 					)}
 				</div>
 			) : (
-				<div className="w-full h-4 mt-3 dark:bg-[#363636] bg-light-300 animate-pulse self-center rounded-lg"></div>
+				<div className="w-full h-4 mt-2 dark:bg-[#363636] bg-light-300 animate-pulse self-center rounded-lg"></div>
 			)}
 		</div>
 	);

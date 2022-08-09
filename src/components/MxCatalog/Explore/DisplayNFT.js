@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useMoralis } from "react-moralis";
-import { MXV_CONTRACT_ADDRESS, BLOCKCHAIN_NETWORK } from "../../../utils/smart-contract/constants";
+import { MXV_DIAMOND_ADDRESS, BLOCKCHAIN_NETWORK } from "../../../constants";
 import NFTCard from "../../../layout/NFTCard/NFTCard";
 
 const DisplayNFT = ({ track, index }) => {
@@ -32,28 +32,32 @@ const DisplayNFT = ({ track, index }) => {
 	const [metadata, setMetadata] = useState("");
 
 	const fetchTrackMetadata = async () => {
-		const options = {
-			address: MXV_CONTRACT_ADDRESS,
-			token_id: track.purchasedTokens.at(0),
-			chain: BLOCKCHAIN_NETWORK,
-		};
-		const token = await Moralis.Web3API.token.getTokenIdMetadata(options);
+		try {
+			const options = {
+				address: MXV_DIAMOND_ADDRESS,
+				token_id: track.purchasedTokens.at(0),
+				chain: BLOCKCHAIN_NETWORK,
+			};
+			const token = await Moralis.Web3API.token.getTokenIdMetadata(options);
 
-		if (token.metadata == null) {
-			await fetch(token.token_uri)
-				.then((response) => {
-					return response.json();
-				})
-				.then((data) => {
-					token.metadata = data;
-				});
-		}
+			if (token.metadata == null) {
+				await fetch(token.token_uri)
+					.then((response) => {
+						return response.json();
+					})
+					.then((data) => {
+						token.metadata = data;
+					});
+			}
 
-		if (typeof token.metadata === "string") {
-			const _metadata = JSON.parse(token.metadata);
-			setMetadata(_metadata);
-		} else {
-			setMetadata(token.metadata);
+			if (typeof token.metadata === "string") {
+				const _metadata = JSON.parse(token.metadata);
+				setMetadata(_metadata);
+			} else {
+				setMetadata(token.metadata);
+			}
+		} catch (error) {
+			console.log(error);
 		}
 	};
 

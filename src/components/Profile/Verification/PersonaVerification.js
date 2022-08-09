@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { useMoralis } from "react-moralis";
 import { useRouter } from "next/router";
 
-const PersonaVerification = ({ isOpen = "", onClose = "", personaInquiryIdData }) => {
+const PersonaVerification = ({ isOpen = "", onClose = "" }) => {
 	const { user } = useMoralis();
 	const router = useRouter();
 
@@ -24,9 +24,8 @@ const PersonaVerification = ({ isOpen = "", onClose = "", personaInquiryIdData }
 
 	const createClient = () => {
 		const client = new Persona.Client({
-			templateId: personaInquiryIdData && personaInquiryIdData.personaInquiryId ? null : process.env.NEXT_PUBLIC_PERSONA_TEMPLATE_ID,
+			templateId: process.env.NEXT_PUBLIC_PERSONA_TEMPLATE_ID,
 			environment: process.env.NEXT_PUBLIC_PERSONA_ENVIRONMENT,
-			inquiryId: personaInquiryIdData && personaInquiryIdData.personaInquiryId ? personaInquiryIdData.personaInquiryId : null,
 			referenceId: user.id,
 			fields: {
 				address_country_code: "IN",

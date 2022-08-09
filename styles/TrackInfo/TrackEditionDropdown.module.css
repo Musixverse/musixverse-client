@@ -1,5 +1,5 @@
 .menu-button {
-	@apply w-full pl-2 pr-1 py-1 inline-flex justify-between text-xs font-medium text-gray-700 bg-light-100 rounded-md border-2 border-transparent hover:border-2 hover:border-[#6cc027];
+	@apply w-full pl-3 pr-1 py-1 inline-flex justify-between text-xs font-medium text-gray-700 bg-light-100 rounded-md border-2 border-transparent hover:border-2 hover:border-[#6cc027];
 }
 
 .menu-item-div {

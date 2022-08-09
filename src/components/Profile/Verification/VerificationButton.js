@@ -1,6 +1,7 @@
 const VerificationButton = ({ onClick, verifiedStatus, buttonText, verifiedText }) => {
 	return (
 		<button
+			type="button"
 			onClick={() => onClick()}
 			className={
 				verifiedStatus

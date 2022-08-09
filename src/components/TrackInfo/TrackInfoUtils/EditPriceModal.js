@@ -39,10 +39,15 @@ const EditPriceModal = ({ isOpen, setEditPriceModalOpen, tokenId, currentPrice }
 		e.preventDefault();
 
 		setLoading(true);
-		await updatePrice(tokenId, updatedPrice);
-		setLoading(false);
-		setEditPriceModalOpen(false);
-		setEditPriceSuccess(true);
+		try {
+			await updatePrice(tokenId, updatedPrice);
+			setLoading(false);
+			setEditPriceModalOpen(false);
+			setEditPriceSuccess(true);
+		} catch (error) {
+			setLoading(false);
+			setEditPriceModalOpen(false);
+		}
 	};
 
 	return (

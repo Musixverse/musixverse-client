@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useMoralis, useMoralisCloudFunction } from "react-moralis";
-import { MXV_CONTRACT_ADDRESS, BLOCKCHAIN_NETWORK } from "../../../utils/smart-contract/constants";
+import { MXV_DIAMOND_ADDRESS, BLOCKCHAIN_NETWORK } from "../../../constants";
 import DisplayNFT from "./DisplayNFT";
 
 const DisplayNFTs = () => {
@@ -9,7 +9,7 @@ const DisplayNFTs = () => {
 
 	// const fetchTokens = async () => {
 	//     const options = {
-	//         address: MXV_CONTRACT_ADDRESS,
+	//         address: MXV_DIAMOND_ADDRESS,
 	//         chain: BLOCKCHAIN_NETWORK,
 	//     };
 	//     const nftData = await Moralis.Web3API.token.getNFTOwners(options);

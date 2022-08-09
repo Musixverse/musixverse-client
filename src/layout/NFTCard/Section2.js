@@ -52,14 +52,14 @@ export default function Section2({ collaboratorList, numberOfCopies, tokenId, un
 			{/* Collaborator Images */}
 			{localTokenId && collaboratorList ? (
 				<div className="flex items-end justify-between font-secondary text-[#1D1D1D] dark:text-light-200 text-xs">
-					<div className="flex -space-x-2 items-end">
+					<div className="flex items-end -space-x-2">
 						{collaboratorList.map((collaborator, index) => {
 							return <CollaboratorImage key={index} collaborator={collaborator} />;
 						})}
 					</div>
 					{unsoldTrackData ? (
-						<div className="flex flex-col justify-end items-end">
-							<span className="dark:text-[#818181]">{numberOfCopies == 1 ? "Single Drop" : <>{numberOfCopies} copies</>}</span>
+						<div className="flex flex-col items-end justify-end">
+							{/* <span className="dark:text-[#818181]">{numberOfCopies == 1 ? "Single Drop" : <>{numberOfCopies} copies</>}</span> */}
 							<span className="dark:text-[#818181] text-end">
 								{collaboratorList.length === 5 ? (
 									<>{unsoldTrackData.unsoldTokens_size} remaining</>
@@ -77,7 +77,7 @@ export default function Section2({ collaboratorList, numberOfCopies, tokenId, un
 					)}
 				</div>
 			) : (
-				<div className="w-full h-4 mt-3 dark:bg-[#363636] bg-light-300 animate-pulse self-center rounded-lg"></div>
+				<div className="w-full h-4 mt-2 dark:bg-[#363636] bg-light-300 animate-pulse self-center rounded-lg"></div>
 			)}
 		</div>
 	);

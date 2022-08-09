@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { useMoralis } from "react-moralis";
 const { Transition } = require("@headlessui/react");
-import { BLOCKCHAIN_NETWORK_ID } from "../../utils/smart-contract/constants";
+import { BLOCKCHAIN_NETWORK_ID } from "../../constants";
 import { addPolygonTestnetNetwork } from "../../utils/smart-contract/functions";
 import logoBlack from "../../../public/logo-black.svg";
 import logoWhite from "../../../public/logo-white.svg";

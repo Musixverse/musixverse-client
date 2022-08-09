@@ -1,14 +1,17 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import { useMoralisCloudFunction } from "react-moralis";
+import { useMoralis, useMoralisQuery, useMoralisCloudFunction } from "react-moralis";
 import PreviewDraft from "./CreateNFTUtils/PreviewDraft";
 import styles from "../../../styles/CreateNFT/createNFT.module.css";
 import DeleteDraftModal from "./CreateNFTUtils/DeleteDraftModal";
 
 const CreateNFTIntro = ({ nextStep }) => {
 	const router = useRouter();
+	const { user } = useMoralis();
+
 	const { data: nftDrafts } = useMoralisCloudFunction("fetchNftDrafts");
+	const { data: userInfo } = useMoralisQuery("UserInfo", (query) => query.equalTo("user", user), [user]);
 
 	const [draftToDelete, setDraftToDelete] = useState("");
 	const [deleteModalOpen, setDeleteModalOpen] = useState(false);
@@ -71,7 +74,17 @@ const CreateNFTIntro = ({ nextStep }) => {
 		},
 		numberOfCopies: "",
 		nftPrice: "",
-		collaboratorList: [{ id: "", name: "", username: "", split: "", role: "", address: "", avatar: "" }],
+		collaboratorList: [
+			{
+				id: user.id,
+				name: user.attributes.name,
+				username: user.attributes.username,
+				split: 100,
+				role: "Singer",
+				address: user.attributes.ethAddress,
+				avatar: userInfo[0] ? userInfo[0].attributes.avatar : "",
+			},
+		],
 		resaleRoyaltyPercent: "",
 		releaseNow: true,
 		unlockTimestamp: new Date().getTime(),

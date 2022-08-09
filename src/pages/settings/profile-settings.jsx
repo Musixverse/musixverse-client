@@ -6,7 +6,7 @@ import ProfileSettings from "../../components/Settings/ProfileSettings";
 import { useMoralis, useMoralisQuery, useMoralisCloudFunction } from "react-moralis";
 import StatusContext from "../../../store/status-context";
 import LoadingContext from "../../../store/loading-context";
-import { BLOCKCHAIN_NETWORK } from "../../utils/smart-contract/constants";
+import { BLOCKCHAIN_NETWORK } from "../../constants";
 
 export default function Settings() {
 	const { user, setUserData, Moralis, isInitialized, refetchUserData } = useMoralis();

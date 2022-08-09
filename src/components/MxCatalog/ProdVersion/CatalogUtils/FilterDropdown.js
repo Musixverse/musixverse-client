@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { Fragment, useMemo, useState } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/solid";
 import styles from "../../../../../styles/CreateNFT/InputDropdown.module.css";
@@ -7,12 +7,16 @@ function classNames(...classes) {
     return classes.filter(Boolean).join(" ");
 }
 
-export default function FilterDropdown({ optionsArray }) {
-    const [currentFilter, setCurrentFilter] = useState(optionsArray[0]);
-
+export default function FilterDropdown({ optionsArray, initialValue, setChoice, dropdownType}) {
+    const [currentFilter, setCurrentFilter] = useState(initialValue === ""? "Select Here":initialValue);
+    
     const handleOptionSelect = (e) => {
         let selectedValue = e.target.textContent;
         setCurrentFilter(selectedValue);
+        setChoice({
+            type: dropdownType, 
+            selectedChoice: selectedValue
+        });
     };
 
     // Map all the options into a items renderable array

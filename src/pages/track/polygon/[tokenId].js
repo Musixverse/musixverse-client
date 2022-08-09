@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import Moralis from "moralis/node";
 import { meta_description } from "../../../constants/index";
 import { useMoralis, useMoralisCloudFunction } from "react-moralis";
-import { MXV_CONTRACT_ADDRESS, BLOCKCHAIN_NETWORK } from "../../../utils/smart-contract/constants";
+import { MXV_DIAMOND_ADDRESS, BLOCKCHAIN_NETWORK } from "../../../constants";
 import TrackHeader from "../../../components/TrackInfo/TrackHeader";
 import TrackDetails from "../../../components/TrackInfo/TrackDetails";
 import PurchaseInfo from "../../../components/TrackInfo/PurchaseInfo";
@@ -21,7 +21,7 @@ export async function getServerSideProps({ query }) {
 
 	const options = {
 		chain: BLOCKCHAIN_NETWORK,
-		address: MXV_CONTRACT_ADDRESS,
+		address: MXV_DIAMOND_ADDRESS,
 		token_id: tokenId,
 	};
 	const token = await Moralis.Web3API.token.getTokenIdMetadata(options);
@@ -64,7 +64,7 @@ export default function TrackInfo({ token, otherTokensOfTrack }) {
 	const { data: tokenPrice } = useMoralisCloudFunction("fetchTokenPrice", { tokenId: tokenId });
 	const { data: currentOwnerAddress } = useMoralisCloudFunction("fetchTokenOwner", {
 		chain: BLOCKCHAIN_NETWORK,
-		address: MXV_CONTRACT_ADDRESS,
+		address: MXV_DIAMOND_ADDRESS,
 		tokenId: tokenId,
 	});
 

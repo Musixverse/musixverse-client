@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useMoralis, useMoralisCloudFunction } from "react-moralis";
-import { BLOCKCHAIN_NETWORK } from "../../../utils/smart-contract/constants";
+import { BLOCKCHAIN_NETWORK } from "../../../constants";
 import { convertTimestampToDate } from "../../../utils/ConvertTimestampToDate";
 import LinkToBlockExplorer from "./LinkToBlockExplorer";
 import auction from "../../../../public/assets/auction.svg";

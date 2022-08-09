@@ -7,11 +7,10 @@ import FilterNftTraits from "./FilterNftTraits";
 import ShowHide from "./ShowHide";
 import SortBy from "./SortBy";
 
-export default function Filter(){
+export default function Filter({appliedFilter, setAppliedFilter}){
     const [currentFilter, setCurrentFilter] = useState(0);
-
     return(
-        <div className="sticky z-10 flex top-24">
+        <div className="sticky z-10 flex mr-10 top-24 ">
             {/* Filter CTA */}
             <div className="self-start p-2 flex flex-col items-center justify-center border border-[#BFBFBF] rounded-2xl backdrop-blur-[40px] backdrop-brightness-200 bg-[rgba(255,255,255,0.8)] ">
                 {/* Filter icon */}
@@ -65,15 +64,35 @@ export default function Filter(){
                     leaveTo="opacity-0 scale-75 translate-x-1/3"
                 >
                     <div className="z-40 absolute self-start p-12 ml-7 backdrop-blur-[40px] backdrop-brightness-200 bg-[rgba(255,255,255,0.8)] rounded-2xl">
-                        <h3 className="text-4xl font-tertiary">MARKETPLACE FILTERS</h3> 
+                        <div className="flex justify-between w-full">
+                            <h3 className="text-4xl font-tertiary">MARKETPLACE FILTERS</h3> 
+                            <div
+                                onClick={() => setCurrentFilter(0)}
+                                className="flex items-center self-end justify-center w-8 h-8 mb-3 transition-all duration-200 rounded-lg cursor-pointer hover:bg-zinc-500/20 "
+                            >
+                                <i className="fa-solid fa-xmark"></i>
+                            </div>
+                        </div>
 
                         {/* Conditional Rendering of filterOptions */}
                         {currentFilter === 1? 
-                            <FilterNftTraits/>
+                            <FilterNftTraits 
+                                appliedFilter={appliedFilter} 
+                                setAppliedFilter={setAppliedFilter}
+                            />
                             :
                             <>
                                 {
-                                    currentFilter === 2? <ShowHide/>:<SortBy/>
+                                    currentFilter === 2? 
+                                        <ShowHide 
+                                            appliedFilter={appliedFilter} 
+                                            setAppliedFilter={setAppliedFilter}
+                                        />
+                                        :
+                                        <SortBy 
+                                            appliedFilter={appliedFilter} 
+                                            setAppliedFilter={setAppliedFilter}
+                                        />
                                 }
                             </>
                         }

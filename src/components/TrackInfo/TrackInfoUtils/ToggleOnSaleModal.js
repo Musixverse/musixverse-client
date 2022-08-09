@@ -24,12 +24,6 @@ const ToggleOnSaleModal = ({ isOpen, setToggleOnSaleModalOpen, tokenId, onSale }
 		} catch (error) {
 			setLoading(false);
 			setToggleOnSaleModalOpen(false);
-			setError({
-				title: "Invalid Operation",
-				message: error.data.message,
-				showErrorBox: true,
-			});
-			console.log("error:", error);
 		}
 	};
 

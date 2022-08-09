@@ -21,14 +21,14 @@ export default function NFTCard({
 	soldOnceTrackData,
 	likeCount,
 	lastPrice,
-	showNumberOfCopies
+	showNumberOfCopies,
 }) {
-	const [showNftCopiesModal ,setShowNftCopiesModal] = useState(false);
+	const [showNftCopiesModal, setShowNftCopiesModal] = useState(false);
 	const { theme } = useTheme();
 	const { data: artist } = useMoralisCloudFunction("fetchUsernameFromAddress", { address: artistAddress });
 
 	let truncatedArtistName = artistName;
-	if (artistName && artistName.length > 14) truncatedArtistName = artistName.substring(0, 14) + "...";
+	if (artistName && artistName.length > 12) truncatedArtistName = artistName.substring(0, 12) + "...";
 
 	let truncatedNftName = trackName;
 	if (trackName && trackName.length > 10) {
@@ -47,8 +47,8 @@ export default function NFTCard({
 		soldOnceTrackData,
 		likeCount,
 		lastPrice,
-		showNumberOfCopies: true
-	}
+		showNumberOfCopies: true,
+	};
 
 	return (
 		<>
@@ -62,18 +62,20 @@ export default function NFTCard({
 							objectFit="cover"
 							layout="fill"
 							priority
-							className={"group-hover:scale-110 rounded-xl hover:rounded-xl group-hover:duration-500 duration-500 " + styles["nft-image"]}
+							className={"group-hover:scale-110 group-hover:duration-500 duration-500 " + styles["nft-image"]}
 						/>
 					) : (
-						<div className="w-full h-full bg-gray-300 animate-pulse"></div>
+						<div className="w-full h-full bg-gray-300 dark:bg-[#363636] animate-pulse"></div>
 					)}
-					{(!showNumberOfCopies && numberOfCopies > 1)? 
-						<button onClick={()=> setShowNftCopiesModal(true)} className="absolute flex items-center px-4 py-2 font-bold top-4 rounded-xl left-4 hover:bg-light-200 bg-light-100 text-dark-100">
+					{!showNumberOfCopies && numberOfCopies > 1 ? (
+						<button
+							onClick={() => setShowNftCopiesModal(true)}
+							className="absolute flex items-center px-4 py-2 font-bold top-4 rounded-xl left-4 hover:bg-light-200 bg-light-100 text-dark-100"
+						>
 							<Image src={multipleNft} objectFit="contain" alt="multiple nft cards" />
 							<span className="ml-1 text-sm">x{numberOfCopies}</span>
 						</button>
-						:null
-					}
+					) : null}
 				</div>
 				{/* NFT Details */}
 				<div className={"dark:bg-dark-100 " + styles["nft-card__description"]}>
@@ -98,7 +100,7 @@ export default function NFTCard({
 				</div>
 			</div>
 
-			<NftCopiesModal {...{modalValues ,showNftCopiesModal, setShowNftCopiesModal}}/>
+			<NftCopiesModal {...{ modalValues, showNftCopiesModal, setShowNftCopiesModal }} />
 		</>
 	);
 }

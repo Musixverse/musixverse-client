@@ -1,7 +1,7 @@
 import Web3 from "web3";
 import Moralis from "moralis";
 // Importing contract abi, address, and other variables
-import { MXV_CONTRACT_ABI, MXV_CONTRACT_ADDRESS, BLOCKCHAIN_NETWORK_ID, RPC_URL } from "./constants";
+import { MUSIXVERSE_FACET_CONTRACT_ABI, MXV_DIAMOND_ADDRESS, BLOCKCHAIN_NETWORK_ID, RPC_URL } from "../../constants";
 var MUSIXVERSE;
 
 async function addPolygonTestnetNetwork() {
@@ -46,7 +46,7 @@ async function connectSmartContract() {
 	window.web3 = new Web3(provider);
 
 	const web3 = window.web3;
-	MUSIXVERSE = await new web3.eth.Contract(MXV_CONTRACT_ABI, MXV_CONTRACT_ADDRESS);
+	MUSIXVERSE = await new web3.eth.Contract(MUSIXVERSE_FACET_CONTRACT_ABI, MXV_DIAMOND_ADDRESS);
 	console.log("Contract connected");
 
 	if (ethereum && (await ethereum.request({ method: "net_version" })) !== BLOCKCHAIN_NETWORK_ID.toString()) {
@@ -57,7 +57,7 @@ async function connectSmartContract() {
 	}
 
 	// if ((await web3.eth.net.getId()) === BLOCKCHAIN_NETWORK_ID) {
-	//     MUSIXVERSE = await new web3.eth.Contract(MXV_CONTRACT_ABI, MXV_CONTRACT_ADDRESS);
+	//     MUSIXVERSE = await new web3.eth.Contract(MUSIXVERSE_FACET_CONTRACT_ABI, MXV_DIAMOND_ADDRESS);
 	//     console.log("Contract connected");
 	// }
 
@@ -81,18 +81,20 @@ async function connectSmartContract() {
 
 async function mintTrackNFT(numberOfCopies, price, metadataURI, collaborators, percentageContributions, resaleRoyaltyPercentage, onSale, unlockTimestamp) {
 	const sendOptions = {
-		contractAddress: MXV_CONTRACT_ADDRESS,
+		contractAddress: MXV_DIAMOND_ADDRESS,
 		functionName: "mintTrackNFT",
-		abi: MXV_CONTRACT_ABI,
+		abi: MUSIXVERSE_FACET_CONTRACT_ABI,
 		params: {
-			amount: numberOfCopies,
-			price: Moralis.Units.Token(String(price), "18"),
-			URIHash: metadataURI,
-			collaborators: collaborators,
-			percentageContributions: percentageContributions,
-			resaleRoyaltyPercentage: resaleRoyaltyPercentage,
-			onSale: onSale,
-			unlockTimestamp: unlockTimestamp,
+			data: [
+				numberOfCopies,
+				Moralis.Units.Token(String(price), "18"),
+				metadataURI,
+				collaborators,
+				percentageContributions,
+				resaleRoyaltyPercentage,
+				onSale,
+				unlockTimestamp,
+			],
 		},
 	};
 
@@ -105,11 +107,30 @@ async function purchaseTrackNFT(tokenId, price) {
 	const _tokenId = parseInt(tokenId).toString();
 
 	const sendOptions = {
-		contractAddress: MXV_CONTRACT_ADDRESS,
+		contractAddress: MXV_DIAMOND_ADDRESS,
 		functionName: "purchaseTrackNFT",
-		abi: MXV_CONTRACT_ABI,
+		abi: MUSIXVERSE_FACET_CONTRACT_ABI,
 		params: {
 			tokenId: _tokenId,
+		},
+		msgValue: Moralis.Units.Token(String(price), "18"),
+	};
+
+	const transaction = await Moralis.executeFunction(sendOptions);
+	// Wait until the transaction is confirmed
+	await transaction.wait();
+}
+
+async function purchaseReferredTrackNFT(tokenId, referrer, price) {
+	const _tokenId = parseInt(tokenId).toString();
+
+	const sendOptions = {
+		contractAddress: MXV_DIAMOND_ADDRESS,
+		functionName: "purchaseReferredTrackNFT",
+		abi: MUSIXVERSE_FACET_CONTRACT_ABI,
+		params: {
+			tokenId: _tokenId,
+			referrer: referrer,
 		},
 		msgValue: Moralis.Units.Token(String(price), "18"),
 	};
@@ -123,9 +144,9 @@ async function updatePrice(tokenId, newPrice) {
 	const _tokenId = parseInt(tokenId).toString();
 
 	const sendOptions = {
-		contractAddress: MXV_CONTRACT_ADDRESS,
+		contractAddress: MXV_DIAMOND_ADDRESS,
 		functionName: "updatePrice",
-		abi: MXV_CONTRACT_ABI,
+		abi: MUSIXVERSE_FACET_CONTRACT_ABI,
 		params: {
 			tokenId: _tokenId,
 			newPrice: Moralis.Units.Token(String(newPrice), "18"),
@@ -137,13 +158,13 @@ async function updatePrice(tokenId, newPrice) {
 	await transaction.wait();
 }
 
-async function toggleOnSale(tokenId, callerAddress) {
+async function toggleOnSale(tokenId) {
 	const _tokenId = parseInt(tokenId).toString();
 
 	const sendOptions = {
-		contractAddress: MXV_CONTRACT_ADDRESS,
+		contractAddress: MXV_DIAMOND_ADDRESS,
 		functionName: "toggleOnSale",
-		abi: MXV_CONTRACT_ABI,
+		abi: MUSIXVERSE_FACET_CONTRACT_ABI,
 		params: {
 			tokenId: _tokenId,
 		},
@@ -154,54 +175,55 @@ async function toggleOnSale(tokenId, callerAddress) {
 	await transaction.wait();
 }
 
-async function uri(tokenId) {
-	const _tokenUri = await MUSIXVERSE.methods.uri(tokenId).call();
-	return _tokenUri;
-}
+// async function uri(tokenId) {
+// 	const _tokenUri = await MUSIXVERSE.methods.uri(tokenId).call();
+// 	return _tokenUri;
+// }
 
-async function ownerOf(tokenId) {
-	const _tokenId = parseInt(tokenId).toString();
-	return await MUSIXVERSE.methods.ownerOf(_tokenId).call();
-}
+// async function ownerOf(tokenId) {
+// 	const _tokenId = parseInt(tokenId).toString();
+// 	return await MUSIXVERSE.methods.ownerOf(_tokenId).call();
+// }
 
-async function contractURI() {
-	return await MUSIXVERSE.methods.contractURI().call();
-}
+// async function contractURI() {
+// 	return await MUSIXVERSE.methods.contractURI().call();
+// }
 
-async function baseURI() {
-	return await MUSIXVERSE.methods.baseURI().call();
-}
+// async function baseURI() {
+// 	return await MUSIXVERSE.methods.baseURI().call();
+// }
 
-async function getRoyaltyInfo(tokenId) {
-	const _tokenId = parseInt(tokenId).toString();
-	return await MUSIXVERSE.methods.getRoyaltyInfo(_tokenId).call();
-}
+// async function getRoyaltyInfo(tokenId) {
+// 	const _tokenId = parseInt(tokenId).toString();
+// 	return await MUSIXVERSE.methods.getRoyaltyInfo(_tokenId).call();
+// }
 
-async function getCurrentNftPrice(tokenId) {
-	const _tokenId = parseInt(tokenId).toString();
-	if (MUSIXVERSE) {
-		var trackNft;
-		await MUSIXVERSE.methods
-			.trackNFTs(_tokenId)
-			.call()
-			.then(function (result) {
-				trackNft = result;
-			});
-		return trackNft;
-	}
-}
+// async function getCurrentNftPrice(tokenId) {
+// 	const _tokenId = parseInt(tokenId).toString();
+// 	if (MUSIXVERSE) {
+// 		var trackNft;
+// 		await MUSIXVERSE.methods
+// 			.trackNFTs(_tokenId)
+// 			.call()
+// 			.then(function (result) {
+// 				trackNft = result;
+// 			});
+// 		return trackNft;
+// 	}
+// }
 
 module.exports = {
 	addPolygonTestnetNetwork,
 	connectSmartContract,
 	mintTrackNFT,
 	purchaseTrackNFT,
+	purchaseReferredTrackNFT,
 	updatePrice,
 	toggleOnSale,
-	uri,
-	ownerOf,
-	contractURI,
-	baseURI,
-	getRoyaltyInfo,
-	getCurrentNftPrice,
+	// uri,
+	// ownerOf,
+	// contractURI,
+	// baseURI,
+	// getRoyaltyInfo,
+	// getCurrentNftPrice,
 };

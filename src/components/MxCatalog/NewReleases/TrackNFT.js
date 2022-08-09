@@ -51,11 +51,12 @@ const TrackNFT = ({ track, index }) => {
 			unsoldTokens_size: track.unsoldTokens_size,
 			purchasedTokens_size: track.purchasedTokens_size,
 		};
-
+		// console.log("track ",track);
 		return (
 			<Link key={index} href={`/track/polygon/${track.unsoldTokens.at(0)}`} passHref={true}>
 				<a>
 					<NFTCard
+						redirectLink={`/track/polygon/${track.unsoldTokens.at(0)}`}
 						trackName={metadata.title}
 						artistName={metadata.artist}
 						artistAddress={metadata.artistAddress}

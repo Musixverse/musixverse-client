@@ -1,30 +1,14 @@
 import { useState, useEffect, useContext } from "react";
-import { useRouter } from "next/router";
 import Link from "next/link";
 import { useMoralis, useMoralisCloudFunction } from "react-moralis";
 import VerificationButton from "./VerificationButton";
 import StatusContext from "../../../../store/status-context";
 import LoadingContext from "../../../../store/loading-context";
 
-const SocialAccountVerification = ({ nextStep, prevStep, isStageNameDifferent, artistStageName, personaInquiryIdData }) => {
+const SocialAccountVerification = ({ nextStep, prevStep, isStageNameDifferent, artistStageName, isTwitterAccountConnected }) => {
 	const { user } = useMoralis();
-
 	const [, setLoading] = useContext(LoadingContext);
 	const [, , setSuccess, setError] = useContext(StatusContext);
-	const [isTwitterAccountConnected, setIsTwitterAccountConnected] = useState(false);
-
-	const { fetch: fetchTwitterAccountConnectionStatus } = useMoralisCloudFunction("getTwitterAccountConnectionStatus");
-
-	useEffect(() => {
-		fetchTwitterAccountConnectionStatus({
-			onSuccess: async (res) => {
-				setIsTwitterAccountConnected(res);
-			},
-			onError: (error) => {
-				console.log("fetchTwitterAccountConnectionStatus Error:", error);
-			},
-		});
-	}, [fetchTwitterAccountConnectionStatus]);
 
 	const authorizeTwitter = async () => {
 		setLoading(true);
@@ -45,36 +29,8 @@ const SocialAccountVerification = ({ nextStep, prevStep, isStageNameDifferent, a
 			});
 	};
 
-	const verifyTwitterOAuth = async (oauth_verifier) => {
-		await fetch(process.env.NEXT_PUBLIC_MUSIXVERSE_SERVER_BASE_URL + "/api/twitter-auth/verify-oauth", {
-			method: "POST",
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({
-				oauth_token: sessionStorage.getItem("oauth_token"),
-				oauth_token_secret: sessionStorage.getItem("oauth_token_secret"),
-				oauth_verifier: oauth_verifier,
-				userId: user.id,
-			}),
-		})
-			.then((res) => res.json())
-			.then((data) => {
-				router.replace("/profile/verify", undefined, { shallow: true });
-				setIsTwitterAccountConnected(data.responseData);
-			})
-			.catch((err) => {
-				console.log("verifyTwitterOAuth error:", err);
-			});
-	};
-
 	const verifyIdentityVerificationTweet = async () => {
-		if (!personaInquiryIdData || !personaInquiryIdData.isPersonaVerified) {
-			setError({
-				title: "KYC is not complete",
-				message: "Please finish your KYC to continue",
-				showErrorBox: true,
-			});
-			return;
-		} else if (!isTwitterAccountConnected) {
+		if (!isTwitterAccountConnected) {
 			setError({
 				title: "Twitter account not connected",
 				message: "You need to connect your Twitter account to continue",
@@ -100,7 +56,7 @@ const SocialAccountVerification = ({ nextStep, prevStep, isStageNameDifferent, a
 				else
 					setError({
 						title: "Tweet Missing",
-						message: "Please send the tweet to verify your account",
+						message: "Please send the tweet to complete verification",
 						showErrorBox: true,
 					});
 			})
@@ -108,14 +64,6 @@ const SocialAccountVerification = ({ nextStep, prevStep, isStageNameDifferent, a
 				console.log("verifyIdentityVerificationTweet error:", err);
 			});
 	};
-
-	const router = useRouter();
-	const { oauth_token, oauth_verifier } = router.query;
-	useEffect(() => {
-		if (oauth_token && oauth_verifier) {
-			verifyTwitterOAuth(oauth_verifier);
-		}
-	}, [oauth_token, oauth_verifier]);
 
 	return (
 		<>
@@ -127,8 +75,6 @@ const SocialAccountVerification = ({ nextStep, prevStep, isStageNameDifferent, a
 				buttonText="Connect Twitter"
 				verifiedText="Twitter account connected successfully"
 			/>
-
-			{/* https://www.instagram.com/musixverse/ */}
 
 			<p className="text-4xl font-tertiary mt-16">5. Tweet from your account</p>
 			<div className="w-2/3 text-sm mt-1">This is required to verify that you are a real person.</div>
@@ -147,6 +93,7 @@ const SocialAccountVerification = ({ nextStep, prevStep, isStageNameDifferent, a
 					</button>
 				</a>
 			</Link>
+			<p className="text-[#777777] font-normal text-xs mt-2">Please click the submit button once you have sent the tweet</p>
 
 			<p className="text-[#777777] font-normal text-sm mt-16">
 				Do not have a Twitter account? &nbsp;

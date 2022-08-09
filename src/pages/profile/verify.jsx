@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Head from "next/head";
+import { useRouter } from "next/router";
 import { useMoralisCloudFunction } from "react-moralis";
 import NameAndIdVerification from "../../components/Profile/Verification/NameAndIdVerification";
 import SocialAccountVerification from "../../components/Profile/Verification/SocialAccountVerification";
@@ -12,7 +13,13 @@ const Verify = () => {
 	const [isStageNameDifferent, setIsStageNameDifferent] = useState(false);
 	const [artistStageName, setArtistStageName] = useState("");
 
-	const { data: personaInquiryIdData } = useMoralisCloudFunction("getPersonaInquiryId");
+	const { data: stageName } = useMoralisCloudFunction("getArtistStageName");
+	useEffect(() => {
+		if (stageName) {
+			setIsStageNameDifferent(true);
+			setArtistStageName(stageName);
+		}
+	}, [stageName]);
 
 	// Continue to next step
 	const nextStep = () => {
@@ -24,9 +31,52 @@ const Verify = () => {
 		setStep((currStep) => currStep - 1);
 	};
 
+	// Twitter Auth Check
+	const [isTwitterAccountConnected, setIsTwitterAccountConnected] = useState(false);
+	const { fetch: fetchTwitterAccountConnectionStatus } = useMoralisCloudFunction("getTwitterAccountConnectionStatus");
+	useEffect(() => {
+		fetchTwitterAccountConnectionStatus({
+			onSuccess: async (res) => {
+				setIsTwitterAccountConnected(res);
+			},
+			onError: (error) => {
+				console.log("fetchTwitterAccountConnectionStatus Error:", error);
+			},
+		});
+	}, [fetchTwitterAccountConnectionStatus]);
+	const verifyTwitterOAuth = async (oauth_verifier) => {
+		await fetch(process.env.NEXT_PUBLIC_MUSIXVERSE_SERVER_BASE_URL + "/api/twitter-auth/verify-oauth", {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({
+				oauth_token: sessionStorage.getItem("oauth_token"),
+				oauth_token_secret: sessionStorage.getItem("oauth_token_secret"),
+				oauth_verifier: oauth_verifier,
+				userId: user.id,
+			}),
+		})
+			.then((res) => res.json())
+			.then((data) => {
+				router.replace("/profile/verify", undefined, { shallow: true });
+				setIsTwitterAccountConnected(data.responseData);
+			})
+			.catch((err) => {
+				console.log("verifyTwitterOAuth error:", err);
+			});
+	};
+	const router = useRouter();
+	const { oauth_token, oauth_verifier } = router.query;
+	useEffect(() => {
+		if (oauth_token && oauth_verifier) {
+			setStep(2);
+			verifyTwitterOAuth(oauth_verifier);
+		}
+	}, [oauth_token, oauth_verifier]);
+
+	const { data: personaInquiryIdData } = useMoralisCloudFunction("getPersonaInquiryId");
 	const step1Values = { nextStep, isStageNameDifferent, setIsStageNameDifferent, artistStageName, setArtistStageName, personaInquiryIdData };
-	const step2Values = { nextStep, prevStep, isStageNameDifferent, artistStageName, personaInquiryIdData };
-	const step3Values = { nextStep, prevStep, isStageNameDifferent, artistStageName };
+	const step2Values = { nextStep, prevStep, isStageNameDifferent, artistStageName, personaInquiryIdData, isTwitterAccountConnected };
+	const step3Values = { prevStep, isStageNameDifferent, artistStageName };
 
 	return (
 		<>

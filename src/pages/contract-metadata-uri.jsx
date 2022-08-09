@@ -1,6 +1,5 @@
 import Head from "next/head";
 import { meta_description } from "../constants/index";
-import { MXV_CONTRACT_ADDRESS } from "../utils/smart-contract/constants";
 
 function contractMetadataURI() {
 	const contractMetadata = {

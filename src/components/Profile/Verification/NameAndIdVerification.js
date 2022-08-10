@@ -1,14 +1,15 @@
 import { useState, useContext } from "react";
 import Link from "next/link";
-import { useMoralisCloudFunction } from "react-moralis";
+import { useMoralis, useMoralisCloudFunction } from "react-moralis";
 import PersonaVerification from "./PersonaVerification";
 import VerificationButton from "./VerificationButton";
-import { useMoralis } from "react-moralis";
 import StatusContext from "../../../../store/status-context";
+import LoadingContext from "../../../../store/loading-context";
 
 const NameAndIdVerification = ({ nextStep, isStageNameDifferent, setIsStageNameDifferent, artistStageName, setArtistStageName, personaInquiryIdData }) => {
 	const { user } = useMoralis();
 	const [, , , setError] = useContext(StatusContext);
+	const [, setLoading] = useContext(LoadingContext);
 
 	const [isVerificationModalOpen, setIsVerificationModalOpen] = useState(false);
 	const [artistStageNameSave, setArtistStageNameSave] = useState(false);
@@ -111,12 +112,18 @@ const NameAndIdVerification = ({ nextStep, isStageNameDifferent, setIsStageNameD
 						/>
 						<VerificationButton
 							onClick={() => {
+								setLoading(true);
+								if (artistStageName == "") {
+									setIsStageNameDifferent(false);
+								}
 								setStageName({
 									onSuccess: async (object) => {
 										setArtistStageNameSave(true);
+										setLoading(false);
 									},
 									onError: (error) => {
 										console.log("setStageName Error:", error);
+										setLoading(false);
 									},
 								});
 							}}

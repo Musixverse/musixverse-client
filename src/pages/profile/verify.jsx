@@ -68,11 +68,11 @@ const Verify = () => {
 	const router = useRouter();
 	const { oauth_token, oauth_verifier } = router.query;
 	useEffect(() => {
-		if (oauth_token && oauth_verifier) {
+		if (user && oauth_token && oauth_verifier) {
 			setStep(2);
 			verifyTwitterOAuth(oauth_verifier);
 		}
-	}, [oauth_token, oauth_verifier]);
+	}, [oauth_token, oauth_verifier, user]);
 
 	const { data: personaInquiryIdData } = useMoralisCloudFunction("getPersonaInquiryId");
 	const step1Values = { nextStep, isStageNameDifferent, setIsStageNameDifferent, artistStageName, setArtistStageName, personaInquiryIdData };

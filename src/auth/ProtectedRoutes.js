@@ -19,7 +19,8 @@ const ProtectedRoutes = ({ router, children }) => {
 	// Level 3: Signed up collector with verified email
 	// Level 4: Signed up artist who hasn't verified email
 	// Level 5: Signed up artist with verified email who does not have a verified artist profile
-	// Level 6: Signed up artist with a verified artist profile
+	// Level 6: Signed up artist with verified email who does not have a verified artist profile, but has initiated a request for verification
+	// Level 7: Signed up artist with a verified artist profile
 	const [accessLevel, setAccessLevel] = useContext(AccessLevelContext);
 
 	const [showContent, setShowContent] = useState(false);

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { useMoralis } from "react-moralis";
+import { useMoralis, useMoralisCloudFunction } from "react-moralis";
 import styles from "../../../styles/Profile/ArtistHeader.module.css";
 import mxv_tick from "../../../public/assets/mxv_tick.svg";
 import AboutArtist from "./ProfileUtils/AboutArtist";
@@ -22,6 +22,8 @@ export default function ArtistHeader({
 	createdAt,
 }) {
 	const { user } = useMoralis();
+
+	const { data: instagramVerificationRequested } = useMoralisCloudFunction("fetchInstagramVerificationRequested");
 
 	return (
 		<div className={"dark:bg-nav-dark dark:backdrop-blur-xl dark:backdrop-brightness-150 z-10 relative " + styles["artist-banner__container"]}>
@@ -46,6 +48,8 @@ export default function ArtistHeader({
 					&nbsp;
 					{isArtistVerified ? (
 						<Image src={mxv_tick} width={20} height={20} alt="mxv_verified" className="ml-10" />
+					) : instagramVerificationRequested ? (
+						<span className="ml-4 font-primary text-sm text-gray-500">Verification Pending...</span>
 					) : user && username === user.attributes.username ? (
 						<Link href="/profile/verify" passHref>
 							<a className="ml-4 font-primary text-sm hover:text-primary-100 cursor-pointer hover:underline">Verify your profile</a>
@@ -96,6 +100,8 @@ export default function ArtistHeader({
 						&nbsp;
 						{isArtistVerified ? (
 							<Image src={mxv_tick} width={20} height={20} alt="mxv_verified" className="ml-10" />
+						) : instagramVerificationRequested ? (
+							<span className="ml-4 font-primary text-sm text-gray-500">Verification Pending...</span>
 						) : user && username === user.attributes.username ? (
 							<Link href="/profile/verify" passHref>
 								<a className="ml-4 font-primary text-sm hover:text-primary-100 cursor-pointer hover:underline">Verify your profile</a>

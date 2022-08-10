@@ -3,7 +3,7 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { useMoralis, useMoralisCloudFunction } from "react-moralis";
 import NameAndIdVerification from "../../components/Profile/Verification/NameAndIdVerification";
-import SocialAccountVerification from "../../components/Profile/Verification/SocialAccountVerification";
+import TwitterAccountVerification from "../../components/Profile/Verification/TwitterAccountVerification";
 import InstagramManualVerification from "../../components/Profile/Verification/InstagramManualVerification";
 import ScrollToPageTop from "../../utils/ScrollToPageTop";
 
@@ -13,6 +13,12 @@ const Verify = () => {
 	const [step, setStep] = useState(1);
 	const [isStageNameDifferent, setIsStageNameDifferent] = useState(false);
 	const [artistStageName, setArtistStageName] = useState("");
+
+	const stageNameDifferentTextMessage = `I, ${user.attributes.name}, am verifying my identity on @musixverse as an artist. My stage name is ${artistStageName}.\n\nJoin @musixverse and let's revolutionize the music industry together!\nhttps://www.musixverse.com\n\n@musixverse\nHear it. Own it. Live it.`;
+	const stageNameSameTextMessage = `I am verifying my identity on @musixverse as an artist.\n\nJoin @musixverse and let's revolutionize the music industry together!\nhttps://www.musixverse.com\n\n@musixverse\nHear it. Own it. Live it.`;
+
+	const uriEncodedStageNameDifferentTextMessage = encodeURI(stageNameDifferentTextMessage);
+	const uriEncodedStageNameSameTextMessage = encodeURI(stageNameSameTextMessage);
 
 	const { data: stageName } = useMoralisCloudFunction("getArtistStageName");
 	useEffect(() => {
@@ -76,8 +82,16 @@ const Verify = () => {
 
 	const { data: personaInquiryIdData } = useMoralisCloudFunction("getPersonaInquiryId");
 	const step1Values = { nextStep, isStageNameDifferent, setIsStageNameDifferent, artistStageName, setArtistStageName, personaInquiryIdData };
-	const step2Values = { nextStep, prevStep, isStageNameDifferent, artistStageName, personaInquiryIdData, isTwitterAccountConnected };
-	const step3Values = { prevStep, isStageNameDifferent, artistStageName };
+	const step2Values = {
+		nextStep,
+		prevStep,
+		isStageNameDifferent,
+		uriEncodedStageNameDifferentTextMessage,
+		uriEncodedStageNameSameTextMessage,
+		personaInquiryIdData,
+		isTwitterAccountConnected,
+	};
+	const step3Values = { prevStep, isStageNameDifferent, artistStageName, stageNameDifferentTextMessage, stageNameSameTextMessage };
 
 	return (
 		<>
@@ -93,7 +107,7 @@ const Verify = () => {
 					{step == 1 ? (
 						<NameAndIdVerification {...step1Values} />
 					) : step == 2 ? (
-						<SocialAccountVerification {...step2Values} />
+						<TwitterAccountVerification {...step2Values} />
 					) : step == 3 ? (
 						<InstagramManualVerification {...step3Values} />
 					) : null}

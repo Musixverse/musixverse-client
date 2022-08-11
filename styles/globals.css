@@ -441,7 +441,7 @@ a:hover {
 	text-align: left;
 }
 
-.ham_menu_link:hover{
+.ham_menu_link:hover {
 	color: rgb(83, 194, 75);
 }
 
@@ -461,7 +461,7 @@ a:hover {
 	height: 1.3px !important;
 }
 
-.connect_link{
+.connect_link {
 	@apply text-white hover:text-primary-100;
 }
 /**************************************************************************/
@@ -498,6 +498,7 @@ html {
 /* Scroll bar width */
 ::-webkit-scrollbar {
 	width: 4px;
+	height: 4px;
 }
 
 /* Track */

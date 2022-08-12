@@ -27,27 +27,30 @@ export default function TrackHeader({
 	});
 	const { data: artworkArtistInfo } = useMoralisCloudFunction("fetchArtworkArtist", { artworkInfo: artworkInfo });
 
-	if (!artist) return null;
 	return (
 		<div className={styles["track-header"]}>
 			<div className={styles["track-header__container"]}>
 				{/* Image section */}
 				<div className={"group pr-4 " + styles["track-header__container--trackImage"]}>
 					<div className="h-full w-full relative">
-						<Link href={image}>
-							<a target="_blank" rel="noopener noreferrer">
-								<Image
-									src={image}
-									className="rounded-lg"
-									alt="trackImage"
-									width="100%"
-									height="100%"
-									layout="responsive"
-									objectFit="contain"
-									priority
-								/>
-							</a>
-						</Link>
+						{image ? (
+							<Link href={image}>
+								<a target="_blank" rel="noopener noreferrer">
+									<Image
+										src={image}
+										className="rounded-lg"
+										alt="trackImage"
+										width="100%"
+										height="100%"
+										layout="responsive"
+										objectFit="contain"
+										priority
+									/>
+								</a>
+							</Link>
+						) : (
+							<div className="bg-gray-300 w-full h-full animate-pulse"></div>
+						)}
 					</div>
 
 					<div className="absolute hidden group-hover:block pt-2">
@@ -106,7 +109,7 @@ export default function TrackHeader({
 								</a>
 							</Link>
 						) : null}
-						{artist.isArtistVerified && (
+						{artist && artist.isArtistVerified && (
 							<div className="ml-2 align-center flex">
 								<Image src={mxv_verified} width={14} height={14} alt="MXV verified" />
 							</div>
@@ -134,7 +137,7 @@ export default function TrackHeader({
 						</div>
 					</div>
 					{/* Audio Player component */}
-					<AudioPlayer audio_url={audio_url} artistName={artist.name} title={title} />
+					<AudioPlayer audio_url={audio_url} artistName={artist && artist.name} title={title} />
 
 					<div className="w-full h-full grid content-between pt-6">
 						<div className="pb-6 w-full">

@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { useMoralis } from "react-moralis";
-import Link from "next/link";
 import { MXV_DIAMOND_ADDRESS, BLOCKCHAIN_NETWORK } from "../../../constants";
 import NFTCard from "../../../layout/NFTCard/NFTCard";
 
@@ -51,23 +50,18 @@ const TrackNFT = ({ track, index }) => {
 			unsoldTokens_size: track.unsoldTokens_size,
 			purchasedTokens_size: track.purchasedTokens_size,
 		};
-		// console.log("track ",track);
 		return (
-			<Link key={index} href={`/track/polygon/${track.unsoldTokens.at(0)}`} passHref={true}>
-				<a>
-					<NFTCard
-						redirectLink={`/track/polygon/${track.unsoldTokens.at(0)}`}
-						trackName={metadata.title}
-						artistName={metadata.artist}
-						artistAddress={metadata.artistAddress}
-						image={metadata.artwork.uri.replace("ipfs://", process.env.NEXT_PUBLIC_IPFS_NODE_URL)}
-						tokenId={track.unsoldTokens.at(0)}
-						numberOfCopies={metadata.attributes[0].value}
-						collaboratorList={metadata.collaborators}
-						unsoldTrackData={unsoldTrackData}
-					/>
-				</a>
-			</Link>
+			<NFTCard
+				redirectLink={`/track/polygon/${track.unsoldTokens.at(0)}`}
+				trackName={metadata.title}
+				artistName={metadata.artist}
+				artistAddress={metadata.artistAddress}
+				image={metadata.artwork.uri.replace("ipfs://", process.env.NEXT_PUBLIC_IPFS_NODE_URL)}
+				tokenId={track.unsoldTokens.at(0)}
+				numberOfCopies={metadata.attributes[0].value}
+				collaboratorList={metadata.collaborators}
+				unsoldTrackData={unsoldTrackData}
+			/>
 		);
 	} else return <NFTCard />;
 };

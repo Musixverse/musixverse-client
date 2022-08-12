@@ -301,7 +301,7 @@ const CreateNFT = () => {
 			],
 		};
 
-		const file = new Moralis.File("file.json", { base64: btoa(JSON.stringify(nftMetadata)) });
+		const file = new Moralis.File("file.json", { base64: btoa(unescape(encodeURIComponent(JSON.stringify(nftMetadata)))) });
 		await file.saveIPFS();
 
 		const metadataHash = file.hash();
@@ -317,7 +317,8 @@ const CreateNFT = () => {
 
 		try {
 			await mintTrackNFT(numberOfCopies, nftPrice, metadataHash, collaborators, percentageContributions, resaleRoyaltyPercent, onSale, _unlockTimestamp);
-			await deleteDraft();
+			// TODO: Uncomment the line below
+			// await deleteDraft();
 			setLoading(false);
 			setCreateNFTSuccess(true);
 		} catch (error) {

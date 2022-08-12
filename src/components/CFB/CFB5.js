@@ -67,7 +67,7 @@ export default function CFB5() {
                     </div>
                 </div>
                 <div className="self-end -mb-10 -mr-56 lg:-mr-14">
-                    <img src="/assets/CFB/section6.png" className="h-[500px] min-w-[680px] md:min-w-0 lg:h-[370px] xl:h-[470px] md:aspect-auto" alt="Boy" />
+                    <img src="/assets/CFB/section6.png" className="h-[500px] min-w-[680px] md:min-w-0 lg:h-[370px] xl:h-[470px] md:aspect-auto" alt="Boy with mic and music icons" />
                 </div>
             </div>
         </div>

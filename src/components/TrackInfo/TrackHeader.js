@@ -39,7 +39,7 @@ export default function TrackHeader({
 								<Image
 									src={image}
 									className="rounded-lg"
-									alt="trackImage"
+									alt="Track Image"
 									width="100%"
 									height="100%"
 									layout="responsive"
@@ -62,7 +62,7 @@ export default function TrackHeader({
 												height="25"
 												width="25"
 												className="rounded-full"
-												alt="Artwork Artist Profile Image"
+												alt="Artwork Artist Profile Avatar"
 											/>
 										)}
 										<span className="ml-1">@{artworkArtistInfo.user[0].username}</span>
@@ -80,7 +80,7 @@ export default function TrackHeader({
 												height="25"
 												width="25"
 												className="rounded-full"
-												alt="Artwork Artist Profile Image"
+												alt="Artwork Artist Profile Avatar"
 											/>
 										)}
 										<span className="ml-1">@{artworkArtistInfo.username}</span>

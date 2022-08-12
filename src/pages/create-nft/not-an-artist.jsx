@@ -1,4 +1,5 @@
 import Head from "next/head";
+import { meta_description } from "../../constants/index";
 import NotAnArtist from "../../components/CreateNFT/not-an-artist";
 
 const notanartist = ({}) => {
@@ -6,7 +7,7 @@ const notanartist = ({}) => {
         <>
             <Head>
                 <title>Musixverse | Not an Artist</title>
-                <meta name="description" content="Musixverse" />
+                <meta name="description" content={meta_description} />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 

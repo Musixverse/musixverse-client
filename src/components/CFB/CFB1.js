@@ -9,7 +9,7 @@ export default function CFB1() {
     return (
         <div className={styles["cfb1__container"]}>
             <button className={styles["cfb-banner__circle-dropdown"]} onClick={scrollToRef}>
-                <img src="/assets/CFB/circle_dropdown.png" className="z-[5]" width={50} height={50} alt="circle dropdown" />
+                <img src="/assets/CFB/circle_dropdown.png" className="z-[5]" width={50} height={50} alt="button to move to next section" />
             </button>
             <p className="text-3xl font-semibold text-center font-primary text-primary-200">MXV COMMUNITY FEEDBACK BOARD</p>
             <p className="max-w-xs pt-6 text-xs text-center font-secondary sm:max-w-2xl">

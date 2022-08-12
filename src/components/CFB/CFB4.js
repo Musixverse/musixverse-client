@@ -7,7 +7,7 @@ export default function CFB4() {
     return (
         <div className={styles["cfb4__container"]}>
             {/* Image */}
-            <img src="/assets/CFB/section5_left.png" className={styles["cfb4__image-left"]} width={250} height={230} alt="svg" />
+            <img src="/assets/CFB/section5_left.png" className={styles["cfb4__image-left"]} width={250} height={230} alt="music icons" />
             <div className={"dark:bg-dark-100 " + styles["cfb4__card"]}>
                 <h1 className="max-w-xl text-2xl font-semibold text-center font-primary">
                     Join our Community Feedback Board for exclusive privileges on Musixverse.
@@ -30,7 +30,7 @@ export default function CFB4() {
                 </div>
             </div>
             {/* Image */}
-            <img src="/assets/CFB/section5_right.png" className={styles["cfb4__image-right"]} width={300} height={230} alt="svg" />
+            <img src="/assets/CFB/section5_right.png" className={styles["cfb4__image-right"]} width={300} height={230} alt="music icons" />
         </div>
     );
 }

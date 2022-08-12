@@ -1,4 +1,5 @@
 import Head from "next/head";
+import { title_main_page,meta_description } from "../constants/index";
 import Banner from "../components/HomePage/HomePageBanner";
 import Section2 from "../components/HomePage/HomePage_section3";
 import Section3 from "../components/HomePage/HomePage_section4";
@@ -9,8 +10,8 @@ function Home() {
     return (
         <>
             <Head>
-                <title>Musixverse</title>
-                <meta name="description" content="Powering music ownership and provenance across the web and beyond" />
+                <title>{title_main_page}</title>
+                <meta name="description" content={meta_description} />
             </Head>
 
             <div className="relative flex flex-col items-center justify-center bg-light-200 dark:bg-dark-200">

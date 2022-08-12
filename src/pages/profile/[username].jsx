@@ -1,5 +1,6 @@
 import { useEffect, useState, useContext } from "react";
 import Head from "next/head";
+import { meta_description } from "../../constants/index";
 import { useRouter } from "next/router";
 import { useMoralisCloudFunction } from "react-moralis";
 import Banner from "../../components/Profile/Banner";
@@ -61,12 +62,12 @@ export default function Profile() {
 			{profileUser.isArtist ? (
 				<Head>
 					<title>Musixverse | Artist Profile</title>
-					<meta name="description" content="The NFT Marketplace for Musicians and Fans" />
+					<meta name="description" content={meta_description} />
 				</Head>
 			) : (
 				<Head>
 					<title>Musixverse | Collector Profile</title>
-					<meta name="description" content="The NFT Marketplace for Musicians and Fans" />
+					<meta name="description" content={meta_description} />
 				</Head>
 			)}
 

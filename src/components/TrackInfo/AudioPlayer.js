@@ -169,7 +169,7 @@ export default function AudioPlayer({ audio_url, artistName, title }) {
 
 				<div className="flex flex-row space-x-4 text-xs">
 					<button className="flex justify-center items-center space-x-2 px-4 py-2 rounded-lg cursor-default hover:bg-light-300 dark:hover:bg-dark-100">
-						<Image src={favourite} width={18} height={18} alt="Add to favourites"></Image>
+						<Image src={favourite} width={18} height={18} alt="Add to favourites button"></Image>
 						<span>Add to Favourites</span>
 					</button>
 

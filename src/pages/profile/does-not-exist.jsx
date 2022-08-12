@@ -2,10 +2,7 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import discord from "../../../public/assets/social/discord.svg";
-import facebook from "../../../public/assets/social/facebook.svg";
-import twitter from "../../../public/assets/social/twitter.svg";
-import instagram from "../../../public/assets/social/instagram.svg";
+import { meta_description } from "../../constants/index";
 
 function DoesNotExist() {
     const router = useRouter();
@@ -15,7 +12,7 @@ function DoesNotExist() {
         <>
             <Head>
                 <title>Musixverse | Profile Does Not Exist</title>
-                <meta name="description" content="Powering music ownership and provenance across the web and beyond" />
+                <meta name="description" content={meta_description} />
             </Head>
 
             <main className="m-auto max-w-screen-2xl md:w-11/12 px-4 md:px-20 py-24 text-center">

@@ -1,4 +1,5 @@
 import Head from "next/head";
+import { meta_description } from "../../constants/index";
 import { useState, useEffect, useContext } from "react";
 import { useRouter } from "next/router";
 import { useMoralis, useMoralisQuery, useNewMoralisObject, useMoralisCloudFunction } from "react-moralis";
@@ -452,7 +453,7 @@ const CreateNFT = () => {
 				<>
 					<Head>
 						<title>Musixverse | Create NFT</title>
-						<meta name="description" content="Musixverse" />
+						<meta name="description" content={meta_description} />
 						<link rel="icon" href="/favicon.ico" />
 					</Head>
 					<ScrollToPageTop samePage={true} changingValue={step} />
@@ -465,7 +466,7 @@ const CreateNFT = () => {
 				<>
 					<Head>
 						<title>Musixverse | Create NFT - Track Details</title>
-						<meta name="description" content="Musixverse" />
+						<meta name="description" content={meta_description} />
 						<link rel="icon" href="/favicon.ico" />
 					</Head>
 					<ScrollToPageTop samePage={true} changingValue={step} />
@@ -479,7 +480,7 @@ const CreateNFT = () => {
 				<>
 					<Head>
 						<title>Musixverse | Create NFT - Comprehensive Details</title>
-						<meta name="description" content="Musixverse" />
+						<meta name="description" content={meta_description} />
 						<link rel="icon" href="/favicon.ico" />
 					</Head>
 					<ScrollToPageTop samePage={true} changingValue={step} />
@@ -493,7 +494,7 @@ const CreateNFT = () => {
 				<>
 					<Head>
 						<title>Musixverse | Create NFT - Pricing and Splits</title>
-						<meta name="description" content="Musixverse" />
+						<meta name="description" content={meta_description} />
 						<link rel="icon" href="/favicon.ico" />
 					</Head>
 					<ScrollToPageTop samePage={true} changingValue={step} />

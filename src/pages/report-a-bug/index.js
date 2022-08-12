@@ -1,4 +1,5 @@
 import Head from "next/head";
+import { meta_description } from "../../constants/index";
 import ReportBug from "../../components/ReportABug/ReportABug";
 
 const ReportABug = ({}) => {
@@ -6,7 +7,7 @@ const ReportABug = ({}) => {
         <>
             <Head>
                 <title>Musixverse | Report A Bug</title>
-                <meta name="description" content="Musixverse" />
+                <meta name="description" content={meta_description} />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 

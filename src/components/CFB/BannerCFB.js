@@ -5,7 +5,7 @@ export default function BannerCFB() {
     return (
         <>
             <div className={"dark:bg-dark-100 " + styles["cfb-banner__container"]}>
-                <img src="/assets/CFB/Girl_Banner.png" className={styles["cfb-banner__left-image"]} width={500} height={500} alt="Girl" />
+                <img src="/assets/CFB/Girl_Banner.png" className={styles["cfb-banner__left-image"]} width={500} height={500} alt="Girl with music icons" />
                 <div className={styles["cfb-banner__subcontainer"]}>
                     <p className="font-semibold text-center font-primary">Hello there!</p>
                     <p className="max-w-lg text-3xl font-semibold text-center font-primary">We invite you to be a part of our Insider Community!</p>
@@ -21,7 +21,7 @@ export default function BannerCFB() {
                         </a>
                     </Link>
                 </div>
-                <img src="/assets/CFB/Boy_Banner.png" className={styles["cfb-banner__right-image"]} alt="Boy" />
+                <img src="/assets/CFB/Boy_Banner.png" className={styles["cfb-banner__right-image"]} alt="Boy with music icons" />
             </div>
         </>
     );

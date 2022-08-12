@@ -1,4 +1,5 @@
 import Head from "next/head";
+import { meta_description } from "../../constants/index";
 import Confirm from "../../components/Registration/Confirm";
 import { useEffect, useContext } from "react";
 import { useMoralis } from "react-moralis";
@@ -24,7 +25,7 @@ const Confirm_Page = () => {
         <>
             <Head>
                 <title>Musixverse | Confirm Email</title>
-                <meta name="description" content="Musixverse" />
+                <meta name="description" content={meta_description} />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <Confirm />

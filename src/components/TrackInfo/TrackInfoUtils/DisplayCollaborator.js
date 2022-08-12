@@ -17,7 +17,7 @@ const DisplayCollaborator = ({ collaborator }) => {
 				<a target="_blank" rel="noopener noreferrer">
 					<div className="flex items-end mb-2 font-secondary text-sm">
 						{collaboratorInfo.userInfo[0] && collaboratorInfo.userInfo[0].avatar && (
-							<Image src={collaboratorInfo.userInfo[0].avatar} height="30" width="30" className="rounded-full" />
+							<Image src={collaboratorInfo.userInfo[0].avatar} alt="collaborator's avatar" height="30" width="30" className="rounded-full" />
 						)}
 						<span className="ml-2">
 							{collaborator.name}

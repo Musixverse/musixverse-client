@@ -204,7 +204,7 @@ const Step3Form = ({
 											<div className="relative basis-1/2">
 												{collaborator.avatar && (
 													<div className="absolute flex items-center h-full ml-2">
-														<Image src={collaborator.avatar} height="30" width="30" className="rounded-full" />
+														<Image src={collaborator.avatar} height="30" width="30" alt="collaborator's avatar" className="rounded-full" />
 													</div>
 												)}
 												<input
@@ -224,7 +224,7 @@ const Step3Form = ({
 													<>
 														{collaborator.avatar && (
 															<div className="absolute flex items-center h-full ml-2">
-																<Image src={collaborator.avatar} height="30" width="30" className="rounded-full" />
+																<Image src={collaborator.avatar} height="30" width="30" alt="collaborator's avatar" className="rounded-full" />
 															</div>
 														)}
 														<input
@@ -274,6 +274,7 @@ const Step3Form = ({
 																					height="30"
 																					width="30"
 																					className="rounded-full"
+																					alt="user's avatar"
 																				/>
 																			) : (
 																				""
@@ -297,6 +298,7 @@ const Step3Form = ({
 																					height="30"
 																					width="30"
 																					className="rounded-full"
+																					alt="user's avatar"
 																				/>
 																			) : (
 																				""
@@ -320,6 +322,7 @@ const Step3Form = ({
 																					height="30"
 																					width="30"
 																					className="rounded-full"
+																					alt="user's avatar"
 																				/>
 																			) : (
 																				""
@@ -343,6 +346,7 @@ const Step3Form = ({
 																					height="30"
 																					width="30"
 																					className="rounded-full"
+																					alt="user's avatar"
 																				/>
 																			) : (
 																				""

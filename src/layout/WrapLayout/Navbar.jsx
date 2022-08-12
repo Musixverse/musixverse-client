@@ -62,7 +62,7 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 
 						{/* Internal links */}
 						<div className="hidden ml-10 lg:block">
-							<ul className="flex flex-row items-center font-medium md:text-base md:space-x-8 md:mt-0 sm:text-sm">
+							<ul className="flex flex-row items-center font-medium md:text-base md:space-x-3 xl:space-x-8 md:mt-0 sm:text-sm">
 								<li className="hidden hover:text-primary-200 md:block">
 									<Link
 										href="/"
@@ -100,7 +100,7 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 						</div>
 
 						<div className="hidden ml-auto md:block">
-							<ul className="flex flex-row items-center text-sm font-medium md:space-x-8 md:mt-0 sm:text-sm">
+							<ul className="flex flex-row items-center text-sm font-medium md:space-x-8 lg:space-x-3 xl:space-x-8 md:mt-0 sm:text-sm">
 								{/* Search bar */}
 								<li className="hidden md:block">
 									{/* <div className="flex items-center justify-center text-xs rounded text-dark-200 dark:text-white">

@@ -1,0 +1,20 @@
+.drafts-container {
+	@apply flex flex-col overflow-x-scroll pt-4 pb-14 lg:px-10;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.drafts-container::-webkit-scrollbar {
+	width: 10px !important;
+	left: -100px !important;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.drafts-container {
+	-ms-overflow-style: none; /* IE and Edge */
+	scrollbar-width: none; /* Firefox */
+}
+
+.drafts-container::-webkit-scrollbar-button {
+	width: 20px;
+	height: 20px;
+}

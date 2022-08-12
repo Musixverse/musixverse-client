@@ -45,7 +45,7 @@ export default function PreviewDraft({ draftId, trackTitle, coverArtUrl, audioFi
 
 	return (
 		<>
-			<div className="w-fit group flex flex-col overflow-hidden rounded-2xl hover:shadow-2xl duration-300 cursor-pointer">
+			<div className="w-fit group flex flex-col overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl duration-300 cursor-pointer">
 				{/* Uploaded Art */}
 				<div className="relative w-[222px] h-[200px] overflow-hidden rounded-t-xl cursor-pointer">
 					{/* Cover art of NFT */}
@@ -78,8 +78,9 @@ export default function PreviewDraft({ draftId, trackTitle, coverArtUrl, audioFi
 						</div>
 					)}
 				</div>
+
 				{/* Content provided */}
-				<div className="dark:bg-[#1D1D1D] bg-light-100 w-[222px] h-[128px] p-4 rounded-b-xl flex flex-col justify-between">
+				<div className="dark:bg-dark-200 bg-light-100 w-[222px] h-[128px] p-4 rounded-b-xl flex flex-col justify-between">
 					<div className="flex justify-between w-full">
 						<div className="flex flex-col">
 							<p className="font-secondary text-[#1D1D1D] text-xs dark:text-light-300">{user && user.attributes.name}</p>

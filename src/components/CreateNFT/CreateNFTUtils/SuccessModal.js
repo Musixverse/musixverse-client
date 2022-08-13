@@ -13,7 +13,7 @@ const SuccessModal = ({ isOpen }) => {
             isOpen={isOpen}
             image={
                 <div className="mx-auto flex items-center relative justify-center h-24 w-24">
-                    <Image src={successLogo} layout="fill" alt="Success!" />
+                    <Image src={successLogo} layout="fill" alt="Success" />
                 </div>
             }
             title={"Successfully created NFT!"}

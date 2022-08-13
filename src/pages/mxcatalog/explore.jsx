@@ -1,5 +1,6 @@
 import Head from "next/head";
 import { useReducer, useState } from "react";
+import { meta_description } from "../../constants/index";
 import CatalogBody from "../../components/MxCatalog/Utils/CatalogBody";
 import CatalogNav from "../../components/MxCatalog/Utils/CatalogNav";
 
@@ -71,7 +72,7 @@ export default function Explore() {
 		<>
 			<Head>
 				<title>Musixverse | Explore</title>
-				<meta name="description" content="Musixverse" />
+				<meta name="description" content={meta_description} />
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 

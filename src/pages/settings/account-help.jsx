@@ -1,4 +1,5 @@
 import Head from "next/head";
+import { meta_description } from "../../constants/index";
 import AccountHelp from "../../components/Settings/AccountHelp";
 import SettingsNav from "../../components/Settings/SettingsNav";
 import { useEffect, useContext } from "react";
@@ -24,7 +25,7 @@ export default function AccountHelpSetting() {
         <>
             <Head>
                 <title>Musixverse | Settings</title>
-                <meta name="description" content="Musixverse" />
+                <meta name="description" content={meta_description} />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <div className="flex items-center justify-center bg-light-200 dark:bg-dark-200">

@@ -13,7 +13,7 @@ export default function Banner() {
                 {/* CTA */}
                 <div className={styles["banner__container--cta"]}>
                     <p className="mr-2">Reserved Price</p>
-                    <Image src={ethLogo} width={12.5} height={25} alt="ethereum logo" />
+                    <Image src={ethLogo} width={12.5} height={25} alt="Ethereum logo" />
                     <p className="font-bold ml-1">{price}</p>
 
                     <div className={styles["banner__container--cta--buttons"]}>

@@ -1,4 +1,5 @@
 import Head from "next/head";
+import { meta_description } from "../../constants/index";
 import PageNotFound  from "../../components/PageNotFound/PageNotFound";  
 
 const ErrorPage = ({}) => {
@@ -6,7 +7,7 @@ const ErrorPage = ({}) => {
         <>
             <Head>
                 <title>Musixverse | 404 Page</title>
-                <meta name="description" content="Musixverse" />
+                <meta name="description" content={meta_description} />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 

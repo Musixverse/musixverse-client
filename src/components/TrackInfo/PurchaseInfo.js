@@ -32,7 +32,7 @@ export default function PurchaseInfo({ metadata, currentOwnerAddress, price }) {
                         <Link href={`/profile/${currentOwner.username}`} className="cursor-pointer">
                             <a target="_blank" rel="noopener noreferrer" className="flex items-center space-x-1">
                                 <div className="rounded-full flex relative">
-                                    {currentOwnerAvatar ? <Image priority src={currentOwnerAvatar} height="20" width="20" className="rounded-full" /> : null}
+                                    {currentOwnerAvatar ? <Image priority src={currentOwnerAvatar} height="20" width="20" alt="current owner avatar" className="rounded-full" /> : null}
                                 </div>
                                 <p className="font-secondary">@{currentOwner.username}</p>
                             </a>
@@ -47,7 +47,7 @@ export default function PurchaseInfo({ metadata, currentOwnerAddress, price }) {
                 <div className="flex flex-col">
                     <p className={styles["purchase-info__heading--p"]}>Price</p>
                     <div className="flex items-center">
-                        <Image src={"/assets/matic-logo.svg"} width={25} height={50} alt="matic" />
+                        <Image src={"/assets/matic-logo.svg"} width={25} height={50} alt="matic icon" />
                         <p className="ml-2 font-bold text-pricing font-primary">{price}</p>
                     </div>
                 </div>

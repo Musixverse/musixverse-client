@@ -2,6 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import Moralis from "moralis/node";
+import { meta_description } from "../../../constants/index";
 import { useMoralis, useMoralisCloudFunction } from "react-moralis";
 import { MXV_DIAMOND_ADDRESS, BLOCKCHAIN_NETWORK } from "../../../constants";
 import TrackHeader from "../../../components/TrackInfo/TrackHeader";
@@ -84,7 +85,7 @@ export default function TrackInfo({ token, otherTokensOfTrack }) {
 		<>
 			<Head>
 				<title>Musixverse | Track Info</title>
-				<meta name="description" content="The NFT Marketplace for Musicians and Fans" />
+				<meta name="description" content={meta_description} />
 			</Head>
 
 			<div className="flex flex-col items-center justify-center w-full bg-light-100 dark:bg-dark-200 pt-28 pb-20">

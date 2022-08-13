@@ -213,7 +213,7 @@ export default function Step1Form({
 									<div className="flex items-center">
 										{coverArtArtist.avatar && (
 											<div className="absolute flex items-center h-full ml-2">
-												<Image src={coverArtArtist.avatar} height="30" width="30" className="rounded-full" />
+												<Image src={coverArtArtist.avatar} height="30" width="30" alt="cover art artist's avatar" className="rounded-full" />
 											</div>
 										)}
 										<input
@@ -272,7 +272,7 @@ export default function Step1Form({
 																	}}
 																>
 																	{user.userInfo[0] ? (
-																		<Image src={user.userInfo[0].avatar} height="30" width="30" className="rounded-full" />
+																		<Image src={user.userInfo[0].avatar} height="30" width="30" alt="user's avatar" className="rounded-full" />
 																	) : (
 																		""
 																	)}
@@ -290,7 +290,7 @@ export default function Step1Form({
 																	}}
 																>
 																	{user.userInfo[0] ? (
-																		<Image src={user.userInfo[0].avatar} height="30" width="30" className="rounded-full" />
+																		<Image src={user.userInfo[0].avatar} height="30" width="30" alt="user's avatar" className="rounded-full" />
 																	) : (
 																		""
 																	)}
@@ -308,7 +308,7 @@ export default function Step1Form({
 																	}}
 																>
 																	{user.userInfo[0] ? (
-																		<Image src={user.userInfo[0].avatar} height="30" width="30" className="rounded-full" />
+																		<Image src={user.userInfo[0].avatar} height="30" width="30" alt="user's avatar" className="rounded-full" />
 																	) : (
 																		""
 																	)}
@@ -326,7 +326,7 @@ export default function Step1Form({
 																	}}
 																>
 																	{user.userInfo[0] ? (
-																		<Image src={user.userInfo[0].avatar} height="30" width="30" className="rounded-full" />
+																		<Image src={user.userInfo[0].avatar} height="30" width="30" alt="user's avatar" className="rounded-full" />
 																	) : (
 																		""
 																	)}

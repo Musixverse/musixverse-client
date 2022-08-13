@@ -1,6 +1,5 @@
 import Head from "next/head";
 import { useReducer, useState } from "react";
-import { meta_description } from "../../constants/index";
 import CatalogBody from "../../components/MxCatalog/Utils/CatalogBody";
 import CatalogNav from "../../components/MxCatalog/Utils/CatalogNav";
 
@@ -43,7 +42,7 @@ const reducer = (state, action) => {
 	}
 };
 
-export default function Explore() {
+export default function Trending() {
 	// Will be maintaining a state here for the type of marketplace (currentSelection (Integer))
 	// Initially set to load the newly released nfts first
 	const [currentSelection, setCurrentSelection] = useState(1);
@@ -71,8 +70,8 @@ export default function Explore() {
 	return (
 		<>
 			<Head>
-				<title>Musixverse | Explore</title>
-				<meta name="description" content={meta_description} />
+				<title>Musixverse | Trending</title>
+				<meta name="description" content="Musixverse" />
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 

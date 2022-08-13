@@ -1,6 +1,6 @@
 import { useEffect, useState, useContext } from "react";
 import Head from "next/head";
-import { meta_description } from "../../constants/index";
+import { meta_description } from "../../constants";
 import { useRouter } from "next/router";
 import { useMoralisCloudFunction } from "react-moralis";
 import Banner from "../../components/Profile/Banner";

@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { meta_description } from "../constants/index";
+import { meta_description } from "../constants";
 
 function contractMetadataURI() {
 	const contractMetadata = {
@@ -11,12 +11,12 @@ function contractMetadataURI() {
 		fee_recipient: MXV_DIAMOND_ADDRESS,
 	};
 
-    return (
-        <>
-            <Head>
-                <title>Musixverse | Contract Metadata URI</title>
-                <meta name="description" content={meta_description} />
-            </Head>
+	return (
+		<>
+			<Head>
+				<title>Musixverse | Contract Metadata URI</title>
+				<meta name="description" content={meta_description} />
+			</Head>
 
 			<div className="mt-20">{JSON.stringify(contractMetadata)}</div>
 		</>

@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { meta_description } from "../../constants/index";
+import { meta_description } from "../../constants";
 import { useState, useEffect, useContext } from "react";
 import { useRouter } from "next/router";
 import { useMoralis, useMoralisQuery, useNewMoralisObject, useMoralisCloudFunction } from "react-moralis";

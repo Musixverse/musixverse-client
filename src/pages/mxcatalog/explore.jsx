@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { useReducer, useState } from "react";
-import { meta_description } from "../../constants/index";
+import { meta_description } from "../../constants";
 import CatalogBody from "../../components/MxCatalog/Utils/CatalogBody";
 import CatalogNav from "../../components/MxCatalog/Utils/CatalogNav";
 

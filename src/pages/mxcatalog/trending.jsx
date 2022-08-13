@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { useEffect, useReducer, useState } from "react";
+import { useReducer, useState } from "react";
 import CatalogBody from "../../components/MxCatalog/Utils/CatalogBody";
 import CatalogNav from "../../components/MxCatalog/Utils/CatalogNav";
 
@@ -42,7 +42,7 @@ const reducer = (state, action) => {
 	}
 };
 
-export default function NewReleases() {
+export default function Trending() {
 	// Will be maintaining a state here for the type of marketplace (currentSelection (Integer))
 	// Initially set to load the newly released nfts first
 	const [currentSelection, setCurrentSelection] = useState(1);
@@ -67,14 +67,10 @@ export default function NewReleases() {
 		date: true,
 	});
 
-	useEffect(() => {
-		console.log("UPDATED FILTERS: ", appliedFilter);
-	}, [appliedFilter]);
-
 	return (
 		<>
 			<Head>
-				<title>Musixverse | New Releases</title>
+				<title>Musixverse | Trending</title>
 				<meta name="description" content="Musixverse" />
 				<link rel="icon" href="/favicon.ico" />
 			</Head>

@@ -3,7 +3,7 @@ import { useMoralis } from "react-moralis";
 import { MXV_DIAMOND_ADDRESS, BLOCKCHAIN_NETWORK } from "../../../constants";
 import NFTCard from "../../../layout/NFTCard/NFTCard";
 
-const TrackNFT = ({ track, index }) => {
+const TrendingNFT = ({ track, index }) => {
 	const { Moralis } = useMoralis();
 	const [metadata, setMetadata] = useState("");
 
@@ -66,4 +66,4 @@ const TrackNFT = ({ track, index }) => {
 	} else return <NFTCard />;
 };
 
-export default TrackNFT;
+export default TrendingNFT;

@@ -1,6 +1,8 @@
 import Image from "next/image";
 import { useState, Fragment } from "react";
+import { useTheme } from "next-themes";
 import FilterSvg from "../../../../../public/assets/Catalog/Filter.svg";
+import FilterSvg_white from "../../../../../public/assets/Catalog/filter_white.svg";
 import mxvLogo from "../../../../../public/assets/Catalog/MXVlogo.svg";
 import { Dialog, Transition } from '@headlessui/react'
 import FilterNftTraits from "./FilterNftTraits";
@@ -8,16 +10,17 @@ import ShowHide from "./ShowHide";
 import SortBy from "./SortBy";
 
 export default function Filter({appliedFilter, setAppliedFilter}){
+    const {theme} = useTheme();
     const [currentFilter, setCurrentFilter] = useState(0);
     return(
         <div className="sticky z-10 flex mr-10 top-24 ">
             {/* Filter CTA */}
-            <div className="self-start p-2 flex flex-col items-center justify-center border border-[#BFBFBF] rounded-2xl backdrop-blur-[40px] backdrop-brightness-200 bg-[rgba(255,255,255,0.8)] ">
+            <div className="self-start p-2 flex flex-col items-center justify-center border border-[#BFBFBF] rounded-2xl backdrop-blur-[40px] backdrop-brightness-200 bg-[rgba(255,255,255,0.8)] dark:bg-[rgba(19,19,19,0.4)] dark:backdrop-blur-[24px] dark:border-search-200 dark:border-2 ">
                 {/* Filter icon */}
                 <div
                     onClick={()=>setCurrentFilter(0)}
-                    className="flex items-center justify-center p-4 cursor-pointer rounded-xl bg-light-300">
-                    <Image src={FilterSvg} objectFit="contain" width={25} height={22} alt="Filter"/>
+                    className="flex items-center justify-center p-4 cursor-pointer rounded-xl bg-light-300 dark:bg-dark-200">
+                    <Image src={theme === "light" ? FilterSvg:FilterSvg_white} objectFit="contain" width={25} height={22} alt="Filter"/>
                 </div>
                 {/* Filter Options */}
                 <div className="flex flex-col mt-5 text-xs divide-y font-secondary">
@@ -63,7 +66,7 @@ export default function Filter({appliedFilter, setAppliedFilter}){
                     leaveFrom="opacity-100 scale-100"
                     leaveTo="opacity-0 scale-75 translate-x-1/3"
                 >
-                    <div className="z-40 absolute self-start p-12 ml-7 backdrop-blur-[40px] backdrop-brightness-200 bg-[rgba(255,255,255,0.8)] rounded-2xl">
+                    <div className="z-40 absolute self-start p-12 ml-7 backdrop-blur-[40px] backdrop-brightness-200 bg-[rgba(255,255,255,0.8)] dark:bg-[rgba(19,19,19,0.4)] dark:backdrop-blur-[24px] dark:border-search-200 dark:border-2 rounded-2xl">
                         <div className="flex justify-between w-full">
                             <h3 className="text-4xl font-tertiary">MARKETPLACE FILTERS</h3> 
                             <div

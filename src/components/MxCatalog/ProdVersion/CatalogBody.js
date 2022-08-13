@@ -15,7 +15,7 @@ export default function CatalogBody({currentSelection, setAppliedFilter, applied
         <div className="flex flex-col items-center w-full mt-[70px]">
             <div className="flex text-[#1d1d1d] mb-[70px] items-center space-x-2 text-4xl font-tertiary">
                 <Image src={theme === "light" ? "/assets/record_b.svg" : "/assets/record_w.svg"} alt="vinyl disc" height={30} width={30}/>
-                <p>{catalogType}</p> 
+                <p className="dark:text-light-200">{catalogType}</p> 
             </div>
             <div className="flex items-start justify-between w-full">
                 <Filter setAppliedFilter={setAppliedFilter} appliedFilter={appliedFilter}/>

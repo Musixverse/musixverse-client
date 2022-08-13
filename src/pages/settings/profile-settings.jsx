@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import Head from "next/head";
-import { meta_description } from "../../constants/index";
+import { meta_description } from "../../constants";
 import SettingsNav from "../../components/Settings/SettingsNav";
 import ProfileSettings from "../../components/Settings/ProfileSettings";
 import { useMoralis, useMoralisQuery, useMoralisCloudFunction } from "react-moralis";

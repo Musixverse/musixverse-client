@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import Moralis from "moralis/node";
-import { meta_description } from "../../../constants/index";
+import { meta_description } from "../../../constants";
 import { useMoralis, useMoralisCloudFunction } from "react-moralis";
 import { MXV_DIAMOND_ADDRESS, BLOCKCHAIN_NETWORK } from "../../../constants";
 import TrackHeader from "../../../components/TrackInfo/TrackHeader";

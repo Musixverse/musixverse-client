@@ -10,9 +10,9 @@ import SortBy from "./SortBy";
 export default function Filter({ appliedFilter, setAppliedFilter }) {
 	const [currentFilter, setCurrentFilter] = useState(0);
 	return (
-		<div className="sticky z-10 flex mr-10 top-24">
+		<div className={currentFilter !== 0 ? "z-40 sticky flex mr-10 top-24" : "z-10 sticky flex mr-10 top-24"}>
 			{/* Filter CTA */}
-			<div className="self-start p-4 flex flex-col items-center justify-center border border-[#BFBFBF] rounded-2xl backdrop-blur-[40px] backdrop-brightness-200 bg-[rgba(255,255,255,0.8)]">
+			<div className="z-40 self-start p-4 flex flex-col items-center justify-center border border-[#BFBFBF] rounded-2xl backdrop-blur-[40px] backdrop-brightness-200 bg-[rgba(255,255,255,0.8)]">
 				{/* Filter icon */}
 				<div onClick={() => setCurrentFilter(0)} className="flex items-center justify-center p-4 cursor-pointer rounded-xl bg-light-300">
 					<Image src={FilterSvg} objectFit="contain" width={25} height={22} alt="Filter" />
@@ -48,18 +48,30 @@ export default function Filter({ appliedFilter, setAppliedFilter }) {
 					<Image src={mxvLogo} height={37} width={37} objectFit="contain" alt="mxv logo" />
 				</div>
 			</div>
+
 			{/* FILTER Modal */}
 			<Transition show={currentFilter !== 0}>
 				<Transition.Child
 					as={Fragment}
-					enter="transition-all ease-in-out duration-400"
+					enter="transition-all duration-200"
+					enterFrom="opacity-0"
+					enterTo="opacity-100"
+					leave="transition-all duration-200"
+					leaveTo="opacity-0"
+					leaveFrom="opacity-100"
+				>
+					<div style={{ zIndex: "30" }} className="w-screen h-screen left-0 top-0 bg-black/50 backdrop-blur-sm fixed" />
+				</Transition.Child>
+				<Transition.Child
+					as={Fragment}
+					enter="transition-all ease-in duration-300"
 					enterFrom="opacity-0 scale-75 translate-x-1/3"
 					enterTo="opacity-100 scale-100"
-					leave="transition-all ease-out duration-200"
+					leave="transition-all ease-out duration-300"
 					leaveFrom="opacity-100 scale-100"
 					leaveTo="opacity-0 scale-75 translate-x-1/3"
 				>
-					<div className="z-40 absolute self-start p-12 ml-7 backdrop-blur-[40px] backdrop-brightness-200 bg-[rgba(255,255,255,0.8)] rounded-2xl">
+					<div className="z-40 absolute self-start p-12 ml-7 backdrop-blur-[40px] backdrop-brightness-200 bg-light-100 rounded-2xl">
 						<div className="flex justify-between w-full">
 							<h3 className="text-4xl font-tertiary">MARKETPLACE FILTERS</h3>
 							<div

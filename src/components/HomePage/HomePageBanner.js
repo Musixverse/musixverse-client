@@ -57,12 +57,12 @@ export default function Banner() {
 					Musixverse will bring together artists and fans like never before, help them do great things, and empower each other in the process.
 				</p>
 				<a
-					className="px-5 py-3 text-xs text-white bg-primary-200 hover:bg-primary-300 font-primary rounded-3xl"
+					className="px-5 py-3 text-xs text-center text-white bg-primary-200 hover:bg-primary-300 font-primary rounded-3xl"
 					href="https://cfbmusixverse.paperform.co/"
 					target={"_blank"}
 					rel="noopener noreferrer"
 				>
-					Join the MXV Insider Community to get beta access
+					Join the Insider Community to get beta access
 				</a>
 			</div>
 			<StayInLoop />

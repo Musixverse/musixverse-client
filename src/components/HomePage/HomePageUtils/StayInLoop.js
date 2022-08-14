@@ -9,7 +9,7 @@ export default function StayInLoop() {
     //nav: blur: 12px, 0.6 opacity
     // mt-28
     return (
-        <div className="w-full backdrop-blur-[40px] backdrop-brightness-150 flex justify-center mt-36">
+        <div className="w-full backdrop-blur-[40px] flex justify-center mt-36">
             <div className="max-w-[1920px] flex flex-col justify-between w-full px-6 md:px-8 lg:px-16 xl:px-20 2xl:px-36 py-10 lg:flex-row">
                 {/* Left div */}
                 <div className="mb-5 sm:mb-3 text-light-100 lg:mb-0">

@@ -65,6 +65,10 @@ export default function Banner() {
 					Join the Insider Community to get beta access
 				</a>
 			</div>
+            <div>
+                <img src="/assets/homepage/tricolor_mobile.png" alt="tricolor" className="md:hidden w-[100vw] absolute bottom-[32%] sm:bottom-[20%] left-0"></img>
+                <img src="/assets/homepage/tricolor1.png" alt="tricolor" className="hidden md:block w-[80vw] absolute md:bottom-[28%] lg:bottom-[20%] xl:bottom-[18%] 2xl:bottom-[17%] left-[10%]"></img>
+            </div>
 			<StayInLoop />
 			{/* </div> */}
 		</div>

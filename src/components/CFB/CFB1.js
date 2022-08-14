@@ -11,9 +11,9 @@ export default function CFB1() {
             <button className={styles["cfb-banner__circle-dropdown"]} onClick={scrollToRef}>
                 <img src="/assets/CFB/circle_dropdown.png" className="z-[5]" width={50} height={50} alt="circle dropdown" />
             </button>
-            <p className="text-3xl font-semibold text-center font-primary text-primary-200">MXV COMMUNITY FEEDBACK BOARD</p>
+            <p className="text-3xl font-semibold text-center font-primary text-primary-200">MXV INSIDER COMMUNITY</p>
             <p className="max-w-xs pt-6 text-xs text-center font-secondary sm:max-w-2xl">
-                The Community Feedback Board is a group of selected individuals with exclusive access to Musixverse and its features before anyone else. In
+                The Insider Community is a group of selected individuals with exclusive access to Musixverse and its features before anyone else. In
                 return, we will ask you to provide feedback about the platform as we continue to build and improve it
             </p>
         </div>

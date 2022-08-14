@@ -10,7 +10,7 @@ export default function CFB4() {
             <img src="/assets/CFB/section5_left.png" className={styles["cfb4__image-left"]} width={250} height={230} alt="svg" />
             <div className={"dark:bg-dark-100 " + styles["cfb4__card"]}>
                 <h1 className="max-w-xl text-2xl font-semibold text-center font-primary">
-                    Join our Community Feedback Board for exclusive privileges on Musixverse.
+                    Join our Insider Community for exclusive privileges on Musixverse.
                 </h1>
                 <div className={styles["cfb4__card--innercard"]}>
                     <div className={"dark:bg-dark-200 " + styles["cfb4__card--innercard2"]}>

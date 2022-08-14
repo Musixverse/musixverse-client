@@ -50,17 +50,17 @@ export default function Banner() {
             {/* <div className="mt-8"> */}
             {/* Inner div for content */}
             <div className={"text-white dark:text-white mt-52 " + styles["hero-section-container__content-div"]}>
-                <h1 className={styles["hero-section-container__content-div--heading"]}>We&apos;re Coming Soon!</h1>
+                <h1 className={styles["hero-section-container__content-div--heading"]}>Musixverse <span className={"text-primary-100 "+styles["hero-section-container__content-div--heading"]}>Beta</span> is live now!!</h1>
                 <p className={styles["hero-section-container__content-div--description"]}>
                     Musixverse will bring together artists and fans like never before, help them do great things, and empower each other in the process.
                 </p>
                 <a
                     className="px-5 py-3 text-xs text-white bg-primary-200 hover:bg-primary-300 font-primary rounded-3xl"
-                    href="https://discord.com/invite/rXKb7rCqjG"
+                    href="https://cfbmusixverse.paperform.co/"
                     target={"_blank"}
                     rel="noopener noreferrer"
                 >
-                    Join the Discord Community
+                    Join the MXV Insider Community
                 </a>
             </div>
             <StayInLoop />

@@ -6,6 +6,7 @@ import facebook from "../../../public/assets/social/facebook.svg";
 import twitter from "../../../public/assets/social/twitter.svg";
 import instagram from "../../../public/assets/social/instagram.svg";
 import { useTheme } from "next-themes";
+import Link from "next/link";
 
 export default function HomePage_section4() {
     const { theme } = useTheme();
@@ -14,7 +15,7 @@ export default function HomePage_section4() {
             <div className={"dark:bg-dark-100 " + styles["HomePage_section4__container"]}>
                 <div>
                     <p className="max-w-2xl text-xl font-semibold font-primary md:text-3xl">
-                        Join our community to get early access and exclusive privileges on Musixverse
+                        Join our Insider Community to get early access and exclusive privileges on Musixverse
                     </p>
                     <p className="mt-5 text-xs font-secondary md:text-sm">
                         Everything that we are doing today is going to power the decentralized world of tomorrow.
@@ -24,19 +25,18 @@ export default function HomePage_section4() {
                 <div className={styles["section2__card--innercard"]}>
                     <div className="flex flex-col">
                         <p className="text-xs font-normal md:text-sm dark:text-dark-200 font-secondary">
-                            To know more about the Musixverse Community,
+                            To know more about the Musixverse Insider Community,
                             <br />
                             tap the button below
                         </p>
-                        <a
+                        <Link
                             href="cfh/cfb"
-                            target={"_blank"}
-                            rel="noopener noreferrer"
+                            passHref
                         >
                             <button className="px-8 py-3 mt-6 text-xs text-white bg-primary-200 hover:bg-primary-300 font-primary rounded-xl">
-                                Join Musixverse Community
+                                Explore about MXV Insider Community
                             </button>
-                        </a>
+                        </Link>
                     </div>
                     <div className="items-end">
                         <div className={styles["newsletter__social"]}>

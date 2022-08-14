@@ -16,7 +16,7 @@ export default function BannerCFB() {
                     <Link href="https://cfbmusixverse.paperform.co/" passHref={true}>
                         <a target="_blank" rel="noopener noreferrer">
                             <button className="px-5 py-3 mt-6 text-xs text-white bg-primary-200 hover:bg-primary-300 font-primary rounded-xl">
-                                Join the Community Feedback Board
+                                Join the MXV Insider Community
                             </button>
                         </a>
                     </Link>

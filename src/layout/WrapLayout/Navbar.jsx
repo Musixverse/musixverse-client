@@ -102,7 +102,7 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 						<div className="hidden ml-auto md:block">
 							<ul className="flex flex-row items-center text-sm font-medium md:space-x-8 lg:space-x-3 xl:space-x-6 md:mt-0 sm:text-sm">
 								{/* Search bar */}
-								<li className="hidden md:block">
+								<li className="hidden xl:block">
 									{/* <div className="flex items-center justify-center text-xs rounded text-dark-200 dark:text-white">
 										<div className="flex overflow-hidden border rounded-full dark:border-dark-100">
 											<button className="flex items-center justify-center px-4 border-l border-light-300 dark:border-dark-100 bg-search-100 dark:bg-search-200">

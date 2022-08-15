@@ -13,6 +13,7 @@ import SaveDraftSuccessModal from "../../components/CreateNFT/CreateNFTUtils/Sav
 import { mintTrackNFT } from "../../utils/smart-contract/functions";
 import { BLOCKCHAIN_NETWORK_ID, MXV_DIAMOND_ADDRESS } from "../../constants";
 import LoadingContext from "../../../store/loading-context";
+import { Country, State } from "country-state-city";
 
 const CreateNFT = () => {
 	const [isLoading, setLoading] = useContext(LoadingContext);
@@ -36,7 +37,15 @@ const CreateNFT = () => {
 	const [parentalAdvisory, setParentalAdvisory] = useState("Explicit");
 	const [vocals, setVocals] = useState(true);
 	const [language, setLanguage] = useState("Hindi");
-	const [location, setLocation] = useState("India");
+	const [countryOfOrigin, setCountryOfOrigin] = useState(Country.getCountryByCode("IN"));
+	const [stateOfOrigin, setStateOfOrigin] = useState(State.getStateByCodeAndCountry("DL", "IN"));
+	const [location, setLocation] = useState({
+		name: "Delhi",
+		countryCode: "IN",
+		stateCode: "DL",
+		latitude: "28.65195000",
+		longitude: "77.23149000",
+	});
 	const [isrc, setIsrc] = useState("");
 	const [tags, setTags] = useState([]);
 	const [links, setLinks] = useState({
@@ -99,6 +108,8 @@ const CreateNFT = () => {
 						setVocals(_draft.attributes.vocals);
 						setLanguage(_draft.attributes.language);
 						setLocation(_draft.attributes.location);
+						setCountryOfOrigin(_draft.attributes.countryOfOrigin);
+						setStateOfOrigin(_draft.attributes.stateOfOrigin);
 						setIsrc(_draft.attributes.isrc);
 						setTags(_draft.attributes.tags);
 						setLinks(_draft.attributes.links);
@@ -243,7 +254,9 @@ const CreateNFT = () => {
 			lyrics: lyrics ? "ipfs://" + lyricsFile.hash() : "",
 			genre: genre,
 			language: language,
-			locationCreated: location,
+			countryOfOrigin: countryOfOrigin,
+			stateOfOrigin: stateOfOrigin,
+			location: location,
 			isrc: isrc,
 			tags: _tags,
 			links: {
@@ -254,6 +267,7 @@ const CreateNFT = () => {
 				other: links.other,
 			},
 			collaborators: reducedCollaboratorList,
+			numberOfCollaborators: reducedCollaboratorList.length,
 			license: "ipfs://" + coverArtUrl.replace("https://ipfs.moralis.io:2053/ipfs/", ""), // TODO
 			unlockTimestamp: _unlockTimestamp,
 			chainDetails: {
@@ -296,7 +310,7 @@ const CreateNFT = () => {
 					value: vocals ? "Yes" : "No",
 				},
 				{
-					trait_type: "Other Collaborators",
+					trait_type: "Has Collaborators",
 					value: collaboratorList.length > 1 ? "Yes" : "No",
 				},
 			],
@@ -351,6 +365,8 @@ const CreateNFT = () => {
 		vocals: vocals,
 		language: language,
 		location: location,
+		countryOfOrigin: countryOfOrigin,
+		stateOfOrigin: stateOfOrigin,
 		isrc: isrc,
 		tags: tags,
 		links: links,
@@ -408,6 +424,10 @@ const CreateNFT = () => {
 		setVocals,
 		setLanguage,
 		setLocation,
+		countryOfOrigin,
+		setCountryOfOrigin,
+		stateOfOrigin,
+		setStateOfOrigin,
 		isrc,
 		setIsrc,
 		tags,

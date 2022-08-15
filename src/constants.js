@@ -13,10 +13,10 @@ export const meta_description3 = "The NFT Marketplace for Musicians and Fans";
 /***********************    BLOCKCHAIN CONSTANTS  *************************/
 /**************************************************************************/
 export const MUSIXVERSE_FACET_CONTRACT_ABI = MusixverseFacet.abi;
-export const MXV_DIAMOND_ADDRESS = "0xe9B597Ca228bA291eEd1c7861A6Ad24bf6207f88"; // Diamond Address
-export const MUSIXVERSE_FACET_ADDRESS = "0xEb5d4fBf1632e0Ff981C40868A8Dd3f2d7547BF9";
-export const MUSIXVERSE_GETTERS_FACET_ADDRESS = "0x1e3cbB1C401e9f558644154CaF365aBE3f7FFa24";
-export const MUSIXVERSE_SETTERS_FACET_ADDRESS = "0x1671116ba849C021d50E8E462e424a569FfCEe98";
+export const MXV_DIAMOND_ADDRESS = "0x78e1a1a665D1065cdf283a1AcD39A76BE3B6c093"; // Diamond Address
+export const MUSIXVERSE_FACET_ADDRESS = "0x789aabC3f3691B1b4691CC8a5093E767c2c3ca8E";
+export const MUSIXVERSE_GETTERS_FACET_ADDRESS = "0xe5a0D685d6b34CfD18C2648098a09912F4e3e88f";
+export const MUSIXVERSE_SETTERS_FACET_ADDRESS = "0x08De2F648b54be5033f9134a5819Fa9fAC8b4129";
 export const BLOCKCHAIN_NETWORK = "mumbai";
 export const BLOCK_EXPLORER_URL = "https://mumbai.polygonscan.com";
 export const BLOCKCHAIN_NETWORK_ID = 80001;
@@ -169,7 +169,61 @@ export const languageArray = [
 	"Ukrainian",
 	"Urdu",
 ];
-export const locationArray = [
+export const tagsAvailable = [
+	{ value: "Aggressive", label: "Aggressive" },
+	{ value: "Alternative", label: "Alternative" },
+	{ value: "Angry", label: "Angry" },
+	{ value: "Beautiful", label: "Beautiful" },
+	{ value: "Calm", label: "Calm" },
+	{ value: "Cheerful", label: "Cheerful" },
+	{ value: "Chill", label: "Chill" },
+	{ value: "Cool", label: "Cool" },
+	{ value: "Country", label: "Country" },
+	{ value: "Dance", label: "Dance" },
+	{ value: "Delicate", label: "Delicate" },
+	{ value: "Depressing", label: "Depressing" },
+	{ value: "Dreamy", label: "Dreamy" },
+	{ value: "Electronic", label: "Electronic" },
+	{ value: "Exciting", label: "Exciting" },
+	{ value: "Fierce", label: "Fierce" },
+	{ value: "Folk", label: "Folk" },
+	{ value: "Fun", label: "Fun" },
+	{ value: "Gloomy", label: "Gloomy" },
+	{ value: "Happy", label: "Happy" },
+	{ value: "Hostile", label: "Hostile" },
+	{ value: "Humorous", label: "Humorous" },
+	{ value: "Indie", label: "Indie" },
+	{ value: "Jazz", label: "Jazz" },
+	{ value: "Joyful", label: "Joyful" },
+	{ value: "Love", label: "Love" },
+	{ value: "Lyrical", label: "Lyrical" },
+	{ value: "Merry", label: "Merry" },
+	{ value: "Metal", label: "Metal" },
+	{ value: "Miserable", label: "Miserable" },
+	{ value: "Oldies", label: "Oldies" },
+	{ value: "Patriotic", label: "Patriotic" },
+	{ value: "Peaceful", label: "Peaceful" },
+	{ value: "Pop", label: "Pop" },
+	{ value: "Quiet", label: "Quiet" },
+	{ value: "Rebellious", label: "Rebellious" },
+	{ value: "Relaxed", label: "Relaxed" },
+	{ value: "Rock", label: "Rock" },
+	{ value: "Sad", label: "Sad" },
+	{ value: "Sadness", label: "Sadness" },
+	{ value: "Satisfying", label: "Satisfying" },
+	{ value: "Silly", label: "Silly" },
+	{ value: "Sleepy", label: "Sleepy" },
+	{ value: "Soft", label: "Soft" },
+	{ value: "Somber", label: "Somber" },
+	{ value: "Soothing", label: "Soothing" },
+	{ value: "Sorrow", label: "Sorrow" },
+	{ value: "Soul", label: "Soul" },
+	{ value: "Tense", label: "Tense" },
+	{ value: "Tragic", label: "Tragic" },
+	{ value: "80s", label: "80s" },
+	{ value: "90s", label: "90s" },
+];
+export const countryOfOriginArray = [
 	"India",
 	"Afghanistan",
 	"Albania",
@@ -369,67 +423,13 @@ export const locationArray = [
 	"Zambia",
 	"Zimbabwe",
 ];
-export const tagsAvailable = [
-	{ value: "Aggressive", label: "Aggressive" },
-	{ value: "Alternative", label: "Alternative" },
-	{ value: "Angry", label: "Angry" },
-	{ value: "Beautiful", label: "Beautiful" },
-	{ value: "Calm", label: "Calm" },
-	{ value: "Cheerful", label: "Cheerful" },
-	{ value: "Chill", label: "Chill" },
-	{ value: "Cool", label: "Cool" },
-	{ value: "Country", label: "Country" },
-	{ value: "Dance", label: "Dance" },
-	{ value: "Delicate", label: "Delicate" },
-	{ value: "Depressing", label: "Depressing" },
-	{ value: "Dreamy", label: "Dreamy" },
-	{ value: "Electronic", label: "Electronic" },
-	{ value: "Exciting", label: "Exciting" },
-	{ value: "Fierce", label: "Fierce" },
-	{ value: "Folk", label: "Folk" },
-	{ value: "Fun", label: "Fun" },
-	{ value: "Gloomy", label: "Gloomy" },
-	{ value: "Happy", label: "Happy" },
-	{ value: "Hostile", label: "Hostile" },
-	{ value: "Humorous", label: "Humorous" },
-	{ value: "Indie", label: "Indie" },
-	{ value: "Jazz", label: "Jazz" },
-	{ value: "Joyful", label: "Joyful" },
-	{ value: "Love", label: "Love" },
-	{ value: "Lyrical", label: "Lyrical" },
-	{ value: "Merry", label: "Merry" },
-	{ value: "Metal", label: "Metal" },
-	{ value: "Miserable", label: "Miserable" },
-	{ value: "Oldies", label: "Oldies" },
-	{ value: "Patriotic", label: "Patriotic" },
-	{ value: "Peaceful", label: "Peaceful" },
-	{ value: "Pop", label: "Pop" },
-	{ value: "Quiet", label: "Quiet" },
-	{ value: "Rebellious", label: "Rebellious" },
-	{ value: "Relaxed", label: "Relaxed" },
-	{ value: "Rock", label: "Rock" },
-	{ value: "Sad", label: "Sad" },
-	{ value: "Sadness", label: "Sadness" },
-	{ value: "Satisfying", label: "Satisfying" },
-	{ value: "Silly", label: "Silly" },
-	{ value: "Sleepy", label: "Sleepy" },
-	{ value: "Soft", label: "Soft" },
-	{ value: "Somber", label: "Somber" },
-	{ value: "Soothing", label: "Soothing" },
-	{ value: "Sorrow", label: "Sorrow" },
-	{ value: "Soul", label: "Soul" },
-	{ value: "Tense", label: "Tense" },
-	{ value: "Tragic", label: "Tragic" },
-	{ value: "80s", label: "80s" },
-	{ value: "90s", label: "90s" },
-];
 
 /**************************************************************************/
 /***********************    MARKETPLACE FILTERS    ************************/
 /**************************************************************************/
 export const duration = ["<100s", "100-150s", "151-200s", "201-250s", "251-300s", "301-350s", "351-400s", ">400s"];
 export const numberOfCollaborators = [1, 2, 3, 4, 5];
-export const nftStatus = ["On Sale", "Not on Sale"];
+export const nftStatus = ["On Sale", "Not on Sale", "Coming Soon"];
 export const numberOfCopies = [
 	"1 (Single Drop)",
 	"2",
@@ -448,4 +448,22 @@ export const numberOfCopies = [
 	"91-100",
 	">100",
 ];
-export const resaleRoyalty = ["5%", "6%-10%", "10%-20%", "20%-30%", "30%-40%", "40%-50%", "50%-60%", "60%-70%", "70%-80%", "80%-90%", "90%-100%"];
+export const resaleRoyalty = [
+	"1%",
+	"2%",
+	"3%",
+	"4%",
+	"5%",
+	"6%-10%",
+	"11%-20%",
+	"21%-30%",
+	"31%-40%",
+	"41%-50%",
+	"51%-60%",
+	"61%-70%",
+	"71%-80%",
+	"81%-90%",
+	"91%-100%",
+];
+
+export const locationArray = [];

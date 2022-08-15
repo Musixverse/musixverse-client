@@ -4,7 +4,8 @@ import FilterSvg from "../../../../../public/assets/Catalog/Filter.svg";
 import mxvLogo from "../../../../../public/assets/Catalog/MXVlogo.svg";
 import { Dialog, Transition } from "@headlessui/react";
 import FilterNftTraits from "./FilterNftTraits";
-import ShowHide from "./ShowHide";
+import FilterTrackTraits from "./FilterTrackTraits";
+import NftState from "./NftState";
 import SortBy from "./SortBy";
 
 export default function Filter({ appliedFilter, setAppliedFilter }) {
@@ -18,6 +19,7 @@ export default function Filter({ appliedFilter, setAppliedFilter }) {
 				<div onClick={() => setCurrentFilterType(0)} className="flex items-center justify-center p-4 cursor-pointer rounded-xl bg-light-300">
 					<Image src={FilterSvg} objectFit="contain" width={25} height={22} alt="Filter" />
 				</div>
+
 				{/* Filter Options */}
 				<div className="flex flex-col mt-5 text-xs divide-y font-secondary">
 					<div
@@ -26,26 +28,35 @@ export default function Filter({ appliedFilter, setAppliedFilter }) {
 						}}
 						className={(currentFilterType === 1 ? "text-primary-100 " : "") + "flex flex-col items-center justify-center cursor-pointer"}
 					>
-						<span className="material-symbols-outlined">library_music</span>
-						<p className="my-2">NFT Traits</p>
+						<span className="material-symbols-outlined">queue_music</span>
+						<p className="my-2 w-full">Track&nbsp;Traits</p>
 					</div>
 					<div
-						onClick={() => setCurrentFilterType(2)}
+						onClick={() => {
+							setCurrentFilterType(2);
+						}}
 						className={(currentFilterType === 2 ? "text-primary-100 " : "") + "flex flex-col items-center justify-center cursor-pointer"}
 					>
-						<span className="mt-2 material-symbols-outlined">dashboard_customize</span>
-						<p className="my-2">Show/Hide</p>
+						<span className="mt-2 material-symbols-outlined">library_music</span>
+						<p className="my-2">NFT Traits</p>
 					</div>
 					<div
 						onClick={() => setCurrentFilterType(3)}
 						className={(currentFilterType === 3 ? "text-primary-100 " : "") + "flex flex-col items-center justify-center cursor-pointer"}
+					>
+						<span className="mt-2 material-symbols-outlined">dashboard_customize</span>
+						<p className="my-2">NFT State</p>
+					</div>
+					<div
+						onClick={() => setCurrentFilterType(4)}
+						className={(currentFilterType === 4 ? "text-primary-100 " : "") + "flex flex-col items-center justify-center cursor-pointer"}
 					>
 						<span className="mt-2 material-symbols-outlined">sort</span>
 						<p className="my-2">Sort By</p>
 					</div>
 				</div>
 				{/* MXV LOGO */}
-				<div className="flex items-center mt-36 mb-2">
+				<div className="flex items-center mt-28 mb-2">
 					<Image src={mxvLogo} height={37} width={37} objectFit="contain" alt="mxv logo" />
 				</div>
 			</div>
@@ -85,15 +96,13 @@ export default function Filter({ appliedFilter, setAppliedFilter }) {
 
 						{/* Conditional Rendering of filterOptions */}
 						{currentFilterType === 1 ? (
+							<FilterTrackTraits appliedFilter={appliedFilter} setAppliedFilter={setAppliedFilter} setCurrentFilterType={setCurrentFilterType} />
+						) : currentFilterType === 2 ? (
 							<FilterNftTraits appliedFilter={appliedFilter} setAppliedFilter={setAppliedFilter} setCurrentFilterType={setCurrentFilterType} />
+						) : currentFilterType === 3 ? (
+							<NftState appliedFilter={appliedFilter} setAppliedFilter={setAppliedFilter} />
 						) : (
-							<>
-								{currentFilterType === 2 ? (
-									<ShowHide appliedFilter={appliedFilter} setAppliedFilter={setAppliedFilter} />
-								) : (
-									<SortBy appliedFilter={appliedFilter} setAppliedFilter={setAppliedFilter} />
-								)}
-							</>
+							<SortBy appliedFilter={appliedFilter} setAppliedFilter={setAppliedFilter} />
 						)}
 					</div>
 				</Transition.Child>

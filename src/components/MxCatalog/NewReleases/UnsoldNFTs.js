@@ -8,7 +8,6 @@ import errorSvg from "/public/assets/success-failure-modals/error.svg";
 const UnsoldNFTs = ({ appliedFilter }) => {
 	const [loading, setLoading] = useContext(LoadingContext);
 	const [tracksWhoseAllCopiesAreNotSold, setTracksWhoseAllCopiesAreNotSold] = useState([]);
-	let tracks = [];
 
 	const { fetch: fetchTracksWhoseAllCopiesAreNotSold } = useMoralisCloudFunction(
 		"fetchTracksWhoseAllCopiesAreNotSold",
@@ -27,7 +26,6 @@ const UnsoldNFTs = ({ appliedFilter }) => {
 				setLoading(false);
 				console.log(object);
 				setTracksWhoseAllCopiesAreNotSold(object);
-				tracks = object;
 			},
 			onError: (error) => {
 				setLoading(false);

@@ -6,6 +6,8 @@ import CatalogNav from "../../components/MxCatalog/Utils/CatalogNav";
 
 const reducer = (state, action) => {
 	switch (action.type) {
+		case "TRACKORIGIN":
+			return { ...state, trackOrigin: action.selectedChoice };
 		case "GENRE":
 			return { ...state, genre: action.selectedChoice };
 		case "LANGUAGE":
@@ -48,6 +50,7 @@ export default function NewReleases() {
 	// Initially set to load the newly released nfts first
 	const [currentSelection, setCurrentSelection] = useState(1);
 	const [appliedFilter, dispatch] = useReducer(reducer, {
+		trackOrigin: "",
 		genre: "",
 		language: "",
 		duration: "",

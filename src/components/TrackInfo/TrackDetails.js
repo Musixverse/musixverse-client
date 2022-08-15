@@ -59,12 +59,12 @@ export default function TrackDetails({ tokenId, metadata }) {
 						<p>{metadata.language}</p>
 					</div>
 					<div className="text-left">
-						<h4 className="font-bold font-secondary text-[16px]">Location Created</h4>
-						<p>{metadata.locationCreated}</p>
+						<h4 className="font-bold font-secondary text-[16px]">Country of Origin</h4>
+						<p>{JSON.parse(metadata.countryOfOrigin).name}</p>
 					</div>
 					<div className="text-left">
-						<h4 className="font-bold font-secondary text-[16px]">{metadata.attributes[6].trait_type}</h4>
-						<p>{metadata.attributes[6].value}</p>
+						<h4 className="font-bold font-secondary text-[16px]">Location Created</h4>
+						<p>{JSON.parse(metadata.location).name}</p>
 					</div>
 				</div>
 
@@ -72,6 +72,10 @@ export default function TrackDetails({ tokenId, metadata }) {
 
 				{/* Section 2 */}
 				<div className={styles["other-details__section2"]}>
+					<div className="text-left">
+						<h4 className="font-bold font-secondary text-[16px]">{metadata.attributes[6].trait_type}</h4>
+						<p>{metadata.attributes[6].value}</p>
+					</div>
 					<div className="text-left">
 						<h4 className="font-bold font-secondary text-[16px]">{metadata.attributes[7].trait_type}</h4>
 						<p>{metadata.attributes[7].value}</p>

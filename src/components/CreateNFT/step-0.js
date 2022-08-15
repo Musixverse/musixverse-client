@@ -6,6 +6,7 @@ import PreviewDraft from "./CreateNFTUtils/PreviewDraft";
 import DeleteDraftModal from "./CreateNFTUtils/DeleteDraftModal";
 import styles from "../../../styles/CreateNFT/Step0.module.css";
 import LoadingContext from "../../../store/loading-context";
+import { Country, State } from "country-state-city";
 
 const CreateNFTIntro = ({ nextStep }) => {
 	const router = useRouter();
@@ -65,7 +66,15 @@ const CreateNFTIntro = ({ nextStep }) => {
 		parentalAdvisory: "Explicit",
 		vocals: true,
 		language: "Hindi",
-		location: "India",
+		countryOfOrigin: JSON.stringify(Country.getCountryByCode("IN")),
+		stateOfOrigin: JSON.stringify(State.getStateByCodeAndCountry("DL", "IN")),
+		location: JSON.stringify({
+			name: "Delhi",
+			countryCode: "IN",
+			stateCode: "DL",
+			latitude: "28.65195000",
+			longitude: "77.23149000",
+		}),
 		isrc: "",
 		tags: [],
 		links: {

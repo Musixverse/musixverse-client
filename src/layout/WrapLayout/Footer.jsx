@@ -25,7 +25,8 @@ const Footer = () => {
 					<Image src={theme === "dark" ? mxvW : mxvB} alt="MXV logo" width="90" height="20"></Image>
 					<p className="font-primary text-lg text-primary-100">Hear it. Own it. Live it.</p>
 				</div>
-				<div className="grid grid-cols-2 gap-y-10 md:gap-y-0 md:flex flex-wrap font-primary justify-between border-t-2 border-b-2 border-[#afafaf] w-full py-8 mt-5">
+
+				<div className="grid grid-cols-2 gap-y-10 md:gap-y-0 md:flex flex-wrap font-primary justify-between border-t-2 border-b-2 border-light-300 w-full py-8 mt-5">
 					<div className="flex flex-col space-y-2">
 						<p className="font-semibold text">Quick Links</p>
 						<ul className="space-y-2">
@@ -125,49 +126,49 @@ const Footer = () => {
 						<p className="font-semibold text-lg text-center sm:text-left">Follow us on</p>
 						<div className="footer__social mt-2">
 							<button className="flex justify-center items-center">
-								<Link href="https://www.youtube.com/channel/UCloNloMRDKaB-0e-xeaTdXw" passHref={true}>
+								<Link href="https://www.youtube.com/channel/UCloNloMRDKaB-0e-xeaTdXw" passHref>
 									<a target="_blank" rel="noopener noreferrer" className="flex justify-center items-center">
 										<Image src={youtube} width={20} height={20} alt="YouTube"></Image>
 									</a>
 								</Link>
 							</button>
 							<button className="flex justify-center items-center">
-								<Link href="https://t.me/+7e4mG5yhutswNWVl" passHref={true}>
+								<Link href="https://t.me/+7e4mG5yhutswNWVl" passHref>
 									<a target="_blank" rel="noopener noreferrer" className="flex justify-center items-center">
 										<Image src={telegram} width={20} height={20} alt="Telegram"></Image>
 									</a>
 								</Link>
 							</button>
 							<button className="flex justify-center items-center">
-								<Link href="https://www.linkedin.com/company/musomatic" passHref={true}>
+								<Link href="https://www.linkedin.com/company/musomatic" passHref>
 									<a target="_blank" rel="noopener noreferrer" className="flex justify-center items-center">
 										<Image src={linkedin} width={20} height={20} alt="LinkedIn"></Image>
 									</a>
 								</Link>
 							</button>
 							<button className="flex justify-center items-center">
-								<Link href="https://discord.com/invite/rXKb7rCqjG" passHref={true}>
+								<Link href="https://discord.com/invite/rXKb7rCqjG" passHref>
 									<a target="_blank" rel="noopener noreferrer" className="flex justify-center items-center">
 										<Image src={discord} width={20} height={20} alt="discord"></Image>
 									</a>
 								</Link>
 							</button>
 							<button className="flex justify-center items-center">
-								<Link href="https://www.facebook.com/Musixverse-104390125641359" passHref={true}>
+								<Link href="https://www.facebook.com/Musixverse-104390125641359" passHref>
 									<a target="_blank" rel="noopener noreferrer" className="flex justify-center items-center">
 										<Image src={facebook} width={20} height={20} alt="facebook"></Image>
 									</a>
 								</Link>
 							</button>
 							<button className="flex justify-center items-center">
-								<Link href="https://twitter.com/musixverse" passHref={true}>
+								<Link href="https://twitter.com/musixverse" passHref>
 									<a target="_blank" rel="noopener noreferrer" className="flex justify-center items-center">
 										<Image src={twitter} width={20} height={20} alt="twitter"></Image>
 									</a>
 								</Link>
 							</button>
 							<button className="flex justify-center items-center">
-								<Link href="https://www.instagram.com/musixverse/" passHref={true}>
+								<Link href="https://www.instagram.com/musixverse/" passHref>
 									<a target="_blank" rel="noopener noreferrer" className="flex justify-center items-center">
 										<Image src={instagram} width={20} height={20} alt="instagram"></Image>
 									</a>
@@ -193,7 +194,9 @@ const Footer = () => {
 						<Image src={theme === "dark" ? MXV_emblemW : MXV_emblemB} width={95} height={95} objectFit="contain" alt="MXV emblem"></Image>
 					</div>
 				</div>
-				<p className="font-primary text-xs max-w-sm text-center sm:text-left mx-auto sm:mx-0">©2021 All Rights Reserved. Musixverse logo is a registered trademark of Musixverse Company.</p>
+				<p className="font-primary text-xs max-w-sm text-center sm:text-left mx-auto sm:mx-0">
+					©2021 All Rights Reserved. Musixverse logo is a registered trademark of Musixverse Company.
+				</p>
 			</div>
 		</div>
 	);

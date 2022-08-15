@@ -8,36 +8,37 @@ import ShowHide from "./ShowHide";
 import SortBy from "./SortBy";
 
 export default function Filter({ appliedFilter, setAppliedFilter }) {
-	const [currentFilter, setCurrentFilter] = useState(0);
+	const [currentFilterType, setCurrentFilterType] = useState(0);
+
 	return (
-		<div className={currentFilter !== 0 ? "z-40 sticky flex mr-10 top-24" : "z-10 sticky flex mr-10 top-24"}>
+		<div className={currentFilterType !== 0 ? "z-40 sticky flex mr-10 top-24" : "z-10 sticky flex mr-10 top-24"}>
 			{/* Filter CTA */}
 			<div className="z-40 self-start p-4 flex flex-col items-center justify-center border border-[#BFBFBF] rounded-2xl backdrop-blur-[40px] backdrop-brightness-200 bg-[rgba(255,255,255,0.8)]">
 				{/* Filter icon */}
-				<div onClick={() => setCurrentFilter(0)} className="flex items-center justify-center p-4 cursor-pointer rounded-xl bg-light-300">
+				<div onClick={() => setCurrentFilterType(0)} className="flex items-center justify-center p-4 cursor-pointer rounded-xl bg-light-300">
 					<Image src={FilterSvg} objectFit="contain" width={25} height={22} alt="Filter" />
 				</div>
 				{/* Filter Options */}
 				<div className="flex flex-col mt-5 text-xs divide-y font-secondary">
 					<div
 						onClick={() => {
-							setCurrentFilter(1);
+							setCurrentFilterType(1);
 						}}
-						className={(currentFilter === 1 ? "text-primary-100 " : "") + "flex flex-col items-center justify-center cursor-pointer"}
+						className={(currentFilterType === 1 ? "text-primary-100 " : "") + "flex flex-col items-center justify-center cursor-pointer"}
 					>
 						<span className="material-symbols-outlined">library_music</span>
 						<p className="my-2">NFT Traits</p>
 					</div>
 					<div
-						onClick={() => setCurrentFilter(2)}
-						className={(currentFilter === 2 ? "text-primary-100 " : "") + "flex flex-col items-center justify-center cursor-pointer"}
+						onClick={() => setCurrentFilterType(2)}
+						className={(currentFilterType === 2 ? "text-primary-100 " : "") + "flex flex-col items-center justify-center cursor-pointer"}
 					>
 						<span className="mt-2 material-symbols-outlined">dashboard_customize</span>
 						<p className="my-2">Show/Hide</p>
 					</div>
 					<div
-						onClick={() => setCurrentFilter(3)}
-						className={(currentFilter === 3 ? "text-primary-100 " : "") + "flex flex-col items-center justify-center cursor-pointer"}
+						onClick={() => setCurrentFilterType(3)}
+						className={(currentFilterType === 3 ? "text-primary-100 " : "") + "flex flex-col items-center justify-center cursor-pointer"}
 					>
 						<span className="mt-2 material-symbols-outlined">sort</span>
 						<p className="my-2">Sort By</p>
@@ -50,7 +51,7 @@ export default function Filter({ appliedFilter, setAppliedFilter }) {
 			</div>
 
 			{/* FILTER Modal */}
-			<Transition show={currentFilter !== 0}>
+			<Transition show={currentFilterType !== 0}>
 				<Transition.Child
 					as={Fragment}
 					enter="transition-all duration-200"
@@ -75,7 +76,7 @@ export default function Filter({ appliedFilter, setAppliedFilter }) {
 						<div className="flex justify-between w-full">
 							<h3 className="text-4xl font-tertiary">MARKETPLACE FILTERS</h3>
 							<div
-								onClick={() => setCurrentFilter(0)}
+								onClick={() => setCurrentFilterType(0)}
 								className="flex items-center self-end justify-center w-8 h-8 mb-3 transition-all duration-200 rounded-lg cursor-pointer hover:bg-zinc-500/20 "
 							>
 								<i className="fa-solid fa-xmark"></i>
@@ -83,11 +84,11 @@ export default function Filter({ appliedFilter, setAppliedFilter }) {
 						</div>
 
 						{/* Conditional Rendering of filterOptions */}
-						{currentFilter === 1 ? (
-							<FilterNftTraits appliedFilter={appliedFilter} setAppliedFilter={setAppliedFilter} />
+						{currentFilterType === 1 ? (
+							<FilterNftTraits appliedFilter={appliedFilter} setAppliedFilter={setAppliedFilter} setCurrentFilterType={setCurrentFilterType} />
 						) : (
 							<>
-								{currentFilter === 2 ? (
+								{currentFilterType === 2 ? (
 									<ShowHide appliedFilter={appliedFilter} setAppliedFilter={setAppliedFilter} />
 								) : (
 									<SortBy appliedFilter={appliedFilter} setAppliedFilter={setAppliedFilter} />

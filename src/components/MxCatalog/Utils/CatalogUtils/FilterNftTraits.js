@@ -1,134 +1,139 @@
 import HorizontalRuler from "../../../../layout/HorizontalRuler";
 import FilterDropdown from "./FilterDropdown";
-import { genre , parentalAdvisory , countryOfOrigin ,trackOrigin, duration, numberOfCollaborators, numberOfCopies, nftStatus, resaleRoyalty  } from "../../../../utils/DropdownValues";
+import {
+	trackOriginArray,
+	genreArray,
+	parentalAdvisoryArray,
+	languageArray,
+	locationArray,
+	duration,
+	numberOfCollaborators,
+	numberOfCopies,
+	nftStatus,
+	resaleRoyalty,
+} from "../../../../constants";
 import TagsMultiSelect from "../../../CreateNFT/CreateNFTUtils/TagsMultiSelect";
 
-export default function FilterNftTraits({appliedFilter, setAppliedFilter}){
-    const languageOptions = ["Any", "This", "Other"];
-	// console.log("NFT traits: ",appliedFilter);
-	// console.log(appliedFilter.genre.length);
-	// const [currGenere, setCurrGenre] = useState();
-	// const [currLanguage, setCurrLanguage] = useState();
+export default function FilterNftTraits({ appliedFilter, setAppliedFilter, setCurrentFilterType }) {
+	return (
+		<div className="flex flex-col mt-8 max-h-[425px] overflow-y-scroll pr-10">
+			<h5 className="text-lg font-bold font-secondary">Filter NFT Traits</h5>
+			<p className="font-secondary text-[#7F7F7F] text-[15px]">Select NFT Traits such as Genre, Language and others</p>
+			<HorizontalRuler />
 
-    return(
-        <div className="flex flex-col mt-8 max-h-[425px] overflow-y-scroll pr-10">
-            <h5 className="text-lg font-bold font-secondary">Filter NFT Traits</h5>
-            <p className="font-secondary text-[#7F7F7F] text-[15px]">Select NFT Traits such as Genres, Languages and others</p>
-			<HorizontalRuler/>
-            <div className="flex w-[657px] flex-col mt-5 space-y-2 sm:flex-row sm:space-x-10 sm:space-y-0">
+			<div className="flex w-[657px] flex-col mt-5 space-y-2 sm:flex-row sm:space-x-10 sm:space-y-0">
 				{/* Can make a component of the div below */}
-                <div className="flex-1 text-sm font-semibold md:text-base font-secondary">
+				<div className="flex-1 text-sm font-semibold md:text-base font-secondary">
 					<p className="mb-1 text-sm">Genre</p>
-                    <FilterDropdown 
-						optionsArray={genre} 
-						initialValue={appliedFilter.genre} 
-						setChoice={setAppliedFilter} 
+					<FilterDropdown
+						optionsArray={genreArray}
+						initialValue={appliedFilter.genre}
+						setChoice={setAppliedFilter}
 						dropdownType={"GENRE"}
+						setCurrentFilterType={setCurrentFilterType}
 					/>
 				</div>
 				<div className="flex-1 text-sm font-semibold md:text-base font-secondary">
 					<p className="mb-1 text-sm">Language</p>
-                    <FilterDropdown 
-						optionsArray={languageOptions} 
-						initialValue={appliedFilter.language} 
-						setChoice={setAppliedFilter} 
+					<FilterDropdown
+						optionsArray={languageArray}
+						initialValue={appliedFilter.language}
+						setChoice={setAppliedFilter}
 						dropdownType={"LANGUAGE"}
+						setCurrentFilterType={setCurrentFilterType}
 					/>
 				</div>
 			</div>
 
-            <div className="flex w-[657px] flex-col mt-5 space-y-2 sm:flex-row sm:space-x-10 sm:space-y-0">
+			<div className="flex w-[657px] flex-col mt-5 space-y-2 sm:flex-row sm:space-x-10 sm:space-y-0">
 				{/* Can make a component of the div below */}
-                <div className="flex-1 text-sm font-semibold md:text-base font-secondary">
+				<div className="flex-1 text-sm font-semibold md:text-base font-secondary">
 					<p className="mb-1 text-sm">Duration</p>
-                    <FilterDropdown 
+					<FilterDropdown
 						optionsArray={duration}
-						initialValue={appliedFilter.duration} 
-						setChoice={setAppliedFilter} 
+						initialValue={appliedFilter.duration}
+						setChoice={setAppliedFilter}
 						dropdownType={"DURATION"}
+						setCurrentFilterType={setCurrentFilterType}
 					/>
 				</div>
 				<div className="flex-1 text-sm font-semibold md:text-base font-secondary">
-					<p className="mb-1 text-sm">No. Of Collaborators</p>
-                    <FilterDropdown 
+					<p className="mb-1 text-sm">No. of Collaborators</p>
+					<FilterDropdown
 						optionsArray={numberOfCollaborators}
-						initialValue={appliedFilter.numberOfCollborators} 
-						setChoice={setAppliedFilter} 
+						initialValue={appliedFilter.numberOfCollborators}
+						setChoice={setAppliedFilter}
 						dropdownType={"NUMCOLLAB"}
+						setCurrentFilterType={setCurrentFilterType}
 					/>
 				</div>
 			</div>
 
-            <div className="flex w-[657px] flex-col mt-5 space-y-2 sm:flex-row sm:space-x-10 sm:space-y-0">
+			<div className="flex w-[657px] flex-col mt-5 space-y-2 sm:flex-row sm:space-x-10 sm:space-y-0">
 				{/* Can make a component of the div below */}
-                <div className="flex-1 text-sm font-semibold md:text-base font-secondary">
-					<p className="mb-1 text-sm">No. Of Copies</p>
-                    <FilterDropdown 
+				<div className="flex-1 text-sm font-semibold md:text-base font-secondary">
+					<p className="mb-1 text-sm">No. of Copies</p>
+					<FilterDropdown
 						optionsArray={numberOfCopies}
-						initialValue={appliedFilter.numberOfCopies} 
-						setChoice={setAppliedFilter} 
+						initialValue={appliedFilter.numberOfCopies}
+						setChoice={setAppliedFilter}
 						dropdownType={"NUMCOPIES"}
+						setCurrentFilterType={setCurrentFilterType}
 					/>
 				</div>
 				<div className="flex-1 text-sm font-semibold md:text-base font-secondary">
 					<p className="mb-1 text-sm">Parental Advisory</p>
-                    <FilterDropdown 
-						optionsArray={parentalAdvisory}
-						initialValue={appliedFilter.parentalAdvisory} 
-						setChoice={setAppliedFilter} 
+					<FilterDropdown
+						optionsArray={parentalAdvisoryArray}
+						initialValue={appliedFilter.parentalAdvisory}
+						setChoice={setAppliedFilter}
 						dropdownType={"PARENTALADV"}
+						setCurrentFilterType={setCurrentFilterType}
 					/>
 				</div>
 			</div>
 
-            <div className="flex w-[657px] flex-col mt-5 space-y-2 sm:flex-row sm:space-x-10 sm:space-y-0">
+			<div className="flex w-[657px] flex-col mt-5 space-y-2 sm:flex-row sm:space-x-10 sm:space-y-0">
 				{/* Can make a component of the div below */}
-                <div className="flex-1 text-sm font-semibold md:text-base font-secondary">
+				<div className="flex-1 text-sm font-semibold md:text-base font-secondary">
 					<p className="mb-1 text-sm">Status</p>
-                    <FilterDropdown 
+					<FilterDropdown
 						optionsArray={nftStatus}
-						initialValue={appliedFilter.status} 
-						setChoice={setAppliedFilter} 
+						initialValue={appliedFilter.status}
+						setChoice={setAppliedFilter}
 						dropdownType={"STATUS"}
+						setCurrentFilterType={setCurrentFilterType}
 					/>
 				</div>
 				<div className="flex-1 text-sm font-semibold md:text-base font-secondary">
 					<p className="mb-1 text-sm">Country Of Origin</p>
-                    <FilterDropdown 
-						optionsArray={countryOfOrigin}
-						initialValue={appliedFilter.countryOfOrigin} 
-						setChoice={setAppliedFilter} 
+					<FilterDropdown
+						optionsArray={locationArray}
+						initialValue={appliedFilter.countryOfOrigin}
+						setChoice={setAppliedFilter}
 						dropdownType={"COUNTRYOFORIGIN"}
+						setCurrentFilterType={setCurrentFilterType}
 					/>
 				</div>
 			</div>
 
-            <div className="flex w-[657px] flex-col mt-5 space-y-2 sm:flex-row sm:space-x-10 sm:space-y-0">
+			<div className="flex w-[657px] flex-col mt-5 space-y-2 sm:flex-row sm:space-x-10 sm:space-y-0">
 				{/* Can make a component of the div below */}
 				<div className="flex-1 text-sm font-semibold md:text-base font-secondary">
 					<p className="mb-1 text-sm">Tags</p>
-					<TagsMultiSelect 
-						tags={appliedFilter.tags} 
-						setAppliedFilter={setAppliedFilter} 
-						dropdownType={"TAGS"}
-					/>
-                    {/* <FilterDropdown 
-						optionsArray={languageOptions}
-						initialValue={appliedFilter.tags} 
-						setChoice={setAppliedFilter} 
-						dropdownType={"TAGS"}
-					/> */}
+					<TagsMultiSelect tags={appliedFilter.tags} setAppliedFilter={setAppliedFilter} dropdownType={"TAGS"} />
 				</div>
 				<div className="flex-1 text-sm font-semibold md:text-base font-secondary">
 					<p className="mb-1 text-sm">Resale Royalty Percentage</p>
-                    <FilterDropdown 
+					<FilterDropdown
 						optionsArray={resaleRoyalty}
-						initialValue={appliedFilter.resaleRoyalty} 
-						setChoice={setAppliedFilter} 
+						initialValue={appliedFilter.resaleRoyalty}
+						setChoice={setAppliedFilter}
 						dropdownType={"RESALEROYALTY"}
+						setCurrentFilterType={setCurrentFilterType}
 					/>
 				</div>
 			</div>
-        </div>
-    );
+		</div>
+	);
 }

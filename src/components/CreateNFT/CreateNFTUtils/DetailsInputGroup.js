@@ -1,6 +1,6 @@
 import InputDropdown from "./InputDropdown";
 import RequiredAsterisk from "./RequiredAsterisk";
-import { trackOriginArray, genreArray, parentalAdvisoryArray } from "../../../constants";
+import { trackOriginArray, genreArray, parentalAdvisoryArray, minRecordingYear } from "../../../constants";
 
 export default function DetailsInputGroup({
 	setTrackOrigin,
@@ -38,7 +38,7 @@ export default function DetailsInputGroup({
 					</p>
 					<input
 						type="number"
-						min={"1860"}
+						min={minRecordingYear}
 						step="1"
 						value={recordingYear}
 						onChange={(e) => {

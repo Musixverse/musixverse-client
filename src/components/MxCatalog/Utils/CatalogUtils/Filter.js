@@ -2,7 +2,7 @@ import Image from "next/image";
 import { useState, Fragment } from "react";
 import FilterSvg from "../../../../../public/assets/Catalog/Filter.svg";
 import mxvLogo from "../../../../../public/assets/Catalog/MXVlogo.svg";
-import { Dialog, Transition } from "@headlessui/react";
+import { Transition } from "@headlessui/react";
 import FilterNftTraits from "./FilterNftTraits";
 import FilterTrackTraits from "./FilterTrackTraits";
 import NftState from "./NftState";

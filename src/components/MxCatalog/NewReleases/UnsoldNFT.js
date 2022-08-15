@@ -1,50 +1,7 @@
-import { useState, useEffect } from "react";
-import { useMoralis } from "react-moralis";
-import { MXV_DIAMOND_ADDRESS, BLOCKCHAIN_NETWORK } from "../../../constants";
 import NFTCard from "../../../layout/NFTCard/NFTCard";
 
 const UnsoldNFT = ({ track, index }) => {
-	const { Moralis } = useMoralis();
-	const [metadata, setMetadata] = useState("");
-
-	const fetchTrackMetadata = async () => {
-		try {
-			const options = {
-				address: MXV_DIAMOND_ADDRESS,
-				token_id: track.unsoldTokens.at(0),
-				chain: BLOCKCHAIN_NETWORK,
-			};
-			const token = await Moralis.Web3API.token.getTokenIdMetadata(options);
-
-			if (token.metadata == null) {
-				await fetch(token.token_uri)
-					.then((response) => {
-						return response.json();
-					})
-					.then((data) => {
-						token.metadata = data;
-					});
-			}
-
-			if (typeof token.metadata === "string") {
-				const _metadata = JSON.parse(token.metadata);
-				setMetadata(_metadata);
-			} else {
-				setMetadata(token.metadata);
-			}
-		} catch (error) {
-			console.log(error);
-		}
-	};
-
-	useEffect(() => {
-		async function fetchMetadata() {
-			await fetchTrackMetadata();
-		}
-		fetchMetadata();
-	}, []);
-
-	if (metadata) {
+	if (track) {
 		const unsoldTrackData = {
 			primaryMarketplacePrice: track.price,
 			unsoldTokens_size: track.unsoldTokens_size,
@@ -53,13 +10,13 @@ const UnsoldNFT = ({ track, index }) => {
 		return (
 			<NFTCard
 				redirectLink={`/track/polygon/${track.unsoldTokens.at(0)}`}
-				trackName={metadata.title}
-				artistName={metadata.artist}
-				artistAddress={metadata.artistAddress}
-				image={metadata.artwork.uri.replace("ipfs://", process.env.NEXT_PUBLIC_IPFS_NODE_URL)}
+				trackName={track.title}
+				artistName={track.artist}
+				artistAddress={track.artistAddress}
+				image={track.artwork.uri.replace("ipfs://", process.env.NEXT_PUBLIC_IPFS_NODE_URL)}
 				tokenId={track.unsoldTokens.at(0)}
-				numberOfCopies={metadata.attributes[0].value}
-				collaboratorList={metadata.collaborators}
+				numberOfCopies={track.numberOfCopies}
+				collaboratorList={track.collaborators}
 				unsoldTrackData={unsoldTrackData}
 			/>
 		);

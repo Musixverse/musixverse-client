@@ -299,7 +299,7 @@ const CreateNFT = () => {
 				},
 				{
 					trait_type: "Recording Year",
-					value: recordingYear.toString(),
+					value: parseInt(recordingYear),
 				},
 				{
 					trait_type: "Parental Advisory",
@@ -360,7 +360,7 @@ const CreateNFT = () => {
 		lyrics: lyrics,
 		trackOrigin: trackOrigin,
 		genre: genre,
-		recordingYear: recordingYear,
+		recordingYear: parseInt(recordingYear),
 		parentalAdvisory: parentalAdvisory,
 		vocals: vocals,
 		language: language,

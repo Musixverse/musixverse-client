@@ -8,6 +8,8 @@ const reducer = (state, action) => {
 	switch (action.type) {
 		case "TRACKORIGIN":
 			return { ...state, trackOrigin: action.selectedChoice };
+		case "RECORDINGYEAR":
+			return { ...state, recordingYear: action.selectedChoice };
 		case "GENRE":
 			return { ...state, genre: action.selectedChoice };
 		case "LANGUAGE":
@@ -51,6 +53,7 @@ export default function NewReleases() {
 	const [currentSelection, setCurrentSelection] = useState(1);
 	const [appliedFilter, dispatch] = useReducer(reducer, {
 		trackOrigin: "",
+		recordingYear: "",
 		genre: "",
 		language: "",
 		duration: "",

@@ -1,7 +1,7 @@
 import HorizontalRuler from "../../../../layout/HorizontalRuler";
 import RadioButton from "../../../../layout/RadioButton";
 
-export default function SortBy({ appliedFilter, setAppliedFilter, setCurrentFilterType }) {
+export default function SortBy({ appliedFilter, setAppliedFilter, setCurrentFilterType, currentSelection }) {
 	const sortByArray = ["Date Listed: Newest", "Date Listed: Oldest", "Price: High to Low", "Price: Low to High", "Date Sold: Newest", "Date Sold: Oldest"];
 	return (
 		<div className="flex w-[657px] flex-col mt-8 max-h-[425px] overflow-y-scroll">
@@ -33,6 +33,24 @@ export default function SortBy({ appliedFilter, setAppliedFilter, setCurrentFilt
 				radioLabel2={"Low to High"}
 				setCurrentFilterType={setCurrentFilterType}
 			/>
+
+			{currentSelection === 2 && (
+				<>
+					<HorizontalRuler />
+
+					<p className="mt-4 font-secondary">Date Sold</p>
+					<RadioButton
+						radioState={appliedFilter.sortingFilter}
+						setRadioState={setAppliedFilter}
+						radioType={"SORTINGFILTER"}
+						radioId1={"dateSoldLatest"}
+						radioId2={"dateSoldOldest"}
+						radioLabel1={"Latest"}
+						radioLabel2={"Oldest"}
+						setCurrentFilterType={setCurrentFilterType}
+					/>
+				</>
+			)}
 		</div>
 	);
 }

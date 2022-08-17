@@ -5,7 +5,7 @@ import CountriesDropdown from "./CountriesDropdown";
 import StatesDropdown from "./StatesDropdown";
 import CitiesDropdown from "./CitiesDropdown";
 
-export default function FilterNftTraits({ appliedFilter, setAppliedFilter, setCurrentFilterType }) {
+export default function FilterNftTraits({ appliedFilter, setAppliedFilter, setCurrentFilterType, currentSelection }) {
 	return (
 		<div className="flex flex-col mt-8 h-[430px] overflow-y-scroll pr-10">
 			<h5 className="text-lg font-bold font-secondary">Filter based on NFT Traits</h5>
@@ -36,16 +36,30 @@ export default function FilterNftTraits({ appliedFilter, setAppliedFilter, setCu
 			</div>
 
 			<div className="flex w-[657px] flex-col mt-5 space-y-2 sm:flex-row sm:space-x-10 sm:space-y-0">
-				<div className="flex-1 text-sm font-semibold md:text-base font-secondary">
-					<p className="mb-1 text-sm">Status</p>
-					<FilterDropdown
-						optionsArray={nftStatus}
-						initialValue={appliedFilter.status}
-						setChoice={setAppliedFilter}
-						dropdownType={"STATUS"}
-						setCurrentFilterType={setCurrentFilterType}
-					/>
-				</div>
+				{currentSelection === 1 ? (
+					<div className="flex-1 text-sm font-semibold md:text-base font-secondary">
+						<p className="mb-1 text-sm">Status</p>
+						<FilterDropdown
+							optionsArray={nftStatus.filter((status) => status !== "Not on Sale")}
+							initialValue={appliedFilter.status}
+							setChoice={setAppliedFilter}
+							dropdownType={"STATUS"}
+							setCurrentFilterType={setCurrentFilterType}
+						/>
+					</div>
+				) : (
+					<div className="flex-1 text-sm font-semibold md:text-base font-secondary">
+						<p className="mb-1 text-sm">Status</p>
+						<FilterDropdown
+							optionsArray={nftStatus.filter((status) => status !== "Coming Soon")}
+							initialValue={appliedFilter.status}
+							setChoice={setAppliedFilter}
+							dropdownType={"STATUS"}
+							setCurrentFilterType={setCurrentFilterType}
+						/>
+					</div>
+				)}
+
 				<div className="flex-1 text-sm font-semibold md:text-base font-secondary">
 					<p className="mb-1 text-sm">Resale Royalty Percentage</p>
 					<FilterDropdown

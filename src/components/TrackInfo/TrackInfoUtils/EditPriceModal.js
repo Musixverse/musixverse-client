@@ -66,7 +66,7 @@ const EditPriceModal = ({ isOpen, setEditPriceModalOpen, tokenId, currentPrice }
 							<p className="text-sm text-start mb-1">New Price</p>
 							<input
 								type="number"
-								step={0.1}
+								step={0.01}
 								min={0}
 								value={updatedPrice}
 								onChange={(e) => {

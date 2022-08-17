@@ -84,7 +84,7 @@ const Step3Form = ({
 
 	// handle click event of the Add button
 	const handleAddClick = () => {
-		setCollaboratorList([...collaboratorList, { id: "", name: "", username: "", split: "", role: "", address: "", avatar: "" }]);
+		setCollaboratorList([...collaboratorList, { id: "", name: "", username: "", split: "", role: "Composer", address: "", avatar: "" }]);
 	};
 
 	const setCollaboratorRole = (index, role) => {
@@ -204,7 +204,13 @@ const Step3Form = ({
 											<div className="relative basis-1/2">
 												{collaborator.avatar && (
 													<div className="absolute flex items-center h-full ml-2">
-														<Image src={collaborator.avatar} height="30" width="30" alt="collaborator's avatar" className="rounded-full" />
+														<Image
+															src={collaborator.avatar}
+															height="30"
+															width="30"
+															alt="collaborator's avatar"
+															className="rounded-full"
+														/>
 													</div>
 												)}
 												<input
@@ -224,7 +230,13 @@ const Step3Form = ({
 													<>
 														{collaborator.avatar && (
 															<div className="absolute flex items-center h-full ml-2">
-																<Image src={collaborator.avatar} height="30" width="30" alt="collaborator's avatar" className="rounded-full" />
+																<Image
+																	src={collaborator.avatar}
+																	height="30"
+																	width="30"
+																	alt="collaborator's avatar"
+																	className="rounded-full"
+																/>
 															</div>
 														)}
 														<input

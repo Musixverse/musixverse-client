@@ -1,20 +1,20 @@
 .background-div {
-    @apply absolute -z-[1] w-full h-full flex;
+	@apply absolute -z-[1] w-full h-full flex;
 }
 
 .hero-section-container {
-    @apply flex flex-col items-center justify-center w-full relative z-[0];
-    /* backdrop-blur-[7px] backdrop-brightness-150; */
+	@apply flex flex-col items-center justify-center w-full relative z-[2];
+	/* backdrop-blur-[7px] backdrop-brightness-150; */
 }
 
 .hero-section-container__content-div {
-    @apply flex flex-col items-center justify-center px-6 md:px-0;
+	@apply flex flex-col items-center justify-center px-6 md:px-0;
 }
 
 .hero-section-container__content-div--heading {
-    @apply mb-4 text-4xl font-bold text-center md:text-5xl font-primary;
+	@apply mb-4 text-4xl font-semibold text-center md:text-5xl font-primary;
 }
 
 .hero-section-container__content-div--description {
-    @apply max-w-xl mb-10 text-center text-[13px] md:text-[15px] font-secondary;
+	@apply max-w-xl mb-10 text-center text-[13px] md:text-[15px] font-secondary;
 }

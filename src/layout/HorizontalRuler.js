@@ -1,5 +1,3 @@
-export default function HorizontalRuler(){
-    return(
-        <div className="flex-grow border-t-[2px] border-[#a7a7a7] my-2"/>
-    );
+export default function HorizontalRuler() {
+	return <div className="border-t-[2px] border-light-300 my-2" />;
 }

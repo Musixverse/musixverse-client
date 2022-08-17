@@ -6,13 +6,16 @@ import styleLight from "./MultiSelectStyles/LightStyles";
 import filterStyleLight from "../../MxCatalog/Utils/CatalogUtils/TagsStyleLight";
 import { useTheme } from "next-themes";
 import styles from "../../../../styles/CreateNFT/MultiSelect.module.css";
-import { tagsAvailable } from "../../../utils/DropdownValues";
+import { tagsAvailable } from "../../../constants";
 
-export default function TagsMultiSelect({ tags, setTags, dropdownType, setAppliedFilter }) {
+export default function TagsMultiSelect({ tags, setTags, dropdownType, setAppliedFilter, setCurrentFilterType }) {
 	const { theme } = useTheme();
 	const animatedComponents = makeAnimated();
 
 	const handleValueSelection = (selectedOption) => {
+		if (setCurrentFilterType) {
+			setCurrentFilterType(0);
+		}
 		if (dropdownType) {
 			setAppliedFilter({ type: dropdownType, selectedChoice: selectedOption });
 			return;

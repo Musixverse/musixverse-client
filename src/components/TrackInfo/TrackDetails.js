@@ -59,12 +59,12 @@ export default function TrackDetails({ tokenId, metadata }) {
 						<p>{metadata.language}</p>
 					</div>
 					<div className="text-left">
-						<h4 className="font-bold font-secondary text-[16px]">Location Created</h4>
-						<p>{metadata.locationCreated}</p>
+						<h4 className="font-bold font-secondary text-[16px]">Country of Origin</h4>
+						<p>{metadata.location.countryOfOrigin.name}</p>
 					</div>
 					<div className="text-left">
-						<h4 className="font-bold font-secondary text-[16px]">{metadata.attributes[6].trait_type}</h4>
-						<p>{metadata.attributes[6].value}</p>
+						<h4 className="font-bold font-secondary text-[16px]">Location Created</h4>
+						<p>{metadata.location.cityOfOrigin.name}</p>
 					</div>
 				</div>
 
@@ -72,6 +72,10 @@ export default function TrackDetails({ tokenId, metadata }) {
 
 				{/* Section 2 */}
 				<div className={styles["other-details__section2"]}>
+					<div className="text-left">
+						<h4 className="font-bold font-secondary text-[16px]">{metadata.attributes[6].trait_type}</h4>
+						<p>{metadata.attributes[6].value}</p>
+					</div>
 					<div className="text-left">
 						<h4 className="font-bold font-secondary text-[16px]">{metadata.attributes[7].trait_type}</h4>
 						<p>{metadata.attributes[7].value}</p>
@@ -84,17 +88,6 @@ export default function TrackDetails({ tokenId, metadata }) {
 						<h4 className="font-bold font-secondary text-[16px]">Unique Token ID</h4>
 						<p>{tokenId}</p>
 					</div>
-					{metadata.lyrics ? (
-						<div className="text-left">
-							<h4 className="font-bold font-secondary text-[16px]">Lyrics</h4>
-							<Link href={metadata.lyrics.replace("ipfs://", process.env.NEXT_PUBLIC_IPFS_NODE_URL)}>
-								<a target="_blank" rel="noopener noreferrer">
-									Available &nbsp;
-									<i className="fa-solid fa-arrow-right-long"></i>
-								</a>
-							</Link>
-						</div>
-					) : null}
 				</div>
 
 				<div className="flex-grow border-t-[3px] border-[#9a9a9a]"></div>
@@ -118,6 +111,17 @@ export default function TrackDetails({ tokenId, metadata }) {
 				<div className="flex-grow border-t-[3px] border-[#9a9a9a]"></div>
 
 				<div className={styles["other-details__section2"]}>
+					{metadata.lyrics ? (
+						<div className="text-left">
+							<h4 className="font-bold font-secondary text-[16px]">Lyrics</h4>
+							<Link href={metadata.lyrics.replace("ipfs://", process.env.NEXT_PUBLIC_IPFS_NODE_URL)}>
+								<a target="_blank" rel="noopener noreferrer">
+									Available &nbsp;
+									<i className="fa-solid fa-arrow-right-long"></i>
+								</a>
+							</Link>
+						</div>
+					) : null}
 					{metadata.isrc ? (
 						<div className="text-left">
 							<h4 className="font-bold font-secondary text-[16px]">ISRC</h4>
@@ -133,9 +137,9 @@ export default function TrackDetails({ tokenId, metadata }) {
 							</a>
 						</Link>
 					</div>
-					<div className="text-left col-span-2">
+					<div className={metadata.lyrics && metadata.isrc ? "text-left col-span-1" : "text-left col-span-2"}>
 						<h4 className="font-bold font-secondary text-[16px]">Contract Address</h4>
-						<p className="break-words">{metadata.chainDetails.contractAddress}</p>
+						<p>{metadata.chainDetails.contractAddress}</p>
 					</div>
 				</div>
 

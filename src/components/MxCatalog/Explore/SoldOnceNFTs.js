@@ -1,39 +1,46 @@
-import { useState, useEffect } from "react";
-import { useMoralis, useMoralisCloudFunction } from "react-moralis";
-import { MXV_DIAMOND_ADDRESS, BLOCKCHAIN_NETWORK } from "../../../constants";
+import { useState, useEffect, useContext } from "react";
+import { useMoralisCloudFunction } from "react-moralis";
 import SoldOnceNFT from "./SoldOnceNFT";
+import LoadingNftCards from "../Utils/LoadingNftCards";
+import NoResultsFound from "../Utils/NoResultsFound";
+import LoadingContext from "../../../../store/loading-context";
 
-const SoldOnceNFTs = () => {
-	// const { Moralis, isInitialized } = useMoralis();
-	// const [tokens, setTokens] = useState([]);
+const SoldOnceNFTs = ({ appliedFilter }) => {
+	const [loading, setLoading] = useContext(LoadingContext);
+	const [tracksWhoseCopiesAreSoldOnce, setTracksWhoseCopiesAreSoldOnce] = useState(false);
 
-	// const fetchTokens = async () => {
-	//     const options = {
-	//         address: MXV_DIAMOND_ADDRESS,
-	//         chain: BLOCKCHAIN_NETWORK,
-	//     };
-	//     const nftData = await Moralis.Web3API.token.getNFTOwners(options);
-	//     setTokens(nftData.result);
-	// };
+	const { fetch: fetchTracksWhoseCopiesAreSoldOnce } = useMoralisCloudFunction(
+		"fetchTracksWhoseCopiesAreSoldOnce",
+		{ appliedFilter: appliedFilter },
+		{ autoFetch: false }
+	);
 
-	// useEffect(() => {
-	//     if (isInitialized) {
-	//         fetchTokens();
-	//     }
-	// }, [isInitialized]);
-
-	// useEffect(() => {
-	//     console.log("Tokens:", tokens);
-	// }, [tokens]);
-
-	const { data: tracksWhoseCopiesAreSoldOnce } = useMoralisCloudFunction("fetchTracksWhoseCopiesAreSoldOnce", { autoFetch: true });
+	useEffect(() => {
+		setLoading(true);
+		fetchTracksWhoseCopiesAreSoldOnce({
+			onSuccess: async (object) => {
+				setLoading(false);
+				setTracksWhoseCopiesAreSoldOnce(object);
+			},
+			onError: (error) => {
+				setLoading(false);
+				console.log("fetchTracksWhoseCopiesAreSoldOnce Error:", error);
+			},
+		});
+	}, [appliedFilter, fetchTracksWhoseCopiesAreSoldOnce]);
 
 	return (
 		<>
-			{tracksWhoseCopiesAreSoldOnce &&
+			{loading && !tracksWhoseCopiesAreSoldOnce ? (
+				<LoadingNftCards />
+			) : !loading && tracksWhoseCopiesAreSoldOnce.length === 0 ? (
+				<NoResultsFound />
+			) : (
+				tracksWhoseCopiesAreSoldOnce &&
 				tracksWhoseCopiesAreSoldOnce.map((track, index) => {
-					return <SoldOnceNFT key={index} track={track} index={index} />;
-				})}
+					return <SoldOnceNFT key={track.maxTokenId} track={track} />;
+				})
+			)}
 		</>
 	);
 };

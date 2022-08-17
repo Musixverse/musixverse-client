@@ -123,7 +123,9 @@ export default function TrackHeaderCta({ tokenId, unlockTimestamp, price, curren
 				</div>
 			</div>
 
-			<CtaButtons currentOwnerAddress={currentOwnerAddress} tokenId={tokenId} price={price} />
+			{Date.now() > unlockTimestamp * 1000 && (
+				<CtaButtons currentOwnerAddress={currentOwnerAddress} tokenId={tokenId} price={price} unlockTimestamp={unlockTimestamp} />
+			)}
 		</div>
 	);
 }

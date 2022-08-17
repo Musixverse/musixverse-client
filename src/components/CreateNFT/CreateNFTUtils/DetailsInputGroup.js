@@ -1,5 +1,6 @@
 import InputDropdown from "./InputDropdown";
 import RequiredAsterisk from "./RequiredAsterisk";
+import { trackOriginArray, genreArray, parentalAdvisoryArray, minRecordingYear } from "../../../constants";
 
 export default function DetailsInputGroup({
 	setTrackOrigin,
@@ -11,94 +12,6 @@ export default function DetailsInputGroup({
 	trackOrigin,
 	parentalAdvisory,
 }) {
-	const trackOriginArray = [
-		"Original",
-		"Cover",
-		"Remix",
-		"Live",
-		"Remastered",
-		"Radio Edit",
-		"Instrumental",
-		"Bonus Cut",
-		"Acapella",
-		"Acoustic",
-		"Extended version",
-		"Deluxe",
-		"Original Motion Picture Soundtrack",
-		"Production Music",
-		"Single Edit",
-		"Mashup",
-		"Bootleg remix",
-		"Explicit version",
-		"Clean version ",
-		"Lo-fi version",
-		"Reverb",
-		"Duet",
-		"Parody",
-	];
-	const genreArray = [
-		"Acoustic",
-		"Alternative",
-		"Anime",
-		"Big Band",
-		"Blues",
-		"Children’s Music",
-		"Classical",
-		"Comedy",
-		"Commercial",
-		"Contemporary",
-		"Country",
-		"Dance",
-		"Dance-pop",
-		"Disney",
-		"Easy Listening",
-		"Electronic",
-		"Enka",
-		"French Pop",
-		"Folk",
-		"German Folk",
-		"German Pop",
-		"Fitness & Workout",
-		"Hip-Hop",
-		"Holiday",
-		"Indie Folk",
-		"Indie Pop",
-		"Industrial",
-		"Inspirational",
-		"Instrumental",
-		"J-Pop",
-		"Jazz",
-		"Jingles",
-		"K-Pop",
-		"Karaoke",
-		"Kayokyoku",
-		"Latin",
-		"Lo-fi",
-		"Lullabies",
-		"Metal",
-		"Musical",
-		"New Age",
-		"Opera",
-		"Pop",
-		"Post-Disco",
-		"Progressive",
-		"Punk",
-		"R&B",
-		"Rap",
-		"Reggae",
-		"Rock",
-		"Soundtrack",
-		"Spoken Word",
-		"Stories",
-		"Tex-Mex/Tejano",
-		"Vocal",
-	];
-	const parentalAdvisoryArray = [
-		"Explicit",
-		"Clean (There is another version of this track that is explicit, but this is the clean version)",
-		"Not Explicit",
-	];
-
 	return (
 		<div className="flex flex-col flex-1 space-y-2 sm:space-y-4">
 			<div className="flex flex-col w-full space-y-2 sm:flex-row sm:space-x-4 sm:space-y-0">
@@ -125,7 +38,7 @@ export default function DetailsInputGroup({
 					</p>
 					<input
 						type="number"
-						min={"1860"}
+						min={minRecordingYear}
 						step="1"
 						value={recordingYear}
 						onChange={(e) => {

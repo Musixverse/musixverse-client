@@ -254,9 +254,11 @@ const CreateNFT = () => {
 			lyrics: lyrics ? "ipfs://" + lyricsFile.hash() : "",
 			genre: genre,
 			language: language,
-			countryOfOrigin: countryOfOrigin,
-			stateOfOrigin: stateOfOrigin,
-			location: location,
+			location: {
+				countryOfOrigin: JSON.parse(countryOfOrigin),
+				stateOfOrigin: JSON.parse(stateOfOrigin),
+				cityOfOrigin: JSON.parse(location),
+			},
 			isrc: isrc,
 			tags: _tags,
 			links: {

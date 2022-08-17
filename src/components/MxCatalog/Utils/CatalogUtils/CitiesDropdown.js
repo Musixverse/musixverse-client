@@ -1,50 +1,49 @@
-import { Fragment, useState } from "react";
+import { Fragment, useState, useEffect } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/solid";
 import styles from "../../../../../styles/CreateNFT/InputDropdown.module.css";
+import { Country, State, City } from "country-state-city";
 
 function classNames(...classes) {
 	return classes.filter(Boolean).join(" ");
 }
 
-export default function FilterDropdown({ optionsArray, initialValue, setChoice, dropdownType, setCurrentFilterType }) {
+export default function CountriesDropdown({ initialValue, setChoice, dropdownType, setCurrentFilterType, countryOfOrigin, stateOfOrigin }) {
 	const [currentFilter, setCurrentFilter] = useState(initialValue === "" ? "Select Here" : initialValue);
+	const cityOfOriginArray = City.getCitiesOfState(countryOfOrigin.isoCode, stateOfOrigin.isoCode);
 
 	const handleOptionSelect = (e) => {
 		setCurrentFilterType(0);
-		let selectedValue = e.target.textContent;
-		if (selectedValue === "Select Here (Reset)") {
-			selectedValue = "";
+		if (e.target.textContent === "Select Here (Reset)") {
 			setCurrentFilter("Select Here");
-		} else if (selectedValue === "Clean (There is another version of this track that is explicit, but this is the clean version)") {
-			selectedValue = "Clean";
-			setCurrentFilter(selectedValue);
-		} else if (selectedValue === "1 (Single Drop)") {
-			setCurrentFilter(selectedValue);
-			selectedValue = "1";
+			setChoice({
+				type: dropdownType,
+				selectedChoice: "",
+			});
 		} else {
+			const selectedValue = cityOfOriginArray[e.target.getAttribute("data-location")];
 			setCurrentFilter(selectedValue);
+			setChoice({
+				type: dropdownType,
+				selectedChoice: selectedValue,
+			});
 		}
-		setChoice({
-			type: dropdownType,
-			selectedChoice: selectedValue,
-		});
 	};
 
 	// Map all the options into a items renderable array
-	const dropdownOptions = optionsArray.map((option, idx) => {
+	const dropdownOptions = cityOfOriginArray.map((option, idx) => {
 		return (
 			<Menu.Item key={idx}>
 				{({ active }) => (
 					<li
 						className={classNames(
 							active ? "bg-gray-100 dark:bg-dark-200 text-gray-900" : "text-gray-700",
-							"block px-4 py-2 text-sm cursor-pointer dark:text-light-100"
+							"flex px-4 py-2 items-center text-sm cursor-pointer dark:text-light-100"
 						)}
 						onClick={handleOptionSelect}
-						value={idx}
+						data-location={idx}
 					>
-						{option}
+						{option.name.length > 20 ? option.name.substring(0, 17) + "..." : option.name}
 					</li>
 				)}
 			</Menu.Item>
@@ -57,10 +56,15 @@ export default function FilterDropdown({ optionsArray, initialValue, setChoice, 
 			<div>
 				<Menu.Button
 					className={
-						"dark:bg-[#323232] bg-[#D9D9D9] hover:dark:border-[#6cc027] dark:text-light-100 dark:border-[#323232] inline-flex justify-between text-sm font-medium text-[#383838]  border-2 border-transparent w-full px-4 py-2 rounded-md hover:border-[#6cc027]"
+						"dark:bg-[#323232] bg-[#D9D9D9] hover:dark:border-[#6cc027] dark:text-light-100 dark:border-[#323232] inline-flex justify-between items-center text-sm font-medium text-[#383838] border-2 border-transparent w-full px-4 py-2 rounded-md hover:border-[#6cc027]"
 					}
 				>
-					{currentFilter.length > 20 ? currentFilter.substring(0, 17) + "..." : currentFilter}
+					{currentFilter.name
+						? currentFilter.name && currentFilter.name.length > 20
+							? currentFilter.name.substring(0, 17) + "..."
+							: currentFilter.name
+						: currentFilter}
+
 					<ChevronDownIcon className="ml-2 h-5 w-5 text-[#6cc027]" aria-hidden="true" />
 				</Menu.Button>
 			</div>

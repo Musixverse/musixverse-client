@@ -100,9 +100,9 @@ export default function Filter({ appliedFilter, setAppliedFilter }) {
 						) : currentFilterType === 2 ? (
 							<FilterNftTraits appliedFilter={appliedFilter} setAppliedFilter={setAppliedFilter} setCurrentFilterType={setCurrentFilterType} />
 						) : currentFilterType === 3 ? (
-							<NftState appliedFilter={appliedFilter} setAppliedFilter={setAppliedFilter} />
+							<NftState appliedFilter={appliedFilter} setAppliedFilter={setAppliedFilter} setCurrentFilterType={setCurrentFilterType} />
 						) : (
-							<SortBy appliedFilter={appliedFilter} setAppliedFilter={setAppliedFilter} />
+							<SortBy appliedFilter={appliedFilter} setAppliedFilter={setAppliedFilter} setCurrentFilterType={setCurrentFilterType} />
 						)}
 					</div>
 				</Transition.Child>

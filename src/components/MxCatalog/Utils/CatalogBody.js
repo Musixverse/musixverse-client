@@ -23,13 +23,15 @@ export default function CatalogBody({ currentSelection, setAppliedFilter, applie
 					<div className="flex items-start justify-between space-x-10 w-full">
 						<Filter setAppliedFilter={setAppliedFilter} appliedFilter={appliedFilter} />
 
-						{currentSelection === 1 ? (
-							<UnsoldNFTs appliedFilter={appliedFilter} />
-						) : currentSelection === 2 ? (
-							<SoldOnceNFTs />
-						) : currentSelection === 3 ? (
-							<TrendingNFTs />
-						) : null}
+						<div className="w-full grid col-span-9 gap-y-[60px] gap-x-[80px] 2xl:grid-cols-4 xl:grid-cols-3 md:grid-cols-2">
+							{currentSelection === 1 ? (
+								<UnsoldNFTs appliedFilter={appliedFilter} />
+							) : currentSelection === 2 ? (
+								<SoldOnceNFTs appliedFilter={appliedFilter} />
+							) : currentSelection === 3 ? (
+								<TrendingNFTs />
+							) : null}
+						</div>
 					</div>
 				</div>
 			</div>

@@ -3,57 +3,57 @@
 } */
 
 .track-detail__container {
-    @apply grid grid-cols-5 gap-10 p-8 border-2 bg-light-200 rounded-xl border-light-300 mt-16;
-    /* grid to appear in this div */
+	@apply grid grid-cols-5 gap-10 p-8 border-2 bg-light-200 rounded-xl border-light-300 mt-16;
+	/* grid to appear in this div */
 }
 
 .track-detail__track-details {
-    @apply flex flex-col col-span-2;
-    /* track details col should span to 2 grid cols */
+	@apply flex flex-col col-span-2;
+	/* track details col should span to 2 grid cols */
 }
 
 .track-details__title {
-    @apply font-semibold text-xl;
+	@apply font-semibold text-xl;
 }
 
 .track-details__subtitle {
-    @apply text-sm;
+	@apply text-sm;
 }
 
 .track-details__artist-notes {
-    @apply text-sm;
+	@apply text-sm;
 }
 
 .track-info__other-details {
-    @apply flex flex-col font-secondary text-[15px] col-span-3;
+	@apply flex flex-col font-secondary text-[15px] col-span-3;
 }
 
 .other-details__title {
-    @apply font-semibold text-xl;
+	@apply font-semibold text-xl;
 }
 
 .other-details__section1 {
-    /* @apply flex flex-row space-x-16 py-3; */
-    @apply grid grid-cols-4 py-3;
+	/* @apply flex flex-row space-x-16 py-3; */
+	@apply grid grid-cols-4 py-3;
 }
 
 .other-details__section2 {
-    /* @apply flex flex-row space-x-10 py-3; */
-    @apply grid grid-cols-4 py-3;
+	/* @apply flex flex-row space-x-10 py-3; */
+	@apply grid grid-cols-4 py-3 overflow-x-auto;
 }
 
 .other-details__section3 {
-    @apply flex flex-row;
+	@apply flex flex-row;
 }
 
 .other-details__Icons {
-    @apply flex flex-row space-x-4 py-2;
+	@apply flex flex-row space-x-4 py-2;
 }
 
 .other-details__footer {
-    @apply flex flex-1 h-[60px] bg-white rounded-md items-center justify-between p-3;
+	@apply flex flex-1 h-[60px] bg-white rounded-md items-center justify-between p-3;
 }
 
 .footer__icons {
-    @apply space-x-4 flex content-center;
+	@apply space-x-4 flex content-center;
 }

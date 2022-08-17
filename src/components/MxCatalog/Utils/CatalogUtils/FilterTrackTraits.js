@@ -88,7 +88,12 @@ export default function FilterTrackTraits({ appliedFilter, setAppliedFilter, set
 				{/* Can make a component of the div below */}
 				<div className="flex-1 text-sm font-semibold md:text-base font-secondary">
 					<p className="mb-1 text-sm">Tags</p>
-					<TagsMultiSelect tags={appliedFilter.tags} setAppliedFilter={setAppliedFilter} dropdownType={"TAGS"} />
+					<TagsMultiSelect
+						tags={appliedFilter.tags}
+						setAppliedFilter={setAppliedFilter}
+						dropdownType={"TAGS"}
+						setCurrentFilterType={setCurrentFilterType}
+					/>
 				</div>
 				<div className="flex-1 text-sm font-semibold md:text-base font-secondary"></div>
 			</div>

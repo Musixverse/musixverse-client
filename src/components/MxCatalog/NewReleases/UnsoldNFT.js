@@ -1,12 +1,13 @@
 import NFTCard from "../../../layout/NFTCard/NFTCard";
 
-const UnsoldNFT = ({ track, index }) => {
+const UnsoldNFT = ({ track }) => {
 	if (track) {
 		const unsoldTrackData = {
 			primaryMarketplacePrice: track.price,
 			unsoldTokens_size: track.unsoldTokens_size,
 			purchasedTokens_size: track.purchasedTokens_size,
 		};
+
 		return (
 			<NFTCard
 				redirectLink={`/track/polygon/${track.unsoldTokens.at(0)}`}

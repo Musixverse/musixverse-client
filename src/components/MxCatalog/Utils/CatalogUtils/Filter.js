@@ -8,7 +8,7 @@ import FilterTrackTraits from "./FilterTrackTraits";
 import NftState from "./NftState";
 import SortBy from "./SortBy";
 
-export default function Filter({ appliedFilter, setAppliedFilter }) {
+export default function Filter({ appliedFilter, setAppliedFilter, currentSelection }) {
 	const [currentFilterType, setCurrentFilterType] = useState(0);
 
 	return (
@@ -98,11 +98,21 @@ export default function Filter({ appliedFilter, setAppliedFilter }) {
 						{currentFilterType === 1 ? (
 							<FilterTrackTraits appliedFilter={appliedFilter} setAppliedFilter={setAppliedFilter} setCurrentFilterType={setCurrentFilterType} />
 						) : currentFilterType === 2 ? (
-							<FilterNftTraits appliedFilter={appliedFilter} setAppliedFilter={setAppliedFilter} setCurrentFilterType={setCurrentFilterType} />
+							<FilterNftTraits
+								appliedFilter={appliedFilter}
+								setAppliedFilter={setAppliedFilter}
+								setCurrentFilterType={setCurrentFilterType}
+								currentSelection={currentSelection}
+							/>
 						) : currentFilterType === 3 ? (
 							<NftState appliedFilter={appliedFilter} setAppliedFilter={setAppliedFilter} setCurrentFilterType={setCurrentFilterType} />
 						) : (
-							<SortBy appliedFilter={appliedFilter} setAppliedFilter={setAppliedFilter} setCurrentFilterType={setCurrentFilterType} />
+							<SortBy
+								appliedFilter={appliedFilter}
+								setAppliedFilter={setAppliedFilter}
+								setCurrentFilterType={setCurrentFilterType}
+								currentSelection={currentSelection}
+							/>
 						)}
 					</div>
 				</Transition.Child>

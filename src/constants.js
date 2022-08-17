@@ -229,7 +229,7 @@ export const tagsAvailable = [
 /**************************************************************************/
 export const duration = ["<100s", "100-150s", "151-200s", "201-250s", "251-300s", "301-350s", "351-400s", ">400s"];
 export const numberOfCollaborators = [1, 2, 3, 4, 5];
-export const nftStatus = ["Coming Soon"];
+export const nftStatus = ["On Sale", "Not on Sale", "Coming Soon"];
 export const numberOfCopies = [
 	"1 (Single Drop)",
 	"2",

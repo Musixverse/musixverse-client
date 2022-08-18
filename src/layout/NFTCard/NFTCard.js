@@ -5,7 +5,7 @@ import styles from "../../../styles/NFTCard/Nftcard.module.css";
 import Section2 from "./Section2";
 import Section1 from "./Section1";
 import multipleNft from "../../../public/assets/nftcard/nftcards.svg";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import NftCopiesModal from "./NftCopiesModal";
 import Link from "next/link";
 
@@ -22,14 +22,12 @@ export default function NFTCard({
 	soldOnceTrackData,
 	likeCount,
 	lastPrice,
-	showNumberOfCopies,
+	showNumberOfCopies = true,
 }) {
 	const [showNftCopiesModal, setShowNftCopiesModal] = useState(false);
 	const { theme } = useTheme();
 	const { data: artist } = useMoralisCloudFunction("fetchUsernameFromAddress", { address: artistAddress });
 
-	// let truncatedArtistName = artistName;
-	// if (artistName && artistName.length > 14) truncatedArtistName = artistName.substring(0, 14) + "...";
 	const truncatedArtistName = useMemo(() => {
 		let returnedString = artistName;
 		if (artistName && artistName.length > 14) returnedString = artistName.substring(0, 14) + "...";
@@ -40,11 +38,11 @@ export default function NFTCard({
 	if (trackName && trackName.length > 10) {
 		truncatedNftName = trackName.substring(0, 10) + "...";
 	}
-	// if(track === undefined)
-	// 	console.log("Name: ",trackName);
-	const modalValues = {
+
+	const trackCopiesModalValues = {
+		redirectLink,
 		trackName,
-		artistName: truncatedArtistName,
+		artistName,
 		artistAddress,
 		image,
 		tokenId,
@@ -52,10 +50,7 @@ export default function NFTCard({
 		collaboratorList,
 		unsoldTrackData,
 		soldOnceTrackData,
-		likeCount,
-		lastPrice,
-		showNumberOfCopies: true,
-		redirectLink,
+		showNumberOfCopies: false,
 	};
 
 	return (
@@ -82,12 +77,12 @@ export default function NFTCard({
 						<div className="w-full h-full bg-gray-300 dark:bg-[#363636] animate-pulse"></div>
 					)}
 
-					{!showNumberOfCopies && numberOfCopies > 1 ? (
+					{showNumberOfCopies && numberOfCopies > 1 ? (
 						<button
 							onClick={() => setShowNftCopiesModal(true)}
-							className="absolute flex items-center px-4 py-2 font-bold top-4 rounded-xl left-4 hover:bg-light-200 bg-light-100 text-dark-100"
+							className="absolute flex items-center px-3 py-[0.4rem] font-bold top-4 rounded-lg left-4 hover:bg-light-200 bg-light-100 text-dark-100 dark:bg-dark-100 dark:text-light-100"
 						>
-							<Image src={multipleNft} objectFit="contain" alt="multiple nft cards" />
+							<Image src={multipleNft} height={18} width={18} alt="multiple nft cards" className="dark:invert" />
 							<span className="ml-1 text-sm">x{numberOfCopies}</span>
 						</button>
 					) : null}
@@ -96,7 +91,13 @@ export default function NFTCard({
 				{/* NFT Details */}
 				<Link href={redirectLink ? redirectLink : ""} passHref>
 					<a>
-						<div className={"dark:bg-dark-100 " + styles["nft-card__description"]}>
+						<div
+							className={
+								!showNumberOfCopies
+									? "dark:bg-dark-200 " + styles["nft-card__description"]
+									: "dark:bg-dark-100 " + styles["nft-card__description"]
+							}
+						>
 							{/* Artist, Music name and tokenId */}
 							<Section1
 								artistName={truncatedArtistName}
@@ -120,7 +121,7 @@ export default function NFTCard({
 				</Link>
 			</div>
 
-			<NftCopiesModal {...{ modalValues, showNftCopiesModal, setShowNftCopiesModal }} />
+			<NftCopiesModal {...{ trackCopiesModalValues, showNftCopiesModal, setShowNftCopiesModal }} />
 		</>
 	);
 }

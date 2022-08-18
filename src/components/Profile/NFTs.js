@@ -54,20 +54,18 @@ export default function NFTs({ username }) {
 				const metadata = JSON.parse(nft.metadata);
 				if (metadata) {
 					tempArray.push(
-						<Link key={idx} href={`/track/polygon/${nft.token_id}`} passHref={true}>
-							<a>
-								<NFTCard
-									trackName={metadata.title}
-									artistName={metadata.artist}
-									artistAddress={metadata.artistAddress}
-									image={metadata.artwork.uri.replace("ipfs://", process.env.NEXT_PUBLIC_IPFS_NODE_URL)}
-									tokenId={nft.token_id}
-									numberOfCopies={metadata.attributes[0].value}
-									collaboratorList={metadata.collaborators}
-									// localTokenId={localTokenId}
-								/>
-							</a>
-						</Link>
+						<NFTCard
+							redirectLink={`/track/polygon/${nft.token_id}`}
+							trackName={metadata.title}
+							artistName={metadata.artist}
+							artistAddress={metadata.artistAddress}
+							image={metadata.artwork.uri.replace("ipfs://", process.env.NEXT_PUBLIC_IPFS_NODE_URL)}
+							tokenId={nft.token_id}
+							numberOfCopies={metadata.attributes[0].value}
+							collaboratorList={metadata.collaborators}
+							showNumberOfCopies={false}
+							// localTokenId={localTokenId}
+						/>
 					);
 					if (tempArray.length % 5 == 0 || idx == tokens.length - 1) {
 						nftCardsTemp.push(tempArray);

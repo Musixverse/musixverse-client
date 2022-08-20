@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import Image from "next/image";
 import { useTheme } from "next-themes";
-import Router from "next/router";
+import { useRouter } from "next/router";
 import { useMoralis } from "react-moralis";
 import styles from "../../../styles/Registration/Confirm.module.css";
 import B_blackhole from "../../../public/assets/registration/dark_black_hole.svg";
@@ -9,22 +9,25 @@ import W_blackhole from "../../../public/assets/registration/white_black_hole.sv
 import StatusContext from "../../../store/status-context";
 
 export default function Confirm() {
+	const router = useRouter();
 	const { theme } = useTheme();
 	const { user, Moralis, refetchUserData } = useMoralis();
 	const [, , setSuccess] = useContext(StatusContext);
 
 	const [checkCounter, setCheckCounter] = useState(0);
 	useEffect(() => {
-		const checkEmailVerified = setTimeout(() => {
+		const checkEmailVerified = setTimeout(async () => {
 			setCheckCounter((prev) => prev + 1);
 			console.log("changeConfirmEmailPage");
 			if (user) {
-				refetchUserData();
+				await refetchUserData();
 				if (user.attributes.emailVerified) {
 					if (user && user.attributes.isArtist) {
-						Router.push(`/profile/${user.attributes.username}`, undefined, { shallow: true });
+						router.push(`/profile/${user.attributes.username}`, undefined, { shallow: true });
+						router.reload(window.location.pathname);
 					} else {
-						Router.push("/mxcatalog/explore", undefined, { shallow: true });
+						router.push("/mxcatalog/new-releases", undefined, { shallow: true });
+						router.reload(window.location.pathname);
 					}
 				}
 			}
@@ -37,9 +40,9 @@ export default function Confirm() {
 		await refetchUserData();
 
 		if (user.attributes.isArtist) {
-			Router.push(`/profile/${user.attributes.username}`, undefined, { shallow: true });
+			router.push(`/profile/${user.attributes.username}`, undefined, { shallow: true });
 		} else {
-			Router.push("/mxcatalog/explore", undefined, { shallow: true });
+			router.push("/mxcatalog/explore", undefined, { shallow: true });
 		}
 		return;
 	};

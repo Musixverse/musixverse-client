@@ -177,10 +177,10 @@ const Step3Form = ({
 								id="individual-nft-price"
 								value={nftPrice}
 								onChange={(e) => {
-									setNftPrice(e.target.value);
+									setNftPrice(e.target.value ? parseFloat(e.target.value).toString() : "");
 								}}
 								type="number"
-								min={0}
+								min={0.01}
 								step="0.01"
 								placeholder="Enter price in MATIC"
 								required

@@ -24,10 +24,10 @@ export default function Confirm() {
 				if (user.attributes.emailVerified) {
 					if (user && user.attributes.isArtist) {
 						router.push(`/profile/${user.attributes.username}`, undefined, { shallow: true });
-						router.reload(window.location.pathname);
+						// router.reload(window.location.pathname);
 					} else {
 						router.push("/mxcatalog/new-releases", undefined, { shallow: true });
-						router.reload(window.location.pathname);
+						// router.reload(window.location.pathname);
 					}
 				}
 			}

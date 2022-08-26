@@ -1,51 +1,66 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import { useMoralis } from "react-moralis";
+import { useMoralis, useMoralisCloudFunction } from "react-moralis";
 import styles from "../../../styles/NFTCard/Section1.module.css";
-import { getCurrentNftPrice } from "../../utils/smart-contract/functions";
+import { truncatePrice } from "../../utils/GetMarketPrice";
 
-export default function Section1({ artistName, isVerified, songName, tokenId }) {
-    const { Moralis } = useMoralis();
-    const isWeb3Active = Moralis.ensureWeb3IsInstalled();
-    const [price, setPrice] = useState("");
+export default function Section1({ artistName, isVerified, trackName, tokenId, unsoldTrackData, soldOnceTrackData }) {
+	const { Moralis } = useMoralis();
+	const { fetch: fetchTokenPrice, data: tokenPrice } = useMoralisCloudFunction("fetchTokenPrice", { tokenId: tokenId }, { autoFetch: false });
+	const [price, setPrice] = useState("");
 
-    const getPriceOf = async (tokenId) => {
-        const result = await getCurrentNftPrice(tokenId);
-        return result;
-    };
+	useEffect(() => {
+		if (tokenId) {
+			fetchTokenPrice({
+				onSuccess: async (object) => {},
+				onError: (error) => {
+					console.log("fetchTokenPrice Error:", error);
+				},
+			});
+		}
+	}, [tokenId, fetchTokenPrice]);
 
-    useEffect(async () => {
-        if (isWeb3Active) {
-            const musicNft = await getPriceOf(tokenId);
-            setPrice(Moralis.Units.FromWei(musicNft.price));
-        }
-    }, [isWeb3Active]);
+	useEffect(() => {
+		if (unsoldTrackData) {
+			setPrice(Moralis.Units.FromWei(unsoldTrackData.primaryMarketplacePrice));
+		} else if (tokenPrice) {
+			setPrice(Moralis.Units.FromWei(tokenPrice));
+		}
+	}, [tokenPrice]);
 
-    let truncatednftPrice = price;
-    if (price >= 1000000) {
-        truncatednftPrice = Number((price / 1000000).toFixed(2)) + " M";
-    } else if (price >= 1000) {
-        truncatednftPrice = Number((price / 1000).toFixed(2)) + " K";
-    }
+	const truncatednftPrice = truncatePrice(price);
 
-    return (
-        <div className={styles["nft-card__description--section1"]}>
-            {/* SONG and ARTIST NAME SECTION */}
-            <div>
-                <p className={styles["description--section1__artistname"]}>
-                    {artistName}
-                    {isVerified ? <Image src={"/assets/mxv_tick.svg"} width={17} height={17} alt="MXV verified"></Image> : null}
-                </p>
-                <h6 className={styles["description--section1__songname"]}>{songName}</h6>
-            </div>
-            {/* CURRENT PRICE */}
-            <div>
-                <p className={styles["description--section1__price"]}>Price</p>
-                <div className="flex items-center font-semibold">
-                    <Image src={"/assets/matic-logo.svg"} width={16} height={16} alt="matic logo" />
-                    <span className="ml-1 sm:text-lg">{truncatednftPrice}</span>
-                </div>
-            </div>
-        </div>
-    );
+	return (
+		<div className={styles["nft-card__description--section1"]}>
+			{/* SONG and ARTIST NAME SECTION */}
+			<div className={artistName && trackName && truncatednftPrice ? "max-w-full fit-content" : "w-full"}>
+				<div className={styles["description--section1__artistname"]}>
+					{artistName ? artistName : <div className="w-4/5 h-4 dark:bg-[#363636] bg-light-300 animate-pulse self-center rounded-lg"></div>}
+					{isVerified ? (
+						<span className="ml-1 flex items-center">
+							<Image src={"/assets/mxv_tick.svg"} width={14} height={14} alt="MXV verified" />
+						</span>
+					) : null}
+				</div>
+				<h6 className={styles["description--section1__trackname"]}>
+					{trackName ? trackName : <div className="w-2/3 h-4 mt-2 dark:bg-[#363636] bg-light-300 animate-pulse self-center rounded-lg"></div>}
+				</h6>
+			</div>
+			{/* CURRENT PRICE */}
+			{artistName && trackName && truncatednftPrice ? (
+				<div className="flex flex-col justify-end">
+					<p className={styles["description--section1__price"]}>{soldOnceTrackData ? "Lowest Price" : "Price"}</p>
+					<div className="flex items-center justify-end font-semibold">
+						<Image src={"/assets/matic-logo.svg"} width={16} height={16} alt="matic logo" />
+						<span className="ml-1 sm:text-lg">{truncatednftPrice}</span>
+					</div>
+				</div>
+			) : (
+				<div className="flex flex-col justify-end w-full">
+					<div className="w-3/5 h-4 dark:bg-[#363636] bg-light-300 animate-pulse self-end rounded-lg"></div>
+					<div className="w-full h-4 mt-2 dark:bg-[#363636] bg-light-300 animate-pulse self-center rounded-lg"></div>
+				</div>
+			)}
+		</div>
+	);
 }

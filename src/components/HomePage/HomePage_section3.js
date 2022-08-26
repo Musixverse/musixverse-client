@@ -29,7 +29,7 @@ export default function HomePage_section2() {
                         className={styles["section2__circle-dropdown"]}
                         width={50}
                         height={50}
-                        alt="circle dropdown"
+                        alt="button to move to next section"
                     />
                 </button>
             </a>

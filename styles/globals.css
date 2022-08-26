@@ -14,21 +14,21 @@
 
 html,
 body {
-    padding: 0 !important;
-    margin: 0 !important;
-    @apply font-primary;
-    @apply bg-light-200 dark:bg-dark-100 scroll-smooth;
-    @apply text-dark-100 dark:text-light-100;
-    z-index: -2 !important;
+	padding: 0 !important;
+	margin: 0 !important;
+	@apply font-primary;
+	@apply bg-light-200 dark:bg-dark-100 scroll-smooth;
+	@apply text-dark-100 dark:text-light-100;
+	z-index: -2 !important;
 }
 
 a {
-    color: inherit;
-    text-decoration: none;
+	color: inherit;
+	text-decoration: none;
 }
 
 * {
-    box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 /**************************************************************************/
@@ -36,20 +36,453 @@ a {
 /**************************************************************************/
 
 .navbar {
-    @apply dark:bg-[rgba(19,19,19,0.4)] flex flex-col items-center justify-center dark:backdrop-blur-[24px] dark:backdrop-brightness-105 fixed top-0 z-40 w-full backdrop-blur-[40px] backdrop-brightness-200 bg-[rgba(255,255,255,0.8)];
+	@apply dark:bg-[rgba(19,19,19,0.4)] dark:backdrop-blur-[24px] w-full dark:backdrop-brightness-105 backdrop-blur-[40px] backdrop-brightness-200 bg-[rgba(255,255,255,0.8)];
 }
 
+.search-box {
+	@apply h-[40px] bg-search-100 dark:bg-search-200 rounded-full p-1.5;
+}
+
+.search-box:hover > .search-text {
+	@apply w-[275px] px-4;
+}
+
+.search-box:hover > .search-btn {
+	@apply text-black bg-white;
+}
+
+.search-btn {
+	@apply flex items-center justify-center float-right p-2 duration-300 rounded-full cursor-pointer dark:text-white w-7 h-7 bg-search-100 dark:bg-dark-100 hover:bg-dark-200;
+	text-decoration: none;
+}
+
+.search-text {
+	border: none;
+	background: none;
+	outline: none;
+	float: left;
+	padding: 0;
+	color: white;
+	font-size: 12px;
+	font-weight: normal;
+	transition: 0.4s;
+	line-height: 25px;
+	width: 0px;
+	@apply text-black dark:text-white;
+}
+
+/**************************************************************************/
+/*****************************    Hamburger Menu  *************************/
+/**************************************************************************/
+
+.hamburger_container::-webkit-scrollbar {
+	width: 0 !important; /* Remove scrollbar space */
+	background: transparent !important; /* Optional: just make scrollbar invisible */
+}
+
+@media (max-width: 670px) {
+	#menuToggle#menuToggle#menuToggle#menuToggle {
+		right: 15px;
+	}
+
+	#menu#menu#menu#menu#menu {
+		right: -75px;
+		width: 105vw;
+	}
+}
+
+@media (max-width: 786px) {
+	.hamburger_menu.hamburger_menu {
+		margin-top: 60px;
+	}
+
+	.quick_hamburger_nav_div {
+		margin-top: 25px !important;
+	}
+
+	.quick_hamburger_nav.quick_hamburger_nav {
+		color: rgb(83, 194, 75);
+	}
+}
+
+@media (max-width: 1000px) {
+	#menuToggle#menuToggle#menuToggle {
+		right: 15px;
+	}
+
+	#menu#menu#menu {
+		right: -75px;
+	}
+}
+
+a:hover {
+	color: inherit;
+	text-decoration: none;
+}
+
+#menuToggle {
+	display: block;
+	position: absolute;
+	top: 23px;
+	right: 60px;
+	z-index: 1;
+	margin-top: -20px;
+	margin-right: 60px;
+}
+
+.toggler {
+	display: block;
+	width: 60px;
+	height: 60px;
+	position: absolute;
+	cursor: pointer;
+	object-fit: contain;
+	opacity: 0; /* hide this */
+	z-index: 3; /* and place it over the hamburger */
+}
+
+/* Hamburger */
+.hamburger {
+	position: absolute;
+	width: 60px;
+	height: 60px;
+	z-index: 2;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 50%;
+}
+
+.hamburger > div {
+	position: absolute;
+	width: 60%;
+	height: 3px;
+	border-radius: 1.2px;
+	background-color: #111;
+	transition: 0.4s;
+}
+
+.hamburger > div:before {
+	content: "";
+	position: absolute;
+	width: 75%;
+	height: 3px;
+	border-radius: 1.5px;
+	background-color: #111;
+	top: -10px;
+	right: 0;
+	transition: 0.4s;
+}
+
+.hamburger > div:after {
+	content: "";
+	position: absolute;
+	width: 85%;
+	height: 3px;
+	border-radius: 1.5px;
+	background-color: #111;
+	top: 10px;
+	right: 0;
+	transition: 0.4s;
+}
+
+.toggler:hover + .hamburger > div:before {
+	width: 100%;
+}
+
+.toggler:hover + .hamburger > div:after {
+	width: 100%;
+}
+
+.toggler:checked + .hamburger > div:before {
+	width: 100%;
+}
+
+.toggler:checked + .hamburger > div:after {
+	width: 100%;
+}
+
+.toggler:checked + .hamburger > div {
+	transform: rotate(135deg);
+	background-color: #fff;
+}
+
+.toggler:checked:hover + .hamburger > div {
+	transform: rotate(225deg);
+	background-color: #fff;
+}
+
+.toggler:checked + .hamburger > div:before,
+.toggler:checked + .hamburger > div:after {
+	top: 0;
+	transform: rotate(90deg);
+	background-color: #fff;
+}
+
+/*
+ * Make this absolute positioned
+ * at the top left of the screen
+ */
+#menu {
+	position: absolute;
+	width: 100vw;
+	margin: -100px 0 0 0;
+	padding: 50px;
+	padding-top: 125px;
+	right: -120px;
+	background: #0d0d0d;
+	list-style-type: none;
+	-webkit-font-smoothing: antialiased;
+	overflow-y: scroll !important;
+	/* to stop flickering of text in safari */
+	transform-origin: 0% 0%;
+	transform: translate(100%, 0);
+	transition: transform 1.5s cubic-bezier(0.77, 0.2, 0.05, 1);
+}
+
+#menu li {
+	padding: 10px 0;
+	font-size: 22px;
+}
+
+/*
+ * fade it in from the left
+ */
+#menuToggle input:checked ~ div {
+	transform: scale(1, 1);
+	opacity: 1;
+}
+
+.hamburger_container {
+	height: 100vh;
+	overscroll-behavior: contain;
+	overflow-x: hidden !important;
+	margin-left: 15px;
+}
+
+.menu_box {
+	text-align: center;
+	width: 100%;
+	max-width: 1500px;
+	margin: 0 auto;
+	font-size: 16px;
+	max-height: 130vh;
+	padding-bottom: 40px;
+}
+
+.toggler:checked + .hamburger + #menu > .hamburger_container > .menu_box {
+	animation: menu_content_fade_in 1.5s ease-in-out;
+}
+
+.toggler:not(:checked) + .hamburger + #menu {
+	transition: transform 2s cubic-bezier(0.77, 0.2, 0.05, 1) 0.5s;
+}
+
+.toggler:not(:checked) + .hamburger + #menu > .hamburger_container > .menu_box {
+	animation: menu_content_fade_out 0.4s ease-out;
+	opacity: 0;
+}
+
+@keyframes menu_content_fade_in {
+	0% {
+		opacity: 0;
+	}
+	75% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+@keyframes menu_content_fade_out {
+	0% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+	}
+}
+
+@keyframes slide_up {
+	0% {
+		transform: translateY(100px);
+		opacity: 0;
+	}
+
+	90% {
+		transform: translateY(100px);
+		opacity: 0;
+	}
+
+	100% {
+		transform: translateY(0px);
+		opacity: 1;
+	}
+}
+
+@keyframes slide_down {
+	0% {
+		transform: translateY(-120px);
+		opacity: 0;
+	}
+
+	90% {
+		transform: translateY(-120px);
+		opacity: 0;
+	}
+
+	100% {
+		transform: translateY(0px);
+		opacity: 1;
+	}
+}
+
+@keyframes slide_left {
+	0% {
+		transform: translateX(80px);
+		opacity: 0;
+	}
+
+	80% {
+		transform: translateX(80px);
+		opacity: 0;
+	}
+
+	100% {
+		transform: translateX(0px);
+		opacity: 1;
+	}
+}
+
+@keyframes slide_right {
+	0% {
+		width: 0;
+		opacity: 0;
+	}
+
+	80% {
+		width: 0;
+		opacity: 0;
+	}
+
+	100% {
+		width: 100%;
+		opacity: 1;
+	}
+}
+
+.toggler:checked + .hamburger + #menu > .hamburger_container > .menu_box > div > .logo_div_anim {
+	animation: slide_down 1.2s ease-out;
+}
+
+.toggler:checked + .hamburger + #menu > .hamburger_container > .menu_box > div > .create_left_anim {
+	animation: slide_left 1.6s ease-in;
+}
+
+.toggler:checked + .hamburger + #menu > .hamburger_container > .menu_box > div > .create_left_anim + .dashboard_left_anim {
+	animation: slide_left 1.6s ease-in;
+}
+
+.toggler:checked + .hamburger + #menu > .hamburger_container > .menu_box > div + div + div > .horizontal_line_to_right {
+	animation: slide_right 2.6s ease-in;
+}
+
+.toggler:checked + .hamburger + #menu > .hamburger_container > .menu_box > div + .hamburger_menu {
+	animation: slide_up 2s ease-in;
+}
+
+.toggler:checked + .hamburger + #menu > .hamburger_container > .menu_box > div + .harmburger_menu_connect {
+	animation: slide_up 2.9s ease-in;
+}
+
+@keyframes text_glow {
+	to {
+		font-size: 1.05em;
+		color: #fff;
+		font-weight: 550;
+	}
+}
+
+.hamburger_logo_mxv {
+	width: 150px;
+}
+
+.quick_hamburger_nav {
+	font-size: 1.4em;
+	color: #fff;
+	font-weight: 600;
+}
+
+.quick_hamburger_nav:hover {
+	color: rgb(83, 194, 75);
+}
+
+.hamburger_menu {
+	margin-top: 100px;
+}
+
+.ham_menu_hover_effect_row {
+	height: 38px !important;
+}
+
+.ham_menu_heading {
+	color: #fff;
+	font-size: 1.2em;
+	font-family: var(--Poppins);
+	font-weight: 600;
+	text-align: left;
+}
+
+.ham_menu_link {
+	color: #fff;
+	font-size: 1.1em;
+	font-family: var(--Poppins);
+	text-align: left;
+}
+
+.ham_menu_link:hover {
+	color: rgb(83, 194, 75);
+}
+
+@keyframes ham_menu_text_glow {
+	to {
+		font-size: 1.12em;
+		font-weight: 550;
+	}
+}
+
+.ham_menu_hover_effect:hover {
+	animation: ham_menu_text_glow 0.05s forwards;
+}
+
+.horizontal_line_to_right {
+	background-color: #fff !important;
+	height: 1.3px !important;
+}
+
+.connect_link {
+	@apply text-white hover:text-primary-100;
+}
 /**************************************************************************/
 /*****************************    Footer   ********************************/
 /**************************************************************************/
 
 .footer {
-    @apply w-full max-w-[1920px] pb-20 px-10 md:px-8 lg:px-16 xl:px-20 2xl:px-36 bg-nav-light backdrop-blur-2xl backdrop-brightness-150;
+	@apply w-full max-w-[1920px] pt-20 pb-10 px-6 md:px-8 lg:px-16 xl:px-20 2xl:px-36 bg-nav-light backdrop-blur-2xl backdrop-brightness-150;
+}
+
+.footer__social {
+	@apply flex space-x-2 lg:space-x-3 xl:space-x-5 md:justify-end;
+}
+
+.footer__social button {
+	@apply p-2 border-none rounded-md bg-dark-200 hover:bg-dark-100 hover:animate-bounce;
 }
 
 input[type="radio"]:checked + label span {
-    background-color: #479e00;
-    box-shadow: 0px 0px 0px 2px white inset;
+	background-color: #479e00;
+	box-shadow: 0px 0px 0px 2px white inset;
 }
 
 /**************************************************************************/
@@ -57,42 +490,280 @@ input[type="radio"]:checked + label span {
 /**************************************************************************/
 
 html {
-    overflow: auto !important;
-    overflow-y: scroll !important;
-    overflow-y: overlay !important;
+	overflow: auto !important;
+	overflow-y: scroll !important;
+	overflow-y: overlay !important;
 }
 
 /* Scroll bar width */
 ::-webkit-scrollbar {
-    width: 4px;
+	width: 4px;
+	height: 4px;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-    background: transparent;
+	background: transparent;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    border-radius: 50px;
-    background: rgb(83, 194, 75);
+	border-radius: 50px;
+	background: rgb(83, 194, 75);
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-    background: rgb(83, 194, 75);
+	background: rgb(83, 194, 75);
 }
 
 /**************************************************************************/
 /************************    React Datepicker   ***************************/
 /**************************************************************************/
+.react-datepicker {
+	@apply border-none border-r-2 overflow-hidden !important;
+}
+
+.react-datepicker__header {
+	@apply dark:bg-[#3f3f3f] dark:text-light-100 rounded-sm;
+}
+
+.react-datepicker__current-month,
+.react-datepicker__day-name,
+.react-datepicker__day,
+.react-datepicker-time__header,
+.react-datepicker__time-list-item {
+	@apply dark:text-light-100;
+}
+
+.react-datepicker__day:hover,
+.react-datepicker__time-list-item:hover {
+	@apply bg-primary-200 text-light-100 !important;
+}
+/* 
+.react-datepicker__day--today{
+    @apply font-bold dark:text-primary-100;
+} */
+
+.react-datepicker__day--disabled {
+	@apply dark:text-[#7a7a7a];
+}
+
 .react-datepicker__input-container > input {
-    padding: 4px 16px 4px 20px;
-    border-radius: 4px;
-    border: 2px solid transparent;
+	padding: 4px 16px 4px 20px;
+	border-radius: 4px;
+	border: 2px solid transparent;
 }
 
 .react-datepicker__input-container > input:focus {
-    outline: none;
-    border: 2px solid #6cc027;
+	outline: none;
+	border: 2px solid #6cc027;
+}
+
+.react-datepicker__day--selected {
+	@apply dark:bg-primary-200 !important;
+}
+
+.react-datepicker__month-container,
+.react-datepicker__time-list {
+	@apply dark:bg-[#323232];
+}
+
+.react-datepicker__navigation-icon {
+	@apply dark:text-primary-200 !important;
+}
+
+/**************************************************************************/
+/****************************    Tooltip   ********************************/
+/**************************************************************************/
+
+.tooltip-button {
+	background: none;
+	font-family: var(--Poppins);
+	font-weight: 400;
+	font-size: 0.75rem;
+	color: #7a7a7a;
+	border: none;
+	padding: 0px;
+	/* height: fit-content !important; */
+	min-width: fit-content;
+}
+
+.tooltip-button:hover {
+	background: none;
+	border: none;
+	color: #9c9c9c;
+}
+
+button.tooltip-button:focus,
+button.tooltip-button:active {
+	/* Removes the button outline on click */
+	outline: none !important;
+	box-shadow: none !important;
+	background: none;
+	border: none;
+	color: #7a7a7a;
+}
+
+.tooltip-button i {
+	margin-right: 5px;
+}
+
+/* Custom Tooltip */
+
+[data-tooltip] {
+	position: relative;
+	z-index: 10;
+}
+
+/* Positioning and visibility settings of the tooltip */
+[data-tooltip]:before,
+[data-tooltip]:after {
+	position: absolute;
+	visibility: hidden;
+	opacity: 0;
+	left: 50%;
+	bottom: calc(80% + 5px); /* 5px is the size of the arrow */
+	pointer-events: none;
+	transition: 0.12s;
+	will-change: transform;
+}
+
+/* The actual tooltip with a dynamic width */
+[data-tooltip]:before {
+	content: attr(data-tooltip);
+	padding: 10px 18px;
+	min-width: 50px;
+	max-width: 250px;
+	width: max-content;
+	width: -moz-max-content;
+	border: 1.5px solid #6cc027;
+	border-radius: 6px;
+	font-size: 14px;
+	background-color: rgba(255, 255, 255, 0);
+	backdrop-filter: blur(4px);
+	/* background-image: linear-gradient(30deg, rgba(44, 53, 59, 0.9), rgba(48, 54, 59, 0.9), rgba(42, 56, 59, 0.9)); */
+	box-shadow: 0px 0px 24px rgba(0, 0, 0, 0.1);
+	font-family: var(--Poppins);
+	text-align: center;
+	white-space: pre-wrap;
+	transform: translate(-50%, -5px) scale(0.5);
+	@apply text-black dark:text-white;
+}
+
+.sample_based_tooltip > [data-tooltip]:before {
+	max-width: 180px !important;
+}
+
+/* Tooltip arrow */
+[data-tooltip]:after {
+	content: "";
+	border-style: solid;
+	border-width: 5px 5px 0px 5px; /* CSS triangle */
+	border-color: #6cc027 transparent transparent transparent;
+	transition-duration: 0s; /* If the mouse leaves the element, 
+								the transition effects for the 
+								tooltip arrow are "turned off" */
+	transform-origin: top; /* Orientation setting for the
+								slide-down effect */
+	transform: translateX(-50%) scaleY(0);
+}
+
+/* Tooltip becomes visible at hover */
+[data-tooltip]:hover:before,
+[data-tooltip]:hover:after {
+	visibility: visible;
+	opacity: 1;
+}
+
+/* Scales from 0.5 to 1 -> grow effect */
+[data-tooltip]:hover:before {
+	transition-delay: 0.1s;
+	transform: translate(-50%, -5px) scale(1);
+}
+
+/* Arrow slide down effect only on mouseenter (NOT on mouseleave) */
+[data-tooltip]:hover:after {
+	transition-delay: 0.1s; /* Starting after the grow effect */
+	transition-duration: 0.1s;
+	transform: translateX(-50%) scaleY(1);
+}
+
+/*
+	That's it for the basic tooltip.
+  
+	If you want some adjustability
+	here are some orientation settings you can use:
+*/
+
+/* LEFT */
+/* Tooltip + arrow */
+[data-tooltip-location="left"]:before,
+[data-tooltip-location="left"]:after {
+	left: auto;
+	right: calc(100% + 5px);
+	bottom: 50%;
+}
+
+/* Tooltip */
+[data-tooltip-location="left"]:before {
+	transform: translate(-5px, 50%) scale(0.5);
+}
+[data-tooltip-location="left"]:hover:before {
+	transform: translate(-5px, 50%) scale(1);
+}
+
+/* Arrow */
+[data-tooltip-location="left"]:after {
+	border-width: 5px 0px 5px 5px;
+	border-color: transparent transparent transparent #6cc027;
+	transform-origin: left;
+	transform: translateY(50%) scaleX(0);
+}
+[data-tooltip-location="left"]:hover:after {
+	transform: translateY(50%) scaleX(1);
+}
+
+/* RIGHT */
+[data-tooltip-location="right"]:before,
+[data-tooltip-location="right"]:after {
+	left: calc(100% + 5px);
+	bottom: 50%;
+}
+
+[data-tooltip-location="right"]:before {
+	transform: translate(5px, 50%) scale(0.5);
+}
+[data-tooltip-location="right"]:hover:before {
+	transform: translate(5px, 50%) scale(1);
+}
+
+[data-tooltip-location="right"]:after {
+	border-width: 5px 5px 5px 0px;
+	border-color: transparent #6cc027 transparent transparent;
+	transform-origin: right;
+	transform: translateY(50%) scaleX(0);
+}
+[data-tooltip-location="right"]:hover:after {
+	transform: translateY(50%) scaleX(1);
+}
+
+/* BOTTOM */
+[data-tooltip-location="bottom"]:before,
+[data-tooltip-location="bottom"]:after {
+	top: calc(80% + 5px);
+	bottom: auto;
+}
+
+[data-tooltip-location="bottom"]:before {
+	transform: translate(-50%, 5px) scale(0.5);
+}
+[data-tooltip-location="bottom"]:hover:before {
+	transform: translate(-50%, 5px) scale(1);
+}
+
+[data-tooltip-location="bottom"]:after {
+	border-width: 0px 5px 5px 5px;
+	border-color: transparent transparent #6cc027 transparent;
+	transform-origin: bottom;
 }

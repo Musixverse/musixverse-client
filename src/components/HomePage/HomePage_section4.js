@@ -1,4 +1,3 @@
-import Image from "next/image";
 import styles from "../../../styles/HomePage/section4.module.css";
 
 export default function HomePage_section3() {

@@ -1,0 +1,11 @@
+.sales-history {
+    @apply p-8 xl:p-10 xl:pb-6 pb-6 rounded-xl bg-light-200 xl:col-span-3 col-span-5;
+}
+
+.sales-history__heading {
+    @apply font-tertiary text-3xl mb-5;
+}
+
+.sales-history__action {
+    @apply bg-light-100 rounded-full w-[40px] h-[40px] flex justify-center items-center;
+}

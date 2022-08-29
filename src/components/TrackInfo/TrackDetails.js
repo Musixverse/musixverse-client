@@ -16,8 +16,8 @@ export default function TrackDetails({ tokenId, metadata }) {
 		", " +
 		date.toLocaleTimeString() +
 		" IST";
-	var time_in_min = Math.floor(metadata.duration / 60).toString() + "min";
-	var time_in_sec = (metadata.duration % 60).toString() + "sec";
+	var time_in_min = Math.floor(metadata.duration / 60).toString() + " min";
+	var time_in_sec = (metadata.duration % 60).toString() + " sec";
 	var time = time_in_min + " " + time_in_sec;
 
 	return (

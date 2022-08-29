@@ -1,0 +1,19 @@
+.help_us_container {
+	@apply w-[100xw] flex flex-col justify-center items-center py-36;
+}
+
+.help_us {
+	@apply w-full text-center;
+}
+
+.help_us_heading {	
+	@apply font-primary text-5xl font-semibold text-primary-100;
+}
+
+.help_notice {
+	@apply font-primary dark:text-white text-sm;
+}
+
+.email_us {
+	@apply font-primary mt-16 dark:text-[#afafaf];
+}

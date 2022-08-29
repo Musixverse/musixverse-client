@@ -16,6 +16,9 @@ export default function TrackDetails({ tokenId, metadata }) {
 		", " +
 		date.toLocaleTimeString() +
 		" IST";
+	var time_in_min = Math.floor(metadata.duration / 60).toString() + "min";
+	var time_in_sec = (metadata.duration % 60).toString() + "sec";
+	var time = time_in_min + " " + time_in_sec;
 
 	return (
 		<div className={"dark:bg-dark-100 dark:border-dark-100 " + styles["track-detail__container"]}>
@@ -52,7 +55,7 @@ export default function TrackDetails({ tokenId, metadata }) {
 				<div className={styles["other-details__section2"]}>
 					<div className="text-left">
 						<h4 className="font-bold font-secondary text-[16px]">Duration</h4>
-						<p>{metadata.duration} seconds</p>
+						<p>{time}</p>
 					</div>
 					<div className="text-left">
 						<h4 className="font-bold font-secondary text-[16px]">Language</h4>

@@ -309,7 +309,7 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 															className="block w-full text-sm dropdown-item whitespace-nowrap hover:bg-primary-100 active:bg-primary-100"
 															href="#"
 														>
-															Logout
+															Sign out
 														</Link>
 													</button>
 												) : (

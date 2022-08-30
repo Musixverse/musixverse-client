@@ -1,4 +1,5 @@
 import { useState, useRef, useContext } from "react";
+import Link from "next/link";
 import RightSection from "./ArtistRegUtils/RightSection";
 import styles from "../../../styles/Registration/Artist.module.css";
 import Button from "./ArtistRegUtils/Button";
@@ -231,7 +232,12 @@ export default function BasicDetails() {
 							<div className="flex items-center justify-start mb-2 space-x-3">
 								<input id="permissionCheckbox" type="checkbox" required />
 								<label htmlFor="permissionCheckbox" className="text-[16px] font-secondary font-bold cursor-pointer">
-									I agree with Musixverse&apos;s Terms annd Conditions
+									I agree with Musixverse&apos;s&nbsp;
+									<Link href="https://drive.google.com/file/d/1U6G3E0oUMo4vSrnhmlc8MiquwY8IrhwH/view?usp=sharing" passHref={true}>
+										<a target="_blank" rel="noopener noreferrer" className="cursor-pointer hover:text-primary-200">
+											Terms and Conditions
+										</a>
+									</Link>
 								</label>
 							</div>
 							<p className="text-[13px] font-secondary lg:max-w-[468px] max-w-none">

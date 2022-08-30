@@ -16,8 +16,8 @@ const ProtectedRoutes = ({ router, children }) => {
 	// Level 0: New user who is not signed in
 	// Level 1: Signed up user who hasn't chosen between a collector/artist profile
 	// Level 2: Signed up collector who hasn't verified email
-	// Level 3: Signed up collector with verified email
-	// Level 4: Signed up artist who hasn't verified email
+	// Level 3: Signed up artist who hasn't verified email
+	// Level 4: Signed up collector with verified email
 	// Level 5: Signed up artist with verified email who does not have a verified artist profile
 	// Level 6: Signed up artist with verified email who does not have a verified artist profile, but has initiated a request for verification
 	// Level 7: Signed up artist with a verified artist profile
@@ -35,7 +35,7 @@ const ProtectedRoutes = ({ router, children }) => {
 	const pathIsProtected = protectedRoutes.some((route) => router.pathname.includes(route));
 
 	// @dev These routes are protected until a user confirms their email
-	const protectedRoutesForAuthenticatedUserEmailUnverified = [appRoutes.REGISTER, appRoutes.SETTINGS, appRoutes.CREATE_NFT];
+	const protectedRoutesForAuthenticatedUserEmailUnverified = [appRoutes.REGISTER, appRoutes.CREATE_NFT];
 	/**
 	 * @const pathIsProtectedForAuthenticatedUserEmailUnverified Checks if path exists in the protectedRoutesForAuthenticatedUserEmailUnverified array
 	 */
@@ -49,6 +49,13 @@ const ProtectedRoutes = ({ router, children }) => {
 	 * @const pathIsProtectedForAuthenticatedUser Checks if path exists in the protectedRoutesForAuthenticatedUser array
 	 */
 	const pathIsProtectedForAuthenticatedUser = protectedRoutesForAuthenticatedUser.some((route) => router.pathname.includes(route));
+
+	// @dev These routes are protected for a logged in user
+	const protectedRoutesForCollectors = [appRoutes.CREATE_NFT];
+	/**
+	 * @const pathIsProtectedForCollector Checks if path exists in the protectedRoutesForCollectors array
+	 */
+	const pathIsProtectedForCollector = protectedRoutesForCollectors.some((route) => router.pathname.includes(route));
 
 	async function refetchData() {
 		await refetchUserData();
@@ -72,6 +79,8 @@ const ProtectedRoutes = ({ router, children }) => {
 						router.push(appRoutes.CONFIRM_EMAIL);
 					} else if (isBrowser() && pathIsProtectedForAuthenticatedUser) {
 						router.push(appRoutes.HOMEPAGE);
+					} else if (isBrowser() && !user.attributes.isArtist && pathIsProtectedForCollector) {
+						router.push(appRoutes.MARKETPLACE);
 					}
 				}
 

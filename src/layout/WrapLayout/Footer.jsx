@@ -4,13 +4,7 @@ import Image from "next/image";
 import { useMoralis } from "react-moralis";
 import mxvB from "../../../public/assets/homepage/mxv_logo_b.svg";
 import mxvW from "../../../public/assets/homepage/mxv_logo_w.svg";
-import discord from "../../../public/assets/social/discord.svg";
-import facebook from "../../../public/assets/social/facebook.svg";
-import twitter from "../../../public/assets/social/twitter.svg";
-import instagram from "../../../public/assets/social/instagram.svg";
-import youtube from "../../../public/assets/social/youtube.svg";
-import telegram from "../../../public/assets/social/telegram.svg";
-import linkedin from "../../../public/assets/social/linkedin.svg";
+import Socials from "../Socials";
 import MXV_emblemW from "../../../public/assets/MXV_emblem_white.png";
 import MXV_emblemB from "../../../public/assets/MXV_emblem_black.png";
 
@@ -22,7 +16,7 @@ const Footer = () => {
 		<div className="flex justify-center w-full dark:bg-dark-200">
 			<div className="footer dark:bg-dark-100">
 				<div className="w-full flex justify-between items-center">
-					<Image src={theme === "dark" ? mxvW : mxvB} alt="MXV logo" width="90" height="20"></Image>
+					<Image src={theme === "dark" ? mxvW : mxvB} alt="MXV logo" width="90" height="20" />
 					<p className="font-primary text-lg text-primary-100">Hear it. Own it. Live it.</p>
 				</div>
 
@@ -44,9 +38,11 @@ const Footer = () => {
 							<li className="hover:text-primary-100">
 								<Link href="/trending">Trending</Link>
 							</li>
-							<li className="hover:text-primary-100">
-								<Link href="/create-nft">Create</Link>
-							</li>
+							{user && user.attributes.isArtist && (
+								<li className="hover:text-primary-100">
+									<Link href="/create-nft">Create</Link>
+								</li>
+							)}
 						</ul>
 					</div>
 					<div className="flex flex-col space-y-2">
@@ -124,57 +120,7 @@ const Footer = () => {
 				<div className="flex flex-col justify-center items-center space-y-5 mb-4 sm:flex-row sm:justify-between sm:items-center w-full mt-3 sm:space-y-2 sm:mb-0">
 					<div className="space-y-2">
 						<p className="font-semibold text-lg text-center sm:text-left">Follow us on</p>
-						<div className="footer__social mt-2">
-							<button className="flex justify-center items-center">
-								<Link href="https://www.youtube.com/channel/UCloNloMRDKaB-0e-xeaTdXw" passHref>
-									<a target="_blank" rel="noopener noreferrer" className="flex justify-center items-center">
-										<Image src={youtube} width={20} height={20} alt="YouTube"></Image>
-									</a>
-								</Link>
-							</button>
-							<button className="flex justify-center items-center">
-								<Link href="https://t.me/+7e4mG5yhutswNWVl" passHref>
-									<a target="_blank" rel="noopener noreferrer" className="flex justify-center items-center">
-										<Image src={telegram} width={20} height={20} alt="Telegram"></Image>
-									</a>
-								</Link>
-							</button>
-							<button className="flex justify-center items-center">
-								<Link href="https://www.linkedin.com/company/musomatic" passHref>
-									<a target="_blank" rel="noopener noreferrer" className="flex justify-center items-center">
-										<Image src={linkedin} width={20} height={20} alt="LinkedIn"></Image>
-									</a>
-								</Link>
-							</button>
-							<button className="flex justify-center items-center">
-								<Link href="https://discord.com/invite/rXKb7rCqjG" passHref>
-									<a target="_blank" rel="noopener noreferrer" className="flex justify-center items-center">
-										<Image src={discord} width={20} height={20} alt="discord"></Image>
-									</a>
-								</Link>
-							</button>
-							<button className="flex justify-center items-center">
-								<Link href="https://www.facebook.com/Musixverse-104390125641359" passHref>
-									<a target="_blank" rel="noopener noreferrer" className="flex justify-center items-center">
-										<Image src={facebook} width={20} height={20} alt="facebook"></Image>
-									</a>
-								</Link>
-							</button>
-							<button className="flex justify-center items-center">
-								<Link href="https://twitter.com/musixverse" passHref>
-									<a target="_blank" rel="noopener noreferrer" className="flex justify-center items-center">
-										<Image src={twitter} width={20} height={20} alt="twitter"></Image>
-									</a>
-								</Link>
-							</button>
-							<button className="flex justify-center items-center">
-								<Link href="https://www.instagram.com/musixverse/" passHref>
-									<a target="_blank" rel="noopener noreferrer" className="flex justify-center items-center">
-										<Image src={instagram} width={20} height={20} alt="instagram"></Image>
-									</a>
-								</Link>
-							</button>
-						</div>
+						<Socials />
 					</div>
 					<div className="grid grid-cols-2 gap-2 gap-x-10 md:gap-x-8 md:pt-6 lg:gap-0 lg:flex justify-between lg:space-x-6 xl:space-x-28 font-primary">
 						<li className="text-xs text-neutral-400 list-none">

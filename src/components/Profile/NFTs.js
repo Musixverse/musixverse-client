@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import Link from "next/link";
 import { useMoralis, useMoralisCloudFunction } from "react-moralis";
 import { MXV_DIAMOND_ADDRESS, BLOCKCHAIN_NETWORK } from "../../constants";
 import NFTCard from "../../layout/NFTCard/NFTCard";

@@ -7,6 +7,7 @@ import DeleteDraftModal from "./CreateNFTUtils/DeleteDraftModal";
 import styles from "../../../styles/CreateNFT/Step0.module.css";
 import LoadingContext from "../../../store/loading-context";
 import { Country, State } from "country-state-city";
+import ArtistProfileNotVerifiedModal from "./CreateNFTUtils/ArtistProfileNotVerifiedModal";
 
 const CreateNFTIntro = ({ nextStep }) => {
 	const router = useRouter();
@@ -18,6 +19,7 @@ const CreateNFTIntro = ({ nextStep }) => {
 
 	const [draftToDelete, setDraftToDelete] = useState("");
 	const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+	const [artistProfileNotVerifiedModalOpen, setArtistProfileNotVerifiedModalOpen] = useState(false);
 
 	useEffect(() => {
 		router.replace("/create-nft", undefined, { shallow: true });
@@ -111,13 +113,17 @@ const CreateNFTIntro = ({ nextStep }) => {
 						className="w-[90vw] sm:w-[80vw] bg-light-100 dark:bg-dark-100 grid lg:grid-cols-3 lg:space-x-10 min-h-full sm:p-14 p-10 lg:pb-10 rounded-2xl backdrop-blur-xl"
 						onSubmit={async (e) => {
 							e.preventDefault();
-							await createNftDraft({
-								onSuccess: (draftId) => {
-									router.replace("/create-nft?draft=" + draftId, undefined, { shallow: true });
-								},
-								onError: (error) => {},
-							});
-							nextStep();
+							if (user && user.attributes.isArtist && user.attributes.isArtistVerified) {
+								await createNftDraft({
+									onSuccess: (draftId) => {
+										router.replace("/create-nft?draft=" + draftId, undefined, { shallow: true });
+									},
+									onError: (error) => {},
+								});
+								nextStep();
+							} else {
+								setArtistProfileNotVerifiedModalOpen(true);
+							}
 						}}
 					>
 						<div className="flex flex-col">
@@ -206,6 +212,7 @@ const CreateNFTIntro = ({ nextStep }) => {
 				draftToDelete={draftToDelete}
 				deleteDraft={deleteDraft}
 			/>
+			<ArtistProfileNotVerifiedModal isOpen={artistProfileNotVerifiedModalOpen} setOpen={setArtistProfileNotVerifiedModalOpen} />
 		</>
 	);
 };

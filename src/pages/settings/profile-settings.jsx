@@ -1,4 +1,5 @@
 import { useState, useEffect, useContext } from "react";
+import { useRouter } from "next/router";
 import Head from "next/head";
 import { meta_description } from "../../constants";
 import SettingsNav from "../../components/Settings/SettingsNav";
@@ -10,6 +11,7 @@ import { BLOCKCHAIN_NETWORK } from "../../constants";
 
 export default function Settings() {
 	const { user, setUserData, Moralis, isInitialized, refetchUserData } = useMoralis();
+	const router = useRouter();
 	// Context Management
 	const [isLoading, setLoading] = useContext(LoadingContext);
 	const [, , setSuccess, setError] = useContext(StatusContext);
@@ -101,7 +103,9 @@ export default function Settings() {
 				});
 				return;
 			} else if (name !== "" && username !== "" && email !== "") {
-				if (email === user.attributes.email && username === user.attributes.username) {
+				if (email === user.attributes.email && username === user.attributes.username && name === user.attributes.name) {
+					// do nothing
+				} else if (email === user.attributes.email && username === user.attributes.username) {
 					setUserData({
 						name: name === "" ? undefined : name,
 					});
@@ -116,6 +120,7 @@ export default function Settings() {
 						username: username === "" ? undefined : username,
 						email: email === "" ? undefined : email,
 					});
+					router.push("/register/confirm-email", undefined, { shallow: true });
 				}
 
 				await updateUserInfo({

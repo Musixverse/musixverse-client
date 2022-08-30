@@ -1,44 +1,44 @@
 import Modal from "../../../layout/Modal/Modal";
 import { useRouter } from "next/router";
-import { useMoralis } from "react-moralis";
 
-const SaveDraftSuccessModal = ({ isOpen, setOpen, setStep }) => {
+const CollectorEmailVerificationSuccessModal = ({ isOpen, setOpen }) => {
 	const router = useRouter();
-	const { user } = useMoralis();
 
 	return (
 		<Modal
 			isOpen={isOpen}
 			image={
 				<div className="mx-auto flex items-center relative justify-center h-24 w-24 text-6xl">
-					<i className="fa-brands fa-firstdraft"></i>
+					<label htmlFor="create-nft-form-submit" className="flex justify-center items-center w-14 h-14 border-2 rounded-full border-primary-200">
+						<i className="fa-solid fa-check text-2xl text-primary-200"></i>
+					</label>
 				</div>
 			}
-			title={"Your draft has been saved!"}
+			title={"Your email has been verified!"}
 			content={
 				<div>
-					You can come back later and continue where you left off.
+					You can now buy and trade NFTs on Musixverse.
 					<br />
-					To see your draft, please click the button below.
+					Click the button below to go to the marketplace.
 				</div>
 			}
 			onClose={() => {
 				setOpen(false);
-				setStep(0);
+				router.push("/mxcatalog/new-releases", undefined, { shallow: true });
 			}}
 			buttons={[
 				{
 					role: "custom",
 					onClick: () => {
 						setOpen(false);
-						setStep(0);
+						router.push("/mxcatalog/new-releases", undefined, { shallow: true });
 					},
 					toClose: true,
 					classes:
 						"flex items-center px-4 py-3 mr-2 mb-2 text-sm font-primary font-bold rounded-md bg-primary-100 hover:bg-primary-200 text-light-100",
 					label: (
 						<>
-							View Draft
+							Go to Mx Catalog
 							<span className="ml-8 text-xl">
 								<i className="fa-solid fa-arrow-right-long"></i>
 							</span>
@@ -50,4 +50,4 @@ const SaveDraftSuccessModal = ({ isOpen, setOpen, setStep }) => {
 	);
 };
 
-export default SaveDraftSuccessModal;
+export default CollectorEmailVerificationSuccessModal;

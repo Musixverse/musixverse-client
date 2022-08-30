@@ -20,7 +20,6 @@ const ArtistBasicDetails = () => {
 		};
 	}, [isInitialized, user]);
 
-	if (user.attributes.email) return null;
 	return (
 		<>
 			<Head>

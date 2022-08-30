@@ -20,7 +20,6 @@ const Register_Page = () => {
 		};
 	}, [isInitialized, user]);
 
-	if (user.attributes.email) return null;
 	return (
 		<>
 			<Head>

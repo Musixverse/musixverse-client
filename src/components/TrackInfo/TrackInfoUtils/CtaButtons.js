@@ -38,7 +38,9 @@ export default function CtaButtons({ currentOwnerAddress, tokenId, price }) {
 	const [toggleOnSaleModalOpen, setToggleOnSaleModalOpen] = useState(false);
 
 	const purchaseToken = async () => {
-		if (user) {
+		if (user && !user.attributes.emailVerified) {
+			router.push("/register/confirm-email", undefined, { shallow: true });
+		} else if (user && user.attributes.emailVerified) {
 			setLoading(true);
 			try {
 				if (referrerAddress) {

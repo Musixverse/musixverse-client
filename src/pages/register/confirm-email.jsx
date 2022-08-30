@@ -20,7 +20,6 @@ const Confirm_Page = () => {
 		};
 	}, [isInitialized, user]);
 
-	if (user.attributes.emailVerified) return null;
 	return (
 		<>
 			<Head>

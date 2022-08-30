@@ -78,15 +78,16 @@ export default function PreviewNft({ trackTitle, coverArtUrl, audioFileUrl, nftP
 						<p className="font-secondary text-[#1D1D1D] text-xs dark:text-light-300">{user && user.attributes.name}</p>
 						<p className="font-semibold font-primary text-[#1D1D1D] dark:text-light-200 text-lg">{truncatedNftName}</p>
 					</div>
-					{truncatednftPrice && (
+
+					{truncatednftPrice ? (
 						<div className="flex flex-col">
 							<p className="font-secondary text-xs text-end dark:text-light-300">Price</p>
 							<div className="flex items-center font-semibold">
 								<Image src={"/assets/matic-logo.svg"} width={16} height={16} alt="matic logo" />
-								<span className="ml-1 sm:text-lg">{truncatednftPrice == 0 ? 0 : truncatednftPrice}</span>
+								<span className="ml-1 sm:text-lg">{truncatednftPrice === 0 ? 0 : truncatednftPrice}</span>
 							</div>
 						</div>
-					)}
+					) : null}
 				</div>
 				{numberOfCopies == 0 ? (
 					<div className="w-[150px] h-2 dark:bg-[#363636] bg-light-300 self-center rounded-lg"></div>

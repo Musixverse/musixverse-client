@@ -3,6 +3,7 @@ const filterStyleLight = {
         return {
             ...defaultStyles,
             color: '#383838',
+            fontWeight: "600",
         }
     },
     //Seleted value styling

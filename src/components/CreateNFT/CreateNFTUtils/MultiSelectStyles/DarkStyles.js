@@ -1,4 +1,11 @@
 const styleDark = {
+    placeholder: (defaultStyles) => {
+        return {
+            ...defaultStyles,
+            color: '#fff',
+            fontWeight: "600",
+        }
+    },
     //Seleted value styling
     multiValue: (style) => {
         return {

@@ -22,10 +22,6 @@ export default function DeleteDraftModal({ isOpen = "", onClose = "", draftToDel
 		setIsModalOpen(isOpen);
 	}, [isOpen]);
 
-	useEffect(() => {
-		console.log("selectedDraft", selectedDraft);
-	}, [selectedDraft]);
-
 	const handleChange = () => {
 		setIsModalOpen(!isModalOpen);
 	};

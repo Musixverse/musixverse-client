@@ -6,6 +6,7 @@ export default function Modal({
 	isOpen = "",
 	image = "",
 	title = "",
+	titleClasses = "",
 	content = "",
 	buttons = [],
 	classes = "",
@@ -68,7 +69,7 @@ export default function Modal({
 					leaveFrom="opacity-100 scale-100"
 				>
 					<div style={{ zIndex: "50" }} className="flex left-0 top-0 justify-center items-center h-full w-full fixed">
-						<div className={`max-w-[32rem] sm:w-full w-11/12 ${classes ? classes : "p-4 bg-white dark:bg-dark-100 rounded-lg"}`}>
+						<div className={`sm:w-full w-11/12 p-4 bg-white dark:bg-dark-100 rounded-lg ${classes ? classes : "max-w-[32rem]"}`}>
 							<div className="w-full flex justify-end items-center">
 								<div
 									onClick={() => closeModal()}
@@ -77,7 +78,7 @@ export default function Modal({
 									<i className="fa-solid fa-xmark"></i>
 								</div>
 							</div>
-							<div className="w-full flex flex-col justify-between items-center mb-4">
+							<div className={`w-full flex flex-col mb-4 ${titleClasses ? titleClasses : "justify-between items-center"}`}>
 								{image}
 								<div className="font-medium text-xl text-center">{title}</div>
 							</div>

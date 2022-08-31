@@ -6,20 +6,21 @@ import mxv_tick from "../../../public/assets/mxv_tick.svg";
 import AboutArtist from "./ProfileUtils/AboutArtist";
 import CustomButton from "../../layout/CustomButton";
 import Stats from "./ProfileUtils/Stats";
+import Tooltip from "../../layout/Tooltip/Tooltip";
 
 export default function ArtistHeader({
 	avatar,
 	name,
 	username,
+	isArtist,
 	isArtistVerified,
 	instagram,
 	facebook,
 	twitter,
-	followerCount,
-	tracksReleased,
 	bio,
 	country,
 	createdAt,
+	setShowArtistBioModal,
 }) {
 	const { user } = useMoralis();
 
@@ -43,19 +44,26 @@ export default function ArtistHeader({
 						<div className="bg-gray-300 w-full h-full animate-pulse rounded-full"></div>
 					)}
 				</div>
-				<p className="mt-4 mb-4 text-4xl md:text-5xl md:hidden font-tertiary xl:mb-0 xl:mt-2">
+				<div className="mt-4 mb-4 text-4xl md:text-5xl md:hidden font-tertiary xl:mb-0 xl:mt-2">
 					{name}
 					&nbsp;
 					{isArtistVerified ? (
 						<Image src={mxv_tick} width={20} height={20} alt="mxv_verified" className="ml-10" />
-					) : instagramVerificationRequested ? (
-						<span className="ml-4 font-primary text-sm text-gray-500">Verification Pending...</span>
-					) : user && username === user.attributes.username ? (
+					) : user && username === user.attributes.username && instagramVerificationRequested ? (
+						<span className="ml-2 font-primary text-sm text-gray-500">
+							<Tooltip
+								labelText={<i className="fa-solid fa-hourglass-half text-sm"></i>}
+								message="Verification Pending..."
+								tooltipLocation="bottom"
+							></Tooltip>
+						</span>
+					) : user && username === user.attributes.username && user.attributes.isArtist ? (
 						<Link href="/profile/verify" passHref>
 							<a className="ml-4 font-primary text-sm hover:text-primary-100 cursor-pointer hover:underline">Verify your profile</a>
 						</Link>
 					) : null}
-				</p>
+					<p className="font-primary text-sm text-center">@{username}</p>
+				</div>
 				{/* links to music platforms */}
 				<div className={styles["section1__social-icons"]}>
 					{instagram ? (
@@ -83,13 +91,21 @@ export default function ArtistHeader({
 					) : null}
 				</div>
 				{/* Edit profile button (Make it render conditionally) */}
-				<Link href="/settings/profile-settings" passHref>
-					<div className="m-auto mt-6">
-						<CustomButton green={true}>
-							Edit profile <i className="ml-1 fas fa-edit"></i>
-						</CustomButton>
-					</div>
-				</Link>
+				{user && username === user.attributes.username ? (
+					<Link href="/settings/profile-settings" passHref>
+						<div className="m-auto mt-6">
+							<CustomButton green={true}>
+								Edit profile <i className="ml-1 fas fa-edit"></i>
+							</CustomButton>
+						</div>
+					</Link>
+				) : (
+					<Link href="#" passHref>
+						<div className="m-auto mt-6">
+							<CustomButton green={true}>Follow</CustomButton>
+						</div>
+					</Link>
+				)}
 			</div>
 
 			{/* Right Details section */}
@@ -100,19 +116,26 @@ export default function ArtistHeader({
 						&nbsp;
 						{isArtistVerified ? (
 							<Image src={mxv_tick} width={20} height={20} alt="mxv_verified" className="ml-10" />
-						) : instagramVerificationRequested ? (
-							<span className="ml-4 font-primary text-sm text-gray-500">Verification Pending...</span>
-						) : user && username === user.attributes.username ? (
+						) : user && username === user.attributes.username && instagramVerificationRequested ? (
+							<span className="ml-2 font-primary text-sm text-gray-500">
+								<Tooltip
+									labelText={<i className="fa-solid fa-hourglass-half text-sm"></i>}
+									message="Verification Pending..."
+									tooltipLocation="bottom"
+								></Tooltip>
+							</span>
+						) : user && username === user.attributes.username && !isArtistVerified && user.attributes.isArtist ? (
 							<Link href="/profile/verify" passHref>
 								<a className="ml-4 font-primary text-sm hover:text-primary-100 cursor-pointer hover:underline">Verify your profile</a>
 							</Link>
 						) : null}
+						<p className="font-primary text-sm">@{username}</p>
 					</div>
 					{/* Artist's Stats Section */}
-					<Stats followerCount={followerCount} tracksReleased={tracksReleased} />
+					<Stats username={username} isArtist={isArtist} />
 				</div>
 				{/* About Artist section */}
-				<AboutArtist name={name} bio={bio} country={country} createdAt={createdAt} />
+				<AboutArtist username={username} name={name} bio={bio} country={country} createdAt={createdAt} setShowArtistBioModal={setShowArtistBioModal} />
 			</div>
 		</div>
 	);

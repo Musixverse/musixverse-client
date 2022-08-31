@@ -137,7 +137,7 @@ export default function TrackHeader({
 						</div>
 					</div>
 					{/* Audio Player component */}
-					<AudioPlayer audio_url={audio_url} artistName={artist && artist.name} title={title} />
+					<AudioPlayer tokenId={tokenId} audio_url={audio_url} artistName={artist && artist.name} title={title} />
 
 					<div className="w-full h-full grid content-between pt-6">
 						<div className="pb-6 w-full">

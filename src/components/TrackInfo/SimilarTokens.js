@@ -12,6 +12,7 @@ const SimilarTokens = ({ otherTokensOfTrack, metadata }) => {
 							if (metadata) {
 								return (
 									<NFTCard
+										key={index}
 										redirectLink={`/track/polygon/${token.tokenId}`}
 										trackName={metadata.title}
 										artistName={metadata.artist}

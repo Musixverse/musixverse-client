@@ -1,14 +1,15 @@
 import { useEffect, useState, useContext } from "react";
 import Head from "next/head";
-import { meta_description } from "../../constants";
+import { meta_description } from "../../../constants";
 import { useRouter } from "next/router";
 import { useMoralisCloudFunction } from "react-moralis";
-import Banner from "../../components/Profile/Banner";
-import ArtistHeader from "../../components/Profile/ArtistHeader";
-import Filter from "../../components/Profile/Filter";
-import NFTs from "../../components/Profile/NFTs";
-import NewsLetter from "../../layout/NewsLetter";
-import LoadingContext from "../../../store/loading-context";
+import Banner from "../../../components/Profile/Banner";
+import ArtistHeader from "../../../components/Profile/ArtistHeader";
+import Filter from "../../../components/Profile/Filter";
+import NFTs from "../../../components/Profile/NFTs";
+import NewsLetter from "../../../layout/NewsLetter";
+import LoadingContext from "../../../../store/loading-context";
+import ArtistBioModal from "../../../components/Profile/ProfileUtils/ArtistBioModal";
 
 export default function Profile() {
 	const router = useRouter();
@@ -17,6 +18,9 @@ export default function Profile() {
 	const [isLoading, setLoading] = useContext(LoadingContext);
 	const [profileUser, setProfileUser] = useState(false);
 	const [profileUserInfo, setProfileUserInfo] = useState(false);
+	const [showArtistBioModal, setShowArtistBioModal] = useState(false);
+	const [currentlyActive, setCurrentlyActive] = useState("All Tracks");
+	const [sortingFilter, setSortingFilter] = useState("Newest First");
 
 	const { fetch: fetchUser } = useMoralisCloudFunction("fetchUser", { username: username }, { autoFetch: false });
 	const { fetch: fetchUserInfo } = useMoralisCloudFunction("fetchUserInfo", { username: username }, { autoFetch: false });
@@ -73,26 +77,32 @@ export default function Profile() {
 
 			<div className="flex flex-col items-center justify-center w-full bg-light-200 dark:bg-dark-200">
 				<Banner coverImage={profileUserInfo.coverImage} />
-				<div className="w-full max-w-[1920px] px-6 md:px-8 lg:px-16 xl:px-20 2xl:px-36">
+				<div className="w-full max-w-[1920px] pb-20 px-6 md:px-8 lg:px-16 xl:px-20 2xl:px-36">
 					<ArtistHeader
 						avatar={profileUserInfo.avatar}
 						name={profileUser.name}
 						username={username}
+						isArtist={profileUser.isArtist}
 						isArtistVerified={profileUser.isArtistVerified}
 						instagram={profileUserInfo.instagram}
 						facebook={profileUserInfo.facebook}
 						twitter={profileUserInfo.twitter}
-						followerCount={profileUserInfo.followerCount}
-						tracksReleased={profileUserInfo.tracksReleased}
 						bio={profileUserInfo.bio}
 						country={profileUserInfo.country}
 						createdAt={profileUser.createdAt}
+						setShowArtistBioModal={setShowArtistBioModal}
 					/>
-					<Filter />
-					<NFTs username={username} />
+					<Filter
+						currentlyActive={currentlyActive}
+						setCurrentlyActive={setCurrentlyActive}
+						sortingFilter={sortingFilter}
+						setSortingFilter={setSortingFilter}
+					/>
+					<NFTs username={username} currentlyActive={currentlyActive} sortingFilter={sortingFilter} />
 				</div>
 				<NewsLetter />
 			</div>
+			<ArtistBioModal isOpen={showArtistBioModal} setOpen={setShowArtistBioModal} name={profileUser.name} bio={profileUserInfo.bio} />
 		</>
 	);
 }

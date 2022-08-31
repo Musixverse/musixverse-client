@@ -11,7 +11,7 @@ const ArtistEmailVerificationSuccessModal = ({ isOpen, setOpen }) => {
 			isOpen={isOpen}
 			image={
 				<div className="mx-auto flex items-center relative justify-center h-24 w-24 text-6xl">
-					<label htmlFor="create-nft-form-submit" className="flex justify-center items-center w-14 h-14 border-2 rounded-full border-primary-200">
+					<label className="flex justify-center items-center w-14 h-14 border-2 rounded-full border-primary-200">
 						<i className="fa-solid fa-check text-2xl text-primary-200"></i>
 					</label>
 				</div>

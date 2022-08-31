@@ -44,7 +44,7 @@ const ProtectedRoutes = ({ router, children }) => {
 	);
 
 	// @dev These routes are protected for a logged in user
-	const protectedRoutesForAuthenticatedUser = [];
+	const protectedRoutesForAuthenticatedUser = [appRoutes.REGISTER];
 	/**
 	 * @const pathIsProtectedForAuthenticatedUser Checks if path exists in the protectedRoutesForAuthenticatedUser array
 	 */

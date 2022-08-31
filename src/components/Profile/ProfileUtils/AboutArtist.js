@@ -1,13 +1,12 @@
 import { useState, useEffect, useContext } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useMoralis } from "react-moralis";
 import styles from "../../../../styles/Profile/ArtistHeader.module.css";
-import ArtistBioModal from "./ArtistBioModal";
 import StatusContext from "../../../../store/status-context";
-import CustomButton from "../../../layout/CustomButton";
 
-export default function AboutArtist({ name, bio, country, createdAt }) {
-	const [showModal, setShowModal] = useState(false);
+export default function AboutArtist({ username, name, bio, country, createdAt, setShowArtistBioModal }) {
+	const { user } = useMoralis();
 	const [joined, setJoined] = useState(false);
 
 	useEffect(() => {
@@ -45,24 +44,35 @@ export default function AboutArtist({ name, bio, country, createdAt }) {
 	return (
 		<>
 			<div>
-				<h4 className="font-bold text-[18px]">About</h4>
 				{bio ? (
 					<>
+						<h4 className="font-bold text-[18px]">About</h4>
 						{bioCharacters.length < 250 ? (
 							<p className={"text-[12px] md:text-[15px] pt-3"}>{bio}</p>
 						) : (
 							<>
 								<p className={"text-[12px] md:text-[15px] pt-3 " + styles["about_us"]}>{bioCharacters}</p>
-								<button onClick={() => setShowModal(true)} className="text-primary-200 hover:text-primary-300 text-[12px] md:text-[15px] mt-2">
+								<button
+									onClick={() => setShowArtistBioModal(true)}
+									className="text-primary-200 hover:text-primary-300 text-[12px] md:text-[15px] mt-2"
+								>
 									Read More
 								</button>
 							</>
 						)}
 					</>
+				) : username === user.attributes.username ? (
+					<>
+						<h4 className="font-bold text-[18px]">About</h4>
+						<Link href="/settings/profile-settings" passHref>
+							<p className={"text-[12px] md:text-[15px] pt-2 cursor-pointer " + styles["about_us"]}>Add your Bio.</p>
+						</Link>
+					</>
 				) : (
-					<Link href="/settings/profile-settings" passHref>
-						<p className={"text-[12px] md:text-[15px] pt-2 cursor-pointer " + styles["about_us"]}>Add your Bio.</p>
-					</Link>
+					<>
+						<h4 className="font-bold text-[18px]">About</h4>
+						<p className={"text-[12px] md:text-[15px] pt-2 " + styles["about_us"]}>No information available</p>
+					</>
 				)}
 			</div>
 
@@ -159,7 +169,6 @@ export default function AboutArtist({ name, bio, country, createdAt }) {
 					</button>
 				</div>
 			</div>
-			<ArtistBioModal showModal={showModal} setShowModal={setShowModal} name={name} bio={bio} />
 		</>
 	);
 }

@@ -1,88 +1,59 @@
 import { useState, useEffect } from "react";
-import { useMoralis, useMoralisCloudFunction } from "react-moralis";
-import { MXV_DIAMOND_ADDRESS, BLOCKCHAIN_NETWORK } from "../../constants";
+import { useMoralisCloudFunction } from "react-moralis";
 import NFTCard from "../../layout/NFTCard/NFTCard";
-import Pager from "./ProfileUtils/Pager";
+import NFTCardsWithPager from "../../layout/NFTCardsWithPager/NFTCardsWithPager";
 import NoNfts from "./NoNfts";
 
-export default function NFTs({ username }) {
-	const { Moralis, isInitialized } = useMoralis();
-	const [tokens, setTokens] = useState("");
-	const [currentPage, setCurrentPage] = useState(0);
+export default function NFTs({ username, currentlyActive, sortingFilter }) {
 	const [nftCards, setNftCards] = useState([]);
+	const [tracks, setTracks] = useState("");
 
-	const { data: profileUserAddress } = useMoralisCloudFunction("fetchAddressFromUsername", { username: username });
+	const { fetch: fetchTracksByArtist } = useMoralisCloudFunction("fetchTracksByArtist", {
+		username: username,
+		currentlyActive: currentlyActive,
+		sortingFilter: sortingFilter,
+	});
 
 	useEffect(() => {
-		if (tokens) {
-			tokens.map(async (token) => {
-				if (token.metadata == null) {
-					await fetch(token.token_uri)
-						.then((response) => {
-							return response.json();
-						})
-						.then((data) => {
-							token.metadata = JSON.stringify(data);
-						});
-				}
+		if (username) {
+			fetchTracksByArtist({
+				onSuccess: async (object) => {
+					setTracks(object);
+				},
+				onError: (error) => {
+					console.log("fetchTracksByArtist Error:", error);
+				},
 			});
 		}
-	}, [tokens]);
+	}, [currentlyActive, sortingFilter, username, fetchTracksByArtist]);
 
 	useEffect(() => {
-		if (isInitialized && profileUserAddress) {
-			(async function () {
-				const options = {
-					chain: BLOCKCHAIN_NETWORK,
-					token_address: MXV_DIAMOND_ADDRESS,
-					address: profileUserAddress,
-				};
-				const nftData = await Moralis.Web3API.account.getNFTsForContract(options);
-				console.log(nftData);
-				setTokens(nftData.result);
-			})();
-		}
-	}, [isInitialized, profileUserAddress, Moralis]);
-
-	useEffect(() => {
-		if (tokens) {
+		if (tracks) {
 			let tempArray = [];
 			const nftCardsTemp = [];
 
-			tokens.map((nft, idx) => {
-				const metadata = JSON.parse(nft.metadata);
-				if (metadata) {
-					tempArray.push(
-						<NFTCard
-							redirectLink={`/track/polygon/${nft.token_id}`}
-							trackName={metadata.title}
-							artistName={metadata.artist}
-							artistAddress={metadata.artistAddress}
-							image={metadata.artwork.uri.replace("ipfs://", process.env.NEXT_PUBLIC_IPFS_NODE_URL)}
-							tokenId={nft.token_id}
-							numberOfCopies={metadata.attributes[0].value}
-							collaboratorList={metadata.collaborators}
-							showNumberOfCopies={false}
-							// localTokenId={localTokenId}
-						/>
-					);
-					if (tempArray.length % 5 == 0 || idx == tokens.length - 1) {
-						nftCardsTemp.push(tempArray);
-						tempArray = [];
-					}
+			tracks.map((track, idx) => {
+				tempArray.push(
+					<NFTCard
+						key={track.tokenIdHavingLowestPrice}
+						redirectLink={`/track/polygon/${track.tokenIdHavingLowestPrice}`}
+						trackName={track.title}
+						artistName={track.artist}
+						artistAddress={track.artistAddress}
+						image={track.artwork.uri.replace("ipfs://", process.env.NEXT_PUBLIC_IPFS_NODE_URL)}
+						tokenId={track.tokenIdHavingLowestPrice}
+						numberOfCopies={track.numberOfCopies}
+						collaboratorList={track.collaborators}
+					/>
+				);
+				if (tempArray.length % 5 == 0 || idx == tracks.length - 1) {
+					nftCardsTemp.push(tempArray);
+					tempArray = [];
 				}
 			});
 			setNftCards(nftCardsTemp);
 		}
-	}, [tokens]);
-	return (
-		<>
-			{nftCards.length === 0 ? (
-				<NoNfts />
-			) : (
-				<div className="grid grid-cols-2 gap-6 my-8 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 md:my-11 md:gap-11">{nftCards[currentPage]}</div>
-			)}
-			{nftCards.length > 1 ? <Pager onPageChange={setCurrentPage} maxPages={nftCards.length} /> : null}
-		</>
-	);
+	}, [tracks]);
+
+	return <>{nftCards.length === 0 ? <NoNfts username={username} /> : <NFTCardsWithPager nftCards={nftCards} />}</>;
 }

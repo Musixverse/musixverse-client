@@ -3,11 +3,13 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import styles from "../../../../styles/Profile/ArtistHeader.module.css";
 import ArtistBioModal from "./ArtistBioModal";
+import ArtistReportModal from "./ArtistReportModal";
 import StatusContext from "../../../../store/status-context";
 import CustomButton from "../../../layout/CustomButton";
 
 export default function AboutArtist({ name, bio, country, createdAt }) {
 	const [showModal, setShowModal] = useState(false);
+	const [showReportModal, setShowReportModal] = useState(false);
 	const [joined, setJoined] = useState(false);
 
 	useEffect(() => {
@@ -73,7 +75,10 @@ export default function AboutArtist({ name, bio, country, createdAt }) {
 					<span>{createdAt ? joined : "Joined Nov, 2020"}</span>
 				</div>
 				<div className="flex space-x-3 text-dark-100 dark:text-light-200">
-					<button className="md:w-[36px] md:h-[36px] w-[28px] h-[28px] text-center rounded-full bg-gray-200 dark:bg-[#040404] hover:bg-light-300">
+					<button
+						onClick={() => setShowReportModal(true)}
+						className="md:w-[36px] md:h-[36px] w-[28px] h-[28px] text-center rounded-full bg-gray-200 dark:bg-[#040404] hover:bg-light-300"
+					>
 						<i className="text-xs md:text-sm fas fa-flag"></i>
 					</button>
 
@@ -160,6 +165,7 @@ export default function AboutArtist({ name, bio, country, createdAt }) {
 				</div>
 			</div>
 			<ArtistBioModal showModal={showModal} setShowModal={setShowModal} name={name} bio={bio} />
+			<ArtistReportModal isOpen={showReportModal} setOpen={setShowReportModal}/>
 		</>
 	);
 }

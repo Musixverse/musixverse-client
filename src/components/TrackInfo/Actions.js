@@ -83,7 +83,7 @@ const Actions = ({ tokenId, artistName, title }) => {
 				onClick={() => {
 					markTokenFavourite();
 				}}
-				className="flex justify-center items-center space-x-2 px-4 py-2 rounded-lg cursor-pointer hover:bg-light-300 dark:hover:bg-dark-100"
+				className="flex justify-center items-center space-x-2 px-4 py-2 rounded-lg cursor-pointer hover:bg-light-200 dark:hover:bg-dark-100"
 			>
 				{isTokenFavourite ? (
 					<>
@@ -98,7 +98,7 @@ const Actions = ({ tokenId, artistName, title }) => {
 				)}
 			</button>
 
-			<button className="flex justify-center items-center px-4 py-2 rounded-lg cursor-default hover:bg-light-300 dark:hover:bg-dark-100 relative group">
+			<button className="flex justify-center items-center px-4 py-2 rounded-lg cursor-default hover:bg-light-200 dark:hover:bg-dark-100 relative group">
 				<div className="flex space-x-2">
 					<i className="fa-solid fa-share-nodes text-lg"></i>
 					<span>Share</span>

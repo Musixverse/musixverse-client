@@ -3,6 +3,7 @@ import Image from "next/image";
 import { useMoralis, useMoralisCloudFunction } from "react-moralis";
 import styles from "../../../styles/NFTCard/Section1.module.css";
 import { truncatePrice } from "../../utils/GetMarketPrice";
+import ShinyLoader from "../../layout/ShinyLoader";
 
 export default function Section1({ artistName, isVerified, trackName, tokenId, unsoldTrackData, soldOnceTrackData }) {
 	const { Moralis } = useMoralis();
@@ -35,7 +36,7 @@ export default function Section1({ artistName, isVerified, trackName, tokenId, u
 			{/* SONG and ARTIST NAME SECTION */}
 			<div className={artistName && trackName && truncatednftPrice ? "max-w-full fit-content" : "w-full"}>
 				<div className={styles["description--section1__artistname"]}>
-					{artistName ? artistName : <div className="w-4/5 h-4 dark:bg-[#363636] bg-light-300 animate-pulse self-center rounded-lg"></div>}
+					{artistName ? artistName : <ShinyLoader classes="w-4/5 h-4 self-center rounded-lg" />}
 					{isVerified ? (
 						<span className="ml-1 flex items-center">
 							<Image src={"/assets/mxv_tick.svg"} width={14} height={14} alt="MXV verified" />
@@ -43,7 +44,7 @@ export default function Section1({ artistName, isVerified, trackName, tokenId, u
 					) : null}
 				</div>
 				<h6 className={styles["description--section1__trackname"]}>
-					{trackName ? trackName : <div className="w-2/3 h-4 mt-2 dark:bg-[#363636] bg-light-300 animate-pulse self-center rounded-lg"></div>}
+					{trackName ? trackName : <ShinyLoader classes="w-2/3 h-4 mt-2 self-center rounded-lg" />}
 				</h6>
 			</div>
 			{/* CURRENT PRICE */}
@@ -57,8 +58,8 @@ export default function Section1({ artistName, isVerified, trackName, tokenId, u
 				</div>
 			) : (
 				<div className="flex flex-col justify-end w-full">
-					<div className="w-3/5 h-4 dark:bg-[#363636] bg-light-300 animate-pulse self-end rounded-lg"></div>
-					<div className="w-full h-4 mt-2 dark:bg-[#363636] bg-light-300 animate-pulse self-center rounded-lg"></div>
+					<ShinyLoader classes="w-3/5 h-4 self-end rounded-lg" />
+					<ShinyLoader classes="w-full h-4 mt-2 self-center rounded-lg" />
 				</div>
 			)}
 		</div>

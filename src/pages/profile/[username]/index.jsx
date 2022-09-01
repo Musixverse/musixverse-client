@@ -10,6 +10,7 @@ import NFTs from "../../../components/Profile/NFTs";
 import NewsLetter from "../../../layout/NewsLetter";
 import LoadingContext from "../../../../store/loading-context";
 import ArtistBioModal from "../../../components/Profile/ProfileUtils/ArtistBioModal";
+import FavouritesModal from "../../../components/Profile/ProfileUtils/FavouritesModal";
 
 export default function Profile() {
 	const router = useRouter();
@@ -52,15 +53,23 @@ export default function Profile() {
 	};
 
 	useEffect(() => {
-		setLoading(true);
+		setLoading("loadingSection");
 		if (username) {
 			fetchUserData();
 			fetchInfo();
 		}
-		setLoading(false);
+		// setLoading(false);
 	}, [username]);
 
-	if (isLoading || !profileUser) return null;
+	// Favourites Modal
+	const [isFavouritesModalOpen, setFavouritesModalOpen] = useState(false);
+	useEffect(() => {
+		if (router.query && "favourites" in router.query) {
+			setFavouritesModalOpen(true);
+		}
+	}, [router.query]);
+
+	// if (isLoading) return null;
 	return (
 		<>
 			{profileUser.isArtist ? (
@@ -103,6 +112,7 @@ export default function Profile() {
 				<NewsLetter />
 			</div>
 			<ArtistBioModal isOpen={showArtistBioModal} setOpen={setShowArtistBioModal} name={profileUser.name} bio={profileUserInfo.bio} />
+			<FavouritesModal isOpen={isFavouritesModalOpen} setOpen={setFavouritesModalOpen} name={profileUser.name} />
 		</>
 	);
 }

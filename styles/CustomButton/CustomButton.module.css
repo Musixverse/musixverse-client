@@ -1,7 +1,0 @@
-.button--green {
-	@apply rounded-lg px-8 py-2 bg-primary-100 hover:bg-primary-200 font-primary font-semibold text-lg text-light-100;
-}
-
-.button--white {
-	@apply rounded-lg px-8 py-2 bg-light-100 hover:bg-light-200 font-primary font-semibold text-lg text-dark-100;
-}

@@ -54,7 +54,7 @@ export default function NotificationSettings({ walletAddress }) {
 	};
 
 	return (
-		<div className="flex-1 p-10 mb-10 pb-14 bg-light-300 dark:bg-dark-100 rounded-xl">
+		<div className="flex-1 p-10 mb-20 bg-light-300 dark:bg-dark-100 rounded-xl">
 			<div className="flex flex-col items-start justify-between w-full space-y-5 md:flex-row md:space-y-0">
 				<div className="flex flex-col space-y-5">
 					<h1 className="text-4xl font-tertiary">NOTIFICATION PREFERENCES</h1>
@@ -81,7 +81,9 @@ export default function NotificationSettings({ walletAddress }) {
 			/>
 
 			<div className="flex justify-end mt-8" onClick={handleSave}>
-				<CustomButton green={true}>Save Changes</CustomButton>
+				<CustomButton green={true} classes="text-sm px-8 py-3">
+					Save Changes
+				</CustomButton>
 			</div>
 		</div>
 	);

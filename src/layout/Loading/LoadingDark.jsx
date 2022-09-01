@@ -3,15 +3,21 @@ import LoadingContext from "../../../store/loading-context";
 import styles from "../../../styles/Loading/LoadingDark.module.css";
 
 export default function Loading() {
-    const [isLoading] = useContext(LoadingContext);
+	const [isLoading] = useContext(LoadingContext);
 
-    return (
-        isLoading && (
-            <div className={styles["loading_container"]}>
-                <div className={styles["loading_container_box"]}>
-                    <div className={styles["loadingSpinner"]}></div>
-                </div>
-            </div>
-        )
-    );
+	return isLoading === "loadingSection" ? (
+		<div className={styles["loading_section_container"]}>
+			<div className={styles["loading_container_box"]}>
+				<div className={styles["loadingSpinner"]}></div>
+			</div>
+		</div>
+	) : (
+		isLoading && (
+			<div className={styles["loading_container"]}>
+				<div className={styles["loading_container_box"]}>
+					<div className={styles["loadingSpinner"]}></div>
+				</div>
+			</div>
+		)
+	);
 }

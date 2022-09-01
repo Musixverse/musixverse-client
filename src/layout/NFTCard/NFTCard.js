@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { useTheme } from "next-themes";
 import { useMoralisCloudFunction } from "react-moralis";
 import styles from "../../../styles/NFTCard/Nftcard.module.css";
@@ -7,7 +8,7 @@ import Section1 from "./Section1";
 import multipleNft from "../../../public/assets/nftcard/nftcards.svg";
 import { useMemo, useState } from "react";
 import NftCopiesModal from "./NftCopiesModal";
-import Link from "next/link";
+import ShinyLoader from "../../layout/ShinyLoader";
 
 export default function NFTCard({
 	redirectLink,
@@ -74,7 +75,7 @@ export default function NFTCard({
 							</a>
 						</Link>
 					) : (
-						<div className="w-full h-full bg-gray-300 dark:bg-[#363636] animate-pulse"></div>
+						<ShinyLoader />
 					)}
 
 					{showNumberOfCopies && numberOfCopies > 1 ? (

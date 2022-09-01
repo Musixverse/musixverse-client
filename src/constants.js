@@ -266,3 +266,15 @@ export const resaleRoyaltyRanges = [
 	"91%-100%",
 ];
 export const minRecordingYear = 1950;
+
+/**************************************************************************/
+/********************    Report Profile Filters    ************************/
+/**************************************************************************/
+export const reportProfileFilters = [
+	"All",
+	"Pushpit",
+	"Yuvraj",
+	"Shivam",
+	"Sparsh",
+	"Other",
+];

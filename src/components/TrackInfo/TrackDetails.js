@@ -1,9 +1,19 @@
 import Image from "next/image";
 import Link from "next/link";
+import { useTheme } from "next-themes";
 import styles from "../../../styles/TrackInfo/TrackDetails.module.css";
 import TrackDetail from "./TrackInfoUtils/TrackDetail";
+import spotifyB from "../../../public/assets/logos/spotify_logo_b.svg";
+import spotifyW from "../../../public/assets/logos/spotify_logo_w.svg";
+import appleB from "../../../public/assets/logos/apple_logo_b.svg";
+import appleW from "../../../public/assets/logos/apple_logo_w.svg";
+import amazonB from "../../../public/assets/logos/amazon_logo_b.svg";
+import amazonW from "../../../public/assets/logos/amazon_logo_w.svg";
+import youtubeB from "../../../public/assets/logos/youtube_logo_b.svg";
+import youtubeW from "../../../public/assets/logos/youtube_logo_w.svg";
 
 export default function TrackDetails({ tokenId, metadata }) {
+	const { theme } = useTheme();
 	var date = new Date(metadata.unlockTimestamp * 1000);
 	var dateStr =
 		date.toLocaleString("default", {
@@ -16,8 +26,8 @@ export default function TrackDetails({ tokenId, metadata }) {
 		", " +
 		date.toLocaleTimeString() +
 		" IST";
-	var time_in_min = Math.floor(metadata.duration / 60).toString() + " min";
-	var time_in_sec = (metadata.duration % 60).toString() + " sec";
+	var time_in_min = Math.round(metadata.duration / 60).toString() + " min";
+	var time_in_sec = Math.round(metadata.duration % 60).toString() + " sec";
 	var time = time_in_min + " " + time_in_sec;
 
 	return (
@@ -154,28 +164,28 @@ export default function TrackDetails({ tokenId, metadata }) {
 							{metadata.links.spotify ? (
 								<Link href={metadata.links.spotify}>
 									<a target="_blank" rel="noopener noreferrer">
-										<Image src="https://img.icons8.com/ios-filled/50/000000/spotify.png" width={25} height={25} alt="spotify" />
+										<Image src={theme === "dark" ? spotifyW : spotifyB} width={25} height={25} alt="spotify" />
 									</a>
 								</Link>
 							) : null}
 							{metadata.links.appleMusic ? (
 								<Link href={metadata.links.appleMusic}>
 									<a target="_blank" rel="noopener noreferrer">
-										<Image src="https://img.icons8.com/ios-filled/50/000000/apple-music.png" width={25} height={25} alt="apple-music" />
+										<Image src={theme === "dark" ? appleW : appleB} width={25} height={25} alt="apple-music" />
 									</a>
 								</Link>
 							) : null}
 							{metadata.links.amazonMusic ? (
 								<Link href={metadata.links.amazonMusic}>
 									<a target="_blank" rel="noopener noreferrer">
-										<Image src="https://img.icons8.com/color/48/000000/amazon.png" width={25} height={25} alt="amazon-music" />
+										<Image src={theme === "dark" ? amazonW : amazonB} width={25} height={25} alt="amazon-music" />
 									</a>
 								</Link>
 							) : null}
 							{metadata.links.youtubeMusic ? (
 								<Link href={metadata.links.youtubeMusic}>
 									<a target="_blank" rel="noopener noreferrer">
-										<Image src="https://img.icons8.com/bubbles/50/000000/youtube-music.png" width={25} height={25} alt="youtube-music" />
+										<Image src={theme === "dark" ? youtubeW : youtubeB} width={25} height={25} alt="youtube-music" />
 									</a>
 								</Link>
 							) : null}

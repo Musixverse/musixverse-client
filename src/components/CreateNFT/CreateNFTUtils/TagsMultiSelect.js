@@ -25,6 +25,7 @@ export default function TagsMultiSelect({ tags, setTags, dropdownType, setApplie
 	let stylesToApply;
 	if (dropdownType) {
 		stylesToApply = filterStyleLight;
+		if (theme === "dark") stylesToApply = styleDark;
 	} else {
 		stylesToApply = styleLight;
 		if (theme === "dark") stylesToApply = styleDark;

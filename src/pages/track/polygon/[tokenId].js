@@ -78,9 +78,6 @@ export default function TrackInfo({ token, otherTokensOfTrack }) {
 		setPrices();
 	}, [tokenPrice]);
 
-	// console.log("metadata", metadata);
-	// console.log("token", token);
-
 	return (
 		<>
 			<Head>

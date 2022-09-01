@@ -1,63 +1,18 @@
-import { useState, useEffect, useContext } from "react";
-import { useMoralis, useMoralisCloudFunction } from "react-moralis";
-import { useRouter } from "next/router";
+import { useState, useContext } from "react";
+import { useMoralis } from "react-moralis";
 import AuthModalContext from "../../../../store/authModal-context";
-import LoadingContext from "../../../../store/loading-context";
-import { purchaseTrackNFT, purchaseReferredTrackNFT } from "../../../utils/smart-contract/functions";
-import PurchaseSuccessModal from "./PurchaseSuccessModal";
 import EditPriceModal from "./EditPriceModal";
 import ToggleOnSaleButtons from "./ToggleOnSaleButtons";
+import PurchaseButton from "./PurchaseButton";
 
 export default function CtaButtons({ currentOwnerAddress, tokenId, price }) {
 	const { user } = useMoralis();
-	const router = useRouter();
-	const { ref } = router.query;
-	const [referrerAddress, setReferrerAddress] = useState("");
-	const { fetch: fetchAddressFromUsername } = useMoralisCloudFunction("fetchAddressFromUsername", { username: ref }, { autoFetch: false });
 
-	useEffect(() => {
-		if (ref) {
-			fetchAddressFromUsername({
-				onSuccess: async (object) => {
-					setReferrerAddress(object);
-				},
-				onError: (error) => {
-					console.log("fetchAddressFromUsername Error:", error);
-				},
-			});
-		}
-	}, [ref]);
-
-	const [authModalOpen, setAuthModalOpen] = useContext(AuthModalContext);
-	const [loading, setLoading] = useContext(LoadingContext);
-	// Purchase success modal
-	const [purchaseNFTSuccess, setPurchaseNFTSuccess] = useState(false);
+	const [, setAuthModalOpen] = useContext(AuthModalContext);
 	// Edit price modal
 	const [editPriceModalOpen, setEditPriceModalOpen] = useState(false);
 	// Edit price modal
 	const [toggleOnSaleModalOpen, setToggleOnSaleModalOpen] = useState(false);
-
-	const purchaseToken = async () => {
-		if (user && !user.attributes.emailVerified) {
-			router.push("/register/confirm-email", undefined, { shallow: true });
-		} else if (user && user.attributes.emailVerified) {
-			setLoading(true);
-			try {
-				if (referrerAddress) {
-					await purchaseReferredTrackNFT(tokenId, referrerAddress, price);
-				} else {
-					await purchaseTrackNFT(tokenId, price);
-				}
-				setLoading(false);
-				setPurchaseNFTSuccess(true);
-			} catch (err) {
-				console.log(err);
-				setLoading(false);
-			}
-		} else {
-			setAuthModalOpen(true);
-		}
-	};
 
 	const editPrice = async () => {
 		if (user) {
@@ -95,20 +50,15 @@ export default function CtaButtons({ currentOwnerAddress, tokenId, price }) {
 							/>
 						</>
 					) : (
-						<button
-							onClick={() => purchaseToken()}
-							className="rounded-lg px-8 py-2 mr-3 bg-primary-100 font-primary font-semibold text-lg text-light-100 hover:bg-primary-200"
-						>
-							Buy Now
-						</button>
+						<PurchaseButton tokenId={tokenId} price={price} />
 					)}
 				</div>
-				<button className="w-[38px] h-[38px] text-center rounded-full bg-light-200 hover:bg-[#dedede]">
-					<i className="fas fa-ellipsis-v text-dark-100 text-sm"></i>
+
+				<button className="w-[38px] h-[38px] text-center rounded-full bg-light-200 hover:bg-[#dedede] dark:bg-dark-100">
+					<i className="fas fa-ellipsis-v text-sm text-dark-100 dark:text-light-100"></i>
 				</button>
 			</div>
 
-			<PurchaseSuccessModal isOpen={purchaseNFTSuccess} />
 			<EditPriceModal isOpen={editPriceModalOpen} setEditPriceModalOpen={setEditPriceModalOpen} tokenId={tokenId} currentPrice={price} />
 		</>
 	);

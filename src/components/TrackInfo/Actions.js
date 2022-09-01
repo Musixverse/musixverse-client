@@ -4,10 +4,12 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { useMoralis, useMoralisCloudFunction } from "react-moralis";
 import StatusContext from "../../../store/status-context";
+import AuthModalContext from "../../../store/authModal-context";
 import mxvverified from "../../../public/assets/mxv_verified.svg";
 
 const Actions = ({ tokenId, artistName, title }) => {
 	const { isAuthenticated, user } = useMoralis();
+	const [, setAuthModalOpen] = useContext(AuthModalContext);
 	/*******************************
 	 *********  FAVOURITE  *********
 	 *******************************/
@@ -29,18 +31,22 @@ const Actions = ({ tokenId, artistName, title }) => {
 
 	const { fetch: markTokenAsFavourite } = useMoralisCloudFunction("markTokenAsFavourite", { tokenId: tokenId }, { autoFetch: false });
 	const markTokenFavourite = () => {
-		markTokenAsFavourite({
-			onSuccess: async (object) => {
-				if (object) {
-					setIsTokenFavourite(true);
-				} else {
-					setIsTokenFavourite(false);
-				}
-			},
-			onError: (error) => {
-				console.log("markTokenAsFavourite Error:", error);
-			},
-		});
+		if (user) {
+			markTokenAsFavourite({
+				onSuccess: async (object) => {
+					if (object) {
+						setIsTokenFavourite(true);
+					} else {
+						setIsTokenFavourite(false);
+					}
+				},
+				onError: (error) => {
+					console.log("markTokenAsFavourite Error:", error);
+				},
+			});
+		} else {
+			setAuthModalOpen(true);
+		}
 	};
 
 	/*******************************

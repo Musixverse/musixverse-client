@@ -16,4 +16,6 @@ module.exports = withPWA({
 	images: {
 		domains: ["pbs.twimg.com", "img.icons8.com", "gateway.moralisipfs.com", "ipfs.moralis.io", "lh3.googleusercontent.com", "www.artnews.com"],
 	},
+	// for running with docker
+	output: "standalone",
 });

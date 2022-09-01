@@ -62,7 +62,7 @@ export default function EditProfilePhoto({ avatar, setAvatar, handleSave }) {
 						id="upload-image-inp"
 						onChange={handleAvatarChange}
 						accept="image/*"
-						className="hidden mt-2 mb-5"
+						className="hidden mt-2 mb-2"
 					/>
 					<label
 						className="absolute flex items-center justify-center p-2 pr-1 rounded-lg cursor-pointer right-1 bottom-2 bg-dark-200"
@@ -72,8 +72,10 @@ export default function EditProfilePhoto({ avatar, setAvatar, handleSave }) {
 					</label>
 				</label>
 				<div className="flex h-full">
-					<div className="self-end" onClick={handleSave}>
-						<CustomButton green={true}>Save Changes</CustomButton>
+					<div className="self-end mb-1" onClick={handleSave}>
+						<CustomButton green={true} classes="text-sm px-8 py-3">
+							Save Changes
+						</CustomButton>
 					</div>
 				</div>
 			</div>

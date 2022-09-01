@@ -6,6 +6,7 @@ import AudioPlayer from "./AudioPlayer";
 import mxv_verified from "../../../public/assets/mxv_tick.svg";
 import TrackHeaderCta from "./TrackInfoUtils/TrackHeaderCta";
 import TrackEditionDropdown from "./TrackInfoUtils/TrackEditionDropdown";
+import ShinyLoader from "../../layout/ShinyLoader";
 
 export default function TrackHeader({
 	image,
@@ -49,7 +50,7 @@ export default function TrackHeader({
 								</a>
 							</Link>
 						) : (
-							<div className="bg-gray-300 w-full h-full animate-pulse"></div>
+							<ShinyLoader />
 						)}
 					</div>
 

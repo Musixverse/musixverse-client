@@ -7,6 +7,7 @@ import AboutArtist from "./ProfileUtils/AboutArtist";
 import CustomButton from "../../layout/CustomButton";
 import Stats from "./ProfileUtils/Stats";
 import Tooltip from "../../layout/Tooltip/Tooltip";
+import ShinyLoader from "../../layout/ShinyLoader";
 
 export default function ArtistHeader({
 	avatar,
@@ -41,7 +42,7 @@ export default function ArtistHeader({
 							alt="artist profile"
 						/>
 					) : (
-						<div className="bg-gray-300 w-full h-full animate-pulse rounded-full"></div>
+						<ShinyLoader rounded={true} />
 					)}
 				</div>
 				<div className="mt-4 mb-4 text-4xl md:text-5xl md:hidden font-tertiary xl:mb-0 xl:mt-2">
@@ -93,16 +94,18 @@ export default function ArtistHeader({
 				{/* Edit profile button (Make it render conditionally) */}
 				{user && username === user.attributes.username ? (
 					<Link href="/settings/profile-settings" passHref>
-						<div className="m-auto mt-6">
-							<CustomButton green={true}>
+						<div className="m-auto mt-4">
+							<CustomButton green={true} classes="text-sm px-8 py-3">
 								Edit profile <i className="ml-1 fas fa-edit"></i>
 							</CustomButton>
 						</div>
 					</Link>
 				) : (
 					<Link href="#" passHref>
-						<div className="m-auto mt-6">
-							<CustomButton green={true}>Follow</CustomButton>
+						<div className="m-auto mt-4">
+							<CustomButton green={false} classes="text-sm px-8 py-3">
+								Follow
+							</CustomButton>
 						</div>
 					</Link>
 				)}

@@ -12,11 +12,11 @@ const Navbar = () => {
 		<nav className="dark:bg-[rgba(19,19,19,0.4)] flex flex-col items-center justify-center dark:backdrop-blur-[24px] dark:backdrop-brightness-105 fixed top-0 z-40 w-full backdrop-blur-[40px] backdrop-brightness-200 bg-[rgba(255,255,255,0.8)]">
 			<div className="flex flex-wrap items-center justify-between w-full max-w-[1920px] px-6 md:px-8 lg:px-16 xl:px-20 2xl:px-36">
 				<Link href="/">
-					<a href="#" className="flex py-2">
+					<a href="#" className="flex">
 						{theme === "light" ? (
-							<Image src={logoIndependence} alt="MXV Logo" width="85" height="50" />
+							<Image src={logoBlack} alt="MXV Logo" width="70" height="70" />
 						) : (
-							<Image src={logoIndependence} alt="MXV Logo" width="85" height="50" />
+							<Image src={logoWhite} alt="MXV Logo" width="70" height="70" />
 						)}
 					</a>
 				</Link>

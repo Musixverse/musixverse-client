@@ -112,7 +112,7 @@ export default function Profile() {
 				<NewsLetter />
 			</div>
 			<ArtistBioModal isOpen={showArtistBioModal} setOpen={setShowArtistBioModal} name={profileUser.name} bio={profileUserInfo.bio} />
-			<FavouritesModal isOpen={isFavouritesModalOpen} setOpen={setFavouritesModalOpen} name={profileUser.name} />
+			<FavouritesModal isOpen={isFavouritesModalOpen} setOpen={setFavouritesModalOpen} name={profileUser.name} username={username} />
 		</>
 	);
 }

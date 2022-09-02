@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { useMoralis } from "react-moralis";
 import styles from "../../../../styles/Profile/ArtistHeader.module.css";
 import StatusContext from "../../../../store/status-context";
+import Tooltip from "../../../layout/Tooltip/Tooltip";
 
 export default function AboutArtist({ username, name, bio, country, createdAt, setShowArtistBioModal, setShowReportModal }) {
 	const { user } = useMoralis();
@@ -83,12 +84,18 @@ export default function AboutArtist({ username, name, bio, country, createdAt, s
 					<span>{createdAt ? joined : "Joined Nov, 2020"}</span>
 				</div>
 				<div className="flex space-x-3 text-dark-100 dark:text-light-200">
-					<button
-						onClick={() => setShowReportModal(true)}
-						className="md:w-[36px] md:h-[36px] w-[28px] h-[28px] text-center rounded-full bg-gray-200 dark:bg-[#040404] hover:bg-light-300"
-					>
-						<i className="text-xs md:text-sm fas fa-flag"></i>
-					</button>
+					<Tooltip
+							labelText={<span className="font-semibold text-sm cursor-help"><button
+							onClick={() => setShowReportModal(true)}
+							className="md:w-[36px] md:h-[36px] w-[28px] h-[28px] text-center rounded-full bg-gray-200 dark:bg-[#040404] hover:bg-light-300"
+						>
+							<i className="text-xs text-black md:text-sm fas fa-flag"></i>
+						</button>
+						</span>}
+						message="Report this Profile"
+						tooltipLocation="top"
+					></Tooltip>
+
 
 					<button className="md:w-[36px] md:h-[36px] w-[28px] h-[28px] text-center rounded-full bg-gray-200 dark:bg-[#040404] hover:bg-light-300 dark:hover:bg-dark-100 relative group">
 						<i className="fa-solid fa-share-nodes text-lg"></i>

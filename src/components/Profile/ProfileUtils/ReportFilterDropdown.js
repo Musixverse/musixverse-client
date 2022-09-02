@@ -9,6 +9,7 @@ function classNames(...classes) {
 
 export default function FilterDropdown({ optionsArray, initialValue, setChoice, dropdownType, setCurrentFilterType }) {
 	const [currentFilter, setCurrentFilter] = useState(initialValue === "" ? "Select Here" : initialValue);
+	const [textfield, setTextField] = useState(false);
 
 	const handleOptionSelect = (e) => {
 		setCurrentFilterType(0);
@@ -16,13 +17,13 @@ export default function FilterDropdown({ optionsArray, initialValue, setChoice, 
 		if (selectedValue === "Select Here (Reset)") {
 			selectedValue = "";
 			setCurrentFilter("Select Here");
-		} else if (selectedValue === "Clean (There is another version of this track that is explicit, but this is the clean version)") {
-			selectedValue = "Clean";
+			setTextField(false);
+		} else if (selectedValue === "Other") {
+			selectedValue = "Other";
+			setTextField(true);
 			setCurrentFilter(selectedValue);
-		} else if (selectedValue === "1 (Single Drop)") {
-			setCurrentFilter(selectedValue);
-			selectedValue = "1";
 		} else {
+			setTextField(false);
 			setCurrentFilter(selectedValue);
 		}
 		setChoice({
@@ -91,10 +92,16 @@ export default function FilterDropdown({ optionsArray, initialValue, setChoice, 
 								)}
 							</Menu.Item>,
 							...dropdownOptions,
-						]}
+						]} 
 					</div>
 				</Menu.Items>
 			</Transition>
+			{textfield && (
+				<div className="flex flex-col mt-4">
+					<label className="font-primary text-xs" htmlFor="report-profile">Please specify below: </label>
+					<textarea className="dark:bg-[#1a1a1a] mt-1 w-full p-2 border-[2px] border-red-500 rounded-sm focus:outline-none focus:shadow-none text-sm font-normal" name="report-profile" id="report-profile" rows="4"></textarea>
+				</div>
+			)}
 		</Menu>
 	);
 }

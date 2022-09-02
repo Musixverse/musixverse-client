@@ -3,14 +3,10 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useMoralis } from "react-moralis";
 import styles from "../../../../styles/Profile/ArtistHeader.module.css";
-import ArtistBioModal from "./ArtistBioModal";
-import ArtistReportModal from "./ArtistReportModal";
 import StatusContext from "../../../../store/status-context";
-import CustomButton from "../../../layout/CustomButton";
 
-export default function AboutArtist({ name, bio, country, createdAt }) {
-	const [showModal, setShowModal] = useState(false);
-	const [showReportModal, setShowReportModal] = useState(false);
+export default function AboutArtist({ username, name, bio, country, createdAt, setShowArtistBioModal, setShowReportModal }) {
+	const { user } = useMoralis();
 	const [joined, setJoined] = useState(false);
 
 	useEffect(() => {
@@ -65,7 +61,7 @@ export default function AboutArtist({ name, bio, country, createdAt }) {
 							</>
 						)}
 					</>
-				) : username === user.attributes.username ? (
+				) : user && username === user.attributes.username ? (
 					<>
 						<h4 className="font-bold text-[18px]">About</h4>
 						<Link href="/settings/profile-settings" passHref>
@@ -176,8 +172,6 @@ export default function AboutArtist({ name, bio, country, createdAt }) {
 					</button>
 				</div>
 			</div>
-			<ArtistBioModal showModal={showModal} setShowModal={setShowModal} name={name} bio={bio} />
-			<ArtistReportModal isOpen={showReportModal} setOpen={setShowReportModal}/>
 		</>
 	);
 }

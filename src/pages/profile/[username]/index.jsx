@@ -10,6 +10,7 @@ import NFTs from "../../../components/Profile/NFTs";
 import NewsLetter from "../../../layout/NewsLetter";
 import LoadingContext from "../../../../store/loading-context";
 import ArtistBioModal from "../../../components/Profile/ProfileUtils/ArtistBioModal";
+import ArtistReportModal from "../../../components/Profile/ProfileUtils/ArtistReportModal";
 import FavouritesModal from "../../../components/Profile/ProfileUtils/FavouritesModal";
 
 export default function Profile() {
@@ -20,6 +21,7 @@ export default function Profile() {
 	const [profileUser, setProfileUser] = useState(false);
 	const [profileUserInfo, setProfileUserInfo] = useState(false);
 	const [showArtistBioModal, setShowArtistBioModal] = useState(false);
+	const [showReportModal, setShowReportModal] = useState(false);
 	const [currentlyActive, setCurrentlyActive] = useState("All Tracks");
 	const [sortingFilter, setSortingFilter] = useState("Newest First");
 
@@ -102,6 +104,7 @@ export default function Profile() {
 						country={profileUserInfo.country}
 						createdAt={profileUser.createdAt}
 						setShowArtistBioModal={setShowArtistBioModal}
+						setShowReportModal={setShowReportModal}
 					/>
 					<Filter
 						currentlyActive={currentlyActive}
@@ -114,6 +117,7 @@ export default function Profile() {
 				<NewsLetter />
 			</div>
 			<ArtistBioModal isOpen={showArtistBioModal} setOpen={setShowArtistBioModal} name={profileUser.name} bio={profileUserInfo.bio} />
+			<ArtistReportModal isOpen={showReportModal} setOpen={setShowReportModal} />
 			<FavouritesModal isOpen={isFavouritesModalOpen} setOpen={setFavouritesModalOpen} name={profileUser.name} username={username} />
 		</>
 	);

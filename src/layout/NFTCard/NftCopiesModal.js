@@ -70,7 +70,7 @@ export default function NftCopiesModal({ trackCopiesModalValues, showNftCopiesMo
 														{trackCopiesModalValues.trackName}
 													</p>
 												</div>
-												<div className="flex items-center px-4 py-2 font-bold cursor-default rounded-xl hover:bg-light-200 bg-light-100 text-dark-100 dark:bg-dark-200 dark:text-light-100">
+												<div className="flex items-center px-4 py-2 font-bold cursor-default rounded-xl bg-light-100 text-dark-100 dark:bg-dark-200 dark:text-light-100">
 													<Image src={multipleNft} objectFit="contain" alt="multiple nft cards" className="dark:invert" />
 													<span className="ml-2 text-sm">
 														x{trackCopiesModalValues.numberOfCopies}

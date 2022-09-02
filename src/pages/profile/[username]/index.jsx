@@ -66,6 +66,8 @@ export default function Profile() {
 	useEffect(() => {
 		if (router.query && "favourites" in router.query) {
 			setFavouritesModalOpen(true);
+		} else {
+			setFavouritesModalOpen(false);
 		}
 	}, [router.query]);
 

@@ -23,7 +23,7 @@ export default function AccountHelp() {
                 description={
                     <>
                         Can&apos;t find the answers you’re looking for? You can submit a request{" "}
-                        <a className="font-medium text-primary-100" href="#">
+                        <a className="font-medium text-primary-100" href="mailto:contact@musixverse.com">
                             here.
                         </a>{" "}
                     </>

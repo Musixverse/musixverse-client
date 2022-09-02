@@ -1,3 +1,4 @@
+import { useState, useEffect, useContext } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useMoralis, useMoralisCloudFunction } from "react-moralis";
@@ -8,6 +9,7 @@ import CustomButton from "../../layout/CustomButton";
 import Stats from "./ProfileUtils/Stats";
 import Tooltip from "../../layout/Tooltip/Tooltip";
 import ShinyLoader from "../../layout/ShinyLoader";
+import AuthModalContext from "../../../store/authModal-context";
 
 export default function ArtistHeader({
 	avatar,
@@ -25,8 +27,62 @@ export default function ArtistHeader({
 	setShowReportModal,
 }) {
 	const { user } = useMoralis();
+	const [, setAuthModalOpen] = useContext(AuthModalContext);
 
-	const { data: instagramVerificationRequested } = useMoralisCloudFunction("fetchInstagramVerificationRequested");
+	const { fetch: fetchInstagramVerificationRequested, data: instagramVerificationRequested } = useMoralisCloudFunction(
+		"fetchInstagramVerificationRequested",
+		{ autoFetch: false }
+	);
+
+	useEffect(() => {
+		if (user) {
+			fetchInstagramVerificationRequested({
+				onSuccess: async (object) => {},
+				onError: (error) => {
+					console.log("fetchInstagramVerificationRequested Error:", error);
+				},
+			});
+		}
+	}, [user, fetchInstagramVerificationRequested]);
+
+	/*******************************
+	 ********  FOLLOW USER  ********
+	 *******************************/
+	const [isFollowingProfileUser, setIsFollowingProfileUser] = useState(false);
+	const { fetch: fetchIsFollowingUser } = useMoralisCloudFunction("fetchIsFollowingUser", { username: username });
+
+	useEffect(() => {
+		if (user) {
+			fetchIsFollowingUser({
+				onSuccess: async (object) => {
+					setIsFollowingProfileUser(object);
+				},
+				onError: (error) => {
+					console.log("fetchIsFollowingUser Error:", error);
+				},
+			});
+		}
+	}, [user, fetchIsFollowingUser]);
+
+	const { fetch: followUser } = useMoralisCloudFunction("followUser", { username: username }, { autoFetch: false });
+	const followProfileUser = () => {
+		if (user) {
+			followUser({
+				onSuccess: async (object) => {
+					if (object) {
+						setIsFollowingProfileUser(true);
+					} else {
+						setIsFollowingProfileUser(false);
+					}
+				},
+				onError: (error) => {
+					console.log("followUser Error:", error);
+				},
+			});
+		} else {
+			setAuthModalOpen(true);
+		}
+	};
 
 	return (
 		<div className={"dark:bg-nav-dark dark:backdrop-blur-xl dark:backdrop-brightness-150 z-10 relative " + styles["artist-banner__container"]}>
@@ -66,50 +122,54 @@ export default function ArtistHeader({
 					) : null}
 					<p className="font-primary text-sm text-center">@{username}</p>
 				</div>
-				{/* links to music platforms */}
-				<div className={styles["section1__social-icons"]}>
-					{instagram ? (
-						<Link href={instagram}>
-							<a target="_blank" rel="noopener noreferrer" className="link-item">
-								<i className="text-2xl fab fa-instagram hover:text-primary-100"></i>
-							</a>
-						</Link>
-					) : null}
 
-					{twitter ? (
-						<Link href={twitter}>
-							<a target="_blank" rel="noopener noreferrer" className="link-item">
-								<i className="text-2xl fab fa-twitter hover:text-primary-100"></i>
-							</a>
+				<div className="mt-4">
+					{/* Edit profile button (Make it render conditionally) */}
+					{user && username === user.attributes.username ? (
+						<Link href="/settings/profile-settings" passHref>
+							<div className="m-auto mt-4">
+								<CustomButton green={true} classes="text-sm px-8 py-3">
+									Edit profile <i className="ml-1 fas fa-edit"></i>
+								</CustomButton>
+							</div>
 						</Link>
-					) : null}
-
-					{facebook ? (
-						<Link href={facebook}>
-							<a target="_blank" rel="noopener noreferrer" className="link-item">
-								<i className="text-2xl fab fa-facebook-square hover:text-primary-100"></i>
-							</a>
-						</Link>
-					) : null}
+					) : (
+						<div className="m-auto mt-4">
+							{isFollowingProfileUser ? (
+								<div className="group">
+									<CustomButton
+										onClick={() => {
+											followProfileUser();
+										}}
+										greenOutline={true}
+										classes="text-base px-8 py-2 block group-hover:hidden"
+									>
+										Following
+									</CustomButton>
+									<CustomButton
+										onClick={() => {
+											followProfileUser();
+										}}
+										error={true}
+										classes="text-base px-8 py-2 border-2 border-transparent hidden group-hover:block"
+									>
+										Unfollow
+									</CustomButton>
+								</div>
+							) : (
+								<CustomButton
+									onClick={() => {
+										followProfileUser();
+									}}
+									green={true}
+									classes="text-base px-8 py-2 border-2 border-transparent"
+								>
+									Follow
+								</CustomButton>
+							)}
+						</div>
+					)}
 				</div>
-				{/* Edit profile button (Make it render conditionally) */}
-				{user && username === user.attributes.username ? (
-					<Link href="/settings/profile-settings" passHref>
-						<div className="m-auto mt-4">
-							<CustomButton green={true} classes="text-sm px-8 py-3">
-								Edit profile <i className="ml-1 fas fa-edit"></i>
-							</CustomButton>
-						</div>
-					</Link>
-				) : (
-					<Link href="#" passHref>
-						<div className="m-auto mt-4">
-							<CustomButton green={true} classes="text-base px-8 py-2">
-								Follow
-							</CustomButton>
-						</div>
-					</Link>
-				)}
 			</div>
 
 			{/* Right Details section */}
@@ -135,8 +195,35 @@ export default function ArtistHeader({
 						) : null}
 						<p className="font-primary text-sm">@{username}</p>
 					</div>
-					{/* Artist's Stats Section */}
-					<Stats username={username} isArtist={isArtist} />
+
+					<div className="flex flex-col items-end -mb-10">
+						{/* Artist's Stats Section */}
+						<Stats username={username} isArtist={isArtist} isFollowingProfileUser={isFollowingProfileUser} />
+						{/* links to music platforms */}
+						<div className="flex justify-center space-x-5 mt-4">
+							{instagram ? (
+								<Link href={instagram}>
+									<a target="_blank" rel="noopener noreferrer" className="link-item">
+										<i className="text-2xl fab fa-instagram hover:text-primary-100"></i>
+									</a>
+								</Link>
+							) : null}
+							{twitter ? (
+								<Link href={twitter}>
+									<a target="_blank" rel="noopener noreferrer" className="link-item">
+										<i className="text-2xl fab fa-twitter hover:text-primary-100"></i>
+									</a>
+								</Link>
+							) : null}
+							{facebook ? (
+								<Link href={facebook}>
+									<a target="_blank" rel="noopener noreferrer" className="link-item">
+										<i className="text-2xl fab fa-facebook-square hover:text-primary-100"></i>
+									</a>
+								</Link>
+							) : null}
+						</div>
+					</div>
 				</div>
 				{/* About Artist section */}
 				<AboutArtist

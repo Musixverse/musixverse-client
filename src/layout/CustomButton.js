@@ -1,4 +1,4 @@
-export default function CustomButton({ green = false, greenOutline = false, onClick, children, classes }) {
+export default function CustomButton({ green = false, greenOutline = false, error = false, onClick, children, classes }) {
 	return (
 		<button
 			onClick={() => (onClick ? onClick() : {})}
@@ -9,6 +9,8 @@ export default function CustomButton({ green = false, greenOutline = false, onCl
 					? `rounded-lg bg-light-100 hover:bg-light-200 border-2 border-primary-100 font-primary font-semibold  ${
 							classes ? classes : "text-lg px-8 py-2"
 					  }`
+					: error
+					? `rounded-lg bg-error-200 hover:bg-error-300 font-primary font-semibold text-light-100 ${classes ? classes : "text-lg px-8 py-2"}`
 					: `rounded-lg bg-light-100 hover:bg-light-200 font-primary font-semibold text-lg text-dark-100 ${classes ? classes : "text-lg px-8 py-2"}`
 			}
 		>

@@ -14,7 +14,7 @@ const Actions = ({ tokenId, artistName, title }) => {
 	 *********  FAVOURITE  *********
 	 *******************************/
 	const [isTokenFavourite, setIsTokenFavourite] = useState(false);
-	const { fetch: fetchIsTokenFavourite } = useMoralisCloudFunction("fetchIsTokenFavourite", { tokenId: tokenId }, []);
+	const { fetch: fetchIsTokenFavourite } = useMoralisCloudFunction("fetchIsTokenFavourite", { tokenId: tokenId });
 
 	useEffect(() => {
 		if (user) {

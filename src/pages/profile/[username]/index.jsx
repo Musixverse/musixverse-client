@@ -12,6 +12,8 @@ import LoadingContext from "../../../../store/loading-context";
 import ArtistBioModal from "../../../components/Profile/ProfileUtils/ArtistBioModal";
 import ArtistReportModal from "../../../components/Profile/ProfileUtils/ArtistReportModal";
 import FavouritesModal from "../../../components/Profile/ProfileUtils/FavouritesModal";
+import FollowersModal from "../../../components/Profile/ProfileUtils/FollowersModal";
+import FollowingModal from "../../../components/Profile/ProfileUtils/FollowingModal";
 
 export default function Profile() {
 	const router = useRouter();
@@ -62,18 +64,28 @@ export default function Profile() {
 		}
 		// setLoading(false);
 	}, [username]);
+	// if (isLoading) return null;
 
 	// Favourites Modal
 	const [isFavouritesModalOpen, setFavouritesModalOpen] = useState(false);
+	// Followers Modal
+	const [isFollowersModalOpen, setFollowersModalOpen] = useState(false);
+	// Following Modal
+	const [isFollowingModalOpen, setFollowingModalOpen] = useState(false);
 	useEffect(() => {
 		if (router.query && "favourites" in router.query) {
 			setFavouritesModalOpen(true);
+		} else if (router.query && "followers" in router.query) {
+			setFollowersModalOpen(true);
+		} else if (router.query && "following" in router.query) {
+			setFollowingModalOpen(true);
 		} else {
 			setFavouritesModalOpen(false);
+			setFollowersModalOpen(false);
+			setFollowingModalOpen(false);
 		}
 	}, [router.query]);
 
-	// if (isLoading) return null;
 	return (
 		<>
 			{profileUser.isArtist ? (
@@ -119,6 +131,8 @@ export default function Profile() {
 			<ArtistBioModal isOpen={showArtistBioModal} setOpen={setShowArtistBioModal} name={profileUser.name} bio={profileUserInfo.bio} />
 			<ArtistReportModal isOpen={showReportModal} setOpen={setShowReportModal} />
 			<FavouritesModal isOpen={isFavouritesModalOpen} setOpen={setFavouritesModalOpen} name={profileUser.name} username={username} />
+			<FollowersModal isOpen={isFollowersModalOpen} setOpen={setFollowersModalOpen} name={profileUser.name} username={username} />
+			<FollowingModal isOpen={isFollowingModalOpen} setOpen={setFollowingModalOpen} name={profileUser.name} username={username} />
 		</>
 	);
 }

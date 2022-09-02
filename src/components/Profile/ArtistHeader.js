@@ -22,6 +22,7 @@ export default function ArtistHeader({
 	country,
 	createdAt,
 	setShowArtistBioModal,
+	setShowReportModal,
 }) {
 	const { user } = useMoralis();
 
@@ -138,7 +139,15 @@ export default function ArtistHeader({
 					<Stats username={username} isArtist={isArtist} />
 				</div>
 				{/* About Artist section */}
-				<AboutArtist username={username} name={name} bio={bio} country={country} createdAt={createdAt} setShowArtistBioModal={setShowArtistBioModal} />
+				<AboutArtist
+					username={username}
+					name={name}
+					bio={bio}
+					country={country}
+					createdAt={createdAt}
+					setShowArtistBioModal={setShowArtistBioModal}
+					setShowReportModal={setShowReportModal}
+				/>
 			</div>
 		</div>
 	);

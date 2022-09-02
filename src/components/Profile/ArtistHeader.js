@@ -103,7 +103,7 @@ export default function ArtistHeader({
 				) : (
 					<Link href="#" passHref>
 						<div className="m-auto mt-4">
-							<CustomButton green={false} classes="text-sm px-8 py-3">
+							<CustomButton green={true} classes="text-base px-8 py-2">
 								Follow
 							</CustomButton>
 						</div>

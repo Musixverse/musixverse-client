@@ -20,7 +20,7 @@ const Footer = () => {
 					<p className="font-primary text-lg text-primary-100">Hear it. Own it. Live it.</p>
 				</div>
 
-				<div className="grid grid-cols-2 gap-y-10 md:gap-y-0 md:flex flex-wrap font-primary justify-between border-t-2 border-b-2 border-light-300 w-full py-8 mt-5">
+				<div className="grid grid-cols-2 gap-y-10 md:gap-y-0 md:flex flex-wrap font-primary justify-between border-t-2 border-light-300 w-full py-8 mt-5">
 					<div className="flex flex-col space-y-2">
 						<p className="font-semibold text">Quick Links</p>
 						<ul className="space-y-2">

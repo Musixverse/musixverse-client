@@ -87,28 +87,29 @@ export default function AboutArtist({ username, name, bio, country, createdAt, s
 				</div>
 				<div className="flex space-x-3 text-dark-100 dark:text-light-200">
 					<Tooltip
-							labelText={<span className="font-semibold text-sm cursor-help">
-            	{user && username !== user.attributes.username && (
-						<button
-							onClick={() => setShowReportModal(true)}
-							className="md:w-[36px] md:h-[36px] w-[28px] h-[28px] text-center rounded-full bg-gray-200 dark:bg-[#040404] hover:bg-light-300"
-						>
-							<i className="text-xs md:text-sm fas fa-flag"></i>
-						</button>
-					)}
-					{!user && (
-						<button
-							onClick={() => setAuthModalOpen(true)}
-							className="md:w-[36px] md:h-[36px] w-[28px] h-[28px] text-center rounded-full bg-gray-200 dark:bg-[#040404] hover:bg-light-300"
-						>
-							<i className="text-xs md:text-sm fas fa-flag"></i>
-						</button>
-					)}
-						</span>}
+						labelText={
+							<span className="font-semibold text-sm cursor-help text-center">
+								{user && username !== user.attributes.username && (
+									<button
+										onClick={() => setShowReportModal(true)}
+										className="md:w-[36px] md:h-[36px] w-[28px] h-[28px] text-center rounded-full bg-gray-200 dark:bg-[#040404] hover:bg-light-300"
+									>
+										<i className="text-xs md:text-sm fas fa-flag text-dark-100 dark:text-light-100 ml-1.5"></i>
+									</button>
+								)}
+								{!user && (
+									<button
+										onClick={() => setAuthModalOpen(true)}
+										className="md:w-[36px] md:h-[36px] w-[28px] h-[28px] text-center rounded-full bg-gray-200 dark:bg-[#040404] hover:bg-light-300"
+									>
+										<i className="text-xs md:text-sm fas fa-flag text-dark-100 dark:text-light-100 ml-1.5"></i>
+									</button>
+								)}
+							</span>
+						}
 						message="Report this Profile"
 						tooltipLocation="bottom"
 					></Tooltip>
-
 
 					<button className="md:w-[36px] md:h-[36px] w-[28px] h-[28px] text-center rounded-full bg-gray-200 dark:bg-[#040404] hover:bg-light-300 dark:hover:bg-dark-100 relative group">
 						<i className="fa-solid fa-share-nodes text-lg"></i>

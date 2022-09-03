@@ -7,29 +7,22 @@ function classNames(...classes) {
 	return classes.filter(Boolean).join(" ");
 }
 
-export default function FilterDropdown({ optionsArray, initialValue, setChoice, dropdownType, setCurrentFilterType }) {
-	const [currentFilter, setCurrentFilter] = useState(initialValue === "" ? "Select Here" : initialValue);
+export default function ReportFilterDropdown({ optionsArray, initialValue, reason, setReason }) {
+	const [currentFilter, setCurrentFilter] = useState(initialValue);
 	const [textfield, setTextField] = useState(false);
 
 	const handleOptionSelect = (e) => {
-		setCurrentFilterType(0);
 		let selectedValue = e.target.textContent;
-		if (selectedValue === "Select Here (Reset)") {
-			selectedValue = "";
-			setCurrentFilter("Select Here");
-			setTextField(false);
-		} else if (selectedValue === "Other") {
+		if (selectedValue === "Other") {
 			selectedValue = "Other";
+			setReason("");
 			setTextField(true);
 			setCurrentFilter(selectedValue);
 		} else {
 			setTextField(false);
 			setCurrentFilter(selectedValue);
+			setReason(selectedValue);
 		}
-		setChoice({
-			type: dropdownType,
-			selectedChoice: selectedValue,
-		});
 	};
 
 	// Map all the options into a items renderable array
@@ -61,7 +54,7 @@ export default function FilterDropdown({ optionsArray, initialValue, setChoice, 
 						"dark:bg-[#323232] bg-[#D9D9D9] hover:dark:border-[red] dark:text-light-100 dark:border-[#323232] inline-flex justify-between text-sm font-medium text-[#383838]  border-2 border-transparent w-full px-4 py-2 rounded-md hover:border-[red]"
 					}
 				>
-					{currentFilter.length > 20 ? currentFilter.substring(0, 17) + "..." : currentFilter}
+					{currentFilter.length > 40 ? currentFilter.substring(0, 40) + "..." : currentFilter}
 					<ChevronDownIcon className="ml-2 h-5 w-5 text-[red]" aria-hidden="true" />
 				</Menu.Button>
 			</div>
@@ -76,30 +69,23 @@ export default function FilterDropdown({ optionsArray, initialValue, setChoice, 
 				leaveTo="transform opacity-0 scale-95"
 			>
 				<Menu.Items className="absolute right-0 z-10 w-full mt-3 origin-top-right rounded-md shadow-lg bg-light-300 dark:bg-dark-100 ring-1 ring-black ring-opacity-5 focus:outline-none">
-					<div className={styles["menu-item-div"]}>
-						{[
-							<Menu.Item key="-1">
-								{({ active }) => (
-									<li
-										className={classNames(
-											active ? "bg-gray-100 dark:bg-dark-200 text-gray-900" : "text-gray-700",
-											"block px-4 py-2 text-sm cursor-pointer dark:text-light-100"
-										)}
-										onClick={handleOptionSelect}
-									>
-										Select Here (Reset)
-									</li>
-								)}
-							</Menu.Item>,
-							...dropdownOptions,
-						]} 
-					</div>
+					<div className={styles["menu-item-div"]}>{[...dropdownOptions]}</div>
 				</Menu.Items>
 			</Transition>
+
 			{textfield && (
 				<div className="flex flex-col mt-4">
-					<label className="font-primary text-xs" htmlFor="report-profile">Please specify below: </label>
-					<textarea className="dark:bg-[#1a1a1a] mt-1 w-full p-2 border-[2px] border-red-500 rounded-sm focus:outline-none focus:shadow-none text-sm font-normal" name="report-profile" id="report-profile" rows="4"></textarea>
+					<label className="font-primary text-sm" htmlFor="report-profile">
+						Please specify below:
+					</label>
+					<textarea
+						className="resize-none dark:bg-[#1a1a1a] mt-1 w-full p-2 border-[2px] border-red-500 rounded-md focus:outline-none focus:shadow-none text-sm font-normal"
+						name="report-profile"
+						id="report-profile"
+						rows="4"
+						value={reason}
+						onChange={(e) => setReason(e.target.value)}
+					></textarea>
 				</div>
 			)}
 		</Menu>

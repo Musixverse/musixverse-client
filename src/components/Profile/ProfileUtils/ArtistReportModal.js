@@ -1,15 +1,43 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import Modal from "../../../layout/Modal/Modal";
-import { useRouter } from "next/router";
-import { useMoralis } from "react-moralis";
-import FilterDropdown from "./ReportFilterDropdown";
+import { useMoralis, useMoralisCloudFunction } from "react-moralis";
+import ReportFilterDropdown from "./ReportFilterDropdown";
 import { reportProfileFilters } from "../../../constants";
+import StatusContext from "../../../../store/status-context";
 
-const ArtistEmailVerificationSuccessModal = ({ isOpen, setOpen }) => {
-	const router = useRouter();
+const ArtistReportModal = ({ isOpen, setOpen, username }) => {
 	const { user } = useMoralis();
-	const [currentFilterType, setCurrentFilterType] = useState(0);
-	const [appliedFilter, setAppliedFilter] = useState(0);
+	const [reason, setReason] = useState(reportProfileFilters[0]);
+	const [, , setSuccess, setError] = useContext(StatusContext);
+
+	const { fetch: reportProfile } = useMoralisCloudFunction("reportProfile", { username: username, reason: reason }, { autoFetch: false });
+
+	const reportUserProfile = () => {
+		if (user && reason) {
+			reportProfile({
+				onSuccess: async (object) => {
+					if (object) {
+						setSuccess((prevState) => ({
+							...prevState,
+							title: "Profile Reported",
+							message: "You report has been recorded. We will review this report soon and take an appropriate action.",
+							showSuccessBox: true,
+						}));
+					}
+				},
+				onError: (error) => {
+					console.log("reportProfile Error:", error);
+				},
+			});
+		} else {
+			setError((prevState) => ({
+				...prevState,
+				title: "Report Failed",
+				message: "There was a problem in submitting your report. Please try again",
+				showErrorBox: true,
+			}));
+		}
+	};
 
 	return (
 		<Modal
@@ -21,18 +49,11 @@ const ArtistEmailVerificationSuccessModal = ({ isOpen, setOpen }) => {
 					</label>
 				</div>
 			}
-			title={"Are you sure you want to report this artist?"}
+			title={<div className="text-lg">Are you sure you want to report this profile?</div>}
 			content={
-				// main content of the modal
 				<div className="flex-1 text-sm font-semibold md:text-base font-secondary">
-					<p className="mb-1 text-sm text-left">Choose a category</p>
-					<FilterDropdown
-						optionsArray={reportProfileFilters}
-						initialValue={""}
-						setChoice={setAppliedFilter}
-						dropdownType={"ReportProfile"}
-						setCurrentFilterType={setCurrentFilterType}
-					/>
+					<p className="mb-1 font-primary text-sm text-left">Choose a category</p>
+					<ReportFilterDropdown optionsArray={reportProfileFilters} initialValue={reportProfileFilters[0]} reason={reason} setReason={setReason} />
 				</div>
 			}
 			onClose={() => {
@@ -42,6 +63,7 @@ const ArtistEmailVerificationSuccessModal = ({ isOpen, setOpen }) => {
 				{
 					role: "custom",
 					onClick: () => {
+						reportUserProfile();
 						setOpen(false);
 					},
 					toClose: true,
@@ -60,4 +82,4 @@ const ArtistEmailVerificationSuccessModal = ({ isOpen, setOpen }) => {
 	);
 };
 
-export default ArtistEmailVerificationSuccessModal;
+export default ArtistReportModal;

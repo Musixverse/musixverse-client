@@ -34,7 +34,7 @@ const SuccessBox = () => {
 				leaveTo="opacity-0 scale-75 translate-x-1/3"
 			>
 				<div
-					className="fixed bottom-0 right-0 z-50 xl:w-4/12 lg:w-5/12 md:w-8/12 px-5 py-4 border-primary-100 backdrop-blur-[40px] backdrop-brightness-200 bg-light-100 dark:bg-[rgba(19,19,19,0.4)] dark:backdrop-blur-[24px] dark:border-search-200 border-2 rounded-lg shadow-2xl -translate-x-4 -translate-y-4"
+					className="fixed bottom-0 right-0 z-50 xl:w-4/12 lg:w-5/12 md:w-8/12 px-5 py-4 border-primary-100 backdrop-blur-[40px] backdrop-brightness-200 bg-light-100 dark:bg-[rgba(19,19,19,0.4)] dark:backdrop-blur-[24px] dark:border-primary-200 border-2 rounded-lg shadow-2xl -translate-x-4 -translate-y-4"
 					role="alert"
 				>
 					<strong className="font-semibold">{success.title}</strong>

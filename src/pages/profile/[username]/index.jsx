@@ -156,7 +156,7 @@ export default function Profile() {
 				<NewsLetter />
 			</div>
 			<ArtistBioModal isOpen={showArtistBioModal} setOpen={setShowArtistBioModal} name={profileUser.name} bio={profileUserInfo.bio} />
-			<ArtistReportModal isOpen={showReportModal} setOpen={setShowReportModal} />
+			<ArtistReportModal isOpen={showReportModal} setOpen={setShowReportModal} username={username} />
 			<FavouritesModal
 				isOpen={isFavouritesModalOpen}
 				setOpen={setFavouritesModalOpen}

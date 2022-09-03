@@ -21,7 +21,7 @@ const DisplayCollaborator = ({ collaborator }) => {
 						)}
 						<span className="ml-2">
 							{collaborator.name}
-							<i className="ml-2 mr-2 fa-solid fa-arrow-right-long text-[10px]"></i>
+							<i className="ml-2 mr-2 fa-solid fa-arrow-right-long text-xs"></i>
 						</span>
 						<span>{collaborator.role}</span>
 						{/* <span className="ml-3">(Split: {collaborator.split}%)</span> */}

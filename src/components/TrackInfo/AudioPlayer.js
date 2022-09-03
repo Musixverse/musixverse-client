@@ -107,11 +107,11 @@ export default function AudioPlayer({ tokenId, audio_url, artistName, title }) {
 	};
 
 	return (
-		<div className="flex flex-row justify-between items-center">
+		<div className="flex md:flex-row justify-between items-center">
 			<button ref={playBtn} onClick={playTrackHandler} className={"dark:border-light-100 " + styles["play-btn"]}>
-				<i className="fas fa-play text-2xl"></i>
+				<i className="fas fa-play text-sm sm:text-xl md:text-2xl"></i>
 			</button>
-			<div className="ml-5 flex flex-col flex-grow">
+			<div className="ml-5 flex flex-col md:flex-grow">
 				{/* MP3 Bar */}
 				<div className={styles["music-bar__container"]}>
 					<div className={styles["music-bar__container--info"]}>

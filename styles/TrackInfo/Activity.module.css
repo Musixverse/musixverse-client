@@ -1,5 +1,5 @@
 .sales-history {
-    @apply p-8 xl:p-10 xl:pb-6 pb-6 rounded-xl bg-light-200 xl:col-span-3 col-span-5;
+    @apply p-8 xl:p-10 xl:pb-6 pb-6 rounded-xl bg-light-200 xl:col-span-3 md:col-span-5;
 }
 
 .sales-history__heading {

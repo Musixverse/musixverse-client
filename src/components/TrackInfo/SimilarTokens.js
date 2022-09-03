@@ -37,7 +37,7 @@ const SimilarTokens = ({ otherTokensOfTrack, metadata }) => {
 
 	return (
 		<>
-			<h1 className="font-tertiary text-4xl mt-20 mb-8">MORE OF THIS TRACK</h1>
+			<h1 className="font-tertiary text-center sm:text-left text-4xl mt-20 mb-8">MORE OF THIS TRACK</h1>
 			<NFTCardsWithPager nftCards={nftCards} />
 		</>
 	);

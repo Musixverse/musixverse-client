@@ -14,7 +14,7 @@ export default function PurchaseInfo({ tokenId, metadata, currentOwnerAddress, p
 			<div className={styles["purchase-info__heading"]}>
 				<h1 className="font-tertiary text-3xl">PURCHASE INFO</h1>
 
-				<p className={styles["purchase-info__heading--p"]}>
+				<p className={"text-right "+styles["purchase-info__heading--p"]}>
 					{metadata.attributes[1].trait_type}
 					<i className="ml-2 mr-2 fa-solid fa-arrow-right-long"></i>
 					{metadata.attributes[1].value}%

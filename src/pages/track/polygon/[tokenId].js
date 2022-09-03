@@ -102,7 +102,7 @@ export default function TrackInfo({ token, otherTokensOfTrack }) {
 						otherTokensOfTrack={otherTokensOfTrack}
 					/>
 					<TrackDetails tokenId={tokenId} metadata={metadata} />
-					<div className="grid grid-cols-9 xl:grid-cols-5 gap-6 my-10">
+					<div className="grid grid-cols-1 md:grid-cols-9 xl:grid-cols-5 gap-y-4 md:gap-6 mt-10">
 						<PurchaseInfo tokenId={tokenId} metadata={metadata} currentOwnerAddress={currentOwnerAddress} price={price} />
 						<Activity tokenId={tokenId} artistAddress={metadata.artistAddress} />
 					</div>

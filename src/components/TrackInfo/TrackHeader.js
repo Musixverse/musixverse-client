@@ -102,7 +102,7 @@ export default function TrackHeader({
 
 				{/* Track Details section */}
 				<div className={styles["track-header__container--track-detail"]}>
-					<div className="font-bold pb-2 items-center flex">
+					<div className="font-bold pt-8 sm:pt-0 pb-2 items-center flex">
 						{artist ? (
 							<Link href={`/profile/${artist.username}`} className="cursor-pointer">
 								<a target="_blank" rel="noopener noreferrer">
@@ -118,14 +118,14 @@ export default function TrackHeader({
 					</div>
 
 					<div className="flex justify-between items-end pb-6">
-						<div className="font-tertiary text-7xl flex">
-							<span>{title}</span>&nbsp;
+						<div className="font-tertiary text-7xl flex flex-col sm:flex-row">
+							<span>{title}</span>
 							{localTokenId ? (
 								<>
 									{otherTokensOfTrack.length === 0 ? (
-										<span className="font-primary text-xs items-end flex mb-3 ml-1">#1 of 1</span>
+										<span className="font-primary text-xs items-end flex mb-3 sm:ml-1">#1 of 1</span>
 									) : (
-										<span className="font-primary text-xs items-end flex mb-2">
+										<span className="font-primary text-xs items-end flex mb-2 sm:ml-1">
 											<TrackEditionDropdown
 												optionsArray={otherTokensOfTrack}
 												localTokenId={localTokenId}

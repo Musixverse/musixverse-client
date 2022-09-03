@@ -28,7 +28,7 @@ export default function Activity({ tokenId, artistAddress }) {
                     </div>
 
                     <div className="ml-3 font-secondary">
-                        <div className="flex items-center font-medium">
+                        <div className="flex items-center text-sm sm:text-base font-medium">
                             Minted with a base price of &nbsp;
                             <Image src={"/assets/matic-logo.svg"} width={15} height={15} alt="matic icon" />
                             <p className="ml-1 font-primary font-semibold">{tokenMintedInfo ? Moralis.Units.FromWei(tokenMintedInfo.price) : ""}</p>

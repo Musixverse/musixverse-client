@@ -5,12 +5,12 @@
 
 .track-header__container {
     /* @apply flex flex-row justify-center items-center space-x-5; */
-    @apply grid grid-cols-5 gap-6;
+    @apply grid grid-cols-1 md:grid md:grid-cols-5 md:gap-6;
 }
 
 .track-header__container--trackImage {
     /* @apply max-w-[474px]; */
-    @apply col-span-2;
+    @apply md:col-span-2;
 }
 
 .track-header__container--track-detail {

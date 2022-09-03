@@ -7,6 +7,8 @@ import Banner from "../../../components/Profile/Banner";
 import ArtistHeader from "../../../components/Profile/ArtistHeader";
 import Filter from "../../../components/Profile/Filter";
 import NFTs from "../../../components/Profile/NFTs";
+import FavouritesHeader from "../../../components/Profile/FavouritesHeader";
+import FavouriteNFTs from "../../../components/Profile/FavouriteNFTs";
 import NewsLetter from "../../../layout/NewsLetter";
 import LoadingContext from "../../../../store/loading-context";
 import ArtistBioModal from "../../../components/Profile/ProfileUtils/ArtistBioModal";
@@ -24,8 +26,17 @@ export default function Profile() {
 	const [profileUserInfo, setProfileUserInfo] = useState(false);
 	const [showArtistBioModal, setShowArtistBioModal] = useState(false);
 	const [showReportModal, setShowReportModal] = useState(false);
-	const [currentlyActive, setCurrentlyActive] = useState("All Tracks");
+	const [currentlyActive, setCurrentlyActive] = useState("");
 	const [sortingFilter, setSortingFilter] = useState("Newest First");
+	useEffect(() => {
+		if (profileUser && profileUser.name) {
+			if (profileUser.isArtist) {
+				setCurrentlyActive("All Tracks");
+			} else {
+				setCurrentlyActive(`Owned by ${profileUser.name}`);
+			}
+		}
+	}, [profileUser]);
 
 	const { fetch: fetchUser } = useMoralisCloudFunction("fetchUser", { username: username }, { autoFetch: false });
 	const { fetch: fetchUserInfo } = useMoralisCloudFunction("fetchUserInfo", { username: username }, { autoFetch: false });
@@ -62,12 +73,23 @@ export default function Profile() {
 			fetchUserData();
 			fetchInfo();
 		}
-		// setLoading(false);
+		setLoading(false);
 	}, [username]);
-	// if (isLoading) return null;
 
 	// Favourites Modal
 	const [isFavouritesModalOpen, setFavouritesModalOpen] = useState(false);
+	const [favouriteTokens, setFavouriteTokens] = useState([]);
+	const { fetch: fetchFavouriteTokens } = useMoralisCloudFunction("fetchFavouriteTokens", { username: username }, { autoFetch: false });
+	useEffect(() => {
+		fetchFavouriteTokens({
+			onSuccess: (data) => {
+				setFavouriteTokens(data);
+			},
+			onError: (error) => {
+				console.log("fetchFavouriteTokens Error:", error);
+			},
+		});
+	}, [fetchFavouriteTokens]);
 	// Followers Modal
 	const [isFollowersModalOpen, setFollowersModalOpen] = useState(false);
 	// Following Modal
@@ -86,6 +108,7 @@ export default function Profile() {
 		}
 	}, [router.query]);
 
+	// if (isLoading) return null;
 	return (
 		<>
 			{profileUser.isArtist ? (
@@ -123,14 +146,25 @@ export default function Profile() {
 						setCurrentlyActive={setCurrentlyActive}
 						sortingFilter={sortingFilter}
 						setSortingFilter={setSortingFilter}
+						name={profileUser.name}
+						isArtist={profileUser.isArtist}
 					/>
-					<NFTs username={username} currentlyActive={currentlyActive} sortingFilter={sortingFilter} />
+					<NFTs username={username} name={profileUser.name} currentlyActive={currentlyActive} sortingFilter={sortingFilter} />
+					<FavouritesHeader />
+					<FavouriteNFTs username={username} favouriteTokens={favouriteTokens} />
 				</div>
 				<NewsLetter />
 			</div>
 			<ArtistBioModal isOpen={showArtistBioModal} setOpen={setShowArtistBioModal} name={profileUser.name} bio={profileUserInfo.bio} />
 			<ArtistReportModal isOpen={showReportModal} setOpen={setShowReportModal} />
-			<FavouritesModal isOpen={isFavouritesModalOpen} setOpen={setFavouritesModalOpen} name={profileUser.name} username={username} />
+			<FavouritesModal
+				isOpen={isFavouritesModalOpen}
+				setOpen={setFavouritesModalOpen}
+				name={profileUser.name}
+				username={username}
+				favouriteTokens={favouriteTokens}
+				setFavouriteTokens={setFavouriteTokens}
+			/>
 			<FollowersModal isOpen={isFollowersModalOpen} setOpen={setFollowersModalOpen} name={profileUser.name} username={username} />
 			<FollowingModal isOpen={isFollowingModalOpen} setOpen={setFollowingModalOpen} name={profileUser.name} username={username} />
 		</>

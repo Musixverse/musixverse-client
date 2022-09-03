@@ -142,7 +142,7 @@ export default function ArtistHeader({
 											followProfileUser();
 										}}
 										greenOutline={true}
-										classes="text-base px-8 py-2 block group-hover:hidden"
+										classes="text-base px-8 py-2 block group-hover:hidden dark:bg-dark-100"
 									>
 										Following
 									</CustomButton>

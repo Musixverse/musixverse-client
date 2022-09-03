@@ -89,7 +89,7 @@ export default function AboutArtist({ username, name, bio, country, createdAt, s
 							onClick={() => setShowReportModal(true)}
 							className="md:w-[36px] md:h-[36px] w-[28px] h-[28px] text-center rounded-full bg-gray-200 dark:bg-[#040404] hover:bg-light-300"
 						>
-							<i className="text-xs text-black md:text-sm fas fa-flag"></i>
+							<i className="text-xs text-black dark:text-white md:text-sm fas fa-flag"></i>
 						</button>
 						</span>}
 						message="Report this Profile"

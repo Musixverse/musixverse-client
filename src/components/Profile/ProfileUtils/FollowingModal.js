@@ -1,40 +1,20 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import { useMoralis, useMoralisCloudFunction } from "react-moralis";
+import { useMoralisCloudFunction } from "react-moralis";
 import Image from "next/image";
 import Link from "next/link";
 import Modal from "../../../layout/Modal/Modal";
-import LoadingContext from "../../../../store/loading-context";
 
 export default function FollowersModal({ isOpen, setOpen, name, username }) {
 	const router = useRouter();
 	const [following, setFollowing] = useState([]);
-	const [isLoading, setLoading] = useContext(LoadingContext);
-
-	const { user, Moralis } = useMoralis();
 
 	const { fetch: fetchFollowing } = useMoralisCloudFunction("fetchFollowing", { username: username }, { autoFetch: false });
-
-	const removeFromFavourites = async (tokenId) => {
-		setLoading(true);
-		await Moralis.Cloud.run("removeTokenFromFavourites", { tokenId: tokenId }).then(async () => {
-			await fetchFollowing({
-				onSuccess: (data) => {
-					setFollowing(data);
-				},
-				onError: (error) => {
-					console.log("fetchFollowing Error:", error);
-				},
-			});
-			setLoading(false);
-		});
-	};
 
 	useEffect(() => {
 		if (isOpen) {
 			fetchFollowing({
 				onSuccess: (data) => {
-					console.log(data);
 					setFollowing(data);
 				},
 				onError: (error) => {
@@ -69,30 +49,9 @@ export default function FollowersModal({ isOpen, setOpen, name, username }) {
 													<p className="ml-4 text-sm font-semibold">{follower.name}</p>
 													<p className="ml-4 text-xs items-end">@{follower.username}</p>
 												</div>
-												{/* <div className="flex items-end">
-													<span className="hidden group-hover:block text-xs mr-4 text-primary-100">{token.genre}</span>
-													<div className="flex items-end -space-x-2">
-														{token.collaborators.map((collaborator, index) => {
-															return <CollaboratorImage key={index} collaborator={collaborator} />;
-														})}
-													</div>
-												</div> */}
 											</div>
 										</a>
 									</Link>
-									{/* Follow
-                                    Following
-                                    Remove */}
-									{/* {user && username === user.attributes.username && (
-										<div className="hidden group-hover:block self-center pl-2">
-											<div
-												onClick={() => removeFromFavourites(token.tokenId)}
-												className="w-8 h-8 flex justify-center items-center rounded-lg transition-all duration-200 cursor-pointer hover:bg-zinc-500/20 "
-											>
-												<i className="fa-solid fa-xmark"></i>
-											</div>
-										</div>
-									)} */}
 								</div>
 							);
 						})

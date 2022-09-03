@@ -79,8 +79,8 @@ export default function AboutArtist({ username, name, bio, country, createdAt, s
 			{/* footer section */}
 			<div className={styles["section2__artist-footer"]}>
 				<div className="space-x-2 md:space-x-5">
-					<span>{country ? country : "India"}</span>
-					<span>{createdAt ? joined : "Joined Nov, 2020"}</span>
+					{country ? <span> {country} </span> : null}
+					<span>{createdAt ? joined : null}</span>
 				</div>
 				<div className="flex space-x-3 text-dark-100 dark:text-light-200">
 					<button

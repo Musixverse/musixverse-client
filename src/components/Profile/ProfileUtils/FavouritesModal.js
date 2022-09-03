@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useContext } from "react";
 import { useRouter } from "next/router";
 import { useMoralis, useMoralisCloudFunction } from "react-moralis";
 import Image from "next/image";
@@ -7,10 +7,9 @@ import Modal from "../../../layout/Modal/Modal";
 import CollaboratorImage from "../../../layout/NFTCard/CollaboratorImage";
 import LoadingContext from "../../../../store/loading-context";
 
-export default function FavouritesModal({ isOpen, setOpen, name, username }) {
+export default function FavouritesModal({ isOpen, setOpen, name, username, favouriteTokens, setFavouriteTokens }) {
 	const router = useRouter();
-	const [favouriteTokens, setFavouriteTokens] = useState([]);
-	const [isLoading, setLoading] = useContext(LoadingContext);
+	const [, setLoading] = useContext(LoadingContext);
 
 	const { user, Moralis } = useMoralis();
 
@@ -30,19 +29,6 @@ export default function FavouritesModal({ isOpen, setOpen, name, username }) {
 			setLoading(false);
 		});
 	};
-
-	useEffect(() => {
-		if (isOpen) {
-			fetchFavouriteTokens({
-				onSuccess: (data) => {
-					setFavouriteTokens(data);
-				},
-				onError: (error) => {
-					console.log("fetchFavouriteTokens Error:", error);
-				},
-			});
-		}
-	}, [isOpen, fetchFavouriteTokens]);
 
 	return (
 		<Modal

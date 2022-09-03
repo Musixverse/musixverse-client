@@ -271,9 +271,9 @@ export const minRecordingYear = 1950;
 /********************    Report Profile Filters    ************************/
 /**************************************************************************/
 export const reportProfileFilters = [
+	"Their content is abusive and hateful",
 	"They're pretending to be me",
 	"They're pretending to be someone else",
-	"Their content is abusive and hateful",
 	"Their profile info and/or images include abusive or hateful content",
 	"Their NFTs contain explicit and sensitive content",
 	"It appears their account is hacked",

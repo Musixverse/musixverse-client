@@ -280,4 +280,19 @@ export const reportProfileFilters = [
 	"Other",
 ];
 
+/**************************************************************************/
+/**********************    Report NFT Filters    **************************/
+/**************************************************************************/
+export const reportNftFilters = [
+	"The content is abusive and hateful",
+	"This track was originally created by me",
+	"This track was originally created by someone else",
+	"The cover art includes abusive/explicit or hateful content",
+	"The track audio includes abusive/explicit or hateful content",
+	"The track contains explicit and sensitive content",
+	"The track data appears to be incorrect",
+	"The track was originally created by a collaborator who is not mentioned",
+	"Other",
+];
+
 export const DISCORD_SUPPORT_CHANNEL_INVITE_LINK = "https://discord.gg/b4B8YhKpfy";

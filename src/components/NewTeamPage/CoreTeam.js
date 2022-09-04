@@ -68,14 +68,13 @@ export default function CoreTeam() {
             title: "CCO",
             dob: "0511",
             role: "Lead Graphics Designer",
-            profileTrack: "/sounds/TeamPage/ShivamTemp.mp3",
+            profileTrack: "/sounds/TeamPage/Shivam.mp3",
             socialLinks: {
                 twitter: "https://twitter.com/Shivamc504",
                 linkedin: "https://www.linkedin.com/in/shivam-singh-bb9bb818a/",
                 github: "https://github.com/Shivamsingh-c17",
             },
-            description: `Shivam is an aesthetic designer who uses the power of design to create stunning graphics. You can find him exploring the breaths and depths of the design world. He handles everything related to design at MXV. He strongly admires the developers and believes that they all are Vikings. Infact he even agrees that Devs >> Designers. Furthermore, he even accepted to distribute 90% of his equity to the developers of MXV.`,
-            // description: `Shivam is an aesthetic designer who uses the power of design to create stunning graphics. You can find him exploring the breaths and depths of the design world. He handles everything related to design at Musixverse "MXV". Shivam has the ability to fight each and every problem through his creative designs. Innovative and creative are the two words that describe him best.`,
+            description: `Shivam is an aesthetic designer who uses the power of design to create stunning graphics. You can find him exploring the breaths and depths of the design world. He handles everything related to design at Musixverse "MXV". Shivam has the ability to fight each and every problem through his creative designs. Innovative and creative are the two words that describe him best.`,
         },
         {
             memberImage: "/assets/teampage/Ayush.jpg",
@@ -96,7 +95,7 @@ export default function CoreTeam() {
     return (
         <>
             <h3 className="mt-32 text-3xl font-medium">Meet the BUIDLers</h3>
-            <div className="flex flex-wrap justify-between w-full mt-10">
+            <div className="flex flex-wrap justify-center w-full mt-10 mb-20 gap-8">
                 {coreTeam.map((member, idx) => {
                     return <MemberNft key={idx} {...{ ...member, setShowModal, currentlyPlaying, setCurrentlyPlaying, idx, setSelectedMember }} />;
                 })}

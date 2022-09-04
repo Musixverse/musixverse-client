@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import PreviewNft from "./CreateNFTUtils/PreviewNft";
 import Step3Form from "./CreateNFTUtils/Step3Form";
 import ActionButtons from "./CreateNFTUtils/ActionButtons";
-import RequiredAsterisk from "./CreateNFTUtils/RequiredAsterisk";
+import RequiredAsterisk from "../../layout/RequiredAsterisk";
 import StatusContext from "../../../store/status-context";
 import SendInviteModal from "./CreateNFTUtils/SendInviteModal";
 

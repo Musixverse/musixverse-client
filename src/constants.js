@@ -279,3 +279,5 @@ export const reportProfileFilters = [
 	"It appears their account is hacked",
 	"Other",
 ];
+
+export const DISCORD_SUPPORT_CHANNEL_INVITE_LINK = "https://discord.gg/b4B8YhKpfy";

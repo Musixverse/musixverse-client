@@ -2,7 +2,7 @@ import { useContext } from "react";
 import PreviewNft from "./CreateNFTUtils/PreviewNft";
 import Step2Form from "./CreateNFTUtils/Step2Form";
 import ActionButtons from "./CreateNFTUtils/ActionButtons";
-import RequiredAsterisk from "./CreateNFTUtils/RequiredAsterisk";
+import RequiredAsterisk from "../../layout/RequiredAsterisk";
 import StatusContext from "../../../store/status-context";
 import { useRouter } from "next/router";
 import { saveNftCreationProgress } from "./CreateNFTUtils/SaveNftCreationProgress";

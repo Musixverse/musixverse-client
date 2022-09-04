@@ -3,7 +3,7 @@ import Image from "next/image";
 import { useMoralisCloudFunction } from "react-moralis";
 import DatePicker from "react-datepicker";
 import CollaboratorRoleDropdown from "./CollaboratorRoleDropdown";
-import RequiredAsterisk from "./RequiredAsterisk";
+import RequiredAsterisk from "../../../layout/RequiredAsterisk";
 import { convertMaticToUSD, convertMaticToINR, truncatePrice } from "../../../utils/GetMarketPrice";
 
 const Step3Form = ({

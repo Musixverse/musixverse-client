@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useMoralis } from "react-moralis";
 
-export default function NoNfts({ username }) {
+export default function NoNfts({ username, favouritesSection = false }) {
 	const { user } = useMoralis();
 
 	return (
@@ -19,13 +19,13 @@ export default function NoNfts({ username }) {
 				)}
 
 				{/* If artist then render create nft other wise buy nft */}
-				{user && username === user.attributes.username && user.attributes.isArtist ? (
+				{user && username === user.attributes.username && user.attributes.isArtist && !favouritesSection ? (
 					<Link href={"/create-nft"} passHref>
 						<button className="py-2 font-medium text-center px-14 hover:bg-primary-200 bg-primary-100 rounded-3xl text-light-100">
 							Create NFTs
 						</button>
 					</Link>
-				) : user && username === user.attributes.username ? (
+				) : user && username === user.attributes.username && !favouritesSection ? (
 					<Link href={"/mxcatalog/new-releases"} passHref>
 						<button className="py-2 font-medium text-center px-14 hover:bg-primary-200 bg-primary-100 rounded-3xl text-light-100">Buy NFTs</button>
 					</Link>

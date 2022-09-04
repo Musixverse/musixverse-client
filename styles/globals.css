@@ -66,7 +66,7 @@ a {
 	font-size: 12px;
 	font-weight: normal;
 	transition: 0.4s;
-	line-height: 25px;
+	line-height: 28px;
 	width: 0px;
 	@apply text-black dark:text-white;
 }
@@ -585,6 +585,7 @@ html {
 	color: #7a7a7a;
 	border: none;
 	padding: 0px;
+	margin: 0px;
 	/* height: fit-content !important; */
 	min-width: fit-content;
 }

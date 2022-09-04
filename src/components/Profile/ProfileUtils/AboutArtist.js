@@ -4,10 +4,12 @@ import { useRouter } from "next/router";
 import { useMoralis } from "react-moralis";
 import styles from "../../../../styles/Profile/ArtistHeader.module.css";
 import StatusContext from "../../../../store/status-context";
+import AuthModalContext from "../../../../store/authModal-context";
 import Tooltip from "../../../layout/Tooltip/Tooltip";
 
 export default function AboutArtist({ username, name, bio, country, createdAt, setShowArtistBioModal, setShowReportModal }) {
 	const { user } = useMoralis();
+	const [, setAuthModalOpen] = useContext(AuthModalContext);
 	const [joined, setJoined] = useState(false);
 
 	useEffect(() => {
@@ -80,22 +82,34 @@ export default function AboutArtist({ username, name, bio, country, createdAt, s
 			{/* footer section */}
 			<div className={styles["section2__artist-footer"]}>
 				<div className="space-x-2 md:space-x-5">
-					<span>{country ? country : "India"}</span>
-					<span>{createdAt ? joined : "Joined Nov, 2020"}</span>
+					{country ? <span> {country} </span> : null}
+					<span>{createdAt ? joined : null}</span>
 				</div>
 				<div className="flex space-x-3 text-dark-100 dark:text-light-200">
 					<Tooltip
-							labelText={<span className="font-semibold text-sm cursor-help"><button
-							onClick={() => setShowReportModal(true)}
-							className="md:w-[36px] md:h-[36px] w-[28px] h-[28px] text-center rounded-full bg-gray-200 dark:bg-[#040404] hover:bg-light-300"
-						>
-							<i className="text-xs text-black dark:text-white md:text-sm fas fa-flag"></i>
-						</button>
-						</span>}
+						labelText={
+							<span className="font-semibold text-sm cursor-help text-center">
+								{user && username !== user.attributes.username && (
+									<button
+										onClick={() => setShowReportModal(true)}
+										className="md:w-[36px] md:h-[36px] w-[28px] h-[28px] text-center rounded-full bg-gray-200 dark:bg-[#040404] hover:bg-light-300"
+									>
+										<i className="text-xs md:text-sm fas fa-flag text-dark-100 dark:text-light-100 ml-1.5"></i>
+									</button>
+								)}
+								{!user && (
+									<button
+										onClick={() => setAuthModalOpen(true)}
+										className="md:w-[36px] md:h-[36px] w-[28px] h-[28px] text-center rounded-full bg-gray-200 dark:bg-[#040404] hover:bg-light-300"
+									>
+										<i className="text-xs md:text-sm fas fa-flag text-dark-100 dark:text-light-100 ml-1.5"></i>
+									</button>
+								)}
+							</span>
+						}
 						message="Report this Profile"
-						tooltipLocation="top"
+						tooltipLocation="bottom"
 					></Tooltip>
-
 
 					<button className="md:w-[36px] md:h-[36px] w-[28px] h-[28px] text-center rounded-full bg-gray-200 dark:bg-[#040404] hover:bg-light-300 dark:hover:bg-dark-100 relative group">
 						<i className="fa-solid fa-share-nodes text-lg"></i>

@@ -9,15 +9,15 @@ import LoadingContext from "../../../../store/loading-context";
 export default function FollowersModal({ isOpen, setOpen, name, username }) {
 	const router = useRouter();
 	const [followers, setFollowers] = useState([]);
-	const [isLoading, setLoading] = useContext(LoadingContext);
+	const [, setLoading] = useContext(LoadingContext);
 
 	const { user, Moralis } = useMoralis();
 
 	const { fetch: fetchFollowers } = useMoralisCloudFunction("fetchFollowers", { username: username }, { autoFetch: false });
 
-	const removeFromFavourites = async (tokenId) => {
+	const removeFollower = async (followerUsername) => {
 		setLoading(true);
-		await Moralis.Cloud.run("removeTokenFromFavourites", { tokenId: tokenId }).then(async () => {
+		await Moralis.Cloud.run("removeFollower", { username: followerUsername }).then(async () => {
 			await fetchFollowers({
 				onSuccess: (data) => {
 					setFollowers(data);
@@ -34,7 +34,6 @@ export default function FollowersModal({ isOpen, setOpen, name, username }) {
 		if (isOpen) {
 			fetchFollowers({
 				onSuccess: (data) => {
-					console.log(data);
 					setFollowers(data);
 				},
 				onError: (error) => {
@@ -60,39 +59,28 @@ export default function FollowersModal({ isOpen, setOpen, name, username }) {
 					{followers && followers.length > 0 ? (
 						followers.map((follower) => {
 							return (
-								<div key={follower.objectId} className="flex group p-2 rounded hover:bg-light-200 dark:hover:bg-dark-200">
+								<div key={follower.objectId} className="flex p-2 rounded hover:bg-light-200 dark:hover:bg-dark-200">
 									<Link href={`/profile/${follower.username}`} passHref>
-										<a target="_blank" rel="noopener noreferrer" className="w-full flex text-start cursor-pointer group">
+										<a target="_blank" rel="noopener noreferrer" className="w-full flex text-start cursor-pointer">
 											<Image src={follower.avatar} className="rounded" height={50} width={50} alt="NFT Artwork" />
 											<div className="w-full flex justify-between">
 												<div className="flex flex-col place-content-between">
 													<p className="ml-4 text-sm font-semibold">{follower.name}</p>
 													<p className="ml-4 text-xs items-end">@{follower.username}</p>
 												</div>
-												{/* <div className="flex items-end">
-													<span className="hidden group-hover:block text-xs mr-4 text-primary-100">{token.genre}</span>
-													<div className="flex items-end -space-x-2">
-														{token.collaborators.map((collaborator, index) => {
-															return <CollaboratorImage key={index} collaborator={collaborator} />;
-														})}
-													</div>
-												</div> */}
 											</div>
 										</a>
 									</Link>
-									{/* Follow
-                                    Following
-                                    Remove */}
-									{/* {user && username === user.attributes.username && (
-										<div className="hidden group-hover:block self-center pl-2">
+									{user && username === user.attributes.username && (
+										<div className="self-center pl-2">
 											<div
-												onClick={() => removeFromFavourites(token.tokenId)}
-												className="w-8 h-8 flex justify-center items-center rounded-lg transition-all duration-200 cursor-pointer hover:bg-zinc-500/20 "
+												onClick={() => removeFollower(follower.username)}
+												className="py-1 px-3 flex justify-center items-center rounded transition-all duration-200 cursor-pointer bg-zinc-500/20 hover:bg-error-100/20"
 											>
-												<i className="fa-solid fa-xmark"></i>
+												Remove
 											</div>
 										</div>
-									)} */}
+									)}
 								</div>
 							);
 						})

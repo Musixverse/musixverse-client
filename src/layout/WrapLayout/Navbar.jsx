@@ -104,33 +104,15 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 						<div className="hidden ml-auto md:block">
 							<ul className="flex flex-row items-center text-sm font-medium md:space-x-8 lg:space-x-3 xl:space-x-6 md:mt-0 sm:text-sm">
 								{/* Search bar */}
-								<li className="hidden xl:block">
-									{/* <div className="flex items-center justify-center text-xs rounded text-dark-200 dark:text-white">
-										<div className="flex overflow-hidden border rounded-full dark:border-dark-100">
-											<button className="flex items-center justify-center px-4 border-l border-light-300 dark:border-dark-100 bg-search-100 dark:bg-search-200">
-												<svg
-													className="w-4 h-4 dark:text-white"
-													fill="currentColor"
-													xmlns="http://www.w3.org/2000/svg"
-													viewBox="0 0 24 24"
-												>
-													<path d="M16.32 14.9l5.39 5.4a1 1 0 0 1-1.42 1.4l-5.38-5.38a8 8 0 1 1 1.41-1.41zM10 16a6 6 0 1 0 0-12 6 6 0 0 0 0 12z" />
-												</svg>
-											</button>
-											<input
-												type="text"
-												className="px-4 py-2 w-72 border-1 border-light-300 bg-search-100 dark:text-search-300 dark:bg-search-200 focus:outline-none"
-												placeholder="Search items, collections and accounts"
-											/>
-										</div>
-									</div> */}
+								{/* TODO: hidden for beta */}
+								{/* <li className="hidden xl:block">
 									<div className="search-box">
 										<input className="search-text" type="text" placeholder="Search items, collections and accounts" />
 										<a href="#" className="search-btn">
 											<i className="fas fa-search"></i>
 										</a>
 									</div>
-								</li>
+								</li> */}
 
 								{/* Notification button */}
 								{/* <li className="hidden lg:block">
@@ -149,9 +131,7 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 									<button
 										aria-label="Toggle Dark Mode"
 										type="button"
-										className={`flex items-center justify-between w-full " + ${
-											user && isAuthenticated ? "" : "rounded-b-xl py-1"
-										} `}
+										className={`flex items-center justify-between w-full " + ${user && isAuthenticated ? "" : "rounded-b-xl py-1"} `}
 										onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
 									>
 										<div className="flex items-center justify-center w-10 h-10 rounded-full bg-search-100 dark:bg-search-200 hover:bg-[#bdbdbd] dark:hover:bg-dark-100">
@@ -224,7 +204,7 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 										>
 											<li>
 												{isAuthenticated && user && (
-													<div className="flex items-center justify-between w-full px-4 py-3 bg-transparent cursor-pointer rounded-t-xl dropdown-item whitespace-nowrap hover:bg-gray-100 dark:hover:bg-dark-100">
+													<div className="flex items-center justify-between w-full px-4 py-3 bg-transparent rounded-t-xl dropdown-item whitespace-nowrap dark:hover:bg-dark-100 active:bg-transparent">
 														<div>
 															<p>Wallet Address</p>
 															<p>{truncatedWalletAddress}</p>
@@ -240,7 +220,7 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 															/>
 														) : null}
 													</div>
-												)} 
+												)}
 												{/* (
 													<div className="px-4 py-3 bg-transparent rounded-t-xl hover:bg-primary-100 hover:text-light-100">
 														<a
@@ -299,7 +279,6 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 												</li>
 											)}
 
-											
 											{/* Logout Button */}
 											<li>
 												{isAuthenticated && user ? (

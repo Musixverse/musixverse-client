@@ -43,7 +43,7 @@ const SuccessBox = () => {
 					<span className="block sm:inline">{success.message}</span>
 					<div
 						onClick={handleClose}
-						className="absolute top-1 right-1 w-8 h-8 flex justify-center items-center rounded-md transition-all duration-200 cursor-pointer hover:bg-primary-200"
+						className="absolute top-1 right-1 w-8 h-8 flex justify-center items-center rounded-md transition-all duration-200 cursor-pointer hover:bg-primary-100 hover:text-light-100"
 					>
 						<i className="fa-solid fa-xmark"></i>
 					</div>

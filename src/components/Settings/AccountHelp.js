@@ -1,6 +1,7 @@
 import LockAccount from "./SettingsUtils/LockAccount";
 import Notification from "./SettingsUtils/Notification";
 import Link from "next/link";
+import { DISCORD_SUPPORT_CHANNEL_INVITE_LINK } from "../../constants";
 
 export default function AccountHelp() {
     return (

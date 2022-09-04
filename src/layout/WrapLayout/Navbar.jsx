@@ -251,7 +251,7 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 													</Link>
 												</li>
 											)}
-											{user && isAuthenticated && user.attributes.email && (
+											{/* {user && isAuthenticated && user.attributes.email && (
 												<li>
 													<Link href="/settings/notifications-settings" passHref={true}>
 														<div className="block w-full px-4 py-2 bg-transparent cursor-pointer dropdown-item whitespace-nowrap hover:bg-gray-100 dark:hover:bg-dark-100">
@@ -259,7 +259,7 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 														</div>
 													</Link>
 												</li>
-											)}
+											)} */}
 											{user && isAuthenticated && (
 												<li>
 													<Link href="/settings/account-help" passHref={true}>

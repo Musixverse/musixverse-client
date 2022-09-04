@@ -119,7 +119,7 @@ export default function TrackHeader({
 
 					<div className="flex justify-between items-end sm:pb-6">
 						<div className="font-tertiary text-7xl flex flex-col sm:flex-row">
-							<span>{title}</span>
+							<span>{title}</span>&nbsp;
 							{localTokenId ? (
 								<>
 									{otherTokensOfTrack.length === 0 ? (

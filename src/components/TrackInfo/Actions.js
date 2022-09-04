@@ -78,7 +78,7 @@ const Actions = ({ tokenId, artistName, title }) => {
 	const uriEncodedSharableText = encodeURI(sharableMessage);
 
 	return (
-		<div className="flex flex-row space-x-4 text-xs">
+		<div className="flex flex-row space-x-2 md:space-x-4 text-xs">
 			<button
 				onClick={() => {
 					markTokenFavourite();

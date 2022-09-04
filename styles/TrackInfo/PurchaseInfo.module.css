@@ -1,5 +1,5 @@
 .purchase-info {
-    @apply p-8 xl:p-10 bg-light-300 rounded-xl xl:col-span-2 col-span-4;
+    @apply p-8 xl:p-10 bg-light-300 rounded-xl xl:col-span-2 md:col-span-4;
 }
 /* divide-y-2 divide-gray-400 */
 
@@ -12,7 +12,7 @@
 }
 
 .purchase-info__heading--p i {
-    @apply text-[10px];
+    @apply text-xs;
 }
 
 .purchase-info__current-owner {

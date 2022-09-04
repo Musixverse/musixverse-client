@@ -37,24 +37,24 @@ export default function TrackDetails({ tokenId, metadata }) {
 			{/* OTHER DETAILS */}
 			<div className={styles["track-info__other-details"]}>
 				{/* <div className={styles['other-details__title']}> */}
-				<h1 className="font-tertiary text-[36px]">OTHER DETAILS</h1>
+				<h1 className="font-tertiary text-4xl">OTHER DETAILS</h1>
 				{/* </div> */}
 
-				<div className={styles["other-details__section1"]}>
+				<div className={styles["other-details__section2"]}>
 					<div className="text-left">
-						<h4 className="font-bold font-secondary text-[16px]">{metadata.attributes[2].trait_type}</h4>
+						<h4 className="font-bold font-secondary text-base">{metadata.attributes[2].trait_type}</h4>
 						<p>{metadata.attributes[2].value}</p>
 					</div>
 					<div className="text-left">
-						<h4 className="font-bold font-secondary text-[16px]">{metadata.attributes[3].trait_type}</h4>
+						<h4 className="font-bold font-secondary text-base">{metadata.attributes[3].trait_type}</h4>
 						<p>{metadata.attributes[3].value}</p>
 					</div>
 					<div className="text-left">
-						<h4 className="font-bold font-secondary text-[16px]">{metadata.attributes[4].trait_type}</h4>
+						<h4 className="font-bold font-secondary text-base">{metadata.attributes[4].trait_type}</h4>
 						<p>{metadata.attributes[4].value}</p>
 					</div>
 					<div className="text-left">
-						<h4 className="font-bold font-secondary text-[16px]">{metadata.attributes[5].trait_type}</h4>
+						<h4 className="font-bold font-secondary text-base">{metadata.attributes[5].trait_type}</h4>
 						<p>{metadata.attributes[5].value}</p>
 					</div>
 				</div>
@@ -64,19 +64,19 @@ export default function TrackDetails({ tokenId, metadata }) {
 				{/* Section 2 */}
 				<div className={styles["other-details__section2"]}>
 					<div className="text-left">
-						<h4 className="font-bold font-secondary text-[16px]">Duration</h4>
+						<h4 className="font-bold font-secondary text-base">Duration</h4>
 						<p>{time}</p>
 					</div>
 					<div className="text-left">
-						<h4 className="font-bold font-secondary text-[16px]">Language</h4>
+						<h4 className="font-bold font-secondary text-base">Language</h4>
 						<p>{metadata.language}</p>
 					</div>
 					<div className="text-left">
-						<h4 className="font-bold font-secondary text-[16px]">Country of Origin</h4>
+						<h4 className="font-bold font-secondary text-base">Country of Origin</h4>
 						<p>{metadata.location.countryOfOrigin.name}</p>
 					</div>
 					<div className="text-left">
-						<h4 className="font-bold font-secondary text-[16px]">Location Created</h4>
+						<h4 className="font-bold font-secondary text-base">Location Created</h4>
 						<p>{metadata.location.cityOfOrigin.name}</p>
 					</div>
 				</div>
@@ -86,19 +86,19 @@ export default function TrackDetails({ tokenId, metadata }) {
 				{/* Section 2 */}
 				<div className={styles["other-details__section2"]}>
 					<div className="text-left">
-						<h4 className="font-bold font-secondary text-[16px]">{metadata.attributes[6].trait_type}</h4>
+						<h4 className="font-bold font-secondary text-base">{metadata.attributes[6].trait_type}</h4>
 						<p>{metadata.attributes[6].value}</p>
 					</div>
 					<div className="text-left">
-						<h4 className="font-bold font-secondary text-[16px]">{metadata.attributes[7].trait_type}</h4>
+						<h4 className="font-bold font-secondary text-base">{metadata.attributes[7].trait_type}</h4>
 						<p>{metadata.attributes[7].value}</p>
 					</div>
 					<div className="text-left">
-						<h4 className="font-bold font-secondary text-[16px]">{metadata.attributes[0].trait_type}</h4>
+						<h4 className="font-bold font-secondary text-base">{metadata.attributes[0].trait_type}</h4>
 						<p>{metadata.attributes[0].value}</p>
 					</div>
 					<div className="text-left">
-						<h4 className="font-bold font-secondary text-[16px]">Unique Token ID</h4>
+						<h4 className="font-bold font-secondary text-base">Unique Token ID</h4>
 						<p>{tokenId}</p>
 					</div>
 				</div>
@@ -107,16 +107,16 @@ export default function TrackDetails({ tokenId, metadata }) {
 
 				<div className={styles["other-details__section2"]}>
 					<div className="text-left">
-						<h4 className="font-bold font-secondary text-[16px]">Token Standard</h4>
+						<h4 className="font-bold font-secondary text-base">Token Standard</h4>
 						<p>ERC-1155</p>
 					</div>
 					<div className="text-left">
-						<h4 className="font-bold font-secondary text-[16px]">Blockchain</h4>
+						<h4 className="font-bold font-secondary text-base">Blockchain</h4>
 						<p>Polygon</p>
 					</div>
 
 					<div className="text-left col-span-2">
-						<h4 className="font-bold font-secondary text-[16px]">Unlocked On</h4>
+						<h4 className="font-bold font-secondary text-base">Unlocked On</h4>
 						<p>{dateStr.toString()}</p>
 					</div>
 				</div>
@@ -126,7 +126,7 @@ export default function TrackDetails({ tokenId, metadata }) {
 				<div className={styles["other-details__section2"]}>
 					{metadata.lyrics ? (
 						<div className="text-left">
-							<h4 className="font-bold font-secondary text-[16px]">Lyrics</h4>
+							<h4 className="font-bold font-secondary text-base">Lyrics</h4>
 							<Link href={metadata.lyrics.replace("ipfs://", process.env.NEXT_PUBLIC_IPFS_NODE_URL)}>
 								<a target="_blank" rel="noopener noreferrer">
 									Available &nbsp;
@@ -137,12 +137,12 @@ export default function TrackDetails({ tokenId, metadata }) {
 					) : null}
 					{metadata.isrc ? (
 						<div className="text-left">
-							<h4 className="font-bold font-secondary text-[16px]">ISRC</h4>
+							<h4 className="font-bold font-secondary text-base">ISRC</h4>
 							<p>{metadata.isrc}</p>
 						</div>
 					) : null}
 					<div className="text-left">
-						<h4 className="font-bold font-secondary text-[16px]">License</h4>
+						<h4 className="font-bold font-secondary text-base">License</h4>
 						<Link href="https://creativecommons.org/publicdomain/zero/1.0/">
 							<a target="_blank" rel="noopener noreferrer">
 								MXV CC0 &nbsp;
@@ -151,7 +151,7 @@ export default function TrackDetails({ tokenId, metadata }) {
 						</Link>
 					</div>
 					<div className={metadata.lyrics && metadata.isrc ? "text-left col-span-1" : "text-left col-span-2"}>
-						<h4 className="font-bold font-secondary text-[16px]">Contract Address</h4>
+						<h4 className="font-bold font-secondary text-base">Contract Address</h4>
 						<p>{metadata.chainDetails.contractAddress}</p>
 					</div>
 				</div>
@@ -159,7 +159,7 @@ export default function TrackDetails({ tokenId, metadata }) {
 				{/* Section 5 */}
 				{metadata.links.spotify || metadata.links.appleMusic || metadata.links.amazonMusic || metadata.links.youtubeMusic || metadata.links.other ? (
 					<div className={"mt-6 dark:bg-dark-200 " + styles["other-details__footer"]}>
-						<h4 className="font-secondary text-[18px]">Listen on</h4>
+						<h4 className="font-secondary text-lg">Listen on</h4>
 						<div className={styles["footer__icons"]}>
 							{metadata.links.spotify ? (
 								<Link href={metadata.links.spotify}>

@@ -6,7 +6,7 @@ export default function NFTCardsWithPager({ nftCards }) {
 
 	return (
 		<>
-			<div className="grid grid-cols-2 gap-6 my-8 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 md:my-11 md:gap-11">{nftCards[currentPage]}</div>
+			<div className="grid grid-cols-1 justify-items-center gap-6 my-8 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 md:my-11 md:gap-11">{nftCards[currentPage]}</div>
 			{nftCards.length > 1 ? <Pager onPageChange={setCurrentPage} maxPages={nftCards.length} /> : null}
 		</>
 	);

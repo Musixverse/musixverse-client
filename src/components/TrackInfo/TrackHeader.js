@@ -102,7 +102,7 @@ export default function TrackHeader({
 
 				{/* Track Details section */}
 				<div className={styles["track-header__container--track-detail"]}>
-					<div className="font-bold pb-2 items-center flex">
+					<div className="font-bold pt-8 sm:pt-0 pb-2 items-center flex">
 						{artist ? (
 							<Link href={`/profile/${artist.username}`} className="cursor-pointer">
 								<a target="_blank" rel="noopener noreferrer">
@@ -117,15 +117,15 @@ export default function TrackHeader({
 						)}
 					</div>
 
-					<div className="flex justify-between items-end pb-6">
-						<div className="font-tertiary text-7xl flex">
-							<span>{title}</span>&nbsp;
+					<div className="flex justify-between items-end sm:pb-6">
+						<div className="font-tertiary text-7xl flex flex-col sm:flex-row">
+							<span>{title}</span>
 							{localTokenId ? (
 								<>
 									{otherTokensOfTrack.length === 0 ? (
-										<span className="font-primary text-xs items-end flex mb-3 ml-1">#1 of 1</span>
+										<span className="font-primary text-xs items-end flex mb-3 sm:ml-1">#1 of 1</span>
 									) : (
-										<span className="font-primary text-xs items-end flex mb-2">
+										<span className="font-primary text-xs items-end flex mb-2 sm:ml-1">
 											<TrackEditionDropdown
 												optionsArray={otherTokensOfTrack}
 												localTokenId={localTokenId}
@@ -141,7 +141,7 @@ export default function TrackHeader({
 					<AudioPlayer tokenId={tokenId} audio_url={audio_url} artistName={artist && artist.name} title={title} />
 
 					<div className="w-full h-full grid content-between pt-6">
-						<div className="pb-6 w-full">
+						<div className="pb-6 flex flex-wrap gap-2 w-full">
 							{tags.map((tag, index) => {
 								return (
 									<button key={index} type="button" className="px-6 py-2 mr-2 rounded-full bg-light-200 dark:bg-dark-100 text-sm">

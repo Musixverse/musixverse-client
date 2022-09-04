@@ -6,8 +6,9 @@ import Image from "next/image";
 import { useMoralis } from "react-moralis";
 import successLogo from "/public/assets/success-failure-modals/success.svg";
 import StatusContext from "../../../../store/status-context";
+import CustomButton from "../../../layout/CustomButton";
 
-const ShareTrackNftModal = ({ isOpen, setOpen, artistName, title }) => {
+const ShareTrackNftModal = ({ isOpen, setOpen, artistName, title, setAuthModalOpen }) => {
 	/*******************************
 	 *******  SHARE BUTTONS  *******
 	 *******************************/
@@ -55,14 +56,28 @@ const ShareTrackNftModal = ({ isOpen, setOpen, artistName, title }) => {
 			}
 			content={
 				<div>
-					<div className="flex items-center justify-between flex-1 px-4 py-2 rounded-lg bg-light-200 dark:bg-[#323232]">
-						<span className="max-w-[180px] md:max-w-[280px] truncate md:text-base align-bottom text-sm font-secondary xl:max-w-none">
-							{currentPageLink}
-						</span>
-						<button className="w-fit h-fit" onClick={copyToClipboard}>
-							<i className="far fa-clipboard text-primary-100"></i>
-						</button>
-					</div>
+					{user ? (
+						<div className="flex items-center justify-between flex-1 px-4 py-2 rounded-lg bg-light-200 dark:bg-[#323232]">
+							<span className="max-w-[180px] md:max-w-[280px] truncate md:text-base align-bottom text-sm font-secondary xl:max-w-none">
+								{currentPageLink}
+							</span>
+							<button className="w-fit h-fit" onClick={copyToClipboard}>
+								<i className="far fa-clipboard text-primary-100"></i>
+							</button>
+						</div>
+					) : (
+						<CustomButton
+							onClick={() => {
+								setOpen(false);
+								setAuthModalOpen(true);
+							}}
+							green={true}
+							classes="text-sm px-8 py-3"
+						>
+							Sign up to get your referral link <i className="ml-1 fa-solid fa-right-to-bracket"></i>
+						</CustomButton>
+					)}
+
 					<div className="flex justify-between mt-8">
 						<div onClick={copyToClipboard}>
 							<div className="flex items-center rounded-lg p-3 cursor-pointer whitespace-nowrap bg-light-200 hover:bg-light-300 dark:bg-[#323232] dark:hover:bg-dark-200">

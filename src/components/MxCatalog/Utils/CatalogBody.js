@@ -4,8 +4,9 @@ import UnsoldNFTs from "../NewReleases/UnsoldNFTs";
 import SoldOnceNFTs from "../Explore/SoldOnceNFTs";
 import TrendingNFTs from "../Trending/TrendingNFTs";
 import Filter from "./CatalogUtils/Filter";
+import MobileFilter from "./CatalogUtils/MobileFilterUtils/MobileFilter"
 
-export default function CatalogBody({ currentSelection, setAppliedFilter, appliedFilter }) {
+export default function CatalogBody({ currentSelection, setAppliedFilter, appliedFilter, showMobileFilter, setShowMobileFilter }) {
 	const { theme } = useTheme();
 	let catalogType = "NEW RELEASES ON MUSIXVERSE";
 	if (currentSelection === 2) catalogType = "EXPLORE THE MUSIXVERSE MARKETPLACE";
@@ -20,7 +21,9 @@ export default function CatalogBody({ currentSelection, setAppliedFilter, applie
 						<p className="dark:text-light-200">{catalogType}</p>
 					</div>
 
-					<div className="flex items-start justify-between space-x-10 w-full">
+					<MobileFilter {...{setShowMobileFilter}}/>
+
+					<div className="flex items-start justify-between w-full space-x-10">
 						<Filter setAppliedFilter={setAppliedFilter} appliedFilter={appliedFilter} currentSelection={currentSelection} />
 
 						<div className="w-full grid col-span-9 gap-y-[60px] gap-x-[80px] 2xl:grid-cols-4 xl:grid-cols-3 md:grid-cols-2">

@@ -1,6 +1,7 @@
 import { useEffect, useReducer, useState } from "react";
 import CatalogBody from "./CatalogBody";
 import CatalogNav from "./CatalogNav";
+import MobileFilterModal from "./CatalogUtils/MobileFilterUtils/MobileFilterModal";
 
 const reducer = (state, action) => {
 	switch (action.type) {
@@ -74,6 +75,8 @@ export default function Marketplace() {
 
 		sortingFilter: "dateNewest",
 	});
+	const [showMobileFilter, setShowMobileFilter] = useState(false);
+
 
 	useEffect(() => {
 		console.log("UPDATED FILTERS: ", appliedFilter);
@@ -81,10 +84,18 @@ export default function Marketplace() {
 
 	return (
 		<>
+			<MobileFilterModal {...{showMobileFilter, setShowMobileFilter, appliedFilter, setAppliedFilter:dispatch, currentSelection}}/>
+
 			<CatalogNav {...{ currentSelection, setCurrentSelection }} />
 
 			{/* Main Catalog Body */}
-			<CatalogBody currentSelection={currentSelection} appliedFilter={appliedFilter} setAppliedFilter={dispatch} />
+			<CatalogBody 
+				showMobileFilter={showMobileFilter} 
+				setShowMobileFilter={setShowMobileFilter}
+				currentSelection={currentSelection} 
+				appliedFilter={appliedFilter} 
+				setAppliedFilter={dispatch} 
+			/>
 		</>
 	);
 }

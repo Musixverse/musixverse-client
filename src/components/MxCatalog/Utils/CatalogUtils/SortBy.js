@@ -4,12 +4,12 @@ import RadioButton from "../../../../layout/RadioButton";
 export default function SortBy({ appliedFilter, setAppliedFilter, setCurrentFilterType, currentSelection }) {
 	const sortByArray = ["Date Listed: Newest", "Date Listed: Oldest", "Price: High to Low", "Price: Low to High", "Date Sold: Newest", "Date Sold: Oldest"];
 	return (
-		<div className="flex w-[657px] flex-col mt-8 max-h-[425px] overflow-y-scroll">
-			<h5 className="text-lg font-bold font-secondary">Sort by</h5>
-			<p className="font-secondary text-[#7F7F7F] text-[15px]">Sort NFTs based on Price or Date </p>
+		<div className="flex lg:w-[657px] flex-col mt-8 h-3/4 lg:h-[430px] overflow-y-scroll">
+			<h5 className="text-sm font-bold lg:text-lg font-secondary">Sort by</h5>
+			<p className="font-secondary text-[#7F7F7F] text-[11px] md:text-[13px] lg:text-[15px]">Sort NFTs based on Price or Date </p>
 			<HorizontalRuler />
 
-			<p className="mt-4 font-secondary">Date Listed</p>
+			<p className="mt-4 text-sm font-secondary lg:text-base">Date Listed</p>
 			<RadioButton
 				radioState={appliedFilter.sortingFilter}
 				setRadioState={setAppliedFilter}
@@ -22,7 +22,7 @@ export default function SortBy({ appliedFilter, setAppliedFilter, setCurrentFilt
 			/>
 			<HorizontalRuler />
 
-			<p className="mt-4 font-secondary">Price</p>
+			<p className="mt-4 text-sm font-secondary lg:text-base">Price</p>
 			<RadioButton
 				radioState={appliedFilter.sortingFilter}
 				setRadioState={setAppliedFilter}
@@ -38,7 +38,7 @@ export default function SortBy({ appliedFilter, setAppliedFilter, setCurrentFilt
 				<>
 					<HorizontalRuler />
 
-					<p className="mt-4 font-secondary">Date Sold</p>
+					<p className="mt-4 text-sm font-secondary lg:text-base">Date Sold</p>
 					<RadioButton
 						radioState={appliedFilter.sortingFilter}
 						setRadioState={setAppliedFilter}

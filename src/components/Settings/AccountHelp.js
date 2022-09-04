@@ -1,5 +1,6 @@
 import LockAccount from "./SettingsUtils/LockAccount";
 import Notification from "./SettingsUtils/Notification";
+import Link from "next/link";
 
 export default function AccountHelp() {
     return (
@@ -13,7 +14,12 @@ export default function AccountHelp() {
                 description={
                     <>
                         {" "}
-                        Visit our <a className="font-medium text-primary-100">help center</a> to learn how to get started with buying, selling, and creating.{" "}
+                        Visit our{" "}
+                        <Link href={DISCORD_SUPPORT_CHANNEL_INVITE_LINK} passHref>
+                            <a target="_blank" rel="noopener noreferrer" className="font-medium text-primary-100">
+                                help center
+                            </a>
+                        </Link> to learn how to get started with buying, selling, and creating.{" "}
                     </>
                 }
                 toggleSwitch={false}
@@ -30,7 +36,7 @@ export default function AccountHelp() {
                 }
                 toggleSwitch={false}
             />
-            <LockAccount />
+            {/* <LockAccount /> */}
             {/* <LockAccount/> */}
             {/* <Compromised */}
         </div>

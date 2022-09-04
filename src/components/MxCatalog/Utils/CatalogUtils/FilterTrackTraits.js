@@ -7,12 +7,12 @@ export default function FilterTrackTraits({ appliedFilter, setAppliedFilter, set
 	const recordingYearArray = [...Array(new Date().getFullYear() - minRecordingYear + 1).keys()].map((x) => new Date().getFullYear() - x);
 
 	return (
-		<div className="flex flex-col mt-8 h-[430px] overflow-y-scroll pr-10">
-			<h5 className="text-lg font-bold font-secondary">Filter based on Track Traits</h5>
-			<p className="font-secondary text-[#7F7F7F] text-[15px]">Select Track Traits such as Genre, Language and others</p>
+		<div className="flex lg:w-[657px] flex-col mt-8 h-3/4 lg:h-[430px] pr-10 overflow-y-scroll">
+			<h5 className="text-sm font-bold md:text-base lg:text-lg font-secondary">Filter based on Track Traits</h5>
+			<p className="font-secondary text-[#7F7F7F] text-[11px] md:text-[13px] lg:text-[15px]">Select Track Traits such as Genre, Language and others</p>
 			<HorizontalRuler />
 
-			<div className="flex w-[657px] flex-col mt-5 space-y-2 sm:flex-row sm:space-x-10 sm:space-y-0">
+			<div className="flex flex-col w-5/6 mt-4 space-y-2 sm:flex-row sm:space-x-10 sm:space-y-0">
 				{/* Can make a component of the div below */}
 				<div className="flex-1 text-sm font-semibold md:text-base font-secondary">
 					<p className="mb-1 text-sm">Track Origin</p>
@@ -36,7 +36,7 @@ export default function FilterTrackTraits({ appliedFilter, setAppliedFilter, set
 				</div>
 			</div>
 
-			<div className="flex w-[657px] flex-col mt-5 space-y-2 sm:flex-row sm:space-x-10 sm:space-y-0">
+			<div className="flex flex-col w-5/6 mt-2 space-y-2 lg:mt-5 sm:flex-row sm:space-x-10 sm:space-y-0">
 				{/* Can make a component of the div below */}
 				<div className="flex-1 text-sm font-semibold md:text-base font-secondary">
 					<p className="mb-1 text-sm">Genre</p>
@@ -60,7 +60,7 @@ export default function FilterTrackTraits({ appliedFilter, setAppliedFilter, set
 				</div>
 			</div>
 
-			<div className="flex w-[657px] flex-col mt-5 space-y-2 sm:flex-row sm:space-x-10 sm:space-y-0">
+			<div className="flex flex-col w-5/6 mt-2 space-y-2 lg:mt-5 sm:flex-row sm:space-x-10 sm:space-y-0">
 				{/* Can make a component of the div below */}
 				<div className="flex-1 text-sm font-semibold md:text-base font-secondary">
 					<p className="mb-1 text-sm">Duration</p>
@@ -84,7 +84,7 @@ export default function FilterTrackTraits({ appliedFilter, setAppliedFilter, set
 				</div>
 			</div>
 
-			<div className="flex w-[657px] flex-col mt-5 space-y-2 sm:flex-row sm:space-x-10 sm:space-y-0">
+			<div className="flex flex-col w-5/6 mt-2 space-y-2 lg:mt-5 sm:flex-row sm:space-x-10 sm:space-y-0">
 				{/* Can make a component of the div below */}
 				<div className="flex-1 text-sm font-semibold md:text-base font-secondary">
 					<p className="mb-1 text-sm">Tags</p>

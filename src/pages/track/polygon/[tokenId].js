@@ -86,7 +86,7 @@ export default function TrackInfo({ token, otherTokensOfTrack }) {
 			</Head>
 
 			<div className="flex flex-col items-center justify-center w-full bg-light-100 dark:bg-dark-200 pt-28 pb-20">
-				<div className="w-full max-w-[1920px] px-16 xl:px-20 2xl:px-36">
+				<div className="w-full max-w-[1920px] px-10 sm:px-16 xl:px-20 2xl:px-36">
 					<TrackHeader
 						image={metadata.artwork.uri.replace("ipfs://", process.env.NEXT_PUBLIC_IPFS_NODE_URL)}
 						artworkInfo={metadata.artwork}

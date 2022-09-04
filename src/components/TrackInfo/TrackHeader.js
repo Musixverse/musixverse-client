@@ -117,7 +117,7 @@ export default function TrackHeader({
 						)}
 					</div>
 
-					<div className="flex justify-between items-end pb-6">
+					<div className="flex justify-between items-end sm:pb-6">
 						<div className="font-tertiary text-7xl flex flex-col sm:flex-row">
 							<span>{title}</span>
 							{localTokenId ? (
@@ -141,7 +141,7 @@ export default function TrackHeader({
 					<AudioPlayer tokenId={tokenId} audio_url={audio_url} artistName={artist && artist.name} title={title} />
 
 					<div className="w-full h-full grid content-between pt-6">
-						<div className="pb-6 w-full">
+						<div className="pb-6 flex flex-wrap gap-2 w-full">
 							{tags.map((tag, index) => {
 								return (
 									<button key={index} type="button" className="px-6 py-2 mr-2 rounded-full bg-light-200 dark:bg-dark-100 text-sm">

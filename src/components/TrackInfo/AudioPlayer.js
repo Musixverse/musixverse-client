@@ -107,16 +107,16 @@ export default function AudioPlayer({ tokenId, audio_url, artistName, title }) {
 	};
 
 	return (
-		<div className="flex md:flex-row justify-between items-center">
+		<div className="flex flex-col justify-evenly items-center sm:flex-row sm:justify-between sm:items-center">
 			<button ref={playBtn} onClick={playTrackHandler} className={"dark:border-light-100 " + styles["play-btn"]}>
-				<i className="fas fa-play text-sm sm:text-xl md:text-2xl"></i>
+				<i className="fas fa-play text-xl md:text-2xl"></i>
 			</button>
-			<div className="ml-5 flex flex-col md:flex-grow">
+			<div className="sm:ml-5 flex flex-col sm:flex-grow">
 				{/* MP3 Bar */}
 				<div className={styles["music-bar__container"]}>
 					<div className={styles["music-bar__container--info"]}>
 						{/* Time elapsed */}
-						<p className={styles["container__info--duration"]} ref={currTime}>
+						<p className={"mr-4 "+styles["container__info--duration"]} ref={currTime}>
 							00:00
 						</p>
 						{/* MP3 Progress */}
@@ -125,7 +125,7 @@ export default function AudioPlayer({ tokenId, audio_url, artistName, title }) {
 							<div className={styles["info__progress-container--slider-box"]}></div>
 						</div>
 						{/* Duration of track */}
-						<p className={styles["container__info--duration"]} ref={durTime}></p>
+						<p className={"ml-2 "+styles["container__info--duration"]} ref={durTime}></p>
 					</div>
 					{/* Audio elem */}
 					<audio ref={audio} src={audio_url} onTimeUpdate={updateProgress} onEnded={resetProgress}></audio>

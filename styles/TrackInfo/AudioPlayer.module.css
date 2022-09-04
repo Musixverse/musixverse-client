@@ -20,9 +20,9 @@
 }
 
 .info__progress-container--slider-box {
-  @apply bg-primary-100 w-[22px] h-[10px] rounded-xl ml-[-11px];
+  @apply bg-primary-100 w-[20px] h-[10px] rounded-xl ml-[-11px];
 }
 
 .play-btn{
-  @apply h-[70px] w-[70px] border-dark-200 border-4 rounded-full flex items-center justify-center;
+  @apply h-[70px] w-[70px] mb-4 sm:mb-0 border-dark-200 border-4 rounded-full flex items-center justify-center;
 }

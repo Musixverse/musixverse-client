@@ -1,5 +1,5 @@
 import InputDropdown from "./InputDropdown";
-import RequiredAsterisk from "./RequiredAsterisk";
+import RequiredAsterisk from "../../../layout/RequiredAsterisk";
 import { trackOriginArray, genreArray, parentalAdvisoryArray, minRecordingYear } from "../../../constants";
 
 export default function DetailsInputGroup({

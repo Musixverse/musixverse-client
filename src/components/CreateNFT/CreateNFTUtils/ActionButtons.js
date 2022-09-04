@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { useRouter } from "next/router";
 import { useMoralisCloudFunction } from "react-moralis";
-import RequiredAsterisk from "./RequiredAsterisk";
+import RequiredAsterisk from "../../../layout/RequiredAsterisk";
 import LoadingContext from "../../../../store/loading-context";
 
 const ActionButtons = ({ step, prevStep, setSaveDraftSuccess, nftDraftMetadata }) => {

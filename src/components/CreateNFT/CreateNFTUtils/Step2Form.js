@@ -1,7 +1,7 @@
 import DetailsInputGroup from "./DetailsInputGroup";
 import GeographicDetailsInputGroup from "./GeographicDetailsInputGroup";
 import TagsMultiSelect from "./TagsMultiSelect";
-import RequiredAsterisk from "./RequiredAsterisk";
+import RequiredAsterisk from "../../../layout/RequiredAsterisk";
 import InputDropdown from "./InputDropdown";
 import { languageArray } from "../../../constants";
 

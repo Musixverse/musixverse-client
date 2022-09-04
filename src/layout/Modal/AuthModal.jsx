@@ -1,6 +1,7 @@
 const { Fragment, useState, useEffect, useRef } = require("react");
 import { useTheme } from "next-themes";
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { useMoralis } from "react-moralis";
 const { Transition } = require("@headlessui/react");
@@ -8,8 +9,10 @@ import { BLOCKCHAIN_NETWORK_ID } from "../../constants";
 import { addPolygonTestnetNetwork } from "../../utils/smart-contract/functions";
 import logoBlack from "../../../public/logo-black.svg";
 import logoWhite from "../../../public/logo-white.svg";
+import { DISCORD_SUPPORT_CHANNEL_INVITE_LINK } from "../../constants";
+import RequiredAsterisk from "../RequiredAsterisk";
 
-module.exports = ({ isOpen = "", onClose = "" }) => {
+export default function AuthModal({ isOpen = "", onClose = "" }) {
 	const router = useRouter();
 	const { authenticate, isAuthenticated, user } = useMoralis();
 	const [isModalOpen, setIsModalOpen] = useState(isOpen);
@@ -42,6 +45,8 @@ module.exports = ({ isOpen = "", onClose = "" }) => {
 	const closeModal = () => {
 		if (!magicFormOpen) {
 			handleChange();
+			setAccessCode("");
+			setBetaAccessGranted(false);
 			onClose();
 		} else displayAuthMethods();
 	};
@@ -97,6 +102,10 @@ module.exports = ({ isOpen = "", onClose = "" }) => {
 		}
 	};
 
+	const [betaAccessGranted, setBetaAccessGranted] = useState(false);
+	const [betaAccessError, setBetaAccessError] = useState(false);
+	const [accessCode, setAccessCode] = useState("");
+
 	return (
 		<>
 			<Transition show={isModalOpen}>
@@ -138,59 +147,112 @@ module.exports = ({ isOpen = "", onClose = "" }) => {
 								</div>
 							</div>
 
-							{!magicFormOpen ? (
-								<>
-									<div className="w-full flex space-x-4 mt-4 pr-4">
-										<div className="w-2/5">
-											<div className="text-xl font-semibold font-primary">Jump into Musixverse!</div>
-											<p className="text-sm mt-4 pr-14">Select your wallet from the options to get started.</p>
-											<p className="text-[10px] text-gray-400 mt-36 pr-14">
-												Connecting your wallet is the simplest way to log in to the world of Web3!
+							{!betaAccessGranted ? (
+								<div className="w-full flex mt-4 pr-4">
+									<div className="w-2/5">
+										<div className="text-xl font-semibold font-primary">Jump into Musixverse!</div>
+										<p className="text-sm mt-4 pr-14">Please enter an access code to try out Musixverse Beta.</p>
+										<p className="text-[10px] text-gray-400 mt-36 pr-14">
+											If you do not have an access code yet, please{" "}
+											<Link href={DISCORD_SUPPORT_CHANNEL_INVITE_LINK} passHref>
+												<a target="_blank" rel="noopener noreferrer" className="text-primary-100 hover:text-primary-200">
+													contact our team here
+												</a>
+											</Link>
+											.
+										</p>
+									</div>
+									<div className="w-3/5">
+										<form
+											onSubmit={(e) => {
+												e.preventDefault();
+												if (accessCode === "MXVBETAQPALZM") {
+													setBetaAccessGranted(true);
+												} else {
+													setBetaAccessError(true);
+												}
+											}}
+										>
+											<p className="text-sm dark:text-light-200 mb-2">
+												Access Code
+												<RequiredAsterisk />
 											</p>
-										</div>
-										<div className="w-3/5 -mt-10">
-											<div className="text-sm">Available Wallets</div>
-											<div className="mt-6 w-full space-y-4">
+											<input
+												type="text"
+												value={accessCode}
+												onChange={(e) => {
+													setAccessCode(e.target.value);
+													setBetaAccessError(false);
+												}}
+												className="w-full p-2 border-2 border-gray-500 rounded-md shadow-sm outline-none focus:border-primary-100 text-sm"
+												required
+											/>
+											{betaAccessError && <span className="text-error-200 text-xs mt-1">Invalid access code</span>}
+											<div className="flex justify-end mt-12">
 												<button
-													onClick={() => metamaskLogin()}
-													className="w-full bg-light-200 hover:bg-light-300 dark:bg-dark-200 dark:hover:bg-[#000] rounded-lg flex items-center p-4 text-sm"
+													type="submit"
+													className="flex justify-center items-center space-x-3 bg-primary-100 hover:bg-primary-200 text-[14px] text-light-100 py-2 px-6 rounded-lg font-primary font-semibold max-w-[210px]"
 												>
-													<Image src="/assets/metamask.png" alt="Metamask Logo" width="40" height="40" />
-													<div className="flex justify-between items-center w-full">
-														<span className="ml-4">Metamask</span>
-														<span className="ml-2 text-xl">
-															<i className="fa-solid fa-arrow-right-long"></i>
-														</span>
-													</div>
+													Submit
+													<span className="ml-2 text-xl">
+														<i className="fa-solid fa-arrow-right-long"></i>
+													</span>
 												</button>
-												<button
-													onClick={() => walletconnectLogin()}
-													className="w-full bg-light-200 hover:bg-light-300 dark:bg-dark-200 dark:hover:bg-[#000] rounded-lg flex items-center p-4 text-sm"
-												>
-													<Image src="/assets/walletconnect.png" alt="WalletConnect Logo" width="40" height="40" />
-													<div className="flex justify-between items-center w-full">
-														<span className="ml-4">WalletConnect</span>
-														<span className="ml-2 text-xl">
-															<i className="fa-solid fa-arrow-right-long"></i>
-														</span>
-													</div>
-												</button>
-												{/* <button
-                                                    onClick={() => setMagicFormOpen(true)}
-                                                    className="w-full bg-light-200 hover:bg-light-300 dark:bg-dark-200 dark:hover:bg-[#000] rounded-lg flex items-center p-4 text-sm"
-                                                >
-                                                    <Image src="/assets/magic.svg" alt="Magic Logo" width="35" height="35" />
-                                                    <div className="flex justify-between items-center w-full">
-                                                        <span className="ml-4">Magic</span>
-                                                        <span className="ml-2 text-xl">
-															<i className="fa-solid fa-arrow-right-long"></i>
-														</span>
-                                                    </div>
-                                                </button> */}
 											</div>
+										</form>
+									</div>
+								</div>
+							) : !magicFormOpen ? (
+								<div className="w-full flex space-x-4 mt-4 pr-4">
+									<div className="w-2/5">
+										<div className="text-xl font-semibold font-primary">Jump into Musixverse!</div>
+										<p className="text-sm mt-4 pr-14">Select your wallet from the options to get started.</p>
+										<p className="text-[10px] text-gray-400 mt-36 pr-14">
+											Connecting your wallet is the simplest way to log in to the world of Web3!
+										</p>
+									</div>
+									<div className="w-3/5 -mt-10">
+										<div className="text-sm">Available Wallets</div>
+										<div className="mt-6 w-full space-y-4">
+											<button
+												onClick={() => metamaskLogin()}
+												className="w-full bg-light-200 hover:bg-light-300 dark:bg-dark-200 dark:hover:bg-[#000] rounded-lg flex items-center p-4 text-sm"
+											>
+												<Image src="/assets/metamask.png" alt="Metamask Logo" width="40" height="40" />
+												<div className="flex justify-between items-center w-full">
+													<span className="ml-4">Metamask</span>
+													<span className="ml-2 text-xl">
+														<i className="fa-solid fa-arrow-right-long"></i>
+													</span>
+												</div>
+											</button>
+											<button
+												onClick={() => walletconnectLogin()}
+												className="w-full bg-light-200 hover:bg-light-300 dark:bg-dark-200 dark:hover:bg-[#000] rounded-lg flex items-center p-4 text-sm"
+											>
+												<Image src="/assets/walletconnect.png" alt="WalletConnect Logo" width="40" height="40" />
+												<div className="flex justify-between items-center w-full">
+													<span className="ml-4">WalletConnect</span>
+													<span className="ml-2 text-xl">
+														<i className="fa-solid fa-arrow-right-long"></i>
+													</span>
+												</div>
+											</button>
+											{/* <button
+												onClick={() => setMagicFormOpen(true)}
+												className="w-full bg-light-200 hover:bg-light-300 dark:bg-dark-200 dark:hover:bg-[#000] rounded-lg flex items-center p-4 text-sm"
+											>
+												<Image src="/assets/magic.svg" alt="Magic Logo" width="35" height="35" />
+												<div className="flex justify-between items-center w-full">
+													<span className="ml-4">Magic</span>
+													<span className="ml-2 text-xl">
+														<i className="fa-solid fa-arrow-right-long"></i>
+													</span>
+												</div>
+											</button> */}
 										</div>
 									</div>
-								</>
+								</div>
 							) : (
 								<div className="w-full flex mt-4 pr-4">
 									<div className="w-2/5">
@@ -230,4 +292,4 @@ module.exports = ({ isOpen = "", onClose = "" }) => {
 			</Transition>
 		</>
 	);
-};
+}

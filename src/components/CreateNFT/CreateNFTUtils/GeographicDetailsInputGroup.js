@@ -3,7 +3,7 @@ import CountriesDropdown from "./CountriesDropdown";
 import StatesDropdown from "./StatesDropdown";
 import CitiesDropdown from "./CitiesDropdown";
 import InputDropdown from "./InputDropdown";
-import RequiredAsterisk from "./RequiredAsterisk";
+import RequiredAsterisk from "../../../layout/RequiredAsterisk";
 import { languageArray } from "../../../constants";
 import { Country, City, State } from "country-state-city";
 

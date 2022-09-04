@@ -88,7 +88,13 @@ const Actions = ({ tokenId, artistName, title }) => {
 				<span>MXV Cerified</span>
 			</button>
 
-			<ShareTrackNftModal isOpen={isShareTrackNftModalOpen} setOpen={setShareTrackNftModalOpen} artistName={artistName} title={title} />
+			<ShareTrackNftModal
+				isOpen={isShareTrackNftModalOpen}
+				setOpen={setShareTrackNftModalOpen}
+				artistName={artistName}
+				title={title}
+				setAuthModalOpen={setAuthModalOpen}
+			/>
 		</div>
 	);
 };

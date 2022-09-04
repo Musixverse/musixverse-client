@@ -1,11 +1,13 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import Actions from "./Actions";
 import styles from "../../../styles/TrackInfo/AudioPlayer.module.css";
+import ShinyLoader from "../../layout/ShinyLoader";
 
 export default function AudioPlayer({ tokenId, audio_url, artistName, title }) {
 	/*******************************
 	 *******  AUDIO PLAYER  ********
 	 *******************************/
+	const [audioIsReady, setAudioIsReady] = useState(false);
 	const playBtn = useRef();
 	const audio = useRef();
 	const progress = useRef();
@@ -20,6 +22,7 @@ export default function AudioPlayer({ tokenId, audio_url, artistName, title }) {
 				if (audio.current && audio.current.readyState >= 2) {
 					getTime(false);
 					clearInterval(intervalId);
+					setAudioIsReady(true);
 					return;
 				}
 			}, 1000);
@@ -107,11 +110,11 @@ export default function AudioPlayer({ tokenId, audio_url, artistName, title }) {
 	};
 
 	return (
-		<div className="flex flex-col justify-evenly items-center sm:flex-row sm:justify-between sm:items-center">
+		<div className="flex flex-col items-center justify-evenly sm:flex-row sm:justify-between sm:items-center">
 			<button ref={playBtn} onClick={playTrackHandler} className={"dark:border-light-100 " + styles["play-btn"]}>
-				<i className="fas fa-play text-xl md:text-2xl"></i>
+				<i className="text-xl fas fa-play md:text-2xl"></i>
 			</button>
-			<div className="sm:ml-5 flex flex-col sm:flex-grow">
+			<div className="flex flex-col sm:ml-5 sm:flex-grow">
 				{/* MP3 Bar */}
 				<div className={styles["music-bar__container"]}>
 					<div className={styles["music-bar__container--info"]}>
@@ -120,10 +123,14 @@ export default function AudioPlayer({ tokenId, audio_url, artistName, title }) {
 							00:00
 						</p>
 						{/* MP3 Progress */}
-						<div ref={progressContainer} className={styles["container__info--progress-container"]} onClick={setProgress}>
-							<div ref={progress} className={styles["info__progress-container--progress"]}></div>
-							<div className={styles["info__progress-container--slider-box"]}></div>
-						</div>
+						{audioIsReady? 
+							<div ref={progressContainer} className={styles["container__info--progress-container"]} onClick={setProgress}>
+								<div ref={progress} className={styles["info__progress-container--progress"]}></div>
+								<div className={styles["info__progress-container--slider-box"]}></div>
+							</div>
+							:
+							<ShinyLoader classes={"rounded-md my-[10px] h-[4px] w-10/12"}/>
+						}
 						{/* Duration of track */}
 						<p className={"ml-2 "+styles["container__info--duration"]} ref={durTime}></p>
 					</div>

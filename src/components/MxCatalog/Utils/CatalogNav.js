@@ -14,7 +14,7 @@ export default function CatalogNav({ currentSelection, setCurrentSelection }) {
 		} else if (router.pathname.startsWith("/mxcatalog/trending")) {
 			setCurrentSelection(3);
 		}
-	}, [router.pathname]);
+	}, [router.pathname, setCurrentSelection]);
 
 	return (
 		<div className="flex flex-col items-center justify-center w-full h-[280px] bg-light-300 dark:bg-dark-100">
@@ -32,7 +32,7 @@ export default function CatalogNav({ currentSelection, setCurrentSelection }) {
 
 				<li className={currentSelection === 3 ? "text-black dark:text-light-100" : "text-[#7B7B7B] dark:hover:text-light-300"}>
 					<Tooltip
-						labelText={<span className="font-semibold text-base cursor-help">Trending</span>}
+						labelText={<span className="text-base font-semibold cursor-help">Trending</span>}
 						message="Coming soon!"
 						tooltipLocation="bottom"
 					></Tooltip>

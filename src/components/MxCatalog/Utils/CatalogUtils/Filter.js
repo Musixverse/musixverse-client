@@ -15,7 +15,7 @@ export default function Filter({ appliedFilter, setAppliedFilter, currentSelecti
 	const [currentFilterType, setCurrentFilterType] = useState(0);
 
 	return (
-		<div className={currentFilterType !== 0 ? "z-40 sticky flex mr-10 top-24" : "z-10 sticky flex mr-10 top-24"}>
+		<div className={"lg:flex hidden "+(currentFilterType !== 0 ? "z-40 sticky mr-10 top-24" : "z-10 sticky mr-10 top-24")}>
 			{/* Filter CTA */}
 			<div className="z-40 self-start p-4 flex flex-col items-center justify-center border border-[#BFBFBF] rounded-2xl backdrop-blur-[40px] backdrop-brightness-200 bg-[rgba(255,255,255,0.8)] dark:bg-[rgba(19,19,19,0.4)] dark:backdrop-blur-[24px] dark:border-search-200 dark:border-2">
 				{/* Filter icon */}
@@ -32,7 +32,7 @@ export default function Filter({ appliedFilter, setAppliedFilter, currentSelecti
 						className={(currentFilterType === 1 ? "text-primary-100 " : "") + "flex flex-col items-center justify-center cursor-pointer"}
 					>
 						<span className="material-symbols-outlined">queue_music</span>
-						<p className="my-2 w-full">Track&nbsp;Traits</p>
+						<p className="w-full my-2">Track&nbsp;Traits</p>
 					</div>
 					<div
 						onClick={() => {
@@ -59,7 +59,7 @@ export default function Filter({ appliedFilter, setAppliedFilter, currentSelecti
 					</div>
 				</div>
 				{/* MXV LOGO */}
-				<div className="flex items-center mt-28 mb-2">
+				<div className="flex items-center mb-2 mt-28">
 					<Image src={mxvLogo} height={37} width={37} objectFit="contain" alt="mxv logo" />
 				</div>
 			</div>
@@ -75,7 +75,7 @@ export default function Filter({ appliedFilter, setAppliedFilter, currentSelecti
 					leaveTo="opacity-0"
 					leaveFrom="opacity-100"
 				>
-					<div style={{ zIndex: "30" }} className="w-screen h-screen left-0 top-0 bg-black/50 backdrop-blur-sm fixed" />
+					<div style={{ zIndex: "30" }} className="fixed top-0 left-0 w-screen h-screen bg-black/50 backdrop-blur-sm" />
 				</Transition.Child>
 				<Transition.Child
 					as={Fragment}

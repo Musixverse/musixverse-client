@@ -347,7 +347,7 @@ export const coreTeam = [
 		description: `Sparsh is a passionate developer who loves to break and build things. For Musixverse he is inclined towards developing the front-end of the platform. At the core, he is a problem solver and loves tinkering with different web development technologies. He usually talks in Java and sometimes in JavaScript. He also has a special place in his heart for Astrophysics, and he spends his leisure time vibing to Lo-fi music or stargazing.`,
 	},
 	{
-		memberImage: "/assets/teampage/ShivamT.jpg",
+		memberImage: "https://pbs.twimg.com/profile_images/1473511548039491584/udoH0U6p_400x400.jpg",
 		fullName: "Shivam Singh",
 		name: "Shivam",
 		title: "CCO",

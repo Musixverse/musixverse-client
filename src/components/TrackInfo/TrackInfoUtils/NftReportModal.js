@@ -2,31 +2,31 @@ import { useState, useContext } from "react";
 import Modal from "../../../layout/Modal/Modal";
 import { useMoralis, useMoralisCloudFunction } from "react-moralis";
 import ReportFilterDropdown from "../../../layout/ReportFilterDropdown";
-import { reportProfileFilters } from "../../../constants";
+import { reportNftFilters } from "../../../constants";
 import StatusContext from "../../../../store/status-context";
 
-const ArtistReportModal = ({ isOpen, setOpen, username }) => {
+const NftReportModal = ({ isOpen, setOpen, tokenId }) => {
 	const { user } = useMoralis();
-	const [reason, setReason] = useState(reportProfileFilters[0]);
+	const [reason, setReason] = useState(reportNftFilters[0]);
 	const [, , setSuccess, setError] = useContext(StatusContext);
 
-	const { fetch: reportProfile } = useMoralisCloudFunction("reportProfile", { username: username, reason: reason }, { autoFetch: false });
+	const { fetch: reportNft } = useMoralisCloudFunction("reportNft", { tokenId: tokenId, reason: reason }, { autoFetch: false });
 
-	const reportUserProfile = () => {
+	const reportTrackNft = () => {
 		if (user && reason) {
-			reportProfile({
+			reportNft({
 				onSuccess: async (object) => {
 					if (object) {
 						setSuccess((prevState) => ({
 							...prevState,
-							title: "Profile Reported",
+							title: "Track NFT Reported",
 							message: "You report has been recorded. We will review this report soon and take appropriate action.",
 							showSuccessBox: true,
 						}));
 					}
 				},
 				onError: (error) => {
-					console.log("reportProfile Error:", error);
+					console.log("reportNft Error:", error);
 				},
 			});
 		} else {
@@ -49,11 +49,11 @@ const ArtistReportModal = ({ isOpen, setOpen, username }) => {
 					</label>
 				</div>
 			}
-			title={<div className="text-lg">Are you sure you want to report this profile?</div>}
+			title={<div className="text-lg">Are you sure you want to report this NFT?</div>}
 			content={
 				<div className="flex-1 text-sm font-semibold md:text-base font-secondary">
 					<p className="mb-1 font-primary text-sm text-left">Choose a category</p>
-					<ReportFilterDropdown optionsArray={reportProfileFilters} initialValue={reportProfileFilters[0]} reason={reason} setReason={setReason} />
+					<ReportFilterDropdown optionsArray={reportNftFilters} initialValue={reportNftFilters[0]} reason={reason} setReason={setReason} />
 				</div>
 			}
 			onClose={() => {
@@ -63,14 +63,14 @@ const ArtistReportModal = ({ isOpen, setOpen, username }) => {
 				{
 					role: "custom",
 					onClick: () => {
-						reportUserProfile();
+						reportTrackNft();
 						setOpen(false);
 					},
 					toClose: true,
-					classes: "flex items-center px-4 py-3 mr-2 mb-2 text-sm font-primary font-bold rounded-md bg-red-600 hover:bg-red-700 text-light-100",
+					classes: "flex items-center px-4 py-2 mr-2 mb-2 text-sm font-primary font-bold rounded-md bg-red-600 hover:bg-red-700 text-light-100",
 					label: (
 						<>
-							Report Profile
+							Report NFT
 							<span className="ml-8 text-xl">
 								<i className="fa-solid fa-arrow-right-long"></i>
 							</span>
@@ -82,4 +82,4 @@ const ArtistReportModal = ({ isOpen, setOpen, username }) => {
 	);
 };
 
-export default ArtistReportModal;
+export default NftReportModal;

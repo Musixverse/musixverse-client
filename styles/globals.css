@@ -580,8 +580,6 @@ html {
 .tooltip-button {
 	background: none;
 	font-family: var(--Poppins);
-	font-weight: 400;
-	font-size: 0.75rem;
 	color: #7a7a7a;
 	border: none;
 	padding: 0px;

@@ -1,12 +1,12 @@
 import Head from "next/head";
 import { meta_description } from "../../constants";
-import Help from "../../components/Help/Help";
+import Help from "../../components/HelpCenter/Help";
 
-const ReportABug = ({}) => {
+const HelpCenter = ({}) => {
 	return (
 		<>
 			<Head>
-				<title>Musixverse | Help Us</title>
+				<title>Musixverse | Help Center</title>
 				<meta name="description" content={meta_description} />
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
@@ -20,4 +20,4 @@ const ReportABug = ({}) => {
 	);
 };
 
-export default ReportABug;
+export default HelpCenter;

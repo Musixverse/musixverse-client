@@ -40,7 +40,7 @@ export default function FavouritesModal({ isOpen, setOpen, name, username, favou
 					</label>
 				</div>
 			}
-			title={<div>{name}&apos;s Favourites</div>}
+			title={"Favourites"}
 			content={
 				<div className="flex flex-col space-y-1 max-h-[400px] overflow-y-scroll px-2">
 					{favouriteTokens && favouriteTokens.length > 0 ? (

@@ -768,3 +768,10 @@ button.tooltip-button:active {
 	border-color: transparent transparent #6cc027 transparent;
 	transform-origin: bottom;
 }
+
+
+/* Tooltip Theme */
+
+[data-tooltip-theme="glass"]:before {
+	@aaply dark:bg-[rgba(1,1,1,0.9)] bg-[rgba(255, 255, 255, 0.9)] backdrop-filter-blur-4px;
+}

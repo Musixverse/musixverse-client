@@ -50,8 +50,15 @@ const ShareTrackNftModal = ({ isOpen, setOpen, artistName, title, setAuthModalOp
 			title={
 				<div className="text-2xl">
 					Share and earn <span className="text-primary-100 text-4xl">10%</span>
-					<p className="text-xs">of Musixverse&apos;s cut of the transaction</p>
-					<p className="text-xs">whenever someone purchases this NFT using your link</p>
+					<p className="text-xs">of the transaction fee whenever someone</p>
+					<p className="text-xs">
+						purchases this NFT using your link.&nbsp;
+						<Link href="/faq" passHref>
+							<a target="_blank" rel="noopener noreferrer" className="hover:underline hover:text-primary-100">
+								Learn more
+							</a>
+						</Link>
+					</p>
 				</div>
 			}
 			content={

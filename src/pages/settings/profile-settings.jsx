@@ -33,7 +33,7 @@ export default function Settings() {
 			const options = { chain: BLOCKCHAIN_NETWORK };
 			const _balance = await Moralis.Web3API.account.getNativeBalance(options);
 			const _balanceAmount = parseFloat(_balance.balance) / 10 ** 18 === 0 ? "0" : parseFloat(_balance.balance) / 10 ** 18;
-			setBalance(_balanceAmount > 0 ? _balanceAmount.toFixed(4) : 0);
+			setBalance(_balanceAmount > 0 ? _balanceAmount.toFixed(2) : 0);
 		} catch (error) {
 			console.log("ERROR-", error);
 		}

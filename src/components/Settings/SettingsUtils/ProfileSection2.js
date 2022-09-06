@@ -7,7 +7,9 @@ export default function ProfileSection2({ spotify, setSpotify, instagram, setIns
 			<div className="flex flex-col mb-10 md:mb-6 md:flex-row">
 				<div className="mb-10 md:mb-0 md:mr-2 xl:mr-8 font-secondary">
 					<h3 className="mb-1 text-lg font-medium md:mb-4">Add accounts</h3>
-					<p className="max-w-[320px] md:max-w-[219px] text-[15px]">Social connections help collectors verify you and your accounts.</p>
+					<p className="max-w-[320px] md:max-w-[219px] text-[15px]">
+						Social Accounts help collectors verify your profile and provide more information about you.
+					</p>
 				</div>
 				{/* Socials URLs input fields */}
 				<div className="flex flex-col flex-1 space-y-2 md:space-y-4">

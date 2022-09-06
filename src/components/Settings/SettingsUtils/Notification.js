@@ -1,6 +1,6 @@
 import ToggleButton from "../../../layout/ToggleButton/ToggleButton";
 
-export default function Notification({ heading, description, toggleSwitch, toggleState, setToggleState }) {
+export default function Notification({ heading, description, toggleSwitch, toggleState, setToggleState, lineBreak = true }) {
 	return (
 		<>
 			<div className="flex items-center justify-between w-full mt-8 mb-7">
@@ -10,7 +10,7 @@ export default function Notification({ heading, description, toggleSwitch, toggl
 				</div>
 				{toggleSwitch ? <ToggleButton toggleState={toggleState} setToggleState={setToggleState} /> : null}
 			</div>
-			<div className="flex-grow border-t-[3px] border-[#9a9a9a]"></div>
+			{lineBreak && <div className="flex-grow border-t-[3px] border-[#9a9a9a]"></div>}
 		</>
 	);
 }

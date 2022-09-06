@@ -7,12 +7,14 @@ import CitiesDropdown from "./CitiesDropdown";
 
 export default function FilterNftTraits({ appliedFilter, setAppliedFilter, setCurrentFilterType, currentSelection }) {
 	return (
-		<div className="flex lg:w-[657px] flex-col mt-8 h-3/4 lg:h-[430px] pr-10 overflow-y-scroll">
+		<div className="flex flex-col mt-8 h-3/4 lg:h-[430px] lg:pr-10 overflow-y-scroll">
 			<h5 className="text-sm font-bold md:text-base lg:text-lg font-secondary">Filter based on NFT Traits</h5>
-			<p className="font-secondary text-[#7F7F7F] text-[11px] md:text-[13px] lg:text-[15px]">Select NFT Traits such as no. of copies, status and others</p>
+			<p className="font-secondary text-[#7F7F7F] text-[11px] md:text-[13px] lg:text-[15px]">
+				Select NFT Traits such as no. of copies, status and others
+			</p>
 			<HorizontalRuler />
 
-			<div className="flex flex-col w-5/6 mt-4 space-y-2 sm:flex-row sm:space-x-10 sm:space-y-0">
+			<div className="flex flex-col lg:w-[657px] w-5/6 mt-4 space-y-2 sm:flex-row sm:space-x-10 sm:space-y-0">
 				<div className="flex-1 text-sm font-semibold md:text-base font-secondary">
 					<p className="mb-1 text-sm">No. of Copies</p>
 					<FilterDropdown
@@ -35,7 +37,7 @@ export default function FilterNftTraits({ appliedFilter, setAppliedFilter, setCu
 				</div>
 			</div>
 
-			<div className="flex flex-col w-5/6 mt-2 space-y-2 sm:flex-row sm:space-x-10 sm:space-y-0">
+			<div className="flex flex-col lg:w-[657px] w-5/6 mt-2 space-y-2 sm:flex-row sm:space-x-10 sm:space-y-0">
 				{currentSelection === 1 ? (
 					<div className="flex-1 text-sm font-semibold md:text-base font-secondary">
 						<p className="mb-1 text-sm">Status</p>
@@ -72,7 +74,7 @@ export default function FilterNftTraits({ appliedFilter, setAppliedFilter, setCu
 				</div>
 			</div>
 
-			<div className="flex flex-col w-5/6 mt-2 space-y-2 sm:flex-row sm:space-x-10 sm:space-y-0">
+			<div className="flex flex-col lg:w-[657px] w-5/6 mt-2 space-y-2 sm:flex-row sm:space-x-10 sm:space-y-0">
 				<div className="flex-1 text-sm font-semibold md:text-base font-secondary">
 					<p className="mb-1 text-sm">Country Of Origin</p>
 					<CountriesDropdown
@@ -98,7 +100,7 @@ export default function FilterNftTraits({ appliedFilter, setAppliedFilter, setCu
 				</div>
 			</div>
 
-			<div className="flex flex-col w-5/6 mt-2 space-y-2 sm:flex-row sm:space-x-10 sm:space-y-0">
+			<div className="flex flex-col lg:w-[657px] w-5/6 mt-2 space-y-2 sm:flex-row sm:space-x-10 sm:space-y-0">
 				<div className="flex-1 text-sm font-semibold md:text-base font-secondary">
 					{appliedFilter.countryOfOrigin !== "" && appliedFilter.stateOfOrigin !== "" && (
 						<>

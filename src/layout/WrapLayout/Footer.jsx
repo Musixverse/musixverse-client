@@ -1,3 +1,4 @@
+import { useContext } from "react";
 import { useTheme } from "next-themes";
 import Link from "next/link";
 import Image from "next/image";
@@ -7,10 +8,13 @@ import mxvW from "../../../public/assets/homepage/mxv_logo_w.svg";
 import Socials from "../Socials";
 import MXV_emblemW from "../../../public/assets/MXV_emblem_white.png";
 import MXV_emblemB from "../../../public/assets/MXV_emblem_black.png";
+import Tooltip from "../Tooltip/Tooltip";
+import AuthModalContext from "../../../store/authModal-context";
 
 const Footer = () => {
 	const { theme } = useTheme();
 	const { isAuthenticated, user } = useMoralis();
+	const [, setAuthModalOpen] = useContext(AuthModalContext);
 
 	return (
 		<div className="flex justify-center w-full dark:bg-dark-200">
@@ -35,9 +39,11 @@ const Footer = () => {
 							<li className="hover:text-primary-100">
 								<Link href="/mxcatalog/explore">Explore</Link>
 							</li>
-							<li className="hover:text-primary-100">
-								<Link href="/trending">Trending</Link>
-							</li>
+							<Tooltip
+								labelText={<li className="hover:text-primary-100 text-dark-100 dark:text-light-100">Trending</li>}
+								message="Coming soon!"
+								tooltipLocation="bottom"
+							></Tooltip>
 							{user && user.attributes.isArtist && (
 								<li className="hover:text-primary-100">
 									<Link href="/create-nft">Create</Link>
@@ -48,16 +54,15 @@ const Footer = () => {
 					<div className="flex flex-col space-y-2">
 						<p className="font-semibold text">Account</p>
 						<ul className="space-y-2">
-							<li className="hover:text-primary-100">
-								{user && isAuthenticated && <Link href={`/profile/${user.attributes.username}`}>Profile</Link>}
-							</li>
-							<li className="hover:text-primary-100">
-								<Link href="/">Dashboard</Link>
-							</li>
-							<li className="hover:text-primary-100">
-								<Link href="/404">Transactions</Link>
+							<li className="hover:text-primary-100 cursor-pointer">
+								{user && isAuthenticated ? (
+									<Link href={`/profile/${user.attributes.username}`}>Profile</Link>
+								) : (
+									<span onClick={() => setAuthModalOpen(true)}>Profile</span>
+								)}
 							</li>
 							<li className="hover:text-primary-100">{user && isAuthenticated && <Link href="/settings/profile-settings">Settings</Link>}</li>
+							<li className="cursor-not-allowed">Transactions</li>
 						</ul>
 					</div>
 					<div className="flex flex-col space-y-2">
@@ -70,7 +75,7 @@ const Footer = () => {
 								<Link href="/faq">FAQ</Link>
 							</li>
 							<li className="hover:text-primary-100">
-								<Link href="/help">Help</Link>
+								<Link href="/help-center">Help Center</Link>
 							</li>
 							<li className="hover:text-primary-100">
 								<Link href="/report-a-bug">Report a Bug</Link>
@@ -80,39 +85,29 @@ const Footer = () => {
 					<div className="flex flex-col space-y-2">
 						<p className="font-semibold text">Resources</p>
 						<ul className="space-y-2">
-							<li className="hover:text-primary-100">
-								<Link href="/404">Blogs</Link>
-							</li>
-							<li className="hover:text-primary-100">
-								<Link href="/404">Docs</Link>
-							</li>
-							<li className="hover:text-primary-100">
-								{" "}
-								<Link href="/404">Media Kit</Link>
-							</li>
-							<li className="hover:text-primary-100">
-								<Link href="/404">Partners</Link>
-							</li>
+							<li className="cursor-not-allowed">Blogs</li>
+							<Tooltip
+								labelText={<li className="hover:text-primary-100 text-dark-100 dark:text-light-100">Trending</li>}
+								message="Coming soon!"
+								tooltipLocation="bottom"
+								theme="glass"
+							></Tooltip>
+
+							<li className="cursor-not-allowed">Docs</li>
+							<li className="cursor-not-allowed"> Media Kit</li>
+							<li className="cursor-not-allowed">Partners</li>
 						</ul>
 					</div>
 					<div className="flex flex-col space-y-2">
 						<p className="font-semibold text">General</p>
 						<ul className="space-y-2">
 							<li className="hover:text-primary-100">
-								<Link href="/">About Us</Link>
-							</li>
-							<li className="hover:text-primary-100">
-								<Link href="/team">Team</Link>
-							</li>
-							<li className="hover:text-primary-100">
-								<Link href="/404">Careers</Link>
-							</li>
-							<li className="hover:text-primary-100">
-								<Link href="/404">MXV Greenpaper</Link>
-							</li>
-							<li className="hover:text-primary-100">
 								<Link href="/cfh/cfb">Community</Link>
 							</li>
+							<li className="cursor-not-allowed">About Us</li>
+							<li className="cursor-not-allowed">Team</li>
+							<li className="cursor-not-allowed">Careers</li>
+							<li className="cursor-not-allowed">MXV Greenpaper</li>
 						</ul>
 					</div>
 				</div>

@@ -63,7 +63,7 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 						{/* Internal links */}
 						<div className="hidden ml-10 lg:block">
 							<ul className="flex flex-row items-center font-medium md:text-base md:space-x-3 xl:space-x-6 md:mt-0 sm:text-sm">
-								<li className="hidden hover:text-primary-200 md:block">
+								{/* <li className="hidden hover:text-primary-200 md:block">
 									<Link
 										href="/"
 										className="py-2 pl-3 pr-4 text-white rounded hover:text-primary-100 md:bg-transparent md:p-0 dark:text-white"
@@ -71,7 +71,7 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 									>
 										Home
 									</Link>
-								</li>
+								</li> */}
 								<li className="hover:text-primary-200">
 									<Link
 										href="/mxcatalog/new-releases"
@@ -92,10 +92,10 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 								)}
 								<li className="hover:text-primary-200">
 									<Link
-										href="/cfh/cfb"
+										href="/help-center"
 										className="block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:text-primary-100 md:hover:bg-transparent md:border-0 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
 									>
-										Community
+										Resources
 									</Link>
 								</li>
 							</ul>

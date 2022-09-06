@@ -2,7 +2,7 @@
 
 ### Using Next.js
 
-To Turn on dev server-
+To turn on dev server-
 ```sh
 npm run dev
 ```

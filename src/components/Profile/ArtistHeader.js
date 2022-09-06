@@ -110,7 +110,11 @@ export default function ArtistHeader({
 					) : user && username === user.attributes.username && instagramVerificationRequested ? (
 						<span className="ml-2 font-primary text-sm text-gray-500">
 							<Tooltip
-								labelText={<i className="fa-solid fa-hourglass-half text-sm"></i>}
+								labelText={
+									<Link href="/profile/verify" passHref>
+										<i className="fa-solid fa-hourglass-half text-sm"></i>
+									</Link>
+								}
 								message="Verification Pending..."
 								tooltipLocation="bottom"
 							></Tooltip>
@@ -183,7 +187,11 @@ export default function ArtistHeader({
 						) : user && username === user.attributes.username && instagramVerificationRequested ? (
 							<span className="ml-2 font-primary text-sm text-gray-500">
 								<Tooltip
-									labelText={<i className="fa-solid fa-hourglass-half text-sm"></i>}
+									labelText={
+										<Link href="/profile/verify" passHref>
+											<i className="fa-solid fa-hourglass-half text-sm"></i>
+										</Link>
+									}
 									message="Verification Pending..."
 									tooltipLocation="bottom"
 								></Tooltip>

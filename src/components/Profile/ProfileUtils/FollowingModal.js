@@ -34,7 +34,7 @@ export default function FollowersModal({ isOpen, setOpen, name, username }) {
 					</label>
 				</div>
 			}
-			title={<div>{name}&apos;s Following</div>}
+			title={"Following"}
 			content={
 				<div className="flex flex-col space-y-1 max-h-[400px] overflow-y-scroll px-2">
 					{following && following.length > 0 ? (

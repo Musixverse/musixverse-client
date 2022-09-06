@@ -77,24 +77,19 @@ export default function Marketplace() {
 	});
 	const [showMobileFilter, setShowMobileFilter] = useState(false);
 
-
-	useEffect(() => {
-		console.log("UPDATED FILTERS: ", appliedFilter);
-	}, [appliedFilter]);
-
 	return (
 		<>
-			<MobileFilterModal {...{showMobileFilter, setShowMobileFilter, appliedFilter, setAppliedFilter:dispatch, currentSelection}}/>
+			<MobileFilterModal {...{ showMobileFilter, setShowMobileFilter, appliedFilter, setAppliedFilter: dispatch, currentSelection }} />
 
 			<CatalogNav {...{ currentSelection, setCurrentSelection }} />
 
 			{/* Main Catalog Body */}
-			<CatalogBody 
-				showMobileFilter={showMobileFilter} 
+			<CatalogBody
+				showMobileFilter={showMobileFilter}
 				setShowMobileFilter={setShowMobileFilter}
-				currentSelection={currentSelection} 
-				appliedFilter={appliedFilter} 
-				setAppliedFilter={dispatch} 
+				currentSelection={currentSelection}
+				appliedFilter={appliedFilter}
+				setAppliedFilter={dispatch}
 			/>
 		</>
 	);

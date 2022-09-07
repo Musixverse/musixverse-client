@@ -1,6 +1,6 @@
 import { Fragment } from "react";
 import styles from "../../../styles/Help/Help.module.css";
-import HelpCard from "./HelpCard";
+import HelpCard from "./utils/HelpCard";
 import GS_icons from "../../../public/assets/help-center/getting-started.png";
 import buying from "../../../public/assets/help-center/buying.png";
 import selling from "../../../public/assets/help-center/selling.png";

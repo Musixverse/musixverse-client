@@ -155,7 +155,7 @@ export default function ReportABug() {
 						explain your bug.
 						<br />
 						Head over to discord and report your issue. {/* Link added to the product-feedback channel on discord server */}
-						<Link href="https://discord.gg/MdSVC8Bfpw" passHref={true}>
+						<Link href="https://discord.com/invite/rXKb7rCqjG" passHref={true}>
 							<a target="_blank" rel="noopener noreferrer" className="font-medium text-primary-100 hover:text-primary-300">
 								Click here
 							</a>

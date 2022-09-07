@@ -6,7 +6,7 @@ import Link from "next/link";
 import Modal from "../../../layout/Modal/Modal";
 import LoadingContext from "../../../../store/loading-context";
 
-export default function FollowersModal({ isOpen, setOpen, name, username }) {
+export default function FollowersModal({ isOpen, setOpen, username }) {
 	const router = useRouter();
 	const [followers, setFollowers] = useState([]);
 	const [, setLoading] = useContext(LoadingContext);

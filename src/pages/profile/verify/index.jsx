@@ -2,10 +2,10 @@ import { useState, useEffect } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useMoralis, useMoralisCloudFunction } from "react-moralis";
-import NameAndIdVerification from "../../components/Profile/Verification/NameAndIdVerification";
-import TwitterAccountVerification from "../../components/Profile/Verification/TwitterAccountVerification";
-import InstagramManualVerification from "../../components/Profile/Verification/InstagramManualVerification";
-import ScrollToPageTop from "../../utils/ScrollToPageTop";
+import NameAndIdVerification from "../../../components/Profile/Verification/NameAndIdVerification";
+import TwitterAccountVerification from "../../../components/Profile/Verification/TwitterAccountVerification";
+import InstagramManualVerification from "../../../components/Profile/Verification/InstagramManualVerification";
+import ScrollToPageTop from "../../../utils/ScrollToPageTop";
 
 const Verify = () => {
 	const { user } = useMoralis();
@@ -77,6 +77,9 @@ const Verify = () => {
 		if (user && oauth_token && oauth_verifier) {
 			setStep(2);
 			verifyTwitterOAuth(oauth_verifier);
+		} else if (router.query.step === "2") {
+			setStep(2);
+			router.replace("/profile/verify", undefined, { shallow: true });
 		}
 	}, [oauth_token, oauth_verifier, user]);
 

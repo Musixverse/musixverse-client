@@ -612,7 +612,7 @@ button.tooltip-button:active {
 
 [data-tooltip] {
 	position: relative;
-	z-index: 10;
+	z-index: 1000 !important;
 }
 
 /* Positioning and visibility settings of the tooltip */
@@ -765,7 +765,6 @@ button.tooltip-button:active {
 	border-color: transparent transparent #6cc027 transparent;
 	transform-origin: bottom;
 }
-
 
 /* Tooltip Theme */
 

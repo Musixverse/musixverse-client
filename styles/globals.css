@@ -630,6 +630,7 @@ button.tooltip-button:active {
 
 /* The actual tooltip with a dynamic width */
 [data-tooltip]:before {
+	@apply dark:bg-dark-100 bg-light-100;
 	content: attr(data-tooltip);
 	padding: 10px 18px;
 	min-width: 50px;
@@ -639,10 +640,8 @@ button.tooltip-button:active {
 	border: 1.5px solid #6cc027;
 	border-radius: 6px;
 	font-size: 14px;
-	background-color: rgba(255, 255, 255, 0);
-	backdrop-filter: blur(4px);
 	/* background-image: linear-gradient(30deg, rgba(44, 53, 59, 0.9), rgba(48, 54, 59, 0.9), rgba(42, 56, 59, 0.9)); */
-	box-shadow: 0px 0px 24px rgba(0, 0, 0, 0.1);
+	/* box-shadow: 0px 0px 24px rgba(0, 0, 0, 0.1); */
 	font-family: var(--Poppins);
 	text-align: center;
 	white-space: pre-wrap;
@@ -765,4 +764,11 @@ button.tooltip-button:active {
 	border-width: 0px 5px 5px 5px;
 	border-color: transparent transparent #6cc027 transparent;
 	transform-origin: bottom;
+}
+
+
+/* Tooltip Theme */
+
+[data-tooltip-theme="glass"]:before {
+	@apply dark:bg-dark-100/80 bg-light-100/10;
 }

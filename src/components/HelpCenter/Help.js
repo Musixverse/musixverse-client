@@ -13,7 +13,8 @@ const card_array = [
   {	icon: selling,	label: "Selling" },
   {	icon: creating,	label: "Creating" },
   {	icon: faq,	label: "FAQ" },
-]
+];
+
 export default function Help() {
 	return (
 		<Fragment>

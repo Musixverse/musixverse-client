@@ -21,6 +21,7 @@ export default function TrackHeader({
 	currentOwnerAddress,
 	numberOfCopies,
 	otherTokensOfTrack,
+	onSale,
 }) {
 	const { data: artist } = useMoralisCloudFunction("fetchUsernameFromAddress", { address: artistAddress });
 	const { data: localTokenId } = useMoralisCloudFunction("fetchLocalTokenId", {
@@ -144,7 +145,11 @@ export default function TrackHeader({
 						<div className="pb-6 flex flex-wrap gap-2 w-full">
 							{tags.map((tag, index) => {
 								return (
-									<button key={index} type="button" className="px-6 py-2 mr-2 rounded-full bg-light-200 dark:bg-dark-100 text-sm">
+									<button
+										key={index}
+										type="button"
+										className="px-6 py-2 mr-2 rounded-full bg-light-200 dark:bg-dark-100 text-sm cursor-default"
+									>
 										{tag}
 									</button>
 								);
@@ -152,7 +157,13 @@ export default function TrackHeader({
 						</div>
 
 						{/* Track Header CTA */}
-						<TrackHeaderCta tokenId={tokenId} unlockTimestamp={unlockTimestamp} price={price} currentOwnerAddress={currentOwnerAddress} />
+						<TrackHeaderCta
+							tokenId={tokenId}
+							unlockTimestamp={unlockTimestamp}
+							price={price}
+							currentOwnerAddress={currentOwnerAddress}
+							onSale={onSale}
+						/>
 					</div>
 				</div>
 			</div>

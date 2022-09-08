@@ -6,7 +6,7 @@ import NftReportModal from "./NftReportModal";
 import ToggleOnSaleButtons from "./ToggleOnSaleButtons";
 import PurchaseButton from "./PurchaseButton";
 
-export default function CtaButtons({ currentOwnerAddress, tokenId, price }) {
+export default function CtaButtons({ currentOwnerAddress, tokenId, price, onSale }) {
 	const { user } = useMoralis();
 
 	const [, setAuthModalOpen] = useContext(AuthModalContext);
@@ -52,8 +52,10 @@ export default function CtaButtons({ currentOwnerAddress, tokenId, price }) {
 								setToggleOnSaleModalOpen={setToggleOnSaleModalOpen}
 							/>
 						</>
-					) : (
+					) : onSale ? (
 						<PurchaseButton tokenId={tokenId} price={price} />
+					) : (
+						<span className="text-sm ml-4">This NFT is currently not on the marketplace for sale</span>
 					)}
 				</div>
 

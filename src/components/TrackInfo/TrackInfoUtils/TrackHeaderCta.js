@@ -3,7 +3,7 @@ import Image from "next/image";
 import CtaButtons from "./CtaButtons";
 import { convertMaticToUSD, convertMaticToINR, truncatePrice } from "../../../utils/GetMarketPrice";
 
-export default function TrackHeaderCta({ tokenId, unlockTimestamp, price, currentOwnerAddress }) {
+export default function TrackHeaderCta({ tokenId, unlockTimestamp, price, currentOwnerAddress, onSale }) {
 	const [maticUSD, setMaticUSD] = useState("");
 	const [maticINR, setMaticINR] = useState("");
 	const [saleStart, setSaleStart] = useState("");
@@ -124,7 +124,7 @@ export default function TrackHeaderCta({ tokenId, unlockTimestamp, price, curren
 			</div>
 
 			{Date.now() > unlockTimestamp * 1000 && (
-				<CtaButtons currentOwnerAddress={currentOwnerAddress} tokenId={tokenId} price={price} unlockTimestamp={unlockTimestamp} />
+				<CtaButtons currentOwnerAddress={currentOwnerAddress} tokenId={tokenId} price={price} unlockTimestamp={unlockTimestamp} onSale={onSale} />
 			)}
 		</div>
 	);

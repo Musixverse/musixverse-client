@@ -3,17 +3,15 @@ import { useTheme } from "next-themes";
 import Dropdown from "./ProfileUtils/Dropdown";
 import styles from "../../../styles/Profile/Filter.module.css";
 
-export default function Filter({ currentlyActive, setCurrentlyActive, setSortingFilter, name, username, isArtist }) {
+export default function Filter({ currentlyActive, setCurrentlyActive, setSortingFilter, isArtist }) {
 	const { theme } = useTheme();
 
 	const handleFilterChange = (e) => {
 		const selectedCategory = e.target.textContent;
 
-		if (selectedCategory == "All Tracks") setCurrentlyActive("All Tracks");
-		else if (selectedCategory == "New Releases") setCurrentlyActive("New Releases");
+		if (selectedCategory == "New Releases") setCurrentlyActive("New Releases");
 		else if (selectedCategory == "Sold Out") setCurrentlyActive("Sold Out");
-		else if (selectedCategory == "Creations") setCurrentlyActive("Creations");
-		else if (selectedCategory == `Owned by ${name}`) setCurrentlyActive(`Owned by ${name}`);
+		else if (selectedCategory == "Collection") setCurrentlyActive("Collection");
 	};
 
 	return (
@@ -32,15 +30,6 @@ export default function Filter({ currentlyActive, setCurrentlyActive, setSorting
 								<span
 									className={
 										"text-sm cursor-pointer " +
-										(currentlyActive == "All Tracks" ? "text-dark-100 font-semibold dark:text-light-100" : "font-medium")
-									}
-									onClick={handleFilterChange}
-								>
-									All Tracks
-								</span>
-								<span
-									className={
-										"text-sm cursor-pointer " +
 										(currentlyActive == "New Releases" ? "text-dark-100 font-semibold dark:text-light-100" : "font-medium")
 									}
 									onClick={handleFilterChange}
@@ -56,31 +45,22 @@ export default function Filter({ currentlyActive, setCurrentlyActive, setSorting
 								>
 									Sold Out
 								</span>
-								<span
-									className={
-										"text-sm cursor-pointer " +
-										(currentlyActive == "Creations" ? "text-dark-100 font-semibold dark:text-light-100" : "font-medium")
-									}
-									onClick={handleFilterChange}
-								>
-									Creations
-								</span>
 							</>
 						)}
 						<span
 							className={
 								"text-sm cursor-pointer " +
-								(currentlyActive == `Owned by ${name}` ? "text-dark-100 font-semibold dark:text-light-100" : "font-medium")
+								(currentlyActive == "Collection" ? "text-dark-100 font-semibold dark:text-light-100" : "font-medium")
 							}
 							onClick={handleFilterChange}
 						>
-							Owned by {name}
+							Collection
 						</span>
 					</div>
 				</div>
 			</div>
 			{/* Right Section */}
-			{currentlyActive !== `Owned by ${name}` && (
+			{currentlyActive !== "Collection" && (
 				<div className={"dark:border-dark-200 dark:bg-dark-200 dark:hover:border-primary-100 " + styles["filter-card__right-section"]}>
 					<p className={"dark:text-light-100 " + styles["filter-card__right-section--sort-by"]}>Sort By:</p>
 					<Dropdown setSortingFilter={setSortingFilter} />

@@ -7,7 +7,7 @@ import Modal from "../../../layout/Modal/Modal";
 import CollaboratorImage from "../../../layout/NFTCard/CollaboratorImage";
 import LoadingContext from "../../../../store/loading-context";
 
-export default function FavouritesModal({ isOpen, setOpen, name, username, favouriteTokens, setFavouriteTokens }) {
+export default function FavouritesModal({ isOpen, setOpen, username, favouriteTokens, setFavouriteTokens }) {
 	const router = useRouter();
 	const [, setLoading] = useContext(LoadingContext);
 

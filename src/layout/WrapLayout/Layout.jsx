@@ -53,7 +53,7 @@ const Layout = ({ children }) => {
 			{isLoading && theme === "light" ? <Loading /> : <LoadingDark />}
 			<ErrorBox />
 			<SuccessBox />
-			{router.pathname !== "/cfh/cfb" && <Footer />}
+			<Footer />
 		</>
 	);
 };

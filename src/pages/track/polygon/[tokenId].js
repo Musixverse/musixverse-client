@@ -43,13 +43,15 @@ export async function getServerSideProps({ query }) {
 		otherTokensOfTrack = JSON.parse(JSON.stringify(result));
 	});
 
+	const onSale = await Moralis.Cloud.run("fetchOnSaleState", { tokenId: tokenId });
+
 	// Passing data to the Page using props
 	return {
-		props: { token, otherTokensOfTrack },
+		props: { token, otherTokensOfTrack, onSale },
 	};
 }
 
-export default function TrackInfo({ token, otherTokensOfTrack }) {
+export default function TrackInfo({ token, otherTokensOfTrack, onSale }) {
 	const router = useRouter();
 	const { tokenId } = router.query;
 
@@ -100,10 +102,11 @@ export default function TrackInfo({ token, otherTokensOfTrack }) {
 						currentOwnerAddress={currentOwnerAddress}
 						numberOfCopies={metadata.attributes[0].value}
 						otherTokensOfTrack={otherTokensOfTrack}
+						onSale={onSale}
 					/>
 					<TrackDetails tokenId={tokenId} metadata={metadata} />
 					<div className="grid grid-cols-1 md:grid-cols-9 xl:grid-cols-5 gap-y-4 md:gap-6 mt-10">
-						<PurchaseInfo tokenId={tokenId} metadata={metadata} currentOwnerAddress={currentOwnerAddress} price={price} />
+						<PurchaseInfo tokenId={tokenId} metadata={metadata} currentOwnerAddress={currentOwnerAddress} price={price} onSale={onSale} />
 						<Activity tokenId={tokenId} artistAddress={metadata.artistAddress} />
 					</div>
 					{otherTokensOfTrack.length > 0 ? <SimilarTokens otherTokensOfTrack={otherTokensOfTrack} metadata={metadata} /> : null}

@@ -4,7 +4,7 @@ import { useMoralisCloudFunction } from "react-moralis";
 import styles from "../../../styles/TrackInfo/PurchaseInfo.module.css";
 import PurchaseButton from "./TrackInfoUtils/PurchaseButton";
 
-export default function PurchaseInfo({ tokenId, metadata, currentOwnerAddress, price }) {
+export default function PurchaseInfo({ tokenId, metadata, currentOwnerAddress, price, onSale }) {
 	const { data: currentOwner } = useMoralisCloudFunction("fetchUsernameFromAddress", { address: currentOwnerAddress });
 	const { data: currentOwnerAvatar } = useMoralisCloudFunction("fetchUserAvatarFromAddress", { address: currentOwnerAddress });
 
@@ -14,7 +14,7 @@ export default function PurchaseInfo({ tokenId, metadata, currentOwnerAddress, p
 			<div className={styles["purchase-info__heading"]}>
 				<h1 className="font-tertiary text-3xl">PURCHASE INFO</h1>
 
-				<p className={"text-right "+styles["purchase-info__heading--p"]}>
+				<p className={"text-right " + styles["purchase-info__heading--p"]}>
 					{metadata.attributes[1].trait_type}
 					<i className="ml-2 mr-2 fa-solid fa-arrow-right-long"></i>
 					{metadata.attributes[1].value}%
@@ -53,9 +53,11 @@ export default function PurchaseInfo({ tokenId, metadata, currentOwnerAddress, p
 						<p className="ml-2 font-bold text-pricing font-primary">{price}</p>
 					</div>
 				</div>
-				<div className={styles["purchase-info__price-div--cta"]}>
-					<PurchaseButton tokenId={tokenId} price={price} />
-				</div>
+				{onSale && (
+					<div className={styles["purchase-info__price-div--cta"]}>
+						<PurchaseButton tokenId={tokenId} price={price} />
+					</div>
+				)}
 			</div>
 		</div>
 	);

@@ -40,7 +40,7 @@ const Footer = () => {
 								<Link href="/mxcatalog/explore">Explore</Link>
 							</li>
 							<Tooltip
-								labelText={<li className="hover:text-primary-100 text-dark-100 dark:text-light-100">Trending</li>}
+								labelText={<li className="text-dark-100 dark:text-light-100 cursor-help">Trending</li>}
 								message="Coming soon!"
 								tooltipLocation="bottom"
 							></Tooltip>
@@ -62,7 +62,11 @@ const Footer = () => {
 								)}
 							</li>
 							<li className="hover:text-primary-100">{user && isAuthenticated && <Link href="/settings/profile-settings">Settings</Link>}</li>
-							<li className="cursor-not-allowed">Transactions</li>
+							<Tooltip
+								labelText={<li className="text-dark-100 dark:text-light-100 cursor-help">Transactions</li>}
+								message="Coming soon!"
+								tooltipLocation="bottom"
+							></Tooltip>
 						</ul>
 					</div>
 					<div className="flex flex-col space-y-2">
@@ -75,9 +79,6 @@ const Footer = () => {
 								<Link href="/faq">FAQ</Link>
 							</li>
 							<li className="hover:text-primary-100">
-								<Link href="/help-center">Help Center</Link>
-							</li>
-							<li className="hover:text-primary-100">
 								<Link href="/report-a-bug">Report a Bug</Link>
 							</li>
 						</ul>
@@ -85,29 +86,45 @@ const Footer = () => {
 					<div className="flex flex-col space-y-2">
 						<p className="font-semibold text">Resources</p>
 						<ul className="space-y-2">
-							<li className="cursor-not-allowed">Blogs</li>
+							<li className="hover:text-primary-100">
+								<Link href="/help-center">Help Center</Link>
+							</li>
 							<Tooltip
-								labelText={<li className="hover:text-primary-100 text-dark-100 dark:text-light-100">Trending</li>}
+								labelText={<li className="text-dark-100 dark:text-light-100 cursor-help">Docs</li>}
 								message="Coming soon!"
 								tooltipLocation="bottom"
-								theme="glass"
 							></Tooltip>
-
-							<li className="cursor-not-allowed">Docs</li>
-							<li className="cursor-not-allowed"> Media Kit</li>
-							<li className="cursor-not-allowed">Partners</li>
+							<li className="hover:text-primary-100">
+								<Link href="https://medium.com/@musixverse" passHref>
+									<a target="_blank" rel="noopener noreferrer">
+										Blogs
+									</a>
+								</Link>
+							</li>
+							<Tooltip
+								labelText={<li className="text-dark-100 dark:text-light-100 cursor-help">Media Kit</li>}
+								message="Coming soon!"
+								tooltipLocation="bottom"
+							></Tooltip>
+							{/* <li className="cursor-not-allowed">Partners</li> */}
 						</ul>
 					</div>
 					<div className="flex flex-col space-y-2">
 						<p className="font-semibold text">General</p>
 						<ul className="space-y-2">
 							<li className="hover:text-primary-100">
+								<Link href="/#section_4">About Us</Link>
+							</li>
+							<li className="hover:text-primary-100">
 								<Link href="/cfh/cfb">Community</Link>
 							</li>
-							<li className="cursor-not-allowed">About Us</li>
-							<li className="cursor-not-allowed">Team</li>
-							<li className="cursor-not-allowed">Careers</li>
-							<li className="cursor-not-allowed">MXV Greenpaper</li>
+							{/* 
+							<Tooltip
+								labelText={<li className="text-dark-100 dark:text-light-100 cursor-help">Team</li>}
+								message="Coming soon!"
+								tooltipLocation="bottom"
+							></Tooltip> */}
+							{/* <li className="cursor-not-allowed">Careers</li> */}
 						</ul>
 					</div>
 				</div>

@@ -6,7 +6,7 @@
 	@apply w-full text-center;
 }
 
-.help_us_heading {	
+.help_us_heading {
 	@apply font-primary text-5xl font-semibold text-primary-100;
 }
 
@@ -15,5 +15,5 @@
 }
 
 .email_us {
-	@apply font-primary mt-16 dark:text-[#afafaf];
+	@apply font-primary mt-32 dark:text-[#afafaf];
 }

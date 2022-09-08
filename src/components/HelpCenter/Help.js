@@ -1,43 +1,62 @@
 import { Fragment } from "react";
+import Image from "next/image";
 import styles from "../../../styles/Help/Help.module.css";
 import { DISCORD_SUPPORT_CHANNEL_INVITE_LINK } from "../../constants";
-import HelpCard from "./utils/HelpCard";
 import GS_icons from "../../../public/assets/help-center/getting-started.png";
 import buying from "../../../public/assets/help-center/buying.png";
 import selling from "../../../public/assets/help-center/selling.png";
 import creating from "../../../public/assets/help-center/creating.png";
-import faq from "../../../public/assets/help-center/faq.png";
-
-const card_array = [
-  {	icon: GS_icons,	label: "Getting Started" },
-  {	icon: buying,	label: "Buying" },
-  {	icon: selling,	label: "Selling" },
-  {	icon: creating,	label: "Creating" },
-  {	icon: faq,	label: "FAQ" },
-];
+import general from "../../../public/assets/help-center/faq.png";
 
 export default function Help() {
 	return (
 		<Fragment>
 			<div className={styles["help_us_container"]}>
 				<div className={styles["help_us"]}>
-					<div>
-						<div className={styles["help_us_heading"]}>Help Center</div>
+					<div className={styles["help_us_heading"]}>Help Center</div>
+
+					<div className="grid grid-rows-2 grid-cols-3 justify-center gap-8 mt-16">
+						<div className="row-span-2 flex flex-col justify-center items-center p-6 rounded-lg border-2 cursor-pointer shadow hover:shadow-xl duration-300  hover:ring-offset-primary-300">
+							<div className="w-24 h-24 relative">
+								<Image src={GS_icons} alt={"Getting Started"} objectFit="contain" layout="fill" priority />
+							</div>
+							<p className="text-lg font-semibold mt-4">Getting Started</p>
+						</div>
+						<div className="flex flex-col justify-center items-center p-6 rounded-lg border-2 cursor-pointer shadow hover:shadow-xl duration-300  hover:ring-offset-primary-300">
+							<div className="w-24 h-24 relative">
+								<Image src={buying} alt={"Buying"} objectFit="contain" layout="fill" priority />
+							</div>
+							<p className="text-lg font-semibold mt-4">Buying</p>
+						</div>
+						<div className="flex flex-col justify-center items-center p-6 rounded-lg border-2 cursor-pointer shadow hover:shadow-xl duration-300  hover:ring-offset-primary-300">
+							<div className="w-24 h-24 relative">
+								<Image src={selling} alt={"Selling"} objectFit="contain" layout="fill" priority />
+							</div>
+							<p className="text-lg font-semibold mt-4">Selling</p>
+						</div>
+						<div className="flex flex-col justify-center items-center p-6 rounded-lg border-2 cursor-pointer shadow hover:shadow-xl duration-300  hover:ring-offset-primary-300">
+							<div className="w-24 h-24 relative">
+								<Image src={creating} alt={"Creating"} objectFit="contain" layout="fill" priority />
+							</div>
+							<p className="text-lg font-semibold mt-4">Creating</p>
+						</div>
+						<div className="flex flex-col justify-center items-center p-6 rounded-lg border-2 cursor-pointer shadow hover:shadow-xl duration-300  hover:ring-offset-primary-300">
+							<div className="w-24 h-24 relative">
+								<Image src={general} alt={"General"} objectFit="contain" layout="fill" priority />
+							</div>
+							<p className="text-lg font-semibold mt-4">General</p>
+						</div>
 					</div>
-					<div className="flex flex-wrap justify-center gap-8">
-						{card_array.map((card, idx) => {
-							return <HelpCard key={idx} help_icon={card.icon} label={card.label} />;
-						})}
-					</div>
-					{/* <div className={styles["email_us"]}>
+
+					<div className={styles["email_us"]}>
 						<div>
-							For any kind of help, please head over to the support channel on discord and ask your question there.
+							Didn&apos;t get your answer here? Please head over to the support channel on discord and ask your question there.
 							<br />
 							<a href={DISCORD_SUPPORT_CHANNEL_INVITE_LINK} className="text-primary-100" target="_blank" rel="noopener noreferrer">
 								Click here to join the discord server
 							</a>
 						</div>
-					</div> */}
+					</div>
 				</div>
 			</div>
 		</Fragment>

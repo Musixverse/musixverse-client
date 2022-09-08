@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Modal from "../../../layout/Modal/Modal";
 
-export default function FollowersModal({ isOpen, setOpen, name, username }) {
+export default function FollowersModal({ isOpen, setOpen, username }) {
 	const router = useRouter();
 	const [following, setFollowing] = useState([]);
 

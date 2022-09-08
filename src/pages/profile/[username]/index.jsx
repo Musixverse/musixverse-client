@@ -31,9 +31,9 @@ export default function Profile() {
 	useEffect(() => {
 		if (profileUser && profileUser.name) {
 			if (profileUser.isArtist) {
-				setCurrentlyActive("All Tracks");
+				setCurrentlyActive("New Releases");
 			} else {
-				setCurrentlyActive(`Owned by ${profileUser.name}`);
+				setCurrentlyActive("Collection");
 			}
 		}
 	}, [profileUser]);
@@ -144,12 +144,10 @@ export default function Profile() {
 					<Filter
 						currentlyActive={currentlyActive}
 						setCurrentlyActive={setCurrentlyActive}
-						sortingFilter={sortingFilter}
 						setSortingFilter={setSortingFilter}
-						name={profileUser.name}
 						isArtist={profileUser.isArtist}
 					/>
-					<NFTs username={username} name={profileUser.name} currentlyActive={currentlyActive} sortingFilter={sortingFilter} />
+					<NFTs username={username} currentlyActive={currentlyActive} sortingFilter={sortingFilter} />
 					<FavouritesHeader />
 					<FavouriteNFTs username={username} favouriteTokens={favouriteTokens} />
 				</div>
@@ -160,13 +158,12 @@ export default function Profile() {
 			<FavouritesModal
 				isOpen={isFavouritesModalOpen}
 				setOpen={setFavouritesModalOpen}
-				name={profileUser.name}
 				username={username}
 				favouriteTokens={favouriteTokens}
 				setFavouriteTokens={setFavouriteTokens}
 			/>
-			<FollowersModal isOpen={isFollowersModalOpen} setOpen={setFollowersModalOpen} name={profileUser.name} username={username} />
-			<FollowingModal isOpen={isFollowingModalOpen} setOpen={setFollowingModalOpen} name={profileUser.name} username={username} />
+			<FollowersModal isOpen={isFollowersModalOpen} setOpen={setFollowersModalOpen} username={username} />
+			<FollowingModal isOpen={isFollowingModalOpen} setOpen={setFollowingModalOpen} username={username} />
 		</>
 	);
 }

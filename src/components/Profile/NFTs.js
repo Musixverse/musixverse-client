@@ -4,36 +4,35 @@ import NFTCard from "../../layout/NFTCard/NFTCard";
 import NFTCardsWithPager from "../../layout/NFTCardsWithPager/NFTCardsWithPager";
 import NoNfts from "./NoNfts";
 
-export default function NFTs({ username, name, currentlyActive, sortingFilter }) {
+export default function NFTs({ username, currentlyActive, sortingFilter }) {
 	const [nftCards, setNftCards] = useState([]);
 	const [tracks, setTracks] = useState("");
 
-	const { fetch: fetchTracksByArtist } = useMoralisCloudFunction("fetchTracksByArtist", {
+	const { fetch: fetchTracksByUser } = useMoralisCloudFunction("fetchTracksByUser", {
 		username: username,
-		name: name,
 		currentlyActive: currentlyActive,
 		sortingFilter: sortingFilter,
 	});
 
 	useEffect(() => {
-		if (username && name) {
-			fetchTracksByArtist({
+		if (username) {
+			fetchTracksByUser({
 				onSuccess: async (object) => {
 					setTracks(object);
 				},
 				onError: (error) => {
-					console.log("fetchTracksByArtist Error:", error);
+					console.log("fetchTracksByUser Error:", error);
 				},
 			});
 		}
-	}, [currentlyActive, sortingFilter, username, fetchTracksByArtist]);
+	}, [currentlyActive, sortingFilter, username, fetchTracksByUser]);
 
 	useEffect(() => {
 		if (tracks) {
 			let tempArray = [];
 			const nftCardsTemp = [];
 
-			if (currentlyActive === `Owned by ${name}`) {
+			if (currentlyActive === "Collection") {
 				tracks.map((track, idx) => {
 					const metadata = JSON.parse(track.metadata);
 
@@ -48,6 +47,7 @@ export default function NFTs({ username, name, currentlyActive, sortingFilter })
 							tokenId={track.token_id}
 							numberOfCopies={metadata.attributes[0].value}
 							collaboratorList={metadata.collaborators}
+							showNumberOfCopies={false}
 						/>
 					);
 

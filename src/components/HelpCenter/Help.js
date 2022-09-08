@@ -1,5 +1,6 @@
 import { Fragment } from "react";
 import styles from "../../../styles/Help/Help.module.css";
+import { DISCORD_SUPPORT_CHANNEL_INVITE_LINK } from "../../constants";
 import HelpCard from "./utils/HelpCard";
 import GS_icons from "../../../public/assets/help-center/getting-started.png";
 import buying from "../../../public/assets/help-center/buying.png";
@@ -32,7 +33,7 @@ export default function Help() {
 						<div>
 							For any kind of help, please head over to the support channel on discord and ask your question there.
 							<br />
-							<a href="https://discord.gg/HVnJrECRSU" className="text-primary-100" target="_blank" rel="noopener noreferrer">
+							<a href={DISCORD_SUPPORT_CHANNEL_INVITE_LINK} className="text-primary-100" target="_blank" rel="noopener noreferrer">
 								Click here to join the discord server
 							</a>
 						</div>

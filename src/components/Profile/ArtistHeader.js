@@ -111,7 +111,7 @@ export default function ArtistHeader({
 						<span className="ml-2 font-primary text-sm text-gray-500">
 							<Tooltip
 								labelText={
-									<Link href="/profile/verify" passHref>
+									<Link href="/profile/verify/instagram-verification-requested" passHref>
 										<i className="fa-solid fa-hourglass-half text-sm"></i>
 									</Link>
 								}
@@ -188,7 +188,7 @@ export default function ArtistHeader({
 							<span className="ml-2 font-primary text-sm text-gray-500">
 								<Tooltip
 									labelText={
-										<Link href="/profile/verify" passHref>
+										<Link href="/profile/verify/instagram-verification-requested" passHref>
 											<i className="fa-solid fa-hourglass-half text-sm"></i>
 										</Link>
 									}

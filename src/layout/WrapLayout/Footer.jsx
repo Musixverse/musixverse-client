@@ -79,9 +79,6 @@ const Footer = () => {
 								<Link href="/faq">FAQ</Link>
 							</li>
 							<li className="hover:text-primary-100">
-								<Link href="/help-center">Help Center</Link>
-							</li>
-							<li className="hover:text-primary-100">
 								<Link href="/report-a-bug">Report a Bug</Link>
 							</li>
 						</ul>
@@ -89,6 +86,9 @@ const Footer = () => {
 					<div className="flex flex-col space-y-2">
 						<p className="font-semibold text">Resources</p>
 						<ul className="space-y-2">
+							<li className="hover:text-primary-100">
+								<Link href="/help-center">Help Center</Link>
+							</li>
 							<Tooltip
 								labelText={<li className="text-dark-100 dark:text-light-100 cursor-help">Docs</li>}
 								message="Coming soon!"
@@ -112,11 +112,9 @@ const Footer = () => {
 					<div className="flex flex-col space-y-2">
 						<p className="font-semibold text">General</p>
 						<ul className="space-y-2">
-							<Tooltip
-								labelText={<li className="text-dark-100 dark:text-light-100 cursor-help">About Us</li>}
-								message="Coming soon!"
-								tooltipLocation="bottom"
-							></Tooltip>
+							<li className="hover:text-primary-100">
+								<Link href="/#section_4">About Us</Link>
+							</li>
 							<li className="hover:text-primary-100">
 								<Link href="/cfh/cfb">Community</Link>
 							</li>
@@ -126,11 +124,6 @@ const Footer = () => {
 								message="Coming soon!"
 								tooltipLocation="bottom"
 							></Tooltip> */}
-							<Tooltip
-								labelText={<li className="text-dark-100 dark:text-light-100 cursor-help">MXV Greenpaper</li>}
-								message="Coming soon!"
-								tooltipLocation="bottom"
-							></Tooltip>
 							{/* <li className="cursor-not-allowed">Careers</li> */}
 						</ul>
 					</div>

@@ -612,7 +612,7 @@ button.tooltip-button:active {
 
 [data-tooltip] {
 	position: relative;
-	z-index: 1000 !important;
+	z-index: 10 !important;
 }
 
 /* Positioning and visibility settings of the tooltip */

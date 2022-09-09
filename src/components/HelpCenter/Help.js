@@ -14,9 +14,7 @@ export default function Help() {
 		<Fragment>
 			<div className={styles["help_us_container"]}>
 				<div className={styles["help_us"]}>
-					<div className={styles["help_us_heading"]}>Help Center</div>
-
-					<div className="grid grid-rows-3 grid-cols-2 sm:grid-rows-2 sm:grid-cols-3 justify-center gap-8 mt-16">
+					<div className="grid grid-rows-3 grid-cols-2 sm:grid-rows-2 sm:grid-cols-3 justify-center gap-8">
 						<Link href="/help-center/getting-started" passHref={true}>
 							<div className="col-span-2 sm:col-span-1 sm:row-span-2 flex flex-col justify-center items-center p-6 rounded-lg border-2 cursor-pointer shadow hover:shadow-xl duration-300  hover:ring-offset-primary-300">
 								<div className="w-24 h-24 relative">

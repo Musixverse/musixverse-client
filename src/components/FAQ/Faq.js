@@ -8,12 +8,7 @@ import { About_Musixverse, Musixverse_NFTs, General_Platform_Features, community
 export default function Faq() {
 	const [currentSelection, setCurrentSelection] = useState(0);
 
-	const categories = [
-		"About Musixverse",
-		"Musixverse NFTs",
-		"General Platform Features",
-		"Community",
-	];
+	const categories = ["About Musixverse", "Musixverse NFTs", "General Platform Features", "Community"];
 	const accordionData = [About_Musixverse, Musixverse_NFTs, General_Platform_Features, community];
 
 	return (

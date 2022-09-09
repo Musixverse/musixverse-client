@@ -17,7 +17,7 @@ export default function Faq() {
 	const accordionData = [About_Musixverse, Musixverse_NFTs, General_Platform_Features, community];
 
 	return (
-		<div className="space-y-16">
+		<div className="w-full space-y-16">
 			<div className="text-center space-y-4">
 				<span className="font-primary text-5xl font-semibold text-primary-100">FAQs</span>
 				<div className="text-sm">

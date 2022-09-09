@@ -5,8 +5,9 @@ import styles from "../../../styles/Registration/Artist.module.css";
 import Button from "./ArtistRegUtils/Button";
 import SelectAvatar from "./ArtistRegUtils/SelectAvatar";
 import Router from "next/router";
-import { useMoralis, useNewMoralisObject, useMoralisCloudFunction } from "react-moralis";
+import { useMoralis, useNewMoralisObject } from "react-moralis";
 import StatusContext from "../../../store/status-context";
+import { isUsernameValidAndAvailable, isEmailValidAndAvailable } from "../../utils/Validate";
 
 export default function BasicDetails() {
 	const [, , , setError] = useContext(StatusContext);
@@ -26,9 +27,6 @@ export default function BasicDetails() {
 	const [username, setUsername] = useState("");
 	const [email, setEmail] = useState("");
 
-	const { fetch: checkUsernameAvailability } = useMoralisCloudFunction("checkUsernameAvailability", { username: username }, { autoFetch: false });
-	const { fetch: checkEmailExists } = useMoralisCloudFunction("checkEmailExists", { email: email }, { autoFetch: false });
-
 	async function uploadFile(data) {
 		const file = new Moralis.File("file", data);
 		await file.saveIPFS();
@@ -38,76 +36,29 @@ export default function BasicDetails() {
 	const handleBasicDetailsSave = async (e) => {
 		e.preventDefault();
 
-		// USERNAME CHECKS
-		const usernameRegex = /^\w+$/;
-		if (username.length < 2) {
+		// USERNAME CHECK
+		const usernameCheck = await isUsernameValidAndAvailable(username);
+		if (usernameCheck.status === false) {
 			setError({
-				title: "Invalid credentials!",
-				message: "Username length should be greater than 1",
-				showErrorBox: true,
-			});
-			usernameRef.current.focus();
-			return;
-		} else if (!usernameRegex.test(username)) {
-			setError({
-				title: "Invalid credentials!",
-				message: "Username can only contain alphabets, numbers, and '_'",
+				title: usernameCheck.title || "Invalid credentials!",
+				message: usernameCheck.message,
 				showErrorBox: true,
 			});
 			usernameRef.current.focus();
 			return;
 		}
 
-		// EMAIL CHECKS
-		const emailRegex = new RegExp(
-			/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i
-		);
-		if (!emailRegex.test(email)) {
+		// EMAIL CHECK
+		const emailCheck = await isEmailValidAndAvailable(email);
+		if (emailCheck.status === false) {
 			setError({
-				title: "Invalid credentials!",
-				message: "Please enter a valid email",
+				title: emailCheck.title || "Invalid credentials!",
+				message: emailCheck.message,
 				showErrorBox: true,
 			});
 			emailRef.current.focus();
 			return;
 		}
-
-		let usernameExists = false;
-		await checkUsernameAvailability({
-			onSuccess: async (object) => {
-				console.log("object", object, user);
-				if (object) {
-					setError({
-						title: object,
-						message: "Please choose another username.",
-						showErrorBox: true,
-					});
-					usernameExists = true;
-				}
-			},
-			onError: (error) => {
-				console.log("checkUsernameAvailability Error:", error);
-			},
-		});
-		if (usernameExists) return;
-
-		let emailExists = false;
-		await checkEmailExists({
-			onSuccess: async (object) => {
-				if (object) {
-					setError({
-						title: object,
-						message: "Please sign up using another email address.",
-						showErrorBox: true,
-					});
-					emailExists = true;
-				}
-			},
-			onError: (error) => {
-				console.log("checkEmailExists Error:", error);
-			},
-		});
-		if (emailExists) return;
 
 		if (name !== "" && username !== "" && email !== "") {
 			await setUserData({

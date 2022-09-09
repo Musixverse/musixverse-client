@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import Link from "next/link";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import { useMoralis } from "react-moralis";
 import VerificationButton from "./VerificationButton";
@@ -11,6 +12,8 @@ const TwitterAccountVerification = ({
 	nextStep,
 	prevStep,
 	isStageNameDifferent,
+	stageNameDifferentTextMessage,
+	stageNameSameTextMessage,
 	uriEncodedStageNameDifferentTextMessage,
 	uriEncodedStageNameSameTextMessage,
 	isTwitterAccountConnected,
@@ -85,9 +88,14 @@ const TwitterAccountVerification = ({
 	};
 
 	return (
-		<>
-			<p className="text-4xl font-tertiary mb-2">4. Connect Twitter account</p>
+		<div>
+			<Head>
+				<title>Musixverse | Artist Profile Verification</title>
+				<meta name="description" content="The NFT Marketplace for Musicians and Fans" />
+				<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+			</Head>
 
+			<p className="text-4xl font-tertiary mb-2">4. Connect Twitter account</p>
 			<VerificationButton
 				onClick={() => authorizeTwitter()}
 				verifiedStatus={isTwitterAccountConnected}
@@ -97,7 +105,6 @@ const TwitterAccountVerification = ({
 
 			<p className="text-4xl font-tertiary mt-16">5. Tweet from your account</p>
 			<div className="w-2/3 text-sm mt-1">This is required to verify that you are a real person.</div>
-
 			<Link
 				href={
 					isStageNameDifferent
@@ -114,6 +121,23 @@ const TwitterAccountVerification = ({
 			</Link>
 			<p className="text-[#777777] font-normal text-xs mt-2">Please click the submit button once you have sent the tweet</p>
 
+			<div className="w-1/3 flex justify-center items-center text-[#777777] text-sm my-6">or</div>
+
+			<p className="text-4xl font-tertiary">Send us a dm on Twitter</p>
+			<div className="flex w-fit mt-2 ">
+				<Link href="https://twitter.com/messages/compose?recipient_id=1473961193618378753&ref_src=twsrc%5Etfw" passHref>
+					<a
+						target="_blank"
+						rel="noopener noreferrer"
+						className="twitter-dm-button"
+						data-size="large"
+						data-text={isStageNameDifferent ? stageNameDifferentTextMessage : stageNameSameTextMessage}
+						data-screen-name="musixverse"
+						data-show-count="false"
+					></a>
+				</Link>
+			</div>
+
 			<p className="text-[#777777] font-normal text-sm mt-16">
 				Do not have a Twitter account? &nbsp;
 				<span className="text-primary-200 hover:underline cursor-pointer" onClick={() => nextStep()}>
@@ -122,7 +146,6 @@ const TwitterAccountVerification = ({
 				<br />
 				Please note that this can take up to five business days.
 			</p>
-
 			<div className="w-full flex justify-center">
 				<div className="w-2/5 flex justify-between mt-20">
 					<button
@@ -139,7 +162,7 @@ const TwitterAccountVerification = ({
 					</button>
 				</div>
 			</div>
-		</>
+		</div>
 	);
 };
 

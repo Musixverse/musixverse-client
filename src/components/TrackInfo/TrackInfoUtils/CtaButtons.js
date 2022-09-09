@@ -52,7 +52,7 @@ export default function CtaButtons({ currentOwnerAddress, tokenId, price, onSale
 								setToggleOnSaleModalOpen={setToggleOnSaleModalOpen}
 							/>
 						</>
-					) : onSale ? (
+					) : onSale || onSale === null ? (
 						<PurchaseButton tokenId={tokenId} price={price} />
 					) : (
 						<span className="text-sm ml-4">This NFT is currently not on the marketplace for sale</span>

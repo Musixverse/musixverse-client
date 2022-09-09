@@ -186,12 +186,17 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 													<span className="mr-4">{truncatedName}</span>
 													{avatarUrl ? <Image src={avatarUrl} alt="avatar" width="24" height="24" className="rounded-full" /> : null}
 												</div>
-											) : (
+											) : !user ? (
 												<div
 													onClick={() => setAuthModalOpen(true)}
 													className="flex items-center justify-center px-10 py-2 text-base font-semibold rounded-full bg-search-100 dark:bg-search-200"
 												>
 													Connect wallet
+												</div>
+											) : (
+												<div className="flex items-center justify-center px-4 py-2 text-sm rounded-full bg-search-100 dark:bg-search-200">
+													<span className="mr-4">User</span>
+													{avatarUrl ? <Image src={avatarUrl} alt="avatar" width="24" height="24" className="rounded-full" /> : null}
 												</div>
 											)}
 										</a>
@@ -260,7 +265,7 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 													</Link>
 												</li>
 											)} */}
-											{user && isAuthenticated && (
+											{user && isAuthenticated && user.attributes.email && (
 												<li>
 													<Link href="/settings/account-help" passHref={true}>
 														<div className="block w-full px-4 py-2 bg-transparent cursor-pointer dropdown-item whitespace-nowrap hover:bg-gray-100 dark:hover:bg-dark-100">

@@ -8,6 +8,7 @@ import { useMoralis, useMoralisQuery, useMoralisCloudFunction } from "react-mora
 import StatusContext from "../../../store/status-context";
 import LoadingContext from "../../../store/loading-context";
 import { BLOCKCHAIN_NETWORK } from "../../constants";
+import { isNameValid, isUsernameValidAndAvailable, isEmailValidAndAvailable } from "../../utils/Validate";
 
 export default function Settings() {
 	const { user, setUserData, Moralis, isInitialized, refetchUserData } = useMoralis();
@@ -80,29 +81,18 @@ export default function Settings() {
 	const { fetch: updateUserInfo } = useMoralisCloudFunction("updateUserInfo", userData, { autoFetch: false });
 	const handleSave = async () => {
 		try {
-			const usernameRegex = /^\w+$/;
-			if (name.length === 0) {
+			// Name CHECK
+			const nameCheck = await isNameValid(name);
+			if (nameCheck.status === false) {
 				setError({
-					title: "Invalid credentials!",
-					message: "Name field can't be empty",
+					title: nameCheck.title || "Invalid credentials!",
+					message: nameCheck.message,
 					showErrorBox: true,
 				});
 				return;
-			} else if (username.length < 2) {
-				setError({
-					title: "Invalid credentials!",
-					message: "Username length should be greater than 1",
-					showErrorBox: true,
-				});
-				return;
-			} else if (!usernameRegex.test(username)) {
-				setError({
-					title: "Invalid credentials!",
-					message: "Username can only contain alphabets, numbers, and '_'",
-					showErrorBox: true,
-				});
-				return;
-			} else if (name !== "" && username !== "" && email !== "") {
+			}
+
+			if (name !== "" && username !== "" && email !== "") {
 				if (email === user.attributes.email && username === user.attributes.username && name === user.attributes.name) {
 					// do nothing
 				} else if (email === user.attributes.email && username === user.attributes.username) {
@@ -110,11 +100,32 @@ export default function Settings() {
 						name: name === "" ? undefined : name,
 					});
 				} else if (email === user.attributes.email) {
+					// USERNAME CHECK
+					const usernameCheck = await isUsernameValidAndAvailable(username);
+					if (usernameCheck.status === false) {
+						setError({
+							title: usernameCheck.title || "Invalid credentials!",
+							message: usernameCheck.message,
+							showErrorBox: true,
+						});
+						return;
+					}
 					setUserData({
 						name: name === "" ? undefined : name,
 						username: username === "" ? undefined : username,
 					});
 				} else {
+					// EMAIL CHECK
+					const emailCheck = await isEmailValidAndAvailable(email);
+					if (emailCheck.status === false) {
+						setError({
+							title: emailCheck.title || "Invalid credentials!",
+							message: emailCheck.message,
+							showErrorBox: true,
+						});
+						emailRef.current.focus();
+						return;
+					}
 					setUserData({
 						name: name === "" ? undefined : name,
 						username: username === "" ? undefined : username,

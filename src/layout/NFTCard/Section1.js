@@ -5,7 +5,7 @@ import styles from "../../../styles/NFTCard/Section1.module.css";
 import { truncatePrice } from "../../utils/GetMarketPrice";
 import ShinyLoader from "../../layout/ShinyLoader";
 
-export default function Section1({ artistName, isVerified, trackName, tokenId, unsoldTrackData, soldOnceTrackData }) {
+export default function Section1({ artistName, trackName, isVerified, tokenId, unsoldTrackData, soldOnceTrackData }) {
 	const { Moralis } = useMoralis();
 	const { fetch: fetchTokenPrice, data: tokenPrice } = useMoralisCloudFunction("fetchTokenPrice", { tokenId: tokenId }, { autoFetch: false });
 	const [price, setPrice] = useState("");

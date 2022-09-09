@@ -1,95 +1,67 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState } from "react";
 import Head from "next/head";
-import { meta_description } from "../../../constants";
+import { meta_description } from "../../constants";
 import { useRouter } from "next/router";
-import { useMoralisCloudFunction } from "react-moralis";
-import Banner from "../../../components/Profile/Banner";
-import ArtistHeader from "../../../components/Profile/ArtistHeader";
-import Filter from "../../../components/Profile/Filter";
-import NFTs from "../../../components/Profile/NFTs";
-import FavouritesHeader from "../../../components/Profile/FavouritesHeader";
-import FavouriteNFTs from "../../../components/Profile/FavouriteNFTs";
-import NewsLetter from "../../../layout/NewsLetter";
-import LoadingContext from "../../../../store/loading-context";
-import ArtistBioModal from "../../../components/Profile/ProfileUtils/ArtistBioModal";
-import ArtistReportModal from "../../../components/Profile/ProfileUtils/ArtistReportModal";
-import FavouritesModal from "../../../components/Profile/ProfileUtils/FavouritesModal";
-import FollowersModal from "../../../components/Profile/ProfileUtils/FollowersModal";
-import FollowingModal from "../../../components/Profile/ProfileUtils/FollowingModal";
+import Moralis from "moralis/node";
+import Banner from "../../components/Profile/Banner";
+import ArtistHeader from "../../components/Profile/ArtistHeader";
+import Filter from "../../components/Profile/Filter";
+import NFTs from "../../components/Profile/NFTs";
+import FavouritesHeader from "../../components/Profile/FavouritesHeader";
+import FavouriteNFTs from "../../components/Profile/FavouriteNFTs";
+import NewsLetter from "../../layout/NewsLetter";
+import ArtistBioModal from "../../components/Profile/ProfileUtils/ArtistBioModal";
+import ArtistReportModal from "../../components/Profile/ProfileUtils/ArtistReportModal";
+import FavouritesModal from "../../components/Profile/ProfileUtils/FavouritesModal";
+import FollowersModal from "../../components/Profile/ProfileUtils/FollowersModal";
+import FollowingModal from "../../components/Profile/ProfileUtils/FollowingModal";
 
-export default function Profile() {
+// Fetching data over here using SSR and then passing in the components as props
+export async function getServerSideProps({ query }) {
+	const { username } = query;
+
+	const MORALIS_APP_ID = process.env.NEXT_PUBLIC_MORALIS_APP_ID;
+	const MORALIS_SERVER_URL = process.env.NEXT_PUBLIC_MORALIS_SERVER_URL;
+	await Moralis.start({ serverUrl: MORALIS_SERVER_URL, appId: MORALIS_APP_ID });
+
+	const profileUser = JSON.parse(JSON.stringify(await Moralis.Cloud.run("fetchUser", { username: username })));
+	const profileUserInfo = JSON.parse(JSON.stringify(await Moralis.Cloud.run("fetchUserInfo", { username: username })));
+
+	if (!profileUser || !profileUserInfo) {
+		return {
+			redirect: {
+				destination: `/profile/does-not-exist?username=${username}`,
+				permanent: false,
+			},
+		};
+	}
+	const _favouriteTokens = await Moralis.Cloud.run("fetchFavouriteTokens", { username: username });
+
+	// Passing data to the page using props
+	return {
+		props: { profileUser, profileUserInfo, _favouriteTokens },
+	};
+}
+
+export default function Profile({ profileUser, profileUserInfo, _favouriteTokens }) {
 	const router = useRouter();
 	const { username } = router.query;
 
-	const [isLoading, setLoading] = useContext(LoadingContext);
-	const [profileUser, setProfileUser] = useState(false);
-	const [profileUserInfo, setProfileUserInfo] = useState(false);
 	const [showArtistBioModal, setShowArtistBioModal] = useState(false);
 	const [showReportModal, setShowReportModal] = useState(false);
 	const [currentlyActive, setCurrentlyActive] = useState("");
 	const [sortingFilter, setSortingFilter] = useState("Newest First");
 	useEffect(() => {
-		if (profileUser && profileUser.name) {
-			if (profileUser.isArtist) {
-				setCurrentlyActive("New Releases");
-			} else {
-				setCurrentlyActive("Collection");
-			}
+		if (profileUser.isArtist) {
+			setCurrentlyActive("New Releases");
+		} else {
+			setCurrentlyActive("Collection");
 		}
 	}, [profileUser]);
 
-	const { fetch: fetchUser } = useMoralisCloudFunction("fetchUser", { username: username }, { autoFetch: false });
-	const { fetch: fetchUserInfo } = useMoralisCloudFunction("fetchUserInfo", { username: username }, { autoFetch: false });
-
-	const fetchUserData = async () => {
-		const results = await fetchUser({
-			onSuccess: (data) => console.log("profileUser:", data.attributes),
-		});
-		if (results) {
-			setProfileUser(results.attributes);
-		}
-	};
-
-	const fetchInfo = async () => {
-		const results = await fetchUserInfo({
-			onSuccess: (data) => {
-				if (!data.attributes) {
-					router.push({ pathname: `/profile/does-not-exist`, query: { username: username } });
-				}
-			},
-			onError: (error) => {
-				console.log("profileUserInfo Error:", error);
-				router.push({ pathname: `/profile/does-not-exist`, query: { username: username } });
-			},
-		});
-		if (results) {
-			setProfileUserInfo(results.attributes);
-		}
-	};
-
-	useEffect(() => {
-		setLoading("loadingSection");
-		if (username) {
-			fetchUserData();
-			fetchInfo();
-		}
-		setLoading(false);
-	}, [username]);
-
 	// Favourites Modal
 	const [isFavouritesModalOpen, setFavouritesModalOpen] = useState(false);
-	const [favouriteTokens, setFavouriteTokens] = useState([]);
-	const { fetch: fetchFavouriteTokens } = useMoralisCloudFunction("fetchFavouriteTokens", { username: username }, { autoFetch: false });
-	useEffect(() => {
-		fetchFavouriteTokens({
-			onSuccess: (data) => {
-				setFavouriteTokens(data);
-			},
-			onError: (error) => {
-				console.log("fetchFavouriteTokens Error:", error);
-			},
-		});
-	}, [fetchFavouriteTokens]);
+	const [favouriteTokens, setFavouriteTokens] = useState(_favouriteTokens);
 	// Followers Modal
 	const [isFollowersModalOpen, setFollowersModalOpen] = useState(false);
 	// Following Modal
@@ -108,7 +80,6 @@ export default function Profile() {
 		}
 	}, [router.query]);
 
-	// if (isLoading) return null;
 	return (
 		<>
 			{profileUser.isArtist ? (

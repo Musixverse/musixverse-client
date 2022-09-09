@@ -2,6 +2,7 @@ import { Fragment, useRef, useContext } from "react";
 import styles from "../../../styles/ContactUs/contactUs.module.css";
 import { useNewMoralisObject } from "react-moralis";
 import StatusContext from "../../../store/status-context";
+import { isEmailValid } from "../../utils/Validate";
 
 export default function ContactUs() {
 	const [, , setSuccess, setError] = useContext(StatusContext);
@@ -11,27 +12,23 @@ export default function ContactUs() {
 	const emailRef = useRef("");
 	const messageRef = useRef("");
 
-	const handleFormSubmit = (e) => {
+	const handleFormSubmit = async (e) => {
 		e.preventDefault();
 
 		const name = nameRef.current.value;
 		const email = emailRef.current.value;
 		const message = messageRef.current.value;
 
-		if (email.length != 0) {
-			// EMAIL CHECKS
-			const emailRegex = new RegExp(
-				/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i
-			);
-			if (!emailRegex.test(email)) {
-				setError({
-					title: "Invalid credentials!",
-					message: "Please enter a valid email",
-					showErrorBox: true,
-				});
-				emailRef.current.focus();
-				return;
-			}
+		// EMAIL CHECK
+		const emailCheck = await isEmailValid(email);
+		if (emailCheck.status === false) {
+			setError({
+				title: emailCheck.title || "Invalid credentials!",
+				message: emailCheck.message,
+				showErrorBox: true,
+			});
+			emailRef.current.focus();
+			return;
 		}
 
 		if (name.length != 0) {

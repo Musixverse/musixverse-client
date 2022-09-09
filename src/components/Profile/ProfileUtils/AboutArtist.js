@@ -14,7 +14,7 @@ export default function AboutArtist({ username, name, bio, country, createdAt, s
 
 	useEffect(() => {
 		if (createdAt) {
-			const dateStr = createdAt.toDateString();
+			const dateStr = new Date(createdAt).toDateString();
 			const dateStrArr = dateStr.split(" ");
 			setJoined("Joined " + dateStrArr[1] + ", " + dateStrArr[3]);
 		}

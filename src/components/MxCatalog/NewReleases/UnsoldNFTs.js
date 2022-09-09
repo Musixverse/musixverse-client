@@ -31,7 +31,7 @@ const UnsoldNFTs = ({ appliedFilter }) => {
 
 	return (
 		<>
-			{loading && !tracksWhoseAllCopiesAreNotSold ? (
+			{loading ? (
 				<LoadingNftCards />
 			) : !loading && tracksWhoseAllCopiesAreNotSold.length === 0 ? (
 				<NoResultsFound />

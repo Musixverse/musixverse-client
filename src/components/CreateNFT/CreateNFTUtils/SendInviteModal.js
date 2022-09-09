@@ -4,10 +4,11 @@ import { useMoralisCloudFunction } from "react-moralis";
 import LoadingContext from "../../../../store/loading-context";
 import StatusContext from "../../../../store/status-context";
 import Modal from "../../../layout/Modal/Modal";
+import { isEmailValid } from "../../../utils/Validate";
 
 const SendInviteModal = ({ isOpen, setOpen, invitedArtistEmail, onEmailChange, nftDraftMetadata }) => {
 	const [loading, setLoading] = useContext(LoadingContext);
-	const [, , setSuccess] = useContext(StatusContext);
+	const [, , setSuccess, setError] = useContext(StatusContext);
 
 	const router = useRouter();
 	const { draft } = router.query;
@@ -23,7 +24,20 @@ const SendInviteModal = ({ isOpen, setOpen, invitedArtistEmail, onEmailChange, n
 	};
 
 	const { fetch: sendInviteEmail } = useMoralisCloudFunction("sendInviteEmail", { email: invitedArtistEmail }, { autoFetch: false });
-	const sendInvitationEmail = async () => {
+	const onFormSubmit = async (e) => {
+		e.preventDefault();
+		// EMAIL CHECK
+		const emailCheck = await isEmailValid(invitedArtistEmail);
+		console.log(emailCheck);
+		if (emailCheck.status === false) {
+			setError({
+				title: emailCheck.title || "Invalid email entered",
+				message: emailCheck.message,
+				showErrorBox: true,
+			});
+			return;
+		}
+
 		setLoading(true);
 		await sendInviteEmail({
 			onSuccess: async (object) => {
@@ -41,11 +55,6 @@ const SendInviteModal = ({ isOpen, setOpen, invitedArtistEmail, onEmailChange, n
 				console.log("fetchMatchingUsers Error:", error);
 			},
 		});
-	};
-
-	const onFormSubmit = async (e) => {
-		e.preventDefault();
-		await sendInvitationEmail();
 		setOpen(false);
 	};
 

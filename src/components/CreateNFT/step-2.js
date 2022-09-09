@@ -2,10 +2,10 @@ import { useContext } from "react";
 import PreviewNft from "./CreateNFTUtils/PreviewNft";
 import Step2Form from "./CreateNFTUtils/Step2Form";
 import ActionButtons from "./CreateNFTUtils/ActionButtons";
-import RequiredAsterisk from "../../layout/RequiredAsterisk";
 import StatusContext from "../../../store/status-context";
 import { useRouter } from "next/router";
 import { saveNftCreationProgress } from "./CreateNFTUtils/SaveNftCreationProgress";
+import { isIsrcValid } from "../../utils/Validate";
 
 export default function ComprehensiveDetails({
 	step,
@@ -90,10 +90,21 @@ export default function ComprehensiveDetails({
 								showErrorBox: true,
 							});
 							return;
-						} else {
-							await saveNftCreationProgress(nftDraftMetadata, draft);
-							nextStep();
 						}
+						if (isrc) {
+							// ISRC CHECK
+							const isrcCheck = await isIsrcValid(isrc);
+							if (isrcCheck.status === false) {
+								setError({
+									title: isrcCheck.title,
+									message: isrcCheck.message,
+									showErrorBox: true,
+								});
+								return;
+							}
+						}
+						await saveNftCreationProgress(nftDraftMetadata, draft);
+						nextStep();
 					}}
 				>
 					<div className="flex flex-col w-full space-y-20 md:space-x-10 md:space-y-0 md:flex-row xl:space-x-20">

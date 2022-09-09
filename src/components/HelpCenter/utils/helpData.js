@@ -1,4 +1,4 @@
-const gettingStarted =[
+export const gettingStarted =[
     {
         heading: "What is Mx Catalog?",
         body: "Mx Catalog is a one-stop shop for all types of music NFTs and communities centered around them. It’s the place where you can buy, sell, and trade Music NFTs on Musixverse.",
@@ -42,7 +42,7 @@ const gettingStarted =[
     },
 ];
 
-const buyNFT=[
+export const buyNFT=[
     {
         heading: "Who can buy an NFT on Musixverse?",
         body: "Anyone with a crypto wallet can buy an NFT on Musixverse",
@@ -98,7 +98,7 @@ const buyNFT=[
     },
 ];
 
-const sellNFT=[
+export const sellNFT=[
     {
         heading: "Who can sell an NFT on Musixverse?",
         body: (
@@ -148,7 +148,7 @@ const sellNFT=[
     },
 ];
 
-const createNFT=[
+export const createNFT=[
     {
         heading: "Who can create an NFT on Musixverse?",
         body: "Anyone with a verified Artist account can create an NFT on Musixverse.",

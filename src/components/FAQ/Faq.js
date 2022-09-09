@@ -3,23 +3,16 @@ import Link from "next/link";
 import Accordion from "./FAQUtils/Accordion";
 import Navigation from "./FAQUtils/Navigation";
 import { DISCORD_SUPPORT_CHANNEL_INVITE_LINK } from "../../constants";
-import { generalData, whatDoINeedData, aboutMxvData, buyingAndSellingData, TransactionsAndTechnicalData, communityData } from "./FAQUtils/FaqData";
+import { About_Musixverse, Musixverse_NFTs, General_Platform_Features, community } from "./FAQUtils/FaqData";
 
 export default function Faq() {
 	const [currentSelection, setCurrentSelection] = useState(0);
 
-	const categories = [
-		"General",
-		"What do I need to use the Platform",
-		"About Musixverse",
-		"Buying and Selling",
-		"Transactions and technical questions",
-		"Community",
-	];
-	const accordionData = [generalData, whatDoINeedData, aboutMxvData, buyingAndSellingData, TransactionsAndTechnicalData, communityData];
+	const categories = ["About Musixverse", "Musixverse NFTs", "General Platform Features", "Community"];
+	const accordionData = [About_Musixverse, Musixverse_NFTs, General_Platform_Features, community];
 
 	return (
-		<div className="space-y-16">
+		<div className="w-full space-y-16">
 			<div className="text-center space-y-4">
 				<span className="font-primary text-5xl font-semibold text-primary-100">FAQs</span>
 				<div className="text-sm">

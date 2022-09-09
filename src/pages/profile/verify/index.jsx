@@ -89,6 +89,8 @@ const Verify = () => {
 		nextStep,
 		prevStep,
 		isStageNameDifferent,
+		stageNameDifferentTextMessage,
+		stageNameSameTextMessage,
 		uriEncodedStageNameDifferentTextMessage,
 		uriEncodedStageNameSameTextMessage,
 		personaInquiryIdData,

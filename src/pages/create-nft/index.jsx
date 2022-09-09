@@ -115,6 +115,13 @@ const CreateNFT = () => {
 						setLinks(_draft.attributes.links);
 						setNumberOfCopies(_draft.attributes.numberOfCopies);
 						setNftPrice(_draft.attributes.nftPrice);
+						for (var idx in _draft.attributes.collaboratorList) {
+							const _collaborator = _draft.attributes.collaboratorList[idx];
+							const _collaboratorData = await Moralis.Cloud.run("fetchUserFromId", { collaborator: _collaborator });
+							_collaborator.name = _collaboratorData.name;
+							_collaborator.username = _collaboratorData.username;
+							_collaborator.avatar = _collaboratorData.avatar;
+						}
 						setCollaboratorList(_draft.attributes.collaboratorList);
 						setResaleRoyaltyPercent(_draft.attributes.resaleRoyaltyPercent);
 						setReleaseNow(_draft.attributes.releaseNow);
@@ -335,7 +342,7 @@ const CreateNFT = () => {
 		try {
 			await mintTrackNFT(numberOfCopies, nftPrice, metadataHash, collaborators, percentageContributions, resaleRoyaltyPercent, onSale, _unlockTimestamp);
 			// TODO: Uncomment the line below
-			// await deleteDraft();
+			await deleteDraft();
 			setLoading(false);
 			setCreateNFTSuccess(true);
 		} catch (error) {
@@ -472,7 +479,7 @@ const CreateNFT = () => {
 
 	switch (step) {
 		case 0:
-			return (
+			return user ? (
 				<>
 					<Head>
 						<title>Musixverse | Create NFT</title>
@@ -482,10 +489,10 @@ const CreateNFT = () => {
 					<ScrollToPageTop samePage={true} changingValue={step} />
 					<CreateNFTIntro {...step0Values} />
 				</>
-			);
+			) : null;
 
 		case 1:
-			return (
+			return user ? (
 				<>
 					<Head>
 						<title>Musixverse | Create NFT - Track Details</title>
@@ -496,10 +503,10 @@ const CreateNFT = () => {
 					<TrackDetails {...step1Values} />
 					<SaveDraftSuccessModal isOpen={saveDraftSuccess} setOpen={setSaveDraftSuccess} setStep={setStep} />
 				</>
-			);
+			) : null;
 
 		case 2:
-			return (
+			return user ? (
 				<>
 					<Head>
 						<title>Musixverse | Create NFT - Comprehensive Details</title>
@@ -510,10 +517,10 @@ const CreateNFT = () => {
 					<ComprehensiveDetails {...step2Values} />
 					<SaveDraftSuccessModal isOpen={saveDraftSuccess} setOpen={setSaveDraftSuccess} setStep={setStep} />
 				</>
-			);
+			) : null;
 
 		case 3:
-			return (
+			return user ? (
 				<>
 					<Head>
 						<title>Musixverse | Create NFT - Pricing and Splits</title>
@@ -525,7 +532,7 @@ const CreateNFT = () => {
 					<SuccessModal isOpen={createNFTSuccess} />
 					<SaveDraftSuccessModal isOpen={saveDraftSuccess} setOpen={setSaveDraftSuccess} setStep={setStep} />
 				</>
-			);
+			) : null;
 	}
 };
 

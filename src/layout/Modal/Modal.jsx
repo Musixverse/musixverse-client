@@ -82,7 +82,7 @@ export default function Modal({
 								{image}
 								<div className="font-medium text-xl text-center">{title}</div>
 							</div>
-							<div className="text-sm pt-6 pb-4 px-8 text-center">{content}</div>
+							<div className="text-sm pt-6 pb-4 px-2 sm:px-8 text-center">{content}</div>
 							<div className="mt-6 flex justify-end items-center gap-2 mb-2 mr-2">
 								{buttons.map((button, index) => (
 									<button

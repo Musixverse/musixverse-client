@@ -1,6 +1,6 @@
 import { useState } from "react";
-import styles from "../../../../styles/Faq/Accordion.module.css";
-import { gettingStarted } from "./helpData";
+import styles from "../../../styles/Faq/Accordion.module.css";
+import { gettingStarted } from "./utils/helpData";
 
 export default function GettingStarted(){
     const [currentlyExpanded, setCurrentlyExpanded] = useState(0);
@@ -42,9 +42,9 @@ export default function GettingStarted(){
     });
 
     return(
-        <div className="self-start w-full p-8 pb-12 dark:bg-dark-100 bg-light-100 rounded-xl">
+        <div className="self-start w-full mt-28 mb-14 p-8 pb-12 dark:bg-dark-100 bg-light-100 rounded-xl">
             {/* FAQ Category Heading */}
-            <h3 className="mb-5 text-lg font-medium sm:text-xl text-primary-200">Getting Started</h3>
+            <h3 className="mb-5 text-lg text-center font-medium sm:text-3xl text-primary-200">Getting Started</h3>
             <div className="w-full rounded-none accordion" id="accordionExample">
                 {gettingStartedAccordion}
             </div>

@@ -1,4 +1,4 @@
-const gettingStarted =[
+export const gettingStarted =[
     {
         heading: "What is Mx Catalog?",
         body: "Mx Catalog is a one-stop shop for all types of music NFTs and communities centered around them. It’s the place where you can buy, sell, and trade Music NFTs on Musixverse.",
@@ -42,7 +42,7 @@ const gettingStarted =[
     },
 ];
 
-const buyNFT=[
+export const buyNFT=[
     {
         heading: "Who can buy an NFT on Musixverse?",
         body: "Anyone with a crypto wallet can buy an NFT on Musixverse",
@@ -53,7 +53,7 @@ const buyNFT=[
         body: (
             <>
                 <p>The following things are required to buy an NFT on Musixverse:</p>
-                <ol>
+                <ol type="i">
                     <li>Metamask/WalletConnect Wallet</li>
                     <li>MATIC in your wallet</li>
                     <li>Collector/Artist Account</li>
@@ -67,7 +67,7 @@ const buyNFT=[
         body: (
             <>
                 <p>You can buy an NFT on Musixverse in 3 simple steps:</p>
-                <ol>
+                <ol type="i">
                     <li>Go to the Mx Catalog page and choose the NFT that you want to buy. Make use of all the filters provided on the sidebar to help you choose the right NFT to buy.</li>
                     <li>Click on the NFT that you want to buy and then click on the Buy Now button to proceed further.</li>
                     <li>After you click on Buy Now, Metamask/WalletConnect will open up. Pay the required matic to complete the transaction and that’s it!</li>
@@ -98,12 +98,12 @@ const buyNFT=[
     },
 ];
 
-const sellNFT=[
+export const sellNFT=[
     {
         heading: "Who can sell an NFT on Musixverse?",
         body: (
             <>
-                <ol>
+                <ol type="i">
                     <li>Artists can create NFTs and sell</li>
                     <li>Collectors can resell</li>
                 </ol>
@@ -148,7 +148,7 @@ const sellNFT=[
     },
 ];
 
-const createNFT=[
+export const createNFT=[
     {
         heading: "Who can create an NFT on Musixverse?",
         body: "Anyone with a verified Artist account can create an NFT on Musixverse.",
@@ -160,7 +160,7 @@ const createNFT=[
             <>
                 <p>
                 Before you create an NFT on Musixverse, you need to have the following prerequisites ready: 
-                    <ol>
+                    <ol type="i">
                         <li>Metamask/WalletConnect Wallet</li>
                         <li>MATIC in your wallet (to pay gas fees while minting an NFT, it’s close to negligible)</li>
                         <li>Artist Account</li>
@@ -180,7 +180,7 @@ const createNFT=[
         heading: "Tips for NFT creation.",
         body: (
             <>
-                <ol>
+                <ol type="i">
                     <li>Price & Quantity: The general rule of thumb is – the more the quantity, the lower the price, the fewer the quantity, the higher the price. Set the price for your NFTs with humility, but raise the floor price steadily and consistently as the market responds.</li>
                     <li>Royalty Percentage: There’s no bar on the royalty percentage that you want to give to your NFT collectors. However, we recommend keeping it between 2% to 5%.</li>
                     <li>Collaborators: Include all the collaborators who worked with you while creating a song. If they haven’t already signed up yet, don’t forget to invite them.</li>

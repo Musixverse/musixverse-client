@@ -13,10 +13,10 @@ export const meta_description3 = "The NFT Marketplace for Musicians and Fans";
 /***********************    BLOCKCHAIN CONSTANTS  *************************/
 /**************************************************************************/
 export const MUSIXVERSE_FACET_CONTRACT_ABI = MusixverseFacet.abi;
-export const MXV_DIAMOND_ADDRESS = "0x41f5c7a23115DB0D7eEA771220a0f79e60c39cd5"; // Diamond Address
-export const MUSIXVERSE_FACET_ADDRESS = "0x5258C95052B83155EEbCAe34aEABa06b56503439";
-export const MUSIXVERSE_GETTERS_FACET_ADDRESS = "0xE823224657d7DAE3cc1cA3cb801C531D598913D4";
-export const MUSIXVERSE_SETTERS_FACET_ADDRESS = "0x37f190DA094B07a9D6F100de52A6B91b71C7267D";
+export const MXV_DIAMOND_ADDRESS = "0xF16fCB942eE382656eF3DedEB098EC45049010C0"; // Diamond Address
+export const MUSIXVERSE_FACET_ADDRESS = "0x23FaB9C144eDF448DE13592115978aff7527B892";
+export const MUSIXVERSE_GETTERS_FACET_ADDRESS = "0xf4D8DAE2c59EA072F9e62feF8110BBA3304C3d7a";
+export const MUSIXVERSE_SETTERS_FACET_ADDRESS = "0x94cb41458fbE83346D1B1686e4a4D351d3f9b1E4";
 export const BLOCKCHAIN_NETWORK = "mumbai";
 export const BLOCK_EXPLORER_URL = "https://mumbai.polygonscan.com";
 export const BLOCKCHAIN_NETWORK_ID = 80001;

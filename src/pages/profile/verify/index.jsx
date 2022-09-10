@@ -14,8 +14,8 @@ const Verify = () => {
 	const [isStageNameDifferent, setIsStageNameDifferent] = useState(false);
 	const [artistStageName, setArtistStageName] = useState("");
 
-	const stageNameDifferentTextMessage = `I, ${user.attributes.name}, am verifying my identity on @musixverse as an artist. My stage name is ${artistStageName}.\n\nJoin @musixverse and let's revolutionize the music industry together!\nhttps://www.musixverse.com\n\n@musixverse\nHear it. Own it. Live it.`;
-	const stageNameSameTextMessage = `I am verifying my identity on @musixverse as an artist.\n\nJoin @musixverse and let's revolutionize the music industry together!\nhttps://www.musixverse.com\n\n@musixverse\nHear it. Own it. Live it.`;
+	const stageNameDifferentTextMessage = `I just applied for my artist verification badge on @musixverse! My stage name is ${artistStageName}.\n\nJoin @musixverse, and let's revolutionize the music industry together through Web3 and Blockchain!\nhttps://www.musixverse.com\n\n@musixverse\nHear it. Own it. Live it.`;
+	const stageNameSameTextMessage = `I just applied for my artist verification badge on @musixverse!\n\nJoin @musixverse, and let's revolutionize the music industry together through Web3 and Blockchain!\nhttps://www.musixverse.com\n\n@musixverse\nHear it. Own it. Live it.`;
 
 	const uriEncodedStageNameDifferentTextMessage = encodeURI(stageNameDifferentTextMessage);
 	const uriEncodedStageNameSameTextMessage = encodeURI(stageNameSameTextMessage);

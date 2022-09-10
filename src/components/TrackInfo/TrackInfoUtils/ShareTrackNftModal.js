@@ -36,7 +36,7 @@ const ShareTrackNftModal = ({ isOpen, setOpen, artistName, title, setAuthModalOp
 		}));
 	};
 
-	const sharableMessage = `Invest in ${title} by ${artistName}!\nOwn music NFTs and connect with the artists you love!\nShare NFTs and get a referral bonus every time the NFT gets traded using your link!\n\nCheck out this track on @musixverse- ${currentPageLink}`;
+	const sharableMessage = `Invest in ${title} by ${artistName}!\n\nOwn music NFTs and connect with the artists you love!\nShare NFTs and get a 10% referral bonus every time the NFT gets traded using your link!\n\nCheck out this track on @musixverse- ${currentPageLink}`;
 	const uriEncodedSharableText = encodeURI(sharableMessage);
 
 	return (

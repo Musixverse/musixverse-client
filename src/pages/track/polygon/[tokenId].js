@@ -10,13 +10,11 @@ import TrackDetails from "../../../components/TrackInfo/TrackDetails";
 import PurchaseInfo from "../../../components/TrackInfo/PurchaseInfo";
 import Activity from "../../../components/TrackInfo/Activity";
 import SimilarTokens from "../../../components/TrackInfo/SimilarTokens";
+import { MORALIS_APP_ID, MORALIS_SERVER_URL } from "../../../constants";
 
 // Fetching data over here using SSR and then passing in the components as props
 export async function getServerSideProps({ query }) {
 	const { tokenId } = query;
-
-	const MORALIS_APP_ID = process.env.NEXT_PUBLIC_MORALIS_APP_ID;
-	const MORALIS_SERVER_URL = process.env.NEXT_PUBLIC_MORALIS_SERVER_URL;
 	await Moralis.start({ serverUrl: MORALIS_SERVER_URL, appId: MORALIS_APP_ID });
 
 	const options = {

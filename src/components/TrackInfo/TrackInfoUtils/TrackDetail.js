@@ -9,10 +9,10 @@ export default function TrackDetail({ description, collaborators }) {
 			{/* </div> */}
 			{/* <div className={styles['track-details__subtitle']}> */}
 			<h3 className="font-bold font-secondary text-lg pt-3">Track Background</h3>
-			<p className="pb-5 font-secondary text-base text-justify">{description}</p>
+			<p className="pr-2 font-secondary text-base text-justify max-h-[130px] overflow-y-scroll">{description}</p>
 			{/* </div> */}
 
-			<div className="mt-10 md:mt-16">
+			<div className="mt-12">
 				<h1 className="font-tertiary text-4xl">COLLABORATORS</h1>
 				{collaborators.map((collaborator, key) => {
 					return <DisplayCollaborator key={key} collaborator={collaborator} />;

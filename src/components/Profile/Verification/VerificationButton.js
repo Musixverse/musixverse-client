@@ -5,7 +5,7 @@ const VerificationButton = ({ onClick, verifiedStatus, buttonText, verifiedText 
 			onClick={() => onClick()}
 			className={
 				verifiedStatus
-					? `flex w-fit items-center px-10 py-3 text-sm font-primary font-bold rounded-md bg-light-100 text-primary-100`
+					? `flex w-fit items-center px-10 py-3 text-sm font-primary font-bold rounded-md bg-light-100 dark:bg-[#323232] text-primary-100`
 					: `flex w-fit items-center px-10 py-3 text-sm font-primary font-bold rounded-md bg-primary-200 hover:bg-primary-300 text-light-100`
 			}
 			disabled={verifiedStatus}

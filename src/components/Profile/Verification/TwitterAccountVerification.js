@@ -150,7 +150,7 @@ const TwitterAccountVerification = ({
 				<div className="w-2/5 flex justify-between mt-20">
 					<button
 						onClick={() => prevStep()}
-						className="flex w-fit items-center px-10 py-3 text-sm font-primary font-bold rounded-md bg-light-100 hover:bg-gray-200 text-primary-100"
+						className="flex w-fit items-center px-10 py-3 text-sm font-primary font-bold rounded-md bg-light-100 dark:bg-[#323232] hover:bg-gray-200 text-primary-100"
 					>
 						Back
 					</button>

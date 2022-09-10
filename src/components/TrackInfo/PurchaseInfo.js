@@ -53,11 +53,12 @@ export default function PurchaseInfo({ tokenId, metadata, currentOwnerAddress, p
 						<p className="ml-2 font-bold text-pricing font-primary">{price}</p>
 					</div>
 				</div>
-				{onSale && (
-					<div className={styles["purchase-info__price-div--cta"]}>
-						<PurchaseButton tokenId={tokenId} price={price} />
-					</div>
-				)}
+				{onSale ||
+					(onSale === null && (
+						<div className={styles["purchase-info__price-div--cta"]}>
+							<PurchaseButton tokenId={tokenId} price={price} />
+						</div>
+					))}
 			</div>
 		</div>
 	);

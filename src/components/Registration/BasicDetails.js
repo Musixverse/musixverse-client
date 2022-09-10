@@ -134,9 +134,9 @@ export default function BasicDetails() {
 				<div className="lg:max-w-[30vw] pb-6 lg:pb-0">
 					<p className="mt-20 text-5xl font-tertiary max-w-[468px]">ARTIST SIGN UP</p>
 					<p className="text-[15px] font-secondary mt-4 max-w-none lg:max-w-[650px]">
-						Artists are the heart and soul of Musixverse. As an artist, you will be able to package your music into limited edition NFTs and sell
-						directly to your fans. In the process you will establish unique connections that your fans long for. You will also be able to explore,
-						buy, and trade NFTs of other artists.
+						Artists are the heart and soul of Musixverse. As an artist, you can package your music into limited edition NFTs and sell them directly
+						to your fans. In the process, you will establish unique connections that your fans long for. You will also be able to explore, buy, and
+						trade NFTs of other artists.
 					</p>
 					<p className="text-[15px] font-secondary mt-4">Thank you for choosing Musixverse!</p>
 				</div>

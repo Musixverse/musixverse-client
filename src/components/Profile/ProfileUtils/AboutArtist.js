@@ -41,7 +41,7 @@ export default function AboutArtist({ username, name, bio, country, createdAt, s
 		}));
 	};
 
-	const sharableMessage = `Artists and Fans are collaborating on Musixverse! Where are you?\nJump into a new world of music fandom!\n\nCheck out ${name}'s profile on @musixverse- ${currentPageLink}`;
+	const sharableMessage = `Artists and Fans are collaborating on Musixverse, eliminating all the intermediaries! Where are you?\n\nJump into a new world of music fandom and be a part of the revolution!\n\nCheck out ${name}'s profile on @musixverse-\n${currentPageLink}`;
 	const uriEncodedSharableText = encodeURI(sharableMessage);
 
 	return (

@@ -51,7 +51,7 @@ export default function Banner() {
 					Welcome to Musixverse <span className={"text-primary-100 " + styles["hero-section-container__content-div--heading"]}>Beta</span>!
 				</h1>
 				<p className={styles["hero-section-container__content-div--description"]}>
-					Musixverse will bring together artists and fans like never before, help them do great things, and empower each other in the process.
+					Musixverse aims to bring together artists and fans like never before, help them do great things, and empower each other in the process.
 				</p>
 				<a
 					className="px-5 py-3 text-xs text-white bg-primary-200 hover:bg-primary-300 font-primary rounded-3xl"

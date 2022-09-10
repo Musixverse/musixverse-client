@@ -23,9 +23,7 @@ export default function SelectAvatar({ uploadFile, setAvatar }) {
 				const uploadedFile = convertDataURLtoFile(croppedImage, "file");
 				setLoading(true);
 				// Get the uploadFileOnIPFS async function
-				console.log("reached here");
 				await uploadFileToIPFS(Moralis, uploadedFile).then((url) => {
-					console.log("inside promise");
 					setAvatar(url);
 					setLoading(false);
 				});

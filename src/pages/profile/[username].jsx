@@ -15,13 +15,11 @@ import ArtistReportModal from "../../components/Profile/ProfileUtils/ArtistRepor
 import FavouritesModal from "../../components/Profile/ProfileUtils/FavouritesModal";
 import FollowersModal from "../../components/Profile/ProfileUtils/FollowersModal";
 import FollowingModal from "../../components/Profile/ProfileUtils/FollowingModal";
+import { MORALIS_APP_ID, MORALIS_SERVER_URL } from "../../constants";
 
 // Fetching data over here using SSR and then passing in the components as props
 export async function getServerSideProps({ query }) {
 	const { username } = query;
-
-	const MORALIS_APP_ID = process.env.NEXT_PUBLIC_MORALIS_APP_ID;
-	const MORALIS_SERVER_URL = process.env.NEXT_PUBLIC_MORALIS_SERVER_URL;
 	await Moralis.start({ serverUrl: MORALIS_SERVER_URL, appId: MORALIS_APP_ID });
 
 	const profileUser = JSON.parse(JSON.stringify(await Moralis.Cloud.run("fetchUser", { username: username })));

@@ -1,24 +1,31 @@
 import { Fragment } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useTheme } from "next-themes";
 import styles from "../../../styles/Help/Help.module.css";
 import { DISCORD_SUPPORT_CHANNEL_INVITE_LINK } from "../../constants";
-import GS_icons from "../../../public/assets/help-center/getting-started.png";
-import buying from "../../../public/assets/help-center/buying.png";
-import selling from "../../../public/assets/help-center/selling.png";
-import creating from "../../../public/assets/help-center/creating.png";
-import general from "../../../public/assets/help-center/faq.png";
+import getting_started_b from "../../../public/assets/help-center/getting-started_b.png";
+import getting_started_w from "../../../public/assets/help-center/getting-started_w.png";
+import buying_b from "../../../public/assets/help-center/buying_b.png";
+import buying_w from "../../../public/assets/help-center/buying_w.png";
+import selling_b from "../../../public/assets/help-center/selling_b.png";
+import selling_w from "../../../public/assets/help-center/selling_w.png";
+import creating_b from "../../../public/assets/help-center/creating_b.png";
+import creating_w from "../../../public/assets/help-center/creating_w.png";
+import general_b from "../../../public/assets/help-center/faq_b.png";
+import general_w from "../../../public/assets/help-center/faq_w.png";
 
 export default function Help() {
+	const { theme } = useTheme();
 	return (
 		<Fragment>
 			<div className={styles["help_us_container"]}>
 				<div className={styles["help_us"]}>
 					<div className="grid grid-rows-3 grid-cols-2 sm:grid-rows-2 sm:grid-cols-3 justify-center gap-8">
 						<Link href="/help-center/getting-started" passHref={true}>
-							<div className="col-span-2 sm:col-span-1 sm:row-span-2 flex flex-col justify-center items-center p-6 rounded-lg border-2 cursor-pointer shadow hover:shadow-xl duration-300  hover:ring-offset-primary-300">
+							<div className="col-span-2 sm:col-span-1 sm:row-span-2 flex flex-col justify-center items-center p-6 rounded-lg border-2 dark:border-gray-600 cursor-pointer shadow hover:shadow-xl duration-300  hover:ring-offset-primary-300">
 								<div className="w-24 h-24 relative">
-									<Image src={GS_icons} alt={"Getting Started"} objectFit="contain" layout="fill" priority />
+									<Image src={theme === 'dark'? getting_started_w : getting_started_b } alt={"Getting Started"} objectFit="contain" layout="fill" priority />
 								</div>
 								<p className="text-lg font-semibold mt-4">Getting Started</p>
 							</div>
@@ -26,7 +33,7 @@ export default function Help() {
 						<Link href="/help-center/buying" passHref={true}>
 							<div className="flex flex-col justify-center items-center p-6 rounded-lg border-2 cursor-pointer shadow hover:shadow-xl duration-300  hover:ring-offset-primary-300">
 								<div className="w-24 h-24 relative">
-									<Image src={buying} alt={"Buying"} objectFit="contain" layout="fill" priority />
+									<Image src={theme === 'dark'? selling_w : selling_b} alt={"Buying"} objectFit="contain" layout="fill" priority />
 								</div>
 								<p className="text-lg font-semibold mt-4">Buying</p>
 							</div>
@@ -34,7 +41,7 @@ export default function Help() {
 						<Link href="/help-center/selling" passHref={true}>
 							<div className="flex flex-col justify-center items-center p-6 rounded-lg border-2 cursor-pointer shadow hover:shadow-xl duration-300  hover:ring-offset-primary-300">
 								<div className="w-24 h-24 relative">
-									<Image src={selling} alt={"Selling"} objectFit="contain" layout="fill" priority />
+									<Image src={theme==='dark'? selling_w:selling_b} alt={"Selling"} objectFit="contain" layout="fill" priority />
 								</div>
 								<p className="text-lg font-semibold mt-4">Selling</p>
 							</div>
@@ -42,7 +49,7 @@ export default function Help() {
 						<Link href="/help-center/creating" passHref={true}>
 							<div className="flex flex-col justify-center items-center p-6 rounded-lg border-2 cursor-pointer shadow hover:shadow-xl duration-300  hover:ring-offset-primary-300">
 								<div className="w-24 h-24 relative">
-									<Image src={creating} alt={"Creating"} objectFit="contain" layout="fill" priority />
+									<Image src={theme === 'dark'? creating_w : creating_b} alt={"Creating"} objectFit="contain" layout="fill" priority />
 								</div>
 								<p className="text-lg font-semibold mt-4">Creating</p>
 							</div>
@@ -50,7 +57,7 @@ export default function Help() {
 						<Link href="/help-center/faq" passHref={true}>
 							<div className="flex flex-col justify-center items-center p-6 rounded-lg border-2 cursor-pointer shadow hover:shadow-xl duration-300  hover:ring-offset-primary-300">
 								<div className="w-24 h-24 relative">
-									<Image src={general} alt={"General"} objectFit="contain" layout="fill" priority />
+									<Image src={theme === 'dark'? general_w : general_b} alt={"General"} objectFit="contain" layout="fill" priority />
 								</div>
 								<p className="text-lg font-semibold mt-4">General</p>
 							</div>

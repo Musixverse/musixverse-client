@@ -8,10 +8,23 @@ import CitiesDropdown from "./CitiesDropdown";
 export default function FilterNftTraits({ appliedFilter, setAppliedFilter, setCurrentFilterType, currentSelection }) {
 	return (
 		<div className="flex flex-col mt-8 h-3/4 lg:h-[430px] lg:pr-10 overflow-y-scroll">
-			<h5 className="text-sm font-bold md:text-base lg:text-lg font-secondary">Filter based on NFT Traits</h5>
-			<p className="font-secondary text-[#7F7F7F] text-[11px] md:text-[13px] lg:text-[15px]">
-				Select NFT Traits such as no. of copies, status and others
-			</p>
+			<div className="flex justify-between items-end">
+				<div>
+					<h5 className="text-sm font-bold md:text-base lg:text-lg font-secondary">Filter based on NFT Traits</h5>
+					<p className="font-secondary text-[#7F7F7F] text-[11px] md:text-[13px] lg:text-[15px]">
+						Select NFT Traits such as no. of copies, status and others
+					</p>
+				</div>
+				<button
+					className="bg-dark-100 text-light-200 text-sm px-6 py-1 rounded"
+					onClick={() => {
+						setCurrentFilterType(0);
+						setAppliedFilter({ type: "reset" });
+					}}
+				>
+					Reset
+				</button>
+			</div>
 			<HorizontalRuler />
 
 			<div className="flex flex-col lg:w-[657px] w-5/6 mt-4 space-y-2 sm:flex-row sm:space-x-10 sm:space-y-0">

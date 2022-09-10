@@ -11,16 +11,19 @@ import NftState from "./NftState";
 import SortBy from "./SortBy";
 
 export default function Filter({ appliedFilter, setAppliedFilter, currentSelection }) {
-	const {theme} = useTheme();
+	const { theme } = useTheme();
 	const [currentFilterType, setCurrentFilterType] = useState(0);
 
 	return (
-		<div className={"lg:flex hidden "+(currentFilterType !== 0 ? "z-40 sticky mr-10 top-24" : "z-10 sticky mr-10 top-24")}>
+		<div className={"lg:flex hidden " + (currentFilterType !== 0 ? "z-40 sticky mr-10 top-24" : "z-10 sticky mr-10 top-24")}>
 			{/* Filter CTA */}
 			<div className="z-40 self-start p-4 flex flex-col items-center justify-center border border-[#BFBFBF] rounded-2xl backdrop-blur-[40px] backdrop-brightness-200 bg-[rgba(255,255,255,0.8)] dark:bg-[rgba(19,19,19,0.4)] dark:backdrop-blur-[24px] dark:border-search-200 dark:border-2">
 				{/* Filter icon */}
-				<div onClick={() => setCurrentFilterType(0)} className="flex items-center justify-center p-4 cursor-pointer rounded-xl bg-light-300 dark:bg-search-200">
-					<Image src={theme === "light" ? FilterSvg:FilterSvg_white} objectFit="contain" width={25} height={22} alt="Filter" />
+				<div
+					onClick={() => setCurrentFilterType(0)}
+					className="flex items-center justify-center p-4 cursor-pointer rounded-xl bg-light-300 dark:bg-search-200"
+				>
+					<Image src={theme === "light" ? FilterSvg : FilterSvg_white} objectFit="contain" width={25} height={22} alt="Filter" />
 				</div>
 
 				{/* Filter Options */}
@@ -59,7 +62,7 @@ export default function Filter({ appliedFilter, setAppliedFilter, currentSelecti
 					</div>
 				</div>
 				{/* MXV LOGO */}
-				<div className="flex items-center mb-2 mt-28">
+				<div className="flex items-center mb-2 mt-28 cursor-pointer" onClick={() => setAppliedFilter({ type: "reset" })}>
 					<Image src={mxvLogo} height={37} width={37} objectFit="contain" alt="mxv logo" />
 				</div>
 			</div>

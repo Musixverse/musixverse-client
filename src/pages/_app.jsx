@@ -13,6 +13,7 @@ import Layout from "../layout/WrapLayout/Layout";
 import ScrollToPageTop from "../utils/ScrollToPageTop";
 import { connectSmartContract } from "../utils/smart-contract/functions";
 import "react-datepicker/dist/react-datepicker.css";
+import { MORALIS_APP_ID, MORALIS_SERVER_URL } from "../constants";
 
 function App({ Component, pageProps, router }) {
 	useEffect(() => {
@@ -39,10 +40,6 @@ function App({ Component, pageProps, router }) {
 		showSuccessBox: false,
 	});
 	const [authModalOpen, setAuthModalOpen] = useState(false);
-	const MORALIS_APP_ID =
-		process.env.NEXT_PUBLIC_NODE_ENV === "development" ? process.env.NEXT_PUBLIC_DEV_MORALIS_APP_ID : process.env.NEXT_PUBLIC_MORALIS_APP_ID;
-	const MORALIS_SERVER_URL =
-		process.env.NEXT_PUBLIC_NODE_ENV === "development" ? process.env.NEXT_PUBLIC_DEV_MORALIS_SERVER_URL : process.env.NEXT_PUBLIC_MORALIS_SERVER_URL;
 
 	// This is a workaround for the issue with the next-themes package. Without this, the theme was not being applied correctly.
 	const [mounted, setMounted] = useState(false);

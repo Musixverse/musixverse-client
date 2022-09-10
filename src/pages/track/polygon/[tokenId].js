@@ -10,7 +10,7 @@ import TrackDetails from "../../../components/TrackInfo/TrackDetails";
 import PurchaseInfo from "../../../components/TrackInfo/PurchaseInfo";
 import Activity from "../../../components/TrackInfo/Activity";
 import SimilarTokens from "../../../components/TrackInfo/SimilarTokens";
-import { MORALIS_APP_ID, MORALIS_SERVER_URL } from "../../constants";
+import { MORALIS_APP_ID, MORALIS_SERVER_URL } from "../../../constants";
 
 // Fetching data over here using SSR and then passing in the components as props
 export async function getServerSideProps({ query }) {

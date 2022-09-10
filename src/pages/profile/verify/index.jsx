@@ -106,9 +106,9 @@ const Verify = () => {
 			</Head>
 			<ScrollToPageTop samePage={true} changingValue={step} />
 
-			<div className="flex flex-col p-40 items-center">
+			<div className="flex flex-col p-40 items-center bg-light-300 dark:bg-dark-100">
 				<p className="text-4xl font-semibold text-center">Artist Verification</p>
-				<div className="w-2/3 mt-10 p-14 bg-light-300 justify-center rounded-xl">
+				<div className="w-2/3 mt-10 p-14 bg-light-200 dark:bg-dark-200 justify-center rounded-xl">
 					{step == 1 ? (
 						<NameAndIdVerification {...step1Values} />
 					) : step == 2 ? (

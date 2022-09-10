@@ -16,11 +16,11 @@ export const About_Musixverse =[
         body: (
             <>
                 <p>There are the 3 main reasons why Musixverse is building on Polygon:</p>
-                <ol type="i">
+                <ul className="list-disc pl-4">
                     <li>Lower Gas Fee</li>
                     <li>Fast transaction speed</li>
                     <li>Large community support</li>
-                </ol>  
+                </ul>  
             </>
         ),
         content_id: "collapseThree",
@@ -111,10 +111,10 @@ export const community = [
                 <p>Yes, we do have an official Twitter handle and Discord Community.
                 <br />
                 Make sure to join us there!</p>
-                <ol>
-                    <li><a href="https://discord.com/invite/rXKb7rCqjG">Click here to connect on Twiiter</a></li>
-                    <li><a href="https://twitter.com/musixverse">Click here to join our Discord Server</a></li>
-                </ol>
+                <ul className="list-disc pl-4">
+                    <li><a className="font-medium" href="https://discord.com/invite/rXKb7rCqjG">Click here to connect on Twiiter</a></li>
+                    <li><a className="font-medium" href="https://twitter.com/musixverse">Click here to join our Discord Server</a></li>
+                </ul>
             </>
         ),
         content_id: "collapseOne",
@@ -123,7 +123,7 @@ export const community = [
         heading: "What are the links to your other social media accounts?",
         body: (
             <>
-                <p>You can find all the links here: <a href="https://linktr.ee/musixverse">Connect With Us</a></p>
+                <p>You can find all the links here: <a className="font-medium" href="https://linktr.ee/musixverse">Connect With Us</a></p>
             </>
         ),
         content_id: "collapseTwo",
@@ -132,7 +132,7 @@ export const community = [
         heading: "How do I connect with the Musixverse team?",
         body: (
             <>
-                <p>You can connect with the Musixverse team via the <Link href="/contact-us">Contact Us page</Link> or you can also email us at <a href="mailto:contact@musixverse.com"></a>contact@musixverse.com</p>
+                <p>You can connect with the Musixverse team via the <Link className="font-medium" href="/contact-us">Contact Us page</Link> or you can also email us at <a className="font-medium" href="mailto:contact@musixverse.com">contact@musixverse.com</a></p>
             </>
         ),
         content_id: "collapseThree",
@@ -188,7 +188,7 @@ export const community = [
 //         body: (
 //             <>
 //                 <p className="text-sm text-primary-200 sm:text-base">Installing your digital wallet</p>
-//                 <ul className="mt-1 list-disc pl-7">
+//                 <ul className="mt-1 list-disc pl-4">
 //                     <li>To use Musixverse, you need a digital wallet. We only support the Metamask wallet currently.</li>
 //                     <li>
 //                         You&apos;ll need to put m1y in your wallet to make your first purchase. We can show you how to do that too. Just contact us through the
@@ -210,7 +210,7 @@ export const community = [
 //         body: (
 //             <>
 //                 <p className="text-sm text-primary-200 sm:text-base">What is MATIC? Why do I need it?</p>
-//                 <ul className="mt-1 list-disc pl-7">
+//                 <ul className="mt-1 list-disc pl-4">
 //                     <li>
 //                         MATIC is a digital currency that powers the Polygon network, which is what Musixverse is built on. MATIC acts like any other currency—
 //                         its value fluctuates with the market.
@@ -228,7 +228,7 @@ export const community = [
 //         heading: "Are Musixverse NFTs like Bitcoin?",
 //         body: (
 //             <>
-//                 <ul className="list-disc pl-7">
+//                 <ul className="list-disc pl-4">
 //                     <li>
 //                         NFTs on Musixverse are NOT a cryptocurrency. They&apos;re a cryptocollectibles. The real-world analogy for a cryptocurrency is dollars
 //                         or rupees; a cryptocollectible&apos;s real world analogy is closer to assets like baseball cards or fine art.
@@ -300,7 +300,7 @@ export const community = [
 //         heading: "Where’s my NFT? I just bought one but it’s not showing up in my account!",
 //         body: (
 //             <>
-//                 <ul className="list-disc pl-7">
+//                 <ul className="list-disc pl-4">
 //                     <li>
 //                         Transactions on the blockchain can take a few minutes to process, and then it can take a few more minutes for our website to sync with
 //                         the blockchain.
@@ -333,7 +333,7 @@ export const community = [
 //         heading: "I can’t access my wallet. Can you recover my NFTs?",
 //         body: (
 //             <>
-//                 <ul className="list-disc pl-7">
+//                 <ul className="list-disc pl-4">
 //                     <li>Unfortunately, no.</li>
 //                     <li>
 //                         If you lose access to your wallet, we can&apos;t recover your NFTs. It&apos;s not an issue of it being against our policy or being too
@@ -381,7 +381,7 @@ export const community = [
 //         heading: "Tell me more about ‘gas’.",
 //         body: (
 //             <>
-//                 <ul className="list-disc pl-7">
+//                 <ul className="list-disc pl-4">
 //                     <li>
 //                         ‘Gas’ is a shorthand used to describe the cost of powering a transaction or contract in Polygon, which is the blockchain network that
 //                         Musixverse is built on.
@@ -409,7 +409,7 @@ export const community = [
 //         heading: "Help! My problem wasn’t addressed here. How do I contact the Musixverse team?",
 //         body: (
 //             <>
-//                 <ul className="list-disc pl-7">
+//                 <ul className="list-disc pl-4">
 //                     <li>
 //                         You can contact us at <span className="font-medium text-primary-300">contact@Musixverse.com</span>. Please include any relevant NFT IDs,
 //                         links, or transaction hashes so we can support you as quickly as possible.

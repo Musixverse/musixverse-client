@@ -53,11 +53,11 @@ export const buyNFT=[
         body: (
             <>
                 <p>The following things are required to buy an NFT on Musixverse:</p>
-                <ol type="i">
+                 <ul className="list-disc pl-4">
                     <li>Metamask/WalletConnect Wallet</li>
                     <li>MATIC in your wallet</li>
                     <li>Collector/Artist Account</li>
-                </ol>
+                </ul>
             </>
         ),
         content_id: "collapseTwo",
@@ -67,11 +67,11 @@ export const buyNFT=[
         body: (
             <>
                 <p>You can buy an NFT on Musixverse in 3 simple steps:</p>
-                <ol type="i">
+                 <ul className="list-disc pl-4">
                     <li>Go to the Mx Catalog page and choose the NFT that you want to buy. Make use of all the filters provided on the sidebar to help you choose the right NFT to buy.</li>
                     <li>Click on the NFT that you want to buy and then click on the Buy Now button to proceed further.</li>
                     <li>After you click on Buy Now, Metamask/WalletConnect will open up. Pay the required matic to complete the transaction and that’s it!</li>
-                </ol>
+                </ul>
             </>
         ),
         content_id: "collapseThree",
@@ -103,10 +103,10 @@ export const sellNFT=[
         heading: "Who can sell an NFT on Musixverse?",
         body: (
             <>
-                <ol type="i">
+                 <ul className="list-disc pl-4">
                     <li>Artists can create NFTs and sell</li>
                     <li>Collectors can resell</li>
-                </ol>
+                </ul>
             </>
         ),
         content_id: "collapseOne",
@@ -160,12 +160,12 @@ export const createNFT=[
             <>
                 <p>
                 Before you create an NFT on Musixverse, you need to have the following prerequisites ready: 
-                    <ol type="i">
+                     <ul className="list-disc pl-4">
                         <li>Metamask/WalletConnect Wallet</li>
                         <li>MATIC in your wallet (to pay gas fees while minting an NFT, it’s close to negligible)</li>
                         <li>Artist Account</li>
                         <li>Verified Profile</li>
-                    </ol>
+                    </ul>
                 </p>
             </>
         ),
@@ -180,14 +180,14 @@ export const createNFT=[
         heading: "Tips for NFT creation.",
         body: (
             <>
-                <ol type="i">
+                 <ul className="list-disc pl-4">
                     <li>Price & Quantity: The general rule of thumb is – the more the quantity, the lower the price, the fewer the quantity, the higher the price. Set the price for your NFTs with humility, but raise the floor price steadily and consistently as the market responds.</li>
                     <li>Royalty Percentage: There’s no bar on the royalty percentage that you want to give to your NFT collectors. However, we recommend keeping it between 2% to 5%.</li>
                     <li>Collaborators: Include all the collaborators who worked with you while creating a song. If they haven’t already signed up yet, don’t forget to invite them.</li>
                     <li>Cover Art: Upload the cover art in X by x dimensions.</li>
                     <li>Audio File: Upload the audio file for the NFT.</li>
                     <li>Links to music platforms: Provide links of the song that you already released to the streaming platforms like Spotify, Apple Music, etc</li>
-                </ol>
+                </ul>
             </>
         ),
         content_id: "collapseFour",

@@ -115,7 +115,7 @@ const InstagramManualVerification = ({ prevStep, artistStageName, stageNameDiffe
 
 			{instagramHandle && instagramHandleSave && (
 				<>
-					<div className="p-10 bg-light-100 rounded-lg mt-8">
+					<div className="p-10 bg-light-100 dark:bg-dark-100 rounded-lg mt-8">
 						<p className="text-3xl font-tertiary text-center">Musixverse Profile Verification</p>
 						<p className="mt-6">
 							<b>Real Name:</b> {user.attributes.name}{" "}
@@ -173,7 +173,7 @@ const InstagramManualVerification = ({ prevStep, artistStageName, stageNameDiffe
 				<div className="w-3/5 flex justify-between mt-14">
 					<button
 						onClick={() => prevStep()}
-						className="flex w-fit items-center px-10 py-3 text-sm font-primary font-bold rounded-md bg-light-100 hover:bg-gray-200 text-primary-100"
+						className="flex w-fit items-center px-10 py-3 text-sm font-primary font-bold rounded-md bg-light-100 dark:bg-[#323232] hover:bg-gray-200 text-primary-100"
 					>
 						Back to Twitter Verification
 					</button>

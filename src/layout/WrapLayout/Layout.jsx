@@ -12,6 +12,7 @@ import SuccessBox from "../Modal/SuccessBox";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import AuthModal from "../Modal/AuthModal";
+import FloatingHelp from "./FloatingHelp";
 
 const Layout = ({ children }) => {
 	const { user, authError } = useMoralis();
@@ -49,6 +50,7 @@ const Layout = ({ children }) => {
 		<>
 			<Navbar authModalOpen={authModalOpen} setAuthModalOpen={setAuthModalOpen} />
 			<AuthModal isOpen={authModalOpen} onClose={() => setAuthModalOpen(false)} />
+			<FloatingHelp/>
 			{children}
 			{isLoading && theme === "light" ? <Loading /> : <LoadingDark />}
 			<ErrorBox />

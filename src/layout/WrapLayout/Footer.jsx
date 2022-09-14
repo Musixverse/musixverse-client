@@ -61,7 +61,13 @@ const Footer = () => {
 									<span onClick={() => setAuthModalOpen(true)}>Profile</span>
 								)}
 							</li>
-							<li className="hover:text-primary-100">{user && isAuthenticated && <Link href="/settings/profile-settings">Settings</Link>}</li>
+							<li className="hover:text-primary-100 cursor-pointer">
+								{user && isAuthenticated ? (
+									<Link href={`/settings/profile-settings`}>Settings</Link>
+								) : (
+									<span onClick={() => setAuthModalOpen(true)}>Settings</span>
+								)}
+							</li>
 							<Tooltip
 								labelText={<li className="text-dark-100 dark:text-light-100 cursor-help">Transactions</li>}
 								message="Coming soon!"

@@ -1,5 +1,5 @@
 import { Transition, Dialog } from "@headlessui/react";
-import { Fragment, useEffect } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { useMoralisCloudFunction } from "react-moralis";
 import NFTCard from "./NFTCard";
 import multipleNft from "../../../public/assets/nftcard/nftcards.svg";
@@ -7,8 +7,35 @@ import NftCopiesRow from "./NftCopiesRow";
 import Image from "next/image";
 
 export default function NftCopiesModal({ trackCopiesModalValues, showNftCopiesModal, setShowNftCopiesModal }) {
-	const { data: otherTokensOfTrack } = useMoralisCloudFunction("fetchOtherTokensOfTrack", { tokenId: trackCopiesModalValues.tokenId });
-	const { data: localTokenId } = useMoralisCloudFunction("fetchLocalTokenId", { tokenId: trackCopiesModalValues.tokenId });
+	const [otherTokensOfTrack, setOtherTokensOfTrack] = useState([]);
+	const { fetch: fetchOtherTokensOfTrack } = useMoralisCloudFunction(
+		"fetchOtherTokensOfTrack",
+		{ tokenId: trackCopiesModalValues.tokenId },
+		{ autoFetch: false }
+	);
+	useEffect(() => {
+		if (trackCopiesModalValues.tokenId) {
+			fetchOtherTokensOfTrack({
+				onSuccess: async (object) => setOtherTokensOfTrack(object),
+				onError: (error) => {
+					console.log("fetchOtherTokensOfTrack Error:", error);
+				},
+			});
+		}
+	}, [trackCopiesModalValues.tokenId, fetchOtherTokensOfTrack]);
+
+	const [localTokenId, setLocalTokenId] = useState([]);
+	const { fetch: fetchLocalTokenId } = useMoralisCloudFunction("fetchLocalTokenId", { tokenId: trackCopiesModalValues.tokenId }, { autoFetch: false });
+	useEffect(() => {
+		if (trackCopiesModalValues.tokenId) {
+			fetchLocalTokenId({
+				onSuccess: async (object) => setLocalTokenId(object),
+				onError: (error) => {
+					console.log("fetchLocalTokenId Error:", error);
+				},
+			});
+		}
+	}, [trackCopiesModalValues.tokenId, fetchLocalTokenId]);
 
 	return (
 		<Transition.Root show={showNftCopiesModal} as={Fragment}>

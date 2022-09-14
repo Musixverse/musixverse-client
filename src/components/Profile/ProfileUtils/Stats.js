@@ -51,13 +51,14 @@ export default function Stats({ username, isArtist, isFollowingProfileUser }) {
 	return (
 		<>
 			{isArtist ? (
-				<div className="flex grid-cols-4 mt-8 font-medium md:m-0 md:w-fit dark:bg-nav-dark dark:backdrop-blur-xl dark:backdrop-brightness-105 opacity-90 rounded-2xl bg-light-200 backdrop-blur-xl backdrop-brightness-150">
+				<div className="grid sm:flex sm:grid-cols-4 grid-cols-2 mt-8 font-medium md:m-0 md:w-fit dark:bg-nav-dark dark:backdrop-blur-xl dark:backdrop-brightness-105 opacity-90 rounded-2xl bg-light-200 backdrop-blur-xl backdrop-brightness-150">
 					<div className="shrink px-5 py-5 text-center rounded-l-2xl">
 						<h1 className="text-xl font-bold">
 							<Image src={theme !== "dark" ? recordImageB : recordImageW} width={14} height={14} alt="records" />
 							&nbsp;{numberOfTracksByArtist || 0}
 						</h1>
-						<p className="text-sm">{numberOfTracksByArtist === 1 ? "Track Released" : "Tracks Released"}</p>
+						<p className="hidden sm:block text-sm">{numberOfTracksByArtist === 1 ? "Track Released" : "Tracks Released"}</p>
+						<p className="block sm:hidden text-sm">{numberOfTracksByArtist === 1 ? "Track" : "Tracks"}</p>
 					</div>
 					<div onClick={() => displayFavourites()} className="shrink px-6 py-5 cursor-pointer text-center hover:bg-light-300 dark:hover:bg-dark-200">
 						<h1 className="text-xl font-bold">
@@ -72,7 +73,7 @@ export default function Stats({ username, isArtist, isFollowingProfileUser }) {
 					</div>
 					<div
 						onClick={() => displayFollowing()}
-						className="shrink pl-6 pr-8 py-5 cursor-pointer text-center hover:bg-light-300 dark:hover:bg-dark-200 rounded-r-2xl hidden font-secondary md:inline-block"
+						className="shrink pl-6 pr-8 py-5 cursor-pointer text-center hover:bg-light-300 dark:hover:bg-dark-200 rounded-r-2xl"
 					>
 						<h1 className="text-xl font-bold">{numberOfFollowing || 0}</h1>
 						<p className="text-sm">Following</p>

@@ -121,7 +121,7 @@ export default function ArtistHeader({
 						</span>
 					) : user && username === user.attributes.username && user.attributes.isArtist ? (
 						<Link href="/profile/verify" passHref>
-							<a className="ml-4 font-primary text-sm hover:text-primary-100 cursor-pointer hover:underline">Verify your profile</a>
+							<a className="ml-4 font-primary text-sm hover:text-primary-100 cursor-pointer hover:underline">Verify profile</a>
 						</Link>
 					) : null}
 					<p className="font-primary text-sm text-center">@{username}</p>
@@ -198,13 +198,13 @@ export default function ArtistHeader({
 							</span>
 						) : user && username === user.attributes.username && !isArtistVerified && user.attributes.isArtist ? (
 							<Link href="/profile/verify" passHref>
-								<a className="ml-4 font-primary text-sm hover:text-primary-100 cursor-pointer hover:underline">Verify your profile</a>
+								<a className="ml-4 font-primary text-sm hover:text-primary-100 cursor-pointer hover:underline">Verify profile</a>
 							</Link>
 						) : null}
 						<p className="font-primary text-sm">@{username}</p>
 					</div>
 
-					<div className="flex flex-col items-end -mb-10">
+					<div className="flex flex-col md:items-end items-center -mb-10">
 						{/* Artist's Stats Section */}
 						<Stats username={username} isArtist={isArtist} isFollowingProfileUser={isFollowingProfileUser} />
 						{/* links to music platforms */}

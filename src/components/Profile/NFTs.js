@@ -28,32 +28,34 @@ export default function NFTs({ username, currentlyActive, sortingFilter }) {
 	}, [currentlyActive, sortingFilter, username, fetchTracksByUser]);
 
 	useEffect(() => {
-		if (tracks) {
+		if (tracks.length > 0) {
 			let tempArray = [];
 			const nftCardsTemp = [];
 
 			if (currentlyActive === "Collection") {
 				tracks.map((track, idx) => {
-					const metadata = JSON.parse(track.metadata);
+					if (track.metadata) {
+						const metadata = JSON.parse(track.metadata);
 
-					tempArray.push(
-						<NFTCard
-							key={track.token_id}
-							redirectLink={`/track/polygon/${track.token_id}`}
-							trackName={metadata.title}
-							artistName={metadata.artist}
-							artistAddress={metadata.artistAddress}
-							image={metadata.artwork.uri.replace("ipfs://", process.env.NEXT_PUBLIC_IPFS_NODE_URL)}
-							tokenId={track.token_id}
-							numberOfCopies={metadata.attributes[0].value}
-							collaboratorList={metadata.collaborators}
-							showNumberOfCopies={false}
-						/>
-					);
+						tempArray.push(
+							<NFTCard
+								key={track.token_id}
+								redirectLink={`/track/polygon/${track.token_id}`}
+								trackName={metadata.title}
+								artistName={metadata.artist}
+								artistAddress={metadata.artistAddress}
+								image={metadata.artwork.uri.replace("ipfs://", process.env.NEXT_PUBLIC_IPFS_NODE_URL)}
+								tokenId={track.token_id}
+								numberOfCopies={metadata.attributes[0].value}
+								collaboratorList={metadata.collaborators}
+								showNumberOfCopies={false}
+							/>
+						);
 
-					if (tempArray.length % 5 == 0 || idx == tracks.length - 1) {
-						nftCardsTemp.push(tempArray);
-						tempArray = [];
+						if (tempArray.length % 5 == 0 || idx == tracks.length - 1) {
+							nftCardsTemp.push(tempArray);
+							tempArray = [];
+						}
 					}
 				});
 			} else {

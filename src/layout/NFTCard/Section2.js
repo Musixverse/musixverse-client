@@ -1,22 +1,16 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useMoralisCloudFunction } from "react-moralis";
 import CollaboratorImage from "./CollaboratorImage";
 import styles from "../../../styles/NFTCard/Section2.module.css";
 import ShinyLoader from "../../layout/ShinyLoader";
 
 export default function Section2({ collaboratorList, numberOfCopies, tokenId, unsoldTrackData, lastPrice }) {
-	const { fetch: fetchLocalTokenId, data: localTokenId } = useMoralisCloudFunction(
-		"fetchLocalTokenId",
-		{
-			tokenId: tokenId,
-		},
-		{ autoFetch: false }
-	);
-
+	const [localTokenId, setLocalTokenId] = useState([]);
+	const { fetch: fetchLocalTokenId } = useMoralisCloudFunction("fetchLocalTokenId", { tokenId: tokenId }, { autoFetch: false });
 	useEffect(() => {
 		if (tokenId) {
 			fetchLocalTokenId({
-				onSuccess: async (object) => {},
+				onSuccess: async (object) => setLocalTokenId(object),
 				onError: (error) => {
 					console.log("fetchLocalTokenId Error:", error);
 				},

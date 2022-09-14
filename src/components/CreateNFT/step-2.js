@@ -3,6 +3,7 @@ import PreviewNft from "./CreateNFTUtils/PreviewNft";
 import Step2Form from "./CreateNFTUtils/Step2Form";
 import ActionButtons from "./CreateNFTUtils/ActionButtons";
 import StatusContext from "../../../store/status-context";
+import LoadingContext from "../../../store/loading-context";
 import { useRouter } from "next/router";
 import { saveNftCreationProgress } from "./CreateNFTUtils/SaveNftCreationProgress";
 import { isIsrcValid } from "../../utils/Validate";
@@ -45,6 +46,7 @@ export default function ComprehensiveDetails({
 	nftDraftMetadata,
 }) {
 	const [, , , setError] = useContext(StatusContext);
+	const [, setLoading] = useContext(LoadingContext);
 
 	const nftPreviewValues = { trackTitle, coverArtUrl, audioFileUrl, nftPrice, numberOfCopies, step, collaboratorList };
 	const step2FormValues = {
@@ -83,6 +85,7 @@ export default function ComprehensiveDetails({
 				<form
 					onSubmit={async (e) => {
 						e.preventDefault();
+						setLoading(true);
 						if (tags.length < 1) {
 							setError({
 								title: "Tags not selected!",
@@ -90,8 +93,7 @@ export default function ComprehensiveDetails({
 								showErrorBox: true,
 							});
 							return;
-						}
-						if (isrc) {
+						} else if (isrc) {
 							// ISRC CHECK
 							const isrcCheck = await isIsrcValid(isrc);
 							if (isrcCheck.status === false) {
@@ -102,9 +104,11 @@ export default function ComprehensiveDetails({
 								});
 								return;
 							}
+						} else {
+							await saveNftCreationProgress(nftDraftMetadata, draft);
+							if (step < 3) nextStep();
 						}
-						await saveNftCreationProgress(nftDraftMetadata, draft);
-						nextStep();
+						setLoading(false);
 					}}
 				>
 					<div className="flex flex-col w-full space-y-20 md:space-x-10 md:space-y-0 md:flex-row xl:space-x-20">

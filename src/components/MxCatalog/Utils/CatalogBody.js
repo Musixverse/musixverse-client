@@ -1,10 +1,11 @@
 import Image from "next/image";
 import { useTheme } from "next-themes";
-import UnsoldNFTs from "../NewReleases/UnsoldNFTs";
-import SoldOnceNFTs from "../Explore/SoldOnceNFTs";
-import TrendingNFTs from "../Trending/TrendingNFTs";
+import dynamic from "next/dynamic";
+const UnsoldNFTs = dynamic(() => import("../NewReleases/UnsoldNFTs"));
+const SoldOnceNFTs = dynamic(() => import("../Explore/SoldOnceNFTs"));
+const TrendingNFTs = dynamic(() => import("../Trending/TrendingNFTs"));
 import Filter from "./CatalogUtils/Filter";
-import MobileFilter from "./CatalogUtils/MobileFilterUtils/MobileFilter";
+const MobileFilter = dynamic(() => import("./CatalogUtils/MobileFilterUtils/MobileFilter"));
 
 export default function CatalogBody({ currentSelection, setAppliedFilter, appliedFilter, showMobileFilter, setShowMobileFilter }) {
 	const { theme } = useTheme();

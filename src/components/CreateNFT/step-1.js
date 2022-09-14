@@ -3,6 +3,7 @@ import PreviewNft from "./CreateNFTUtils/PreviewNft";
 import Step1Form from "./CreateNFTUtils/Step1Form";
 import ActionButtons from "./CreateNFTUtils/ActionButtons";
 import StatusContext from "../../../store/status-context";
+import LoadingContext from "../../../store/loading-context";
 import { useRouter } from "next/router";
 import { saveNftCreationProgress } from "./CreateNFTUtils/SaveNftCreationProgress";
 import SendInviteModal from "./CreateNFTUtils/SendInviteModal";
@@ -48,6 +49,7 @@ export default function TrackDetails({
 	 * Move CSS from inline to external file
 	 */
 	const [, , , setError] = useContext(StatusContext);
+	const [, setLoading] = useContext(LoadingContext);
 	const [isInvitationModalOpen, setInvitationModalOpen] = useState(false);
 
 	const nftPreviewValues = { trackTitle, coverArtUrl, audioFileUrl, nftPrice, numberOfCopies, step, collaboratorList };
@@ -82,6 +84,7 @@ export default function TrackDetails({
 					<form
 						onSubmit={async (e) => {
 							e.preventDefault();
+							setLoading(true);
 							if (!coverArtUrl) {
 								setError({
 									title: "Image not uploaded!",
@@ -98,8 +101,9 @@ export default function TrackDetails({
 								return;
 							} else {
 								await saveNftCreationProgress(nftDraftMetadata, draft);
-								nextStep();
+								if (step < 3) nextStep();
 							}
+							setLoading(false);
 						}}
 					>
 						<div className="flex flex-col w-full space-y-20 md:space-x-10 md:space-y-0 md:flex-row xl:space-x-20">

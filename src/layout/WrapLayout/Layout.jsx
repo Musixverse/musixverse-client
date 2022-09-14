@@ -48,14 +48,14 @@ const Layout = ({ children }) => {
 
 	return (
 		<>
-			<Navbar authModalOpen={authModalOpen} setAuthModalOpen={setAuthModalOpen} />
+			{!router.pathname.startsWith("/admin") && <Navbar authModalOpen={authModalOpen} setAuthModalOpen={setAuthModalOpen} />}
 			<AuthModal isOpen={authModalOpen} onClose={() => setAuthModalOpen(false)} />
-			<FloatingHelp/>
 			{children}
 			{isLoading && theme === "light" ? <Loading /> : <LoadingDark />}
+			{!router.pathname.startsWith("/admin") && <FloatingHelp />}
 			<ErrorBox />
 			<SuccessBox />
-			<Footer />
+			{!router.pathname.startsWith("/admin") && <Footer />}
 		</>
 	);
 };

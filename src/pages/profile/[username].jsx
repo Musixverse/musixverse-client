@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Head from "next/head";
+import dynamic from "next/dynamic";
 import { meta_description } from "../../constants";
 import { useRouter } from "next/router";
 import Moralis from "moralis/node";
@@ -7,14 +8,14 @@ import Banner from "../../components/Profile/Banner";
 import ArtistHeader from "../../components/Profile/ArtistHeader";
 import Filter from "../../components/Profile/Filter";
 import NFTs from "../../components/Profile/NFTs";
-import FavouritesHeader from "../../components/Profile/FavouritesHeader";
-import FavouriteNFTs from "../../components/Profile/FavouriteNFTs";
+const FavouritesHeader = dynamic(() => import("../../components/Profile/FavouritesHeader"));
+const FavouriteNFTs = dynamic(() => import("../../components/Profile/FavouriteNFTs"));
 import NewsLetter from "../../layout/NewsLetter";
-import ArtistBioModal from "../../components/Profile/ProfileUtils/ArtistBioModal";
-import ArtistReportModal from "../../components/Profile/ProfileUtils/ArtistReportModal";
-import FavouritesModal from "../../components/Profile/ProfileUtils/FavouritesModal";
-import FollowersModal from "../../components/Profile/ProfileUtils/FollowersModal";
-import FollowingModal from "../../components/Profile/ProfileUtils/FollowingModal";
+const ArtistBioModal = dynamic(() => import("../../components/Profile/ProfileUtils/ArtistBioModal"));
+const ArtistReportModal = dynamic(() => import("../../components/Profile/ProfileUtils/ArtistReportModal"));
+const FavouritesModal = dynamic(() => import("../../components/Profile/ProfileUtils/FavouritesModal"));
+const FollowersModal = dynamic(() => import("../../components/Profile/ProfileUtils/FollowersModal"));
+const FollowingModal = dynamic(() => import("../../components/Profile/ProfileUtils/FollowingModal"));
 import { MORALIS_APP_ID, MORALIS_SERVER_URL } from "../../constants";
 
 // Fetching data over here using SSR and then passing in the components as props

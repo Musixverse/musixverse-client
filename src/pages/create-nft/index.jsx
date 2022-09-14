@@ -16,7 +16,7 @@ import LoadingContext from "../../../store/loading-context";
 import { Country, State } from "country-state-city";
 
 const CreateNFT = () => {
-	const [isLoading, setLoading] = useContext(LoadingContext);
+	const [, setLoading] = useContext(LoadingContext);
 	const { Moralis, user } = useMoralis();
 
 	// States

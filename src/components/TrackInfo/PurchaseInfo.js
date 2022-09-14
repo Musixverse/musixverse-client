@@ -1,10 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
-import { useMoralisCloudFunction } from "react-moralis";
+import { useMoralis, useMoralisCloudFunction } from "react-moralis";
 import styles from "../../../styles/TrackInfo/PurchaseInfo.module.css";
 import PurchaseButton from "./TrackInfoUtils/PurchaseButton";
 
 export default function PurchaseInfo({ tokenId, metadata, currentOwnerAddress, price, onSale }) {
+	const { user } = useMoralis();
+
 	const { data: currentOwner } = useMoralisCloudFunction("fetchUsernameFromAddress", { address: currentOwnerAddress });
 	const { data: currentOwnerAvatar } = useMoralisCloudFunction("fetchUserAvatarFromAddress", { address: currentOwnerAddress });
 
@@ -53,12 +55,11 @@ export default function PurchaseInfo({ tokenId, metadata, currentOwnerAddress, p
 						<p className="ml-2 font-bold text-pricing font-primary">{price}</p>
 					</div>
 				</div>
-				{onSale ||
-					(onSale === null && (
-						<div className={styles["purchase-info__price-div--cta"]}>
-							<PurchaseButton tokenId={tokenId} price={price} />
-						</div>
-					))}
+				{user?.attributes.ethAddress !== currentOwnerAddress && (onSale || onSale === null) && (
+					<div className={styles["purchase-info__price-div--cta"]}>
+						<PurchaseButton tokenId={tokenId} price={price} />
+					</div>
+				)}
 			</div>
 		</div>
 	);

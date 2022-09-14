@@ -1,7 +1,8 @@
 import { useReducer, useState } from "react";
+import dynamic from "next/dynamic";
 import CatalogBody from "./CatalogBody";
 import CatalogNav from "./CatalogNav";
-import MobileFilterModal from "./CatalogUtils/MobileFilterUtils/MobileFilterModal";
+const MobileFilterModal = dynamic(() => import("./CatalogUtils/MobileFilterUtils/MobileFilterModal"));
 
 const initialState = {
 	trackOrigin: "",

@@ -49,7 +49,7 @@ export default function AboutArtist({ username, name, bio, country, createdAt, s
 			<div>
 				{bio ? (
 					<>
-						<h4 className="font-bold text-[18px]">About</h4>
+						<h4 className="font-bold text-[18px] text-center md:text-start">About</h4>
 						{bioCharacters.length < 250 ? (
 							<p className={"text-[12px] md:text-[15px] pt-3"}>{bio}</p>
 						) : (
@@ -66,14 +66,14 @@ export default function AboutArtist({ username, name, bio, country, createdAt, s
 					</>
 				) : user && username === user.attributes.username ? (
 					<>
-						<h4 className="font-bold text-[18px]">About</h4>
+						<h4 className="font-bold text-[18px] text-center md:text-start">About</h4>
 						<Link href="/settings/profile-settings" passHref>
 							<p className={"text-[12px] md:text-[15px] pt-2 cursor-pointer " + styles["about_us"]}>Add your Bio.</p>
 						</Link>
 					</>
 				) : (
 					<>
-						<h4 className="font-bold text-[18px]">About</h4>
+						<h4 className="font-bold text-[18px] text-center md:text-start">About</h4>
 						<p className={"text-[12px] md:text-[15px] pt-2 " + styles["about_us"]}>No information available</p>
 					</>
 				)}

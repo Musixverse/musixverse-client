@@ -93,15 +93,7 @@ a {
 
 @media (max-width: 786px) {
 	.hamburger_menu.hamburger_menu {
-		margin-top: 60px;
-	}
-
-	.quick_hamburger_nav_div {
-		margin-top: 25px !important;
-	}
-
-	.quick_hamburger_nav.quick_hamburger_nav {
-		color: rgb(83, 194, 75);
+		margin-top: 32px;
 	}
 }
 
@@ -227,8 +219,7 @@ a:hover {
 	position: absolute;
 	width: 100vw;
 	margin: -100px 0 0 0;
-	padding: 50px;
-	padding-top: 125px;
+	padding: 125px 30px 40px 30px;
 	right: -120px;
 	background: #0d0d0d;
 	list-style-type: none;
@@ -408,22 +399,12 @@ a:hover {
 	width: 150px;
 }
 
-.quick_hamburger_nav {
-	font-size: 1.4em;
-	color: #fff;
-	font-weight: 600;
-}
-
-.quick_hamburger_nav:hover {
-	color: rgb(83, 194, 75);
-}
-
 .hamburger_menu {
 	margin-top: 100px;
 }
 
 .ham_menu_hover_effect_row {
-	height: 38px !important;
+	height: 32px !important;
 }
 
 .ham_menu_heading {
@@ -436,7 +417,7 @@ a:hover {
 
 .ham_menu_link {
 	color: #fff;
-	font-size: 1.1em;
+	font-size: 1em;
 	font-family: var(--Poppins);
 	text-align: left;
 }

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import logoWhite from "../../../public/logo-white.svg";
+import logoWhite from "../../../../public/logo-white.svg";
 
 export default function HamburgerMenu() {
 	const closeNavbar = () => {
@@ -78,7 +78,7 @@ export default function HamburgerMenu() {
 													</Link>
 												</div>
 												<div className="flex flex-wrap  ham_menu_hover_effect_row justify-center">
-													<Link href={"/team"} className="ham_menu_link ham_menu_hover_effect text-center" passHref={true}>
+													<Link href={"/"} className="ham_menu_link ham_menu_hover_effect text-center" passHref={true}>
 														<a className="text-white hover:text-primary-100" onClick={closeNavbar}>
 															Team
 														</a>

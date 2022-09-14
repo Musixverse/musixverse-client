@@ -6,7 +6,7 @@ import Image from "next/image";
 import { useMoralis, useMoralisCloudFunction } from "react-moralis";
 import logoBlack from "../../../public/logo-black.svg";
 import logoWhite from "../../../public/logo-white.svg";
-import HamburgerMenu from "../../utils/HamburgerMenu/HamburgerMenu";
+import HamburgerMenu from "./HamburgerMenu/HamburgerMenu";
 
 const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 	const { theme, setTheme } = useTheme();

@@ -303,6 +303,7 @@ export const reportNftFilters = [
 	"Other",
 ];
 
+export const DISCORD_INVITE_LINK = "https://discord.com/invite/rXKb7rCqjG";
 export const DISCORD_SUPPORT_CHANNEL_INVITE_LINK = "https://discord.gg/b4B8YhKpfy";
 
 /**************************************************************************/

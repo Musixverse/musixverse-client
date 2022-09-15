@@ -23,7 +23,7 @@
 }
 
 .contact_us_box {
-	@apply max-h-max md:h-[400px] p-8 md:p-12 border-2 border-[#afafaf] rounded-xl shadow;
+	@apply p-8 md:p-12 border-2 border-[#afafaf] rounded-xl shadow;
 }
 
 .inputBox input {
@@ -31,7 +31,7 @@
 }
 
 .inputBox label {
-	@apply p-2 text-sm font-secondary;
+	@apply py-2 text-sm font-secondary;
 }
 
 .textarea_contact {

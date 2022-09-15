@@ -3,6 +3,7 @@ import styles from "../../../styles/ContactUs/contactUs.module.css";
 import { useNewMoralisObject } from "react-moralis";
 import StatusContext from "../../../store/status-context";
 import { isEmailValid } from "../../utils/Validate";
+import { DISCORD_INVITE_LINK } from "../../constants";
 
 export default function ContactUs() {
 	const [, , setSuccess, setError] = useContext(StatusContext);
@@ -10,6 +11,7 @@ export default function ContactUs() {
 
 	const nameRef = useRef("");
 	const emailRef = useRef("");
+	const subjectRef = useRef("");
 	const messageRef = useRef("");
 
 	const handleFormSubmit = async (e) => {
@@ -17,25 +19,28 @@ export default function ContactUs() {
 
 		const name = nameRef.current.value;
 		const email = emailRef.current.value;
+		const subject = subjectRef.current.value;
 		const message = messageRef.current.value;
 
 		// EMAIL CHECK
-		const emailCheck = await isEmailValid(email);
-		if (emailCheck.status === false) {
-			setError({
-				title: emailCheck.title || "Invalid credentials!",
-				message: emailCheck.message,
-				showErrorBox: true,
-			});
-			emailRef.current.focus();
-			return;
+		if (email) {
+			const emailCheck = await isEmailValid(email);
+			if (emailCheck.status === false) {
+				setError({
+					title: emailCheck.title || "Invalid input!",
+					message: emailCheck.message,
+					showErrorBox: true,
+				});
+				emailRef.current.focus();
+				return;
+			}
 		}
 
-		if (name.length != 0) {
+		if (name.length !== 0) {
 			// NAME CHECKS
 			if (name.length < 2) {
 				setError({
-					title: "Invalid credentials!",
+					title: "Invalid input!",
 					message: "Please enter a valid name",
 					showErrorBox: true,
 				});
@@ -44,11 +49,22 @@ export default function ContactUs() {
 			}
 		}
 
+		// Subject Check
+		if (subject.length < 5) {
+			setError({
+				title: "Invalid input!",
+				message: "Please enter a valid subject with at least 5 characters",
+				showErrorBox: true,
+			});
+			subjectRef.current.focus();
+			return;
+		}
+
 		// Message Check
 		if (message.length < 5) {
 			setError({
-				title: "Invalid credentials!",
-				message: "Please enter a valid message",
+				title: "Invalid input!",
+				message: "Please enter a valid message with at least 5 characters",
 				showErrorBox: true,
 			});
 			messageRef.current.focus();
@@ -59,6 +75,7 @@ export default function ContactUs() {
 			const userData = {
 				name: name,
 				email: email,
+				subject: subject,
 				message: message,
 			};
 			saveContactMessage(userData, {
@@ -66,10 +83,11 @@ export default function ContactUs() {
 					// Execute any logic that should take place after the object is saved.
 					nameRef.current.value = "";
 					emailRef.current.value = "";
+					subjectRef.current.value = "";
 					messageRef.current.value = "";
 					setSuccess((prevState) => ({
 						...prevState,
-						title: "Message sent!",
+						title: "Message sent",
 						message: "Your message has been recorded successfully",
 						showSuccessBox: true,
 					}));
@@ -80,7 +98,7 @@ export default function ContactUs() {
 					// error is a Moralis.Error with an error code and message.
 					setError((prevState) => ({
 						...prevState,
-						title: "Failed to save user information",
+						title: "Failed to save message",
 						message: JSON.stringify(error.message),
 						showErrorBox: true,
 					}));
@@ -101,13 +119,8 @@ export default function ContactUs() {
 
 					<div className="mt-4">
 						<div className={styles["contact_notice"]}>
-							Please note that{" "}
-							<a href="http://musixverse.com" className="text-primary-100">
-								musixverse.com
-							</a>{" "}
-							aggregates all tracks that users put up as NFTs and is not partnering with any of the artists displayed on the website. If you want
-							to contact one of the artists listed here, you must contact them directly through other social media platforms. We are not
-							responsible if someone else puts up an artists&apos; track as an NFT on our platform and cannot assist you regarding the same.
+							In order to best assist you, please share as many details as you can about your query. If applicable, please include any
+							troubleshooting steps that you have already taken.
 						</div>
 					</div>
 
@@ -115,7 +128,7 @@ export default function ContactUs() {
 						<div>
 							Email us at:
 							<br />
-							<a href="mailto:contact@musixverse.com" target="_blank" rel="noopener noreferrer">
+							<a href="mailto:contact@musixverse.com" target="_blank" rel="noopener noreferrer" className="hover:text-primary-100">
 								contact@musixverse.com
 							</a>
 							<br />
@@ -153,19 +166,32 @@ export default function ContactUs() {
 
 										<div className="mt-5">
 											<div className="font-primary text-primary-100 text-sm">
-												If you don&apos;t provide an email, we will not be able to respond to your query!
+												You can leave an anonymous note but if you do not provide your email, we will not be able to connect with you
+												and respond to your query.
 											</div>
 										</div>
 									</div>
 
 									<div className="w-full mt-5 md:w-2/3 md:mt-0">
-										<div>
+										<div className={styles["inputBox"]}>
+											<label className="text-sm font-primary dark:opacity-50">Subject</label>
+											<input
+												className="dark:bg-[#1a1a1a] mt-1 dark:border-transparent"
+												type="text"
+												ref={subjectRef}
+												name="subject"
+												autoComplete="off"
+												required
+											/>
+										</div>
+
+										<div className="mt-4">
 											<label className="text-sm font-primary dark:opacity-50">Message</label>
 											<textarea
 												className={"dark:bg-[#1a1a1a] mt-1 dark:border-transparent " + styles["textarea_contact"]}
 												ref={messageRef}
 												name="message"
-												rows="8"
+												rows="6"
 												required
 											></textarea>
 										</div>
@@ -178,6 +204,17 @@ export default function ContactUs() {
 									</div>
 								</div>
 							</form>
+						</div>
+					</div>
+
+					<div className="w-full text-center mt-20">
+						<div>
+							Want to explain the issue in detail to our team? Please head over to the support channel on discord and tell us about the problem
+							there.
+							<br />
+							<a href={DISCORD_INVITE_LINK} className="text-primary-100" target="_blank" rel="noopener noreferrer">
+								Click here to join the discord server
+							</a>
 						</div>
 					</div>
 				</div>

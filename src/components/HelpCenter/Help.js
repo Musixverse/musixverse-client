@@ -59,7 +59,7 @@ export default function Help() {
 								<div className="w-24 h-24 relative">
 									<Image src={theme === 'dark'? general_w : general_b} alt={"General"} objectFit="contain" layout="fill" priority />
 								</div>
-								<p className="text-lg font-semibold mt-4">General</p>
+								<p className="text-lg font-semibold mt-4">FAQs</p>
 							</div>
 						</Link>
 					</div>

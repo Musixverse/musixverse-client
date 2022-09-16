@@ -26,9 +26,9 @@ export const gettingStarted = [
         heading: "How do I verify my profile?",
         body: (
             <>
-                <p>After you sign up to MXV as an artist, you’ll automatically get redirected to the Artist Verification page, you can verify your profile there with the help of on-screen instructions. Musixverse uses a third party verification service provided by Persona to verify government ID.
+                <p>After you sign up to MXV as an artist, you’ll automatically get redirected to the Artist Verification page, you can verify your profile there with the help of on-screen instructions. Musixverse uses a third party verification service provided by <strong>Persona</strong> to verify government ID.
                     <br />
-                    You can also go to the <strong><Link href="/profile/verify">Artist Verification</Link></strong> page to verify your profile. Provide details including your real name, stage name, and government-issued ID, and then connect your Twitter account to get verified.
+                    You can also go to the <span className="font-medium hover:text-primary-100"><Link href="/profile/verify">Artist Verification</Link></span> page to verify your profile. Provide details including your <strong> real name, stage name, and government-issued ID,</strong> and then connect your <strong>Twitter</strong>  account to get verified.
                     <br />
                     Musixverse takes artist verification seriously to ensure the platform is spam and scam free.</p>
             </>
@@ -42,7 +42,7 @@ export const gettingStarted = [
     },
     {
         heading: "How can I buy MATIC to transact on Musixverse?",
-        body: "lorem-ipsum dolor sit amet, consectetur adipis",
+        body: "To buy MATIC, you can use any crypto exchange like Binance, CoinDCX, or WazirX. You can simply buy USDT for INR on Binance P2P or add INR to CoinDCX or WazirX using the bank transfer option to buy USDT. Once you have USDT, you can go to MATICUSDT pair and place a buy order. Once you have MATIC, you can withdraw it to your decentralized wallet, and you can easily transact on Musixverse.",
         content_id: "collapseSeven",
     },
 ];
@@ -148,20 +148,20 @@ export const sellNFT = [
         body: "You can list the NFT that you own on marketplace using the “Put Up for Sale” button that’s present on the NFT’s track info page.",
         content_id: "collapseFive",
     },
-    {
-        heading: "What is the difference between an artist selling the NFT vs. a collector selling it?",
-        body: "yet to be decided",
-        content_id: "collapseSix",
-    },
-    {
-        heading: "What is the breakdown of the transaction if I sell an NFT?",
-        body: "yet to be decided",
-        content_id: "collapseSeven",
-    },
+    // {
+    //     heading: "What is the difference between an artist selling the NFT vs. a collector selling it?",
+    //     body: "yet to be decided",
+    //     content_id: "collapseSix",
+    // },
+    // {
+    //     heading: "What is the breakdown of the transaction if I sell an NFT?",
+    //     body: "yet to be decided",
+    //     content_id: "collapseSeven",
+    // },
     {
         heading: "How much does it cost to sell an NFT?",
         body: "It doesn’t cost anything to sell an NFT. You just need to pay the gas fees for the transaction and that gas fee is almost negligible.",
-        content_id: "collapseEight",
+        content_id: "collapseSix",
     },
 ];
 
@@ -184,7 +184,7 @@ export const createNFT = [
                     Before you create an NFT on Musixverse, you need to have the following prerequisites ready:
                     <ul className="list-disc pl-4">
                         <li>Metamask/WalletConnect Wallet</li>
-                        <li>MATIC in your wallet (to pay gas fees while minting an NFT, it’s close to negligible). You may be eligible to get free MATIC from Musixverse to cover the gas fee. Drop us an email on <strong><a href="mailto:contact@musixverse.com">team@musixverse.com</a></strong> with subject: <strong>REQUEST MATIC FOR GAS FEE</strong>.</li>
+                        <li>MATIC in your wallet (to pay gas fees while minting an NFT, it’s close to negligible). You may be eligible to get free MATIC from Musixverse to cover the gas fee. Drop us an email on <strong><a className="hover:text-primary-100 hover:font-normal" href="mailto:contact@musixverse.com?subject=REQUEST MATIC FOR GAS FEE">team@musixverse.com</a></strong>.</li>
                         <li>Artist Account</li>
                         <li>Verified Profile</li>
                     </ul>

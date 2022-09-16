@@ -7,7 +7,7 @@ const TrendingNFTs = dynamic(() => import("../Trending/TrendingNFTs"));
 import Filter from "./CatalogUtils/Filter";
 const MobileFilter = dynamic(() => import("./CatalogUtils/MobileFilterUtils/MobileFilter"));
 
-export default function CatalogBody({ currentSelection, setAppliedFilter, appliedFilter, showMobileFilter, setShowMobileFilter }) {
+export default function CatalogBody({ currentSelection, setAppliedFilter, appliedFilter, setShowMobileFilter, tracks }) {
 	const { theme } = useTheme();
 	let catalogType = "NEW RELEASES ON MUSIXVERSE";
 	if (currentSelection === 2) catalogType = "EXPLORE THE MUSIXVERSE MARKETPLACE";
@@ -29,9 +29,9 @@ export default function CatalogBody({ currentSelection, setAppliedFilter, applie
 
 						<div className="w-full text-center justify-items-center grid col-span-9 gap-y-[60px] gap-x-[80px] 2xl:grid-cols-4 md:grid-cols-3 sm:grid-cols-2">
 							{currentSelection === 1 ? (
-								<UnsoldNFTs appliedFilter={appliedFilter} />
+								<UnsoldNFTs appliedFilter={appliedFilter} tracks={tracks} />
 							) : currentSelection === 2 ? (
-								<SoldOnceNFTs appliedFilter={appliedFilter} />
+								<SoldOnceNFTs appliedFilter={appliedFilter} tracks={tracks} />
 							) : currentSelection === 3 ? (
 								<TrendingNFTs />
 							) : null}

@@ -18,9 +18,8 @@ const FollowersModal = dynamic(() => import("../../components/Profile/ProfileUti
 const FollowingModal = dynamic(() => import("../../components/Profile/ProfileUtils/FollowingModal"));
 import { MORALIS_APP_ID, MORALIS_SERVER_URL } from "../../constants";
 
-// Fetching data over here using SSR and then passing in the components as props
-export async function getServerSideProps({ query }) {
-	const { username } = query;
+export async function getStaticProps(context) {
+	const { username } = context.params;
 	await Moralis.start({ serverUrl: MORALIS_SERVER_URL, appId: MORALIS_APP_ID });
 
 	const profileUser = JSON.parse(JSON.stringify(await Moralis.Cloud.run("fetchUser", { username: username })));
@@ -39,6 +38,14 @@ export async function getServerSideProps({ query }) {
 	// Passing data to the page using props
 	return {
 		props: { profileUser, profileUserInfo, _favouriteTokens },
+		revalidate: 5,
+	};
+}
+
+export function getStaticPaths() {
+	return {
+		paths: [],
+		fallback: "blocking",
 	};
 }
 

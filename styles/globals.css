@@ -560,7 +560,7 @@ html {
 
 .tooltip-button {
 	background: none;
-	font-family: var(--Poppins);
+	font-family: "Roboto", "sans-serif";
 	color: #7a7a7a;
 	border: none;
 	padding: 0px;
@@ -623,7 +623,7 @@ button.tooltip-button:active {
 	font-size: 14px;
 	/* background-image: linear-gradient(30deg, rgba(44, 53, 59, 0.9), rgba(48, 54, 59, 0.9), rgba(42, 56, 59, 0.9)); */
 	/* box-shadow: 0px 0px 24px rgba(0, 0, 0, 0.1); */
-	font-family: var(--Poppins);
+	font-family: "Roboto", "sans-serif";
 	text-align: center;
 	white-space: pre-wrap;
 	transform: translate(-50%, -5px) scale(0.5);

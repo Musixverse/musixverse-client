@@ -6,15 +6,15 @@ import VerificationButton from "./VerificationButton";
 import StatusContext from "../../../../store/status-context";
 import LoadingContext from "../../../../store/loading-context";
 
-const NameAndIdVerification = ({ nextStep, isStageNameDifferent, setIsStageNameDifferent, artistStageName, setArtistStageName, personaInquiryIdData }) => {
+const NameAndIdVerification = ({ nextStep, isRealNameDifferent, setIsRealNameDifferent, artistRealName, setArtistRealName, personaInquiryIdData }) => {
 	const { user } = useMoralis();
 	const [, , , setError] = useContext(StatusContext);
 	const [, setLoading] = useContext(LoadingContext);
 
 	const [isVerificationModalOpen, setIsVerificationModalOpen] = useState(false);
-	const [artistStageNameSave, setArtistStageNameSave] = useState(false);
+	const [artistRealNameSave, setArtistRealNameSave] = useState(false);
 
-	const { fetch: setStageName } = useMoralisCloudFunction("setArtistStageName", { userId: user.id, artistStageName: artistStageName }, { autoFetch: false });
+	const { fetch: setRealName } = useMoralisCloudFunction("setArtistRealName", { userId: user.id, artistRealName: artistRealName }, { autoFetch: false });
 
 	return (
 		<form
@@ -31,18 +31,16 @@ const NameAndIdVerification = ({ nextStep, isStageNameDifferent, setIsStageNameD
 				nextStep();
 			}}
 		>
-			<p className="text-4xl font-tertiary">1. Verify your Real Name</p>
-			<p className="text-[#777777] font-normal text-xs">(This is the name on a Government Issued ID)</p>
-
+			<p className="text-4xl font-tertiary">1. Verify your Stage Name</p>
 			<input
-				className="dark:text-light-100 dark:bg-[#323232] dark:border-[#323232] px-4 py-2 mt-4 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777]"
+				className="dark:text-light-100 dark:bg-[#323232] dark:border-[#323232] px-4 py-2 mt-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777]"
 				id="artistRealName"
 				name="artistRealName"
 				type="text"
 				value={user.attributes.name}
 				readOnly
 			/>
-			<p className="text-[#777777] mt-1 font-normal text-xs">
+			<p className="text-[#777777] mt-2 font-normal text-xs">
 				The name displayed above is associated with your account on Musixverse. <br />
 				Visit&nbsp;
 				<Link href="/settings/profile-settings" passHref>
@@ -51,38 +49,39 @@ const NameAndIdVerification = ({ nextStep, isStageNameDifferent, setIsStageNameD
 				&nbsp;if you want to change this.
 			</p>
 
-			<p className="text-4xl font-tertiary mt-16">2. Verify your Stage Name</p>
-			<div className="w-2/3 text-sm mt-2">Is your stage name different from your real name?</div>
+			<p className="text-4xl font-tertiary mt-16">2. Verify your Real Name</p>
+			<p className="text-[#777777] font-normal text-xs">(This is the name on a Government Issued ID)</p>
+			<div className="w-2/3 text-sm mt-2">Is your real name different from your stage name?</div>
 			<div className="flex flex-col mb-6">
 				<div className="flex items-center mt-2 space-x-10">
 					<div className="flex items-center">
 						<input
-							id="isStageNameDifferent"
+							id="isRealNameDifferent"
 							onChange={(e) => {
-								setIsStageNameDifferent(true);
+								setIsRealNameDifferent(true);
 							}}
 							type="radio"
 							name="radio"
-							checked={isStageNameDifferent}
+							checked={isRealNameDifferent}
 							className="hidden"
 						/>
-						<label htmlFor="isStageNameDifferent" className="flex items-center text-sm font-normal cursor-pointer font-secondary">
+						<label htmlFor="isRealNameDifferent" className="flex items-center text-sm font-normal cursor-pointer font-secondary">
 							<span className="inline-block w-6 h-6 mr-1 border-2 rounded-full border-[#363636] flex-no-shrink"></span>
 							Yes
 						</label>
 					</div>
 					<div className="flex items-center">
 						<input
-							id="isStageNameSame"
+							id="isRealNameSame"
 							type="radio"
 							onChange={(e) => {
-								setIsStageNameDifferent(false);
+								setIsRealNameDifferent(false);
 							}}
 							name="radio"
-							checked={!isStageNameDifferent}
+							checked={!isRealNameDifferent}
 							className="hidden"
 						/>
-						<label htmlFor="isStageNameSame" className="flex items-center text-sm font-normal cursor-pointer font-secondary">
+						<label htmlFor="isRealNameSame" className="flex items-center text-sm font-normal cursor-pointer font-secondary">
 							<span className="inline-block w-6 h-6 mr-1 border-2 rounded-full border-[#363636] flex-no-shrink"></span>
 							No
 						</label>
@@ -90,44 +89,44 @@ const NameAndIdVerification = ({ nextStep, isStageNameDifferent, setIsStageNameD
 				</div>
 			</div>
 
-			{isStageNameDifferent && (
+			{isRealNameDifferent && (
 				<div className="w-2/3 flex flex-col text-xs">
-					<p className="text-sm font-semibold font-secondary">Enter your stage name</p>
+					<p className="text-sm font-semibold font-secondary">Enter your real name</p>
 					<div className="flex mt-1">
 						<input
 							className="mr-4 dark:text-light-100 dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-100 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-100"
-							id="artistStageName"
-							name="artistStageName"
+							id="artistRealName"
+							name="artistRealName"
 							type="text"
-							placeholder="Your stage name"
+							placeholder="Your real name"
 							autoComplete="off"
-							value={artistStageName}
+							value={artistRealName}
 							onChange={(e) => {
-								setArtistStageName(e.target.value);
+								setArtistRealName(e.target.value);
 							}}
 							onClick={() => {
-								setArtistStageNameSave(false);
+								setArtistRealNameSave(false);
 							}}
 							required
 						/>
 						<VerificationButton
 							onClick={() => {
 								setLoading(true);
-								if (artistStageName == "") {
-									setIsStageNameDifferent(false);
+								if (artistRealName == "") {
+									setIsRealNameDifferent(false);
 								}
-								setStageName({
+								setRealName({
 									onSuccess: async (object) => {
-										setArtistStageNameSave(true);
+										setArtistRealNameSave(true);
 										setLoading(false);
 									},
 									onError: (error) => {
-										console.log("setStageName Error:", error);
+										console.log("setRealName Error:", error);
 										setLoading(false);
 									},
 								});
 							}}
-							verifiedStatus={artistStageNameSave}
+							verifiedStatus={artistRealNameSave}
 							buttonText="Save"
 							verifiedText="Saved"
 						/>

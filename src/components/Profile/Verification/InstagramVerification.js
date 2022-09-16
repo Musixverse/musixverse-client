@@ -7,7 +7,7 @@ import StatusContext from "../../../../store/status-context";
 import LoadingContext from "../../../../store/loading-context";
 import { sleep } from "../../../utils/Sleep";
 
-const InstagramManualVerification = ({ prevStep, artistStageName, stageNameDifferentTextMessage, stageNameSameTextMessage }) => {
+const InstagramVerification = ({ prevStep, artistRealName, realNameDifferentTextMessage, realNameSameTextMessage }) => {
 	const { user } = useMoralis();
 	const [, setLoading] = useContext(LoadingContext);
 	const [, , setSuccess, setError] = useContext(StatusContext);
@@ -71,7 +71,7 @@ const InstagramManualVerification = ({ prevStep, artistStageName, stageNameDiffe
 				});
 			}}
 		>
-			<p className="text-4xl font-tertiary mb-2">4. Manual Verification</p>
+			<p className="text-4xl font-tertiary mb-2">Instagram Verification</p>
 
 			<p className="text-sm font-semibold font-secondary mt-6">Instagram Handle</p>
 
@@ -117,28 +117,28 @@ const InstagramManualVerification = ({ prevStep, artistStageName, stageNameDiffe
 				<>
 					<div className="p-10 bg-light-100 dark:bg-dark-100 rounded-lg mt-8">
 						<p className="text-3xl font-tertiary text-center">Musixverse Profile Verification</p>
-						<p className="mt-6">
-							<b>Real Name:</b> {user.attributes.name}{" "}
+						<p className="mt-10">
+							<b>Stage Name:</b> {user.attributes.name}
 						</p>
-						{artistStageName && (
+						{artistRealName && (
 							<p>
-								<b>Stage Name:</b> {artistStageName}
+								<b>Real Name:</b> {artistRealName}
 							</p>
 						)}
 						<p>
 							<b>Instagram Handle:</b> {instagramHandle ? "@" + instagramHandle : ""}
 						</p>
-						{artistStageName ? (
+						{artistRealName ? (
 							<p
-								className="mt-4"
-								dangerouslySetInnerHTML={{ __html: stageNameDifferentTextMessage.replace(new RegExp("\r?\n", "g"), "<br />") }}
+								className="mt-8"
+								dangerouslySetInnerHTML={{ __html: realNameDifferentTextMessage.replace(new RegExp("\r?\n", "g"), "<br />") }}
 							></p>
 						) : (
-							<p className="mt-4" dangerouslySetInnerHTML={{ __html: stageNameSameTextMessage.replace(new RegExp("\r?\n", "g"), "<br />") }}></p>
+							<p className="mt-8" dangerouslySetInnerHTML={{ __html: realNameSameTextMessage.replace(new RegExp("\r?\n", "g"), "<br />") }}></p>
 						)}
 					</div>
 
-					<div className="mt-6">
+					<div className="mt-16">
 						<p className="text-center">
 							Click a picture of above text and send a DM to&nbsp;
 							<Link href="https://www.instagram.com/musixverse/" passHref>
@@ -148,17 +148,7 @@ const InstagramManualVerification = ({ prevStep, artistStageName, stageNameDiffe
 							</Link>
 							&nbsp;on Instagram
 						</p>
-						<p className="text-[#777777] font-normal text-sm text-center">
-							Please note that instagram verification can take up to five business days
-						</p>
-						<p className="text-[#777777] font-normal text-sm text-center mt-4">
-							Use the&nbsp;
-							<span className="text-primary-200 hover:underline cursor-pointer" onClick={() => prevStep()}>
-								Twitter verification method
-							</span>
-							&nbsp;for instant verification
-						</p>
-						<p className="mt-8">
+						<p className="mt-16">
 							<input id="confirm-instagram-verification-picture-sent" type="checkbox" className="cursor-pointer" required />
 							&nbsp;&nbsp;
 							<label htmlFor="confirm-instagram-verification-picture-sent" className="cursor-pointer">
@@ -170,12 +160,12 @@ const InstagramManualVerification = ({ prevStep, artistStageName, stageNameDiffe
 			)}
 
 			<div className="w-full flex justify-center">
-				<div className="w-3/5 flex justify-between mt-14">
+				<div className="w-2/5 flex justify-between mt-14">
 					<button
 						onClick={() => prevStep()}
 						className="flex w-fit items-center px-10 py-3 text-sm font-primary font-bold rounded-md bg-light-100 dark:bg-[#323232] hover:bg-gray-200 text-primary-100"
 					>
-						Back to Twitter Verification
+						Back
 					</button>
 					<button
 						type="submit"
@@ -189,4 +179,4 @@ const InstagramManualVerification = ({ prevStep, artistStageName, stageNameDiffe
 	);
 };
 
-export default InstagramManualVerification;
+export default InstagramVerification;

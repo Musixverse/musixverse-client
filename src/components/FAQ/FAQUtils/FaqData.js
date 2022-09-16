@@ -3,7 +3,7 @@ import Link from "next/link";
 export const About_Musixverse =[
     {
         heading: "What is Musixverse?",
-        body: "Musixverse is a dApp that aims to power music ownership and distribution across the web and beyond. Currently, we are a music NFT marketplace that will enable artist discovery and provide artists with new sources of income, and give fans a chance to own and collect music in the digital age while establishing a true connection with the artists that they truly admire.",
+        body: "Musixverse is a platform  that aims to power music ownership and distribution across the web and beyond. Currently, we are a music NFT marketplace that will enable artist discovery and provide artists with new sources of income, and give fans a chance to own and collect music in the digital age while establishing a true connection with the artists that they truly admire.",
         content_id: "collapseOne",
     },
     {
@@ -35,30 +35,32 @@ export const Musixverse_NFTs =[
     },
     {
         heading: "What kind of rights do Musixverse NFTs come with?",
-        body: "#",
+        body: (
+            <>
+                <ol className="list-decimal pl-4">
+                    <li>Currently Musixverse NFTs come with a limited license for non-commercial use of the music file or the album art packaged in the NFT.</li>
+                    <li>All rights are retained by the artist and any commercial use of packaged content will be illegal.</li>
+                </ol>
+            </>
+        ),
         content_id: "collapseTwo",
-    },
-    {
-        heading: "What are the key features of Musixverse NFTs",
-        body: "#",
-        content_id: "collapseThree",
     },
     {
         heading: "Can you list Musixverse NFTs on other platforms?",
         body: "Yes",
-        content_id: "collapseFour",
+        content_id: "collapseThree",
     },
     {
         heading: "Where do I find the NFTs that I own?",
         body: "You can find the NFTs that you own on your Profile Page.",
-        content_id: "collapseFive",
+        content_id: "collapseFour",
     },
 ];
 
 export const General_Platform_Features =[
     {
         heading: "Mx Catalog",
-        body: "Mx Catalog is a marketplace where you can buy, sell, and trade Music NFTs.",
+        body: "Mx Catalog is the marketplace where you can buy, sell, and trade Music NFTs.",
         content_id: "collapseOne",
     },
     {
@@ -68,37 +70,47 @@ export const General_Platform_Features =[
     },
     {
         heading: "Schedule NFT Launch",
-        body: "You can schedule the launch of your NFT according to your need. It will appear on the Musixverse’s marketplace the time you choose.",
+        body: "Schedule your NFT on the Musixverse’s marketplace beforehand.",
         content_id: "collapseThree",
     },
     {
-        heading: "NFT Draft",
-        body: "Creating an NFT on Musixverse is a smooth process, but still if you want to save the NFT creation progress",
+        heading: "Royalties",
+        body: "You can directly buy an NFT from an artist and earn royalties from the NFT.",
         content_id: "collapseFour",
+    },
+    {
+        heading: "One-on-one connection with artists",
+        body: " Musixverse provides the platform to build personal connections with your favorite artists.",
+        content_id: "collapseFive",
+    },
+    {
+        heading: "NFT Draft",
+        body: "Creating an NFT on Musixverse is a smooth process, but still if you want to save the NFT creation progres, you can save the drafts",
+        content_id: "collapseSix",
     },
     {
         heading: "Share NFT",
         body: "You can easily share the NFTs to multiple platforms including Twitter, Telegram, LinkedIn, WhatsApp, and so on.",
-        content_id: "collapseFive",
+        content_id: "collapseSeven",
     },  
     {
         heading: "Favorites",
-        body: " Liked any NFT? Mark them as favorite using the Add to Favorites feature. You can find all your favorite NFTs in the profile page.",
-        content_id: "collapseSix",
+        body: "Liked any NFT? Mark them as favorites using the Add to Favorites feature. You can find all your favorite NFTs in the profile page.",
+        content_id: "collapseEight",
     },  
     {
         heading: "Followers and following",
         body: "Follow your favorite artists and grow your following at Musixverse. Connect with the community of the music universe.",
-        content_id: "collapseSeven",
+        content_id: "collapseNine",
     },  
     {
-        heading: "Spam Free",
+        heading: "Artist Verification/Spam & Scam Free",
         body: "Musixverse is completely spam free! Only verified artists can create NFT on Musixverse.",
-        content_id: "collapseEight",
+        content_id: "collapseTen",
     },  
     {
-        heading: "Multi NFTs",
-        body: "You can create multiple NFTs of the same song and all those individual NFTs are unique in nature.",
+        heading: "Multi NFT Copy",
+        body: "You can create multiple NFTs of the same song and all those individual NFTs will be unique.",
         content_id: "collapseNine",
     },  
 ];

@@ -25,10 +25,8 @@ export const RPC_URL = "https://polygon-mumbai.g.alchemy.com/v2/8qorAGwStqgObuxI
 /**************************************************************************/
 /******************************    MORALIS  *******************************/
 /**************************************************************************/
-export const MORALIS_APP_ID =
-	process.env.NEXT_PUBLIC_NODE_ENV === "development" ? process.env.NEXT_PUBLIC_DEV_MORALIS_APP_ID : process.env.NEXT_PUBLIC_MORALIS_APP_ID;
-export const MORALIS_SERVER_URL =
-	process.env.NEXT_PUBLIC_NODE_ENV === "development" ? process.env.NEXT_PUBLIC_DEV_MORALIS_SERVER_URL : process.env.NEXT_PUBLIC_MORALIS_SERVER_URL;
+export const MORALIS_APP_ID = process.env.NEXT_PUBLIC_MORALIS_APP_ID;
+export const MORALIS_SERVER_URL = process.env.NEXT_PUBLIC_MORALIS_SERVER_URL;
 
 /**************************************************************************/
 /************************    TRACK ATTRIBUTES    **************************/

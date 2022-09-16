@@ -91,14 +91,12 @@ export default function TrackDetails({
 									message: "You need to upload an image to proceed.",
 									showErrorBox: true,
 								});
-								return;
 							} else if (!audioFileUrl) {
 								setError({
 									title: "Audio file not uploaded!",
 									message: "You need to upload an audio file to proceed.",
 									showErrorBox: true,
 								});
-								return;
 							} else {
 								await saveNftCreationProgress(nftDraftMetadata, draft);
 								if (step < 3) nextStep();

@@ -382,7 +382,7 @@ const Step3Form = ({
 																	}}
 																	className="justify-start px-6 py-3 rounded bg-light-100 hover:bg-gray-200 dark:bg-dark-100 dark:text-light-100 text-start"
 																>
-																	<span className="text-sm">
+																	<span className="text-xs">
 																		No results found.&nbsp;&nbsp;
 																		<a className="cursor-pointer text-primary-200 hover:underline">
 																			Send an Invite <i className="fa-solid fa-arrow-right"></i>

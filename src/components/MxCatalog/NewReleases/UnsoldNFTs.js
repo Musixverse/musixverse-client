@@ -5,9 +5,10 @@ import LoadingNftCards from "../Utils/LoadingNftCards";
 import NoResultsFound from "../Utils/NoResultsFound";
 import LoadingContext from "../../../../store/loading-context";
 
-const UnsoldNFTs = ({ appliedFilter }) => {
+const UnsoldNFTs = ({ appliedFilter, tracks }) => {
 	const [loading, setLoading] = useContext(LoadingContext);
-	const [tracksWhoseAllCopiesAreNotSold, setTracksWhoseAllCopiesAreNotSold] = useState(false);
+	const [tracksWhoseAllCopiesAreNotSold, setTracksWhoseAllCopiesAreNotSold] = useState(tracks);
+	const [hasLoadedOnce, setLoadedOnce] = useState(false);
 
 	const { fetch: fetchTracksWhoseAllCopiesAreNotSold } = useMoralisCloudFunction(
 		"fetchTracksWhoseAllCopiesAreNotSold",
@@ -16,17 +17,20 @@ const UnsoldNFTs = ({ appliedFilter }) => {
 	);
 
 	useEffect(() => {
-		setLoading(true);
-		fetchTracksWhoseAllCopiesAreNotSold({
-			onSuccess: async (object) => {
-				setLoading(false);
-				setTracksWhoseAllCopiesAreNotSold(object);
-			},
-			onError: (error) => {
-				setLoading(false);
-				console.log("fetchTracksWhoseAllCopiesAreNotSold Error:", error);
-			},
-		});
+		if (hasLoadedOnce) {
+			setLoading(true);
+			fetchTracksWhoseAllCopiesAreNotSold({
+				onSuccess: async (object) => {
+					setLoading(false);
+					setTracksWhoseAllCopiesAreNotSold(object);
+				},
+				onError: (error) => {
+					setLoading(false);
+					console.log("fetchTracksWhoseAllCopiesAreNotSold Error:", error);
+				},
+			});
+		}
+		setLoadedOnce(true);
 	}, [appliedFilter, fetchTracksWhoseAllCopiesAreNotSold]);
 
 	return (

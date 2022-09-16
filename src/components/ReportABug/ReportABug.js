@@ -182,7 +182,7 @@ export default function ReportABug() {
 						Sending us an email at:
 						<br />
 						<strong>
-							<a href="mailto:contact@musixverse.com?subject=[Bug%20Report]" target="_blank" rel="noopener noreferrer">
+							<a href="mailto:contact@musixverse.com?subject=Bug Report" target="_blank" rel="noopener noreferrer">
 								contact@musixverse.com
 							</a>
 						</strong>

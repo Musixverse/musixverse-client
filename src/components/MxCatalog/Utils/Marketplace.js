@@ -75,7 +75,7 @@ const reducer = (state, action) => {
 	}
 };
 
-export default function Marketplace() {
+export default function Marketplace({ tracks }) {
 	// Will be maintaining a state here for the type of marketplace (currentSelection (Integer))
 	// Initially set to load the newly released nfts first
 	const [currentSelection, setCurrentSelection] = useState(1);
@@ -90,11 +90,11 @@ export default function Marketplace() {
 
 			{/* Main Catalog Body */}
 			<CatalogBody
-				showMobileFilter={showMobileFilter}
 				setShowMobileFilter={setShowMobileFilter}
 				currentSelection={currentSelection}
 				appliedFilter={appliedFilter}
 				setAppliedFilter={dispatch}
+				tracks={tracks}
 			/>
 		</>
 	);

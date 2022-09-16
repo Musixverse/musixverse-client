@@ -101,9 +101,7 @@ export default function ReportABug() {
 
 				<div className="mt-4">
 					<div className={styles["report_a_bug_notice"]}>
-						First, <span className="text-primary-100">thank you for reporting bugs!</span> Identifying, reproducing, and documenting bugs is not
-						always fun or easy, but it’s an important part of making excellent software. It can also be rewarding, as you&apos;ll have a direct
-						influence on the platform development. We at{" "}
+						Thank you for reporting bugs! Identifying, reproducing, and documenting bugs is important to improve Musixverse. Feedback is vital to making our services even better. With bug reporting forms, email, and discord server, it&apos;s easy to report issues you encounter and request enhancements to any services or functionalities on our platform. You&apos;ll directly influence the platform&apos;s development and building of the future of the Music Industry We at{" "}
 						<a href={"/"} className="text-primary-100">
 							Musixverse
 						</a>
@@ -122,8 +120,7 @@ export default function ReportABug() {
 						<span className="text-primary-100">broken</span> can be termed as a bug and is important to let us know about.
 						<br />
 						<br />
-						<span className="text-primary-100">Report everything</span> that you find. An issue might be glaringly obvious to you, but if you don’t
-						report it, we may not even know about it.
+						<span className="text-primary-100">Report everything</span> that you find. An issue might be glaringly obvious to you,  but we may not even know about it if you don&apos;t report it.
 					</div>
 				</div>
 
@@ -136,27 +133,24 @@ export default function ReportABug() {
 						No matter what the bug is, we will <span className="text-primary-100">always</span> want to know this information:
 						<br />
 						<br />
-						<ul>
+						<ul className="list-disc pl-4">
 							<li>What did you try to do?</li>
-							<li>What steps did you take to do that?</li>
+							<li>What steps were involved? (So that we can replicate)</li>
 							<li>What did you expect to happen?</li>
 							<li>What happened instead?</li>
 						</ul>
 						One or more of those may seem stupid or self-explanatory to you, but it’s <span className="text-primary-100">extremely helpful</span> to
-						us if you take the time to write it all out. <span className="text-primary-100">Don’t assume we know anything!</span> Perhaps you
+						us if you take the time to write it all out. <span className="text-primary-100">Please don&apos;t assume we know everything! </span> Perhaps you
 						learned how to do something in another application, and we have a totally different way to accomplish the same thing. Simply saying that
-						something “doesn’t work” isn’t very helpful; spell it out for us as simply and clearly as possible.
+						something “doesn’t work” isn’t very helpful; explain it to us as simply and clearly as possible.
 						<br />
 						<br />
-						Any supporting information you can think of adding will be appreciated. Eg. A screenshot or screen recording may be the clearest way to
+						Any supporting information you can think of adding will be appreciated.
+						<br />
+						<br />
+						Eg. A screenshot or screen recording may be the clearest way to
 						explain your bug.
 						<br />
-						Head over to discord and report your issue. {/* Link added to the product-feedback channel on discord server */}
-						<Link href="https://discord.com/invite/rXKb7rCqjG" passHref={true}>
-							<a target="_blank" rel="noopener noreferrer" className="font-medium text-primary-100 hover:text-primary-300">
-								Click here
-							</a>
-						</Link>{" "}
 					</div>
 				</div>
 
@@ -166,17 +160,38 @@ export default function ReportABug() {
 
 				<div className="mt-4 font-primary dark:text-[#afafaf]">
 					<div>
-						Report bugs by sending us an email at:
+						The fastest and most convinient way to report a bug is by joining our Discord server:
 						<br />
-						<a href="mailto:contact@musixverse.com?subject=[Bug%20Report]" target="_blank" rel="noopener noreferrer">
-							contact@musixverse.com
-						</a>
+						<br />
+						<ol className="list-decimal pl-4">
+							<li>Join our Discord server <Link href="https://discord.com/invite/rXKb7rCqjG" passHref={true}>
+								<a target="_blank" rel="noopener noreferrer" className="font-medium text-primary-100 hover:text-primary-300">
+									here
+								</a>
+							</Link>.</li>
+							<li>Pickup MXV Insider role in the <strong>#get-role</strong> channel</li>
+							<li>Once you have the role, you will have access to the bug reporting channels on our server, and you can start reporting bugs and giving feedback.</li>
+						</ol>
+					</div>
+
+
+					<div className="mt-8">
+						Alternative ways to report a bug are given below.
+						<br />
+						<br />
+						Sending us an email at:
+						<br />
+						<strong>
+							<a href="mailto:contact@musixverse.com?subject=[Bug%20Report]" target="_blank" rel="noopener noreferrer">
+								contact@musixverse.com
+							</a>
+						</strong>
 						<br />
 						<br />
 						Or submit your comments anonymously using the form below.
 						<br />
 						<br />
-						Please make sure to include as much detailed information about the issue as possible.
+						Please ensure to include as much detailed information about the issue as possible.
 					</div>
 				</div>
 

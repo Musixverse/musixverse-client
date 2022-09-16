@@ -12,40 +12,51 @@ import Activity from "../../../components/TrackInfo/Activity";
 import SimilarTokens from "../../../components/TrackInfo/SimilarTokens";
 import { MORALIS_APP_ID, MORALIS_SERVER_URL } from "../../../constants";
 
-// Fetching data over here using SSR and then passing in the components as props
-export async function getServerSideProps({ query }) {
-	const { tokenId } = query;
+export async function getStaticProps(context) {
+	const { tokenId } = context.params;
 	await Moralis.start({ serverUrl: MORALIS_SERVER_URL, appId: MORALIS_APP_ID });
 
-	const options = {
-		chain: BLOCKCHAIN_NETWORK,
-		address: MXV_DIAMOND_ADDRESS,
-		token_id: tokenId,
-	};
-	const token = await Moralis.Web3API.token.getTokenIdMetadata(options);
+	try {
+		const options = {
+			chain: BLOCKCHAIN_NETWORK,
+			address: MXV_DIAMOND_ADDRESS,
+			token_id: tokenId,
+		};
+		const token = await Moralis.Web3API.token.getTokenIdMetadata(options);
 
-	if (token.metadata == null) {
-		fetch(token.token_uri)
-			.then((response) => {
-				return response.json();
-			})
-			.then((data) => {
-				token.metadata = data;
-				console.log("data", data);
-			});
+		if (token.metadata == null) {
+			fetch(token.token_uri)
+				.then((response) => {
+					return response.json();
+				})
+				.then((data) => {
+					token.metadata = data;
+					console.log("data", data);
+				});
+		}
+
+		// Fetch similar tokens
+		let otherTokensOfTrack = [];
+		await Moralis.Cloud.run("fetchOtherTokensOfTrack", { tokenId: tokenId }).then((result) => {
+			otherTokensOfTrack = JSON.parse(JSON.stringify(result));
+		});
+
+		const onSale = await Moralis.Cloud.run("fetchOnSaleState", { tokenId: tokenId });
+
+		// Passing data to the Page using props
+		return {
+			props: { token, otherTokensOfTrack, onSale },
+			revalidate: 10,
+		};
+	} catch (error) {
+		return { notFound: true };
 	}
+}
 
-	// Fetch similar tokens
-	let otherTokensOfTrack = [];
-	await Moralis.Cloud.run("fetchOtherTokensOfTrack", { tokenId: tokenId }).then((result) => {
-		otherTokensOfTrack = JSON.parse(JSON.stringify(result));
-	});
-
-	const onSale = await Moralis.Cloud.run("fetchOnSaleState", { tokenId: tokenId });
-
-	// Passing data to the Page using props
+export function getStaticPaths() {
 	return {
-		props: { token, otherTokensOfTrack, onSale },
+		paths: [],
+		fallback: "blocking",
 	};
 }
 

@@ -46,7 +46,7 @@ export async function getStaticProps(context) {
 		// Passing data to the Page using props
 		return {
 			props: { token, otherTokensOfTrack, onSale },
-			revalidate: 10,
+			revalidate: 5,
 		};
 	} catch (error) {
 		return { notFound: true };

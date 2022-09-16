@@ -38,7 +38,7 @@ export async function getStaticProps(context) {
 	// Passing data to the page using props
 	return {
 		props: { profileUser, profileUserInfo, _favouriteTokens },
-		revalidate: 10,
+		revalidate: 5,
 	};
 }
 

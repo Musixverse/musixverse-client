@@ -92,7 +92,6 @@ export default function ComprehensiveDetails({
 								message: "You need to select at least 1 tag to proceed.",
 								showErrorBox: true,
 							});
-							return;
 						} else if (isrc) {
 							// ISRC CHECK
 							const isrcCheck = await isIsrcValid(isrc);
@@ -102,7 +101,6 @@ export default function ComprehensiveDetails({
 									message: isrcCheck.message,
 									showErrorBox: true,
 								});
-								return;
 							}
 						} else {
 							await saveNftCreationProgress(nftDraftMetadata, draft);

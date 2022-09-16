@@ -5,6 +5,7 @@ import ImageUpload from "./ImageUpload";
 import AudioUpload from "./AudioUpload";
 import RequiredAsterisk from "../../../layout/RequiredAsterisk";
 import TrackBackgroundModal from "./TrackBackgroundModal";
+import Tooltip from "../../../layout/Tooltip/Tooltip";
 
 export default function Step1Form({
 	trackTitle,
@@ -107,8 +108,14 @@ export default function Step1Form({
 					{/* Details */}
 					<div className="font-semibold lg:w-1/2 font-secondary">
 						<p className="text-sm">
-							TRACK TITLE
+						   	TRACK TITLE	
 							<RequiredAsterisk />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<Tooltip
+								labelText={<i className="fa-solid fa-circle-info"></i>}
+								message={"Include featured artists and version info in the track title (if any) . Example: Knock You Down (feat. Kanye West & Ne-Yo)"}
+								tooltipLocation={"right"}
+							/>	
 						</p>
 						<input
 							type={"text"}
@@ -127,6 +134,12 @@ export default function Step1Form({
 									<p className="text-sm">
 										TRACK BACKGROUND
 										<RequiredAsterisk />
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<Tooltip
+											labelText={<i className="fa-solid fa-circle-info"></i>}
+											message={"Include background details about your song"}
+											tooltipLocation={"right"}
+										/>
 									</p>
 									<textarea
 										value={trackBackground ?? ""}

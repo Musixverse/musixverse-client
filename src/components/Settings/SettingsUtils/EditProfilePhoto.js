@@ -5,6 +5,7 @@ import convertDataURLtoFile from "../../../utils/image-crop/convertDataURLtoFile
 import uploadFileToIPFS from "../../../utils/image-crop/uploadFileToIPFS";
 import LoadingContext from "../../../../store/loading-context";
 import CropImageModal from "../../CreateNFT/CreateNFTUtils/CropImageModal";
+import Tooltip from "../../../layout/Tooltip/Tooltip";
 
 export default function EditProfilePhoto({ avatar, setAvatar, handleSave }) {
 	const profilePicture = useRef(null);
@@ -46,7 +47,12 @@ export default function EditProfilePhoto({ avatar, setAvatar, handleSave }) {
 		<>
 			<div className="flex flex-col">
 				<p className="mb-5 text-sm font-medium md:text-base font-secondary">
-					Profile Picture<i className="ml-2 text-base md:text-lg fa fa-info-circle"></i>
+					Profile Picture
+					<Tooltip 
+					 	labelText={<i className="ml-2 text-base md:text-lg fa fa-info-circle"></i>}
+						message={"Recommended dimensions:		 640 x 640 px"}
+						tooltipPosition={"right"}
+					/>
 				</p>
 				<label className="relative w-fit cursor-pointer" htmlFor="upload-image-inp">
 					<img

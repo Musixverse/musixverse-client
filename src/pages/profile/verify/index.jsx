@@ -4,29 +4,29 @@ import { useRouter } from "next/router";
 import { useMoralis, useMoralisCloudFunction } from "react-moralis";
 import NameAndIdVerification from "../../../components/Profile/Verification/NameAndIdVerification";
 import TwitterAccountVerification from "../../../components/Profile/Verification/TwitterAccountVerification";
-import InstagramManualVerification from "../../../components/Profile/Verification/InstagramManualVerification";
+import InstagramVerification from "../../../components/Profile/Verification/InstagramVerification";
 import ScrollToPageTop from "../../../utils/ScrollToPageTop";
 
 const Verify = () => {
 	const { user } = useMoralis();
 
 	const [step, setStep] = useState(1);
-	const [isStageNameDifferent, setIsStageNameDifferent] = useState(false);
-	const [artistStageName, setArtistStageName] = useState("");
+	const [isRealNameDifferent, setIsRealNameDifferent] = useState(false);
+	const [artistRealName, setArtistRealName] = useState("");
 
-	const stageNameDifferentTextMessage = `I just applied for my artist verification badge on @musixverse! My stage name is ${artistStageName}.\n\nJoin @musixverse, and let's revolutionize the music industry together through Web3 and Blockchain!\nhttps://www.musixverse.com\n\n@musixverse\nHear it. Own it. Live it.`;
-	const stageNameSameTextMessage = `I just applied for my artist verification badge on @musixverse!\n\nJoin @musixverse, and let's revolutionize the music industry together through Web3 and Blockchain!\nhttps://www.musixverse.com\n\n@musixverse\nHear it. Own it. Live it.`;
+	const realNameDifferentTextMessage = `I just applied for my artist verification badge on @musixverse! My real name is ${artistRealName}.`;
+	const realNameSameTextMessage = `I just applied for my artist verification badge on @musixverse!`;
 
-	const uriEncodedStageNameDifferentTextMessage = encodeURI(stageNameDifferentTextMessage);
-	const uriEncodedStageNameSameTextMessage = encodeURI(stageNameSameTextMessage);
+	const uriEncodedRealNameDifferentTextMessage = encodeURI(realNameDifferentTextMessage);
+	const uriEncodedRealNameSameTextMessage = encodeURI(realNameSameTextMessage);
 
-	const { data: stageName } = useMoralisCloudFunction("getArtistStageName");
+	const { data: realName } = useMoralisCloudFunction("getArtistRealName");
 	useEffect(() => {
-		if (stageName) {
-			setIsStageNameDifferent(true);
-			setArtistStageName(stageName);
+		if (realName) {
+			setIsRealNameDifferent(true);
+			setArtistRealName(realName);
 		}
-	}, [stageName]);
+	}, [realName]);
 
 	// Continue to next step
 	const nextStep = () => {
@@ -84,19 +84,19 @@ const Verify = () => {
 	}, [oauth_token, oauth_verifier, user]);
 
 	const { data: personaInquiryIdData } = useMoralisCloudFunction("getPersonaInquiryId");
-	const step1Values = { nextStep, isStageNameDifferent, setIsStageNameDifferent, artistStageName, setArtistStageName, personaInquiryIdData };
+	const step1Values = { nextStep, isRealNameDifferent, setIsRealNameDifferent, artistRealName, setArtistRealName, personaInquiryIdData };
 	const step2Values = {
 		nextStep,
 		prevStep,
-		isStageNameDifferent,
-		stageNameDifferentTextMessage,
-		stageNameSameTextMessage,
-		uriEncodedStageNameDifferentTextMessage,
-		uriEncodedStageNameSameTextMessage,
+		isRealNameDifferent,
+		realNameDifferentTextMessage,
+		realNameSameTextMessage,
+		uriEncodedRealNameDifferentTextMessage,
+		uriEncodedRealNameSameTextMessage,
 		personaInquiryIdData,
 		isTwitterAccountConnected,
 	};
-	const step3Values = { prevStep, isStageNameDifferent, artistStageName, stageNameDifferentTextMessage, stageNameSameTextMessage };
+	const step3Values = { prevStep, isRealNameDifferent, artistRealName, realNameDifferentTextMessage, realNameSameTextMessage };
 
 	return (
 		<>
@@ -114,7 +114,7 @@ const Verify = () => {
 					) : step == 2 ? (
 						<TwitterAccountVerification {...step2Values} />
 					) : step == 3 ? (
-						<InstagramManualVerification {...step3Values} />
+						<InstagramVerification {...step3Values} />
 					) : null}
 				</div>
 			</div>

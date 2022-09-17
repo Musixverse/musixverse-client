@@ -15,9 +15,7 @@ export default function CollectorRegistration() {
 	const { save: saveUserInfo } = useNewMoralisObject("UserInfo");
 	const { save: saveUserPreferences } = useNewMoralisObject("UserPreferences");
 
-	const [avatar, setAvatar] = useState(
-		"https://lh3.googleusercontent.com/MA0m87sfDmKHswPN39ycJkOUMS9C2wLqF5jz3SRpA8ij_V2Z-o3iPnViH1bT8_QISKwnCYSIO5ngL_85H60bpE9R6mogFuMjumBfB3w=s0"
-	);
+	const [avatar, setAvatar] = useState("https://ipfs.moralis.io:2053/ipfs/QmbeQE3qktnDF7DZnsi51MoBNHTM8b3uMKyLQkwHPy8WW7");
 
 	const nameRef = useRef(null);
 	const usernameRef = useRef(null);

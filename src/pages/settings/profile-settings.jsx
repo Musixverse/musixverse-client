@@ -7,7 +7,6 @@ import ProfileSettings from "../../components/Settings/ProfileSettings";
 import { useMoralis, useMoralisQuery, useMoralisCloudFunction } from "react-moralis";
 import StatusContext from "../../../store/status-context";
 import LoadingContext from "../../../store/loading-context";
-import { BLOCKCHAIN_NETWORK } from "../../constants";
 import { isNameValid, isUsernameValidAndAvailable, isEmailValidAndAvailable } from "../../utils/Validate";
 
 export default function Settings() {
@@ -31,7 +30,7 @@ export default function Settings() {
 
 	const fetchBalance = async () => {
 		try {
-			const options = { chain: BLOCKCHAIN_NETWORK };
+			const options = { chain: process.env.NEXT_PUBLIC_BLOCKCHAIN_NETWORK };
 			const _balance = await Moralis.Web3API.account.getNativeBalance(options);
 			const _balanceAmount = parseFloat(_balance.balance) / 10 ** 18 === 0 ? "0" : parseFloat(_balance.balance) / 10 ** 18;
 			setBalance(_balanceAmount > 0 ? _balanceAmount.toFixed(2) : 0);

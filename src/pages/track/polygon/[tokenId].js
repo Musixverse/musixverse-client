@@ -4,7 +4,6 @@ import { useRouter } from "next/router";
 import Moralis from "moralis/node";
 import { meta_description } from "../../../constants";
 import { useMoralis, useMoralisCloudFunction } from "react-moralis";
-import { MXV_DIAMOND_ADDRESS, BLOCKCHAIN_NETWORK } from "../../../constants";
 import TrackHeader from "../../../components/TrackInfo/TrackHeader";
 import TrackDetails from "../../../components/TrackInfo/TrackDetails";
 import PurchaseInfo from "../../../components/TrackInfo/PurchaseInfo";
@@ -18,8 +17,8 @@ export async function getStaticProps(context) {
 
 	try {
 		const options = {
-			chain: BLOCKCHAIN_NETWORK,
-			address: MXV_DIAMOND_ADDRESS,
+			chain: process.env.NEXT_PUBLIC_BLOCKCHAIN_NETWORK,
+			address: process.env.NEXT_PUBLIC_MXV_DIAMOND_ADDRESS,
 			token_id: tokenId,
 		};
 		const token = await Moralis.Web3API.token.getTokenIdMetadata(options);
@@ -74,8 +73,8 @@ export default function TrackInfo({ token, otherTokensOfTrack, onSale }) {
 	const { Moralis } = useMoralis();
 	const { data: tokenPrice } = useMoralisCloudFunction("fetchTokenPrice", { tokenId: tokenId });
 	const { data: currentOwnerAddress } = useMoralisCloudFunction("fetchTokenOwner", {
-		chain: BLOCKCHAIN_NETWORK,
-		address: MXV_DIAMOND_ADDRESS,
+		chain: process.env.NEXT_PUBLIC_BLOCKCHAIN_NETWORK,
+		address: process.env.NEXT_PUBLIC_MXV_DIAMOND_ADDRESS,
 		tokenId: tokenId,
 	});
 

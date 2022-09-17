@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useMoralis, useMoralisCloudFunction } from "react-moralis";
-import { BLOCKCHAIN_NETWORK } from "../../../constants";
 import { convertTimestampToDate } from "../../../utils/ConvertTimestampToDate";
 import LinkToBlockExplorer from "./LinkToBlockExplorer";
 import auction from "../../../../public/assets/auction.svg";
@@ -15,7 +14,7 @@ const PurchasedActivity = ({ activity }) => {
 
 	const getTransactionDetails = async () => {
 		const options = {
-			chain: BLOCKCHAIN_NETWORK,
+			chain: process.env.NEXT_PUBLIC_BLOCKCHAIN_NETWORK,
 			transaction_hash: activity.transaction_hash,
 		};
 		const _transaction = await Moralis.Web3API.native.getTransaction(options);

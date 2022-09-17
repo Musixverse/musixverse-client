@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { useMoralis } from "react-moralis";
-import { MXV_DIAMOND_ADDRESS, BLOCKCHAIN_NETWORK } from "../../../constants";
 import NFTCard from "../../../layout/NFTCard/NFTCard";
 
 const TrendingNFT = ({ track, index }) => {
@@ -10,9 +9,9 @@ const TrendingNFT = ({ track, index }) => {
 	const fetchTrackMetadata = async () => {
 		try {
 			const options = {
-				address: MXV_DIAMOND_ADDRESS,
+				address: process.env.NEXT_PUBLIC_MXV_DIAMOND_ADDRESS,
 				token_id: track.unsoldTokens.at(0),
-				chain: BLOCKCHAIN_NETWORK,
+				chain: process.env.NEXT_PUBLIC_BLOCKCHAIN_NETWORK,
 			};
 			const token = await Moralis.Web3API.token.getTokenIdMetadata(options);
 

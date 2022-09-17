@@ -29,21 +29,20 @@ export default function ArtistHeader({
 	const { user } = useMoralis();
 	const [, setAuthModalOpen] = useContext(AuthModalContext);
 
-	const { fetch: fetchInstagramVerificationRequested, data: instagramVerificationRequested } = useMoralisCloudFunction(
-		"fetchInstagramVerificationRequested",
-		{ autoFetch: false }
-	);
+	const { fetch: fetchVerificationRequested, data: verificationRequested } = useMoralisCloudFunction("fetchVerificationRequested", {
+		autoFetch: false,
+	});
 
 	useEffect(() => {
 		if (user) {
-			fetchInstagramVerificationRequested({
+			fetchVerificationRequested({
 				onSuccess: async (object) => {},
 				onError: (error) => {
-					console.log("fetchInstagramVerificationRequested Error:", error);
+					console.log("fetchVerificationRequested Error:", error);
 				},
 			});
 		}
-	}, [user, fetchInstagramVerificationRequested]);
+	}, [user, fetchVerificationRequested]);
 
 	/*******************************
 	 ********  FOLLOW USER  ********
@@ -107,11 +106,11 @@ export default function ArtistHeader({
 					&nbsp;
 					{isArtistVerified ? (
 						<Image src={mxv_tick} width={20} height={20} alt="mxv_verified" className="ml-10" />
-					) : user && username === user.attributes.username && instagramVerificationRequested ? (
+					) : user && username === user.attributes.username && verificationRequested ? (
 						<span className="ml-2 font-primary text-sm text-gray-500">
 							<Tooltip
 								labelText={
-									<Link href="/profile/verify/instagram-verification-requested" passHref>
+									<Link href="/profile/verify/verification-requested" passHref>
 										<i className="fa-solid fa-hourglass-half text-sm"></i>
 									</Link>
 								}
@@ -184,11 +183,11 @@ export default function ArtistHeader({
 						&nbsp;
 						{isArtistVerified ? (
 							<Image src={mxv_tick} width={20} height={20} alt="mxv_verified" className="ml-10" />
-						) : user && username === user.attributes.username && instagramVerificationRequested ? (
+						) : user && username === user.attributes.username && verificationRequested ? (
 							<span className="ml-2 font-primary text-sm text-gray-500">
 								<Tooltip
 									labelText={
-										<Link href="/profile/verify/instagram-verification-requested" passHref>
+										<Link href="/profile/verify/verification-requested" passHref>
 											<i className="fa-solid fa-hourglass-half text-sm"></i>
 										</Link>
 									}

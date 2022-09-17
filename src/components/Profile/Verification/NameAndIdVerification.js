@@ -2,17 +2,25 @@ import { useState, useContext } from "react";
 import Link from "next/link";
 import { useMoralis, useMoralisCloudFunction } from "react-moralis";
 import PersonaVerification from "./PersonaVerification";
-import VerificationButton from "./VerificationButton";
+import ConnectionButton from "../../../layout/ConnectionButton";
 import StatusContext from "../../../../store/status-context";
 import LoadingContext from "../../../../store/loading-context";
 
-const NameAndIdVerification = ({ nextStep, isRealNameDifferent, setIsRealNameDifferent, artistRealName, setArtistRealName, personaInquiryIdData }) => {
+const NameAndIdVerification = ({
+	nextStep,
+	isRealNameDifferent,
+	setIsRealNameDifferent,
+	artistRealName,
+	setArtistRealName,
+	artistRealNameSave,
+	setArtistRealNameSave,
+	personaInquiryIdData,
+}) => {
 	const { user } = useMoralis();
 	const [, , , setError] = useContext(StatusContext);
 	const [, setLoading] = useContext(LoadingContext);
 
 	const [isVerificationModalOpen, setIsVerificationModalOpen] = useState(false);
-	const [artistRealNameSave, setArtistRealNameSave] = useState(false);
 
 	const { fetch: setRealName } = useMoralisCloudFunction("setArtistRealName", { userId: user.id, artistRealName: artistRealName }, { autoFetch: false });
 
@@ -28,6 +36,16 @@ const NameAndIdVerification = ({ nextStep, isRealNameDifferent, setIsRealNameDif
 					});
 					return;
 				}
+				setRealName({
+					onSuccess: async (object) => {
+						setArtistRealNameSave(true);
+						setLoading(false);
+					},
+					onError: (error) => {
+						console.log("setRealName Error:", error);
+						setLoading(false);
+					},
+				});
 				nextStep();
 			}}
 		>
@@ -76,6 +94,8 @@ const NameAndIdVerification = ({ nextStep, isRealNameDifferent, setIsRealNameDif
 							type="radio"
 							onChange={(e) => {
 								setIsRealNameDifferent(false);
+								setArtistRealName("");
+								setArtistRealNameSave(false);
 							}}
 							name="radio"
 							checked={!isRealNameDifferent}
@@ -109,7 +129,7 @@ const NameAndIdVerification = ({ nextStep, isRealNameDifferent, setIsRealNameDif
 							}}
 							required
 						/>
-						<VerificationButton
+						<ConnectionButton
 							onClick={() => {
 								setLoading(true);
 								if (artistRealName == "") {
@@ -126,7 +146,7 @@ const NameAndIdVerification = ({ nextStep, isRealNameDifferent, setIsRealNameDif
 									},
 								});
 							}}
-							verifiedStatus={artistRealNameSave}
+							connectionStatus={artistRealNameSave}
 							buttonText="Save"
 							verifiedText="Saved"
 						/>
@@ -136,9 +156,9 @@ const NameAndIdVerification = ({ nextStep, isRealNameDifferent, setIsRealNameDif
 
 			<p className="text-4xl font-tertiary mt-16 mb-2">3. Verify Government Issued ID</p>
 
-			<VerificationButton
+			<ConnectionButton
 				onClick={() => setIsVerificationModalOpen(true)}
-				verifiedStatus={personaInquiryIdData ? personaInquiryIdData.isPersonaVerified : false}
+				connectionStatus={personaInquiryIdData ? personaInquiryIdData.isPersonaVerified : false}
 				buttonText="Verify"
 				verifiedText="Verified successfully"
 			/>
@@ -146,7 +166,7 @@ const NameAndIdVerification = ({ nextStep, isRealNameDifferent, setIsRealNameDif
 			<div className="flex justify-center mt-20">
 				<button
 					type="submit"
-					verifiedStatus={false}
+					connectionStatus={false}
 					className="flex w-fit items-center px-10 py-3 text-sm font-primary font-bold rounded-md bg-primary-200 hover:bg-primary-300 text-light-100"
 				>
 					Continue

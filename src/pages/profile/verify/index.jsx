@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import Head from "next/head";
-import { useRouter } from "next/router";
 import { useMoralis, useMoralisCloudFunction } from "react-moralis";
 import NameAndIdVerification from "../../../components/Profile/Verification/NameAndIdVerification";
-import TwitterAccountVerification from "../../../components/Profile/Verification/TwitterAccountVerification";
+import SendUsADM from "../../../components/Profile/Verification/SendUsADM";
 import InstagramVerification from "../../../components/Profile/Verification/InstagramVerification";
 import ScrollToPageTop from "../../../utils/ScrollToPageTop";
+import VerificationRequestSubmittedModal from "../../../components/Profile/Verification/VerificationRequestSubmittedModal";
 
 const Verify = () => {
 	const { user } = useMoralis();
@@ -13,18 +13,19 @@ const Verify = () => {
 	const [step, setStep] = useState(1);
 	const [isRealNameDifferent, setIsRealNameDifferent] = useState(false);
 	const [artistRealName, setArtistRealName] = useState("");
+	const [artistRealNameSave, setArtistRealNameSave] = useState(false);
+
+	const [isVerificationRequestSubmittedModalOpen, setVerificationRequestSubmittedModalOpen] = useState(false);
 
 	const realNameDifferentTextMessage = `I just applied for my artist verification badge on @musixverse! My real name is ${artistRealName}.`;
 	const realNameSameTextMessage = `I just applied for my artist verification badge on @musixverse!`;
-
-	const uriEncodedRealNameDifferentTextMessage = encodeURI(realNameDifferentTextMessage);
-	const uriEncodedRealNameSameTextMessage = encodeURI(realNameSameTextMessage);
 
 	const { data: realName } = useMoralisCloudFunction("getArtistRealName");
 	useEffect(() => {
 		if (realName) {
 			setIsRealNameDifferent(true);
 			setArtistRealName(realName);
+			setArtistRealNameSave(true);
 		}
 	}, [realName]);
 
@@ -38,65 +39,33 @@ const Verify = () => {
 		setStep((currStep) => currStep - 1);
 	};
 
-	// Twitter Auth Check
-	const [isTwitterAccountConnected, setIsTwitterAccountConnected] = useState(false);
-	const { fetch: fetchTwitterAccountConnectionStatus } = useMoralisCloudFunction("getTwitterAccountConnectionStatus");
-	useEffect(() => {
-		fetchTwitterAccountConnectionStatus({
-			onSuccess: async (res) => {
-				setIsTwitterAccountConnected(res);
-			},
-			onError: (error) => {
-				console.log("fetchTwitterAccountConnectionStatus Error:", error);
-			},
-		});
-	}, [fetchTwitterAccountConnectionStatus]);
-	const verifyTwitterOAuth = async (oauth_verifier) => {
-		await fetch(process.env.NEXT_PUBLIC_MUSIXVERSE_SERVER_BASE_URL + "/api/twitter-auth/verify-oauth", {
-			method: "POST",
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({
-				oauth_token: sessionStorage.getItem("oauth_token"),
-				oauth_token_secret: sessionStorage.getItem("oauth_token_secret"),
-				oauth_verifier: oauth_verifier,
-				userId: user.id,
-			}),
-		})
-			.then((res) => res.json())
-			.then((data) => {
-				router.replace("/profile/verify", undefined, { shallow: true });
-				setIsTwitterAccountConnected(data.responseData);
-			})
-			.catch((err) => {
-				console.log("verifyTwitterOAuth error:", err);
-			});
-	};
-	const router = useRouter();
-	const { oauth_token, oauth_verifier } = router.query;
-	useEffect(() => {
-		if (user && oauth_token && oauth_verifier) {
-			setStep(2);
-			verifyTwitterOAuth(oauth_verifier);
-		} else if (router.query.step === "2") {
-			setStep(2);
-			router.replace("/profile/verify", undefined, { shallow: true });
-		}
-	}, [oauth_token, oauth_verifier, user]);
-
 	const { data: personaInquiryIdData } = useMoralisCloudFunction("getPersonaInquiryId");
-	const step1Values = { nextStep, isRealNameDifferent, setIsRealNameDifferent, artistRealName, setArtistRealName, personaInquiryIdData };
+	const step1Values = {
+		nextStep,
+		isRealNameDifferent,
+		setIsRealNameDifferent,
+		artistRealName,
+		setArtistRealName,
+		artistRealNameSave,
+		setArtistRealNameSave,
+		personaInquiryIdData,
+	};
 	const step2Values = {
 		nextStep,
 		prevStep,
 		isRealNameDifferent,
 		realNameDifferentTextMessage,
 		realNameSameTextMessage,
-		uriEncodedRealNameDifferentTextMessage,
-		uriEncodedRealNameSameTextMessage,
-		personaInquiryIdData,
-		isTwitterAccountConnected,
+		setVerificationRequestSubmittedModalOpen,
 	};
-	const step3Values = { prevStep, isRealNameDifferent, artistRealName, realNameDifferentTextMessage, realNameSameTextMessage };
+	const step3Values = {
+		prevStep,
+		isRealNameDifferent,
+		artistRealName,
+		realNameDifferentTextMessage,
+		realNameSameTextMessage,
+		setVerificationRequestSubmittedModalOpen,
+	};
 
 	return (
 		<>
@@ -112,12 +81,14 @@ const Verify = () => {
 					{step == 1 ? (
 						<NameAndIdVerification {...step1Values} />
 					) : step == 2 ? (
-						<TwitterAccountVerification {...step2Values} />
+						<SendUsADM {...step2Values} />
 					) : step == 3 ? (
 						<InstagramVerification {...step3Values} />
 					) : null}
 				</div>
 			</div>
+
+			<VerificationRequestSubmittedModal isOpen={isVerificationRequestSubmittedModalOpen} setOpen={setVerificationRequestSubmittedModalOpen} />
 		</>
 	);
 };

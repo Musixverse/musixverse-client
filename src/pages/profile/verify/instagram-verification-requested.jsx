@@ -1,7 +1,7 @@
 import { useMoralis, useMoralisCloudFunction } from "react-moralis";
 import Link from "next/link";
 
-const InstagramVerificationRequested = () => {
+const VerificationRequested = () => {
 	const { user } = useMoralis();
 	const { data: instagramHandle } = useMoralisCloudFunction("getInstagramUsername");
 
@@ -19,9 +19,7 @@ const InstagramVerificationRequested = () => {
 					</p>
 
 					<div className="mt-16">
-						<p className="text-[#777777] font-normal text-sm text-center">
-							Please note that instagram verification can take up to five business days
-						</p>
+						<p className="text-[#777777] font-normal text-sm text-center">Please note that profile verification can take up to 24 hours</p>
 						<p className="text-[#777777] font-normal text-sm text-center mt-4">
 							Use the&nbsp;
 							<Link href="/profile/verify?step=2" passHref>
@@ -36,4 +34,4 @@ const InstagramVerificationRequested = () => {
 	);
 };
 
-export default InstagramVerificationRequested;
+export default VerificationRequested;

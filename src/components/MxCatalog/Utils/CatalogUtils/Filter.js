@@ -9,6 +9,7 @@ import FilterNftTraits from "./FilterNftTraits";
 import FilterTrackTraits from "./FilterTrackTraits";
 import NftState from "./NftState";
 import SortBy from "./SortBy";
+import Tooltip from "../../../../layout/Tooltip/Tooltip";
 
 export default function Filter({ appliedFilter, setAppliedFilter, currentSelection }) {
 	const { theme } = useTheme();
@@ -63,7 +64,11 @@ export default function Filter({ appliedFilter, setAppliedFilter, currentSelecti
 				</div>
 				{/* MXV LOGO */}
 				<div className="flex items-center mb-2 mt-28 cursor-pointer" onClick={() => setAppliedFilter({ type: "reset" })}>
-					<Image src={mxvLogo} height={37} width={37} objectFit="contain" alt="mxv logo" />
+					<Tooltip
+						labelText={<Image src={mxvLogo} height={37} width={37} objectFit="contain" alt="mxv logo" />}
+						message={"Clear Filter"}
+						tooltipLocation={"bottom"}
+					/>
 				</div>
 			</div>
 

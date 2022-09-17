@@ -5,6 +5,7 @@ import convertDataURLtoFile from "../../../utils/image-crop/convertDataURLtoFile
 import uploadFileToIPFS from "../../../utils/image-crop/uploadFileToIPFS";
 import LoadingContext from "../../../../store/loading-context";
 import CropImageModal from "../../CreateNFT/CreateNFTUtils/CropImageModal";
+import Tooltip from "../../../layout/Tooltip/Tooltip";
 
 export default function CoverPhoto({ coverImage, setCoverImage }) {
 	const coverPicture = useRef(null);
@@ -46,7 +47,12 @@ export default function CoverPhoto({ coverImage, setCoverImage }) {
 		<>
 			<div className="flex flex-col flex-1">
 				<p className="mb-2 text-sm font-medium md:text-base md:mb-5 font-secondary">
-					Cover Photo<i className="ml-2 text-base md:text-lg fa fa-info-circle"></i>
+					Cover Photo
+					<Tooltip 
+					 	labelText={<i className="ml-2 text-base md:text-lg fa fa-info-circle"></i>}
+						message={"Recommended dimensions: 		1500 x 500 px"}
+						tooltipPosition={"right"}
+					/>
 				</p>
 				<label className="relative w-full h-fit" htmlFor="upload-cover-image">
 					<div className={"w-full h-full hover:cursor-pointer"}>

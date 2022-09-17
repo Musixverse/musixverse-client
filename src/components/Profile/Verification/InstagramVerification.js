@@ -1,24 +1,27 @@
 import { useState, useEffect, useContext } from "react";
 import { useMoralis, useMoralisCloudFunction } from "react-moralis";
 import Link from "next/link";
-import { useRouter } from "next/router";
-import VerificationButton from "./VerificationButton";
+import ConnectionButton from "../../../layout/ConnectionButton";
 import StatusContext from "../../../../store/status-context";
 import LoadingContext from "../../../../store/loading-context";
-import { sleep } from "../../../utils/Sleep";
 
-const InstagramVerification = ({ prevStep, artistRealName, realNameDifferentTextMessage, realNameSameTextMessage }) => {
+const InstagramVerification = ({
+	prevStep,
+	artistRealName,
+	realNameDifferentTextMessage,
+	realNameSameTextMessage,
+	setVerificationRequestSubmittedModalOpen,
+}) => {
 	const { user } = useMoralis();
 	const [, setLoading] = useContext(LoadingContext);
-	const [, , setSuccess, setError] = useContext(StatusContext);
-	const router = useRouter();
+	const [, , , setError] = useContext(StatusContext);
 
 	const [instagramHandle, setInstagramHandle] = useState("");
 	const [instagramHandleSave, setInstagramHandleSave] = useState(false);
 
 	const { fetch: setInstagramUsername } = useMoralisCloudFunction("setInstagramUsername", { instagramHandle: instagramHandle }, { autoFetch: false });
 	const { fetch: getInstagramUsername } = useMoralisCloudFunction("getInstagramUsername");
-	const { fetch: requestForInstagramVerification } = useMoralisCloudFunction("requestForInstagramVerification", { autoFetch: false });
+	const { fetch: requestForVerification } = useMoralisCloudFunction("requestForVerification", { autoFetch: false });
 
 	useEffect(() => {
 		if (user) {
@@ -50,23 +53,16 @@ const InstagramVerification = ({ prevStep, artistRealName, realNameDifferentText
 					});
 					return;
 				}
-				requestForInstagramVerification({
+				await requestForVerification({
 					onSuccess: async (object) => {
 						if (object) {
 							setLoading(false);
-							setSuccess({
-								title: "Request initiated for manual verification",
-								message:
-									"Hang tight. We will soon reach out to let you know about your verification status. You'll be redirected to your profile page now",
-								showSuccessBox: true,
-							});
-							await sleep(4000);
-							router.replace(`/profile/${user.attributes.username}`, undefined, { shallow: true });
+							setVerificationRequestSubmittedModalOpen(true);
 						}
 					},
 					onError: (error) => {
 						setLoading(false);
-						console.log("getInstagramUsername Error:", error);
+						console.log("requestForVerification Error:", error);
 					},
 				});
 			}}
@@ -93,7 +89,7 @@ const InstagramVerification = ({ prevStep, artistRealName, realNameDifferentText
 					}}
 					required
 				/>
-				<VerificationButton
+				<ConnectionButton
 					onClick={() => {
 						setLoading(true);
 						setInstagramUsername({
@@ -107,7 +103,7 @@ const InstagramVerification = ({ prevStep, artistRealName, realNameDifferentText
 							},
 						});
 					}}
-					verifiedStatus={instagramHandleSave}
+					connectionStatus={instagramHandleSave}
 					buttonText="Save"
 					verifiedText="Saved"
 				/>

@@ -1,95 +1,40 @@
-import { useState, useContext, useRef } from "react";
+import { useState, useEffect, useContext, useRef } from "react";
 import Link from "next/link";
 import Head from "next/head";
-import { useRouter } from "next/router";
-import { useMoralis } from "react-moralis";
-import VerificationButton from "./VerificationButton";
+import { useMoralis, useMoralisCloudFunction } from "react-moralis";
 import StatusContext from "../../../../store/status-context";
 import LoadingContext from "../../../../store/loading-context";
-import { sleep } from "../../../utils/Sleep";
-import VerificationRequestSubmittedModal from "./VerificationRequestSubmittedModal";
 
-const TwitterAccountVerification = ({
+const SendUsADM = ({
 	nextStep,
 	prevStep,
 	isRealNameDifferent,
 	realNameDifferentTextMessage,
 	realNameSameTextMessage,
-	uriEncodedRealNameDifferentTextMessage,
-	uriEncodedRealNameSameTextMessage,
-	isTwitterAccountConnected,
+	setVerificationRequestSubmittedModalOpen,
 }) => {
 	const { user } = useMoralis();
 	const [, setLoading] = useContext(LoadingContext);
 	const [, , setSuccess, setError] = useContext(StatusContext);
 	const songLinkRef = useRef(null);
+	const [songLink, setSongLink] = useState("");
 
-	const [isVerificationRequestSubmittedModalOpen, setVerificationRequestSubmittedModalOpen] = useState(false);
+	const { fetch: setArtistSongLink } = useMoralisCloudFunction("setArtistSongLink", { userId: user.id, songLink: songLink }, { autoFetch: false });
+	const { fetch: getArtistSongLink } = useMoralisCloudFunction("getArtistSongLink");
+	const { fetch: requestForVerification } = useMoralisCloudFunction("requestForVerification", { autoFetch: false });
 
-	const router = useRouter();
-
-	const authorizeTwitter = async () => {
-		setLoading(true);
-		await fetch(process.env.NEXT_PUBLIC_MUSIXVERSE_SERVER_BASE_URL + "/api/twitter-auth/authorize", {
-			method: "POST",
-		})
-			.then((res) => res.json())
-			.then((data) => {
-				if (typeof window !== "undefined") {
-					sessionStorage.setItem("oauth_token", data.responseData.oauth_token);
-					sessionStorage.setItem("oauth_token_secret", data.responseData.oauth_token_secret);
-				}
-				window.open(data.responseData.url, "_self");
-				setLoading(false);
-			})
-			.catch((err) => {
-				console.log("authorizeTwitter error:", err);
+	useEffect(() => {
+		if (user) {
+			getArtistSongLink({
+				onSuccess: async (object) => {
+					setSongLink(object);
+				},
+				onError: (error) => {
+					console.log("getArtistSongLink Error:", error);
+				},
 			});
-	};
-
-	const verifyIdentityVerificationTweet = async () => {
-		setLoading(true);
-		if (!isTwitterAccountConnected) {
-			setLoading(false);
-			setError({
-				title: "Twitter account not connected",
-				message: "You need to connect your Twitter account to continue",
-				showErrorBox: true,
-			});
-			return;
 		}
-		await fetch(process.env.NEXT_PUBLIC_MUSIXVERSE_SERVER_BASE_URL + "/api/twitter-auth/verify-tweet", {
-			method: "POST",
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({
-				userId: user.id,
-			}),
-		})
-			.then((res) => res.json())
-			.then(async (data) => {
-				if (data.code === 200) {
-					setLoading(false);
-					setSuccess({
-						title: "You've been verified successfully",
-						message: "You'll be redirected to your profile page now",
-						showSuccessBox: true,
-					});
-					await sleep(1500);
-					router.replace(`/profile/${user.attributes.username}`, undefined, { shallow: true });
-				} else {
-					setLoading(false);
-					setError({
-						title: "Tweet Missing",
-						message: "Please send the tweet to complete verification",
-						showErrorBox: true,
-					});
-				}
-			})
-			.catch((err) => {
-				setLoading(false);
-				console.log("verifyIdentityVerificationTweet error:", err);
-			});
-	};
+	}, [user, getArtistSongLink]);
 
 	return (
 		<div>
@@ -98,31 +43,6 @@ const TwitterAccountVerification = ({
 				<meta name="description" content="The NFT Marketplace for Musicians and Fans" />
 				<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 			</Head>
-
-			{/* <p className="text-4xl font-tertiary mb-2">4. Connect Twitter account</p>
-			<VerificationButton
-				onClick={() => authorizeTwitter()}
-				verifiedStatus={isTwitterAccountConnected}
-				buttonText="Connect Twitter"
-				verifiedText="Twitter account connected successfully"
-			/> */}
-
-			{/* <p className="text-4xl font-tertiary mt-16">5. Tweet from your account</p>
-			<div className="w-2/3 text-sm mt-1">This is required to verify that you are a real person.</div>
-			<Link
-				href={
-					isRealNameDifferent
-						? `https://twitter.com/intent/tweet?text=` + uriEncodedRealNameDifferentTextMessage
-						: `https://twitter.com/intent/tweet?text=` + uriEncodedRealNameSameTextMessage
-				}
-				passHref
-			>
-				<a target="_blank" rel="noopener noreferrer" className="flex w-fit mt-2">
-					<button className="flex w-fit items-center px-10 py-3 text-sm font-primary font-bold rounded-md bg-primary-200 hover:bg-primary-300 text-light-100">
-						Send a Tweet
-					</button>
-				</a>
-			</Link> */}
 
 			<form
 				onSubmit={async (e) => {
@@ -137,10 +57,29 @@ const TwitterAccountVerification = ({
 						});
 						songLinkRef.current.focus();
 						return;
+					} else {
+						await setArtistSongLink({
+							onSuccess: async (object) => {
+								setLoading(false);
+							},
+							onError: (error) => {
+								console.log("setArtistSongLink Error:", error);
+								setLoading(false);
+							},
+						});
+						await requestForVerification({
+							onSuccess: async (object) => {
+								if (object) {
+									setLoading(false);
+									setVerificationRequestSubmittedModalOpen(true);
+								}
+							},
+							onError: (error) => {
+								setLoading(false);
+								console.log("requestForVerification Error:", error);
+							},
+						});
 					}
-					setVerificationRequestSubmittedModalOpen(true);
-					verifyIdentityVerificationTweet();
-					setLoading(false);
 				}}
 			>
 				<p className="text-4xl font-tertiary">4. Song link</p>
@@ -155,6 +94,10 @@ const TwitterAccountVerification = ({
 					placeholder="Please enter a song link"
 					autoComplete="off"
 					ref={songLinkRef}
+					value={songLink}
+					onChange={(e) => {
+						setSongLink(e.target.value);
+					}}
 					required
 				/>
 
@@ -217,10 +160,8 @@ const TwitterAccountVerification = ({
 					</div>
 				</div>
 			</form>
-
-			<VerificationRequestSubmittedModal isOpen={isVerificationRequestSubmittedModalOpen} setOpen={setVerificationRequestSubmittedModalOpen} />
 		</div>
 	);
 };
 
-export default TwitterAccountVerification;
+export default SendUsADM;

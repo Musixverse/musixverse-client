@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import { useMoralisCloudFunction } from "react-moralis";
 import DatePicker from "react-datepicker";
+import Tooltip from "../../../layout/Tooltip/Tooltip";
 import CollaboratorRoleDropdown from "./CollaboratorRoleDropdown";
 import RequiredAsterisk from "../../../layout/RequiredAsterisk";
 import { convertMaticToUSD, convertMaticToINR, truncatePrice } from "../../../utils/GetMarketPrice";
@@ -49,6 +50,17 @@ const Step3Form = ({
 
 	const [maticUSD, setMaticUSD] = useState("");
 	const [maticINR, setMaticINR] = useState("");
+
+	const [currentMaticUSD,setCurrentMaticUSD] = useState("");
+	const [currentMaticINR,setCurrentMaticINR] = useState("");
+
+	useEffect(() => {
+		async function setCurrentPrices(){
+			setCurrentMaticUSD(await convertMaticToUSD(1));
+			setCurrentMaticINR(await convertMaticToINR(1));
+		}
+		setCurrentPrices();
+	}, []);
 
 	useEffect(() => {
 		async function setPrices() {
@@ -150,6 +162,11 @@ const Step3Form = ({
 							<label htmlFor="nft-copies" className="block mb-1 text-sm tracking-wide uppercase">
 								NO. OF COPIES
 								<RequiredAsterisk />
+								<Tooltip
+									labelText={<i className="pl-4 fa-solid fa-circle-info"></i>}
+									message={"You can create several NFT copies of the same song. Each copy would be unique and will be traded separately. Musixverse recommends keeping the number of copies low to maintain exclusivity."}
+									tooltipLocation={"right"}
+								/>
 							</label>
 							<input
 								className="dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-100 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-100"
@@ -170,6 +187,11 @@ const Step3Form = ({
 							<label htmlFor="individual-nft-price" className="block mb-1 text-sm tracking-wide uppercase">
 								PRICE OF EACH COPY
 								<RequiredAsterisk />
+								<Tooltip
+									labelText={<i className="pl-4 fa-solid fa-circle-info"></i>}
+									message={`1 MATIC = $${currentMaticUSD} or ₹${currentMaticINR}`}
+									tooltipLocation={"right"}
+								/>
 							</label>
 
 							<input
@@ -195,6 +217,11 @@ const Step3Form = ({
 						<p className="mb-1 text-sm">
 							ADD COLLABORATORS AND SPLITS
 							<RequiredAsterisk />
+							<Tooltip
+								labelText={<i className="pl-4 fa-solid fa-circle-info"></i>}
+								message={"You can split all the earnings from this NFT with the collaborators using the Musixverse's split feature."}
+								tooltipLocation={"right"}
+							/>
 						</p>
 						<div className="flex flex-col gap-4 text-gray-700">
 							{collaboratorList.map((collaborator, index) => {

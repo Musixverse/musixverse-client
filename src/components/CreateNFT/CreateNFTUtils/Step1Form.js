@@ -110,9 +110,8 @@ export default function Step1Form({
 						<p className="text-sm">
 						   	TRACK TITLE	
 							<RequiredAsterisk />
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							<Tooltip
-								labelText={<i className="fa-solid fa-circle-info"></i>}
+								labelText={<i className="pl-4 fa-solid fa-circle-info"></i>}
 								message={"Include featured artists and version info in the track title (if any) . Example: Knock You Down (feat. Kanye West & Ne-Yo)"}
 								tooltipLocation={"right"}
 							/>	
@@ -134,10 +133,9 @@ export default function Step1Form({
 									<p className="text-sm">
 										TRACK BACKGROUND
 										<RequiredAsterisk />
-										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 										<Tooltip
-											labelText={<i className="fa-solid fa-circle-info"></i>}
-											message={"Include background details about your song"}
+											labelText={<i className="pl-4 fa-solid fa-circle-info"></i>}
+											message={"Your fans will really be interested to know the background of the song. You can write about the whole ideation process and the journey behind creating this awesome piece of music."}
 											tooltipLocation={"right"}
 										/>
 									</p>

@@ -110,9 +110,8 @@ export default function Step2Form({
 				{/* Uploads */}
 				<div className="font-semibold lg:w-1/2 font-secondary">
 					<p className="mb-1 text-sm">ISRC
-					&nbsp;&nbsp;
 						<Tooltip
-							labelText={<i className="fa-solid fa-circle-info"></i>}
+							labelText={<i className="pl-2 fa-solid fa-circle-info"></i>}
 							message={"The International Standard Recording Code (ISRC) is an international standard code for uniquely identifying sound recordings and music video recordings."}
 							tooltipLocation={"right"}
 						/>

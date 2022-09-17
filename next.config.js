@@ -14,7 +14,7 @@ module.exports = withPWA({
 		disable: process.env.NODE_ENV === "development",
 	},
 	images: {
-		domains: ["pbs.twimg.com", "gateway.moralisipfs.com", "ipfs.moralis.io"],
+		domains: ["pbs.twimg.com", "lh3.googleusercontent.com", "gateway.moralisipfs.com", "ipfs.moralis.io"],
 	},
 	// for running with docker
 	output: "standalone",

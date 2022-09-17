@@ -162,9 +162,8 @@ const Step3Form = ({
 							<label htmlFor="nft-copies" className="block mb-1 text-sm tracking-wide uppercase">
 								NO. OF COPIES
 								<RequiredAsterisk />
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								<Tooltip
-									labelText={<i className="fa-solid fa-circle-info"></i>}
+									labelText={<i className="pl-4 fa-solid fa-circle-info"></i>}
 									message={"You can create several NFT copies of the same song. Each copy would be unique and will be traded separately. Musixverse recommends keeping the number of copies low to maintain exclusivity."}
 									tooltipLocation={"right"}
 								/>
@@ -188,9 +187,8 @@ const Step3Form = ({
 							<label htmlFor="individual-nft-price" className="block mb-1 text-sm tracking-wide uppercase">
 								PRICE OF EACH COPY
 								<RequiredAsterisk />
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								<Tooltip
-									labelText={<i className="fa-solid fa-circle-info"></i>}
+									labelText={<i className="pl-4 fa-solid fa-circle-info"></i>}
 									message={`1 MATIC = $${currentMaticUSD} or ₹${currentMaticINR}`}
 									tooltipLocation={"right"}
 								/>
@@ -219,9 +217,8 @@ const Step3Form = ({
 						<p className="mb-1 text-sm">
 							ADD COLLABORATORS AND SPLITS
 							<RequiredAsterisk />
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							<Tooltip
-								labelText={<i className="fa-solid fa-circle-info"></i>}
+								labelText={<i className="pl-4 fa-solid fa-circle-info"></i>}
 								message={"You can split all the earnings from this NFT with the collaborators using the Musixverse's split feature."}
 								tooltipLocation={"right"}
 							/>

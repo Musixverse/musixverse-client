@@ -57,9 +57,8 @@ export default function DetailsInputGroup({
 					<p className="mb-1 text-sm">
 						PARENTAL ADVISORY
 						<RequiredAsterisk />
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<Tooltip
-							labelText={<i className="fa-solid fa-circle-info"></i>}
+							labelText={<i className="pl-4 fa-solid fa-circle-info"></i>}
 							message={"By marking your asset as explicit for NSFW (Not Safe For Work) content will protect users with safe search while browsing Musixverse."}
 							tooltipLocation={"right"}
 						/>

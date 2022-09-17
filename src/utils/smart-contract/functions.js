@@ -1,7 +1,7 @@
 import Web3 from "web3";
 import Moralis from "moralis";
 // Importing contract abi, address, and other variables
-import { MUSIXVERSE_FACET_CONTRACT_ABI, MXV_DIAMOND_ADDRESS, BLOCKCHAIN_NETWORK_ID, RPC_URL } from "../../constants";
+import { MUSIXVERSE_FACET_CONTRACT_ABI } from "../../constants";
 var MUSIXVERSE;
 
 async function addPolygonTestnetNetwork() {
@@ -42,22 +42,22 @@ async function addPolygonTestnetNetwork() {
 async function connectSmartContract() {
 	const { ethereum } = window;
 
-	const provider = new Web3.providers.HttpProvider(RPC_URL);
+	const provider = new Web3.providers.HttpProvider(process.env.NEXT_PUBLIC_RPC_URL);
 	window.web3 = new Web3(provider);
 
 	const web3 = window.web3;
-	MUSIXVERSE = await new web3.eth.Contract(MUSIXVERSE_FACET_CONTRACT_ABI, MXV_DIAMOND_ADDRESS);
+	MUSIXVERSE = await new web3.eth.Contract(MUSIXVERSE_FACET_CONTRACT_ABI, process.env.NEXT_PUBLIC_MXV_DIAMOND_ADDRESS);
 	console.log("Contract connected");
 
-	if (ethereum && (await ethereum.request({ method: "net_version" })) !== BLOCKCHAIN_NETWORK_ID.toString()) {
+	if (ethereum && (await ethereum.request({ method: "net_version" })) !== process.env.NEXT_PUBLIC_BLOCKCHAIN_NETWORK_ID.toString()) {
 		await addPolygonTestnetNetwork();
 	} else if (ethereum) {
 		await addPolygonTestnetNetwork();
 		window.web3 = new Web3(ethereum);
 	}
 
-	// if ((await web3.eth.net.getId()) === BLOCKCHAIN_NETWORK_ID) {
-	//     MUSIXVERSE = await new web3.eth.Contract(MUSIXVERSE_FACET_CONTRACT_ABI, MXV_DIAMOND_ADDRESS);
+	// if ((await web3.eth.net.getId()) === process.env.NEXT_PUBLIC_BLOCKCHAIN_NETWORK_ID) {
+	//     MUSIXVERSE = await new web3.eth.Contract(MUSIXVERSE_FACET_CONTRACT_ABI, process.env.NEXT_PUBLIC_MXV_DIAMOND_ADDRESS);
 	//     console.log("Contract connected");
 	// }
 
@@ -81,7 +81,7 @@ async function connectSmartContract() {
 
 async function mintTrackNFT(numberOfCopies, price, metadataURI, collaborators, percentageContributions, resaleRoyaltyPercentage, onSale, unlockTimestamp) {
 	const sendOptions = {
-		contractAddress: MXV_DIAMOND_ADDRESS,
+		contractAddress: process.env.NEXT_PUBLIC_MXV_DIAMOND_ADDRESS,
 		functionName: "mintTrackNFT",
 		abi: MUSIXVERSE_FACET_CONTRACT_ABI,
 		params: {
@@ -107,7 +107,7 @@ async function purchaseTrackNFT(tokenId, price) {
 	const _tokenId = parseInt(tokenId).toString();
 
 	const sendOptions = {
-		contractAddress: MXV_DIAMOND_ADDRESS,
+		contractAddress: process.env.NEXT_PUBLIC_MXV_DIAMOND_ADDRESS,
 		functionName: "purchaseTrackNFT",
 		abi: MUSIXVERSE_FACET_CONTRACT_ABI,
 		params: {
@@ -125,7 +125,7 @@ async function purchaseReferredTrackNFT(tokenId, referrer, price) {
 	const _tokenId = parseInt(tokenId).toString();
 
 	const sendOptions = {
-		contractAddress: MXV_DIAMOND_ADDRESS,
+		contractAddress: process.env.NEXT_PUBLIC_MXV_DIAMOND_ADDRESS,
 		functionName: "purchaseReferredTrackNFT",
 		abi: MUSIXVERSE_FACET_CONTRACT_ABI,
 		params: {
@@ -144,7 +144,7 @@ async function updatePrice(tokenId, newPrice) {
 	const _tokenId = parseInt(tokenId).toString();
 
 	const sendOptions = {
-		contractAddress: MXV_DIAMOND_ADDRESS,
+		contractAddress: process.env.NEXT_PUBLIC_MXV_DIAMOND_ADDRESS,
 		functionName: "updatePrice",
 		abi: MUSIXVERSE_FACET_CONTRACT_ABI,
 		params: {
@@ -162,7 +162,7 @@ async function toggleOnSale(tokenId) {
 	const _tokenId = parseInt(tokenId).toString();
 
 	const sendOptions = {
-		contractAddress: MXV_DIAMOND_ADDRESS,
+		contractAddress: process.env.NEXT_PUBLIC_MXV_DIAMOND_ADDRESS,
 		functionName: "toggleOnSale",
 		abi: MUSIXVERSE_FACET_CONTRACT_ABI,
 		params: {

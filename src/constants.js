@@ -13,14 +13,6 @@ export const meta_description3 = "The NFT Marketplace for Musicians and Fans";
 /***********************    BLOCKCHAIN CONSTANTS  *************************/
 /**************************************************************************/
 export const MUSIXVERSE_FACET_CONTRACT_ABI = MusixverseFacet.abi;
-export const MXV_DIAMOND_ADDRESS = "0xF16fCB942eE382656eF3DedEB098EC45049010C0"; // Diamond Address
-export const MUSIXVERSE_FACET_ADDRESS = "0x23FaB9C144eDF448DE13592115978aff7527B892";
-export const MUSIXVERSE_GETTERS_FACET_ADDRESS = "0xf4D8DAE2c59EA072F9e62feF8110BBA3304C3d7a";
-export const MUSIXVERSE_SETTERS_FACET_ADDRESS = "0x94cb41458fbE83346D1B1686e4a4D351d3f9b1E4";
-export const BLOCKCHAIN_NETWORK = "mumbai";
-export const BLOCK_EXPLORER_URL = "https://mumbai.polygonscan.com";
-export const BLOCKCHAIN_NETWORK_ID = 80001;
-export const RPC_URL = "https://polygon-mumbai.g.alchemy.com/v2/8qorAGwStqgObuxITbYVAD3T2BI1jC36";
 
 /**************************************************************************/
 /******************************    MORALIS  *******************************/

@@ -5,7 +5,6 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useMoralis } from "react-moralis";
 const { Transition } = require("@headlessui/react");
-import { BLOCKCHAIN_NETWORK_ID } from "../../constants";
 import { addPolygonTestnetNetwork } from "../../utils/smart-contract/functions";
 import logoBlack from "../../../public/logo-black.svg";
 import logoWhite from "../../../public/logo-white.svg";
@@ -69,7 +68,11 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 
 	const walletconnectLogin = async () => {
 		if (!isAuthenticated) {
-			await authenticate({ provider: "walletconnect", signingMessage: "Musixverse Authentication", chainId: BLOCKCHAIN_NETWORK_ID })
+			await authenticate({
+				provider: "walletconnect",
+				signingMessage: "Musixverse Authentication",
+				chainId: process.env.NEXT_PUBLIC_BLOCKCHAIN_NETWORK_ID,
+			})
 				.then(function (user) {
 					if (user) {
 						closeModal();

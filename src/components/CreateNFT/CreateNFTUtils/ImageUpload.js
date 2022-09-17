@@ -66,7 +66,9 @@ export default function ImageUpload({ coverArtUrl, setCoverArtUrl, setCoverArtMi
 					{coverArtUrl !== null ? (
 						<p className="text-sm text-primary-200">Image Uploaded</p>
 					) : (
-						<p className="text-xs">Any Image file | Max file size: 1GB <br /> Recommended size: 640 x 640 px.</p>
+						<p className="text-xs">
+							Any Image file | Max file size: 1GB <br /> Recommended size: 640 x 640 px.
+						</p>
 					)}
 				</div>
 			</label>

@@ -5,9 +5,10 @@ import convertDataURLtoFile from "../../../utils/image-crop/convertDataURLtoFile
 import uploadFileToIPFS from "../../../utils/image-crop/uploadFileToIPFS";
 import LoadingContext from "../../../../store/loading-context";
 import CropImageModal from "../../CreateNFT/CreateNFTUtils/CropImageModal";
+import Image from "next/image";
 
 export default function EditProfilePhoto({ avatar, setAvatar, handleSave }) {
-	const profilePicture = useRef(null);
+	// const profilePicture = useRef(null);
 	const profilePictureInput = useRef(null);
 	const { Moralis } = useMoralis();
 	const [, setLoading] = useContext(LoadingContext);
@@ -15,6 +16,7 @@ export default function EditProfilePhoto({ avatar, setAvatar, handleSave }) {
 	const [showModal, setShowModal] = useState(false);
 	const [imageToCrop, setImageToCrop] = useState(undefined);
 	const [croppedImage, setCroppedImage] = useState(undefined);
+	const [profilePicture, setProfilePicture] = useState(avatar? avatar : "https://ipfs.moralis.io:2053/ipfs/Qmcn1aZ4PKUUzwpTncuSbruwLD98dtiNqvoJG5zm8EMwXZ")
 	const aspectRatio = { width: 1, height: 1 };
 	const circularCrop = false;
 	const cropModalValues = { showModal, setShowModal, imageToCrop, setCroppedImage, circularCrop, aspectRatio };
@@ -22,7 +24,8 @@ export default function EditProfilePhoto({ avatar, setAvatar, handleSave }) {
 	useEffect(() => {
 		if (croppedImage !== undefined) {
 			setLoading(true);
-			profilePicture.current.src = croppedImage;
+			// profilePicture.current.src = croppedImage;
+			setProfilePicture(croppedImage);
 			// Get the File from DataURL
 			const uploadedFile = convertDataURLtoFile(croppedImage, "file");
 			// Get the uploadFileOnIPFS async function
@@ -48,13 +51,24 @@ export default function EditProfilePhoto({ avatar, setAvatar, handleSave }) {
 				<p className="mb-5 text-sm font-medium md:text-base font-secondary">
 					Profile Picture<i className="ml-2 text-base md:text-lg fa fa-info-circle"></i>
 				</p>
-				<label className="relative w-fit cursor-pointer" htmlFor="upload-image-inp">
-					<img
+				<label className="relative cursor-pointer w-fit" htmlFor="upload-image-inp">
+					<div
+						className="w-[130px] h-[130px] md:w-[150px] md:h-[150px] rounded-full relative overflow-hidden"
+					>
+						<Image
+							src={profilePicture}
+							objectFit="contain"
+							layout="fill"
+							alt="Current Avatar"
+						/>
+					</div>
+					
+					{/* <img
 						className="w-[130px] h-[130px] md:w-[150px] md:h-[150px] rounded-full"
 						ref={profilePicture}
 						src={avatar || "https://ipfs.moralis.io:2053/ipfs/Qmcn1aZ4PKUUzwpTncuSbruwLD98dtiNqvoJG5zm8EMwXZ"}
 						alt="Current Avatar"
-					></img>
+					></img> */}
 
 					<input
 						ref={profilePictureInput}

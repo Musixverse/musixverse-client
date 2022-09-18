@@ -5,8 +5,19 @@ import convertDataURLtoFile from "../../../utils/image-crop/convertDataURLtoFile
 import uploadFileToIPFS from "../../../utils/image-crop/uploadFileToIPFS";
 import CropImageModal from "../../CreateNFT/CreateNFTUtils/CropImageModal";
 import LoadingContext from "../../../../store/loading-context";
+import Image from "next/image";
 
 export default function SelectAvatar({ uploadFile, setAvatar }) {
+	// Array of default urls
+	const urls = [
+		"https://lh3.googleusercontent.com/MA0m87sfDmKHswPN39ycJkOUMS9C2wLqF5jz3SRpA8ij_V2Z-o3iPnViH1bT8_QISKwnCYSIO5ngL_85H60bpE9R6mogFuMjumBfB3w=s0",
+		"https://www.artnews.com/wp-content/uploads/2021/08/BAYC-8746.png?w=631",
+		"https://lh3.googleusercontent.com/sQaGzstpAmGeIx0OQmb2RvPwpjZXY8iHzz6uadPifYNKeVnReB9g0p1rvtN3_8PJIv8XDbOWFnpG3LNl4F69CvDzFJ4lcT9wPm-S=w600",
+		"https://lh3.googleusercontent.com/CBT0DkF1cL6pXhtT-GCEZuQ4dXX0LmSbkhGo9b8HMwbbJ7bF1ej_bEtfW6ogKI_DqphMPuw0awPc7m7bMt43-u1rw3WlMt-I4DWY9Fs=w600",
+		"https://lh3.googleusercontent.com/LvPsEvPztcU-SfcXV8Kt2nAcWqn8osuBF5G4urVrXEHLgE3B-dmCaEefdTDLhmuzd7SKqbb8z3f2z8Vp6IllHszlFWfmPUMZT30i_Q=w600",
+		"https://lh3.googleusercontent.com/vQ2C30yW4SlWeBKfgkbH81GXhbbTOIdZIfScez6uEvg_y2CpbKiaRznPhnWUOCM6RJYL5MX_RkByRUxF4mUNFSNq5VERLCdp45u5=w600",
+	];
+
 	const [showModal, setShowModal] = useState(false);
 	const [imageToCrop, setImageToCrop] = useState(undefined);
 	const [croppedImage, setCroppedImage] = useState(undefined);
@@ -14,11 +25,13 @@ export default function SelectAvatar({ uploadFile, setAvatar }) {
 	const [isLoading, setLoading] = useContext(LoadingContext);
 	const uploadedImage = useRef(null);
 	const uploadImage = useRef(null);
+	const [selectedAvatar, setSelectedAvatar] = useState(urls[0])
 
 	useEffect(() => {
 		async function setProfileImage() {
 			if (croppedImage !== undefined) {
-				uploadedImage.current.src = croppedImage;
+				// uploadedImage.current.src = croppedImage;
+				setSelectedAvatar(croppedImage);
 				// Get the File from DataURL
 				const uploadedFile = convertDataURLtoFile(croppedImage, "file");
 				setLoading(true);
@@ -37,22 +50,15 @@ export default function SelectAvatar({ uploadFile, setAvatar }) {
 	// console.log(showModal);
 	// const cropModalValues = { showModal, setShowModal, imageToCrop, setCroppedImage, circularCrop, aspectRatio };
 
-	// Array of default urls
-	const urls = [
-		"https://lh3.googleusercontent.com/MA0m87sfDmKHswPN39ycJkOUMS9C2wLqF5jz3SRpA8ij_V2Z-o3iPnViH1bT8_QISKwnCYSIO5ngL_85H60bpE9R6mogFuMjumBfB3w=s0",
-		"https://www.artnews.com/wp-content/uploads/2021/08/BAYC-8746.png?w=631",
-		"https://lh3.googleusercontent.com/sQaGzstpAmGeIx0OQmb2RvPwpjZXY8iHzz6uadPifYNKeVnReB9g0p1rvtN3_8PJIv8XDbOWFnpG3LNl4F69CvDzFJ4lcT9wPm-S=w600",
-		"https://lh3.googleusercontent.com/CBT0DkF1cL6pXhtT-GCEZuQ4dXX0LmSbkhGo9b8HMwbbJ7bF1ej_bEtfW6ogKI_DqphMPuw0awPc7m7bMt43-u1rw3WlMt-I4DWY9Fs=w600",
-		"https://lh3.googleusercontent.com/LvPsEvPztcU-SfcXV8Kt2nAcWqn8osuBF5G4urVrXEHLgE3B-dmCaEefdTDLhmuzd7SKqbb8z3f2z8Vp6IllHszlFWfmPUMZT30i_Q=w600",
-		"https://lh3.googleusercontent.com/vQ2C30yW4SlWeBKfgkbH81GXhbbTOIdZIfScez6uEvg_y2CpbKiaRznPhnWUOCM6RJYL5MX_RkByRUxF4mUNFSNq5VERLCdp45u5=w600",
-	];
+	
 
 	const handleImageSelection = (selectedUrl) => {
-		const el = uploadedImage.current;
-		el.src = selectedUrl;
+		// const el = uploadedImage.current;
+		// el.src = selectedUrl;
 		// Reset the uploaded file
 		uploadImage.current.value = "";
-		setAvatar(el.src);
+		setSelectedAvatar(selectedUrl);
+		setAvatar(selectedUrl);
 	};
 
 	const handleImageUpload = (event) => {
@@ -65,7 +71,17 @@ export default function SelectAvatar({ uploadFile, setAvatar }) {
 	return (
 		<>
 			<div className="flex">
-				<img className={"w-[100px] h-[100px] sm:w-[150px] sm:h-[150px] rounded-full"} ref={uploadedImage} src={urls[0]} alt="Selected Avatar"></img>
+				<div
+					className={"w-[100px] h-[100px] sm:w-[150px] sm:h-[150px] rounded-full relative overflow-hidden"}
+				>
+					<Image
+						src={selectedAvatar}
+						objectFit="contain"
+						layout="fill"
+						alt="Selected Avatar"
+					/>
+				</div>
+				{/* <img className={"w-[100px] h-[100px] sm:w-[150px] sm:h-[150px] rounded-full"} ref={uploadedImage} src={urls[0]} alt="Selected Avatar"></img> */}
 
 				{/* Avatars */}
 				<div className="max-w-[200px] ml-5">

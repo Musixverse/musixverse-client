@@ -50,8 +50,8 @@ export default function CoverPhoto({ coverImage, setCoverImage }) {
 					Cover Photo
 					<Tooltip 
 					 	labelText={<i className="ml-2 text-base md:text-lg fa fa-info-circle"></i>}
-						message={"Recommended dimensions: 1500 x 500 px"}
-						tooltipPosition={"bottom"}
+						message={"Recommended dimensions:		 1500 x 500 px"}
+						tooltipLocation={"bottom"}
 					/>
 				</p>
 				<label className="relative w-full h-fit" htmlFor="upload-cover-image">

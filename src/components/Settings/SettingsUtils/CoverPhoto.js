@@ -16,9 +16,9 @@ export default function CoverPhoto({ coverImage, setCoverImage }) {
 	const [imageToCrop, setImageToCrop] = useState(undefined);
 	const [croppedImage, setCroppedImage] = useState(undefined);
 	
-	const [coverPhoto, setCoverPhoto] = useState(coverImage === undefined? coverImage : "https://ipfs.moralis.io:2053/ipfs/Qmcn1aZ4PKUUzwpTncuSbruwLD98dtiNqvoJG5zm8EMwXZ");
-	console.log({thisL:coverImage});
-	console.log("coverpooho",coverPhoto);
+	// const [coverPhoto, setCoverPhoto] = useState(coverImage === undefined? coverImage : "https://ipfs.moralis.io:2053/ipfs/Qmcn1aZ4PKUUzwpTncuSbruwLD98dtiNqvoJG5zm8EMwXZ");
+	// console.log({thisL:coverImage});
+	// console.log("coverpooho",coverPhoto);
 	const aspectRatio = { width: 1918, height: 350 };
 	const circularCrop = false;
 	const cropModalValues = { showModal, setShowModal, imageToCrop, setCroppedImage, circularCrop, aspectRatio };
@@ -26,7 +26,7 @@ export default function CoverPhoto({ coverImage, setCoverImage }) {
 	useEffect(() => {
 		if (croppedImage !== undefined) {
 			setLoading(true);
-			setCoverPhoto(croppedImage);
+			// setCoverPhoto(croppedImage);
 			// Get the File from DataURL
 			const uploadedFile = convertDataURLtoFile(croppedImage, "file");
 			// Get the uploadFileOnIPFS async function
@@ -63,10 +63,11 @@ export default function CoverPhoto({ coverImage, setCoverImage }) {
 							className="w-full rounded-lg relative overflow-hidden aspect-[5.48]"
 						>
 							<Image 
-								src={coverPhoto}
+								src={croppedImage? croppedImage : coverImage? coverImage:"https://ipfs.moralis.io:2053/ipfs/Qmcn1aZ4PKUUzwpTncuSbruwLD98dtiNqvoJG5zm8EMwXZ"}
 								objectFit="contain"
 								layout="fill"
 								alt="cover photo"
+								priority
 							/>
 						</div>
 					</div>

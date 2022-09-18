@@ -54,6 +54,7 @@ function ImageCrop({ imageToCrop, setCroppedImage, setShowModal, circularCrop, a
 
 		// Method 1
 		// DataURL(memory loaded based) is less efficient than ObjectURL(reference based)
+		//qualtiy: 0.15 (60% compression)
 		const base64Image = canvas.toDataURL("image/jpeg", 1);
 		return base64Image;
 
@@ -85,7 +86,7 @@ function ImageCrop({ imageToCrop, setCroppedImage, setShowModal, circularCrop, a
 			leaveFrom="opacity-100 translate-y-0 sm:scale-100"
 			leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
 		>
-			<div className="relative inline-block overflow-hidden text-left align-bottom transition-all transform rounded-xl shadow-xl bg-none sm:my-8 sm:align-middle sm:max-w-3xl sm:w-full">
+			<div className="relative inline-block overflow-hidden text-left align-bottom transition-all transform shadow-xl rounded-xl bg-none sm:my-8 sm:align-middle sm:max-w-3xl sm:w-full">
 				<div className="px-5 pt-7 pb-6 dark:bg-dark-100 dark:backdrop-blur-[7px] backdrop-blur-[7px] bg-[rgba(255,255,255,0.9)]">
 					<div>
 						<div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">

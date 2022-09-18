@@ -9,13 +9,21 @@ import Image from "next/image";
 
 export default function SelectAvatar({ uploadFile, setAvatar }) {
 	// Array of default urls
+	// const urls = [
+	// 	"https://lh3.googleusercontent.com/MA0m87sfDmKHswPN39ycJkOUMS9C2wLqF5jz3SRpA8ij_V2Z-o3iPnViH1bT8_QISKwnCYSIO5ngL_85H60bpE9R6mogFuMjumBfB3w=s0",
+	// 	"https://www.artnews.com/wp-content/uploads/2021/08/BAYC-8746.png?w=631",
+	// 	"https://lh3.googleusercontent.com/sQaGzstpAmGeIx0OQmb2RvPwpjZXY8iHzz6uadPifYNKeVnReB9g0p1rvtN3_8PJIv8XDbOWFnpG3LNl4F69CvDzFJ4lcT9wPm-S=w600",
+	// 	"https://lh3.googleusercontent.com/CBT0DkF1cL6pXhtT-GCEZuQ4dXX0LmSbkhGo9b8HMwbbJ7bF1ej_bEtfW6ogKI_DqphMPuw0awPc7m7bMt43-u1rw3WlMt-I4DWY9Fs=w600",
+	// 	"https://lh3.googleusercontent.com/LvPsEvPztcU-SfcXV8Kt2nAcWqn8osuBF5G4urVrXEHLgE3B-dmCaEefdTDLhmuzd7SKqbb8z3f2z8Vp6IllHszlFWfmPUMZT30i_Q=w600",
+	// 	"https://lh3.googleusercontent.com/vQ2C30yW4SlWeBKfgkbH81GXhbbTOIdZIfScez6uEvg_y2CpbKiaRznPhnWUOCM6RJYL5MX_RkByRUxF4mUNFSNq5VERLCdp45u5=w600",
+	// ];
 	const urls = [
-		"https://lh3.googleusercontent.com/MA0m87sfDmKHswPN39ycJkOUMS9C2wLqF5jz3SRpA8ij_V2Z-o3iPnViH1bT8_QISKwnCYSIO5ngL_85H60bpE9R6mogFuMjumBfB3w=s0",
-		"https://www.artnews.com/wp-content/uploads/2021/08/BAYC-8746.png?w=631",
-		"https://lh3.googleusercontent.com/sQaGzstpAmGeIx0OQmb2RvPwpjZXY8iHzz6uadPifYNKeVnReB9g0p1rvtN3_8PJIv8XDbOWFnpG3LNl4F69CvDzFJ4lcT9wPm-S=w600",
-		"https://lh3.googleusercontent.com/CBT0DkF1cL6pXhtT-GCEZuQ4dXX0LmSbkhGo9b8HMwbbJ7bF1ej_bEtfW6ogKI_DqphMPuw0awPc7m7bMt43-u1rw3WlMt-I4DWY9Fs=w600",
-		"https://lh3.googleusercontent.com/LvPsEvPztcU-SfcXV8Kt2nAcWqn8osuBF5G4urVrXEHLgE3B-dmCaEefdTDLhmuzd7SKqbb8z3f2z8Vp6IllHszlFWfmPUMZT30i_Q=w600",
-		"https://lh3.googleusercontent.com/vQ2C30yW4SlWeBKfgkbH81GXhbbTOIdZIfScez6uEvg_y2CpbKiaRznPhnWUOCM6RJYL5MX_RkByRUxF4mUNFSNq5VERLCdp45u5=w600",
+		"https://ipfs.moralis.io:2053/ipfs/QmbeQE3qktnDF7DZnsi51MoBNHTM8b3uMKyLQkwHPy8WW7",
+		"https://ipfs.moralis.io:2053/ipfs/QmRnHRffz2gzAdzsf8TdXGR4zAQA6EBd7gcsB9owgD1Soy",
+		"https://ipfs.moralis.io:2053/ipfs/QmY1cUn6shTZafoZmdHxtpBJYV3MzTg9LGhe8vtAXdqDsv",
+		"https://ipfs.moralis.io:2053/ipfs/QmTe7MQehzR426oU8MvgksAEUr5ZzGnx42GmsT2KQSSkjd",
+		"https://ipfs.moralis.io:2053/ipfs/QmaYmZEt1qohGeDF8YupUM1Q786knd75iCb8jH3vGyV5xy",
+		"https://ipfs.moralis.io:2053/ipfs/QmSYaJ1bS53MxbBvVZfoWcvis1JoS46ESJY9EJcAGNXaNk",
 	];
 
 	const [showModal, setShowModal] = useState(false);
@@ -43,7 +51,7 @@ export default function SelectAvatar({ uploadFile, setAvatar }) {
 			}
 		}
 		setProfileImage();
-	}, [croppedImage, setAvatar]);
+	}, [croppedImage, setAvatar, setLoading, Moralis]);
 
 	const circularCrop = true;
 	const aspectRatio = { width: 1, height: 1 };
@@ -79,6 +87,7 @@ export default function SelectAvatar({ uploadFile, setAvatar }) {
 						objectFit="contain"
 						layout="fill"
 						alt="Selected Avatar"
+						priority
 					/>
 				</div>
 				{/* <img className={"w-[100px] h-[100px] sm:w-[150px] sm:h-[150px] rounded-full"} ref={uploadedImage} src={urls[0]} alt="Selected Avatar"></img> */}

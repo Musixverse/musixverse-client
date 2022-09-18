@@ -17,7 +17,7 @@ export default function EditProfilePhoto({ avatar, setAvatar, handleSave }) {
 	const [showModal, setShowModal] = useState(false);
 	const [imageToCrop, setImageToCrop] = useState(undefined);
 	const [croppedImage, setCroppedImage] = useState(undefined);
-	const [profilePicture, setProfilePicture] = useState(avatar? avatar : "https://ipfs.moralis.io:2053/ipfs/Qmcn1aZ4PKUUzwpTncuSbruwLD98dtiNqvoJG5zm8EMwXZ")
+	// const [profilePicture, setProfilePicture] = useState(avatar? avatar : "https://ipfs.moralis.io:2053/ipfs/Qmcn1aZ4PKUUzwpTncuSbruwLD98dtiNqvoJG5zm8EMwXZ")
 	const aspectRatio = { width: 1, height: 1 };
 	const circularCrop = false;
 	const cropModalValues = { showModal, setShowModal, imageToCrop, setCroppedImage, circularCrop, aspectRatio };
@@ -26,9 +26,10 @@ export default function EditProfilePhoto({ avatar, setAvatar, handleSave }) {
 		if (croppedImage !== undefined) {
 			setLoading(true);
 			// profilePicture.current.src = croppedImage;
-			setProfilePicture(croppedImage);
+			// setProfilePicture(croppedImage);
 			// Get the File from DataURL
 			const uploadedFile = convertDataURLtoFile(croppedImage, "file");
+			console.log("Compressed file size: ",uploadedFile.size);
 			// Get the uploadFileOnIPFS async function
 
 			uploadFileToIPFS(Moralis, uploadedFile).then((url) => {
@@ -62,10 +63,11 @@ export default function EditProfilePhoto({ avatar, setAvatar, handleSave }) {
 						className="w-[130px] h-[130px] md:w-[150px] md:h-[150px] rounded-full relative overflow-hidden"
 					>
 						<Image
-							src={profilePicture}
+							src={croppedImage? croppedImage : avatar? avatar:"https://ipfs.moralis.io:2053/ipfs/Qmcn1aZ4PKUUzwpTncuSbruwLD98dtiNqvoJG5zm8EMwXZ"}
 							objectFit="contain"
 							layout="fill"
 							alt="Current Avatar"
+							priority
 						/>
 					</div>
 					

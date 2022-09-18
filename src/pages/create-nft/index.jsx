@@ -11,7 +11,6 @@ import PricingAndSplits from "../../components/CreateNFT/step-3";
 import SuccessModal from "../../components/CreateNFT/CreateNFTUtils/SuccessModal";
 import SaveDraftSuccessModal from "../../components/CreateNFT/CreateNFTUtils/SaveDraftSuccessModal";
 import { mintTrackNFT } from "../../utils/smart-contract/functions";
-import { BLOCKCHAIN_NETWORK_ID, MXV_DIAMOND_ADDRESS } from "../../constants";
 import LoadingContext from "../../../store/loading-context";
 import { Country, State } from "country-state-city";
 
@@ -280,8 +279,8 @@ const CreateNFT = () => {
 			license: "ipfs://" + coverArtUrl.replace("https://ipfs.moralis.io:2053/ipfs/", ""), // TODO
 			unlockTimestamp: _unlockTimestamp,
 			chainDetails: {
-				chainId: BLOCKCHAIN_NETWORK_ID,
-				contractAddress: MXV_DIAMOND_ADDRESS,
+				chainId: process.env.NEXT_PUBLIC_BLOCKCHAIN_NETWORK_ID,
+				contractAddress: process.env.NEXT_PUBLIC_MXV_DIAMOND_ADDRESS,
 			},
 			// OpenSea standard ⬇️
 			name: user.attributes.name + " - " + trackTitle,

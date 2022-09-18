@@ -8,7 +8,7 @@ function contractMetadataURI() {
 		image: "external-link-url/image.png",
 		external_link: "https://www.musixverse.com",
 		seller_fee_basis_points: 100,
-		fee_recipient: MXV_DIAMOND_ADDRESS,
+		fee_recipient: process.env.NEXT_PUBLIC_MXV_DIAMOND_ADDRESS,
 	};
 
 	return (

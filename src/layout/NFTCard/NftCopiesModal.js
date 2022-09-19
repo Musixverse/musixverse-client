@@ -1,42 +1,12 @@
 import { Transition, Dialog } from "@headlessui/react";
-import { Fragment, useEffect, useState } from "react";
-import { useMoralisCloudFunction } from "react-moralis";
-import NFTCard from "./NFTCard";
-import multipleNft from "../../../public/assets/nftcard/nftcards.svg";
-import NftCopiesRow from "./NftCopiesRow";
+import { Fragment } from "react";
 import Image from "next/image";
+import multipleNft from "../../../public/assets/nftcard/nftcards.svg";
+import dynamic from "next/dynamic";
+const NFTCard = dynamic(() => import("./NFTCard"));
+const NftCopiesRow = dynamic(() => import("./NftCopiesRow"));
 
 export default function NftCopiesModal({ trackCopiesModalValues, showNftCopiesModal, setShowNftCopiesModal }) {
-	const [otherTokensOfTrack, setOtherTokensOfTrack] = useState([]);
-	const { fetch: fetchOtherTokensOfTrack } = useMoralisCloudFunction(
-		"fetchOtherTokensOfTrack",
-		{ tokenId: trackCopiesModalValues.tokenId },
-		{ autoFetch: false }
-	);
-	useEffect(() => {
-		if (trackCopiesModalValues.tokenId) {
-			fetchOtherTokensOfTrack({
-				onSuccess: async (object) => setOtherTokensOfTrack(object),
-				onError: (error) => {
-					console.log("fetchOtherTokensOfTrack Error:", error);
-				},
-			});
-		}
-	}, [trackCopiesModalValues.tokenId, fetchOtherTokensOfTrack]);
-
-	const [localTokenId, setLocalTokenId] = useState([]);
-	const { fetch: fetchLocalTokenId } = useMoralisCloudFunction("fetchLocalTokenId", { tokenId: trackCopiesModalValues.tokenId }, { autoFetch: false });
-	useEffect(() => {
-		if (trackCopiesModalValues.tokenId) {
-			fetchLocalTokenId({
-				onSuccess: async (object) => setLocalTokenId(object),
-				onError: (error) => {
-					console.log("fetchLocalTokenId Error:", error);
-				},
-			});
-		}
-	}, [trackCopiesModalValues.tokenId, fetchLocalTokenId]);
-
 	return (
 		<Transition.Root show={showNftCopiesModal} as={Fragment}>
 			<Dialog as="div" className="fixed inset-0 top-0 left-0 z-50 w-screen h-screen overflow-y-auto" onClose={() => setShowNftCopiesModal(false)}>
@@ -83,8 +53,8 @@ export default function NftCopiesModal({ trackCopiesModalValues, showNftCopiesMo
 									<div className="flex w-full">
 										<div className="flex flex-col justify-center items-center">
 											<NFTCard {...trackCopiesModalValues} />
-											<span className="mt-3 text-sm">
-												#{localTokenId} of {trackCopiesModalValues.numberOfCopies}
+											<span className="mt-4 text-xs text-[#777777]">
+												#{trackCopiesModalValues.localTokenId} of {trackCopiesModalValues.numberOfCopies}
 											</span>
 										</div>
 
@@ -108,8 +78,12 @@ export default function NftCopiesModal({ trackCopiesModalValues, showNftCopiesMo
 
 											{/* NFT Copies section */}
 											<div className="mt-8 max-h-72 overflow-scroll pr-4">
-												{otherTokensOfTrack?.map((token, idx) => {
-													return <NftCopiesRow token={token.attributes} trackName={trackCopiesModalValues.trackName} key={idx} />;
+												{trackCopiesModalValues.otherTokensOfTrack?.map((token, idx) => {
+													return (
+														trackCopiesModalValues.tokenId !== token.tokenId && (
+															<NftCopiesRow token={token} trackName={trackCopiesModalValues.trackName} key={idx} />
+														)
+													);
 												})}
 											</div>
 										</div>

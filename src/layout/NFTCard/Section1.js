@@ -1,35 +1,21 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import { useMoralis, useMoralisCloudFunction } from "react-moralis";
+import { useMoralis } from "react-moralis";
 import styles from "../../../styles/NFTCard/Section1.module.css";
 import { truncatePrice } from "../../utils/GetMarketPrice";
 import ShinyLoader from "../../layout/ShinyLoader";
 
-export default function Section1({ artistName, trackName, isVerified, tokenId, unsoldTrackData, soldOnceTrackData }) {
+export default function Section1({ artistName, trackName, price, isArtistVerified, soldOnceTrackData }) {
 	const { Moralis } = useMoralis();
-	const { fetch: fetchTokenPrice, data: tokenPrice } = useMoralisCloudFunction("fetchTokenPrice", { tokenId: tokenId }, { autoFetch: false });
-	const [price, setPrice] = useState("");
+	const [tokenPrice, setTokenPrice] = useState("");
 
 	useEffect(() => {
-		if (tokenId) {
-			fetchTokenPrice({
-				onSuccess: async (object) => {},
-				onError: (error) => {
-					console.log("fetchTokenPrice Error:", error);
-				},
-			});
+		if (price) {
+			setTokenPrice(Moralis.Units.FromWei(price));
 		}
-	}, [tokenId, fetchTokenPrice]);
+	}, [price, Moralis.Units]);
 
-	useEffect(() => {
-		if (unsoldTrackData) {
-			setPrice(Moralis.Units.FromWei(unsoldTrackData.primaryMarketplacePrice));
-		} else if (tokenPrice) {
-			setPrice(Moralis.Units.FromWei(tokenPrice));
-		}
-	}, [tokenPrice]);
-
-	const truncatednftPrice = truncatePrice(price);
+	const truncatednftPrice = truncatePrice(tokenPrice);
 
 	return (
 		<div className={styles["nft-card__description--section1"]}>
@@ -37,7 +23,7 @@ export default function Section1({ artistName, trackName, isVerified, tokenId, u
 			<div className={artistName && trackName && truncatednftPrice ? "max-w-full fit-content" : "w-full"}>
 				<div className={styles["description--section1__artistname"]}>
 					{artistName ? artistName : <ShinyLoader classes="w-4/5 h-4 self-center rounded-lg" />}
-					{isVerified ? (
+					{isArtistVerified ? (
 						<span className="ml-1 flex items-center">
 							<Image src={"/assets/mxv_tick.svg"} width={14} height={14} alt="MXV verified" />
 						</span>

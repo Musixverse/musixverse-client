@@ -503,6 +503,11 @@ const Step3Form = ({
 						<label htmlFor="resale-royalty-percentage" className="block mb-1 text-sm tracking-wide uppercase">
 							RESALE ROYALTY PERCENTAGE
 							<RequiredAsterisk />
+							<Tooltip
+								labelText={<i className="pl-4 fa-solid fa-circle-info"></i>}
+								message={"Resale royalty entitles artists to a share of the sale price when their NFT is resold. We recommend keeping the resale royalty percentage between 1% to 10%."}
+								tooltipLocation={"bottom"}
+							/>
 						</label>
 						<input
 							className="dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-100 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-100"

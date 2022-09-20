@@ -19,8 +19,8 @@ const UnsoldNFT = ({ track }) => {
 				tokenId={track.unsoldTokens.at(0)}
 				localTokenId={track.localTokenId}
 				numberOfCopies={track.numberOfCopies}
-				otherTokensOfTrack={track.otherTokensOfTrack}
 				collaboratorList={track.collaboratorsAvatars}
+				otherTokensOfTrack={track.otherTokensOfTrack}
 				unsoldTrackData={unsoldTrackData}
 			/>
 		);

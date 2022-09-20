@@ -30,7 +30,6 @@ export async function getStaticProps(context) {
 		sortingFilter: "dateNewest",
 	};
 	const tracksWhoseCopiesAreSoldOnce = (await Moralis.Cloud.run("fetchTracksWhoseCopiesAreSoldOnce", { appliedFilter: appliedFilter })) ?? false;
-	console.log(tracksWhoseCopiesAreSoldOnce);
 
 	// Passing data to the Page using props
 	return {

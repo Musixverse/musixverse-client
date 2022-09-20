@@ -55,9 +55,9 @@ export default function NFTCard({
 		localTokenId,
 		numberOfCopies,
 		collaboratorList,
+		otherTokensOfTrack,
 		unsoldTrackData,
 		soldOnceTrackData,
-		otherTokensOfTrack,
 		showNumberOfCopies: false,
 	};
 

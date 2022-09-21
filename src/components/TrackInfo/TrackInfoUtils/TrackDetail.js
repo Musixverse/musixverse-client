@@ -1,7 +1,7 @@
 import DisplayCollaborator from "./DisplayCollaborator";
 import styles from "../../../../styles/TrackInfo/TrackDetails.module.css";
 
-export default function TrackDetail({ description, collaborators }) {
+export default function TrackDetail({ description, collaborators, collaboratorUsers }) {
 	return (
 		<div className={styles["track-detail__track-details"]}>
 			{/* <div className={styles['track-details__title']}> */}
@@ -14,8 +14,8 @@ export default function TrackDetail({ description, collaborators }) {
 
 			<div className="mt-12">
 				<h1 className="font-tertiary text-4xl">COLLABORATORS</h1>
-				{collaborators.map((collaborator, key) => {
-					return <DisplayCollaborator key={key} collaborator={collaborator} />;
+				{collaborators.map((collaborator, index) => {
+					return <DisplayCollaborator key={index} collaborator={collaborator} collaboratorUsers={collaboratorUsers} />;
 				})}
 			</div>
 		</div>

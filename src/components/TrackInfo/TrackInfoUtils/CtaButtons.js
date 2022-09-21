@@ -1,8 +1,9 @@
 import { useState, useContext } from "react";
 import { useMoralis } from "react-moralis";
 import AuthModalContext from "../../../../store/authModal-context";
-import EditPriceModal from "./EditPriceModal";
-import NftReportModal from "./NftReportModal";
+import dynamic from "next/dynamic";
+const EditPriceModal = dynamic(() => import("./EditPriceModal"));
+const NftReportModal = dynamic(() => import("./NftReportModal"));
 import ToggleOnSaleButtons from "./ToggleOnSaleButtons";
 import PurchaseButton from "./PurchaseButton";
 
@@ -50,6 +51,7 @@ export default function CtaButtons({ currentOwnerAddress, tokenId, price, onSale
 								toggleOnSale={toggleOnSale}
 								toggleOnSaleModalOpen={toggleOnSaleModalOpen}
 								setToggleOnSaleModalOpen={setToggleOnSaleModalOpen}
+								onSale={onSale}
 							/>
 						</>
 					) : onSale || onSale === null ? (

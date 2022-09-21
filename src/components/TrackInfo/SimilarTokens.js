@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import NFTCard from "../../layout/NFTCard/NFTCard";
 import NFTCardsWithPager from "../../layout/NFTCardsWithPager/NFTCardsWithPager";
 
-const SimilarTokens = ({ otherTokensOfTrack, metadata }) => {
+const SimilarTokens = ({ otherTokensOfTrack, metadata, isArtistVerified, collaboratorUsers }) => {
 	const [nftCards, setNftCards] = useState([]);
 
 	useEffect(() => {
@@ -17,12 +17,16 @@ const SimilarTokens = ({ otherTokensOfTrack, metadata }) => {
 							key={token.tokenId}
 							redirectLink={`/track/polygon/${token.tokenId}`}
 							trackName={metadata.title}
+							price={token.price}
 							artistName={metadata.artist}
 							artistAddress={metadata.artistAddress}
+							isArtistVerified={isArtistVerified}
 							image={metadata.artwork.uri.replace("ipfs://", process.env.NEXT_PUBLIC_IPFS_NODE_URL)}
 							tokenId={token.tokenId}
+							localTokenId={token.localTokenId}
 							numberOfCopies={metadata.attributes[0].value}
-							collaboratorList={metadata.collaborators}
+							collaboratorList={collaboratorUsers}
+							showNumberOfCopies={false}
 						/>
 					);
 					if (tempArray.length % 5 == 0 || idx == otherTokensOfTrack.length - 1) {

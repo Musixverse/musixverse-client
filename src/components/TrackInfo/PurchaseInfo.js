@@ -1,14 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
-import { useMoralis, useMoralisCloudFunction } from "react-moralis";
+import { useMoralis } from "react-moralis";
 import styles from "../../../styles/TrackInfo/PurchaseInfo.module.css";
 import PurchaseButton from "./TrackInfoUtils/PurchaseButton";
 
-export default function PurchaseInfo({ tokenId, metadata, currentOwnerAddress, price, onSale }) {
+export default function PurchaseInfo({ tokenId, metadata, currentOwner, price, onSale }) {
 	const { user } = useMoralis();
-
-	const { data: currentOwner } = useMoralisCloudFunction("fetchUsernameFromAddress", { address: currentOwnerAddress });
-	const { data: currentOwnerAvatar } = useMoralisCloudFunction("fetchUserAvatarFromAddress", { address: currentOwnerAddress });
 
 	return (
 		<div className={"dark:bg-dark-100 " + styles["purchase-info"]}>
@@ -34,9 +31,7 @@ export default function PurchaseInfo({ tokenId, metadata, currentOwnerAddress, p
 						<Link href={`/profile/${currentOwner.username}`} className="cursor-pointer">
 							<a target="_blank" rel="noopener noreferrer" className="flex items-center space-x-1">
 								<div className="rounded-full flex relative">
-									{currentOwnerAvatar ? (
-										<Image priority src={currentOwnerAvatar} height="20" width="20" alt="current owner avatar" className="rounded-full" />
-									) : null}
+									<Image priority src={currentOwner.avatar} height="20" width="20" alt="current owner avatar" className="rounded-full" />
 								</div>
 								<p className="font-secondary">@{currentOwner.username}</p>
 							</a>
@@ -55,7 +50,7 @@ export default function PurchaseInfo({ tokenId, metadata, currentOwnerAddress, p
 						<p className="ml-2 font-bold text-pricing font-primary">{price}</p>
 					</div>
 				</div>
-				{user?.attributes.ethAddress !== currentOwnerAddress && (onSale || onSale === null) && (
+				{user?.attributes.ethAddress !== currentOwner.ethAddress && (onSale || onSale === null) && (
 					<div className={styles["purchase-info__price-div--cta"]}>
 						<PurchaseButton tokenId={tokenId} price={price} />
 					</div>

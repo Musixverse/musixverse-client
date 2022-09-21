@@ -12,7 +12,7 @@ import amazonW from "../../../public/assets/logos/amazon_logo_w.svg";
 import youtubeB from "../../../public/assets/logos/youtube_logo_b.svg";
 import youtubeW from "../../../public/assets/logos/youtube_logo_w.svg";
 
-export default function TrackDetails({ tokenId, metadata }) {
+export default function TrackDetails({ tokenId, metadata, collaboratorUsers }) {
 	const { theme } = useTheme();
 	var date = new Date(metadata.unlockTimestamp * 1000);
 	var dateStr =
@@ -32,7 +32,7 @@ export default function TrackDetails({ tokenId, metadata }) {
 
 	return (
 		<div className={"dark:bg-dark-100 dark:border-dark-100 " + styles["track-detail__container"]}>
-			<TrackDetail description={metadata.description} collaborators={metadata.collaborators} />
+			<TrackDetail description={metadata.description} collaborators={metadata.collaborators} collaboratorUsers={collaboratorUsers} />
 
 			{/* OTHER DETAILS */}
 			<div className={styles["track-info__other-details"]}>

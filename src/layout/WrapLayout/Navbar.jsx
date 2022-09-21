@@ -31,6 +31,13 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 	const handleLogout = async () => {
 		if (router.pathname != "/") router.push("/", undefined, { shallow: true });
 		await logout();
+		await fetch("/api/auth/logout", {
+			method: "post",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({}),
+		});
 		router.reload(window.location.pathname);
 	};
 

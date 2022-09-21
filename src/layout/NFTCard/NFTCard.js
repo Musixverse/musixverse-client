@@ -1,23 +1,27 @@
+import { useMemo, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useTheme } from "next-themes";
-import { useMoralisCloudFunction } from "react-moralis";
 import styles from "../../../styles/NFTCard/Nftcard.module.css";
-import Section2 from "./Section2";
-import Section1 from "./Section1";
 import multipleNft from "../../../public/assets/nftcard/nftcards.svg";
-import { useMemo, useState } from "react";
-import NftCopiesModal from "./NftCopiesModal";
 import ShinyLoader from "../../layout/ShinyLoader";
+import dynamic from "next/dynamic";
+const NftCopiesModal = dynamic(() => import("./NftCopiesModal"));
+import Section1 from "./Section1";
+import Section2 from "./Section2";
 
 export default function NFTCard({
 	redirectLink,
 	trackName,
+	price,
 	artistName,
 	artistAddress,
+	isArtistVerified,
 	image,
 	tokenId,
+	localTokenId,
 	numberOfCopies,
+	otherTokensOfTrack,
 	collaboratorList,
 	unsoldTrackData,
 	soldOnceTrackData,
@@ -27,7 +31,6 @@ export default function NFTCard({
 }) {
 	const [showNftCopiesModal, setShowNftCopiesModal] = useState(false);
 	const { theme } = useTheme();
-	const { data: artist } = useMoralisCloudFunction("fetchUsernameFromAddress", { address: artistAddress });
 
 	const truncatedArtistName = useMemo(() => {
 		let returnedString = artistName;
@@ -36,19 +39,23 @@ export default function NFTCard({
 	}, [artistName]);
 
 	let truncatedNftName = trackName;
-	if (trackName && trackName.length > 10) {
-		truncatedNftName = trackName.substring(0, 10) + "...";
+	if (trackName && trackName.length > 8) {
+		truncatedNftName = trackName.substring(0, 8) + "...";
 	}
 
 	const trackCopiesModalValues = {
 		redirectLink,
 		trackName,
+		price,
 		artistName,
 		artistAddress,
+		isArtistVerified,
 		image,
 		tokenId,
+		localTokenId,
 		numberOfCopies,
 		collaboratorList,
+		otherTokensOfTrack,
 		unsoldTrackData,
 		soldOnceTrackData,
 		showNumberOfCopies: false,
@@ -103,16 +110,16 @@ export default function NFTCard({
 							<Section1
 								artistName={truncatedArtistName}
 								trackName={truncatedNftName}
-								tokenId={tokenId}
-								unsoldTrackData={unsoldTrackData}
+								price={price}
+								isArtistVerified={isArtistVerified}
 								soldOnceTrackData={soldOnceTrackData}
-								isVerified={artist ? artist.isArtistVerified : false}
 							/>
 							{/* LIKES and Prev Price Section */}
 							<Section2
 								collaboratorList={collaboratorList}
 								numberOfCopies={numberOfCopies}
 								tokenId={tokenId}
+								localTokenId={localTokenId}
 								unsoldTrackData={unsoldTrackData}
 								likeCount={likeCount}
 								lastPrice={lastPrice}

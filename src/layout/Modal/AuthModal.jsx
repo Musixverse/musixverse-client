@@ -1,4 +1,4 @@
-const { Fragment, useState, useEffect, useRef } = require("react");
+const { Fragment, useState, useEffect, useRef, useContext } = require("react");
 import { useTheme } from "next-themes";
 import Image from "next/image";
 import Link from "next/link";
@@ -10,10 +10,12 @@ import logoBlack from "../../../public/logo-black.svg";
 import logoWhite from "../../../public/logo-white.svg";
 import { DISCORD_SUPPORT_CHANNEL_INVITE_LINK } from "../../constants";
 import RequiredAsterisk from "../RequiredAsterisk";
+import LoadingContext from "../../../store/loading-context";
 
 export default function AuthModal({ isOpen = "", onClose = "" }) {
 	const router = useRouter();
 	const { authenticate, isAuthenticated, user } = useMoralis();
+	const [, setLoading] = useContext(LoadingContext);
 	const [isModalOpen, setIsModalOpen] = useState(isOpen);
 	const [magicFormOpen, setMagicFormOpen] = useState(false);
 	const emailRef = useRef(null);
@@ -51,36 +53,56 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 	};
 
 	const metamaskLogin = async () => {
+		setLoading(true);
 		if (!isAuthenticated) {
 			await addPolygonTestnetNetwork();
 			await authenticate({ signingMessage: "Musixverse Authentication" })
-				.then(function (user) {
+				.then(async function (user) {
 					if (user) {
+						await fetch("/api/auth/login", {
+							method: "post",
+							headers: {
+								"Content-Type": "application/json",
+							},
+							body: JSON.stringify({ currentUser: user }),
+						});
 						closeModal();
 						if (router.pathname === "/") router.push("/mxcatalog/new-releases", undefined, { shallow: true });
 					}
+					setLoading(false);
 				})
 				.catch(function (error) {
 					console.log("Metamask authentication error:", error);
+					setLoading(false);
 				});
 		}
 	};
 
 	const walletconnectLogin = async () => {
+		setLoading(true);
 		if (!isAuthenticated) {
 			await authenticate({
 				provider: "walletconnect",
 				signingMessage: "Musixverse Authentication",
 				chainId: process.env.NEXT_PUBLIC_BLOCKCHAIN_NETWORK_ID,
 			})
-				.then(function (user) {
+				.then(async function (user) {
 					if (user) {
+						await fetch("/api/auth/login", {
+							method: "post",
+							headers: {
+								"Content-Type": "application/json",
+							},
+							body: JSON.stringify({ currentUser: user }),
+						});
 						closeModal();
 						if (router.pathname === "/") router.push("/mxcatalog/new-releases", undefined, { shallow: true });
 					}
+					setLoading(false);
 				})
 				.catch(function (error) {
 					console.log("WalletConnect authentication error:", error);
+					setLoading(false);
 				});
 		}
 	};

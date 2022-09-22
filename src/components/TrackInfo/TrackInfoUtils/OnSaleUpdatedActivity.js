@@ -1,33 +1,11 @@
-import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useMoralis, useMoralisCloudFunction } from "react-moralis";
 import { convertTimestampToDate } from "../../../utils/ConvertTimestampToDate";
 import LinkToBlockExplorer from "./LinkToBlockExplorer";
 import auction from "../../../../public/assets/auction.svg";
 import styles from "../../../../styles/TrackInfo/Activity.module.css";
 
 const PurchasedActivity = ({ activity }) => {
-	const { Moralis } = useMoralis();
-	const [transaction, setTransaction] = useState("");
-	const { data: fetchedUser } = useMoralisCloudFunction("fetchUsernameFromAddress", { address: transaction.from_address });
-
-	const getTransactionDetails = async () => {
-		const options = {
-			chain: process.env.NEXT_PUBLIC_BLOCKCHAIN_NETWORK,
-			transaction_hash: activity.transaction_hash,
-		};
-		const _transaction = await Moralis.Web3API.native.getTransaction(options);
-		setTransaction(_transaction);
-	};
-
-	useEffect(() => {
-		async function getDetails() {
-			await getTransactionDetails();
-		}
-		getDetails();
-	}, [activity]);
-
 	return (
 		<>
 			<div className={"dark:bg-dark-200 " + styles["sales-history__action"]}>
@@ -42,10 +20,10 @@ const PurchasedActivity = ({ activity }) => {
 
 				<p className="text-[#8a8a8a] text-sm">
 					by&nbsp;
-					{fetchedUser ? (
-						<Link href={`/profile/${fetchedUser.username}`} className="cursor-pointer">
+					{activity ? (
+						<Link href={`/profile/${activity.caller.username}`} className="cursor-pointer">
 							<a target="_blank" rel="noopener noreferrer">
-								@{fetchedUser.username}&nbsp;
+								@{activity.caller.username}&nbsp;
 							</a>
 						</Link>
 					) : null}

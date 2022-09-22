@@ -7,6 +7,13 @@ const UnsoldNFT = ({ track }) => {
 			purchasedTokens_size: track.purchasedTokens_size,
 		};
 
+		let collaboratorList = [];
+		track.collaborators.map((collaborator) => {
+			track.collaboratorUsers.map((collaboratorUser) => {
+				collaborator.address === collaboratorUser.ethAddress && collaboratorList.push(collaboratorUser);
+			});
+		});
+
 		return (
 			<NFTCard
 				redirectLink={`/track/polygon/${track.unsoldTokens.at(0)}`}
@@ -19,7 +26,8 @@ const UnsoldNFT = ({ track }) => {
 				tokenId={track.unsoldTokens.at(0)}
 				localTokenId={track.localTokenId}
 				numberOfCopies={track.numberOfCopies}
-				collaboratorList={track.collaboratorsAvatars}
+				collaborators={track.collaborators}
+				collaboratorList={collaboratorList}
 				otherTokensOfTrack={track.otherTokensOfTrack}
 				unsoldTrackData={unsoldTrackData}
 			/>

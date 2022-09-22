@@ -4,7 +4,7 @@ import { useMoralis } from "react-moralis";
 import styles from "../../../styles/TrackInfo/PurchaseInfo.module.css";
 import PurchaseButton from "./TrackInfoUtils/PurchaseButton";
 
-export default function PurchaseInfo({ tokenId, metadata, currentOwner, price, onSale }) {
+export default function PurchaseInfo({ tokenId, resaleRoyaltyPercentage, currentOwner, price, onSale }) {
 	const { user } = useMoralis();
 
 	return (
@@ -14,9 +14,9 @@ export default function PurchaseInfo({ tokenId, metadata, currentOwner, price, o
 				<h1 className="font-tertiary text-3xl">PURCHASE INFO</h1>
 
 				<p className={"text-right " + styles["purchase-info__heading--p"]}>
-					{metadata.attributes[1].trait_type}
+					Resale Royalty Percentage
 					<i className="ml-2 mr-2 fa-solid fa-arrow-right-long"></i>
-					{metadata.attributes[1].value}%
+					{resaleRoyaltyPercentage}%
 				</p>
 			</div>
 

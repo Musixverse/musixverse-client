@@ -24,7 +24,7 @@ const SimilarTokens = ({ otherTokensOfTrack, metadata, isArtistVerified, collabo
 							image={metadata.artwork.uri.replace("ipfs://", process.env.NEXT_PUBLIC_IPFS_NODE_URL)}
 							tokenId={token.tokenId}
 							localTokenId={token.localTokenId}
-							numberOfCopies={metadata.attributes[0].value}
+							numberOfCopies={metadata.numberOfCopies}
 							collaboratorList={collaboratorUsers}
 							showNumberOfCopies={false}
 						/>

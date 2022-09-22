@@ -1,6 +1,5 @@
 import { useState, useEffect, useContext } from "react";
 import Image from "next/image";
-import { useRouter } from "next/router";
 import LoadingContext from "../../../../store/loading-context";
 import { updatePrice } from "../../../utils/smart-contract/functions";
 import Modal from "../../../layout/Modal/Modal";
@@ -8,8 +7,7 @@ import EditPriceSuccessModal from "./EditPriceSuccessModal";
 import { convertMaticToUSD, convertMaticToINR, truncatePrice } from "../../../utils/GetMarketPrice";
 
 const EditPriceModal = ({ isOpen, setEditPriceModalOpen, tokenId, currentPrice }) => {
-	const router = useRouter();
-	const [loading, setLoading] = useContext(LoadingContext);
+	const [, setLoading] = useContext(LoadingContext);
 
 	const [maticUSD, setMaticUSD] = useState("");
 	const [maticINR, setMaticINR] = useState("");

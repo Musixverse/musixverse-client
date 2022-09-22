@@ -1,27 +1,23 @@
 import Image from "next/image";
 import Link from "next/link";
-import { useMoralis, useMoralisCloudFunction } from "react-moralis";
+import { useMoralis } from "react-moralis";
+import minted from "../../../public/assets/MINTED.svg";
+import styles from "../../../styles/TrackInfo/Activity.module.css";
 import { convertTimestampToDate } from "../../utils/ConvertTimestampToDate";
 import LinkToBlockExplorer from "./TrackInfoUtils/LinkToBlockExplorer";
 import ActivityDetails from "./TrackInfoUtils/ActivityDetails";
-import minted from "../../../public/assets/MINTED.svg";
-import styles from "../../../styles/TrackInfo/Activity.module.css";
 
-export default function Activity({ tokenId, artistAddress }) {
+export default function Activity({ artist, activity }) {
 	const { Moralis } = useMoralis();
-	const { data: artist } = useMoralisCloudFunction("fetchUsernameFromAddress", { address: artistAddress });
-	const { data: tokenMintedInfo } = useMoralisCloudFunction("fetchTokenMintedInfo", { tokenId: tokenId });
-	const { data: tokenActivity } = useMoralisCloudFunction("fetchTokenActivity", { tokenId: tokenId });
 
 	return (
 		<div className={"dark:bg-dark-100 " + styles["sales-history"]}>
 			<h1 className={styles["sales-history__heading"]}>Activity</h1>
 			<div className="max-h-32 overflow-y-auto">
-				{tokenActivity &&
-					tokenActivity.map((activity, index) => {
-						return <ActivityDetails key={index} activity={activity} />;
+				{activity.tokenActivity &&
+					activity.tokenActivity.map((_activity, index) => {
+						return <ActivityDetails key={index} activity={_activity} />;
 					})}
-
 				<div className="flex">
 					<div className={"dark:bg-dark-200 " + styles["sales-history__action"]}>
 						<Image src={minted} alt="minting logo" width={25} height={25}></Image>
@@ -31,7 +27,9 @@ export default function Activity({ tokenId, artistAddress }) {
 						<div className="flex items-center text-sm sm:text-base font-medium">
 							Minted with a base price of &nbsp;
 							<Image src={"/assets/matic-logo.svg"} width={15} height={15} alt="matic icon" />
-							<p className="ml-1 font-primary font-semibold">{tokenMintedInfo ? Moralis.Units.FromWei(tokenMintedInfo.price) : ""}</p>
+							<p className="ml-1 font-primary font-semibold">
+								{activity.tokenMintedInfo ? Moralis.Units.FromWei(activity.tokenMintedInfo.price) : ""}
+							</p>
 						</div>
 						<p className="text-[#8a8a8a] text-sm">
 							by&nbsp;
@@ -43,8 +41,8 @@ export default function Activity({ tokenId, artistAddress }) {
 								</Link>
 							) : null}
 							on&nbsp;
-							{tokenMintedInfo ? convertTimestampToDate(tokenMintedInfo.block_timestamp) : ""}
-							{tokenMintedInfo ? <LinkToBlockExplorer transactionHash={tokenMintedInfo.transaction_hash} /> : ""}
+							{activity.tokenMintedInfo ? convertTimestampToDate(activity.tokenMintedInfo.block_timestamp) : ""}
+							{activity.tokenMintedInfo ? <LinkToBlockExplorer transactionHash={activity.tokenMintedInfo.transaction_hash} /> : ""}
 						</p>
 					</div>
 				</div>

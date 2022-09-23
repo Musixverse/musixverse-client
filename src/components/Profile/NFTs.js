@@ -15,7 +15,7 @@ export default function NFTs({ username, currentlyActive, sortingFilter }) {
 	});
 
 	useEffect(() => {
-		if (username) {
+		if (username && currentlyActive && sortingFilter) {
 			fetchTracksByUser({
 				onSuccess: async (object) => {
 					setTracks(object);

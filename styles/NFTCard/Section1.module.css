@@ -7,7 +7,7 @@
 }
 
 .description--section1__trackname {
-	@apply text-sm sm:text-lg md:text-xl font-semibold font-primary text-start;
+	@apply text-sm font-semibold sm:text-lg md:text-xl font-primary text-start;
 }
 
 .description--section1__price {

@@ -33,7 +33,7 @@ export default function ImageUpload({ coverArtUrl, setCoverArtUrl, setCoverArtMi
 			}
 		}
 		setCoverArt();
-	}, [croppedImage, setCoverArtUrl]);
+	}, [croppedImage, setCoverArtUrl, Moralis, setLoading]);
 
 	const handleImageUpload = (event) => {
 		//If file size is > 10MB show error box
@@ -78,7 +78,7 @@ export default function ImageUpload({ coverArtUrl, setCoverArtUrl, setCoverArtMi
 						<p className="text-sm text-primary-200">Image Uploaded</p>
 					) : (
 						<p className="text-xs">
-							Any Image file | Max file size: 1GB <br /> Recommended size: 640 x 640 px.
+							Any Image file | Max file size: 10MB <br /> Recommended size: 640 x 640 px.
 						</p>
 					)}
 				</div>

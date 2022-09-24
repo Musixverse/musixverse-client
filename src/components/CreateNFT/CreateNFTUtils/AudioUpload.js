@@ -60,7 +60,7 @@ export default function AudioUpload({ audioFileUrl, setAudioFileUrl, setAudioFil
 				<div className="flex-1 font-secondary">
 					<h3 className="font-semibold">UPLOAD AUDIO FILE</h3>
 					{audioFileUrl === null ? (
-						<p className="text-xs">Any Audio file | Max file size: 1 GB</p>
+						<p className="text-xs">Any Audio file | Max file size: 500 MB</p>
 					) : (
 						<p className="text-sm text-primary-200">Track Uploaded</p>
 					)}

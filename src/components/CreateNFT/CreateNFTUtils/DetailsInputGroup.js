@@ -60,7 +60,7 @@ export default function DetailsInputGroup({
 						<Tooltip
 							labelText={<i className="pl-4 fa-solid fa-circle-info"></i>}
 							message={"By marking your asset as explicit for NSFW (Not Safe For Work) content will protect users with safe search while browsing Musixverse."}
-							tooltipLocation={"right"}
+							tooltipLocation={"bottom"}
 						/>
 					</p>
 					<InputDropdown optionsArray={parentalAdvisoryArray} setChoice={setParentalAdvisory} initialValue={parentalAdvisory} />

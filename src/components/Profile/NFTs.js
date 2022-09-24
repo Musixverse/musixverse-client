@@ -83,7 +83,7 @@ export default function NFTs({ username, currentlyActive, sortingFilter }) {
 
 			setNftCards(nftCardsTemp);
 		}
-	}, [tracks]);
+	}, [tracks, currentlyActive]);
 
 	return <>{nftCards.length === 0 ? <NoNfts username={username} /> : <NFTCardsWithPager nftCards={nftCards} />}</>;
 }

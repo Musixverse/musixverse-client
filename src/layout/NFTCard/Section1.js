@@ -24,14 +24,30 @@ export default function Section1({ artistName, trackName, price, isArtistVerifie
 				<div className={styles["description--section1__artistname"]}>
 					{artistName ? artistName : <ShinyLoader classes="w-4/5 h-4 self-center rounded-lg" />}
 					{isArtistVerified ? (
-						<span className="ml-1 flex items-center">
+						<span className="flex items-center ml-1">
 							<Image src={"/assets/mxv_tick.svg"} width={14} height={14} alt="MXV verified" />
 						</span>
 					) : null}
 				</div>
-				<h6 className={styles["description--section1__trackname"]}>
-					{trackName ? trackName : <ShinyLoader classes="w-2/3 h-4 mt-2 self-center rounded-lg" />}
-				</h6>
+				{/* Marquee animation when long text */}
+				{(trackName && trackName.length > 8)?
+					<div className="w-[104px] md:w-[115px] relative flex overflow-x-hidden">
+						<div className="animate-marquee whitespace-nowrap">
+							<h6 className={"mr-4 "+styles["description--section1__trackname"]}>
+								{trackName}
+							</h6>
+						</div>
+						<div className="absolute top-0 animate-marquee2 whitespace-nowrap">
+							<h6 className={"mr-4 "+styles["description--section1__trackname"]}>
+								{trackName}
+							</h6>
+						</div>
+					</div>
+					:
+					<h6 className={styles["description--section1__trackname"]}>
+						{trackName ? trackName : <ShinyLoader classes="w-2/3 h-4 mt-2 self-center rounded-lg" />}
+					</h6>
+				}
 			</div>
 			{/* CURRENT PRICE */}
 			{artistName && trackName && truncatednftPrice ? (

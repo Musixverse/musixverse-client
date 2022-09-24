@@ -109,7 +109,7 @@ export default function NFTCard({
 							{/* Artist, Music name and tokenId */}
 							<Section1
 								artistName={truncatedArtistName}
-								trackName={truncatedNftName}
+								trackName={trackName}
 								price={price}
 								isArtistVerified={isArtistVerified}
 								soldOnceTrackData={soldOnceTrackData}

@@ -124,8 +124,8 @@ export const community = [
                 <br />
                 Make sure to join us there!</p>
                 <ul className="list-disc pl-4">
-                    <li><a className="font-medium hover:text-primary-100 hover:font-normal" href="https://discord.com/invite/rXKb7rCqjG">Click here to connect on Twiiter</a></li>
-                    <li><a className="font-medium hover:text-primary-100 hover:font-normal" href="https://twitter.com/musixverse">Click here to join our Discord Server</a></li>
+                    <li><span className="font-medium underline underline-offset-2 text-primary-100"><Link href="https://twitter.com/musixverse">Click here to connect on Twiiter</Link></span></li>
+                    <li><span className="font-medium underline underline-offset-2 text-primary-100"><Link href="https://discord.com/invite/rXKb7rCqjG">Click here to join our Discord Server</Link></span></li>
                 </ul>
             </>
         ),
@@ -135,7 +135,7 @@ export const community = [
         heading: "What are the links to your other social media accounts?",
         body: (
             <>
-                <p>You can find all the links here: <a className="font-medium hover:text-primary-100 hover:font-normal" href="https://linktr.ee/musixverse">Connect With Us</a></p>
+                <p>You can find all the links here: <span className="font-medium underline underline-offset-2 text-primary-100"><Link className="font-medium underline underline-offset-2 text-primary-100" href="https://linktr.ee/musixverse">Connect With Us</Link></span></p>
             </>
         ),
         content_id: "collapseTwo",
@@ -144,7 +144,7 @@ export const community = [
         heading: "How do I connect with the Musixverse team?",
         body: (
             <>
-                <p>You can connect with the Musixverse team via the <span className="font-medium hover:text-primary-100 hover:font-normal"><Link href="/contact-us">Contact Us page</Link></span> or you can also email us at <a className="font-medium hover:text-primary-100 hover:font-normal" href="mailto:contact@musixverse.com">contact@musixverse.com</a></p>
+                <p>You can connect with the Musixverse team via the <span className="font-medium underline underline-offset-2 text-primary-100"><Link href="/contact-us">Contact Us page</Link></span> or you can also email us at <span className="font-medium underline underline-offset-2 text-primary-100"><Link href="mailto:contact@musixverse.com">contact@musixverse.com</Link></span></p>
             </>
         ),
         content_id: "collapseThree",

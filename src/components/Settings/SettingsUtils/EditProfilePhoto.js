@@ -50,8 +50,8 @@ export default function EditProfilePhoto({ avatar, setAvatar, handleSave }) {
 					Profile Picture
 					<Tooltip 
 					 	labelText={<i className="ml-2 text-base md:text-lg fa fa-info-circle"></i>}
-						message={"Recommended dimensions:		 640 x 640 px"}
-						tooltipPosition={"right"}
+						message={"Recommended dimensions: 		640 x 640 px"}
+						tooltipLocation={"bottom"}
 					/>
 				</p>
 				<label className="relative w-fit cursor-pointer" htmlFor="upload-image-inp">

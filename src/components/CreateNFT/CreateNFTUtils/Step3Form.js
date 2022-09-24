@@ -165,7 +165,7 @@ const Step3Form = ({
 								<Tooltip
 									labelText={<i className="pl-4 fa-solid fa-circle-info"></i>}
 									message={"You can create several NFT copies of the same song. Each copy would be unique and will be traded separately. Musixverse recommends keeping the number of copies low to maintain exclusivity."}
-									tooltipLocation={"right"}
+									tooltipLocation={"bottom"}
 								/>
 							</label>
 							<input
@@ -190,7 +190,7 @@ const Step3Form = ({
 								<Tooltip
 									labelText={<i className="pl-4 fa-solid fa-circle-info"></i>}
 									message={`1 MATIC = $${currentMaticUSD} or ₹${currentMaticINR}`}
-									tooltipLocation={"right"}
+									tooltipLocation={"bottom"}
 								/>
 							</label>
 
@@ -220,7 +220,7 @@ const Step3Form = ({
 							<Tooltip
 								labelText={<i className="pl-4 fa-solid fa-circle-info"></i>}
 								message={"You can split all the earnings from this NFT with the collaborators using the Musixverse's split feature."}
-								tooltipLocation={"right"}
+								tooltipLocation={"bottom"}
 							/>
 						</p>
 						<div className="flex flex-col gap-4 text-gray-700">
@@ -503,6 +503,11 @@ const Step3Form = ({
 						<label htmlFor="resale-royalty-percentage" className="block mb-1 text-sm tracking-wide uppercase">
 							RESALE ROYALTY PERCENTAGE
 							<RequiredAsterisk />
+							<Tooltip
+								labelText={<i className="pl-4 fa-solid fa-circle-info"></i>}
+								message={"Resale royalty entitles artists to a share of the sale price when their NFT is resold. We recommend keeping the resale royalty percentage between 1% to 10%."}
+								tooltipLocation={"bottom"}
+							/>
 						</label>
 						<input
 							className="dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-100 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-100"

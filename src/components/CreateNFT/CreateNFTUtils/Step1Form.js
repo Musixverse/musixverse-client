@@ -113,7 +113,7 @@ export default function Step1Form({
 							<Tooltip
 								labelText={<i className="pl-4 fa-solid fa-circle-info"></i>}
 								message={"Include featured artists and version info in the track title (if any) . Example: Knock You Down (feat. Kanye West & Ne-Yo)"}
-								tooltipLocation={"right"}
+								tooltipLocation={"bottom"}
 							/>	
 						</p>
 						<input
@@ -136,7 +136,7 @@ export default function Step1Form({
 										<Tooltip
 											labelText={<i className="pl-4 fa-solid fa-circle-info"></i>}
 											message={"Your fans will really be interested to know the background of the song. You can write about the whole ideation process and the journey behind creating this awesome piece of music."}
-											tooltipLocation={"right"}
+											tooltipLocation={"bottom"}
 										/>
 									</p>
 									<textarea

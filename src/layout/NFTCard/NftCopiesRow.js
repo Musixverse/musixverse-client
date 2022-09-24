@@ -1,10 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
-import { useMoralis, useMoralisCloudFunction } from "react-moralis";
+import { useMoralis } from "react-moralis";
 
 const NftCopiesRow = ({ token, trackName }) => {
 	const { Moralis } = useMoralis();
-	const { data: tokenPrice } = useMoralisCloudFunction("fetchTokenPrice", { tokenId: token.tokenId });
 
 	return (
 		<>
@@ -17,7 +16,7 @@ const NftCopiesRow = ({ token, trackName }) => {
 						</p>
 						<div className="flex items-center justify-end font-semibold">
 							<Image src={"/assets/matic-logo.svg"} width={16} height={16} alt="matic logo" />
-							<span className="ml-1 sm:text-lg">{tokenPrice ? Moralis.Units.FromWei(tokenPrice) : ""}</span>
+							<span className="ml-1 sm:text-lg">{Moralis.Units.FromWei(token.price)}</span>
 						</div>
 					</div>
 				</a>

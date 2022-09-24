@@ -23,11 +23,9 @@ export async function getStaticProps(context) {
 	await Moralis.start({ serverUrl: MORALIS_SERVER_URL, appId: MORALIS_APP_ID });
 
 	// Fetch token details
-	const profileDetails = await Moralis.Cloud.run("fetchProfileDetails", { username: username });
-	console.log("profileDetails:", profileDetails);
-	console.log("stringify profileDetails:", JSON.stringify(profileDetails));
+	const _profileDetails = await Moralis.Cloud.run("fetchProfileDetails", { username: username });
 
-	if (!profileDetails) {
+	if (!_profileDetails) {
 		return {
 			redirect: {
 				destination: `/profile/does-not-exist?username=${username}`,
@@ -35,12 +33,11 @@ export async function getStaticProps(context) {
 			},
 		};
 	}
-
-	const _profileDetails = JSON.parse(JSON.stringify(profileDetails));
+	const profileDetails = JSON.parse(JSON.stringify(_profileDetails));
 
 	// Passing data to the page using props
 	return {
-		props: { _profileDetails },
+		props: { profileDetails },
 		revalidate: 1,
 	};
 }
@@ -52,22 +49,17 @@ export function getStaticPaths() {
 	};
 }
 
-export default function Profile({ _profileDetails }) {
-	const profileDetails = _profileDetails;
+export default function Profile({ profileDetails }) {
 	const router = useRouter();
 	const { username } = router.query;
 
 	const [showArtistBioModal, setShowArtistBioModal] = useState(false);
 	const [showReportModal, setShowReportModal] = useState(false);
-	const [currentlyActive, setCurrentlyActive] = useState("");
+	const [currentlyActive, setCurrentlyActive] = useState(profileDetails.isArtist ? "New Releases" : "Collection");
+	// NFTs
+	const [tracks, setTracks] = useState(profileDetails.isArtist ? profileDetails.newReleases : profileDetails.collection);
+	// Sort by
 	const [sortingFilter, setSortingFilter] = useState("Newest First");
-	useEffect(() => {
-		if (profileDetails.isArtist) {
-			setCurrentlyActive("New Releases");
-		} else {
-			setCurrentlyActive("Collection");
-		}
-	}, [profileDetails]);
 
 	// Favourites Modal
 	const [isFavouritesModalOpen, setFavouritesModalOpen] = useState(false);
@@ -114,12 +106,16 @@ export default function Profile({ _profileDetails }) {
 						setShowReportModal={setShowReportModal}
 					/>
 					<Filter
+						username={username}
 						currentlyActive={currentlyActive}
 						setCurrentlyActive={setCurrentlyActive}
+						sortingFilter={sortingFilter}
 						setSortingFilter={setSortingFilter}
 						isArtist={profileDetails.isArtist}
+						setTracks={setTracks}
+						profileDetails={profileDetails}
 					/>
-					<NFTs username={username} currentlyActive={currentlyActive} sortingFilter={sortingFilter} />
+					<NFTs username={username} tracks={tracks} currentlyActive={currentlyActive} />
 					<FavouritesHeader />
 					<FavouriteNFTs username={username} favouriteTokens={favouriteTokens} />
 				</div>

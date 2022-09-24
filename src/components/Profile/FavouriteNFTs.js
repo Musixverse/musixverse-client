@@ -33,7 +33,7 @@ export default function FavouriteNFTs({ username, favouriteTokens }) {
 						localTokenId={token.localTokenId}
 						numberOfCopies={token.numberOfCopies}
 						collaboratorList={collaboratorList}
-						showNumberOfCopies={false}
+						otherTokensOfTrack={token.otherTokensOfTrack}
 					/>
 				);
 				if (tempArray.length % 5 == 0 || idx == favouriteTokens.length - 1) {

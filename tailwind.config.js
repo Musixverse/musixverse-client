@@ -4,6 +4,20 @@ module.exports = {
     darkMode: "class",
     theme: {
         extend: {
+            animation: {
+                marquee: 'marquee 10s linear infinite',
+                marquee2: 'marquee2 10s linear infinite',
+            },
+            keyframes: {
+                marquee: {
+                  '0%': { transform: 'translateX(0%)' },
+                  '100%': { transform: 'translateX(-100%)' },
+                },
+                marquee2: {
+                  '0%': { transform: 'translateX(100%)' },
+                  '100%': { transform: 'translateX(0%)' },
+                },
+            },
             width: {
                 responsive: "clamp(367px, calc(22.9375rem + ((1vw - 4.28px) * 45.7775)), 1050px)",
             },

@@ -1,18 +1,62 @@
+import { useEffect } from "react";
 import Image from "next/image";
 import { useTheme } from "next-themes";
+import { useMoralisCloudFunction } from "react-moralis";
 import Dropdown from "./ProfileUtils/Dropdown";
 import styles from "../../../styles/Profile/Filter.module.css";
 
-export default function Filter({ currentlyActive, setCurrentlyActive, setSortingFilter, isArtist }) {
+export default function Filter({ username, currentlyActive, setCurrentlyActive, sortingFilter, setSortingFilter, isArtist, setTracks, profileDetails }) {
 	const { theme } = useTheme();
 
 	const handleFilterChange = (e) => {
 		const selectedCategory = e.target.textContent;
 
-		if (selectedCategory == "New Releases") setCurrentlyActive("New Releases");
-		else if (selectedCategory == "Sold Out") setCurrentlyActive("Sold Out");
-		else if (selectedCategory == "Collection") setCurrentlyActive("Collection");
+		if (selectedCategory == "New Releases") {
+			setCurrentlyActive("New Releases");
+			setTracks(profileDetails.newReleases);
+			setSortingFilter("Newest First");
+		} else if (selectedCategory == "Sold Out") {
+			setCurrentlyActive("Sold Out");
+			setTracks(profileDetails.soldOut);
+			setSortingFilter("Newest First");
+		} else if (selectedCategory == "Collection") {
+			setCurrentlyActive("Collection");
+			setTracks(profileDetails.collection);
+			setSortingFilter("Newest First");
+		}
 	};
+
+	const { fetch: fetchTracksByUser } = useMoralisCloudFunction(
+		"fetchTracksByUser",
+		{
+			username: username,
+			currentlyActive: currentlyActive,
+			sortingFilter: sortingFilter,
+		},
+		{ autoFetch: false }
+	);
+
+	useEffect(() => {
+		if (sortingFilter !== "Newest First") {
+			fetchTracksByUser({
+				onSuccess: async (object) => {
+					console.log(object);
+					setTracks(object);
+				},
+				onError: (error) => {
+					console.log("fetchTracksByUser Error:", error);
+				},
+			});
+		} else {
+			if (currentlyActive == "New Releases") {
+				setTracks(profileDetails.newReleases);
+			} else if (currentlyActive == "Sold Out") {
+				setTracks(profileDetails.soldOut);
+			} else if (currentlyActive == "Collection") {
+				setTracks(profileDetails.collection);
+			}
+		}
+	}, [sortingFilter]);
 
 	return (
 		<div className={"dark:bg-dark-100 " + styles["filter-card"]}>

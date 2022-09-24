@@ -3,7 +3,7 @@ import Moralis from "moralis/node";
 import { meta_description, MORALIS_APP_ID, MORALIS_SERVER_URL } from "../../constants";
 import Marketplace from "../../components/MxCatalog/Utils/Marketplace";
 
-export async function getStaticProps(context) {
+export async function getStaticProps() {
 	await Moralis.start({ serverUrl: MORALIS_SERVER_URL, appId: MORALIS_APP_ID });
 	// Empty filters just because we need to pass appliedFilter as a param to Moralis cloud function
 	const appliedFilter = {

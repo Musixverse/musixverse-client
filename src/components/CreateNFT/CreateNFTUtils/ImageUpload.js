@@ -6,11 +6,12 @@ import uploadFileToIPFS from "../../../utils/image-crop/uploadFileToIPFS";
 import uploadImage from "../../../../public/assets/create-nft/upload-image.svg";
 import CropImageModal from "./CropImageModal";
 import LoadingContext from "../../../../store/loading-context";
+import StatusContext from "../../../../store/status-context";
 
 export default function ImageUpload({ coverArtUrl, setCoverArtUrl, setCoverArtMimeType }) {
 	const { Moralis } = useMoralis();
 	const [isLoading, setLoading] = useContext(LoadingContext);
-
+	const [, , , setError] = useContext(StatusContext);
 	const [showModal, setShowModal] = useState(false);
 	const [imageToCrop, setImageToCrop] = useState(undefined);
 	const [croppedImage, setCroppedImage] = useState(undefined);
@@ -32,9 +33,19 @@ export default function ImageUpload({ coverArtUrl, setCoverArtUrl, setCoverArtMi
 			}
 		}
 		setCoverArt();
-	}, [croppedImage, setCoverArtUrl]);
+	}, [croppedImage, setCoverArtUrl, Moralis, setLoading]);
 
 	const handleImageUpload = (event) => {
+		//If file size is > 10MB show error box
+		if(event.target.files[0].size > 10000000){
+			setError({
+				title:"File size too large",
+				message: "Uploaded image should be less than 10MB",
+				showErrorBox: true,
+			})
+			nftCoverArt.current.value = "";
+			return;
+		}
 		// uploadFileToIPFS(Moralis, event.target.files[0]).then((url) => setCoverArtUrl(url));
 		const imageURL = URL.createObjectURL(event.target.files[0]);
 		setCoverArtMimeType(event.target.files[0].type);
@@ -67,7 +78,7 @@ export default function ImageUpload({ coverArtUrl, setCoverArtUrl, setCoverArtMi
 						<p className="text-sm text-primary-200">Image Uploaded</p>
 					) : (
 						<p className="text-xs">
-							Any Image file | Max file size: 1GB <br /> Recommended size: 640 x 640 px.
+							Any Image file | Max file size: 10MB <br /> Recommended size: 640 x 640 px.
 						</p>
 					)}
 				</div>

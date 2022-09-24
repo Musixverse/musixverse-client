@@ -12,9 +12,9 @@ import amazonW from "../../../public/assets/logos/amazon_logo_w.svg";
 import youtubeB from "../../../public/assets/logos/youtube_logo_b.svg";
 import youtubeW from "../../../public/assets/logos/youtube_logo_w.svg";
 
-export default function TrackDetails({ tokenId, metadata }) {
+export default function TrackDetails({ tokenId, metadata, collaboratorUsers }) {
 	const { theme } = useTheme();
-	var date = new Date(metadata.unlockTimestamp * 1000);
+	var date = new Date(parseInt(metadata.unlockTimestamp) * 1000);
 	var dateStr =
 		date.toLocaleString("default", {
 			month: "long",
@@ -26,13 +26,13 @@ export default function TrackDetails({ tokenId, metadata }) {
 		", " +
 		date.toLocaleTimeString() +
 		" IST";
-	var time_in_min = Math.round(metadata.duration / 60).toString() + " min";
-	var time_in_sec = Math.round(metadata.duration % 60).toString() + " sec";
+	var time_in_min = Math.round(parseFloat(metadata.duration) / 60).toString() + " min";
+	var time_in_sec = Math.round(parseFloat(metadata.duration) % 60).toString() + " sec";
 	var time = time_in_min + " " + time_in_sec;
 
 	return (
 		<div className={"dark:bg-dark-100 dark:border-dark-100 " + styles["track-detail__container"]}>
-			<TrackDetail description={metadata.description} collaborators={metadata.collaborators} />
+			<TrackDetail description={metadata.description} collaborators={metadata.collaborators} collaboratorUsers={collaboratorUsers} />
 
 			{/* OTHER DETAILS */}
 			<div className={styles["track-info__other-details"]}>
@@ -42,20 +42,20 @@ export default function TrackDetails({ tokenId, metadata }) {
 
 				<div className={styles["other-details__section2"]}>
 					<div className="text-left">
-						<h4 className="font-bold font-secondary text-base">{metadata.attributes[2].trait_type}</h4>
-						<p>{metadata.attributes[2].value}</p>
+						<h4 className="font-bold font-secondary text-base">Track Origin (Version)</h4>
+						<p>{metadata.trackOrigin}</p>
 					</div>
 					<div className="text-left">
-						<h4 className="font-bold font-secondary text-base">{metadata.attributes[3].trait_type}</h4>
-						<p>{metadata.attributes[3].value}</p>
+						<h4 className="font-bold font-secondary text-base">Genre</h4>
+						<p>{metadata.genre}</p>
 					</div>
 					<div className="text-left">
-						<h4 className="font-bold font-secondary text-base">{metadata.attributes[4].trait_type}</h4>
-						<p>{metadata.attributes[4].value}</p>
+						<h4 className="font-bold font-secondary text-base">Recording Year</h4>
+						<p>{metadata.recordingYear}</p>
 					</div>
 					<div className="text-left">
-						<h4 className="font-bold font-secondary text-base">{metadata.attributes[5].trait_type}</h4>
-						<p>{metadata.attributes[5].value}</p>
+						<h4 className="font-bold font-secondary text-base">Parental Advisory</h4>
+						<p>{metadata.parentalAdvisory}</p>
 					</div>
 				</div>
 
@@ -86,16 +86,16 @@ export default function TrackDetails({ tokenId, metadata }) {
 				{/* Section 2 */}
 				<div className={styles["other-details__section2"]}>
 					<div className="text-left">
-						<h4 className="font-bold font-secondary text-base">{metadata.attributes[6].trait_type}</h4>
-						<p>{metadata.attributes[6].value}</p>
+						<h4 className="font-bold font-secondary text-base">Vocals</h4>
+						<p>{metadata.vocals}</p>
 					</div>
 					<div className="text-left">
-						<h4 className="font-bold font-secondary text-base">{metadata.attributes[7].trait_type}</h4>
-						<p>{metadata.attributes[7].value}</p>
+						<h4 className="font-bold font-secondary text-base">Has Collaborators</h4>
+						<p>{metadata.hasCollaborators}</p>
 					</div>
 					<div className="text-left">
-						<h4 className="font-bold font-secondary text-base">{metadata.attributes[0].trait_type}</h4>
-						<p>{metadata.attributes[0].value}</p>
+						<h4 className="font-bold font-secondary text-base">Number of Copies</h4>
+						<p>{metadata.numberOfCopies}</p>
 					</div>
 					<div className="text-left">
 						<h4 className="font-bold font-secondary text-base">Unique Token ID</h4>
@@ -112,7 +112,7 @@ export default function TrackDetails({ tokenId, metadata }) {
 					</div>
 					<div className="text-left">
 						<h4 className="font-bold font-secondary text-base">Blockchain</h4>
-						<p>Polygon</p>
+						<p>{parseInt(metadata.chainDetails.chainId) === 80001 ? "Polygon" : ""}</p>
 					</div>
 
 					<div className="text-left col-span-2">

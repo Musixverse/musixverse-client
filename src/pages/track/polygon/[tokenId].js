@@ -1,9 +1,6 @@
-import { useState, useEffect, useContext } from "react";
 import Head from "next/head";
-import { useRouter } from "next/router";
 import Moralis from "moralis/node";
 import { meta_description } from "../../../constants";
-import { useMoralis, useMoralisCloudFunction } from "react-moralis";
 import TrackHeader from "../../../components/TrackInfo/TrackHeader";
 import TrackDetails from "../../../components/TrackInfo/TrackDetails";
 import PurchaseInfo from "../../../components/TrackInfo/PurchaseInfo";
@@ -16,35 +13,42 @@ export async function getStaticProps(context) {
 	await Moralis.start({ serverUrl: MORALIS_SERVER_URL, appId: MORALIS_APP_ID });
 
 	try {
-		const options = {
-			chain: process.env.NEXT_PUBLIC_BLOCKCHAIN_NETWORK,
-			address: process.env.NEXT_PUBLIC_MXV_DIAMOND_ADDRESS,
-			token_id: tokenId,
-		};
-		const token = await Moralis.Web3API.token.getTokenIdMetadata(options);
+		// Fetch token details
+		const tokenDetails = await Moralis.Cloud.run("fetchTokenDetails", { tokenId: tokenId });
 
-		if (token.metadata == null) {
-			fetch(token.token_uri)
-				.then((response) => {
-					return response.json();
-				})
-				.then((data) => {
-					token.metadata = data;
-					console.log("data", data);
-				});
-		}
+		const metadata = JSON.parse(JSON.stringify(tokenDetails.metadata));
+		const otherTokensOfTrack = tokenDetails.otherTokensOfTrack;
+		const onSale = tokenDetails.onSale;
+		const price = Moralis.Units.FromWei(tokenDetails.price);
+		const currentOwner = tokenDetails.currentOwner;
+		const artist = tokenDetails.artist;
+		const localTokenId = tokenDetails.localTokenId;
+		const artworkArtistInfo = tokenDetails.artworkArtistInfo;
+		const _collaboratorUsers = tokenDetails.collaboratorUsers;
+		const activity = JSON.parse(JSON.stringify(tokenDetails.activity));
 
-		// Fetch similar tokens
-		let otherTokensOfTrack = [];
-		await Moralis.Cloud.run("fetchOtherTokensOfTrack", { tokenId: tokenId }).then((result) => {
-			otherTokensOfTrack = JSON.parse(JSON.stringify(result));
+		let collaboratorUsers = [];
+		metadata.collaborators.map((collaborator) => {
+			_collaboratorUsers.map((collaboratorUser) => {
+				collaborator.address === collaboratorUser.ethAddress && collaboratorUsers.push(collaboratorUser);
+			});
 		});
-
-		const onSale = await Moralis.Cloud.run("fetchOnSaleState", { tokenId: tokenId });
 
 		// Passing data to the Page using props
 		return {
-			props: { token, otherTokensOfTrack, onSale },
+			props: {
+				tokenId,
+				localTokenId,
+				metadata,
+				otherTokensOfTrack,
+				price,
+				onSale,
+				currentOwner,
+				artist,
+				artworkArtistInfo,
+				collaboratorUsers,
+				activity,
+			},
 			revalidate: 1,
 		};
 	} catch (error) {
@@ -59,35 +63,19 @@ export function getStaticPaths() {
 	};
 }
 
-export default function TrackInfo({ token, otherTokensOfTrack, onSale }) {
-	const router = useRouter();
-	const { tokenId } = router.query;
-
-	let metadata = "";
-	if (typeof token.metadata === "string") {
-		metadata = JSON.parse(token.metadata);
-	} else {
-		metadata = token.metadata;
-	}
-
-	const { Moralis } = useMoralis();
-	const { data: tokenPrice } = useMoralisCloudFunction("fetchTokenPrice", { tokenId: tokenId });
-	const { data: currentOwnerAddress } = useMoralisCloudFunction("fetchTokenOwner", {
-		chain: process.env.NEXT_PUBLIC_BLOCKCHAIN_NETWORK,
-		address: process.env.NEXT_PUBLIC_MXV_DIAMOND_ADDRESS,
-		tokenId: tokenId,
-	});
-
-	const [price, setPrice] = useState("");
-	useEffect(() => {
-		async function setPrices() {
-			if (tokenPrice) {
-				setPrice(Moralis.Units.FromWei(tokenPrice));
-			}
-		}
-		setPrices();
-	}, [tokenPrice]);
-
+export default function TrackInfo({
+	tokenId,
+	localTokenId,
+	metadata,
+	otherTokensOfTrack,
+	price,
+	onSale,
+	currentOwner,
+	artist,
+	artworkArtistInfo,
+	collaboratorUsers,
+	activity,
+}) {
 	return (
 		<>
 			<Head>
@@ -98,26 +86,41 @@ export default function TrackInfo({ token, otherTokensOfTrack, onSale }) {
 			<div className="flex flex-col items-center justify-center w-full bg-light-100 dark:bg-dark-200 pt-28 pb-20">
 				<div className="w-full max-w-[1920px] px-10 sm:px-16 xl:px-20 2xl:px-36">
 					<TrackHeader
+						tokenId={tokenId}
+						localTokenId={localTokenId}
 						image={metadata.artwork.uri.replace("ipfs://", process.env.NEXT_PUBLIC_IPFS_NODE_URL)}
 						artworkInfo={metadata.artwork}
-						artistAddress={metadata.artistAddress}
+						artworkArtistInfo={artworkArtistInfo}
+						artist={artist}
 						title={metadata.title}
 						audio_url={metadata.audio.replace("ipfs://", process.env.NEXT_PUBLIC_IPFS_NODE_URL)}
 						tags={metadata.tags}
-						tokenId={tokenId}
-						unlockTimestamp={metadata.unlockTimestamp}
+						unlockTimestamp={parseInt(metadata.unlockTimestamp)}
 						price={price}
-						currentOwnerAddress={currentOwnerAddress}
-						numberOfCopies={metadata.attributes[0].value}
+						currentOwnerAddress={currentOwner.ethAddress}
+						numberOfCopies={metadata.numberOfCopies}
 						otherTokensOfTrack={otherTokensOfTrack}
 						onSale={onSale}
 					/>
-					<TrackDetails tokenId={tokenId} metadata={metadata} />
+					<TrackDetails tokenId={tokenId} metadata={metadata} collaboratorUsers={collaboratorUsers} />
 					<div className="grid grid-cols-1 md:grid-cols-9 xl:grid-cols-5 gap-y-4 md:gap-6 mt-10">
-						<PurchaseInfo tokenId={tokenId} metadata={metadata} currentOwnerAddress={currentOwnerAddress} price={price} onSale={onSale} />
-						<Activity tokenId={tokenId} artistAddress={metadata.artistAddress} />
+						<PurchaseInfo
+							tokenId={tokenId}
+							resaleRoyaltyPercentage={metadata.resaleRoyaltyPercent}
+							currentOwner={currentOwner}
+							price={price}
+							onSale={onSale}
+						/>
+						<Activity tokenId={tokenId} artist={artist} activity={activity} />
 					</div>
-					{otherTokensOfTrack.length > 0 ? <SimilarTokens otherTokensOfTrack={otherTokensOfTrack} metadata={metadata} /> : null}
+					{otherTokensOfTrack.length > 0 ? (
+						<SimilarTokens
+							otherTokensOfTrack={otherTokensOfTrack}
+							metadata={metadata}
+							isArtistVerified={artist.isArtistVerified}
+							collaboratorUsers={collaboratorUsers}
+						/>
+					) : null}
 				</div>
 			</div>
 		</>

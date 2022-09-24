@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useContext } from "react";
 import { useMoralis, useMoralisCloudFunction } from "react-moralis";
 import { useRouter } from "next/router";
 import CustomButton from "../../../layout/CustomButton";
@@ -11,21 +11,7 @@ const PurchaseButton = ({ tokenId, price }) => {
 	const { user } = useMoralis();
 	const router = useRouter();
 	const { ref } = router.query;
-	const [referrerAddress, setReferrerAddress] = useState("");
 	const { fetch: fetchAddressFromUsername } = useMoralisCloudFunction("fetchAddressFromUsername", { username: ref }, { autoFetch: false });
-
-	useEffect(() => {
-		if (ref) {
-			fetchAddressFromUsername({
-				onSuccess: async (object) => {
-					setReferrerAddress(object);
-				},
-				onError: (error) => {
-					console.log("fetchAddressFromUsername Error:", error);
-				},
-			});
-		}
-	}, [ref, fetchAddressFromUsername]);
 
 	const [, setLoading] = useContext(LoadingContext);
 	const [, setAuthModalOpen] = useContext(AuthModalContext);
@@ -38,8 +24,15 @@ const PurchaseButton = ({ tokenId, price }) => {
 		} else if (user && user.attributes.emailVerified) {
 			setLoading(true);
 			try {
-				if (referrerAddress) {
-					await purchaseReferredTrackNFT(tokenId, referrerAddress, price);
+				if (ref) {
+					fetchAddressFromUsername({
+						onSuccess: async (referrerAddress) => {
+							await purchaseReferredTrackNFT(tokenId, referrerAddress, price);
+						},
+						onError: (error) => {
+							console.log("purchaseReferredTrackNFT fetchAddressFromUsername Error:", error);
+						},
+					});
 				} else {
 					await purchaseTrackNFT(tokenId, price);
 				}

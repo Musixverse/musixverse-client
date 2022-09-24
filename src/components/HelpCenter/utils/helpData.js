@@ -28,7 +28,7 @@ export const gettingStarted = [
             <>
                 <p>After you sign up to MXV as an artist, you’ll automatically get redirected to the Artist Verification page, you can verify your profile there with the help of on-screen instructions. Musixverse uses a third party verification service provided by <strong>Persona</strong> to verify government ID.
                     <br />
-                    You can also go to the <span className="font-medium hover:text-primary-100"><Link href="/profile/verify">Artist Verification</Link></span> page to verify your profile. Provide details including your <strong> real name, stage name, and government-issued ID,</strong> and then connect your <strong>Twitter</strong>  account to get verified.
+                    You can also go to the <span className="font-medium underline underline-offset-2 text-primary-100"><Link href="/profile/verify">Artist Verification</Link></span> page to verify your profile. Provide details including your <strong> real name, stage name, and government-issued ID,</strong> and then connect your <strong>Twitter</strong>  account to get verified.
                     <br />
                     Musixverse takes artist verification seriously to ensure the platform is spam and scam free.</p>
             </>
@@ -170,8 +170,8 @@ export const createNFT = [
         heading: "Who can create an NFT on Musixverse?",
         body: (
             <>
-                <p>Anyone with a verified Artist account can create an NFT on Musixverse.
-                    <Link href="/profile/verify">How do I verify my profile?</Link></p>
+                <p>Anyone with a verified Artist account can create an NFT on Musixverse. &nbsp;
+                <span className="font-medium underline underline-offset-2 text-primary-100"><Link href="/profile/verify">How do I verify my profile?</Link></span></p>
             </>
         ),
         content_id: "collapseOne",
@@ -184,7 +184,7 @@ export const createNFT = [
                     Before you create an NFT on Musixverse, you need to have the following prerequisites ready:
                     <ul className="list-disc pl-4">
                         <li>Metamask/WalletConnect Wallet</li>
-                        <li>MATIC in your wallet (to pay gas fees while minting an NFT, it’s close to negligible). You may be eligible to get free MATIC from Musixverse to cover the gas fee. Drop us an email on <strong><a className="hover:text-primary-100 hover:font-normal" href="mailto:contact@musixverse.com?subject=REQUEST MATIC FOR GAS FEE">team@musixverse.com</a></strong>.</li>
+                        <li>MATIC in your wallet (to pay gas fees while minting an NFT, it’s close to negligible). You may be eligible to get free MATIC from Musixverse to cover the gas fee. Drop us an email on <span className="font-medium underline underline-offset-2 text-primary-100"><Link href="mailto:contact@musixverse.com?subject=REQUEST MATIC FOR GAS FEE">team@musixverse.com</Link></span>.</li>
                         <li>Artist Account</li>
                         <li>Verified Profile</li>
                     </ul>

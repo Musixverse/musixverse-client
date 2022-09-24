@@ -119,20 +119,20 @@ export default function AudioPlayer({ tokenId, audio_url, artistName, title }) {
 				<div className={styles["music-bar__container"]}>
 					<div className={styles["music-bar__container--info"]}>
 						{/* Time elapsed */}
-						<p className={"mr-4 "+styles["container__info--duration"]} ref={currTime}>
+						<p className={"mr-4 " + styles["container__info--duration"]} ref={currTime}>
 							00:00
 						</p>
 						{/* MP3 Progress */}
-						{audioIsReady? 
+						{audioIsReady ? (
 							<div ref={progressContainer} className={styles["container__info--progress-container"]} onClick={setProgress}>
 								<div ref={progress} className={styles["info__progress-container--progress"]}></div>
 								<div className={styles["info__progress-container--slider-box"]}></div>
 							</div>
-							:
-							<ShinyLoader classes={"rounded-md my-[10px] h-[4px] w-10/12"}/>
-						}
+						) : (
+							<ShinyLoader classes={"rounded-md my-[10px] h-[4px] w-10/12"} />
+						)}
 						{/* Duration of track */}
-						<p className={"ml-2 "+styles["container__info--duration"]} ref={durTime}></p>
+						<p className={"ml-2 " + styles["container__info--duration"]} ref={durTime}></p>
 					</div>
 					{/* Audio elem */}
 					<audio ref={audio} src={audio_url} onTimeUpdate={updateProgress} onEnded={resetProgress}></audio>

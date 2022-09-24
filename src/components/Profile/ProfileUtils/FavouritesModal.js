@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { useRouter } from "next/router";
-import { useMoralis, useMoralisCloudFunction } from "react-moralis";
+import { useMoralis } from "react-moralis";
 import Image from "next/image";
 import Link from "next/link";
 import Modal from "../../../layout/Modal/Modal";
@@ -10,22 +10,17 @@ import LoadingContext from "../../../../store/loading-context";
 export default function FavouritesModal({ isOpen, setOpen, username, favouriteTokens, setFavouriteTokens }) {
 	const router = useRouter();
 	const [, setLoading] = useContext(LoadingContext);
-
 	const { user, Moralis } = useMoralis();
-
-	const { fetch: fetchFavouriteTokens } = useMoralisCloudFunction("fetchFavouriteTokens", { username: username }, { autoFetch: false });
 
 	const removeFromFavourites = async (tokenId) => {
 		setLoading(true);
 		await Moralis.Cloud.run("removeTokenFromFavourites", { tokenId: tokenId }).then(async () => {
-			await fetchFavouriteTokens({
-				onSuccess: (data) => {
-					setFavouriteTokens(data);
-				},
-				onError: (error) => {
-					console.log("fetchFavouriteTokens Error:", error);
-				},
-			});
+			setFavouriteTokens((favouriteTokens) =>
+				favouriteTokens.filter((token) => {
+					// 👇️ remove object that has id equal to tokenId
+					return token.tokenId !== tokenId;
+				})
+			);
 			setLoading(false);
 		});
 	};
@@ -45,6 +40,13 @@ export default function FavouritesModal({ isOpen, setOpen, username, favouriteTo
 				<div className="flex flex-col space-y-1 max-h-[400px] overflow-y-scroll px-2">
 					{favouriteTokens && favouriteTokens.length > 0 ? (
 						favouriteTokens.map((token) => {
+							let collaboratorList = [];
+							token.collaborators.map((collaborator) => {
+								token.collaboratorUsers.map((collaboratorUser) => {
+									collaborator.address === collaboratorUser.ethAddress && collaboratorList.push(collaboratorUser);
+								});
+							});
+
 							return (
 								<div key={token.tokenId} className="flex group p-2 rounded hover:bg-light-200 dark:hover:bg-dark-200">
 									<Link href={`/track/polygon/${token.tokenId}`} passHref>
@@ -52,19 +54,24 @@ export default function FavouritesModal({ isOpen, setOpen, username, favouriteTo
 											<Image
 												src={token.artwork.uri.replace("ipfs://", process.env.NEXT_PUBLIC_IPFS_NODE_URL)}
 												className="rounded"
-												height={50}
-												width={50}
+												height={60}
+												width={60}
 												alt="NFT Artwork"
 											/>
 											<div className="w-full flex justify-between">
 												<div className="flex flex-col place-content-between">
-													<p className="ml-4 text-sm font-semibold">{token.title}</p>
+													<p className="ml-4 text-sm font-semibold">
+														<span className="absolute">{token.title}</span>
+													</p>
 													<p className="ml-4 text-xs items-end">{token.artist}</p>
 												</div>
 												<div className="flex items-end">
 													<span className="hidden group-hover:block text-xs mr-4 text-primary-100">{token.genre}</span>
+													<span className="mr-4 text-xs font-light">
+														#{token.localTokenId} of {token.numberOfCopies}
+													</span>
 													<div className="flex items-end -space-x-2">
-														{token.collaborators.map((collaborator, index) => {
+														{collaboratorList.map((collaborator, index) => {
 															return <CollaboratorImage key={index} collaborator={collaborator} />;
 														})}
 													</div>
@@ -76,7 +83,7 @@ export default function FavouritesModal({ isOpen, setOpen, username, favouriteTo
 										<div className="hidden group-hover:block self-center pl-2">
 											<div
 												onClick={() => removeFromFavourites(token.tokenId)}
-												className="w-8 h-8 flex justify-center items-center rounded-lg transition-all duration-200 cursor-pointer hover:bg-zinc-500/20 "
+												className="w-8 h-8 flex justify-center items-center rounded-lg transition-all duration-200 cursor-pointer hover:bg-error-100/20"
 											>
 												<i className="fa-solid fa-xmark"></i>
 											</div>

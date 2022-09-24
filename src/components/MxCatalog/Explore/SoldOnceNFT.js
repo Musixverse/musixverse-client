@@ -7,16 +7,27 @@ const SoldOnceNFT = ({ track }) => {
 			tokenIdHavingLowestPrice: track.tokenIdHavingLowestPrice,
 		};
 
+		let collaboratorList = [];
+		track.collaborators.map((collaborator) => {
+			track.collaboratorUsers.map((collaboratorUser) => {
+				collaborator.address === collaboratorUser.ethAddress && collaboratorList.push(collaboratorUser);
+			});
+		});
+
 		return (
 			<NFTCard
 				redirectLink={`/track/polygon/${track.tokenIdHavingLowestPrice}`}
 				trackName={track.title}
+				price={track.price}
 				artistName={track.artist}
 				artistAddress={track.artistAddress}
+				isArtistVerified={track.isArtistVerified}
 				image={track.artwork.uri.replace("ipfs://", process.env.NEXT_PUBLIC_IPFS_NODE_URL)}
 				tokenId={track.tokenIdHavingLowestPrice}
+				localTokenId={track.localTokenId}
 				numberOfCopies={track.numberOfCopies}
-				collaboratorList={track.collaborators}
+				collaboratorList={collaboratorList}
+				otherTokensOfTrack={track.otherTokensOfTrack}
 				soldOnceTrackData={soldOnceTrackData}
 			/>
 		);

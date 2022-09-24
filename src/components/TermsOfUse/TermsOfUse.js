@@ -3,10 +3,10 @@ export default function TermsOfUse() {
         <div className="w-full h-screen flex justify-center pt-36">
             <div className="w-full">
                 <div>
-                    <div className="font-primary text-5xl font-semibold text-primary-100">Terms of Use</div>
+                    <div className="font-primary text-center text-5xl font-semibold text-primary-100">COMING SOON!</div>
                 </div>
 
-                <div className="mt-5">
+                {/* <div className="mt-5">
                     <div className="font-primary text-base">
                         Please note that{" "}
                         <a href={"/"} className="text-primary-100">
@@ -16,7 +16,7 @@ export default function TermsOfUse() {
                         contact one of the artists listed here, you must contact them directly through other social media platforms. We are not responsible if
                         someone else puts up an artists&apos; track as an NFT on our platform and cannot assist you regarding the same.
                     </div>
-                </div>
+                </div> */}
             </div>
         </div>
     );

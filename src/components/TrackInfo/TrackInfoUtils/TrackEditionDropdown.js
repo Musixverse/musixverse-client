@@ -13,7 +13,7 @@ export default function TrackEditionDropdown({ optionsArray, localTokenId, numbe
 
 	useEffect(() => {
 		setCurrentFilter("#" + localTokenId + " of " + numberOfCopies);
-	}, [localTokenId]);
+	}, [localTokenId, numberOfCopies]);
 
 	// Map all the options into a items renderable array
 	const dropdownOptions = optionsArray.map((option, idx) => {

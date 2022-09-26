@@ -51,19 +51,20 @@ export default function Banner() {
 			{/* Inner div for content */}
 			<div className={"text-white dark:text-white mt-52 " + styles["hero-section-container__content-div"]}>
 				<h1 className={styles["hero-section-container__content-div--heading"]}>
-					Musixverse <span className={"text-primary-100 " + styles["hero-section-container__content-div--heading"]}>Beta</span> is now live!
+					Musixverse <span className={"text-primary-100 " + styles["hero-section-container__content-div--heading"]}>Beta</span> Program is full
 				</h1>
-				<p className={styles["hero-section-container__content-div--description"]}>
-					Musixverse will bring together artists and fans like never before, help them do great things, and empower each other in the process.
-				</p>
+				<p className={styles["hero-section-container__content-div--description"]}>We thank you for the overwhelming interest and support</p>
 				<a
-					className="px-5 py-3 text-xs text-center text-white bg-primary-200 hover:bg-primary-300 font-primary rounded-3xl"
+					className="mt-4 px-5 py-3 text-xs text-center text-white bg-primary-200 hover:bg-primary-300 font-primary rounded-3xl"
 					href="https://cfbmusixverse.paperform.co/"
 					target={"_blank"}
 					rel="noopener noreferrer"
 				>
-					Join the Insider Community to get beta access
+					Join our waitlist to get priority access
 				</a>
+				{/* <p className="max-w-xl mt-20 text-center text-[13px] md:text-[15px] font-secondary">
+					Musixverse will bring together artists and fans like never before, help them do great things, and empower each other in the process.
+				</p> */}
 			</div>
 			<StayInLoop />
 			{/* </div> */}

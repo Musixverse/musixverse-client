@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useTheme } from "next-themes";
 import styles from "../../../styles/Help/Help.module.css";
+import ReadSection from "./utils/ReadSection";
 import { DISCORD_SUPPORT_CHANNEL_INVITE_LINK } from "../../constants";
 import getting_started_b from "../../../public/assets/help-center/getting-started_b.png";
 import getting_started_w from "../../../public/assets/help-center/getting-started_w.png";
@@ -21,6 +22,7 @@ export default function Help() {
 		<Fragment>
 			<div className={styles["help_us_container"]}>
 				<div className={styles["help_us"]}>
+					{/* Help center Cards */}
 					<div className="grid grid-rows-3 grid-cols-2 sm:grid-rows-2 sm:grid-cols-3 justify-center gap-8">
 						<Link href="/help-center/getting-started" passHref={true}>
 							<div className="col-span-2 sm:col-span-1 sm:row-span-2 flex flex-col justify-center items-center p-6 rounded-lg border-2 dark:border-zinc-700 cursor-pointer shadow hover:shadow-xl duration-300  hover:ring-offset-primary-300">
@@ -64,6 +66,12 @@ export default function Help() {
 						</Link>
 					</div>
 
+					{/* Recommended Reads Section */}
+					<div className="mt-24">
+						<ReadSection />
+					</div>
+
+					{/* Discord Link Section */}	
 					<div className={styles["email_us"]}>
 						<div>
 							Didn&apos;t get your answer here? Please head over to the support channel on discord and ask your question there.

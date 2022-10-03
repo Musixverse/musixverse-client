@@ -11,5 +11,5 @@
 }
 
 .email_us {
-	@apply font-primary mt-32 dark:text-[#afafaf];
+	@apply font-primary mt-24 dark:text-[#afafaf];
 }

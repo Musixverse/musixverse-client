@@ -37,6 +37,7 @@ const CreateNFTIntro = ({ nextStep }) => {
 		deleteNftDraft({
 			onSuccess: async (object) => {
 				setDeleteModalOpen(false);
+				setLoading(false);
 				router.reload(window.location.pathname);
 			},
 			onError: (error) => {

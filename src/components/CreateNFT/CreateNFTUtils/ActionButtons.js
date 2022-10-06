@@ -21,7 +21,7 @@ const ActionButtons = ({ step, prevStep, setSaveDraftSuccess, nftDraftMetadata }
 			},
 			onError: (error) => {
 				setLoading(false);
-				console.log("fetchMatchingUsers Error:", error);
+				console.log("saveNftDraft Error:", error);
 			},
 		});
 	};

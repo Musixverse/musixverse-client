@@ -126,6 +126,7 @@ export default function TrackDetails({
 						email: value,
 					}))
 				}
+				nftDraftMetadata={nftDraftMetadata}
 			/>
 		</>
 	);

@@ -51,11 +51,11 @@ const Step3Form = ({
 	const [maticUSD, setMaticUSD] = useState("");
 	const [maticINR, setMaticINR] = useState("");
 
-	const [currentMaticUSD,setCurrentMaticUSD] = useState("");
-	const [currentMaticINR,setCurrentMaticINR] = useState("");
+	const [currentMaticUSD, setCurrentMaticUSD] = useState("");
+	const [currentMaticINR, setCurrentMaticINR] = useState("");
 
 	useEffect(() => {
-		async function setCurrentPrices(){
+		async function setCurrentPrices() {
 			setCurrentMaticUSD(await convertMaticToUSD(1));
 			setCurrentMaticINR(await convertMaticToINR(1));
 		}
@@ -125,8 +125,8 @@ const Step3Form = ({
 		setSearchedUsername(keyword);
 	};
 
-	const { fetch: fetchMatchingUsers } = useMoralisCloudFunction(
-		"fetchMatchingUsers",
+	const { fetch: fetchMatchingVerifiedArtists } = useMoralisCloudFunction(
+		"fetchMatchingVerifiedArtists",
 		{ username: searchedUsername },
 		{
 			autoFetch: false,
@@ -134,7 +134,7 @@ const Step3Form = ({
 	);
 	useEffect(() => {
 		if (searchedUsername !== "") {
-			fetchMatchingUsers({
+			fetchMatchingVerifiedArtists({
 				onSuccess: async (object) => {
 					setFilteredUsers(
 						await object.filter(function (userObj) {
@@ -145,7 +145,7 @@ const Step3Form = ({
 					);
 				},
 				onError: (error) => {
-					console.log("fetchMatchingUsers Error:", error);
+					console.log("fetchMatchingVerifiedArtists Error:", error);
 				},
 			});
 		}
@@ -164,7 +164,9 @@ const Step3Form = ({
 								<RequiredAsterisk />
 								<Tooltip
 									labelText={<i className="pl-4 fa-solid fa-circle-info"></i>}
-									message={"You can create several NFT copies of the same song. Each copy would be unique and will be traded separately. Musixverse recommends keeping the number of copies low to maintain exclusivity."}
+									message={
+										"You can create several NFT copies of the same song. Each copy would be unique and will be traded separately. Musixverse recommends keeping the number of copies low to maintain exclusivity."
+									}
 									tooltipLocation={"bottom"}
 								/>
 							</label>
@@ -226,7 +228,7 @@ const Step3Form = ({
 						<div className="flex flex-col gap-4 text-gray-700">
 							{collaboratorList.map((collaborator, index) => {
 								return (
-									<div key={index} className="flex gap-4">
+									<div key={index} className="flex gap-2">
 										{index == 0 ? (
 											<div className="relative basis-1/2">
 												{collaborator.avatar && (
@@ -439,7 +441,6 @@ const Step3Form = ({
 
 										<div className="basis-2/5">
 											<CollaboratorRoleDropdown
-												// TODO: Need to change the optionsArray by Final data @Pushpit07
 												optionsArray={rolesArray}
 												setCollaboratorRole={setCollaboratorRole}
 												index={index}
@@ -447,12 +448,21 @@ const Step3Form = ({
 											/>
 										</div>
 										{/* Button to remove more collaborators */}
-										{collaboratorList.length !== 1 && (
-											<div className="flex">
-												<button type="button" className="text-gray-400 hover:text-gray-600" onClick={() => handleRemoveClick(index)}>
-													x
-												</button>
+										{index !== 0 ? (
+											<div className="flex justify-center items-center">
+												<div
+													onClick={() => handleRemoveClick(index)}
+													className="w-8 h-8 flex justify-center items-center rounded-lg transition-all duration-200 cursor-pointer dark:text-light-100 hover:bg-zinc-500/20"
+												>
+													<i className="fa-solid fa-xmark"></i>
+												</div>
 											</div>
+										) : (
+											collaboratorList.length !== 1 && (
+												<div className="flex justify-center items-center">
+													<div className="w-8 h-8 flex justify-center items-center"></div>
+												</div>
+											)
 										)}
 									</div>
 								);
@@ -460,7 +470,7 @@ const Step3Form = ({
 						</div>
 
 						{/* Button to add more collaborators */}
-						{collaboratorList.length < 5 && (
+						{collaboratorList.length < 10 && (
 							<div className="flex items-center justify-start mt-4">
 								<button
 									type="button"
@@ -505,7 +515,9 @@ const Step3Form = ({
 							<RequiredAsterisk />
 							<Tooltip
 								labelText={<i className="pl-4 fa-solid fa-circle-info"></i>}
-								message={"Resale royalty entitles artists to a share of the sale price when their NFT is resold. We recommend keeping the resale royalty percentage between 1% to 10%."}
+								message={
+									"Resale royalty entitles artists to a share of the sale price when their NFT is resold. We recommend keeping the resale royalty percentage between 1% to 10%."
+								}
 								tooltipLocation={"bottom"}
 							/>
 						</label>

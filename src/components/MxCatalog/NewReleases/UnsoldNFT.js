@@ -29,7 +29,7 @@ const UnsoldNFT = ({ track }) => {
 				otherTokensOfTrack={track.otherTokensOfTrack}
 				unsoldTrackData={unsoldTrackData}
 				trackAudio={track.audio.replace("ipfs://", process.env.NEXT_PUBLIC_IPFS_NODE_URL)}
-				trackId={track.objectId}
+				trackId={track.trackId}
 			/>
 		);
 	} else return <NFTCard />;

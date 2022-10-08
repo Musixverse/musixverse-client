@@ -135,7 +135,7 @@ export default function NFTCard({
 						onClick={playTrackHandler}
 						className="h-[40px] w-[40px] absolute bottom-4 right-4 bg-primary-300 hover:bg-primary-100 rounded-full flex items-center justify-center"
 					>
-						<i className={"text-lg text-dark-100 fas " + ((audioPlayerProps.isPlaying && trackId === audioPlayerTrackId)? "fa-pause":"fa-play")}></i>
+						<i className={"text-lg text-light-200 fas " + ((audioPlayerProps.isPlaying && trackId === audioPlayerTrackId)? "fa-pause":"fa-play")}></i>
 					</button>
 				</div>
 

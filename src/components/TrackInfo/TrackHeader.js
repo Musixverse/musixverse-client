@@ -80,7 +80,7 @@ export default function TrackHeader({
 				<div className={styles["track-header__container--track-detail"]}>
 					<div className="font-bold pt-8 sm:pt-0 pb-2 items-center flex">
 						{artist ? (
-							<Link href={`/profile/${artist.username}`} className="cursor-pointer">
+							<Link href={artist.isBand ? `/profile/band/${artist.username}` : `/profile/${artist.username}`} className="cursor-pointer">
 								<a target="_blank" rel="noopener noreferrer">
 									{artist.name}
 								</a>

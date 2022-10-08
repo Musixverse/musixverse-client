@@ -28,7 +28,10 @@ export default function PurchaseInfo({ tokenId, resaleRoyaltyPercentage, current
 				<p className={styles["purchase-info__heading--p"]}>Current Owner</p>
 				<div className="flex items-center">
 					{currentOwner ? (
-						<Link href={`/profile/${currentOwner.username}`} className="cursor-pointer">
+						<Link
+							href={currentOwner.isBand ? `/profile/band/${currentOwner.username}` : `/profile/${currentOwner.username}`}
+							className="cursor-pointer"
+						>
 							<a target="_blank" rel="noopener noreferrer" className="flex items-center space-x-1">
 								<div className="rounded-full flex relative">
 									<Image priority src={currentOwner.avatar} height="20" width="20" alt="current owner avatar" className="rounded-full" />

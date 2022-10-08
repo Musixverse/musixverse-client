@@ -31,14 +31,14 @@ export default function NFTCard({
 	showNumberOfCopies = true,
 	trackAudio,
 	trackId,
-  favouriteOfBandMember,
+	favouriteOfBandMember,
 	tokenInCollectionOwnedByBandMember,
 }) {
 	const [showNftCopiesModal, setShowNftCopiesModal] = useState(false);
-	const [audioPlayerProps, setAudioPlayerProps] =  useContext(AudioPlayerContext);
+	const [audioPlayerProps, setAudioPlayerProps] = useContext(AudioPlayerContext);
 	const { theme } = useTheme();
-	
-	const audioPlayerTrackId = audioPlayerProps.currentlyPlayingIdx === -1? undefined : audioPlayerProps.queue[audioPlayerProps.currentlyPlayingIdx].trackId;
+
+	const audioPlayerTrackId = audioPlayerProps.currentlyPlayingIdx === -1 ? undefined : audioPlayerProps.queue[audioPlayerProps.currentlyPlayingIdx].trackId;
 
 	const truncatedArtistName = useMemo(() => {
 		let returnedString = artistName;
@@ -67,17 +67,17 @@ export default function NFTCard({
 	const playTrackHandler = () => {
 		//If same song is played again then dont add again
 		//Instead need a logic to pause it in the audioplayer...
-		if(audioPlayerTrackId && trackId === audioPlayerTrackId){
-			setAudioPlayerProps((prevProps)=>{
+		if (audioPlayerTrackId && trackId === audioPlayerTrackId) {
+			setAudioPlayerProps((prevProps) => {
 				return {
 					...prevProps,
 					isPlaying: !prevProps.isPlaying,
 				};
-			})
+			});
 			return;
 		}
-		setAudioPlayerProps((prevProps)=>{
-			const newQueue = [...(prevProps.queue)];
+		setAudioPlayerProps((prevProps) => {
+			const newQueue = [...prevProps.queue];
 			newQueue.unshift({
 				tokenId: tokenId,
 				audioURL: trackAudio,
@@ -96,8 +96,8 @@ export default function NFTCard({
 				currentProgress: "00:00",
 				playerIsLoaded: false,
 			};
-		})
-	}
+		});
+	};
 
 	return (
 		<>
@@ -117,7 +117,7 @@ export default function NFTCard({
 										className={"group-hover:scale-110 group-hover:duration-500 duration-500 " + styles["nft-image"]}
 									/>
 									{favouriteOfBandMember && (
-										<div className="group-hover:bg-dark-100/80 duration-500 text-light-100 w-full h-full opacity-0 group-hover:opacity-100 flex items-center justify-center absolute">
+										<div className="group-hover:bg-dark-100/10 backdrop-blur duration-500 text-light-100 w-full h-full opacity-0 group-hover:opacity-100 flex items-center justify-center absolute">
 											<div className="relative flex flex-col items-center justify-center">
 												<i className="fa-solid fa-heart text-5xl"></i>
 												<p className="mt-2">{favouriteOfBandMember}</p>
@@ -125,7 +125,7 @@ export default function NFTCard({
 										</div>
 									)}
 									{tokenInCollectionOwnedByBandMember && (
-										<div className="group-hover:bg-dark-100/80 duration-500 text-light-100 w-full h-full opacity-0 group-hover:opacity-100 flex items-center justify-center absolute">
+										<div className="group-hover:bg-dark-100/10 backdrop-blur duration-500 text-light-100 w-full h-full opacity-0 group-hover:opacity-100 flex items-center justify-center absolute">
 											<div className="relative flex flex-col items-center justify-center">
 												<i className="fa-solid fa-record-vinyl text-5xl"></i>
 												<p className="mt-2">{tokenInCollectionOwnedByBandMember}</p>
@@ -153,7 +153,9 @@ export default function NFTCard({
 						onClick={playTrackHandler}
 						className="h-[40px] w-[40px] absolute bottom-4 right-4 bg-primary-300 hover:bg-primary-100 rounded-full flex items-center justify-center"
 					>
-						<i className={"text-lg text-light-200 fas " + ((audioPlayerProps.isPlaying && trackId === audioPlayerTrackId)? "fa-pause":"fa-play")}></i>
+						<i
+							className={"text-lg text-light-200 fas " + (audioPlayerProps.isPlaying && trackId === audioPlayerTrackId ? "fa-pause" : "fa-play")}
+						></i>
 					</button>
 				</div>
 

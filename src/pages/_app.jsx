@@ -14,7 +14,7 @@ import ScrollToPageTop from "../utils/ScrollToPageTop";
 import { connectSmartContract } from "../utils/smart-contract/functions";
 import "react-datepicker/dist/react-datepicker.css";
 import { MORALIS_APP_ID, MORALIS_SERVER_URL } from "../constants";
-import AudioPlayerContext from "../../store/audioPlayer-context";
+import AudioPlayerContext from "../../store/audioplayer-context";
 
 function App({ Component, pageProps, router }) {
 	useEffect(() => {

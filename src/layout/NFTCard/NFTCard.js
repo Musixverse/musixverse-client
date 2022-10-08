@@ -9,7 +9,7 @@ import dynamic from "next/dynamic";
 const NftCopiesModal = dynamic(() => import("./NftCopiesModal"));
 import Section1 from "./Section1";
 import Section2 from "./Section2";
-import AudioPlayerContext from "../../../store/audioPlayer-context";
+import AudioPlayerContext from "../../../store/audioplayer-context";
 
 export default function NFTCard({
 	redirectLink,

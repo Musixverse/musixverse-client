@@ -9,7 +9,7 @@
 import MarqueeText from "../../utils/MarqueeText";
 import Image from "next/image";
 import { useCallback, useContext, useEffect, useRef } from "react";
-import AudioPlayerContext from "../../../store/audioPlayer-context";
+import AudioPlayerContext from "../../../store/audioplayer-context";
 import { useMoralis } from "react-moralis";
 import ShinyLoader from "../ShinyLoader";
 

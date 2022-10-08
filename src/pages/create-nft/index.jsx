@@ -64,6 +64,11 @@ const CreateNFT = () => {
 	const [createNFTSuccess, setCreateNFTSuccess] = useState(false);
 	// Draft saved modal state
 	const [saveDraftSuccess, setSaveDraftSuccess] = useState(false);
+	// Personal Profile Collaborator Data
+	const [personalProfileCollaborator, setPersonalProfileCollaborator] = useState([]);
+	// Verified Bands Of artist
+	const [verifiedBandsOfArtist, setVerifiedBandsOfArtist] = useState([]);
+	const [chosenProfileOrBand, setChosenProfileOrBand] = useState({ objectId: "profile" });
 
 	// Continue to next step
 	const nextStep = () => {
@@ -121,6 +126,7 @@ const CreateNFT = () => {
 							_collaborator.username = _collaboratorData.username;
 							_collaborator.avatar = _collaboratorData.avatar;
 						}
+						setChosenProfileOrBand(_draft.attributes.chosenProfileOrBand);
 						setCollaboratorList(_draft.attributes.collaboratorList);
 						setResaleRoyaltyPercent(_draft.attributes.resaleRoyaltyPercent);
 						setReleaseNow(_draft.attributes.releaseNow);
@@ -142,6 +148,9 @@ const CreateNFT = () => {
 
 	// Adding logged in user as default to the collaboratorList
 	const { data: userInfo } = useMoralisQuery("UserInfo", (query) => query.equalTo("user", user), [user]);
+	const { fetch: fetchVerifiedBandsOfArtist } = useMoralisCloudFunction("fetchVerifiedBandsOfArtist", {
+		autoFetch: false,
+	});
 	useEffect(() => {
 		if (user && userInfo[0]) {
 			// setTrackTitle("Rap God");
@@ -167,6 +176,17 @@ const CreateNFT = () => {
 			// 		setNumberOfCopies(4);
 			// 		setNftPrice(12.4);
 			// 		setResaleRoyaltyPercent(5);
+			setPersonalProfileCollaborator([
+				{
+					id: user.id,
+					name: user.attributes.name,
+					username: user.attributes.username,
+					split: 100,
+					role: "Singer",
+					address: user.attributes.ethAddress,
+					avatar: userInfo[0].attributes.avatar,
+				},
+			]);
 			setCollaboratorList([
 				{
 					id: user.id,
@@ -178,6 +198,15 @@ const CreateNFT = () => {
 					avatar: userInfo[0].attributes.avatar,
 				},
 			]);
+
+			fetchVerifiedBandsOfArtist({
+				onSuccess: async (object) => {
+					setVerifiedBandsOfArtist(object);
+				},
+				onError: (error) => {
+					console.log("fetchVerifiedBandsOfArtist Error:", error);
+				},
+			});
 		}
 	}, [user, userInfo]);
 
@@ -241,11 +270,21 @@ const CreateNFT = () => {
 
 		const _unlockTimestamp = Math.round(unlockTimestamp / 1000);
 
+		// Personal profile or band profile
+		let _chosenProfileOrBandElem = "";
+		const profileOrBandChoices = document.getElementsByName("profileChooser");
+		for (let i = 0; i < profileOrBandChoices.length; i++) {
+			if (profileOrBandChoices[i].checked) {
+				_chosenProfileOrBandElem = profileOrBandChoices[i];
+			}
+		}
+
 		const nftMetadata = {
 			version: "1.0",
 			title: trackTitle,
-			artist: user.attributes.name,
+			artist: _chosenProfileOrBandElem.id === "profile" ? user.attributes.name : _chosenProfileOrBandElem.getAttribute("data-band-name"),
 			artistAddress: user.attributes.ethAddress,
+			bandId: _chosenProfileOrBandElem.id === "profile" ? null : _chosenProfileOrBandElem.getAttribute("data-band-id"),
 			description: trackBackground,
 			audio: "ipfs://" + audioFileUrl.replace("https://ipfs.moralis.io:2053/ipfs/", ""),
 			duration: audioFileDuration,
@@ -380,12 +419,13 @@ const CreateNFT = () => {
 		links: links,
 		numberOfCopies: numberOfCopies,
 		nftPrice: nftPrice,
+		chosenProfileOrBand: chosenProfileOrBand,
 		collaboratorList: collaboratorList,
 		resaleRoyaltyPercent: resaleRoyaltyPercent,
 		releaseNow: releaseNow,
 		unlockTimestamp: unlockTimestamp,
 	};
-	const step0Values = { nextStep, nftDraftMetadata };
+	const step0Values = { nextStep, chosenProfileOrBand };
 	const step1Values = {
 		step,
 		prevStep,
@@ -415,6 +455,7 @@ const CreateNFT = () => {
 		collaboratorList,
 		setSaveDraftSuccess,
 		nftDraftMetadata,
+		chosenProfileOrBand,
 	};
 	const step2Values = {
 		step,
@@ -452,6 +493,7 @@ const CreateNFT = () => {
 		location,
 		setSaveDraftSuccess,
 		nftDraftMetadata,
+		chosenProfileOrBand,
 	};
 	const step3Values = {
 		step,
@@ -474,6 +516,10 @@ const CreateNFT = () => {
 		nftCreateFormOnSubmit,
 		setSaveDraftSuccess,
 		nftDraftMetadata,
+		verifiedBandsOfArtist,
+		personalProfileCollaborator,
+		chosenProfileOrBand,
+		setChosenProfileOrBand,
 	};
 
 	switch (step) {

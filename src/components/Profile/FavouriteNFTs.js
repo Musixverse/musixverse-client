@@ -3,7 +3,7 @@ import NFTCard from "../../layout/NFTCard/NFTCard";
 import NFTCardsWithPager from "../../layout/NFTCardsWithPager/NFTCardsWithPager";
 import NoNfts from "./NoNfts";
 
-export default function FavouriteNFTs({ username, favouriteTokens }) {
+export default function FavouriteNFTs({ username, favouriteTokens, isBand }) {
 	const [nftCards, setNftCards] = useState([]);
 
 	useEffect(() => {
@@ -34,6 +34,7 @@ export default function FavouriteNFTs({ username, favouriteTokens }) {
 						numberOfCopies={token.numberOfCopies}
 						collaboratorList={collaboratorList}
 						otherTokensOfTrack={token.otherTokensOfTrack}
+						favouriteOfBandMember={isBand ? token.bandMember.name : null}
 					/>
 				);
 				if (tempArray.length % 5 == 0 || idx == favouriteTokens.length - 1) {
@@ -43,7 +44,7 @@ export default function FavouriteNFTs({ username, favouriteTokens }) {
 			});
 			setNftCards(nftCardsTemp);
 		}
-	}, [favouriteTokens]);
+	}, [favouriteTokens, isBand]);
 
 	return <>{nftCards.length === 0 ? <NoNfts username={username} favouritesSection={true} /> : <NFTCardsWithPager nftCards={nftCards} />}</>;
 }

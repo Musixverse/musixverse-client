@@ -5,30 +5,49 @@ import ReportFilterDropdown from "../../../layout/ReportFilterDropdown";
 import { reportProfileFilters } from "../../../constants";
 import StatusContext from "../../../../store/status-context";
 
-const ArtistReportModal = ({ isOpen, setOpen, username }) => {
+const ArtistReportModal = ({ isOpen, setOpen, username, isBand }) => {
 	const { user } = useMoralis();
 	const [reason, setReason] = useState(reportProfileFilters[0]);
 	const [, , setSuccess, setError] = useContext(StatusContext);
 
 	const { fetch: reportProfile } = useMoralisCloudFunction("reportProfile", { username: username, reason: reason }, { autoFetch: false });
+	const { fetch: reportBand } = useMoralisCloudFunction("reportBand", { username: username, reason: reason }, { autoFetch: false });
 
 	const reportUserProfile = () => {
 		if (user && reason) {
-			reportProfile({
-				onSuccess: async (object) => {
-					if (object) {
-						setSuccess((prevState) => ({
-							...prevState,
-							title: "Profile Reported",
-							message: "You report has been recorded. We will review this report soon and take appropriate action.",
-							showSuccessBox: true,
-						}));
-					}
-				},
-				onError: (error) => {
-					console.log("reportProfile Error:", error);
-				},
-			});
+			if (isBand) {
+				reportBand({
+					onSuccess: async (object) => {
+						if (object) {
+							setSuccess((prevState) => ({
+								...prevState,
+								title: "Profile Reported",
+								message: "You report has been recorded. We will review this report soon and take appropriate action.",
+								showSuccessBox: true,
+							}));
+						}
+					},
+					onError: (error) => {
+						console.log("reportBand Error:", error);
+					},
+				});
+			} else {
+				reportProfile({
+					onSuccess: async (object) => {
+						if (object) {
+							setSuccess((prevState) => ({
+								...prevState,
+								title: "Profile Reported",
+								message: "You report has been recorded. We will review this report soon and take appropriate action.",
+								showSuccessBox: true,
+							}));
+						}
+					},
+					onError: (error) => {
+						console.log("reportProfile Error:", error);
+					},
+				});
+			}
 		} else {
 			setError((prevState) => ({
 				...prevState,

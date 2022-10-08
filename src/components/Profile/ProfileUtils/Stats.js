@@ -9,20 +9,23 @@ export default function Stats({ username, profileDetails }) {
 	const router = useRouter();
 
 	const displayFavourites = () => {
-		router.push(`/profile/${username}?favourites`, undefined, { shallow: true });
+		if (profileDetails.isBand) router.push(`/profile/band/${username}?favourites`, undefined, { shallow: true });
+		else router.push(`/profile/${username}?favourites`, undefined, { shallow: true });
 	};
 
 	const displayFollowers = () => {
-		router.push(`/profile/${username}?followers`, undefined, { shallow: true });
+		if (profileDetails.isBand) router.push(`/profile/band/${username}?followers`, undefined, { shallow: true });
+		else router.push(`/profile/${username}?followers`, undefined, { shallow: true });
 	};
 
 	const displayFollowing = () => {
-		router.push(`/profile/${username}?following`, undefined, { shallow: true });
+		if (profileDetails.isBand) router.push(`/profile/band/${username}?following`, undefined, { shallow: true });
+		else router.push(`/profile/${username}?following`, undefined, { shallow: true });
 	};
 
 	return (
 		<>
-			{profileDetails.isArtist ? (
+			{profileDetails.isArtist || profileDetails.isBand ? (
 				<div className="grid sm:flex sm:grid-cols-4 grid-cols-2 mt-8 font-medium md:m-0 md:w-fit dark:bg-nav-dark dark:backdrop-blur-xl dark:backdrop-brightness-105 opacity-90 rounded-2xl bg-light-200 backdrop-blur-xl backdrop-brightness-150">
 					<div className="shrink px-5 py-5 text-center rounded-l-2xl">
 						<h1 className="text-xl font-bold">

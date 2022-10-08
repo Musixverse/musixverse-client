@@ -61,7 +61,7 @@ export async function isUsernameValidAndAvailable(username) {
 		};
 	}
 	const usernameExists = await Moralis.Cloud.run("checkUsernameAvailability", { username: username });
-	if (usernameExists) {
+	if (usernameExists || username === "band") {
 		return {
 			status: false,
 			title: "Username already exists!",
@@ -85,6 +85,31 @@ export function isIsrcValid(isrc) {
 			status: false,
 			title: "Invalid ISRC",
 			message: "Please enter a valid ISRC or leave it blank",
+		};
+	}
+
+	return { status: true, message: "" };
+}
+
+export async function isBandUsernameValidAndAvailable(username) {
+	const usernameRegex = /^\w+$/;
+	if (username.length < 2) {
+		return {
+			status: false,
+			message: "Username length should be greater than 1",
+		};
+	} else if (!usernameRegex.test(username)) {
+		return {
+			status: false,
+			message: "Username can only contain alphabets, numbers, and '_'",
+		};
+	}
+	const usernameExists = await Moralis.Cloud.run("checkBandUsernameAvailability", { username: username });
+	if (usernameExists || username === "band") {
+		return {
+			status: false,
+			title: "Band username already exists!",
+			message: "Please choose another username.",
 		};
 	}
 

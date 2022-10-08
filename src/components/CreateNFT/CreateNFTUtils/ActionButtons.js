@@ -15,13 +15,12 @@ const ActionButtons = ({ step, prevStep, setSaveDraftSuccess, nftDraftMetadata }
 		setLoading(true);
 		saveNftCreationDraft({
 			onSuccess: async (object) => {
-				console.log("object:", object);
 				setLoading(false);
 				setSaveDraftSuccess(true);
 			},
 			onError: (error) => {
 				setLoading(false);
-				console.log("fetchMatchingUsers Error:", error);
+				console.log("saveNftDraft Error:", error);
 			},
 		});
 	};

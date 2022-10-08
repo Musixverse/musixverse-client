@@ -26,6 +26,10 @@ export default function PricingAndSplits({
 	nftCreateFormOnSubmit,
 	setSaveDraftSuccess,
 	nftDraftMetadata,
+	verifiedBandsOfArtist,
+	personalProfileCollaborator,
+	chosenProfileOrBand,
+	setChosenProfileOrBand,
 }) {
 	const [, , , setError] = useContext(StatusContext);
 	const [isInvitationModalOpen, setInvitationModalOpen] = useState(false);
@@ -41,7 +45,7 @@ export default function PricingAndSplits({
 		}
 	}, [collaboratorList]);
 
-	const nftPreviewValues = { trackTitle, coverArtUrl, audioFileUrl, nftPrice, numberOfCopies, step, collaboratorList };
+	const nftPreviewValues = { trackTitle, coverArtUrl, audioFileUrl, nftPrice, numberOfCopies, step, collaboratorList, chosenProfileOrBand };
 	const step3FormValues = {
 		numberOfCopies,
 		setNumberOfCopies,
@@ -56,6 +60,10 @@ export default function PricingAndSplits({
 		unlockTimestamp,
 		setUnlockTimestamp,
 		setInvitationModalOpen,
+		verifiedBandsOfArtist,
+		personalProfileCollaborator,
+		chosenProfileOrBand,
+		setChosenProfileOrBand,
 	};
 	const actionButtonProps = { step, prevStep, setSaveDraftSuccess, nftDraftMetadata };
 

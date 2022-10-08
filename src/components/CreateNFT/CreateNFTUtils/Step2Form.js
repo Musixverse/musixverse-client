@@ -80,7 +80,6 @@ export default function Step2Form({
 								className="hidden"
 								onClick={(e) => toggleVocalsRadio(e)}
 								checked={vocals}
-								onChange={(e) => {}}
 							/>
 							<label htmlFor="othervocalsyes" className="flex items-center text-sm font-normal cursor-pointer font-secondary">
 								<span className="inline-block w-6 h-6 mr-1 border-2 rounded-full border-[#363636] flex-no-shrink"></span>
@@ -95,7 +94,6 @@ export default function Step2Form({
 								className="hidden"
 								onClick={(e) => toggleVocalsRadio(e)}
 								checked={!vocals}
-								onChange={(e) => {}}
 							/>
 							<label htmlFor="othervocalsno" className="flex items-center text-sm font-normal cursor-pointer font-secondary">
 								<span className="inline-block w-6 h-6 mr-1 border-2 rounded-full border-[#363636] flex-no-shrink"></span>
@@ -109,10 +107,13 @@ export default function Step2Form({
 
 				{/* Uploads */}
 				<div className="font-semibold lg:w-1/2 font-secondary">
-					<p className="mb-1 text-sm">ISRC
+					<p className="mb-1 text-sm">
+						ISRC
 						<Tooltip
 							labelText={<i className="pl-2 fa-solid fa-circle-info"></i>}
-							message={"The International Standard Recording Code (ISRC) is an international standard code for uniquely identifying sound recordings and music video recordings."}
+							message={
+								"The International Standard Recording Code (ISRC) is an international standard code for uniquely identifying sound recordings and music video recordings."
+							}
 							tooltipLocation={"bottom"}
 						/>
 					</p>

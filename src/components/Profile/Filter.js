@@ -5,7 +5,17 @@ import { useMoralisCloudFunction } from "react-moralis";
 import Dropdown from "./ProfileUtils/Dropdown";
 import styles from "../../../styles/Profile/Filter.module.css";
 
-export default function Filter({ username, currentlyActive, setCurrentlyActive, sortingFilter, setSortingFilter, isArtist, setTracks, profileDetails }) {
+export default function Filter({
+	username,
+	currentlyActive,
+	setCurrentlyActive,
+	sortingFilter,
+	setSortingFilter,
+	isArtist,
+	isBand,
+	setTracks,
+	profileDetails,
+}) {
 	const { theme } = useTheme();
 
 	const handleFilterChange = (e) => {
@@ -35,18 +45,37 @@ export default function Filter({ username, currentlyActive, setCurrentlyActive, 
 		},
 		{ autoFetch: false }
 	);
+	const { fetch: fetchTracksByBand } = useMoralisCloudFunction(
+		"fetchTracksByBand",
+		{
+			username: username,
+			currentlyActive: currentlyActive,
+			sortingFilter: sortingFilter,
+		},
+		{ autoFetch: false }
+	);
 
 	useEffect(() => {
 		if (sortingFilter !== "Newest First") {
-			fetchTracksByUser({
-				onSuccess: async (object) => {
-					console.log(object);
-					setTracks(object);
-				},
-				onError: (error) => {
-					console.log("fetchTracksByUser Error:", error);
-				},
-			});
+			if (isBand) {
+				fetchTracksByBand({
+					onSuccess: async (object) => {
+						setTracks(object);
+					},
+					onError: (error) => {
+						console.log("fetchTracksByBand Error:", error);
+					},
+				});
+			} else {
+				fetchTracksByUser({
+					onSuccess: async (object) => {
+						setTracks(object);
+					},
+					onError: (error) => {
+						console.log("fetchTracksByUser Error:", error);
+					},
+				});
+			}
 		} else {
 			if (currentlyActive == "New Releases") {
 				setTracks(profileDetails.newReleases);
@@ -69,7 +98,7 @@ export default function Filter({ username, currentlyActive, setCurrentlyActive, 
 					<div className="my-1 flex-grow border-t-[2px] border-[#818181]"></div>
 					{/* Owned NFTs Category Filters */}
 					<div className="space-x-4 text-[#818181]">
-						{isArtist && (
+						{(isArtist || isBand) && (
 							<>
 								<span
 									className={

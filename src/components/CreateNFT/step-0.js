@@ -9,7 +9,7 @@ import LoadingContext from "../../../store/loading-context";
 import { Country, State } from "country-state-city";
 import ArtistProfileNotVerifiedModal from "./CreateNFTUtils/ArtistProfileNotVerifiedModal";
 
-const CreateNFTIntro = ({ nextStep }) => {
+const CreateNFTIntro = ({ nextStep, chosenProfileOrBand }) => {
 	const router = useRouter();
 	const { user } = useMoralis();
 	const [, setLoading] = useContext(LoadingContext);
@@ -37,6 +37,7 @@ const CreateNFTIntro = ({ nextStep }) => {
 		deleteNftDraft({
 			onSuccess: async (object) => {
 				setDeleteModalOpen(false);
+				setLoading(false);
 				router.reload(window.location.pathname);
 			},
 			onError: (error) => {
@@ -88,6 +89,7 @@ const CreateNFTIntro = ({ nextStep }) => {
 		},
 		numberOfCopies: "",
 		nftPrice: "",
+		chosenProfileOrBand: { objectId: "profile" },
 		collaboratorList: [
 			{
 				id: user.id,
@@ -177,6 +179,7 @@ const CreateNFTIntro = ({ nextStep }) => {
 															collaboratorList={draft.attributes.collaboratorList}
 															setDeleteModalOpen={setDeleteModalOpen}
 															setDraftToDelete={setDraftToDelete}
+															chosenProfileOrBand={chosenProfileOrBand}
 														/>
 													</a>
 												</Link>

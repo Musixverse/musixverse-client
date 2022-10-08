@@ -14,6 +14,7 @@ import ScrollToPageTop from "../utils/ScrollToPageTop";
 import { connectSmartContract } from "../utils/smart-contract/functions";
 import "react-datepicker/dist/react-datepicker.css";
 import { MORALIS_APP_ID, MORALIS_SERVER_URL } from "../constants";
+import AudioPlayerContext from "../../store/audioPlayer-context";
 
 function App({ Component, pageProps, router }) {
 	useEffect(() => {
@@ -40,7 +41,18 @@ function App({ Component, pageProps, router }) {
 		showSuccessBox: false,
 	});
 	const [authModalOpen, setAuthModalOpen] = useState(false);
-
+	const [audioPlayerProps, setAudioPlayerProps] = useState({
+		queue: [],
+		// updateQueue to be updated in every play button click on the site
+		updateQueue: true,
+		// currentlyPlayingIdx to keep an eye on the loadCapacity to reach
+		currentlyPlayingIdx: -1,
+		// 👇 To be updated from globalAudioPlayer and to be consumed in trackInfo
+		currentProgress: "00:00",
+		currentDuration: "",
+		playerIsLoaded: false,
+		isPlaying: false,
+	})
 	// This is a workaround for the issue with the next-themes package. Without this, the theme was not being applied correctly.
 	const [mounted, setMounted] = useState(false);
 	// When mounted on client, now we can show the UI
@@ -75,12 +87,14 @@ function App({ Component, pageProps, router }) {
 						<AccessLevelContext.Provider value={[accessLevel, setAccessLevel]}>
 							<AuthModalContext.Provider value={[authModalOpen, setAuthModalOpen]}>
 								<StatusContext.Provider value={[error, success, setSuccess, setError]}>
-									<ProtectedRoutes router={router}>
-										<Layout>
-											<ScrollToPageTop />
-											<Component {...pageProps} />
-										</Layout>
-									</ProtectedRoutes>
+									<AudioPlayerContext.Provider value={[audioPlayerProps, setAudioPlayerProps]}>
+										<ProtectedRoutes router={router}>
+											<Layout>
+												<ScrollToPageTop />
+												<Component {...pageProps} />
+											</Layout>
+										</ProtectedRoutes>
+									</AudioPlayerContext.Provider>
 								</StatusContext.Provider>
 							</AuthModalContext.Provider>
 						</AccessLevelContext.Provider>

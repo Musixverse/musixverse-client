@@ -13,7 +13,6 @@ const UnsoldNFT = ({ track }) => {
 				collaborator.address === collaboratorUser.ethAddress && collaboratorList.push(collaboratorUser);
 			});
 		});
-
 		return (
 			<NFTCard
 				redirectLink={`/track/polygon/${track.unsoldTokens.at(0)}`}
@@ -29,6 +28,8 @@ const UnsoldNFT = ({ track }) => {
 				collaboratorList={collaboratorList}
 				otherTokensOfTrack={track.otherTokensOfTrack}
 				unsoldTrackData={unsoldTrackData}
+				trackAudio={track.audio.replace("ipfs://", process.env.NEXT_PUBLIC_IPFS_NODE_URL)}
+				trackId={track.objectId}
 			/>
 		);
 	} else return <NFTCard />;

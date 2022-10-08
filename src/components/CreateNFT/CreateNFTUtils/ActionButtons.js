@@ -15,7 +15,6 @@ const ActionButtons = ({ step, prevStep, setSaveDraftSuccess, nftDraftMetadata }
 		setLoading(true);
 		saveNftCreationDraft({
 			onSuccess: async (object) => {
-				console.log("object:", object);
 				setLoading(false);
 				setSaveDraftSuccess(true);
 			},

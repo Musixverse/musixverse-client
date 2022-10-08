@@ -7,7 +7,7 @@ import Modal from "../../../layout/Modal/Modal";
 import CollaboratorImage from "../../../layout/NFTCard/CollaboratorImage";
 import LoadingContext from "../../../../store/loading-context";
 
-export default function FavouritesModal({ isOpen, setOpen, username, favouriteTokens, setFavouriteTokens }) {
+export default function FavouritesModal({ isOpen, setOpen, username, favouriteTokens, setFavouriteTokens, isBand }) {
 	const router = useRouter();
 	const [, setLoading] = useContext(LoadingContext);
 	const { user, Moralis } = useMoralis();
@@ -59,27 +59,53 @@ export default function FavouritesModal({ isOpen, setOpen, username, favouriteTo
 												alt="NFT Artwork"
 											/>
 											<div className="w-full flex justify-between">
-												<div className="flex flex-col place-content-between">
+												<div className="flex flex-col place-content-between relative">
 													<p className="ml-4 text-sm font-semibold">
-														<span className="absolute">{token.title}</span>
+														<span className="absolute w-max">{token.title}</span>
 													</p>
 													<p className="ml-4 text-xs items-end">{token.artist}</p>
 												</div>
 												<div className="flex items-end">
-													<span className="hidden group-hover:block text-xs mr-4 text-primary-100">{token.genre}</span>
-													<span className="mr-4 text-xs font-light">
+													{!isBand ? (
+														<span className="hidden group-hover:block text-xs mr-2 text-primary-100">{token.genre}</span>
+													) : (
+														<>
+															<div className="sm:hidden block w-[80px] md:w-[100px] relative overflow-x-hidden mr-2">
+																<div className="animate-marquee whitespace-nowrap">
+																	<span className="text-xs mr-4 text-primary-100">
+																		<i className="fa-solid fa-heart text-sm mr-1 text-primary-200"></i>
+																		{token.bandMember.name}
+																	</span>
+																</div>
+																<div className="absolute top-0 animate-marquee2 whitespace-nowrap">
+																	<span className="text-xs mr-4 text-primary-100">
+																		<i className="fa-solid fa-heart text-sm mr-1 text-primary-200"></i>
+																		{token.bandMember.name}
+																	</span>
+																</div>
+															</div>
+															<span className="hidden sm:block text-xs mr-4 text-primary-100">
+																<i className="fa-solid fa-heart text-sm mr-1 text-primary-200"></i>
+																{token.bandMember.name}
+															</span>
+														</>
+													)}
+
+													<span className="mr-2 text-xs font-light">
 														#{token.localTokenId} of {token.numberOfCopies}
 													</span>
-													<div className="flex items-end -space-x-2">
-														{collaboratorList.map((collaborator, index) => {
-															return <CollaboratorImage key={index} collaborator={collaborator} />;
-														})}
-													</div>
+													{!isBand && (
+														<div className="flex items-end -space-x-2">
+															{collaboratorList.map((collaborator, index) => {
+																return <CollaboratorImage key={index} collaborator={collaborator} />;
+															})}
+														</div>
+													)}
 												</div>
 											</div>
 										</a>
 									</Link>
-									{user && username === user.attributes.username && (
+									{user && username === user.attributes.username && !isBand && (
 										<div className="hidden group-hover:block self-center pl-2">
 											<div
 												onClick={() => removeFromFavourites(token.tokenId)}
@@ -99,7 +125,11 @@ export default function FavouritesModal({ isOpen, setOpen, username, favouriteTo
 			}
 			onClose={() => {
 				setOpen(false);
-				router.push(`/profile/${username}`, undefined, { shallow: true });
+				{
+					!isBand
+						? router.push(`/profile/${username}`, undefined, { shallow: true })
+						: router.push(`/profile/band/${username}`, undefined, { shallow: true });
+				}
 			}}
 		></Modal>
 	);

@@ -21,6 +21,10 @@ const Step3Form = ({
 	unlockTimestamp,
 	setUnlockTimestamp,
 	setInvitationModalOpen,
+	verifiedBandsOfArtist,
+	personalProfileCollaborator,
+	chosenProfileOrBand,
+	setChosenProfileOrBand,
 }) => {
 	const rolesArray = [
 		"Composer",
@@ -151,6 +155,34 @@ const Step3Form = ({
 		}
 	}, [searchedUsername]);
 
+	const setBandMembersAsCollaborators = async (band) => {
+		setChosenProfileOrBand(band);
+
+		const bandMembersList = [];
+		band.bandMembers.map((bandMember) => {
+			band.updatedBandMembersList.map((updatedBandMember) => {
+				if (bandMember.userId === updatedBandMember._id) {
+					updatedBandMember.role = bandMember.role;
+					bandMembersList.push(updatedBandMember);
+				}
+			});
+		});
+
+		const listOfMembers = [];
+		for (let i in bandMembersList) {
+			listOfMembers.push({
+				id: bandMembersList[i]._id,
+				name: bandMembersList[i].name,
+				username: bandMembersList[i].username,
+				split: "",
+				role: bandMembersList[i].role || "Composer",
+				address: bandMembersList[i].ethAddress,
+				avatar: bandMembersList[i].avatar,
+			});
+		}
+		setCollaboratorList(listOfMembers);
+	};
+
 	return (
 		<div className="w-full">
 			<p className="mb-10 text-5xl font-normal font-tertiary">PRICING & SPLITS</p>
@@ -215,13 +247,65 @@ const Step3Form = ({
 						</div>
 					</div>
 
+					<p className="mt-6 text-sm">
+						Do you wish to use your personal profile or a band profile to create this music NFT?
+						<RequiredAsterisk />
+					</p>
+
+					<div className="grid grid-cols-3 items-center">
+						<div className="flex items-center mt-2">
+							<input
+								id="profile"
+								type="radio"
+								name="profileChooser"
+								className="hidden"
+								onClick={(e) => {
+									setChosenProfileOrBand({ objectId: "profile" });
+									setCollaboratorList(personalProfileCollaborator);
+								}}
+								checked={chosenProfileOrBand.objectId === "profile"}
+							/>
+							<label htmlFor="profile" className="flex items-center text-sm font-normal cursor-pointer font-secondary">
+								<span className="inline-block w-6 h-6 mr-3 border-2 rounded-full border-[#363636] flex-no-shrink"></span>
+								<Image src={collaboratorList[0].avatar} height="25" width="25" alt="artist's avatar" className="rounded" />
+								<p className="ml-1">{collaboratorList[0].name}</p>
+							</label>
+						</div>
+
+						{verifiedBandsOfArtist.length > 0 &&
+							verifiedBandsOfArtist.map((band) => {
+								return (
+									<div className="flex items-center mt-2" key={band.username}>
+										<input
+											id={`band-${band.username}`}
+											type="radio"
+											name="profileChooser"
+											className="hidden"
+											onClick={(e) => setBandMembersAsCollaborators(band)}
+											checked={chosenProfileOrBand.objectId !== "profile" && chosenProfileOrBand.objectId === band.objectId}
+											data-band-name={band.name}
+											data-band-id={band.objectId}
+										/>
+										<label
+											htmlFor={`band-${band.username}`}
+											className="flex items-center text-sm font-normal cursor-pointer font-secondary"
+										>
+											<span className="inline-block w-6 h-6 mr-3 border-2 rounded-full border-[#363636] flex-no-shrink"></span>
+											<Image src={band.avatar} height="25" width="25" alt="band's avatar" className="rounded" />
+											<p className="ml-1">{band.name}</p>
+										</label>
+									</div>
+								);
+							})}
+					</div>
+
 					<div>
-						<p className="mb-1 text-sm">
+						<p className="mt-8 mb-1 text-sm">
 							ADD COLLABORATORS AND SPLITS
 							<RequiredAsterisk />
 							<Tooltip
 								labelText={<i className="pl-4 fa-solid fa-circle-info"></i>}
-								message={"You can split all the earnings from this NFT with the collaborators using the Musixverse's split feature."}
+								message={"You can split all the earnings from this NFT with the collaborators using Musixverse's split feature."}
 								tooltipLocation={"bottom"}
 							/>
 						</p>

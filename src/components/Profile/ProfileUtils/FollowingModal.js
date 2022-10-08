@@ -5,24 +5,36 @@ import Image from "next/image";
 import Link from "next/link";
 import Modal from "../../../layout/Modal/Modal";
 
-export default function FollowersModal({ isOpen, setOpen, username }) {
+export default function FollowersModal({ isOpen, setOpen, username, isBand }) {
 	const router = useRouter();
 	const [following, setFollowing] = useState([]);
 
 	const { fetch: fetchFollowing } = useMoralisCloudFunction("fetchFollowing", { username: username }, { autoFetch: false });
+	const { fetch: fetchBandFollowing } = useMoralisCloudFunction("fetchBandFollowing", { username: username }, { autoFetch: false });
 
 	useEffect(() => {
 		if (isOpen) {
-			fetchFollowing({
-				onSuccess: (data) => {
-					setFollowing(data);
-				},
-				onError: (error) => {
-					console.log("fetchFollowing Error:", error);
-				},
-			});
+			if (isBand) {
+				fetchBandFollowing({
+					onSuccess: (data) => {
+						setFollowing(data);
+					},
+					onError: (error) => {
+						console.log("fetchBandFollowing Error:", error);
+					},
+				});
+			} else {
+				fetchFollowing({
+					onSuccess: (data) => {
+						setFollowing(data);
+					},
+					onError: (error) => {
+						console.log("fetchFollowing Error:", error);
+					},
+				});
+			}
 		}
-	}, [isOpen, fetchFollowing]);
+	}, [isOpen, isBand, fetchFollowing, fetchBandFollowing]);
 
 	return (
 		<Modal
@@ -40,15 +52,23 @@ export default function FollowersModal({ isOpen, setOpen, username }) {
 					{following && following.length > 0 ? (
 						following.map((follower) => {
 							return (
-								<div key={follower.objectId} className="flex group p-2 rounded hover:bg-light-200 dark:hover:bg-dark-200">
+								<div key={follower.username} className="flex group p-2 rounded hover:bg-light-200 dark:hover:bg-dark-200">
 									<Link href={`/profile/${follower.username}`} passHref>
 										<a target="_blank" rel="noopener noreferrer" className="w-full flex text-start cursor-pointer group">
 											<Image src={follower.avatar} className="rounded" height={50} width={50} alt="NFT Artwork" />
 											<div className="w-full flex justify-between">
-												<div className="flex flex-col place-content-between">
-													<p className="ml-4 text-sm font-semibold">{follower.name}</p>
+												<div className="flex flex-col place-content-between relative">
+													<p className="ml-4 text-sm font-semibold">
+														<span className="absolute w-max">{follower.name}</span>
+													</p>
 													<p className="ml-4 text-xs items-end">@{follower.username}</p>
 												</div>
+
+												{isBand && follower.followerName && (
+													<div className="flex items-end">
+														<span className="text-xs text-primary-100">{follower.followerName} follows</span>
+													</div>
+												)}
 											</div>
 										</a>
 									</Link>
@@ -62,7 +82,11 @@ export default function FollowersModal({ isOpen, setOpen, username }) {
 			}
 			onClose={() => {
 				setOpen(false);
-				router.push(`/profile/${username}`, undefined, { shallow: true });
+				{
+					!isBand
+						? router.push(`/profile/${username}`, undefined, { shallow: true })
+						: router.push(`/profile/band/${username}`, undefined, { shallow: true });
+				}
 			}}
 		></Modal>
 	);

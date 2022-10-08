@@ -28,6 +28,8 @@ export default function NFTCard({
 	likeCount,
 	lastPrice,
 	showNumberOfCopies = true,
+	favouriteOfBandMember,
+	tokenInCollectionOwnedByBandMember,
 }) {
 	const [showNftCopiesModal, setShowNftCopiesModal] = useState(false);
 	const { theme } = useTheme();
@@ -78,6 +80,22 @@ export default function NFTCard({
 										priority
 										className={"group-hover:scale-110 group-hover:duration-500 duration-500 " + styles["nft-image"]}
 									/>
+									{favouriteOfBandMember && (
+										<div className="group-hover:bg-dark-100/80 duration-500 text-light-100 w-full h-full opacity-0 group-hover:opacity-100 flex items-center justify-center absolute">
+											<div className="relative flex flex-col items-center justify-center">
+												<i className="fa-solid fa-heart text-5xl"></i>
+												<p className="mt-2">{favouriteOfBandMember}</p>
+											</div>
+										</div>
+									)}
+									{tokenInCollectionOwnedByBandMember && (
+										<div className="group-hover:bg-dark-100/80 duration-500 text-light-100 w-full h-full opacity-0 group-hover:opacity-100 flex items-center justify-center absolute">
+											<div className="relative flex flex-col items-center justify-center">
+												<i className="fa-solid fa-record-vinyl text-5xl"></i>
+												<p className="mt-2">{tokenInCollectionOwnedByBandMember}</p>
+											</div>
+										</div>
+									)}
 								</div>
 							</a>
 						</Link>

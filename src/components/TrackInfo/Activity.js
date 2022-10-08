@@ -34,7 +34,7 @@ export default function Activity({ artist, activity }) {
 						<p className="text-[#8a8a8a] text-sm">
 							by&nbsp;
 							{artist ? (
-								<Link href={`/profile/${artist.username}`} className="cursor-pointer">
+								<Link href={artist.isBand ? `/profile/band/${artist.username}` : `/profile/${artist.username}`} className="cursor-pointer">
 									<a target="_blank" rel="noopener noreferrer">
 										@{artist.username}&nbsp;
 									</a>

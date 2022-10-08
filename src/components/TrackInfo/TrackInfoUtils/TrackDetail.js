@@ -13,7 +13,7 @@ export default function TrackDetail({ description, collaborators, collaboratorUs
 			{/* </div> */}
 
 			<div className="mt-12">
-				<h1 className="font-tertiary text-4xl">COLLABORATORS</h1>
+				<h1 className="font-tertiary text-4xl mb-2">COLLABORATORS</h1>
 				{collaborators.map((collaborator, index) => {
 					return <DisplayCollaborator key={index} collaborator={collaborator} collaboratorUsers={collaboratorUsers} />;
 				})}

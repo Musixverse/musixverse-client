@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useContext, useMemo, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useTheme } from "next-themes";
@@ -9,6 +9,7 @@ import dynamic from "next/dynamic";
 const NftCopiesModal = dynamic(() => import("./NftCopiesModal"));
 import Section1 from "./Section1";
 import Section2 from "./Section2";
+import AudioPlayerContext from "../../../store/audioplayer-context";
 
 export default function NFTCard({
 	redirectLink,
@@ -28,22 +29,22 @@ export default function NFTCard({
 	likeCount,
 	lastPrice,
 	showNumberOfCopies = true,
-	favouriteOfBandMember,
+	trackAudio,
+	trackId,
+  favouriteOfBandMember,
 	tokenInCollectionOwnedByBandMember,
 }) {
 	const [showNftCopiesModal, setShowNftCopiesModal] = useState(false);
+	const [audioPlayerProps, setAudioPlayerProps] =  useContext(AudioPlayerContext);
 	const { theme } = useTheme();
+	
+	const audioPlayerTrackId = audioPlayerProps.currentlyPlayingIdx === -1? undefined : audioPlayerProps.queue[audioPlayerProps.currentlyPlayingIdx].trackId;
 
 	const truncatedArtistName = useMemo(() => {
 		let returnedString = artistName;
 		if (artistName && artistName.length > 14) returnedString = artistName.substring(0, 14) + "...";
 		return returnedString;
 	}, [artistName]);
-
-	let truncatedNftName = trackName;
-	if (trackName && trackName.length > 8) {
-		truncatedNftName = trackName.substring(0, 8) + "...";
-	}
 
 	const trackCopiesModalValues = {
 		redirectLink,
@@ -62,6 +63,41 @@ export default function NFTCard({
 		soldOnceTrackData,
 		showNumberOfCopies: false,
 	};
+
+	const playTrackHandler = () => {
+		//If same song is played again then dont add again
+		//Instead need a logic to pause it in the audioplayer...
+		if(audioPlayerTrackId && trackId === audioPlayerTrackId){
+			setAudioPlayerProps((prevProps)=>{
+				return {
+					...prevProps,
+					isPlaying: !prevProps.isPlaying,
+				};
+			})
+			return;
+		}
+		setAudioPlayerProps((prevProps)=>{
+			const newQueue = [...(prevProps.queue)];
+			newQueue.unshift({
+				tokenId: tokenId,
+				audioURL: trackAudio,
+				price: price,
+				artistName: artistName,
+				isArtistVerified: isArtistVerified,
+				songName: trackName,
+				nftCover: image,
+				trackId: trackId,
+			});
+			return {
+				...prevProps,
+				queue: newQueue,
+				updateQueue: true,
+				currentlyPlayingIdx: 0,
+				currentProgress: "00:00",
+				playerIsLoaded: false,
+			};
+		})
+	}
 
 	return (
 		<>
@@ -112,6 +148,13 @@ export default function NFTCard({
 							<span className="ml-1 text-sm">x{numberOfCopies}</span>
 						</button>
 					) : null}
+					<button
+						type="button"
+						onClick={playTrackHandler}
+						className="h-[40px] w-[40px] absolute bottom-4 right-4 bg-primary-300 hover:bg-primary-100 rounded-full flex items-center justify-center"
+					>
+						<i className={"text-lg text-light-200 fas " + ((audioPlayerProps.isPlaying && trackId === audioPlayerTrackId)? "fa-pause":"fa-play")}></i>
+					</button>
 				</div>
 
 				{/* NFT Details */}

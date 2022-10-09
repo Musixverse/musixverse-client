@@ -3,7 +3,17 @@ import { useRef } from "react";
 import { useMoralis } from "react-moralis";
 import { truncatePrice } from "../../../utils/GetMarketPrice";
 
-export default function PreviewDraft({ draftId, trackTitle, coverArtUrl, audioFileUrl, nftPrice, collaboratorList, setDeleteModalOpen, setDraftToDelete }) {
+export default function PreviewDraft({
+	draftId,
+	trackTitle,
+	coverArtUrl,
+	audioFileUrl,
+	nftPrice,
+	collaboratorList,
+	setDeleteModalOpen,
+	setDraftToDelete,
+	chosenProfileOrBand,
+}) {
 	const { user } = useMoralis();
 
 	const playBtn = useRef(null);
@@ -83,7 +93,13 @@ export default function PreviewDraft({ draftId, trackTitle, coverArtUrl, audioFi
 				<div className="dark:bg-dark-200 bg-light-100 w-[222px] h-[128px] p-4 rounded-b-xl flex flex-col justify-between">
 					<div className="flex justify-between w-full">
 						<div className="flex flex-col">
-							<p className="font-secondary text-[#1D1D1D] text-xs dark:text-light-300">{user && user.attributes.name}</p>
+							<p className="font-secondary text-[#1D1D1D] text-xs dark:text-light-300">
+								{user && chosenProfileOrBand.objectId === "profile"
+									? user.attributes.name
+									: user && chosenProfileOrBand.objectId !== "profile"
+									? chosenProfileOrBand.name
+									: null}
+							</p>
 							<p className="font-semibold font-primary text-[#1D1D1D] dark:text-light-200 text-lg">{truncatedNftName}</p>
 						</div>
 						{truncatednftPrice && (

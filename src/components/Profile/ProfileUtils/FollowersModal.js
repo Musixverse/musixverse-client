@@ -6,7 +6,7 @@ import Link from "next/link";
 import Modal from "../../../layout/Modal/Modal";
 import LoadingContext from "../../../../store/loading-context";
 
-export default function FollowersModal({ isOpen, setOpen, username }) {
+export default function FollowersModal({ isOpen, setOpen, username, isBand }) {
 	const router = useRouter();
 	const [followers, setFollowers] = useState([]);
 	const [, setLoading] = useContext(LoadingContext);
@@ -14,6 +14,7 @@ export default function FollowersModal({ isOpen, setOpen, username }) {
 	const { user, Moralis } = useMoralis();
 
 	const { fetch: fetchFollowers } = useMoralisCloudFunction("fetchFollowers", { username: username }, { autoFetch: false });
+	const { fetch: fetchBandFollowers } = useMoralisCloudFunction("fetchBandFollowers", { username: username }, { autoFetch: false });
 
 	const removeFollower = async (followerUsername) => {
 		setLoading(true);
@@ -32,16 +33,27 @@ export default function FollowersModal({ isOpen, setOpen, username }) {
 
 	useEffect(() => {
 		if (isOpen) {
-			fetchFollowers({
-				onSuccess: (data) => {
-					setFollowers(data);
-				},
-				onError: (error) => {
-					console.log("fetchFollowers Error:", error);
-				},
-			});
+			if (isBand) {
+				fetchBandFollowers({
+					onSuccess: (data) => {
+						setFollowers(data);
+					},
+					onError: (error) => {
+						console.log("fetchBandFollowers Error:", error);
+					},
+				});
+			} else {
+				fetchFollowers({
+					onSuccess: (data) => {
+						setFollowers(data);
+					},
+					onError: (error) => {
+						console.log("fetchFollowers Error:", error);
+					},
+				});
+			}
 		}
-	}, [isOpen, fetchFollowers]);
+	}, [isOpen, isBand, fetchFollowers, fetchBandFollowers]);
 
 	return (
 		<Modal
@@ -59,7 +71,7 @@ export default function FollowersModal({ isOpen, setOpen, username }) {
 					{followers && followers.length > 0 ? (
 						followers.map((follower) => {
 							return (
-								<div key={follower.objectId} className="flex p-2 rounded hover:bg-light-200 dark:hover:bg-dark-200">
+								<div key={follower.username} className="flex p-2 rounded hover:bg-light-200 dark:hover:bg-dark-200">
 									<Link href={`/profile/${follower.username}`} passHref>
 										<a target="_blank" rel="noopener noreferrer" className="w-full flex text-start cursor-pointer">
 											<Image src={follower.avatar} className="rounded" height={50} width={50} alt="NFT Artwork" />
@@ -71,7 +83,8 @@ export default function FollowersModal({ isOpen, setOpen, username }) {
 											</div>
 										</a>
 									</Link>
-									{user && username === user.attributes.username && (
+
+									{user && username === user.attributes.username && !isBand && (
 										<div className="self-center pl-2">
 											<div
 												onClick={() => removeFollower(follower.username)}
@@ -91,7 +104,11 @@ export default function FollowersModal({ isOpen, setOpen, username }) {
 			}
 			onClose={() => {
 				setOpen(false);
-				router.push(`/profile/${username}`, undefined, { shallow: true });
+				{
+					!isBand
+						? router.push(`/profile/${username}`, undefined, { shallow: true })
+						: router.push(`/profile/band/${username}`, undefined, { shallow: true });
+				}
 			}}
 		></Modal>
 	);

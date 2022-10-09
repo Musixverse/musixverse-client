@@ -16,6 +16,15 @@ export default function BasicDetails() {
 	const { save: saveUserPreferences } = useNewMoralisObject("UserPreferences");
 
 	const [avatar, setAvatar] = useState("https://ipfs.moralis.io:2053/ipfs/QmbeQE3qktnDF7DZnsi51MoBNHTM8b3uMKyLQkwHPy8WW7");
+	// Array of default avatar urls
+	const defaultAvatarUrls = [
+		"https://ipfs.moralis.io:2053/ipfs/QmbeQE3qktnDF7DZnsi51MoBNHTM8b3uMKyLQkwHPy8WW7",
+		"https://ipfs.moralis.io:2053/ipfs/QmRnHRffz2gzAdzsf8TdXGR4zAQA6EBd7gcsB9owgD1Soy",
+		"https://ipfs.moralis.io:2053/ipfs/QmY1cUn6shTZafoZmdHxtpBJYV3MzTg9LGhe8vtAXdqDsv",
+		"https://ipfs.moralis.io:2053/ipfs/QmTe7MQehzR426oU8MvgksAEUr5ZzGnx42GmsT2KQSSkjd",
+		"https://ipfs.moralis.io:2053/ipfs/QmaYmZEt1qohGeDF8YupUM1Q786knd75iCb8jH3vGyV5xy",
+		"https://ipfs.moralis.io:2053/ipfs/QmSYaJ1bS53MxbBvVZfoWcvis1JoS46ESJY9EJcAGNXaNk",
+	];
 
 	const nameRef = useRef(null);
 	const usernameRef = useRef(null);
@@ -143,7 +152,7 @@ export default function BasicDetails() {
 				<RightSection>
 					<p className="text-5xl font-tertiary max-w-[468px] mb-10">YOUR DETAILS</p>
 					<form onSubmit={handleBasicDetailsSave}>
-						<SelectAvatar uploadFile={uploadFile} setAvatar={setAvatar} />
+						<SelectAvatar defaultAvatarUrls={defaultAvatarUrls} uploadFile={uploadFile} setAvatar={setAvatar} />
 						<p className="mt-8 text-[16px] font-secondary font-bold">Your Name</p>
 						<input
 							type="text"

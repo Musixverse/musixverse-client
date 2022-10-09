@@ -33,7 +33,7 @@
 }
 
 .about_us {
-	background: -webkit-linear-gradient(#eee, #333);
+	background: -webkit-linear-gradient(#111, #eee);
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
 }

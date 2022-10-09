@@ -44,11 +44,12 @@ export default function ComprehensiveDetails({
 	location,
 	setSaveDraftSuccess,
 	nftDraftMetadata,
+	chosenProfileOrBand,
 }) {
 	const [, , , setError] = useContext(StatusContext);
 	const [, setLoading] = useContext(LoadingContext);
 
-	const nftPreviewValues = { trackTitle, coverArtUrl, audioFileUrl, nftPrice, numberOfCopies, step, collaboratorList };
+	const nftPreviewValues = { trackTitle, coverArtUrl, audioFileUrl, nftPrice, numberOfCopies, step, collaboratorList, chosenProfileOrBand };
 	const step2FormValues = {
 		setTrackOrigin,
 		setGenre,

@@ -21,6 +21,10 @@ const Step3Form = ({
 	unlockTimestamp,
 	setUnlockTimestamp,
 	setInvitationModalOpen,
+	verifiedBandsOfArtist,
+	personalProfileCollaborator,
+	chosenProfileOrBand,
+	setChosenProfileOrBand,
 }) => {
 	const rolesArray = [
 		"Composer",
@@ -51,11 +55,11 @@ const Step3Form = ({
 	const [maticUSD, setMaticUSD] = useState("");
 	const [maticINR, setMaticINR] = useState("");
 
-	const [currentMaticUSD,setCurrentMaticUSD] = useState("");
-	const [currentMaticINR,setCurrentMaticINR] = useState("");
+	const [currentMaticUSD, setCurrentMaticUSD] = useState("");
+	const [currentMaticINR, setCurrentMaticINR] = useState("");
 
 	useEffect(() => {
-		async function setCurrentPrices(){
+		async function setCurrentPrices() {
 			setCurrentMaticUSD(await convertMaticToUSD(1));
 			setCurrentMaticINR(await convertMaticToINR(1));
 		}
@@ -125,8 +129,8 @@ const Step3Form = ({
 		setSearchedUsername(keyword);
 	};
 
-	const { fetch: fetchMatchingUsers } = useMoralisCloudFunction(
-		"fetchMatchingUsers",
+	const { fetch: fetchMatchingVerifiedArtists } = useMoralisCloudFunction(
+		"fetchMatchingVerifiedArtists",
 		{ username: searchedUsername },
 		{
 			autoFetch: false,
@@ -134,7 +138,7 @@ const Step3Form = ({
 	);
 	useEffect(() => {
 		if (searchedUsername !== "") {
-			fetchMatchingUsers({
+			fetchMatchingVerifiedArtists({
 				onSuccess: async (object) => {
 					setFilteredUsers(
 						await object.filter(function (userObj) {
@@ -145,11 +149,39 @@ const Step3Form = ({
 					);
 				},
 				onError: (error) => {
-					console.log("fetchMatchingUsers Error:", error);
+					console.log("fetchMatchingVerifiedArtists Error:", error);
 				},
 			});
 		}
 	}, [searchedUsername]);
+
+	const setBandMembersAsCollaborators = async (band) => {
+		setChosenProfileOrBand(band);
+
+		const bandMembersList = [];
+		band.bandMembers.map((bandMember) => {
+			band.updatedBandMembersList.map((updatedBandMember) => {
+				if (bandMember.userId === updatedBandMember._id) {
+					updatedBandMember.role = bandMember.role;
+					bandMembersList.push(updatedBandMember);
+				}
+			});
+		});
+
+		const listOfMembers = [];
+		for (let i in bandMembersList) {
+			listOfMembers.push({
+				id: bandMembersList[i]._id,
+				name: bandMembersList[i].name,
+				username: bandMembersList[i].username,
+				split: "",
+				role: bandMembersList[i].role || "Composer",
+				address: bandMembersList[i].ethAddress,
+				avatar: bandMembersList[i].avatar,
+			});
+		}
+		setCollaboratorList(listOfMembers);
+	};
 
 	return (
 		<div className="w-full">
@@ -164,7 +196,9 @@ const Step3Form = ({
 								<RequiredAsterisk />
 								<Tooltip
 									labelText={<i className="pl-4 fa-solid fa-circle-info"></i>}
-									message={"You can create several NFT copies of the same song. Each copy would be unique and will be traded separately. Musixverse recommends keeping the number of copies low to maintain exclusivity."}
+									message={
+										"You can create several NFT copies of the same song. Each copy would be unique and will be traded separately. Musixverse recommends keeping the number of copies low to maintain exclusivity."
+									}
 									tooltipLocation={"bottom"}
 								/>
 							</label>
@@ -213,20 +247,72 @@ const Step3Form = ({
 						</div>
 					</div>
 
+					<p className="mt-6 text-sm">
+						Do you wish to use your personal profile or a band profile to create this music NFT?
+						<RequiredAsterisk />
+					</p>
+
+					<div className="grid grid-cols-3 items-center">
+						<div className="flex items-center mt-2">
+							<input
+								id="profile"
+								type="radio"
+								name="profileChooser"
+								className="hidden"
+								onClick={(e) => {
+									setChosenProfileOrBand({ objectId: "profile" });
+									setCollaboratorList(personalProfileCollaborator);
+								}}
+								checked={chosenProfileOrBand.objectId === "profile"}
+							/>
+							<label htmlFor="profile" className="flex items-center text-sm font-normal cursor-pointer font-secondary">
+								<span className="inline-block w-6 h-6 mr-3 border-2 rounded-full border-[#363636] flex-no-shrink"></span>
+								<Image src={collaboratorList[0].avatar} height="25" width="25" alt="artist's avatar" className="rounded" />
+								<p className="ml-1">{collaboratorList[0].name}</p>
+							</label>
+						</div>
+
+						{verifiedBandsOfArtist.length > 0 &&
+							verifiedBandsOfArtist.map((band) => {
+								return (
+									<div className="flex items-center mt-2" key={band.username}>
+										<input
+											id={`band-${band.username}`}
+											type="radio"
+											name="profileChooser"
+											className="hidden"
+											onClick={(e) => setBandMembersAsCollaborators(band)}
+											checked={chosenProfileOrBand.objectId !== "profile" && chosenProfileOrBand.objectId === band.objectId}
+											data-band-name={band.name}
+											data-band-id={band.objectId}
+										/>
+										<label
+											htmlFor={`band-${band.username}`}
+											className="flex items-center text-sm font-normal cursor-pointer font-secondary"
+										>
+											<span className="inline-block w-6 h-6 mr-3 border-2 rounded-full border-[#363636] flex-no-shrink"></span>
+											<Image src={band.avatar} height="25" width="25" alt="band's avatar" className="rounded" />
+											<p className="ml-1">{band.name}</p>
+										</label>
+									</div>
+								);
+							})}
+					</div>
+
 					<div>
-						<p className="mb-1 text-sm">
+						<p className="mt-8 mb-1 text-sm">
 							ADD COLLABORATORS AND SPLITS
 							<RequiredAsterisk />
 							<Tooltip
 								labelText={<i className="pl-4 fa-solid fa-circle-info"></i>}
-								message={"You can split all the earnings from this NFT with the collaborators using the Musixverse's split feature."}
+								message={"You can split all the earnings from this NFT with the collaborators using Musixverse's split feature."}
 								tooltipLocation={"bottom"}
 							/>
 						</p>
 						<div className="flex flex-col gap-4 text-gray-700">
 							{collaboratorList.map((collaborator, index) => {
 								return (
-									<div key={index} className="flex gap-4">
+									<div key={index} className="flex gap-2">
 										{index == 0 ? (
 											<div className="relative basis-1/2">
 												{collaborator.avatar && (
@@ -439,7 +525,6 @@ const Step3Form = ({
 
 										<div className="basis-2/5">
 											<CollaboratorRoleDropdown
-												// TODO: Need to change the optionsArray by Final data @Pushpit07
 												optionsArray={rolesArray}
 												setCollaboratorRole={setCollaboratorRole}
 												index={index}
@@ -447,12 +532,21 @@ const Step3Form = ({
 											/>
 										</div>
 										{/* Button to remove more collaborators */}
-										{collaboratorList.length !== 1 && (
-											<div className="flex">
-												<button type="button" className="text-gray-400 hover:text-gray-600" onClick={() => handleRemoveClick(index)}>
-													x
-												</button>
+										{index !== 0 ? (
+											<div className="flex justify-center items-center">
+												<div
+													onClick={() => handleRemoveClick(index)}
+													className="w-8 h-8 flex justify-center items-center rounded-lg transition-all duration-200 cursor-pointer dark:text-light-100 hover:bg-zinc-500/20"
+												>
+													<i className="fa-solid fa-xmark"></i>
+												</div>
 											</div>
+										) : (
+											collaboratorList.length !== 1 && (
+												<div className="flex justify-center items-center">
+													<div className="w-8 h-8 flex justify-center items-center"></div>
+												</div>
+											)
 										)}
 									</div>
 								);
@@ -460,7 +554,7 @@ const Step3Form = ({
 						</div>
 
 						{/* Button to add more collaborators */}
-						{collaboratorList.length < 5 && (
+						{collaboratorList.length < 10 && (
 							<div className="flex items-center justify-start mt-4">
 								<button
 									type="button"
@@ -505,7 +599,9 @@ const Step3Form = ({
 							<RequiredAsterisk />
 							<Tooltip
 								labelText={<i className="pl-4 fa-solid fa-circle-info"></i>}
-								message={"Resale royalty entitles artists to a share of the sale price when their NFT is resold. We recommend keeping the resale royalty percentage between 1% to 10%."}
+								message={
+									"Resale royalty entitles artists to a share of the sale price when their NFT is resold. We recommend keeping the resale royalty percentage between 1% to 10%."
+								}
 								tooltipLocation={"bottom"}
 							/>
 						</label>

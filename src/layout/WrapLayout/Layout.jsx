@@ -13,6 +13,7 @@ import Navbar from "./Navbar";
 import Footer from "./Footer";
 import AuthModal from "../Modal/AuthModal";
 import FloatingHelp from "./FloatingHelp";
+import NewAudioPlayer from "../AudioPlayer/NewAudioPlayer";
 
 const Layout = ({ children }) => {
 	const { user, authError } = useMoralis();
@@ -53,6 +54,7 @@ const Layout = ({ children }) => {
 			{children}
 			{isLoading && theme === "light" ? <Loading /> : <LoadingDark />}
 			{!router.pathname.startsWith("/admin") && <FloatingHelp />}
+			<NewAudioPlayer/>
 			<ErrorBox />
 			<SuccessBox />
 			{!router.pathname.startsWith("/admin") && <Footer />}

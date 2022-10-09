@@ -17,8 +17,8 @@ const Verify = () => {
 
 	const [isVerificationRequestSubmittedModalOpen, setVerificationRequestSubmittedModalOpen] = useState(false);
 
-	const realNameDifferentTextMessage = `I just applied for my artist verification badge on @musixverse! My real name is ${artistRealName}.`;
-	const realNameSameTextMessage = `I just applied for my artist verification badge on @musixverse!`;
+	const realNameDifferentTextMessage = `I just applied for my artist verification badge on @musixverse! My username is ${user.attributes.username} and my real name is ${artistRealName}.`;
+	const realNameSameTextMessage = `I just applied for my artist verification badge on @musixverse! My username is ${user.attributes.username}.}`;
 
 	const { data: realName } = useMoralisCloudFunction("getArtistRealName");
 	useEffect(() => {

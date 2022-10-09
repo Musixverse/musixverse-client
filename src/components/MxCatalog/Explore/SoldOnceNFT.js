@@ -29,6 +29,8 @@ const SoldOnceNFT = ({ track }) => {
 				collaboratorList={collaboratorList}
 				otherTokensOfTrack={track.otherTokensOfTrack}
 				soldOnceTrackData={soldOnceTrackData}
+				trackAudio={track.audio.replace("ipfs://", process.env.NEXT_PUBLIC_IPFS_NODE_URL)}
+				trackId={track.trackId}
 			/>
 		);
 	} else return <NFTCard />;

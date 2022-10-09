@@ -20,35 +20,63 @@ export default function ArtistHeader({ username, profileDetails, setShowArtistBi
 	 *******************************/
 	const [isFollowingProfileUser, setIsFollowingProfileUser] = useState(false);
 	const { fetch: fetchIsFollowingUser } = useMoralisCloudFunction("fetchIsFollowingUser", { username: username }, { autoFetch: false });
+	const { fetch: fetchIsFollowingBand } = useMoralisCloudFunction("fetchIsFollowingBand", { username: username }, { autoFetch: false });
 
 	useEffect(() => {
 		if (user) {
-			fetchIsFollowingUser({
-				onSuccess: async (object) => {
-					setIsFollowingProfileUser(object);
-				},
-				onError: (error) => {
-					console.log("fetchIsFollowingUser Error:", error);
-				},
-			});
+			if (profileDetails.isBand) {
+				fetchIsFollowingBand({
+					onSuccess: async (object) => {
+						setIsFollowingProfileUser(object);
+					},
+					onError: (error) => {
+						console.log("fetchIsFollowingBand Error:", error);
+					},
+				});
+			} else {
+				fetchIsFollowingUser({
+					onSuccess: async (object) => {
+						setIsFollowingProfileUser(object);
+					},
+					onError: (error) => {
+						console.log("fetchIsFollowingUser Error:", error);
+					},
+				});
+			}
 		}
-	}, [user, fetchIsFollowingUser]);
+	}, [user, fetchIsFollowingUser, fetchIsFollowingBand, profileDetails.isBand]);
 
 	const { fetch: followUser } = useMoralisCloudFunction("followUser", { username: username }, { autoFetch: false });
+	const { fetch: followBand } = useMoralisCloudFunction("followBand", { username: username }, { autoFetch: false });
 	const followProfileUser = () => {
 		if (user) {
-			followUser({
-				onSuccess: async (object) => {
-					if (object) {
-						setIsFollowingProfileUser(true);
-					} else {
-						setIsFollowingProfileUser(false);
-					}
-				},
-				onError: (error) => {
-					console.log("followUser Error:", error);
-				},
-			});
+			if (profileDetails.isBand) {
+				followBand({
+					onSuccess: async (object) => {
+						if (object) {
+							setIsFollowingProfileUser(true);
+						} else {
+							setIsFollowingProfileUser(false);
+						}
+					},
+					onError: (error) => {
+						console.log("followBand Error:", error);
+					},
+				});
+			} else {
+				followUser({
+					onSuccess: async (object) => {
+						if (object) {
+							setIsFollowingProfileUser(true);
+						} else {
+							setIsFollowingProfileUser(false);
+						}
+					},
+					onError: (error) => {
+						console.log("followUser Error:", error);
+					},
+				});
+			}
 		} else {
 			setAuthModalOpen(true);
 		}
@@ -75,7 +103,7 @@ export default function ArtistHeader({ username, profileDetails, setShowArtistBi
 				<div className="mt-4 mb-4 text-4xl md:text-5xl md:hidden font-tertiary xl:mb-0 xl:mt-2">
 					{profileDetails.name}
 					&nbsp;
-					{profileDetails.isArtistVerified ? (
+					{profileDetails.isArtistVerified || profileDetails.isBandVerified ? (
 						<Image src={mxv_tick} width={20} height={20} alt="mxv_verified" className="ml-10" />
 					) : user && username === user.attributes.username && profileDetails.verificationRequested ? (
 						<span className="ml-2 font-primary text-sm text-gray-500">
@@ -89,7 +117,11 @@ export default function ArtistHeader({ username, profileDetails, setShowArtistBi
 								tooltipLocation="bottom"
 							></Tooltip>
 						</span>
-					) : user && username === user.attributes.username && user.attributes.isArtist ? (
+					) : user &&
+					  username === user.attributes.username &&
+					  !profileDetails.isArtistVerified &&
+					  user.attributes.isArtist &&
+					  !profileDetails.isBand ? (
 						<Link href="/profile/verify" passHref>
 							<a className="ml-4 font-primary text-sm hover:text-primary-100 cursor-pointer hover:underline">Verify profile</a>
 						</Link>
@@ -116,7 +148,7 @@ export default function ArtistHeader({ username, profileDetails, setShowArtistBi
 											followProfileUser();
 										}}
 										greenOutline={true}
-										classes="text-base px-10 py-1.5 block group-hover:hidden dark:bg-dark-100"
+										classes="text-base px-10 py-1.5 block group-hover:hidden dark:bg-dark-100 rounded-full"
 									>
 										Following
 									</CustomButton>
@@ -125,7 +157,7 @@ export default function ArtistHeader({ username, profileDetails, setShowArtistBi
 											followProfileUser();
 										}}
 										error={true}
-										classes="text-base px-10 py-1.5 border-2 border-transparent hidden group-hover:block"
+										classes="text-base px-10 py-1.5 border-2 border-transparent hidden group-hover:block rounded-full"
 									>
 										Unfollow
 									</CustomButton>
@@ -136,7 +168,7 @@ export default function ArtistHeader({ username, profileDetails, setShowArtistBi
 										followProfileUser();
 									}}
 									green={true}
-									classes="text-base px-10 py-1.5 border-2 border-transparent"
+									classes="text-base px-12 py-1.5 border-2 border-transparent rounded-full"
 								>
 									Follow
 								</CustomButton>
@@ -152,7 +184,7 @@ export default function ArtistHeader({ username, profileDetails, setShowArtistBi
 					<div className="md:block hidden font-tertiary mb-3 xl:mb-0 mt-3 xl:mt-2 text-6xl">
 						{profileDetails.name}
 						&nbsp;
-						{profileDetails.isArtistVerified ? (
+						{profileDetails.isArtistVerified || profileDetails.isBandVerified ? (
 							<Image src={mxv_tick} width={20} height={20} alt="mxv_verified" className="ml-10" />
 						) : user && username === user.attributes.username && profileDetails.verificationRequested ? (
 							<span className="ml-2 font-primary text-sm text-gray-500">
@@ -166,7 +198,11 @@ export default function ArtistHeader({ username, profileDetails, setShowArtistBi
 									tooltipLocation="bottom"
 								></Tooltip>
 							</span>
-						) : user && username === user.attributes.username && !profileDetails.isArtistVerified && user.attributes.isArtist ? (
+						) : user &&
+						  username === user.attributes.username &&
+						  !profileDetails.isArtistVerified &&
+						  user.attributes.isArtist &&
+						  !profileDetails.isBand ? (
 							<Link href="/profile/verify" passHref>
 								<a className="ml-4 font-primary text-sm hover:text-primary-100 cursor-pointer hover:underline">Verify profile</a>
 							</Link>

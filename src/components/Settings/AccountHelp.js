@@ -4,7 +4,7 @@ import { DISCORD_SUPPORT_CHANNEL_INVITE_LINK } from "../../constants";
 
 export default function AccountHelp() {
 	return (
-		<div className="flex-1 p-8 pb-12 mb-10 md:p-10 md:pb-14 bg-light-300 dark:bg-dark-100 rounded-xl">
+		<div className="flex-1 p-8 pb-12 md:p-10 md:pb-14 bg-light-300 dark:bg-dark-100 rounded-xl">
 			<h1 className="mb-6 text-3xl xl:text-4xl font-tertiary">ACCOUNT HELP</h1>
 			<p className="max-w-[510px] mb-14 font-secondary text-[15px]">
 				Search for any issues related to your NFT or your account. If you don&apos;t find your issue mention you can contact use

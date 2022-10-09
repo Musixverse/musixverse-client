@@ -3,7 +3,7 @@ import NFTCard from "../../layout/NFTCard/NFTCard";
 import NFTCardsWithPager from "../../layout/NFTCardsWithPager/NFTCardsWithPager";
 import NoNfts from "./NoNfts";
 
-export default function NFTs({ username, tracks, currentlyActive }) {
+export default function NFTs({ username, tracks, currentlyActive, isBand }) {
 	const [nftCards, setNftCards] = useState([]);
 
 	useEffect(() => {
@@ -35,6 +35,7 @@ export default function NFTs({ username, tracks, currentlyActive }) {
 						collaboratorList={collaboratorList}
 						otherTokensOfTrack={track.otherTokensOfTrack}
 						showNumberOfCopies={currentlyActive === "Collection" ? false : true}
+						tokenInCollectionOwnedByBandMember={isBand && currentlyActive === "Collection" ? track.bandMember.name : null}
 					/>
 				);
 

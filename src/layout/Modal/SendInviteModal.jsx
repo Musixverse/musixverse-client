@@ -1,27 +1,13 @@
 import { useContext } from "react";
-import { useRouter } from "next/router";
 import { useMoralisCloudFunction } from "react-moralis";
-import LoadingContext from "../../../../store/loading-context";
-import StatusContext from "../../../../store/status-context";
-import Modal from "../../../layout/Modal/Modal";
-import { isEmailValid } from "../../../utils/Validate";
+import LoadingContext from "../../../store/loading-context";
+import StatusContext from "../../../store/status-context";
+import Modal from "./Modal";
+import { isEmailValid } from "../../utils/Validate";
 
-const SendInviteModal = ({ isOpen, setOpen, invitedArtistEmail, onEmailChange, nftDraftMetadata }) => {
-	const [loading, setLoading] = useContext(LoadingContext);
+const SendInviteModal = ({ isOpen, setOpen, onClose = "", invitedArtistEmail, onEmailChange }) => {
+	const [, setLoading] = useContext(LoadingContext);
 	const [, , setSuccess, setError] = useContext(StatusContext);
-
-	const router = useRouter();
-	const { draft } = router.query;
-	// Save Draft Feature
-	const { fetch: saveNftCreationDraft } = useMoralisCloudFunction("saveNftDraft", { metadata: nftDraftMetadata, draftId: draft }, { autoFetch: false });
-	const saveNftDraft = async () => {
-		await saveNftCreationDraft({
-			onSuccess: async (object) => {},
-			onError: (error) => {
-				console.log("saveNftDraft Error:", error);
-			},
-		});
-	};
 
 	const { fetch: sendInviteEmail } = useMoralisCloudFunction("sendInviteEmail", { email: invitedArtistEmail }, { autoFetch: false });
 	const onFormSubmit = async (e) => {
@@ -42,13 +28,13 @@ const SendInviteModal = ({ isOpen, setOpen, invitedArtistEmail, onEmailChange, n
 		await sendInviteEmail({
 			onSuccess: async (object) => {
 				setLoading(false);
-				await saveNftDraft();
 				setSuccess((prevState) => ({
 					...prevState,
 					title: "Invite sent successfully!",
-					message: `An invitation email has been sent to ${invitedArtistEmail}. A draft of your NFT has also been saved. We will notify you once your friend/collaborator joins Musixverse.`,
+					message: `An invitation email has been sent to ${invitedArtistEmail}. We will notify you once your friend/band member joins Musixverse.`,
 					showSuccessBox: true,
 				}));
+				onClose();
 			},
 			onError: (error) => {
 				setLoading(false);

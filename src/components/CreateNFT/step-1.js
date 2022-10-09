@@ -34,6 +34,7 @@ export default function TrackDetails({
 	collaboratorList,
 	setSaveDraftSuccess,
 	nftDraftMetadata,
+	chosenProfileOrBand,
 }) {
 	/**
 	 * TODO: Need to add the following-
@@ -52,7 +53,7 @@ export default function TrackDetails({
 	const [, setLoading] = useContext(LoadingContext);
 	const [isInvitationModalOpen, setInvitationModalOpen] = useState(false);
 
-	const nftPreviewValues = { trackTitle, coverArtUrl, audioFileUrl, nftPrice, numberOfCopies, step, collaboratorList };
+	const nftPreviewValues = { trackTitle, coverArtUrl, audioFileUrl, nftPrice, numberOfCopies, step, collaboratorList, chosenProfileOrBand };
 	const step1FormValues = {
 		trackTitle,
 		setTrackTitle,
@@ -126,6 +127,7 @@ export default function TrackDetails({
 						email: value,
 					}))
 				}
+				nftDraftMetadata={nftDraftMetadata}
 			/>
 		</>
 	);

@@ -4,7 +4,7 @@ import discord from "../../../public/assets/social/discord.svg";
 
 export default function FloatingHelp() {
 	return (
-		<div className="fixed right-0 bottom-0 z-40 pr-6 pb-6">
+		<div className="fixed right-0 bottom-0 z-40 pr-4 pb-4">
 			<div className="relative group">
 				<ul className="absolute hidden w-full pb-10 group-hover:block -top-36">
 					<ul className="flex flex-col w-full dark:bg-dark-100 bg-light-300 rounded-xl">

@@ -180,7 +180,7 @@ export default function NewAudioPlayer() {
 
 	//Global Audio Player Component
 	return (
-		<div className="md:w-[364px] group transition-[width] duration-500 ease-in-out fixed z-40 overflow-hidden left-6 bottom-6 md:hover:w-[500px]">
+		<div className="md:w-[364px] group transition-[width] duration-500 ease-in-out fixed z-40 overflow-hidden left-4 bottom-4 md:hover:w-[500px]">
 			{/* Normal state bg-div */}
 			<div
 				className="absolute z-0 w-full h-full rounded-xl"
@@ -191,14 +191,14 @@ export default function NewAudioPlayer() {
 					backgroundRepeat: "no-repeat",
 				}}
 			></div>
-			<div className="bg-[rgba(234,232,232,0.2)] backdrop-blur-[4px] backdrop-brightness-105 dark:bg-[rgba(19,19,19,0.2)] dark:backdrop-blur-[4px] dark:backdrop-brightness-105 relative flex items-center justify-between w-full px-6 py-2 group-hover:p-6 group-hover:flex-col rounded-xl">
+			<div className="bg-[rgba(19,19,19,0.2)] backdrop-blur-[4px] backdrop-brightness-105 text-light-100 relative flex items-center justify-between w-full px-6 py-2 group-hover:p-6 group-hover:flex-col rounded-xl">
 				{/* Normal state */}
 				<div className="flex justify-between w-full">
 					<div className="flex flex-col">
 						{trackName.length > 15 ? (
-							<MarqueeText text={trackName} textClass={"font-secondary font-semibold text-xl"} marqueeWidth={"w-[104px] md:w-[150px]"} />
+							<MarqueeText text={trackName} textClass={"font-primary font-semibold text-xl"} marqueeWidth={"w-[104px] md:w-[150px]"} />
 						) : (
-							<h6 className={"font-secondary font-semibold text-xl "}>{trackName}</h6>
+							<h6 className={"font-primary font-semibold text-xl "}>{trackName}</h6>
 						)}
 						<div className="flex items-center">
 							<p className="text-sm font-secondary">{singer}</p>
@@ -210,9 +210,10 @@ export default function NewAudioPlayer() {
 						</div>
 						{/* Price of the nft */}
 						<div className="flex-col hidden mt-1 group-hover:flex">
-							<div className="flex items-center font-semibold">
+							<div className="flex items-center justify-center font-semibold">
 								<Image src={"/assets/matic-logo.svg"} width={16} height={16} alt="matic logo" />
 								<span className="ml-1 sm:text-lg">{nftPrice}</span>
+								<button className="ml-4 px-4 py-1 text-xs bg-primary-100 hover:bg-primary-200 rounded-full">View Track</button>
 							</div>
 						</div>
 					</div>

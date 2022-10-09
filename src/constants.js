@@ -21,6 +21,18 @@ export const MORALIS_APP_ID = process.env.NEXT_PUBLIC_MORALIS_APP_ID;
 export const MORALIS_SERVER_URL = process.env.NEXT_PUBLIC_MORALIS_SERVER_URL;
 
 /**************************************************************************/
+/******************    Array of default avatar urls   *********************/
+/**************************************************************************/
+export const defaultAvatarUrls = [
+	"https://ipfs.moralis.io:2053/ipfs/QmU7YuBCLpu5E5sgL3LW38KUvgDqX6qDERsxX4qtxd3U5v",
+	"https://ipfs.moralis.io:2053/ipfs/QmcY5bjpmP7DLtuMH1emM2akEzb9y8rjgm4VUfdeN22Bze",
+	"https://ipfs.moralis.io:2053/ipfs/QmdDoE5NGrT6scSUHDSNTwqVXP4WpPEpAALKH1yrLUdCwm",
+	"https://ipfs.moralis.io:2053/ipfs/QmUFw2VJnZirSukMpUs7U4gMeKBw1v321NJt26D5s4PuBL",
+	"https://ipfs.moralis.io:2053/ipfs/QmetsQ5gRrGb8vgySJPB1vNeaQVBMWbqhr4MJ9THg5rFyM",
+	"https://ipfs.moralis.io:2053/ipfs/QmQLG2gWQjZK8KD2cifDymfKtYfXjraGAWYAn3XMhz2UCS",
+];
+
+/**************************************************************************/
 /************************    TRACK ATTRIBUTES    **************************/
 /**************************************************************************/
 export const trackOriginArray = [

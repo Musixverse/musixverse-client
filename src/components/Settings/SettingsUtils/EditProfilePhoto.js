@@ -29,7 +29,7 @@ export default function EditProfilePhoto({ avatar, setAvatar, handleSave }) {
 			// setProfilePicture(croppedImage);
 			// Get the File from DataURL
 			const uploadedFile = convertDataURLtoFile(croppedImage, "file");
-			console.log("Compressed file size: ",uploadedFile.size);
+			console.log("Compressed file size: ", uploadedFile.size);
 			// Get the uploadFileOnIPFS async function
 
 			uploadFileToIPFS(Moralis, uploadedFile).then((url) => {
@@ -52,25 +52,29 @@ export default function EditProfilePhoto({ avatar, setAvatar, handleSave }) {
 			<div className="flex flex-col">
 				<p className="mb-5 text-sm font-medium md:text-base font-secondary">
 					Profile Picture
-					<Tooltip 
-					 	labelText={<i className="ml-2 text-base md:text-lg fa fa-info-circle"></i>}
+					<Tooltip
+						labelText={<i className="ml-2 text-base md:text-lg fa fa-info-circle"></i>}
 						message={"Recommended dimensions: 		640 x 640 px"}
 						tooltipLocation={"bottom"}
 					/>
 				</p>
 				<label className="relative cursor-pointer w-fit" htmlFor="upload-image-inp">
-					<div
-						className="w-[130px] h-[130px] md:w-[150px] md:h-[150px] rounded-full relative overflow-hidden"
-					>
+					<div className="w-[130px] h-[130px] md:w-[150px] md:h-[150px] rounded-full relative overflow-hidden">
 						<Image
-							src={croppedImage? croppedImage : avatar? avatar:"https://ipfs.moralis.io:2053/ipfs/Qmcn1aZ4PKUUzwpTncuSbruwLD98dtiNqvoJG5zm8EMwXZ"}
+							src={
+								croppedImage
+									? croppedImage
+									: avatar
+									? avatar
+									: "https://ipfs.moralis.io:2053/ipfs/Qmcn1aZ4PKUUzwpTncuSbruwLD98dtiNqvoJG5zm8EMwXZ"
+							}
 							objectFit="contain"
 							layout="fill"
 							alt="Current Avatar"
 							priority
 						/>
 					</div>
-					
+
 					{/* <img
 						className="w-[130px] h-[130px] md:w-[150px] md:h-[150px] rounded-full"
 						ref={profilePicture}
@@ -93,6 +97,7 @@ export default function EditProfilePhoto({ avatar, setAvatar, handleSave }) {
 						<i className="far fa-edit text-light-200"></i>
 					</label>
 				</label>
+
 				<div className="flex h-full">
 					<div className="self-end mb-1" onClick={handleSave}>
 						<CustomButton green={true} classes="text-sm px-8 py-3">

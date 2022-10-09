@@ -10,7 +10,7 @@ export default function Notification({ heading, description, toggleSwitch, toggl
 				</div>
 				{toggleSwitch ? <ToggleButton toggleState={toggleState} setToggleState={setToggleState} /> : null}
 			</div>
-			{lineBreak && <div className="flex-grow border-t-[3px] border-[#9a9a9a]"></div>}
+			{lineBreak && <div className="flex-grow border-t-[2px] border-[#9a9a9a]"></div>}
 		</>
 	);
 }

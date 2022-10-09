@@ -8,6 +8,7 @@ import Router from "next/router";
 import { useMoralis, useNewMoralisObject } from "react-moralis";
 import StatusContext from "../../../store/status-context";
 import { isUsernameValidAndAvailable, isEmailValidAndAvailable } from "../../utils/Validate";
+import { defaultAvatarUrls } from "../../constants";
 
 export default function BasicDetails() {
 	const [, , , setError] = useContext(StatusContext);
@@ -15,16 +16,7 @@ export default function BasicDetails() {
 	const { save: saveUserInfo } = useNewMoralisObject("UserInfo");
 	const { save: saveUserPreferences } = useNewMoralisObject("UserPreferences");
 
-	const [avatar, setAvatar] = useState("https://ipfs.moralis.io:2053/ipfs/QmbeQE3qktnDF7DZnsi51MoBNHTM8b3uMKyLQkwHPy8WW7");
-	// Array of default avatar urls
-	const defaultAvatarUrls = [
-		"https://ipfs.moralis.io:2053/ipfs/QmbeQE3qktnDF7DZnsi51MoBNHTM8b3uMKyLQkwHPy8WW7",
-		"https://ipfs.moralis.io:2053/ipfs/QmRnHRffz2gzAdzsf8TdXGR4zAQA6EBd7gcsB9owgD1Soy",
-		"https://ipfs.moralis.io:2053/ipfs/QmY1cUn6shTZafoZmdHxtpBJYV3MzTg9LGhe8vtAXdqDsv",
-		"https://ipfs.moralis.io:2053/ipfs/QmTe7MQehzR426oU8MvgksAEUr5ZzGnx42GmsT2KQSSkjd",
-		"https://ipfs.moralis.io:2053/ipfs/QmaYmZEt1qohGeDF8YupUM1Q786knd75iCb8jH3vGyV5xy",
-		"https://ipfs.moralis.io:2053/ipfs/QmSYaJ1bS53MxbBvVZfoWcvis1JoS46ESJY9EJcAGNXaNk",
-	];
+	const [avatar, setAvatar] = useState(defaultAvatarUrls[0]);
 
 	const nameRef = useRef(null);
 	const usernameRef = useRef(null);

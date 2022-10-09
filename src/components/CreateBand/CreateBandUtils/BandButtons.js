@@ -9,7 +9,7 @@ const BandButtons = ({}) => {
 			<div className="flex flex-col justify-end max-w-xs mt-4 space-x-0 space-y-3 sm:max-w-none sm:flex-row sm:space-y-0 sm:space-x-3 md:self-end">
 				<button
 					type="button"
-					onClick={() => router.push("/settings/dashboard")}
+					onClick={() => router.push("/settings/band-dashboard")}
 					className="flex items-center px-10 py-3 text-sm font-primary font-bold rounded-md bg-light-100 hover:bg-[#dde7e7e3] dark:bg-[#323232] dark:hover:bg-dark-100 dark:border-[#323232]"
 				>
 					Cancel

@@ -1,4 +1,4 @@
-export default function UserInfo({ username, setUsername, name, setName, email, setEmail, bio, setBio }) {
+export default function UserInfo({ username, setUsername, name, setName, email, setEmail, bio, setBio, isBandSettings }) {
 	return (
 		<div className="flex-col flex-1 mt-5 md:mt-7">
 			<div className="flex space-x-2 md:space-x-4">
@@ -26,18 +26,20 @@ export default function UserInfo({ username, setUsername, name, setName, email, 
 						className="dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-100 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-light-100 focus:border-primary-100"
 					/>
 				</div>
-				<div className="flex-1 text-sm font-medium md:text-base font-secondary">
-					<p className="mb-1">Email Address</p>
-					<input
-						type="email"
-						value={email}
-						onChange={(e) => setEmail(e.target.value)}
-						id="email"
-						placeholder="Enter your email"
-						spellCheck={false}
-						className="dark:bg-[#242424] dark:border-[#323232] dark:focus:border-primary-100 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-light-100 focus:border-primary-100"
-					/>
-				</div>
+				{!isBandSettings && (
+					<div className="flex-1 text-sm font-medium md:text-base font-secondary">
+						<p className="mb-1">Email Address</p>
+						<input
+							type="email"
+							value={email}
+							onChange={(e) => setEmail(e.target.value)}
+							id="email"
+							placeholder="Enter your email"
+							spellCheck={false}
+							className="dark:bg-[#242424] dark:border-[#323232] dark:focus:border-primary-100 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-light-100 focus:border-primary-100"
+						/>
+					</div>
+				)}
 			</div>
 			<div className="flex-1 mt-3 font-medium font-secondary">
 				<p className="mb-1 text-sm md:text-base">Bio</p>

@@ -10,6 +10,7 @@ import Tooltip from "../../layout/Tooltip/Tooltip";
 import LoadingContext from "../../../store/loading-context";
 import StatusContext from "../../../store/status-context";
 import { isBandUsernameValidAndAvailable } from "../../utils/Validate";
+import { defaultAvatarUrls } from "../../constants";
 
 const CreateBandPage = () => {
 	const { Moralis, user } = useMoralis();
@@ -19,15 +20,6 @@ const CreateBandPage = () => {
 	const [bandName, setBandName] = useState("");
 	const [bandUsername, setBandUsername] = useState("");
 	const [bandDescription, setBandDescription] = useState("");
-	// Array of default avatar urls
-	const defaultAvatarUrls = [
-		"https://ipfs.moralis.io:2053/ipfs/QmbeQE3qktnDF7DZnsi51MoBNHTM8b3uMKyLQkwHPy8WW7",
-		"https://ipfs.moralis.io:2053/ipfs/QmRnHRffz2gzAdzsf8TdXGR4zAQA6EBd7gcsB9owgD1Soy",
-		"https://ipfs.moralis.io:2053/ipfs/QmY1cUn6shTZafoZmdHxtpBJYV3MzTg9LGhe8vtAXdqDsv",
-		"https://ipfs.moralis.io:2053/ipfs/QmTe7MQehzR426oU8MvgksAEUr5ZzGnx42GmsT2KQSSkjd",
-		"https://ipfs.moralis.io:2053/ipfs/QmaYmZEt1qohGeDF8YupUM1Q786knd75iCb8jH3vGyV5xy",
-		"https://ipfs.moralis.io:2053/ipfs/QmSYaJ1bS53MxbBvVZfoWcvis1JoS46ESJY9EJcAGNXaNk",
-	];
 	const [avatar, setAvatar] = useState(defaultAvatarUrls[0]);
 	const [bandMembers, setBandMembers] = useState([{ userId: "", name: "", username: "", role: "", address: "", avatar: "", hasAcceptedBandInvite: false }]);
 
@@ -264,6 +256,9 @@ const CreateBandPage = () => {
 										/>
 										<p className="flex justify-start text-sm text-[#777777]">
 											We will send band invite emails to all members once you click the Create button.
+										</p>
+										<p className="flex justify-start text-sm text-[#777777]">
+											You will not be able to create NFTs until all band members have verified their band invite email.
 										</p>
 									</div>
 

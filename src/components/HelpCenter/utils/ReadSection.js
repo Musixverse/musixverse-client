@@ -4,7 +4,7 @@ export default function ReadSection(){
     return (
         <div className="flex flex-col items-center justify-center w-full">
             <h1 className="text-center text-3xl">Recommended Reads</h1>
-            <div className="grid grid-cols-3 gap-5 mt-10">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mt-10">
                 <div className="bg-white text-lg font-primary p-12 text-center rounded-lg cursor-pointer shadow hover:shadow-lg duration-300 dark:bg-dark-100 dark:shadow-slate-400">
                     <Link href="/help-center/blog/how-to-open-account">How do I open a Musixverse account?</Link>
                 </div>

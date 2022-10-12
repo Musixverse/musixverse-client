@@ -7,7 +7,8 @@ import ScrollToPageTop from "../../utils/ScrollToPageTop";
 import CreateNFTIntro from "../../components/CreateNFT/step-0";
 import TrackDetails from "../../components/CreateNFT/step-1";
 import ComprehensiveDetails from "../../components/CreateNFT/step-2";
-import PricingAndSplits from "../../components/CreateNFT/step-3";
+import UnlockableContent from "../../components/CreateNFT/step-3";
+import PricingAndSplits from "../../components/CreateNFT/step-4";
 import SuccessModal from "../../components/CreateNFT/CreateNFTUtils/SuccessModal";
 import SaveDraftSuccessModal from "../../components/CreateNFT/CreateNFTUtils/SaveDraftSuccessModal";
 import { mintTrackNFT } from "../../utils/smart-contract/functions";
@@ -497,6 +498,20 @@ const CreateNFT = () => {
 	};
 	const step3Values = {
 		step,
+		nextStep,
+		prevStep,
+		trackTitle,
+		coverArtUrl,
+		audioFileUrl,
+		nftPrice,
+		numberOfCopies,
+		collaboratorList,
+		setSaveDraftSuccess,
+		nftDraftMetadata,
+		chosenProfileOrBand,
+	};
+	const step4Values = {
+		step,
 		prevStep,
 		coverArtUrl,
 		audioFileUrl,
@@ -568,12 +583,26 @@ const CreateNFT = () => {
 			return user ? (
 				<>
 					<Head>
+						<title>Musixverse | Create NFT - Unlockable Content</title>
+						<meta name="description" content={meta_description} />
+						<link rel="icon" href="/favicon.ico" />
+					</Head>
+					<ScrollToPageTop samePage={true} changingValue={step} />
+					<UnlockableContent {...step3Values} />
+					<SaveDraftSuccessModal isOpen={saveDraftSuccess} setOpen={setSaveDraftSuccess} setStep={setStep} />
+				</>
+			) : null;
+
+		case 4:
+			return user ? (
+				<>
+					<Head>
 						<title>Musixverse | Create NFT - Pricing and Splits</title>
 						<meta name="description" content={meta_description} />
 						<link rel="icon" href="/favicon.ico" />
 					</Head>
 					<ScrollToPageTop samePage={true} changingValue={step} />
-					<PricingAndSplits {...step3Values} />
+					<PricingAndSplits {...step4Values} />
 					<SuccessModal isOpen={createNFTSuccess} />
 					<SaveDraftSuccessModal isOpen={saveDraftSuccess} setOpen={setSaveDraftSuccess} setStep={setStep} />
 				</>

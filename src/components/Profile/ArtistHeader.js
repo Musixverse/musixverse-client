@@ -134,7 +134,7 @@ export default function ArtistHeader({ username, profileDetails, setShowArtistBi
 					{user && username === user.attributes.username ? (
 						<Link href="/settings/profile-settings" passHref>
 							<div className="m-auto mt-4">
-								<CustomButton green={true} classes="text-sm px-8 py-3">
+								<CustomButton green={true} classes="text-base px-8 py-1.5 border-2 border-transparent rounded-full">
 									Edit profile <i className="ml-1 fas fa-edit"></i>
 								</CustomButton>
 							</div>

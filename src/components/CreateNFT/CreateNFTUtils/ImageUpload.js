@@ -37,12 +37,12 @@ export default function ImageUpload({ coverArtUrl, setCoverArtUrl, setCoverArtMi
 
 	const handleImageUpload = (event) => {
 		//If file size is > 10MB show error box
-		if(event.target.files[0].size > 10000000){
+		if (event.target.files[0].size > 10000000) {
 			setError({
-				title:"File size too large",
+				title: "File size too large",
 				message: "Uploaded image should be less than 10MB",
 				showErrorBox: true,
-			})
+			});
 			nftCoverArt.current.value = "";
 			return;
 		}

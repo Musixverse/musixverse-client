@@ -13,7 +13,7 @@ export default function Settings() {
 	const { user, setUserData, Moralis, isInitialized, refetchUserData } = useMoralis();
 	const router = useRouter();
 	// Context Management
-	const [isLoading, setLoading] = useContext(LoadingContext);
+	const [, setLoading] = useContext(LoadingContext);
 	const [, , setSuccess, setError] = useContext(StatusContext);
 	// State Management
 	const [avatar, setAvatar] = useState("");
@@ -65,7 +65,7 @@ export default function Settings() {
 			setFacebook(userInfo[0].attributes.facebook ? userInfo[0].attributes.facebook : "");
 			setLoading(false);
 		}
-	}, [userInfo]);
+	}, [userInfo, setLoading]);
 
 	// Update User Information
 	const userData = {

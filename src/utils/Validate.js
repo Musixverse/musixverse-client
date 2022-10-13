@@ -48,6 +48,8 @@ export async function isEmailValidAndAvailable(email) {
 }
 
 export async function isUsernameValidAndAvailable(username) {
+	if (username.trim().length === 0) return { status: false, title: "Username can't be empty", message: "Please choose another username" };
+
 	const usernameRegex = /^\w+$/;
 	if (username.length < 2) {
 		return {
@@ -61,7 +63,7 @@ export async function isUsernameValidAndAvailable(username) {
 		};
 	}
 	const usernameExists = await Moralis.Cloud.run("checkUsernameAvailability", { username: username });
-	if (usernameExists || username === "band") {
+	if (usernameExists || username === "band" || username === "user" || username === "admin") {
 		return {
 			status: false,
 			title: "Username already exists!",
@@ -73,7 +75,7 @@ export async function isUsernameValidAndAvailable(username) {
 }
 
 export function isNameValid(name) {
-	if (name.trim().length === 0) return { status: false, message: "Name field can't be empty" };
+	if (name.trim().length === 0) return { status: false, title: "Name can't be empty", message: "Please choose another name" };
 
 	return { status: true, message: "" };
 }
@@ -92,6 +94,8 @@ export function isIsrcValid(isrc) {
 }
 
 export async function isBandUsernameValidAndAvailable(username) {
+	if (username.trim().length === 0) return { status: false, title: "Username can't be empty", message: "Please choose another username" };
+
 	const usernameRegex = /^\w+$/;
 	if (username.length < 2) {
 		return {
@@ -105,7 +109,7 @@ export async function isBandUsernameValidAndAvailable(username) {
 		};
 	}
 	const usernameExists = await Moralis.Cloud.run("checkBandUsernameAvailability", { username: username });
-	if (usernameExists || username === "band") {
+	if (usernameExists || username === "band" || username === "user" || username === "admin") {
 		return {
 			status: false,
 			title: "Band username already exists!",

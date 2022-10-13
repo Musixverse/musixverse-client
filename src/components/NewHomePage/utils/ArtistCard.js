@@ -13,7 +13,7 @@ export default function ArtistCard({imageURL,name,description}){
                         <i className="fa-solid fa-arrow-right"></i>
                     </Link>
                 </span>
-                <div className="z-10 p-8 align-bottom">
+                <div className="z-10 p-8 align-bottom text-white">
                     <h1 className="font-tertiary text-2xl uppercase">{name}</h1>
                     <p className="font-primary text-sm mt-2">{description}</p>
                 </div>

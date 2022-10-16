@@ -28,7 +28,13 @@ export default function ProfileSettings({
 	walletAddress,
 }) {
 	return (
-		<div className="flex-1 mb-32">
+		<form
+			className="flex-1 mb-32"
+			onSubmit={(e) => {
+				e.preventDefault();
+				handleSave();
+			}}
+		>
 			{/* Section 1 */}
 			<ProfileSection1
 				avatar={avatar}
@@ -43,7 +49,6 @@ export default function ProfileSettings({
 				setEmail={setEmail}
 				bio={bio}
 				setBio={setBio}
-				handleSave={handleSave}
 			/>
 			{/* Section 2 */}
 			<ProfileSection2
@@ -55,10 +60,9 @@ export default function ProfileSettings({
 				setTwitter={setTwitter}
 				facebook={facebook}
 				setFacebook={setFacebook}
-				handleSave={handleSave}
 			/>
 			{/* Section 3 */}
 			<ProfileSection3 balance={balance} walletAddress={walletAddress} />
-		</div>
+		</form>
 	);
 }

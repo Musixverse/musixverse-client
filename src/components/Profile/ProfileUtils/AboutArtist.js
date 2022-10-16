@@ -2,12 +2,14 @@ import { useState, useEffect, useContext } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useMoralis } from "react-moralis";
+import { useTheme } from "next-themes";
 import styles from "../../../../styles/Profile/ArtistHeader.module.css";
 import StatusContext from "../../../../store/status-context";
 import AuthModalContext from "../../../../store/authModal-context";
 import Tooltip from "../../../layout/Tooltip/Tooltip";
 
 export default function AboutArtist({ username, name, bio, country, createdAt, setShowArtistBioModal, setShowReportModal }) {
+	const { theme } = useTheme();
 	const { user } = useMoralis();
 	const [, setAuthModalOpen] = useContext(AuthModalContext);
 	const [joined, setJoined] = useState(false);
@@ -20,8 +22,9 @@ export default function AboutArtist({ username, name, bio, country, createdAt, s
 		}
 	}, [createdAt]);
 
+	const maxBioCharacters = 800;
 	let bioCharacters = bio;
-	if (bioCharacters && bioCharacters.length > 250) bioCharacters = bioCharacters.substring(0, 250) + "...";
+	if (bioCharacters && bioCharacters.length > maxBioCharacters) bioCharacters = bioCharacters.substring(0, maxBioCharacters) + "...";
 
 	const { asPath } = useRouter();
 	const [, , setSuccess] = useContext(StatusContext);
@@ -30,6 +33,11 @@ export default function AboutArtist({ username, name, bio, country, createdAt, s
 	useEffect(() => {
 		setCurrentPageLink(window.location.origin + asPath);
 	}, [asPath]);
+
+	useEffect(() => {
+		console.log("bioCharacters:", bioCharacters);
+		console.log("bio && bioCharacters && bioCharacters.length < maxBioCharacters", bio && bioCharacters && bioCharacters.length < maxBioCharacters);
+	}, [bio, bioCharacters]);
 
 	const copyToClipboard = async () => {
 		await navigator.clipboard.writeText(currentPageLink);
@@ -50,11 +58,18 @@ export default function AboutArtist({ username, name, bio, country, createdAt, s
 				{bio ? (
 					<>
 						<h4 className="font-bold text-[18px] text-center md:text-start">About</h4>
-						{bioCharacters.length < 250 ? (
-							<p className={"text-[12px] md:text-[15px] pt-3"}>{bio}</p>
+						{bioCharacters.length < maxBioCharacters ? (
+							<p className={"text-[12px] md:text-[15px] pt-3 whitespace-pre-wrap"}>{bio}</p>
 						) : (
 							<>
-								<p className={"text-[12px] md:text-[15px] pt-3 " + styles["about_us"]}>{bioCharacters}</p>
+								<p
+									className={
+										"text-[12px] md:text-[15px] pt-3 whitespace-pre-wrap " +
+										(theme === "light" ? styles["about_us"] : styles["about_us_dark"])
+									}
+								>
+									{bioCharacters}
+								</p>
 								<button
 									onClick={() => setShowArtistBioModal(true)}
 									className="text-primary-200 hover:text-primary-300 text-[12px] md:text-[15px] mt-2"
@@ -80,7 +95,12 @@ export default function AboutArtist({ username, name, bio, country, createdAt, s
 			</div>
 
 			{/* footer section */}
-			<div className={styles["section2__artist-footer"]}>
+			<div
+				className={
+					(bio && bioCharacters && bioCharacters.length < maxBioCharacters ? "mt-8" : bio && bioCharacters ? "mt-6" : "mt-14") +
+					" w-full flex justify-between items-end xl:items-center text-[#818181] text-[12px] md:text-[15px] font-medium"
+				}
+			>
 				<div className="space-x-2 md:space-x-5">
 					{country ? <span> {country} </span> : null}
 					<span>{createdAt ? joined : null}</span>

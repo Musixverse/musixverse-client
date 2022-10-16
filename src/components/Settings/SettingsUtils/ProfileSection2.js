@@ -1,7 +1,7 @@
 import CustomButton from "../../../layout/CustomButton";
 import ConnectionButton from "../../../layout/ConnectionButton";
 
-export default function ProfileSection2({ spotify, setSpotify, instagram, setInstagram, twitter, setTwitter, facebook, setFacebook, handleSave }) {
+export default function ProfileSection2({ spotify, setSpotify, instagram, setInstagram, twitter, setTwitter, facebook, setFacebook }) {
 	// const authorizeTwitter = async () => {
 	// 	setLoading(true);
 	// 	await fetch(process.env.NEXT_PUBLIC_MUSIXVERSE_SERVER_BASE_URL + "/api/twitter-auth/authorize", {
@@ -182,11 +182,10 @@ export default function ProfileSection2({ spotify, setSpotify, instagram, setIns
 					</div>
 				</div>
 			</div>
-			<div onClick={handleSave}>
-				<CustomButton green={true} classes="text-sm px-8 py-3">
-					Save Changes
-				</CustomButton>
-			</div>
+
+			<CustomButton green={true} classes="text-sm px-8 py-3">
+				Save Changes
+			</CustomButton>
 		</div>
 	);
 }

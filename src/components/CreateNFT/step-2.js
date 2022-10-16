@@ -86,6 +86,7 @@ export default function ComprehensiveDetails({
 				<form
 					onSubmit={async (e) => {
 						e.preventDefault();
+
 						setLoading(true);
 						if (tags.length < 1) {
 							setError({
@@ -93,20 +94,25 @@ export default function ComprehensiveDetails({
 								message: "You need to select at least 1 tag to proceed.",
 								showErrorBox: true,
 							});
-						} else if (isrc) {
+							setLoading(false);
+							return;
+						}
+						if (isrc) {
 							// ISRC CHECK
-							const isrcCheck = await isIsrcValid(isrc);
+							const isrcCheck = isIsrcValid(isrc);
 							if (isrcCheck.status === false) {
 								setError({
 									title: isrcCheck.title,
 									message: isrcCheck.message,
 									showErrorBox: true,
 								});
+								setLoading(false);
+								return;
 							}
-						} else {
-							await saveNftCreationProgress(nftDraftMetadata, draft);
-							if (step < 3) nextStep();
 						}
+
+						await saveNftCreationProgress(nftDraftMetadata, draft);
+						if (step < 3) nextStep();
 						setLoading(false);
 					}}
 				>

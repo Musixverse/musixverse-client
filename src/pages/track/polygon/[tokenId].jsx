@@ -2,7 +2,9 @@ import Head from "next/head";
 import Moralis from "moralis/node";
 import { meta_description } from "../../../constants";
 import TrackHeader from "../../../components/TrackInfo/TrackHeader";
+import UnlockableContent from "../../../components/TrackInfo/UnlockableContent";
 import TrackDetails from "../../../components/TrackInfo/TrackDetails";
+import Collaborators from "../../../components/TrackInfo/Collaborators";
 import PurchaseInfo from "../../../components/TrackInfo/PurchaseInfo";
 import Activity from "../../../components/TrackInfo/Activity";
 import SimilarTokens from "../../../components/TrackInfo/SimilarTokens";
@@ -16,6 +18,7 @@ export async function getStaticProps(context) {
 		// Fetch token details
 		const tokenDetails = await Moralis.Cloud.run("fetchTokenDetails", { tokenId: tokenId });
 
+		const trackId = tokenDetails.trackId;
 		const metadata = JSON.parse(JSON.stringify(tokenDetails.metadata));
 		const otherTokensOfTrack = tokenDetails.otherTokensOfTrack;
 		const onSale = tokenDetails.onSale;
@@ -37,6 +40,7 @@ export async function getStaticProps(context) {
 		// Passing data to the Page using props
 		return {
 			props: {
+				trackId,
 				tokenId,
 				localTokenId,
 				metadata,
@@ -64,6 +68,7 @@ export function getStaticPaths() {
 }
 
 export default function TrackInfo({
+	trackId,
 	tokenId,
 	localTokenId,
 	metadata,
@@ -102,7 +107,9 @@ export default function TrackInfo({
 						otherTokensOfTrack={otherTokensOfTrack}
 						onSale={onSale}
 					/>
+					<UnlockableContent />
 					<TrackDetails tokenId={tokenId} metadata={metadata} collaboratorUsers={collaboratorUsers} />
+					<Collaborators bandId={metadata.bandId} collaborators={metadata.collaborators} collaboratorUsers={collaboratorUsers} />
 					<div className="grid grid-cols-1 md:grid-cols-9 xl:grid-cols-5 gap-y-4 md:gap-6 mt-10">
 						<PurchaseInfo
 							tokenId={tokenId}
@@ -115,6 +122,8 @@ export default function TrackInfo({
 					</div>
 					{otherTokensOfTrack.length > 0 ? (
 						<SimilarTokens
+							trackId={trackId}
+							audio={metadata.audio.replace("ipfs://", process.env.NEXT_PUBLIC_IPFS_NODE_URL)}
 							otherTokensOfTrack={otherTokensOfTrack}
 							metadata={metadata}
 							isArtistVerified={artist.isArtistVerified}

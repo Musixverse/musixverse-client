@@ -7,7 +7,7 @@ const ArtistBioModal = ({ isOpen, setOpen, name, bio }) => {
 			classes="max-w-[48rem]"
 			title={<div className="flex ml-8">About {name}</div>}
 			titleClasses="justify-start text-start"
-			content={<div className="text-start">{bio}</div>}
+			content={<div className="text-start whitespace-pre-wrap">{bio}</div>}
 			onClose={() => {
 				setOpen(false);
 			}}

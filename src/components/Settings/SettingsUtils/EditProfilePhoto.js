@@ -8,7 +8,7 @@ import CropImageModal from "../../CreateNFT/CreateNFTUtils/CropImageModal";
 import Image from "next/image";
 import Tooltip from "../../../layout/Tooltip/Tooltip";
 
-export default function EditProfilePhoto({ avatar, setAvatar, handleSave }) {
+export default function EditProfilePhoto({ avatar, setAvatar }) {
 	// const profilePicture = useRef(null);
 	const profilePictureInput = useRef(null);
 	const { Moralis } = useMoralis();
@@ -99,7 +99,7 @@ export default function EditProfilePhoto({ avatar, setAvatar, handleSave }) {
 				</label>
 
 				<div className="flex h-full">
-					<div className="self-end mb-1" onClick={handleSave}>
+					<div className="self-end mb-1">
 						<CustomButton green={true} classes="text-sm px-8 py-3">
 							Save Changes
 						</CustomButton>

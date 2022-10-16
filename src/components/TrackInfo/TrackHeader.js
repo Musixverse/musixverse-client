@@ -51,7 +51,7 @@ export default function TrackHeader({
 					</div>
 
 					<div className="absolute hidden group-hover:block pt-2">
-						{(artworkInfo.invitedArtistId || artworkInfo.artistAddress) && artworkArtistInfo ? (
+						{artworkArtistInfo && (artworkInfo.invitedArtistId || artworkInfo.artistAddress) && artworkArtistInfo.avatar ? (
 							<Link href={`/profile/${artworkArtistInfo.username}`} className="cursor-pointer">
 								<a target="_blank" rel="noopener noreferrer">
 									<div className="flex items-center mb-2 font-secondary text-sm">

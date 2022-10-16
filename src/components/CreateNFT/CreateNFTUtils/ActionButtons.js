@@ -5,7 +5,7 @@ import RequiredAsterisk from "../../../layout/RequiredAsterisk";
 import LoadingContext from "../../../../store/loading-context";
 
 const ActionButtons = ({ step, prevStep, setSaveDraftSuccess, nftDraftMetadata }) => {
-	const [loading, setLoading] = useContext(LoadingContext);
+	const [, setLoading] = useContext(LoadingContext);
 
 	const router = useRouter();
 	const { draft } = router.query;
@@ -53,7 +53,7 @@ const ActionButtons = ({ step, prevStep, setSaveDraftSuccess, nftDraftMetadata }
 					type="submit"
 					className="flex items-center justify-between px-4 py-3 text-sm font-bold rounded-md font-primary bg-primary-100 hover:bg-primary-200 text-light-100"
 				>
-					{step === 3 ? "Create" : "Next"}
+					{step === 4 ? "Create" : "Next"}
 					<span className="ml-24 text-xl">
 						<i className="fa-solid fa-arrow-right-long"></i>
 					</span>

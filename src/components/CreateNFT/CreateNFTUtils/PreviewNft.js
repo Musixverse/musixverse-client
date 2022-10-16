@@ -45,7 +45,7 @@ export default function PreviewNft({ trackTitle, coverArtUrl, audioFileUrl, nftP
 
 	return (
 		<div className="flex-1 lg:mt-0">
-			<p className="mb-16 font-semibold font-secondary">STEP {step} OF 3</p>
+			<p className="mb-16 font-semibold font-secondary">STEP {step} OF 4</p>
 			{/* Uploaded Art */}
 			<div className="relative w-[220px] h-[220px] overflow-hidden rounded-t-xl">
 				{/* Cover art of NFT */}
@@ -65,7 +65,7 @@ export default function PreviewNft({ trackTitle, coverArtUrl, audioFileUrl, nftP
 							onClick={playTrackHandler}
 							className="h-[40px] w-[40px] bg-primary-100 rounded-full flex items-center justify-center"
 						>
-							<i className="text-lg fas fa-play text-dark-200"></i>
+							<i className="text-lg fas fa-play text-light-200"></i>
 						</button>
 						<audio ref={audio} className="hidden" src={audioFileUrl} onEnded={resetProgress}></audio>
 					</div>

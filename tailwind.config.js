@@ -7,6 +7,7 @@ module.exports = {
 			animation: {
 				marquee: "marquee 10s linear infinite",
 				marquee2: "marquee2 10s linear infinite",
+				slowSpin: "slowSpin 100s ease infinite",
 			},
 			keyframes: {
 				marquee: {
@@ -17,6 +18,9 @@ module.exports = {
 					"0%": { transform: "translateX(100%)" },
 					"100%": { transform: "translateX(0%)" },
 				},
+				slowSpin: {
+					"to": { transform: "rotate(360deg)"},
+				}
 			},
 			width: {
 				responsive: "clamp(367px, calc(22.9375rem + ((1vw - 4.28px) * 45.7775)), 1050px)",

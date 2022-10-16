@@ -2,7 +2,9 @@ import Head from "next/head";
 import Moralis from "moralis/node";
 import { meta_description } from "../../../constants";
 import TrackHeader from "../../../components/TrackInfo/TrackHeader";
+import UnlockableContent from "../../../components/TrackInfo/UnlockableContent";
 import TrackDetails from "../../../components/TrackInfo/TrackDetails";
+import Collaborators from "../../../components/TrackInfo/Collaborators";
 import PurchaseInfo from "../../../components/TrackInfo/PurchaseInfo";
 import Activity from "../../../components/TrackInfo/Activity";
 import SimilarTokens from "../../../components/TrackInfo/SimilarTokens";
@@ -102,7 +104,9 @@ export default function TrackInfo({
 						otherTokensOfTrack={otherTokensOfTrack}
 						onSale={onSale}
 					/>
+					<UnlockableContent />
 					<TrackDetails tokenId={tokenId} metadata={metadata} collaboratorUsers={collaboratorUsers} />
+					<Collaborators bandId={metadata.bandId} collaborators={metadata.collaborators} collaboratorUsers={collaboratorUsers} />
 					<div className="grid grid-cols-1 md:grid-cols-9 xl:grid-cols-5 gap-y-4 md:gap-6 mt-10">
 						<PurchaseInfo
 							tokenId={tokenId}

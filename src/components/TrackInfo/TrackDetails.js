@@ -1,8 +1,8 @@
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useTheme } from "next-themes";
 import styles from "../../../styles/TrackInfo/TrackDetails.module.css";
-import TrackDetail from "./TrackInfoUtils/TrackDetail";
 import spotifyB from "../../../public/assets/logos/spotify_logo_b.svg";
 import spotifyW from "../../../public/assets/logos/spotify_logo_w.svg";
 import appleB from "../../../public/assets/logos/apple_logo_b.svg";
@@ -11,6 +11,7 @@ import amazonB from "../../../public/assets/logos/amazon_logo_b.svg";
 import amazonW from "../../../public/assets/logos/amazon_logo_w.svg";
 import youtubeB from "../../../public/assets/logos/youtube_logo_b.svg";
 import youtubeW from "../../../public/assets/logos/youtube_logo_w.svg";
+import LyricsModal from "./TrackInfoUtils/LyricsModal";
 
 export default function TrackDetails({ tokenId, metadata, collaboratorUsers }) {
 	const { theme } = useTheme();
@@ -30,14 +31,19 @@ export default function TrackDetails({ tokenId, metadata, collaboratorUsers }) {
 	var time_in_sec = Math.round(parseFloat(metadata.duration) % 60).toString() + " sec";
 	var time = time_in_min + " " + time_in_sec;
 
+	const [isLyricsModalOpen, setLyricsModalOpen] = useState(false);
+
 	return (
 		<div className={"dark:bg-dark-100 dark:border-dark-100 " + styles["track-detail__container"]}>
-			<TrackDetail description={metadata.description} collaborators={metadata.collaborators} collaboratorUsers={collaboratorUsers} />
+			<div className="flex flex-col col-span-3 md:col-span-2">
+				<h1 className="font-tertiary text-4xl">TRACK BACKGROUND</h1>
+				<p className="mt-4 pr-2 font-secondary text-base text-justify max-h-[320px] overflow-y-scroll whitespace-pre-wrap">{metadata.description}</p>
+			</div>
 
 			{/* OTHER DETAILS */}
 			<div className={styles["track-info__other-details"]}>
 				{/* <div className={styles['other-details__title']}> */}
-				<h1 className="font-tertiary text-4xl">OTHER DETAILS</h1>
+				<h1 className="font-tertiary text-4xl">SONG DETAILS</h1>
 				{/* </div> */}
 
 				<div className={styles["other-details__section2"]}>
@@ -127,12 +133,10 @@ export default function TrackDetails({ tokenId, metadata, collaboratorUsers }) {
 					{metadata.lyrics ? (
 						<div className="text-left">
 							<h4 className="font-bold font-secondary text-base">Lyrics</h4>
-							<Link href={metadata.lyrics.replace("ipfs://", process.env.NEXT_PUBLIC_IPFS_NODE_URL)}>
-								<a target="_blank" rel="noopener noreferrer">
-									Available &nbsp;
-									<i className="fa-solid fa-arrow-right-long"></i>
-								</a>
-							</Link>
+							<span onClick={() => setLyricsModalOpen(true)} className="cursor-pointer">
+								Available &nbsp;
+								<i className="fa-solid fa-arrow-right-long"></i>
+							</span>
 						</div>
 					) : null}
 					{metadata.isrc ? (
@@ -200,6 +204,7 @@ export default function TrackDetails({ tokenId, metadata, collaboratorUsers }) {
 					</div>
 				) : null}
 			</div>
+			<LyricsModal isOpen={isLyricsModalOpen} setOpen={setLyricsModalOpen} lyricsUrl={metadata.lyrics} />
 		</div>
 	);
 }

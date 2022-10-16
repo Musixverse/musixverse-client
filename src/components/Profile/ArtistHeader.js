@@ -215,6 +215,13 @@ export default function ArtistHeader({ username, profileDetails, setShowArtistBi
 						<Stats username={username} profileDetails={profileDetails} />
 						{/* links to music platforms */}
 						<div className="flex justify-center space-x-5 mt-4">
+							{profileDetails.spotify ? (
+								<Link href={profileDetails.spotify}>
+									<a target="_blank" rel="noopener noreferrer" className="link-item">
+										<i className="text-2xl fab fa-spotify hover:text-primary-100"></i>
+									</a>
+								</Link>
+							) : null}
 							{profileDetails.instagram ? (
 								<Link href={profileDetails.instagram}>
 									<a target="_blank" rel="noopener noreferrer" className="link-item">

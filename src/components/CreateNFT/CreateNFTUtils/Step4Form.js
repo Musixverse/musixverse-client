@@ -233,6 +233,9 @@ const Step3Form = ({
 								id="individual-nft-price"
 								value={nftPrice}
 								onChange={(e) => {
+									setNftPrice(e.target.value);
+								}}
+								onBlur={(e) => {
 									setNftPrice(e.target.value ? parseFloat(e.target.value).toString() : "");
 								}}
 								type="number"

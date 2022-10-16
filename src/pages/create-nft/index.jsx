@@ -55,6 +55,14 @@ const CreateNFT = () => {
 		youtubeMusicLink: "",
 		other: "",
 	});
+	// Unlockable Content
+	const [unlockableContent, setUnlockableContent] = useState({
+		about: "",
+		secretMessage: "",
+		exclusiveImages: [],
+		exclusiveAudios: [],
+		exclusiveVideos: [],
+	});
 	const [numberOfCopies, setNumberOfCopies] = useState("");
 	const [nftPrice, setNftPrice] = useState("");
 	const [collaboratorList, setCollaboratorList] = useState([{ id: "", name: "", username: "", split: "", role: "", address: "", avatar: "" }]);
@@ -509,6 +517,8 @@ const CreateNFT = () => {
 		setSaveDraftSuccess,
 		nftDraftMetadata,
 		chosenProfileOrBand,
+		unlockableContent,
+		setUnlockableContent,
 	};
 	const step4Values = {
 		step,

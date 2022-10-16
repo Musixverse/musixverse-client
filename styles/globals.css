@@ -774,7 +774,8 @@ button.tooltip-button:active {
 /**************************************************************************/
 
 #selectedUnlockableImages div,
-#selectedUnlockableAudios div {
+#selectedUnlockableAudios div,
+#selectedUnlockableVideos div {
 	@apply mt-2 w-full flex flex-col items-center justify-center text-center text-xs font-normal text-[#777777];
 }
 
@@ -786,7 +787,8 @@ button.tooltip-button:active {
 }
 
 #selectedUnlockableImages > div > span,
-#selectedUnlockableAudios > div > span {
+#selectedUnlockableAudios > div > span,
+#selectedUnlockableVideos > div > span {
 	margin-top: 4px !important;
 	width: 70px !important;
 	white-space: nowrap !important;
@@ -794,7 +796,8 @@ button.tooltip-button:active {
 	text-overflow: ellipsis !important;
 }
 
-#selectedUnlockableAudios > div > p {
+#selectedUnlockableAudios > div > p,
+#selectedUnlockableVideos > div > p {
 	margin-bottom: 4px !important;
 	width: 40px !important;
 }

@@ -33,8 +33,8 @@ export default function AudioUpload({ audioFileUrl, setAudioFileUrl, setAudioFil
 			reader.readAsDataURL(fileToUpload);
 
 			await uploadFileToIPFS(Moralis, fileToUpload).then((url) => setAudioFileUrl(url));
-			setLoading(false);
 		}
+		setLoading(false);
 	};
 
 	return (

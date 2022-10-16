@@ -18,11 +18,13 @@ export default function UnlockableContent({
 	setSaveDraftSuccess,
 	nftDraftMetadata,
 	chosenProfileOrBand,
+	unlockableContent,
+	setUnlockableContent,
 }) {
 	const [, , , setError] = useContext(StatusContext);
 
 	const nftPreviewValues = { trackTitle, coverArtUrl, audioFileUrl, nftPrice, numberOfCopies, step, collaboratorList, chosenProfileOrBand };
-	const step3FormValues = {};
+	const step3FormValues = { unlockableContent, setUnlockableContent };
 	const actionButtonProps = { step, prevStep, setSaveDraftSuccess, nftDraftMetadata };
 
 	const router = useRouter();

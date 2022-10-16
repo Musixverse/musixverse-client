@@ -1,17 +1,61 @@
 import { useState, useRef, useEffect, useContext } from "react";
 import { useTheme } from "next-themes";
+import Image from "next/image";
 import RequiredAsterisk from "../../../layout/RequiredAsterisk";
 import StatusContext from "../../../../store/status-context";
 
-const Step3Form = ({}) => {
+const Step3Form = ({ unlockableContent, setUnlockableContent }) => {
 	const { theme } = useTheme();
 	const [, , , setError] = useContext(StatusContext);
 
+	useEffect(() => {
+		console.log("unlockableContent:", unlockableContent);
+	}, [unlockableContent]);
+
+	useEffect(() => {
+		if (unlockableContent.exclusiveImages.length > 0) {
+			// TOTAL FILE COUNT
+			if (unlockableContent.exclusiveImages.length === 1) setImageFilesChosenText(unlockableContent.exclusiveImages.length + " file chosen");
+			else setImageFilesChosenText(unlockableContent.exclusiveImages.length + " files chosen");
+
+			document.getElementById("selectedUnlockableImages").innerHTML = "";
+
+			// RUN A LOOP TO CHECK EACH SELECTED FILE
+			for (var i = 0; i < unlockableContent.exclusiveImages.length; i++) {
+				var currentFile = unlockableContent.exclusiveImages[i];
+				var filename = currentFile.name; // THE NAME OF THE FILE
+				var filesize = currentFile.size; // THE SIZE OF THE FILE
+
+				if (!currentFile.type.match("image.*")) {
+					return;
+				}
+
+				var reader = new FileReader();
+				reader.onload = function (e) {
+					// console.log("e.target.result:", e.target.result);
+					// SHOW THE EXTRACTED DETAILS OF THE FILE
+					document.getElementById("selectedUnlockableImages").innerHTML =
+						document.getElementById("selectedUnlockableImages").innerHTML +
+						`<div>` +
+						`<img src="${e.target.result}" alt="unlockable image"/>` +
+						"<span>" +
+						filename +
+						"</span>(" +
+						bytesToMegaBytes(filesize) +
+						" MB)" +
+						`</div>`;
+				};
+				reader.readAsDataURL(currentFile);
+			}
+		}
+	}, [unlockableContent.exclusiveImages]);
+
 	const hiddenMultipleImageFilesInput = useRef(null);
 	const hiddenMultipleAudioFilesInput = useRef(null);
+	const hiddenMultipleVideoFilesInput = useRef(null);
 	const [imageFilesChosenText, setImageFilesChosenText] = useState("No file chosen");
 	const [audioFilesChosenText, setAudioFilesChosenText] = useState("No file chosen");
-	const [msg, setMsg] = useState("");
+	const [videoFilesChosenText, setVideoFilesChosenText] = useState("No file chosen");
 
 	function bytesToMegaBytes(bytes) {
 		var converted = bytes / (1024 * 1024);
@@ -32,6 +76,10 @@ const Step3Form = ({}) => {
 			filesInput.files = new DataTransfer().files;
 			filesInput.value = "";
 
+			setUnlockableContent((prevState) => ({
+				...prevState,
+				exclusiveImages: [],
+			}));
 			setError({
 				title: "Maximum number of images exceeded",
 				message: "Please select fewer than 10 images",
@@ -41,41 +89,19 @@ const Step3Form = ({}) => {
 
 		// VALIDATE OR CHECK IF ANY FILE IS SELECTED
 		if (filesInput.files.length > 0) {
-			// TOTAL FILE COUNT
-			if (filesInput.files.length === 1) setImageFilesChosenText(filesInput.files.length + " file chosen");
-			else setImageFilesChosenText(filesInput.files.length + " files chosen");
-
-			document.getElementById("selectedUnlockableImages").innerHTML = "";
-
-			// RUN A LOOP TO CHECK EACH SELECTED FILE
-			for (var i = 0; i < filesInput.files.length; i++) {
-				var currentFile = filesInput.files[i];
-				var filename = currentFile.name; // THE NAME OF THE FILE
-				var filesize = currentFile.size; // THE SIZE OF THE FILE
-
-				if (!currentFile.type.match("image.*")) {
-					return;
-				}
-
-				var reader = new FileReader();
-				reader.onload = function (e) {
-					// SHOW THE EXTRACTED DETAILS OF THE FILE
-					document.getElementById("selectedUnlockableImages").innerHTML =
-						document.getElementById("selectedUnlockableImages").innerHTML +
-						`<div>` +
-						`<img src="${e.target.result}" alt="unlockable image"/>` +
-						"<span>" +
-						filename +
-						"</span>(" +
-						bytesToMegaBytes(filesize) +
-						" MB)" +
-						`</div>`;
-				};
-				reader.readAsDataURL(currentFile);
-			}
+			setUnlockableContent((prevState) => ({
+				...prevState,
+				exclusiveImages: Object.entries(filesInput.files).map(([key, currentFile]) => {
+					return currentFile;
+				}),
+			}));
 		} else {
 			// TOTAL FILE COUNT
 			setImageFilesChosenText("No file chosen");
+			setUnlockableContent((prevState) => ({
+				...prevState,
+				exclusiveImages: [],
+			}));
 			document.getElementById("selectedUnlockableImages").innerHTML = "";
 		}
 	}
@@ -146,6 +172,70 @@ const Step3Form = ({}) => {
 		}
 	}
 
+	function handleVideoFilesClick() {
+		hiddenMultipleVideoFilesInput.current.click();
+	}
+
+	function handleVideoFilesChange() {
+		if (!document.getElementById("unlockableVideoFiles") || !window.FileReader) return;
+
+		// GET THE FILE INPUT
+		var filesInput = document.getElementById("unlockableVideoFiles");
+
+		if (filesInput.files.length > 10) {
+			filesInput.files = new DataTransfer().files;
+			filesInput.value = "";
+
+			setError({
+				title: "Maximum number of files exceeded",
+				message: "Please select fewer than 10 files",
+				showErrorBox: true,
+			});
+		}
+
+		// VALIDATE OR CHECK IF ANY FILE IS SELECTED
+		if (filesInput.files.length > 0) {
+			// TOTAL FILE COUNT
+			if (filesInput.files.length === 1) setVideoFilesChosenText(filesInput.files.length + " file chosen");
+			else setVideoFilesChosenText(filesInput.files.length + " files chosen");
+
+			document.getElementById("selectedUnlockableVideos").innerHTML = "";
+
+			// RUN A LOOP TO CHECK EACH SELECTED FILE
+			for (var i = 0; i < filesInput.files.length; i++) {
+				var currentFile = filesInput.files[i];
+				var filename = currentFile.name; // THE NAME OF THE FILE
+				var filesize = currentFile.size; // THE SIZE OF THE FILE
+
+				if (!currentFile.type.match("video.*")) {
+					return;
+				}
+
+				var reader = new FileReader();
+				reader.onload = function (e) {
+					// SHOW THE EXTRACTED DETAILS OF THE FILE
+					document.getElementById("selectedUnlockableVideos").innerHTML =
+						document.getElementById("selectedUnlockableVideos").innerHTML +
+						`<div>` +
+						`<p>` +
+						`<img src="/assets/video.png" alt="unlockable video"/>` +
+						`</p>` +
+						"<span>" +
+						filename +
+						"</span>(" +
+						bytesToMegaBytes(filesize) +
+						" MB)" +
+						`</div>`;
+				};
+				reader.readAsDataURL(currentFile);
+			}
+		} else {
+			// TOTAL FILE COUNT
+			setVideoFilesChosenText("No file chosen");
+			document.getElementById("selectedUnlockableVideos").innerHTML = "";
+		}
+	}
+
 	return (
 		<div className="w-full">
 			<div className="mb-10 text-5xl font-normal font-tertiary">
@@ -162,9 +252,12 @@ const Step3Form = ({}) => {
 						{/* <RequiredAsterisk /> */}
 					</p>
 					<textarea
-						value={msg ?? ""}
+						value={unlockableContent.about ?? ""}
 						onChange={(e) => {
-							setMsg(e.target.value);
+							setUnlockableContent((prevState) => ({
+								...prevState,
+								about: e.target.value,
+							}));
 						}}
 						className={
 							"dark:bg-[#323232] dark:focus:bg-[#1a1a1a] dark:border-[#323232] mt-1 w-full p-2 border-[2px] border-[#777777] focus:border-[2px] focus:border-primary-100 dark:focus:border-primary-100 rounded focus:outline-none focus:shadow-none dark:focus:text-primary-100 font-normal resize-none"
@@ -179,9 +272,12 @@ const Step3Form = ({}) => {
 
 					<p className="text-sm mt-8">MESSAGE FROM THE ARTIST</p>
 					<textarea
-						value={msg ?? ""}
+						value={unlockableContent.secretMessage ?? ""}
 						onChange={(e) => {
-							setMsg(e.target.value);
+							setUnlockableContent((prevState) => ({
+								...prevState,
+								secretMessage: e.target.value,
+							}));
 						}}
 						className={
 							"dark:bg-[#323232] dark:focus:bg-[#1a1a1a] dark:border-[#323232] mt-1 w-full p-2 border-[2px] border-[#777777] focus:border-[2px] focus:border-primary-100 dark:focus:border-primary-100 rounded focus:outline-none focus:shadow-none dark:focus:text-primary-100 font-normal resize-none"
@@ -191,8 +287,8 @@ const Step3Form = ({}) => {
 					></textarea>
 					<p className="text-[#777777] font-normal text-xs">
 						A secret message that you&apos;d like to share with the NFT buyer. This will only be shown to fans who purchase your music NFT. You can
-						include details about anything you&apos;d like. Eg. Provide instructions to set up a 1:1 call with you. They would be amazed to see
-						this!
+						include details about anything you&apos;d like. Eg. Some details about the exclusive images/audios/videos that you are going to upload,
+						or provide instructions to set up a 1:1 call with you. They would be amazed to see this!
 					</p>
 				</div>
 
@@ -224,12 +320,30 @@ const Step3Form = ({}) => {
 							className="hidden"
 						/>
 						<div id="selectedUnlockableImages" className="w-full grid grid-cols-6 items-center justify-center"></div>
+
+						{unlockableContent.exclusiveImages && unlockableContent.exclusiveImages.length > 0 && (
+							<div className="w-full grid grid-cols-6 items-center justify-center">
+								{unlockableContent.exclusiveImages.map((currentFile, index) => {
+									const imgSrc = URL.createObjectURL(currentFile);
+									return (
+										<div
+											key={currentFile.name}
+											className="mt-2 w-full flex flex-col items-center justify-center text-center text-xs font-normal text-[#777777]"
+										>
+											<Image src={imgSrc} height={60} width={60} alt="unlockable image" className="rounded" />
+											<span className="mt-1 w-[70px] whitespace-nowrap overflow-hidden text-ellipsis">{currentFile.name}</span>(
+											{bytesToMegaBytes(currentFile.size)} MB)
+										</div>
+									);
+								})}
+							</div>
+						)}
 					</div>
 
 					<div className="mt-8">
 						<p className="text-sm">EXCLUSIVE AUDIO UPLOADS</p>
 						<p className="text-[#777777] font-normal text-xs mb-2">
-							These files will only be visible to your top fans who will purchase your music NFTs. Feel free to upload multiple files
+							These audio files will only be visible to your top fans who will purchase your music NFTs. Feel free to upload multiple files
 						</p>
 
 						<div className="flex items-center mt-2 mb-2">
@@ -253,6 +367,33 @@ const Step3Form = ({}) => {
 							className="hidden"
 						/>
 						<div id="selectedUnlockableAudios" className="w-full grid grid-cols-6 items-center justify-center"></div>
+					</div>
+
+					<div className="mt-8">
+						<p className="text-sm">EXCLUSIVE VIDEO UPLOADS</p>
+						<p className="text-[#777777] font-normal text-xs mb-2">
+							These videos will only be visible to your top fans who will purchase your music NFTs. Feel free to upload multiple files
+						</p>
+						<div className="flex items-center mt-2 mb-2">
+							<input
+								type="button"
+								className="bg-primary-100 hover:bg-primary-200 text-light-100 text-sm py-1 px-6 rounded-full cursor-pointer"
+								value="Choose Files"
+								onClick={handleVideoFilesClick}
+							/>
+							<span className="ml-2 text-sm">{videoFilesChosenText}</span>
+						</div>
+						<input
+							type="file"
+							multiple
+							accept="video/*"
+							id="unlockableVideoFiles"
+							name="unlockableVideoFiles"
+							ref={hiddenMultipleVideoFilesInput}
+							onChange={handleVideoFilesChange}
+							className="hidden"
+						/>
+						<div id="selectedUnlockableVideos" className="w-full grid grid-cols-6 items-center justify-center"></div>
 					</div>
 				</div>
 			</div>

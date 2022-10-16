@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from "next/link";
-import CoverImage from "../../../public/assets/new-homepage/cover-image.png";
+import CoverImage_d from "../../../public/assets/new-homepage/cover_d.png";
+import CoverImage_m from "../../../public/assets/new-homepage/cover_m.png";
 import ArtistCard from './utils/ArtistCard';
 import Sarthak_Kalyani from "../../../public/assets/new-homepage/sarthak_kalyani.png";
 import Jatayu from "../../../public/assets/new-homepage/jatayu.png";
@@ -10,9 +11,9 @@ import Sommaiya from "../../../public/assets/new-homepage/sommaiya.png";
 export default function TopArtist(){
     return(
         <div className="relative">
-            <h1 className="font-primary text-3xl text-center">Top Artist on M<span className="text-primary-100">x</span> Catalog</h1>
-            <div className="w-full mt-10 relative">
-                <div className="text-sm z-10 absolute right-36 mt-10">
+            <h1 className="font-primary text-3xl text-center mt-4">Top Artist on M<span className="text-primary-100">x</span> Catalog</h1>
+            <div className="w-full mt-10 relative rounded-2xl overflow-hidden">
+                <div className="text-sm z-10 absolute right-6 lg:right-16 text-white mt-10">
                     <div className="space-x-4">
                         <span className="py-2 px-8 font-primary cursor-pointer bg-[rgba(255,255,255,0.4)] rounded-3xl">
                             <Link href="/mx-catalog" passHref={true}>
@@ -26,7 +27,12 @@ export default function TopArtist(){
                         </span>
                     </div>
                 </div>
-                <Image src={CoverImage} alt="Cover art for Top Artist" layout="responsive" priority />
+                <div className="w-full h-full hidden md:block">
+                    <Image src={CoverImage_d} className="hidden" alt="Cover art for Top Artist" layout="responsive" priority />
+                </div>
+                <div className="w-full h-full md:hidden">
+                    <Image src={CoverImage_m} className="hidden" alt="Cover art for Top Artist" layout="responsive" priority />
+                </div>
             </div>
 
             {/* Desktop view Carousel */}
@@ -42,27 +48,27 @@ export default function TopArtist(){
                     </div>
                 </div>
                 <button
-                    className="carousel-control-prev absolute top-0 bottom-0 flex items-center justify-center p-0 text-center border-0 hover:outline-none hover:no-underline focus:outline-none focus:no-underline left-8"
+                    className="carousel-control-prev absolute top-0 bottom-0 flex items-center justify-center p-0 text-center border-0 hover:outline-none hover:no-underline focus:outline-none focus:no-underline left-0"
                     type="button"
                     data-bs-target="#carouselExampleControls-d"
                     data-bs-slide="prev"
                 >
-                    <span className="bg-primary-100 rounded-2xl h-28 w-4 inline-block" aria-hidden="true"></span>
+                    <span className="carousel-control-prev-icon inline-block bg-no-repeat" aria-hidden="true"></span>
                     <span className="visually-hidden">Previous</span>
                 </button>
                 <button
-                    className="carousel-control-next absolute top-0 bottom-0 flex items-center justify-center p-0 text-center border-0 hover:outline-none hover:no-underline focus:outline-none focus:no-underline right-8"
+                    className="carousel-control-next absolute top-0 bottom-0 flex items-center justify-center p-0 text-center border-0 hover:outline-none hover:no-underline focus:outline-none focus:no-underline right-0"
                     type="button"
                     data-bs-target="#carouselExampleControls-d"
                     data-bs-slide="next"
                 >
-                    <span className="bg-primary-100 rounded-2xl h-28 w-4 inline-block bg-no-repeat" aria-hidden="true"></span>
+                    <span className="carousel-control-next-icon inline-block bg-no-repeat" aria-hidden="true"></span>
                     <span className="visually-hidden">Next</span>
                 </button>
             </div>
 
             {/* Tab view Carousel */}
-            <div id="carouselExampleControls-t" className="carousel hidden md:block xl:hidden slide relative bottom-28" data-bs-ride="carousel">
+            <div id="carouselExampleControls-t" className="carousel hidden md:block xl:hidden slide relative bottom-32" data-bs-ride="carousel">
                 <div className="carousel-inner relative w-full overflow-hidden">
                     <div className="carousel-item active relative float-left w-full">
                         <div className="w-full flex justify-center gap-x-8">
@@ -98,7 +104,7 @@ export default function TopArtist(){
             </div>
 
             {/* Mobile view carousel */}
-            <div id="carouselExampleControls-m" className="carousel md:hidden slide relative" data-bs-ride="carousel">
+            <div id="carouselExampleControls-m" className="carousel md:hidden slide relative bottom-56" data-bs-ride="carousel">
                 <div className="carousel-inner relative w-full overflow-hidden">
                     <div className="carousel-item active relative float-left w-full">
                         <div className="w-full flex justify-center gap-x-8">

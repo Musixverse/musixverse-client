@@ -230,32 +230,37 @@ export default function BandDashboard() {
 
 			{activeBand && (
 				<>
-					<ProfileSection1
-						isBandSettings={true}
-						avatar={avatar}
-						setAvatar={setAvatar}
-						coverImage={coverImage}
-						setCoverImage={setCoverImage}
-						username={username}
-						setUsername={setUsername}
-						name={name}
-						setName={setName}
-						bio={bio}
-						setBio={setBio}
-						handleSave={handleSave}
-					/>
+					<form
+						onSubmit={(e) => {
+							e.preventDefault();
+							handleSave();
+						}}
+					>
+						<ProfileSection1
+							isBandSettings={true}
+							avatar={avatar}
+							setAvatar={setAvatar}
+							coverImage={coverImage}
+							setCoverImage={setCoverImage}
+							username={username}
+							setUsername={setUsername}
+							name={name}
+							setName={setName}
+							bio={bio}
+							setBio={setBio}
+						/>
 
-					<ProfileSection2
-						spotify={spotify}
-						setSpotify={setSpotify}
-						instagram={instagram}
-						setInstagram={setInstagram}
-						twitter={twitter}
-						setTwitter={setTwitter}
-						facebook={facebook}
-						setFacebook={setFacebook}
-						handleSave={handleSave}
-					/>
+						<ProfileSection2
+							spotify={spotify}
+							setSpotify={setSpotify}
+							instagram={instagram}
+							setInstagram={setInstagram}
+							twitter={twitter}
+							setTwitter={setTwitter}
+							facebook={facebook}
+							setFacebook={setFacebook}
+						/>
+					</form>
 
 					<BandMembers bandId={activeBand.objectId} bandMembers={activeBand.bandMembers} updatedBandMembersList={activeBand.updatedBandMembersList} />
 				</>

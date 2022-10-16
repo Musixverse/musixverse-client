@@ -768,3 +768,19 @@ button.tooltip-button:active {
 	background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f09433', endColorstr='#bc1888',GradientType=1 );
 }
+
+/**************************************************************************/
+/*****************    Create NFT (Unlockable Content)   *******************/
+/**************************************************************************/
+
+.selected-unlockable-content-div {
+	@apply w-full grid grid-cols-6 items-center justify-center;
+}
+
+.selected-unlockable-content-item {
+	@apply mt-2 w-full flex flex-col items-center justify-center text-center text-xs font-normal text-[#777777];
+}
+
+.selected-unlockable-content-span {
+	@apply mt-1 w-[70px] whitespace-nowrap overflow-hidden text-ellipsis;
+}

@@ -7,7 +7,8 @@ import ScrollToPageTop from "../../utils/ScrollToPageTop";
 import CreateNFTIntro from "../../components/CreateNFT/step-0";
 import TrackDetails from "../../components/CreateNFT/step-1";
 import ComprehensiveDetails from "../../components/CreateNFT/step-2";
-import PricingAndSplits from "../../components/CreateNFT/step-3";
+import UnlockableContent from "../../components/CreateNFT/step-3";
+import PricingAndSplits from "../../components/CreateNFT/step-4";
 import SuccessModal from "../../components/CreateNFT/CreateNFTUtils/SuccessModal";
 import SaveDraftSuccessModal from "../../components/CreateNFT/CreateNFTUtils/SaveDraftSuccessModal";
 import { mintTrackNFT } from "../../utils/smart-contract/functions";
@@ -54,6 +55,14 @@ const CreateNFT = () => {
 		youtubeMusicLink: "",
 		other: "",
 	});
+	// Unlockable Content
+	const [unlockableContent, setUnlockableContent] = useState({
+		about: "",
+		secretMessage: "",
+		exclusiveImages: [],
+		exclusiveAudios: [],
+		exclusiveVideos: [],
+	});
 	const [numberOfCopies, setNumberOfCopies] = useState("");
 	const [nftPrice, setNftPrice] = useState("");
 	const [collaboratorList, setCollaboratorList] = useState([{ id: "", name: "", username: "", split: "", role: "", address: "", avatar: "" }]);
@@ -69,6 +78,10 @@ const CreateNFT = () => {
 	// Verified Bands Of artist
 	const [verifiedBandsOfArtist, setVerifiedBandsOfArtist] = useState([]);
 	const [chosenProfileOrBand, setChosenProfileOrBand] = useState({ objectId: "profile" });
+
+	useEffect(() => {
+		console.log("unlockableContent:", unlockableContent);
+	}, [unlockableContent]);
 
 	// Continue to next step
 	const nextStep = () => {
@@ -117,6 +130,7 @@ const CreateNFT = () => {
 						setIsrc(_draft.attributes.isrc);
 						setTags(_draft.attributes.tags);
 						setLinks(_draft.attributes.links);
+						setUnlockableContent(_draft.attributes.unlockableContent);
 						setNumberOfCopies(_draft.attributes.numberOfCopies);
 						setNftPrice(_draft.attributes.nftPrice);
 						for (var idx in _draft.attributes.collaboratorList) {
@@ -417,6 +431,7 @@ const CreateNFT = () => {
 		isrc: isrc,
 		tags: tags,
 		links: links,
+		unlockableContent: unlockableContent,
 		numberOfCopies: numberOfCopies,
 		nftPrice: nftPrice,
 		chosenProfileOrBand: chosenProfileOrBand,
@@ -497,6 +512,22 @@ const CreateNFT = () => {
 	};
 	const step3Values = {
 		step,
+		nextStep,
+		prevStep,
+		trackTitle,
+		coverArtUrl,
+		audioFileUrl,
+		nftPrice,
+		numberOfCopies,
+		collaboratorList,
+		setSaveDraftSuccess,
+		nftDraftMetadata,
+		chosenProfileOrBand,
+		unlockableContent,
+		setUnlockableContent,
+	};
+	const step4Values = {
+		step,
 		prevStep,
 		coverArtUrl,
 		audioFileUrl,
@@ -568,12 +599,26 @@ const CreateNFT = () => {
 			return user ? (
 				<>
 					<Head>
+						<title>Musixverse | Create NFT - Unlockable Content</title>
+						<meta name="description" content={meta_description} />
+						<link rel="icon" href="/favicon.ico" />
+					</Head>
+					<ScrollToPageTop samePage={true} changingValue={step} />
+					<UnlockableContent {...step3Values} />
+					<SaveDraftSuccessModal isOpen={saveDraftSuccess} setOpen={setSaveDraftSuccess} setStep={setStep} />
+				</>
+			) : null;
+
+		case 4:
+			return user ? (
+				<>
+					<Head>
 						<title>Musixverse | Create NFT - Pricing and Splits</title>
 						<meta name="description" content={meta_description} />
 						<link rel="icon" href="/favicon.ico" />
 					</Head>
 					<ScrollToPageTop samePage={true} changingValue={step} />
-					<PricingAndSplits {...step3Values} />
+					<PricingAndSplits {...step4Values} />
 					<SuccessModal isOpen={createNFTSuccess} />
 					<SaveDraftSuccessModal isOpen={saveDraftSuccess} setOpen={setSaveDraftSuccess} setStep={setStep} />
 				</>

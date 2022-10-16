@@ -46,7 +46,7 @@ const confirm = ({ band }) => {
 					<div className="w-full items-center justify-center rounded-2xl backdrop-blur-xl bg-light-100 dark:bg-dark-100 min-h-full sm:p-14 py-14 px-6 text-center">
 						<p className="text-5xl font-tertiary">Woohoo!</p>
 						<p className="text-4xl font-tertiary mt-2">
-							You&apos;ve confirmed being a member of <span className="text-primary-100">{band.name}</span>
+							You&apos;ve confirmed that you are a member of <span className="text-primary-100">{band.name}</span>
 						</p>
 
 						<div className="flex items-center justify-center mt-8">

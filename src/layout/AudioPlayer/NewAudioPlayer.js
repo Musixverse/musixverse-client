@@ -191,7 +191,7 @@ export default function NewAudioPlayer() {
 					backgroundRepeat: "no-repeat",
 				}}
 			></div>
-			<div className="bg-[rgba(19,19,19,0.2)] backdrop-blur-[4px] backdrop-brightness-105 text-light-100 relative flex items-center justify-between w-full px-6 py-2 group-hover:p-6 group-hover:flex-col rounded-xl">
+			<div className="bg-[rgba(19,19,19,0.4)] backdrop-blur-[4px] backdrop-brightness-105 text-light-100 relative flex items-center justify-between w-full px-6 py-3 group-hover:p-6 group-hover:flex-col rounded-xl">
 				{/* Normal state */}
 				<div className="flex justify-between w-full">
 					<div className="flex flex-col">
@@ -252,9 +252,9 @@ export default function NewAudioPlayer() {
 					<button
 						type="button"
 						onClick={playTrackHandler}
-						className="h-[40px] w-[40px] bg-primary-300 hover:bg-primary-100 rounded-full flex items-center justify-center"
+						className="h-[40px] w-[40px] bg-primary-100 hover:bg-primary-200 rounded-full flex items-center justify-center"
 					>
-						<i className={"text-xl text-light-200 fas " + (audioPlayerProps.isPlaying ? "fa-pause" : "fa-play")}></i>
+						<i className={"text-lg text-light-200 fas " + (audioPlayerProps.isPlaying ? "fa-pause" : "fa-play")}></i>
 					</button>
 					<button
 						onClick={nextSong}

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import NFTCard from "../../layout/NFTCard/NFTCard";
 import NFTCardsWithPager from "../../layout/NFTCardsWithPager/NFTCardsWithPager";
 
-const SimilarTokens = ({ otherTokensOfTrack, metadata, isArtistVerified, collaboratorUsers }) => {
+const SimilarTokens = ({ trackId, audio, otherTokensOfTrack, metadata, isArtistVerified, collaboratorUsers }) => {
 	const [nftCards, setNftCards] = useState([]);
 
 	useEffect(() => {
@@ -16,6 +16,8 @@ const SimilarTokens = ({ otherTokensOfTrack, metadata, isArtistVerified, collabo
 						<NFTCard
 							key={token.tokenId}
 							redirectLink={`/track/polygon/${token.tokenId}`}
+							trackId={trackId}
+							audio={audio}
 							trackName={metadata.title}
 							price={token.price}
 							artistName={metadata.artist}

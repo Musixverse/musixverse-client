@@ -29,7 +29,7 @@ export default function NFTCard({
 	likeCount,
 	lastPrice,
 	showNumberOfCopies = true,
-	trackAudio,
+	audio,
 	trackId,
 	favouriteOfBandMember,
 	tokenInCollectionOwnedByBandMember,
@@ -49,6 +49,8 @@ export default function NFTCard({
 	const trackCopiesModalValues = {
 		redirectLink,
 		trackName,
+		trackId,
+		audio,
 		price,
 		artistName,
 		artistAddress,
@@ -80,7 +82,7 @@ export default function NFTCard({
 			const newQueue = [...prevProps.queue];
 			newQueue.unshift({
 				tokenId: tokenId,
-				audioURL: trackAudio,
+				audioURL: audio,
 				price: price,
 				artistName: artistName,
 				isArtistVerified: isArtistVerified,
@@ -151,7 +153,7 @@ export default function NFTCard({
 					<button
 						type="button"
 						onClick={playTrackHandler}
-						className="h-[40px] w-[40px] absolute bottom-4 right-4 bg-primary-300 hover:bg-primary-100 rounded-full flex items-center justify-center"
+						className="opacity-0 group-hover:opacity-100 duration-500 h-[40px] w-[40px] absolute bottom-4 right-4 bg-primary-100 hover:bg-primary-200 rounded-full items-center justify-center"
 					>
 						<i
 							className={"text-lg text-light-200 fas " + (audioPlayerProps.isPlaying && trackId === audioPlayerTrackId ? "fa-pause" : "fa-play")}

@@ -94,6 +94,7 @@ export default function ComprehensiveDetails({
 								message: "You need to select at least 1 tag to proceed.",
 								showErrorBox: true,
 							});
+							setLoading(false);
 							return;
 						}
 						if (isrc) {
@@ -105,6 +106,7 @@ export default function ComprehensiveDetails({
 									message: isrcCheck.message,
 									showErrorBox: true,
 								});
+								setLoading(false);
 								return;
 							}
 						}

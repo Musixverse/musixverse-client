@@ -87,6 +87,13 @@ const CreateNFTIntro = ({ nextStep, chosenProfileOrBand }) => {
 			youtubeMusicLink: "",
 			other: "",
 		},
+		unlockableContent: {
+			about: "",
+			secretMessage: "",
+			exclusiveImages: [],
+			exclusiveAudios: [],
+			exclusiveVideos: [],
+		},
 		numberOfCopies: "",
 		nftPrice: "",
 		chosenProfileOrBand: { objectId: "profile" },

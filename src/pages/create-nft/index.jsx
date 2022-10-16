@@ -79,6 +79,10 @@ const CreateNFT = () => {
 	const [verifiedBandsOfArtist, setVerifiedBandsOfArtist] = useState([]);
 	const [chosenProfileOrBand, setChosenProfileOrBand] = useState({ objectId: "profile" });
 
+	useEffect(() => {
+		console.log("unlockableContent:", unlockableContent);
+	}, [unlockableContent]);
+
 	// Continue to next step
 	const nextStep = () => {
 		setStep((currStep) => currStep + 1);
@@ -126,6 +130,7 @@ const CreateNFT = () => {
 						setIsrc(_draft.attributes.isrc);
 						setTags(_draft.attributes.tags);
 						setLinks(_draft.attributes.links);
+						setUnlockableContent(_draft.attributes.unlockableContent);
 						setNumberOfCopies(_draft.attributes.numberOfCopies);
 						setNftPrice(_draft.attributes.nftPrice);
 						for (var idx in _draft.attributes.collaboratorList) {
@@ -426,6 +431,7 @@ const CreateNFT = () => {
 		isrc: isrc,
 		tags: tags,
 		links: links,
+		unlockableContent: unlockableContent,
 		numberOfCopies: numberOfCopies,
 		nftPrice: nftPrice,
 		chosenProfileOrBand: chosenProfileOrBand,

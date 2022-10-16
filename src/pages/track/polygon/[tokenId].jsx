@@ -18,6 +18,7 @@ export async function getStaticProps(context) {
 		// Fetch token details
 		const tokenDetails = await Moralis.Cloud.run("fetchTokenDetails", { tokenId: tokenId });
 
+		const trackId = tokenDetails.trackId;
 		const metadata = JSON.parse(JSON.stringify(tokenDetails.metadata));
 		const otherTokensOfTrack = tokenDetails.otherTokensOfTrack;
 		const onSale = tokenDetails.onSale;
@@ -39,6 +40,7 @@ export async function getStaticProps(context) {
 		// Passing data to the Page using props
 		return {
 			props: {
+				trackId,
 				tokenId,
 				localTokenId,
 				metadata,
@@ -66,6 +68,7 @@ export function getStaticPaths() {
 }
 
 export default function TrackInfo({
+	trackId,
 	tokenId,
 	localTokenId,
 	metadata,
@@ -119,6 +122,8 @@ export default function TrackInfo({
 					</div>
 					{otherTokensOfTrack.length > 0 ? (
 						<SimilarTokens
+							trackId={trackId}
+							audio={metadata.audio.replace("ipfs://", process.env.NEXT_PUBLIC_IPFS_NODE_URL)}
 							otherTokensOfTrack={otherTokensOfTrack}
 							metadata={metadata}
 							isArtistVerified={artist.isArtistVerified}

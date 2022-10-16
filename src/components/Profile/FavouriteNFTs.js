@@ -23,6 +23,8 @@ export default function FavouriteNFTs({ username, favouriteTokens, isBand }) {
 					<NFTCard
 						key={token.tokenId}
 						redirectLink={`/track/polygon/${token.tokenId}`}
+						trackId={token.trackId}
+						audio={token.audio.replace("ipfs://", process.env.NEXT_PUBLIC_IPFS_NODE_URL)}
 						trackName={token.title}
 						price={token.price}
 						artistName={token.artist}

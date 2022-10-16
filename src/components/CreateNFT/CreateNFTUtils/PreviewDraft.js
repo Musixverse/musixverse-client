@@ -82,7 +82,7 @@ export default function PreviewDraft({
 								onClick={playTrackHandler}
 								className="h-[40px] w-[40px] bg-primary-100 rounded-full flex items-center justify-center"
 							>
-								<i className="text-lg fas fa-play text-dark-200"></i>
+								<i className="text-lg fas fa-play text-light-200"></i>
 							</button>
 							<audio ref={audio} className="hidden" src={audioFileUrl} onEnded={resetProgress}></audio>
 						</div>

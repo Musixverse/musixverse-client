@@ -773,31 +773,14 @@ button.tooltip-button:active {
 /*****************    Create NFT (Unlockable Content)   *******************/
 /**************************************************************************/
 
-#selectedUnlockableImages div,
-#selectedUnlockableAudios div,
-#selectedUnlockableVideos div {
+.selected-unlockable-content-div {
+	@apply w-full grid grid-cols-6 items-center justify-center;
+}
+
+.selected-unlockable-content-item {
 	@apply mt-2 w-full flex flex-col items-center justify-center text-center text-xs font-normal text-[#777777];
 }
 
-#selectedUnlockableImages img {
-	border-radius: 4px;
-	padding: 0px !important;
-	margin: 0px !important;
-	width: 60px !important;
-}
-
-#selectedUnlockableImages > div > span,
-#selectedUnlockableAudios > div > span,
-#selectedUnlockableVideos > div > span {
-	margin-top: 4px !important;
-	width: 70px !important;
-	white-space: nowrap !important;
-	overflow: hidden !important;
-	text-overflow: ellipsis !important;
-}
-
-#selectedUnlockableAudios > div > p,
-#selectedUnlockableVideos > div > p {
-	margin-bottom: 4px !important;
-	width: 40px !important;
+.selected-unlockable-content-span {
+	@apply mt-1 w-[70px] whitespace-nowrap overflow-hidden text-ellipsis;
 }

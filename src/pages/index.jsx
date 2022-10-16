@@ -5,6 +5,7 @@ import Section2 from "../components/HomePage/HomePage_section3";
 import Section3 from "../components/HomePage/HomePage_section4";
 import Section4 from "../components/HomePage/HomePage_section5";
 import Section2New from "../components/HomePage/HomePageSection2";
+import TopArtist from "../components/NewHomePage/TopArtist";
 
 function Home() {
 	return (
@@ -18,6 +19,7 @@ function Home() {
 				<Banner />
 				<div className="flex flex-col w-full max-w-[1920px] px-6 md:px-8 lg:px-16 xl:px-20 2xl:px-36">
 					<Section2New />
+					<TopArtist />
 					<Section2 />
 					<Section3 />
 				</div>

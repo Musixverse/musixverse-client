@@ -52,7 +52,7 @@ const PurchaseButton = ({ tokenId, price }) => {
 			<CustomButton green={true} onClick={() => purchaseToken()}>
 				Buy Now
 			</CustomButton>
-			<PurchaseSuccessModal isOpen={purchaseNFTSuccess} />
+			<PurchaseSuccessModal isOpen={purchaseNFTSuccess} setOpen={setPurchaseNFTSuccess} />
 		</>
 	);
 };

@@ -1,10 +1,16 @@
 import { useState, useRef, useEffect, useContext } from "react";
 import Image from "next/image";
+import Link from "next/link";
+import { useMoralis } from "react-moralis";
 import RequiredAsterisk from "../../../layout/RequiredAsterisk";
 import StatusContext from "../../../../store/status-context";
+import LoadingContext from "../../../../store/loading-context";
+import uploadFileToIPFS from "../../../utils/image-crop/uploadFileToIPFS";
 
 const Step3Form = ({ unlockableContent, setUnlockableContent }) => {
+	const { Moralis } = useMoralis();
 	const [, , , setError] = useContext(StatusContext);
+	const [, setLoading] = useContext(LoadingContext);
 
 	useEffect(() => {
 		if (unlockableContent.exclusiveImages.length > 0) {
@@ -46,7 +52,7 @@ const Step3Form = ({ unlockableContent, setUnlockableContent }) => {
 		hiddenMultipleImageFilesInput.current.click();
 	}
 
-	function handleImageFilesChange() {
+	async function handleImageFilesChange() {
 		if (!document.getElementById("unlockableImageFiles") || !window.FileReader) return;
 
 		// GET THE FILE INPUT
@@ -69,12 +75,21 @@ const Step3Form = ({ unlockableContent, setUnlockableContent }) => {
 
 		// VALIDATE OR CHECK IF ANY FILE IS SELECTED
 		if (filesInput.files.length > 0) {
+			setLoading(true);
+
+			const _exclusiveImages = [];
+			for (let currentFile of filesInput.files) {
+				const ipfsUrl = await uploadFileToIPFS(Moralis, currentFile).then((url) => {
+					return url;
+				});
+				_exclusiveImages.push({ file: currentFile, ipfsUrl: ipfsUrl });
+			}
+
 			setUnlockableContent((prevState) => ({
 				...prevState,
-				exclusiveImages: Object.entries(filesInput.files).map(([key, currentFile]) => {
-					return currentFile;
-				}),
+				exclusiveImages: _exclusiveImages,
 			}));
+			setLoading(false);
 		} else {
 			// TOTAL FILE COUNT
 			setImageFilesChosenText("No file chosen");
@@ -89,7 +104,7 @@ const Step3Form = ({ unlockableContent, setUnlockableContent }) => {
 		hiddenMultipleAudioFilesInput.current.click();
 	}
 
-	function handleAudioFilesChange() {
+	async function handleAudioFilesChange() {
 		if (!document.getElementById("unlockableAudioFiles") || !window.FileReader) return;
 
 		// GET THE FILE INPUT
@@ -112,12 +127,21 @@ const Step3Form = ({ unlockableContent, setUnlockableContent }) => {
 
 		// VALIDATE OR CHECK IF ANY FILE IS SELECTED
 		if (filesInput.files.length > 0) {
+			setLoading(true);
+
+			const _exclusiveAudios = [];
+			for (let currentFile of filesInput.files) {
+				const ipfsUrl = await uploadFileToIPFS(Moralis, currentFile).then((url) => {
+					return url;
+				});
+				_exclusiveAudios.push({ file: currentFile, ipfsUrl: ipfsUrl });
+			}
+
 			setUnlockableContent((prevState) => ({
 				...prevState,
-				exclusiveAudios: Object.entries(filesInput.files).map(([key, currentFile]) => {
-					return currentFile;
-				}),
+				exclusiveAudios: _exclusiveAudios,
 			}));
+			setLoading(false);
 		} else {
 			// TOTAL FILE COUNT
 			setAudioFilesChosenText("No file chosen");
@@ -132,7 +156,7 @@ const Step3Form = ({ unlockableContent, setUnlockableContent }) => {
 		hiddenMultipleVideoFilesInput.current.click();
 	}
 
-	function handleVideoFilesChange() {
+	async function handleVideoFilesChange() {
 		if (!document.getElementById("unlockableVideoFiles") || !window.FileReader) return;
 
 		// GET THE FILE INPUT
@@ -155,12 +179,21 @@ const Step3Form = ({ unlockableContent, setUnlockableContent }) => {
 
 		// VALIDATE OR CHECK IF ANY FILE IS SELECTED
 		if (filesInput.files.length > 0) {
+			setLoading(true);
+
+			const _exclusiveVideos = [];
+			for (let currentFile of filesInput.files) {
+				const ipfsUrl = await uploadFileToIPFS(Moralis, currentFile).then((url) => {
+					return url;
+				});
+				_exclusiveVideos.push({ file: currentFile, ipfsUrl: ipfsUrl });
+			}
+
 			setUnlockableContent((prevState) => ({
 				...prevState,
-				exclusiveVideos: Object.entries(filesInput.files).map(([key, currentFile]) => {
-					return currentFile;
-				}),
+				exclusiveVideos: _exclusiveVideos,
 			}));
+			setLoading(false);
 		} else {
 			// TOTAL FILE COUNT
 			setVideoFilesChosenText("No file chosen");
@@ -257,12 +290,15 @@ const Step3Form = ({ unlockableContent, setUnlockableContent }) => {
 
 						{unlockableContent.exclusiveImages && unlockableContent.exclusiveImages.length > 0 && (
 							<div className="selected-unlockable-content-div">
-								{unlockableContent.exclusiveImages.map((currentFile, index) => {
-									const imgSrc = URL.createObjectURL(currentFile);
+								{unlockableContent.exclusiveImages.map((item, index) => {
 									return (
-										<div key={currentFile.name} className="selected-unlockable-content-item">
-											<Image src={imgSrc} height={60} width={60} alt="unlockable image" className="rounded" />
-											<span className="selected-unlockable-content-span">{currentFile.name}</span>({bytesToMegaBytes(currentFile.size)}
+										<div key={item.file.name} className="selected-unlockable-content-item">
+											<Link href={item.ipfsUrl} passHref>
+												<a target="_blank" rel="noopener noreferrer" className="-mb-1">
+													<Image src={item.ipfsUrl} height={60} width={60} alt="unlockable image" className="rounded" />
+												</a>
+											</Link>
+											<span className="selected-unlockable-content-span">{item.file.name}</span>({bytesToMegaBytes(item.file.size)}
 											&nbsp;MB)
 										</div>
 									);
@@ -298,13 +334,15 @@ const Step3Form = ({ unlockableContent, setUnlockableContent }) => {
 
 						{unlockableContent.exclusiveAudios && unlockableContent.exclusiveAudios.length > 0 && (
 							<div className="selected-unlockable-content-div">
-								{unlockableContent.exclusiveAudios.map((currentFile, index) => {
+								{unlockableContent.exclusiveAudios.map((item, index) => {
 									return (
-										<div key={currentFile.name} className="selected-unlockable-content-item">
-											<p>
-												<i className="fa-solid fa-record-vinyl text-4xl"></i>
-											</p>
-											<span className="selected-unlockable-content-span">{currentFile.name}</span>({bytesToMegaBytes(currentFile.size)}
+										<div key={item.file.name} className="selected-unlockable-content-item">
+											<Link href={item.ipfsUrl} passHref>
+												<a target="_blank" rel="noopener noreferrer">
+													<i className="fa-solid fa-record-vinyl text-4xl"></i>
+												</a>
+											</Link>
+											<span className="selected-unlockable-content-span">{item.file.name}</span>({bytesToMegaBytes(item.file.size)}
 											&nbsp;MB)
 										</div>
 									);
@@ -339,11 +377,15 @@ const Step3Form = ({ unlockableContent, setUnlockableContent }) => {
 						/>
 						{unlockableContent.exclusiveVideos && unlockableContent.exclusiveVideos.length > 0 && (
 							<div className="selected-unlockable-content-div">
-								{unlockableContent.exclusiveVideos.map((currentFile, index) => {
+								{unlockableContent.exclusiveVideos.map((item, index) => {
 									return (
-										<div key={currentFile.name} className="selected-unlockable-content-item">
-											<Image src={"/assets/video.png"} height={40} width={40} alt="unlockable video" />
-											<span className="selected-unlockable-content-span">{currentFile.name}</span>({bytesToMegaBytes(currentFile.size)}
+										<div key={item.file.name} className="selected-unlockable-content-item">
+											<Link href={item.ipfsUrl} passHref>
+												<a target="_blank" rel="noopener noreferrer" className="-mb-1">
+													<Image src={"/assets/video.png"} height={40} width={40} alt="unlockable video" />
+												</a>
+											</Link>
+											<span className="selected-unlockable-content-span">{item.file.name}</span>({bytesToMegaBytes(item.file.size)}
 											&nbsp;MB)
 										</div>
 									);

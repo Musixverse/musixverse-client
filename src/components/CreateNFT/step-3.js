@@ -4,6 +4,8 @@ import PreviewNft from "./CreateNFTUtils/PreviewNft";
 import Step3Form from "./CreateNFTUtils/Step3Form";
 import ActionButtons from "./CreateNFTUtils/ActionButtons";
 import StatusContext from "../../../store/status-context";
+import LoadingContext from "../../../store/loading-context";
+import { saveNftCreationProgress } from "./CreateNFTUtils/SaveNftCreationProgress";
 
 export default function UnlockableContent({
 	step,
@@ -22,6 +24,7 @@ export default function UnlockableContent({
 	setUnlockableContent,
 }) {
 	const [, , , setError] = useContext(StatusContext);
+	const [, setLoading] = useContext(LoadingContext);
 
 	const nftPreviewValues = { trackTitle, coverArtUrl, audioFileUrl, nftPrice, numberOfCopies, step, collaboratorList, chosenProfileOrBand };
 	const step3FormValues = { unlockableContent, setUnlockableContent };
@@ -37,7 +40,7 @@ export default function UnlockableContent({
 						onSubmit={async (e) => {
 							e.preventDefault();
 
-							// setLoading(true);
+							setLoading(true);
 							// if (tags.length < 1) {
 							// 	setError({
 							// 		title: "Tags not selected!",
@@ -59,9 +62,9 @@ export default function UnlockableContent({
 							// 	}
 							// }
 
-							// await saveNftCreationProgress(nftDraftMetadata, draft);
+							await saveNftCreationProgress(nftDraftMetadata, draft);
 							if (step < 4) nextStep();
-							// setLoading(false);
+							setLoading(false);
 						}}
 					>
 						<div className="flex flex-col w-full space-y-20 md:space-x-10 md:space-y-0 md:flex-row xl:space-x-20">

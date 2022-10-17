@@ -15,7 +15,7 @@ export default function CoverPhoto({ coverImage, setCoverImage }) {
 	const [showModal, setShowModal] = useState(false);
 	const [imageToCrop, setImageToCrop] = useState(undefined);
 	const [croppedImage, setCroppedImage] = useState(undefined);
-	
+
 	// const [coverPhoto, setCoverPhoto] = useState(coverImage === undefined? coverImage : "https://ipfs.moralis.io:2053/ipfs/Qmcn1aZ4PKUUzwpTncuSbruwLD98dtiNqvoJG5zm8EMwXZ");
 	// console.log({thisL:coverImage});
 	// console.log("coverpooho",coverPhoto);
@@ -33,7 +33,6 @@ export default function CoverPhoto({ coverImage, setCoverImage }) {
 
 			uploadFileToIPFS(Moralis, uploadedFile).then((url) => {
 				setLoading(false);
-				console.log(url);
 				setCoverImage(url);
 			});
 		}
@@ -51,19 +50,23 @@ export default function CoverPhoto({ coverImage, setCoverImage }) {
 			<div className="flex flex-col flex-1">
 				<p className="mb-2 text-sm font-medium md:text-base md:mb-5 font-secondary">
 					Cover Photo
-					<Tooltip 
-					 	labelText={<i className="ml-2 text-base md:text-lg fa fa-info-circle"></i>}
+					<Tooltip
+						labelText={<i className="ml-2 text-base md:text-lg fa fa-info-circle"></i>}
 						message={"Recommended dimensions:		 1500 x 500 px"}
 						tooltipLocation={"bottom"}
 					/>
 				</p>
 				<label className="relative w-full h-fit" htmlFor="upload-cover-image">
 					<div className={"w-full h-full hover:cursor-pointer"}>
-						<div
-							className="w-full rounded-lg relative overflow-hidden aspect-[5.48]"
-						>
-							<Image 
-								src={croppedImage? croppedImage : coverImage? coverImage:"https://ipfs.moralis.io:2053/ipfs/Qmcn1aZ4PKUUzwpTncuSbruwLD98dtiNqvoJG5zm8EMwXZ"}
+						<div className="w-full rounded-lg relative overflow-hidden aspect-[5.48]">
+							<Image
+								src={
+									croppedImage
+										? croppedImage
+										: coverImage
+										? coverImage
+										: "https://ipfs.moralis.io:2053/ipfs/Qmcn1aZ4PKUUzwpTncuSbruwLD98dtiNqvoJG5zm8EMwXZ"
+								}
 								objectFit="contain"
 								layout="fill"
 								alt="cover photo"

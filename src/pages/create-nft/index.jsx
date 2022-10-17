@@ -619,7 +619,7 @@ const CreateNFT = () => {
 					</Head>
 					<ScrollToPageTop samePage={true} changingValue={step} />
 					<PricingAndSplits {...step4Values} />
-					<SuccessModal isOpen={createNFTSuccess} />
+					<SuccessModal isOpen={createNFTSuccess} setOpen={setCreateNFTSuccess} />
 					<SaveDraftSuccessModal isOpen={saveDraftSuccess} setOpen={setSaveDraftSuccess} setStep={setStep} />
 				</>
 			) : null;

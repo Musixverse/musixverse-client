@@ -101,6 +101,7 @@ const Step3Form = ({
 	// handle click event of the Add button
 	const handleAddClick = () => {
 		setCollaboratorList([...collaboratorList, { id: "", name: "", username: "", split: "", role: "Composer", address: "", avatar: "" }]);
+		setUsernameEntered("");
 	};
 
 	const setCollaboratorRole = (index, role) => {
@@ -270,8 +271,16 @@ const Step3Form = ({
 							/>
 							<label htmlFor="profile" className="flex items-center text-sm font-normal cursor-pointer font-secondary">
 								<span className="inline-block w-6 h-6 mr-3 border-2 rounded-full border-[#363636] flex-no-shrink"></span>
-								<Image src={collaboratorList[0].avatar} height="25" width="25" alt="artist's avatar" className="rounded" />
-								<p className="ml-1">{collaboratorList[0].name}</p>
+								<div className="relative rounded h-8 w-8">
+									<Image
+										src={personalProfileCollaborator[0].avatar}
+										layout="fill"
+										objectFit="contain"
+										alt="artist's avatar"
+										className="rounded-full"
+									/>
+								</div>
+								<p className="ml-1">{personalProfileCollaborator[0].name}</p>
 							</label>
 						</div>
 
@@ -294,7 +303,9 @@ const Step3Form = ({
 											className="flex items-center text-sm font-normal cursor-pointer font-secondary"
 										>
 											<span className="inline-block w-6 h-6 mr-3 border-2 rounded-full border-[#363636] flex-no-shrink"></span>
-											<Image src={band.avatar} height="25" width="25" alt="band's avatar" className="rounded" />
+											<div className="relative rounded h-8 w-8">
+												<Image src={band.avatar} layout="fill" objectFit="contain" alt="band's avatar" className="rounded-full" />
+											</div>
 											<p className="ml-1">{band.name}</p>
 										</label>
 									</div>

@@ -34,7 +34,6 @@ export default function EditProfilePhoto({ avatar, setAvatar }) {
 
 			uploadFileToIPFS(Moralis, uploadedFile).then((url) => {
 				setLoading(false);
-				console.log(url);
 				setAvatar(url);
 			});
 		}

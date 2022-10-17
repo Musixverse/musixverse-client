@@ -9,6 +9,37 @@
         {
           "indexed": false,
           "internalType": "address",
+          "name": "caller",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "tokenId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "previousComment",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "newComment",
+          "type": "string"
+        }
+      ],
+      "name": "TokenCommentUpdated",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "address",
           "name": "creator",
           "type": "address"
         },
@@ -171,8 +202,8 @@
       "type": "event"
     }
   ],
-  "bytecode": "0x6080604052348015600f57600080fd5b50603f80601d6000396000f3fe6080604052600080fdfea264697066735822122080266fef07dbe6d6e863f97e470ff658a504d2c50a741786f5eb8907f4c2b97e64736f6c63430008040033",
-  "deployedBytecode": "0x6080604052600080fdfea264697066735822122080266fef07dbe6d6e863f97e470ff658a504d2c50a741786f5eb8907f4c2b97e64736f6c63430008040033",
+  "bytecode": "0x6080604052348015600f57600080fd5b50603f80601d6000396000f3fe6080604052600080fdfea2646970667358221220f4c4d234e67c4e1cae2c54b8bb225ee1bef486468ab001a794a126df8c5279c964736f6c63430008040033",
+  "deployedBytecode": "0x6080604052600080fdfea2646970667358221220f4c4d234e67c4e1cae2c54b8bb225ee1bef486468ab001a794a126df8c5279c964736f6c63430008040033",
   "linkReferences": {},
   "deployedLinkReferences": {}
 }

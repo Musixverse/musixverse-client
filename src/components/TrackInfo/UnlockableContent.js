@@ -14,11 +14,6 @@ export default function UnlockableContent({}) {
 			description: "A special community of all NFT holders (read. top fans) of the artist on Discord.",
 		},
 		// {
-		// 	name: "Comment Wall",
-		// 	description: "Make a public comment on the song. Prove you were a supporter from way back in the day.",
-		// },
-		// { name: "Pre-release info for upcoming NFTs", description: "Be the first to know about future music NFT drops by the artist on Musixverse." },
-		// {
 		// 	name: "Exclusive Images",
 		// 	description:
 		// 		"These are images that are not visible to the general public. You'll have exclusive access to these images as long as you hold the NFT.",
@@ -28,6 +23,11 @@ export default function UnlockableContent({}) {
 		// 	description:
 		// 		"These are audio/video files that are not visible to the general public. You'll have exclusive access to these images as long as you hold the NFT.",
 		// },
+		// {
+		// 	name: "Comment Wall",
+		// 	description: "Make a public comment on the song. Prove you were a supporter from way back in the day.",
+		// },
+		// { name: "Pre-release info for upcoming NFTs", description: "Be the first to know about future music NFT drops by the artist on Musixverse." },
 		// { name: "Project Files & Demos", description: "Files for the track and earlier versions of it too!" },
 		// {
 		// 	name: "Exclusive First Listen",

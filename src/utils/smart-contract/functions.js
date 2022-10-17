@@ -79,7 +79,17 @@ async function connectSmartContract() {
 	// }
 }
 
-async function mintTrackNFT(numberOfCopies, price, metadataURI, collaborators, percentageContributions, resaleRoyaltyPercentage, onSale, unlockTimestamp) {
+async function mintTrackNFT(
+	numberOfCopies,
+	price,
+	metadataHash,
+	unlockableContentURIHash,
+	collaborators,
+	percentageContributions,
+	resaleRoyaltyPercentage,
+	onSale,
+	unlockTimestamp
+) {
 	const sendOptions = {
 		contractAddress: process.env.NEXT_PUBLIC_MXV_DIAMOND_ADDRESS,
 		functionName: "mintTrackNFT",
@@ -88,7 +98,8 @@ async function mintTrackNFT(numberOfCopies, price, metadataURI, collaborators, p
 			data: [
 				numberOfCopies,
 				Moralis.Units.Token(String(price), "18"),
-				metadataURI,
+				metadataHash,
+				unlockableContentURIHash,
 				collaborators,
 				percentageContributions,
 				resaleRoyaltyPercentage,

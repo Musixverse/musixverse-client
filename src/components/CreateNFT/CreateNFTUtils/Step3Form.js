@@ -2,7 +2,6 @@ import { useState, useRef, useEffect, useContext } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useMoralis } from "react-moralis";
-import RequiredAsterisk from "../../../layout/RequiredAsterisk";
 import StatusContext from "../../../../store/status-context";
 import LoadingContext from "../../../../store/loading-context";
 import uploadFileToIPFS from "../../../utils/image-crop/uploadFileToIPFS";
@@ -17,6 +16,8 @@ const Step3Form = ({ unlockableContent, setUnlockableContent }) => {
 			// TOTAL FILE COUNT
 			if (unlockableContent.exclusiveImages.length === 1) setImageFilesChosenText(unlockableContent.exclusiveImages.length + " file chosen");
 			else setImageFilesChosenText(unlockableContent.exclusiveImages.length + " files chosen");
+		} else {
+			setImageFilesChosenText("No file chosen");
 		}
 	}, [unlockableContent.exclusiveImages]);
 
@@ -25,6 +26,8 @@ const Step3Form = ({ unlockableContent, setUnlockableContent }) => {
 			// TOTAL FILE COUNT
 			if (unlockableContent.exclusiveAudios.length === 1) setAudioFilesChosenText(unlockableContent.exclusiveAudios.length + " file chosen");
 			else setAudioFilesChosenText(unlockableContent.exclusiveAudios.length + " files chosen");
+		} else {
+			setAudioFilesChosenText("No file chosen");
 		}
 	}, [unlockableContent.exclusiveAudios]);
 
@@ -33,6 +36,8 @@ const Step3Form = ({ unlockableContent, setUnlockableContent }) => {
 			// TOTAL FILE COUNT
 			if (unlockableContent.exclusiveVideos.length === 1) setVideoFilesChosenText(unlockableContent.exclusiveVideos.length + " file chosen");
 			else setVideoFilesChosenText(unlockableContent.exclusiveVideos.length + " files chosen");
+		} else {
+			setVideoFilesChosenText("No file chosen");
 		}
 	}, [unlockableContent.exclusiveVideos]);
 
@@ -204,6 +209,25 @@ const Step3Form = ({ unlockableContent, setUnlockableContent }) => {
 		}
 	}
 
+	const deleteUnlockableItem = (unlockableContentType, index) => {
+		if (unlockableContentType === "exclusiveImages") {
+			setUnlockableContent((prevState) => ({
+				...prevState,
+				exclusiveImages: prevState.exclusiveImages.filter((_, i) => i !== index),
+			}));
+		} else if (unlockableContentType === "exclusiveAudios") {
+			setUnlockableContent((prevState) => ({
+				...prevState,
+				exclusiveAudios: prevState.exclusiveAudios.filter((_, i) => i !== index),
+			}));
+		} else if (unlockableContentType === "exclusiveVideos") {
+			setUnlockableContent((prevState) => ({
+				...prevState,
+				exclusiveVideos: prevState.exclusiveVideos.filter((_, i) => i !== index),
+			}));
+		}
+	};
+
 	return (
 		<div className="w-full">
 			<div className="mb-10 text-5xl font-normal font-tertiary">
@@ -292,14 +316,46 @@ const Step3Form = ({ unlockableContent, setUnlockableContent }) => {
 							<div className="selected-unlockable-content-div">
 								{unlockableContent.exclusiveImages.map((item, index) => {
 									return (
-										<div key={item.file.name} className="selected-unlockable-content-item">
-											<Link href={item.ipfsUrl} passHref>
-												<a target="_blank" rel="noopener noreferrer" className="-mb-1">
-													<Image src={item.ipfsUrl} height={60} width={60} alt="unlockable image" className="rounded" />
-												</a>
-											</Link>
-											<span className="selected-unlockable-content-span">{item.file.name}</span>({bytesToMegaBytes(item.file.size)}
-											&nbsp;MB)
+										<div key={item.file.name} className="flex">
+											<div className="selected-unlockable-content-item">
+												<Link href={item.ipfsUrl} passHref>
+													{/* <a target="_blank" rel="noopener noreferrer" className="-mb-1">
+														<Image src={item.ipfsUrl} height={60} width={60} alt="unlockable image" className="rounded" />
+													</a> */}
+													<a
+														target="_blank"
+														rel="noopener noreferrer"
+														className="-mb-1 relative w-[60px] h-[60px] rounded-xl overflow-hidden"
+													>
+														<Image
+															src={item.ipfsUrl}
+															layout="fill"
+															objectFit="contain"
+															alt="unlockable image"
+															className="rounded-xl "
+														/>
+													</a>
+													{/* <a target="_blank" rel="noopener noreferrer" className="-mb-1 w-11/12 relative rounded">
+														<Image
+															src={item.ipfsUrl}
+															width="80%"
+															height="80%"
+															layout="responsive"
+															objectFit="contain"
+															alt="unlockable image"
+															className="rounded"
+														/>
+													</a> */}
+												</Link>
+												<span className="selected-unlockable-content-span">{item.file.name}</span>({bytesToMegaBytes(item.file.size)}
+												&nbsp;MB)
+											</div>
+											<div
+												onClick={() => deleteUnlockableItem("exclusiveImages", index)}
+												className="-ml-6 w-5 h-5 flex justify-center items-center rounded-full transition-all duration-200 cursor-pointer text-light-100 bg-error-100 hover:bg-error-300 z-10"
+											>
+												<i className="fa-solid fa-xmark text-xs"></i>
+											</div>
 										</div>
 									);
 								})}
@@ -336,14 +392,22 @@ const Step3Form = ({ unlockableContent, setUnlockableContent }) => {
 							<div className="selected-unlockable-content-div">
 								{unlockableContent.exclusiveAudios.map((item, index) => {
 									return (
-										<div key={item.file.name} className="selected-unlockable-content-item">
-											<Link href={item.ipfsUrl} passHref>
-												<a target="_blank" rel="noopener noreferrer">
-													<i className="fa-solid fa-record-vinyl text-4xl"></i>
-												</a>
-											</Link>
-											<span className="selected-unlockable-content-span">{item.file.name}</span>({bytesToMegaBytes(item.file.size)}
-											&nbsp;MB)
+										<div key={item.file.name} className="flex">
+											<div className="selected-unlockable-content-item">
+												<Link href={item.ipfsUrl} passHref>
+													<a target="_blank" rel="noopener noreferrer">
+														<i className="fa-solid fa-record-vinyl text-4xl"></i>
+													</a>
+												</Link>
+												<span className="selected-unlockable-content-span">{item.file.name}</span>({bytesToMegaBytes(item.file.size)}
+												&nbsp;MB)
+											</div>
+											<div
+												onClick={() => deleteUnlockableItem("exclusiveAudios", index)}
+												className="-ml-6 w-5 h-5 flex justify-center items-center rounded-full transition-all duration-200 cursor-pointer text-light-100 bg-error-100 hover:bg-error-300 z-10"
+											>
+												<i className="fa-solid fa-xmark text-xs"></i>
+											</div>
 										</div>
 									);
 								})}
@@ -379,14 +443,22 @@ const Step3Form = ({ unlockableContent, setUnlockableContent }) => {
 							<div className="selected-unlockable-content-div">
 								{unlockableContent.exclusiveVideos.map((item, index) => {
 									return (
-										<div key={item.file.name} className="selected-unlockable-content-item">
-											<Link href={item.ipfsUrl} passHref>
-												<a target="_blank" rel="noopener noreferrer" className="-mb-1">
-													<Image src={"/assets/video.png"} height={40} width={40} alt="unlockable video" />
-												</a>
-											</Link>
-											<span className="selected-unlockable-content-span">{item.file.name}</span>({bytesToMegaBytes(item.file.size)}
-											&nbsp;MB)
+										<div key={item.file.name} className="flex">
+											<div className="selected-unlockable-content-item">
+												<Link href={item.ipfsUrl} passHref>
+													<a target="_blank" rel="noopener noreferrer" className="-mb-1">
+														<Image src={"/assets/video.png"} height={40} width={40} alt="unlockable video" />
+													</a>
+												</Link>
+												<span className="selected-unlockable-content-span">{item.file.name}</span>({bytesToMegaBytes(item.file.size)}
+												&nbsp;MB)
+											</div>
+											<div
+												onClick={() => deleteUnlockableItem("exclusiveVideos", index)}
+												className="-ml-6 w-5 h-5 flex justify-center items-center rounded-full transition-all duration-200 cursor-pointer text-light-100 bg-error-100 hover:bg-error-300 z-10"
+											>
+												<i className="fa-solid fa-xmark text-xs"></i>
+											</div>
 										</div>
 									);
 								})}

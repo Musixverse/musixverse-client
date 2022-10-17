@@ -335,6 +335,13 @@ const CreateNFT = () => {
 				chainId: process.env.NEXT_PUBLIC_BLOCKCHAIN_NETWORK_ID,
 				contractAddress: process.env.NEXT_PUBLIC_MXV_DIAMOND_ADDRESS,
 			},
+			unlockableContent: {
+				about: unlockableContent.about,
+				secretMessage: unlockableContent.secretMessage.length > 0 ? true : false,
+				exclusiveImages: unlockableContent.exclusiveImages.length,
+				exclusiveAudios: unlockableContent.exclusiveAudios.length,
+				exclusiveVideos: unlockableContent.exclusiveVideos.length,
+			},
 			// OpenSea standard ⬇️
 			name: user.attributes.name + " - " + trackTitle,
 			image: "ipfs://" + coverArtUrl.replace("https://ipfs.moralis.io:2053/ipfs/", ""),
@@ -376,11 +383,21 @@ const CreateNFT = () => {
 				},
 			],
 		};
-
 		const file = new Moralis.File("file.json", { base64: btoa(unescape(encodeURIComponent(JSON.stringify(nftMetadata)))) });
 		await file.saveIPFS();
 
-		const metadataHash = file.hash();
+		const unlockableContentData = {
+			about: unlockableContent.about,
+			secretMessage: unlockableContent.secretMessage,
+			exclusiveImages: unlockableContent.exclusiveImages,
+			exclusiveAudios: unlockableContent.exclusiveAudios,
+			exclusiveVideos: unlockableContent.exclusiveVideos,
+		};
+		const unlockableContentFile = new Moralis.File("unlockableContentFile.json", {
+			base64: btoa(unescape(encodeURIComponent(JSON.stringify(unlockableContentData)))),
+		});
+		await unlockableContentFile.saveIPFS();
+
 		const collaborators = collaboratorList.reduce((result, { address }) => {
 			result.push(address);
 			return result;
@@ -391,8 +408,20 @@ const CreateNFT = () => {
 		}, []);
 		const onSale = true;
 
+		const metadataHash = file.hash();
+		const unlockableContentURIHash = unlockableContentFile.hash();
 		try {
-			await mintTrackNFT(numberOfCopies, nftPrice, metadataHash, collaborators, percentageContributions, resaleRoyaltyPercent, onSale, _unlockTimestamp);
+			await mintTrackNFT(
+				numberOfCopies,
+				nftPrice,
+				metadataHash,
+				unlockableContentURIHash,
+				collaborators,
+				percentageContributions,
+				resaleRoyaltyPercent,
+				onSale,
+				_unlockTimestamp
+			);
 			// TODO: Uncomment the line below
 			await deleteDraft();
 			setLoading(false);

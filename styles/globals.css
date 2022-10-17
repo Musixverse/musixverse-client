@@ -774,7 +774,7 @@ button.tooltip-button:active {
 /**************************************************************************/
 
 .selected-unlockable-content-div {
-	@apply w-full grid grid-cols-6 items-center justify-center;
+	@apply w-full grid grid-cols-5 items-center justify-center;
 }
 
 .selected-unlockable-content-item {

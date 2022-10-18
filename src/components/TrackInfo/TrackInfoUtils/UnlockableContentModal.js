@@ -69,7 +69,7 @@ const UnlockableContentModal = ({ isOpen, setOpen, tokenId, selectedUnlockableIt
 									</div>
 								</form>
 							</>
-						) : selectedUnlockableItemIndex === 5 ? (
+						) : selectedUnlockableItemIndex === 4 ? (
 							<>
 								{selectedUnlockableItem.unlockableItemData && selectedUnlockableItem.unlockableItemData.length > 0 && (
 									<div className="selected-unlockable-content-div">
@@ -98,7 +98,7 @@ const UnlockableContentModal = ({ isOpen, setOpen, tokenId, selectedUnlockableIt
 									</div>
 								)}
 							</>
-						) : selectedUnlockableItemIndex === 6 ? (
+						) : selectedUnlockableItemIndex === 5 ? (
 							<>
 								{selectedUnlockableItem.unlockableItemData && selectedUnlockableItem.unlockableItemData.length > 0 && (
 									<div className="selected-unlockable-content-div">
@@ -121,7 +121,7 @@ const UnlockableContentModal = ({ isOpen, setOpen, tokenId, selectedUnlockableIt
 									</div>
 								)}
 							</>
-						) : selectedUnlockableItemIndex === 7 ? (
+						) : selectedUnlockableItemIndex === 6 ? (
 							<>
 								{selectedUnlockableItem.unlockableItemData && selectedUnlockableItem.unlockableItemData.length > 0 && (
 									<div className="selected-unlockable-content-div">

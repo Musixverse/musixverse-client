@@ -51,13 +51,13 @@ export default function UnlockableContent({ tokenId, currentOwnerAddress, unlock
 			unlockableHeading: "Post a Comment",
 			unlockableItemText: "Click on this card to post a comment on this track NFT page. Your comment will be public.",
 		},
-		{
-			name: "Pre-release info for upcoming NFTs",
-			description: "Be the first to know about future music NFT drops by the artist on Musixverse.",
-			unlockableHeading: "Pre-release info for upcoming NFTs",
-			unlockableItemText:
-				"You will be the first to know about future music NFT releases by this artist on Musixverse. We will send you an email whenever a new track NFT is released.",
-		},
+		// {
+		// 	name: "Pre-release info for upcoming NFTs",
+		// 	description: "Be the first to know about future music NFT drops by the artist on Musixverse.",
+		// 	unlockableHeading: "Pre-release info for upcoming NFTs",
+		// 	unlockableItemText:
+		// 		"You will be the first to know about future music NFT releases by this artist on Musixverse. We will send you an email whenever a new track NFT is released.",
+		// },
 		{
 			name: "Exclusive Images",
 			description:
@@ -123,10 +123,9 @@ export default function UnlockableContent({ tokenId, currentOwnerAddress, unlock
 								index === 1 ||
 								index === 2 ||
 								index === 3 ||
-								index === 4 ||
-								(unlockableContent.exclusiveImages > 0 && index === 5) ||
-								(unlockableContent.exclusiveAudios > 0 && index === 6) ||
-								(unlockableContent.exclusiveVideos > 0 && index === 7)
+								(unlockableContent.exclusiveImages > 0 && index === 4) ||
+								(unlockableContent.exclusiveAudios > 0 && index === 5) ||
+								(unlockableContent.exclusiveVideos > 0 && index === 6)
 							) {
 								if (item.unlockableItemText && item.unlockableItemText.length > 120) {
 									truncatedUnlockableItemText = truncatedUnlockableItemText.substring(0, 120) + "...";
@@ -139,7 +138,7 @@ export default function UnlockableContent({ tokenId, currentOwnerAddress, unlock
 											(unlockableContentUriData ? "cursor-pointer hover:bg-light-300/40" : "cursor-not-allowed")
 										}
 										onClick={() => {
-											if (unlockableContentUriData && (index === 0 || index === 3 || index === 5 || index === 6 || index === 7)) {
+											if (unlockableContentUriData && (index === 0 || index === 3 || index === 4 || index === 5 || index === 6)) {
 												setSelectedUnlockableItem(unlockableContentItems[index]);
 												setSelectedUnlockableItemIndex(index);
 												setUnlockableContentModalOpen(true);

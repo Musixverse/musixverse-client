@@ -20,7 +20,7 @@ export default function Activity({ artist, activity }) {
 					})}
 				<div className="flex">
 					<div className={"dark:bg-dark-200 " + styles["sales-history__action"]}>
-						<Image src={minted} alt="minting logo" width={25} height={25}></Image>
+						<i className="fa-solid fa-compact-disc text-xl"></i>
 					</div>
 
 					<div className="ml-3 font-secondary">

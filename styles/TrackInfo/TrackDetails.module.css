@@ -3,7 +3,7 @@
 } */
 
 .track-detail__container {
-	@apply grid grid-cols-1 md:grid-cols-5 gap-10 p-8 border-2 bg-light-200 rounded-xl border-light-300 mt-10;
+	@apply grid grid-cols-1 md:grid-cols-5 gap-x-10 p-8 border-2 bg-light-200 rounded-xl border-light-300 mt-10;
 	/* grid to appear in this div */
 }
 

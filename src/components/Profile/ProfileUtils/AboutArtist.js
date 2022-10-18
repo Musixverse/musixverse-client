@@ -34,11 +34,6 @@ export default function AboutArtist({ username, name, bio, country, createdAt, s
 		setCurrentPageLink(window.location.origin + asPath);
 	}, [asPath]);
 
-	useEffect(() => {
-		console.log("bioCharacters:", bioCharacters);
-		console.log("bio && bioCharacters && bioCharacters.length < maxBioCharacters", bio && bioCharacters && bioCharacters.length < maxBioCharacters);
-	}, [bio, bioCharacters]);
-
 	const copyToClipboard = async () => {
 		await navigator.clipboard.writeText(currentPageLink);
 		setSuccess((prevState) => ({

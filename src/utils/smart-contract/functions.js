@@ -186,6 +186,39 @@ async function toggleOnSale(tokenId) {
 	await transaction.wait();
 }
 
+async function unlockableContentUri(tokenId, callerAddress) {
+	const _tokenId = parseInt(tokenId);
+
+	const options = {
+		chain: "mumbai",
+		contractAddress: process.env.NEXT_PUBLIC_MXV_DIAMOND_ADDRESS,
+		functionName: "unlockableContentUri",
+		abi: MUSIXVERSE_FACET_CONTRACT_ABI,
+		params: { mxvTokenId: _tokenId, from: callerAddress },
+	};
+	const _unlockableContentUri = await Moralis.executeFunction(options);
+	return _unlockableContentUri;
+}
+
+async function updateCommentOnToken(tokenId, comment) {
+	const _tokenId = parseInt(tokenId);
+
+	const options = {
+		chain: "mumbai",
+		contractAddress: process.env.NEXT_PUBLIC_MXV_DIAMOND_ADDRESS,
+		functionName: "updateCommentOnToken",
+		abi: MUSIXVERSE_FACET_CONTRACT_ABI,
+		params: {
+			_tokenId: _tokenId,
+			_comment: comment,
+		},
+	};
+
+	const transaction = await Moralis.executeFunction(options);
+	// Wait until the transaction is confirmed
+	await transaction.wait();
+}
+
 // async function uri(tokenId) {
 // 	const _tokenUri = await MUSIXVERSE.methods.uri(tokenId).call();
 // 	return _tokenUri;
@@ -231,6 +264,8 @@ module.exports = {
 	purchaseReferredTrackNFT,
 	updatePrice,
 	toggleOnSale,
+	unlockableContentUri,
+	updateCommentOnToken,
 	// uri,
 	// ownerOf,
 	// contractURI,

@@ -13,10 +13,12 @@ import SuccessModal from "../../components/CreateNFT/CreateNFTUtils/SuccessModal
 import SaveDraftSuccessModal from "../../components/CreateNFT/CreateNFTUtils/SaveDraftSuccessModal";
 import { mintTrackNFT } from "../../utils/smart-contract/functions";
 import LoadingContext from "../../../store/loading-context";
+import StatusContext from "../../../store/status-context";
 import { Country, State } from "country-state-city";
 
 const CreateNFT = () => {
 	const [, setLoading] = useContext(LoadingContext);
+	const [, , , setError] = useContext(StatusContext);
 	const { Moralis, user } = useMoralis();
 
 	// States
@@ -424,6 +426,13 @@ const CreateNFT = () => {
 			setCreateNFTSuccess(true);
 		} catch (error) {
 			setLoading(false);
+			if (error.title === "User is not connected to the same wallet") {
+				setError({
+					title: error.title,
+					message: error.message,
+					showErrorBox: true,
+				});
+			}
 		}
 	};
 

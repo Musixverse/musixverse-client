@@ -4,11 +4,13 @@ import Image from "next/future/image";
 import Modal from "../../../layout/Modal/Modal";
 import { bytesToMegaBytes } from "../../../utils/Convert";
 import LoadingContext from "../../../../store/loading-context";
+import StatusContext from "../../../../store/status-context";
 import { updateCommentOnToken } from "../../../utils/smart-contract/functions";
 import UpdateCommentSuccessModal from "./UpdateCommentSuccessModal";
 
 const UnlockableContentModal = ({ isOpen, setOpen, tokenId, selectedUnlockableItemIndex, selectedUnlockableItem }) => {
 	const [, setLoading] = useContext(LoadingContext);
+	const [, , , setError] = useContext(StatusContext);
 	const [comment, setComment] = useState("");
 	const [updateCommentSuccess, setUpdateCommentSuccess] = useState(false);
 
@@ -22,9 +24,16 @@ const UnlockableContentModal = ({ isOpen, setOpen, tokenId, selectedUnlockableIt
 			setOpen(false);
 			setComment("");
 			setUpdateCommentSuccess(true);
-		} catch (error) {
+		} catch (err) {
 			setLoading(false);
 			setOpen(false);
+			if (err.title === "User is not connected to the same wallet") {
+				setError({
+					title: err.title,
+					message: err.message,
+					showErrorBox: true,
+				});
+			}
 		}
 	};
 

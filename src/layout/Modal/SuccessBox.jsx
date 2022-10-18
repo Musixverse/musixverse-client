@@ -18,7 +18,7 @@ const SuccessBox = () => {
 					...prevState,
 					showSuccessBox: false,
 				}));
-			}, 4000);
+			}, 6000);
 		}
 	}, [success.showSuccessBox, setSuccess]);
 

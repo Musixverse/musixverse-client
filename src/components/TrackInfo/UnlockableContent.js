@@ -1,20 +1,32 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useMoralis } from "react-moralis";
+import StatusContext from "../../../store/status-context";
 import { unlockableContentUri } from "../../utils/smart-contract/functions";
 import UnlockableContentModal from "./TrackInfoUtils/UnlockableContentModal";
 
 export default function UnlockableContent({ tokenId, currentOwnerAddress, unlockableContent }) {
 	const { user, isWeb3Enabled } = useMoralis();
+	const [, , , setError] = useContext(StatusContext);
 	const [unlockableContentUriData, setUnlockableContentUriData] = useState(null);
 	const [isUnlockableContentModalOpen, setUnlockableContentModalOpen] = useState(false);
 	const [selectedUnlockableItem, setSelectedUnlockableItem] = useState("");
 	const [selectedUnlockableItemIndex, setSelectedUnlockableItemIndex] = useState(0);
 
 	const getUnlockableContentUri = async () => {
-		const _unlockableContentUri = await unlockableContentUri(tokenId, user.attributes.ethAddress);
-		const res = await fetch(_unlockableContentUri);
-		const data = await res.json();
-		setUnlockableContentUriData(data);
+		try {
+			const _unlockableContentUri = await unlockableContentUri(tokenId, user.attributes.ethAddress);
+			const res = await fetch(_unlockableContentUri);
+			const data = await res.json();
+			setUnlockableContentUriData(data);
+		} catch (err) {
+			if (err.title === "User is not connected to the same wallet") {
+				setError({
+					title: err.title,
+					message: err.message,
+					showErrorBox: true,
+				});
+			}
+		}
 	};
 
 	useEffect(() => {

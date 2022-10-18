@@ -3,6 +3,7 @@ import { useMoralis, useMoralisCloudFunction } from "react-moralis";
 import { useRouter } from "next/router";
 import CustomButton from "../../../layout/CustomButton";
 import LoadingContext from "../../../../store/loading-context";
+import StatusContext from "../../../../store/status-context";
 import AuthModalContext from "../../../../store/authModal-context";
 import { purchaseTrackNFT, purchaseReferredTrackNFT } from "../../../utils/smart-contract/functions";
 import PurchaseSuccessModal from "./PurchaseSuccessModal";
@@ -14,6 +15,7 @@ const PurchaseButton = ({ tokenId, price }) => {
 	const { fetch: fetchAddressFromUsername } = useMoralisCloudFunction("fetchAddressFromUsername", { username: ref }, { autoFetch: false });
 
 	const [, setLoading] = useContext(LoadingContext);
+	const [, , , setError] = useContext(StatusContext);
 	const [, setAuthModalOpen] = useContext(AuthModalContext);
 	// Purchase success modal
 	const [purchaseNFTSuccess, setPurchaseNFTSuccess] = useState(false);
@@ -44,6 +46,13 @@ const PurchaseButton = ({ tokenId, price }) => {
 			} catch (err) {
 				console.log(err);
 				setLoading(false);
+				if (err.title === "User is not connected to the same wallet") {
+					setError({
+						title: err.title,
+						message: err.message,
+						showErrorBox: true,
+					});
+				}
 			}
 		} else {
 			setAuthModalOpen(true);

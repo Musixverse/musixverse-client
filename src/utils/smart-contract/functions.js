@@ -90,8 +90,10 @@ async function mintTrackNFT(
 	onSale,
 	unlockTimestamp
 ) {
+	const { ethereum } = window;
 	const callerAddress = Moralis.User.current().attributes.ethAddress;
-	if (callerAddress) {
+
+	if (callerAddress === ethereum.selectedAddress) {
 		const sendOptions = {
 			contractAddress: process.env.NEXT_PUBLIC_MXV_DIAMOND_ADDRESS,
 			functionName: "mintTrackNFT",
@@ -108,28 +110,38 @@ async function mintTrackNFT(
 					onSale,
 					unlockTimestamp,
 				],
-				from: callerAddress,
 			},
 		};
 
 		const transaction = await Moralis.executeFunction(sendOptions);
 		// Wait until the transaction is confirmed
 		await transaction.wait();
+	} else {
+		window.ethereum.request({
+			method: "wallet_requestPermissions",
+			params: [
+				{
+					eth_accounts: {},
+				},
+			],
+		});
+		throw { title: "User is not connected to the same wallet", message: "Please connect to the same wallet as your Musixverse account." };
 	}
 }
 
 async function purchaseTrackNFT(tokenId, price) {
+	const { ethereum } = window;
 	const callerAddress = Moralis.User.current().attributes.ethAddress;
+
 	const _tokenId = parseInt(tokenId).toString();
 
-	if (callerAddress) {
+	if (callerAddress === ethereum.selectedAddress) {
 		const sendOptions = {
 			contractAddress: process.env.NEXT_PUBLIC_MXV_DIAMOND_ADDRESS,
 			functionName: "purchaseTrackNFT",
 			abi: MUSIXVERSE_FACET_CONTRACT_ABI,
 			params: {
 				tokenId: _tokenId,
-				from: callerAddress,
 			},
 			msgValue: Moralis.Units.Token(String(price), "18"),
 		};
@@ -137,14 +149,26 @@ async function purchaseTrackNFT(tokenId, price) {
 		const transaction = await Moralis.executeFunction(sendOptions);
 		// Wait until the transaction is confirmed
 		await transaction.wait();
+	} else {
+		window.ethereum.request({
+			method: "wallet_requestPermissions",
+			params: [
+				{
+					eth_accounts: {},
+				},
+			],
+		});
+		throw { title: "User is not connected to the same wallet", message: "Please connect to the same wallet as your Musixverse account." };
 	}
 }
 
 async function purchaseReferredTrackNFT(tokenId, referrer, price) {
+	const { ethereum } = window;
 	const callerAddress = Moralis.User.current().attributes.ethAddress;
+
 	const _tokenId = parseInt(tokenId).toString();
 
-	if (callerAddress) {
+	if (callerAddress === ethereum.selectedAddress) {
 		const sendOptions = {
 			contractAddress: process.env.NEXT_PUBLIC_MXV_DIAMOND_ADDRESS,
 			functionName: "purchaseReferredTrackNFT",
@@ -152,7 +176,6 @@ async function purchaseReferredTrackNFT(tokenId, referrer, price) {
 			params: {
 				tokenId: _tokenId,
 				referrer: referrer,
-				from: callerAddress,
 			},
 			msgValue: Moralis.Units.Token(String(price), "18"),
 		};
@@ -160,14 +183,26 @@ async function purchaseReferredTrackNFT(tokenId, referrer, price) {
 		const transaction = await Moralis.executeFunction(sendOptions);
 		// Wait until the transaction is confirmed
 		await transaction.wait();
+	} else {
+		window.ethereum.request({
+			method: "wallet_requestPermissions",
+			params: [
+				{
+					eth_accounts: {},
+				},
+			],
+		});
+		throw { title: "User is not connected to the same wallet", message: "Please connect to the same wallet as your Musixverse account." };
 	}
 }
 
 async function updatePrice(tokenId, newPrice) {
+	const { ethereum } = window;
 	const callerAddress = Moralis.User.current().attributes.ethAddress;
+
 	const _tokenId = parseInt(tokenId).toString();
 
-	if (callerAddress) {
+	if (callerAddress === ethereum.selectedAddress) {
 		const sendOptions = {
 			contractAddress: process.env.NEXT_PUBLIC_MXV_DIAMOND_ADDRESS,
 			functionName: "updatePrice",
@@ -175,41 +210,63 @@ async function updatePrice(tokenId, newPrice) {
 			params: {
 				tokenId: _tokenId,
 				newPrice: Moralis.Units.Token(String(newPrice), "18"),
-				from: callerAddress,
 			},
 		};
 
 		const transaction = await Moralis.executeFunction(sendOptions);
 		// Wait until the transaction is confirmed
 		await transaction.wait();
+	} else {
+		window.ethereum.request({
+			method: "wallet_requestPermissions",
+			params: [
+				{
+					eth_accounts: {},
+				},
+			],
+		});
+		throw { title: "User is not connected to the same wallet", message: "Please connect to the same wallet as your Musixverse account." };
 	}
 }
 
 async function toggleOnSale(tokenId) {
+	const { ethereum } = window;
 	const callerAddress = Moralis.User.current().attributes.ethAddress;
+
 	const _tokenId = parseInt(tokenId).toString();
 
-	if (callerAddress) {
+	if (callerAddress === ethereum.selectedAddress) {
 		const sendOptions = {
 			contractAddress: process.env.NEXT_PUBLIC_MXV_DIAMOND_ADDRESS,
 			functionName: "toggleOnSale",
 			abi: MUSIXVERSE_FACET_CONTRACT_ABI,
 			params: {
 				tokenId: _tokenId,
-				from: callerAddress,
 			},
 		};
 
 		const transaction = await Moralis.executeFunction(sendOptions);
 		// Wait until the transaction is confirmed
 		await transaction.wait();
+	} else {
+		window.ethereum.request({
+			method: "wallet_requestPermissions",
+			params: [
+				{
+					eth_accounts: {},
+				},
+			],
+		});
+		throw { title: "User is not connected to the same wallet", message: "Please connect to the same wallet as your Musixverse account." };
 	}
 }
 
 async function unlockableContentUri(tokenId, callerAddress) {
+	const { ethereum } = window;
+
 	const _tokenId = parseInt(tokenId);
 
-	if (callerAddress) {
+	if (callerAddress === ethereum.selectedAddress) {
 		const options = {
 			chain: "mumbai",
 			contractAddress: process.env.NEXT_PUBLIC_MXV_DIAMOND_ADDRESS,
@@ -219,14 +276,26 @@ async function unlockableContentUri(tokenId, callerAddress) {
 		};
 		const _unlockableContentUri = await Moralis.executeFunction(options);
 		return _unlockableContentUri;
+	} else {
+		window.ethereum.request({
+			method: "wallet_requestPermissions",
+			params: [
+				{
+					eth_accounts: {},
+				},
+			],
+		});
+		throw { title: "User is not connected to the same wallet", message: "Please connect to the same wallet as your Musixverse account." };
 	}
 }
 
 async function updateCommentOnToken(tokenId, comment) {
+	const { ethereum } = window;
 	const callerAddress = Moralis.User.current().attributes.ethAddress;
+
 	const _tokenId = parseInt(tokenId);
 
-	if (callerAddress) {
+	if (callerAddress === ethereum.selectedAddress) {
 		const options = {
 			chain: "mumbai",
 			contractAddress: process.env.NEXT_PUBLIC_MXV_DIAMOND_ADDRESS,
@@ -235,13 +304,22 @@ async function updateCommentOnToken(tokenId, comment) {
 			params: {
 				_tokenId: _tokenId,
 				_comment: comment,
-				from: callerAddress,
 			},
 		};
 
 		const transaction = await Moralis.executeFunction(options);
 		// Wait until the transaction is confirmed
 		await transaction.wait();
+	} else {
+		window.ethereum.request({
+			method: "wallet_requestPermissions",
+			params: [
+				{
+					eth_accounts: {},
+				},
+			],
+		});
+		throw { title: "User is not connected to the same wallet", message: "Please connect to the same wallet as your Musixverse account." };
 	}
 }
 

@@ -28,6 +28,26 @@ const Layout = ({ children }) => {
 	router.events.on("routeChangeComplete", () => setLoading(false));
 	router.events.on("routeChangeError", () => setLoading(false));
 
+	window.ethereum.on("accountsChanged", (accounts) => {
+		if (user.attributes.ethAddress !== accounts[0]) {
+			setError((prevState) => ({
+				...prevState,
+				title: "User is not connected to the same wallet",
+				message: "Please connect to the same wallet as your Musixverse account.",
+				showErrorBox: true,
+			}));
+
+			window.ethereum.request({
+				method: "wallet_requestPermissions",
+				params: [
+					{
+						eth_accounts: {},
+					},
+				],
+			});
+		}
+	});
+
 	useEffect(() => {
 		if (authError) {
 			if (
@@ -54,7 +74,7 @@ const Layout = ({ children }) => {
 			{children}
 			{isLoading && theme === "light" ? <Loading /> : <LoadingDark />}
 			{!router.pathname.startsWith("/admin") && <FloatingHelp />}
-			<NewAudioPlayer/>
+			<NewAudioPlayer />
 			<ErrorBox />
 			<SuccessBox />
 			{!router.pathname.startsWith("/admin") && <Footer />}

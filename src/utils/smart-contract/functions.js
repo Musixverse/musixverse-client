@@ -90,133 +90,159 @@ async function mintTrackNFT(
 	onSale,
 	unlockTimestamp
 ) {
-	const sendOptions = {
-		contractAddress: process.env.NEXT_PUBLIC_MXV_DIAMOND_ADDRESS,
-		functionName: "mintTrackNFT",
-		abi: MUSIXVERSE_FACET_CONTRACT_ABI,
-		params: {
-			data: [
-				numberOfCopies,
-				Moralis.Units.Token(String(price), "18"),
-				metadataHash,
-				unlockableContentURIHash,
-				collaborators,
-				percentageContributions,
-				resaleRoyaltyPercentage,
-				onSale,
-				unlockTimestamp,
-			],
-		},
-	};
+	const callerAddress = Moralis.User.current().attributes.ethAddress;
+	if (callerAddress) {
+		const sendOptions = {
+			contractAddress: process.env.NEXT_PUBLIC_MXV_DIAMOND_ADDRESS,
+			functionName: "mintTrackNFT",
+			abi: MUSIXVERSE_FACET_CONTRACT_ABI,
+			params: {
+				data: [
+					numberOfCopies,
+					Moralis.Units.Token(String(price), "18"),
+					metadataHash,
+					unlockableContentURIHash,
+					collaborators,
+					percentageContributions,
+					resaleRoyaltyPercentage,
+					onSale,
+					unlockTimestamp,
+				],
+				from: callerAddress,
+			},
+		};
 
-	const transaction = await Moralis.executeFunction(sendOptions);
-	// Wait until the transaction is confirmed
-	await transaction.wait();
+		const transaction = await Moralis.executeFunction(sendOptions);
+		// Wait until the transaction is confirmed
+		await transaction.wait();
+	}
 }
 
 async function purchaseTrackNFT(tokenId, price) {
+	const callerAddress = Moralis.User.current().attributes.ethAddress;
 	const _tokenId = parseInt(tokenId).toString();
 
-	const sendOptions = {
-		contractAddress: process.env.NEXT_PUBLIC_MXV_DIAMOND_ADDRESS,
-		functionName: "purchaseTrackNFT",
-		abi: MUSIXVERSE_FACET_CONTRACT_ABI,
-		params: {
-			tokenId: _tokenId,
-		},
-		msgValue: Moralis.Units.Token(String(price), "18"),
-	};
+	if (callerAddress) {
+		const sendOptions = {
+			contractAddress: process.env.NEXT_PUBLIC_MXV_DIAMOND_ADDRESS,
+			functionName: "purchaseTrackNFT",
+			abi: MUSIXVERSE_FACET_CONTRACT_ABI,
+			params: {
+				tokenId: _tokenId,
+				from: callerAddress,
+			},
+			msgValue: Moralis.Units.Token(String(price), "18"),
+		};
 
-	const transaction = await Moralis.executeFunction(sendOptions);
-	// Wait until the transaction is confirmed
-	await transaction.wait();
+		const transaction = await Moralis.executeFunction(sendOptions);
+		// Wait until the transaction is confirmed
+		await transaction.wait();
+	}
 }
 
 async function purchaseReferredTrackNFT(tokenId, referrer, price) {
+	const callerAddress = Moralis.User.current().attributes.ethAddress;
 	const _tokenId = parseInt(tokenId).toString();
 
-	const sendOptions = {
-		contractAddress: process.env.NEXT_PUBLIC_MXV_DIAMOND_ADDRESS,
-		functionName: "purchaseReferredTrackNFT",
-		abi: MUSIXVERSE_FACET_CONTRACT_ABI,
-		params: {
-			tokenId: _tokenId,
-			referrer: referrer,
-		},
-		msgValue: Moralis.Units.Token(String(price), "18"),
-	};
+	if (callerAddress) {
+		const sendOptions = {
+			contractAddress: process.env.NEXT_PUBLIC_MXV_DIAMOND_ADDRESS,
+			functionName: "purchaseReferredTrackNFT",
+			abi: MUSIXVERSE_FACET_CONTRACT_ABI,
+			params: {
+				tokenId: _tokenId,
+				referrer: referrer,
+				from: callerAddress,
+			},
+			msgValue: Moralis.Units.Token(String(price), "18"),
+		};
 
-	const transaction = await Moralis.executeFunction(sendOptions);
-	// Wait until the transaction is confirmed
-	await transaction.wait();
+		const transaction = await Moralis.executeFunction(sendOptions);
+		// Wait until the transaction is confirmed
+		await transaction.wait();
+	}
 }
 
 async function updatePrice(tokenId, newPrice) {
+	const callerAddress = Moralis.User.current().attributes.ethAddress;
 	const _tokenId = parseInt(tokenId).toString();
 
-	const sendOptions = {
-		contractAddress: process.env.NEXT_PUBLIC_MXV_DIAMOND_ADDRESS,
-		functionName: "updatePrice",
-		abi: MUSIXVERSE_FACET_CONTRACT_ABI,
-		params: {
-			tokenId: _tokenId,
-			newPrice: Moralis.Units.Token(String(newPrice), "18"),
-		},
-	};
+	if (callerAddress) {
+		const sendOptions = {
+			contractAddress: process.env.NEXT_PUBLIC_MXV_DIAMOND_ADDRESS,
+			functionName: "updatePrice",
+			abi: MUSIXVERSE_FACET_CONTRACT_ABI,
+			params: {
+				tokenId: _tokenId,
+				newPrice: Moralis.Units.Token(String(newPrice), "18"),
+				from: callerAddress,
+			},
+		};
 
-	const transaction = await Moralis.executeFunction(sendOptions);
-	// Wait until the transaction is confirmed
-	await transaction.wait();
+		const transaction = await Moralis.executeFunction(sendOptions);
+		// Wait until the transaction is confirmed
+		await transaction.wait();
+	}
 }
 
 async function toggleOnSale(tokenId) {
+	const callerAddress = Moralis.User.current().attributes.ethAddress;
 	const _tokenId = parseInt(tokenId).toString();
 
-	const sendOptions = {
-		contractAddress: process.env.NEXT_PUBLIC_MXV_DIAMOND_ADDRESS,
-		functionName: "toggleOnSale",
-		abi: MUSIXVERSE_FACET_CONTRACT_ABI,
-		params: {
-			tokenId: _tokenId,
-		},
-	};
+	if (callerAddress) {
+		const sendOptions = {
+			contractAddress: process.env.NEXT_PUBLIC_MXV_DIAMOND_ADDRESS,
+			functionName: "toggleOnSale",
+			abi: MUSIXVERSE_FACET_CONTRACT_ABI,
+			params: {
+				tokenId: _tokenId,
+				from: callerAddress,
+			},
+		};
 
-	const transaction = await Moralis.executeFunction(sendOptions);
-	// Wait until the transaction is confirmed
-	await transaction.wait();
+		const transaction = await Moralis.executeFunction(sendOptions);
+		// Wait until the transaction is confirmed
+		await transaction.wait();
+	}
 }
 
 async function unlockableContentUri(tokenId, callerAddress) {
 	const _tokenId = parseInt(tokenId);
 
-	const options = {
-		chain: "mumbai",
-		contractAddress: process.env.NEXT_PUBLIC_MXV_DIAMOND_ADDRESS,
-		functionName: "unlockableContentUri",
-		abi: MUSIXVERSE_FACET_CONTRACT_ABI,
-		params: { mxvTokenId: _tokenId, from: callerAddress },
-	};
-	const _unlockableContentUri = await Moralis.executeFunction(options);
-	return _unlockableContentUri;
+	if (callerAddress) {
+		const options = {
+			chain: "mumbai",
+			contractAddress: process.env.NEXT_PUBLIC_MXV_DIAMOND_ADDRESS,
+			functionName: "unlockableContentUri",
+			abi: MUSIXVERSE_FACET_CONTRACT_ABI,
+			params: { mxvTokenId: _tokenId, from: callerAddress },
+		};
+		const _unlockableContentUri = await Moralis.executeFunction(options);
+		return _unlockableContentUri;
+	}
 }
 
 async function updateCommentOnToken(tokenId, comment) {
+	const callerAddress = Moralis.User.current().attributes.ethAddress;
 	const _tokenId = parseInt(tokenId);
 
-	const options = {
-		chain: "mumbai",
-		contractAddress: process.env.NEXT_PUBLIC_MXV_DIAMOND_ADDRESS,
-		functionName: "updateCommentOnToken",
-		abi: MUSIXVERSE_FACET_CONTRACT_ABI,
-		params: {
-			_tokenId: _tokenId,
-			_comment: comment,
-		},
-	};
+	if (callerAddress) {
+		const options = {
+			chain: "mumbai",
+			contractAddress: process.env.NEXT_PUBLIC_MXV_DIAMOND_ADDRESS,
+			functionName: "updateCommentOnToken",
+			abi: MUSIXVERSE_FACET_CONTRACT_ABI,
+			params: {
+				_tokenId: _tokenId,
+				_comment: comment,
+				from: callerAddress,
+			},
+		};
 
-	const transaction = await Moralis.executeFunction(options);
-	// Wait until the transaction is confirmed
-	await transaction.wait();
+		const transaction = await Moralis.executeFunction(options);
+		// Wait until the transaction is confirmed
+		await transaction.wait();
+	}
 }
 
 // async function uri(tokenId) {

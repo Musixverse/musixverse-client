@@ -95,7 +95,7 @@ export default function TrackHeader({
 						)}
 					</div>
 
-					<div className="flex justify-between items-end sm:pb-2">
+					<div className="flex justify-between items-end sm:pb-4">
 						<div className="font-tertiary text-7xl flex flex-col sm:flex-row">
 							<span>{title}</span>&nbsp;
 							{localTokenId ? (
@@ -118,9 +118,9 @@ export default function TrackHeader({
 					{/* Audio Player component */}
 					<AudioPlayer tokenId={tokenId} audio_url={audio_url} artistName={artist && artist.name} title={title} />
 
-					<div className="w-full h-full grid content-between pt-4">
+					<div className="w-full h-full grid content-between pt-6">
 						<div className="pb-6 grid grid-cols-12 flex-wrap gap-2 w-full justify-between">
-							<div className="col-span-5">
+							<div className={comment ? "col-span-5" : "col-span-full"}>
 								{tags.map((tag, index) => {
 									return (
 										<button
@@ -134,7 +134,11 @@ export default function TrackHeader({
 								})}
 							</div>
 							<div className="col-span-1"></div>
-							<div className="col-span-6">{comment && <CommentWall comment={comment} />}</div>
+							{comment && (
+								<div className="col-span-6">
+									<CommentWall comment={comment} />
+								</div>
+							)}
 						</div>
 
 						{/* Track Header CTA */}

@@ -189,7 +189,6 @@ async function toggleOnSale(tokenId) {
 async function unlockableContentUri(tokenId, callerAddress) {
 	const _tokenId = parseInt(tokenId);
 
-	console.log(process.env.NEXT_PUBLIC_MXV_DIAMOND_ADDRESS);
 	const options = {
 		chain: "mumbai",
 		contractAddress: process.env.NEXT_PUBLIC_MXV_DIAMOND_ADDRESS,

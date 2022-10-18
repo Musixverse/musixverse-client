@@ -11,21 +11,15 @@ export default function UnlockableContent({ tokenId, currentOwnerAddress, unlock
 	const [selectedUnlockableItemIndex, setSelectedUnlockableItemIndex] = useState(0);
 
 	const getUnlockableContentUri = async () => {
-		console.log("here2");
 		const _unlockableContentUri = await unlockableContentUri(tokenId, user.attributes.ethAddress);
-		console.log("here3");
 		const res = await fetch(_unlockableContentUri);
-		console.log("here4");
 		const data = await res.json();
-		console.log("here5");
 		setUnlockableContentUriData(data);
 	};
 
 	useEffect(() => {
 		if (tokenId && isWeb3Enabled && user && currentOwnerAddress === user.attributes.ethAddress) {
-			console.log("here1");
 			getUnlockableContentUri();
-			console.log("here6");
 		}
 	}, [user, tokenId, isWeb3Enabled, currentOwnerAddress]);
 

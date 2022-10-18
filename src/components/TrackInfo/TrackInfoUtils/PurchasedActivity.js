@@ -3,7 +3,6 @@ import Link from "next/link";
 import { useMoralis } from "react-moralis";
 import { convertTimestampToDate } from "../../../utils/ConvertTimestampToDate";
 import LinkToBlockExplorer from "./LinkToBlockExplorer";
-import auction from "../../../../public/assets/auction.svg";
 import styles from "../../../../styles/TrackInfo/Activity.module.css";
 
 const PurchasedActivity = ({ activity }) => {
@@ -12,7 +11,7 @@ const PurchasedActivity = ({ activity }) => {
 	return (
 		<>
 			<div className={"dark:bg-dark-200 " + styles["sales-history__action"]}>
-				<Image src={auction} alt="minting logo" width={25} height={25}></Image>
+				<i className="fa-solid fa-gavel text-lg"></i>
 			</div>
 
 			<div className="ml-3 font-secondary">
@@ -31,6 +30,16 @@ const PurchasedActivity = ({ activity }) => {
 							</a>
 						</Link>
 					) : null}
+					{activity && activity.referrer && (
+						<>
+							using referral link of&nbsp;
+							<Link href={`/profile/${activity.referrer.username}`} className="cursor-pointer">
+								<a target="_blank" rel="noopener noreferrer">
+									@{activity.referrer.username}&nbsp;
+								</a>
+							</Link>
+						</>
+					)}
 					on&nbsp;
 					{convertTimestampToDate(activity.block_timestamp)}
 					<LinkToBlockExplorer transactionHash={activity.transaction_hash} />

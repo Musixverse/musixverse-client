@@ -1,10 +1,11 @@
 import { useState, useRef, useEffect, useContext } from "react";
-import Image from "next/image";
+import Image from "next/future/image";
 import Link from "next/link";
 import { useMoralis } from "react-moralis";
 import StatusContext from "../../../../store/status-context";
 import LoadingContext from "../../../../store/loading-context";
 import uploadFileToIPFS from "../../../utils/image-crop/uploadFileToIPFS";
+import { bytesToMegaBytes } from "../../../utils/Convert";
 
 const Step3Form = ({ unlockableContent, setUnlockableContent }) => {
 	const { Moralis } = useMoralis();
@@ -47,11 +48,6 @@ const Step3Form = ({ unlockableContent, setUnlockableContent }) => {
 	const [imageFilesChosenText, setImageFilesChosenText] = useState("No file chosen");
 	const [audioFilesChosenText, setAudioFilesChosenText] = useState("No file chosen");
 	const [videoFilesChosenText, setVideoFilesChosenText] = useState("No file chosen");
-
-	function bytesToMegaBytes(bytes) {
-		var converted = bytes / (1024 * 1024);
-		return converted.toFixed(2);
-	}
 
 	function handleImageFilesClick() {
 		hiddenMultipleImageFilesInput.current.click();
@@ -319,33 +315,9 @@ const Step3Form = ({ unlockableContent, setUnlockableContent }) => {
 										<div key={item.file.name} className="flex">
 											<div className="selected-unlockable-content-item">
 												<Link href={item.ipfsUrl} passHref>
-													{/* <a target="_blank" rel="noopener noreferrer" className="-mb-1">
-														<Image src={item.ipfsUrl} height={60} width={60} alt="unlockable image" className="rounded" />
-													</a> */}
-													<a
-														target="_blank"
-														rel="noopener noreferrer"
-														className="-mb-1 relative w-[60px] h-[60px] rounded-xl overflow-hidden"
-													>
-														<Image
-															src={item.ipfsUrl}
-															layout="fill"
-															objectFit="contain"
-															alt="unlockable image"
-															className="rounded-xl "
-														/>
+													<a target="_blank" rel="noopener noreferrer" className="-mb-1 relative w-[60px] h-[60px]">
+														<Image src={item.ipfsUrl} alt="unlockable image" className="object-contain rounded" fill quality={50} />
 													</a>
-													{/* <a target="_blank" rel="noopener noreferrer" className="-mb-1 w-11/12 relative rounded">
-														<Image
-															src={item.ipfsUrl}
-															width="80%"
-															height="80%"
-															layout="responsive"
-															objectFit="contain"
-															alt="unlockable image"
-															className="rounded"
-														/>
-													</a> */}
 												</Link>
 												<span className="selected-unlockable-content-span">{item.file.name}</span>({bytesToMegaBytes(item.file.size)}
 												&nbsp;MB)
@@ -439,6 +411,7 @@ const Step3Form = ({ unlockableContent, setUnlockableContent }) => {
 							onChange={handleVideoFilesChange}
 							className="hidden"
 						/>
+
 						{unlockableContent.exclusiveVideos && unlockableContent.exclusiveVideos.length > 0 && (
 							<div className="selected-unlockable-content-div">
 								{unlockableContent.exclusiveVideos.map((item, index) => {

@@ -79,10 +79,6 @@ const CreateNFT = () => {
 	const [verifiedBandsOfArtist, setVerifiedBandsOfArtist] = useState([]);
 	const [chosenProfileOrBand, setChosenProfileOrBand] = useState({ objectId: "profile" });
 
-	useEffect(() => {
-		console.log("unlockableContent:", unlockableContent);
-	}, [unlockableContent]);
-
 	// Continue to next step
 	const nextStep = () => {
 		setStep((currStep) => currStep + 1);

@@ -25,19 +25,22 @@ const PurchaseButton = ({ tokenId, price }) => {
 			setLoading(true);
 			try {
 				if (ref) {
-					fetchAddressFromUsername({
+					await fetchAddressFromUsername({
 						onSuccess: async (referrerAddress) => {
 							await purchaseReferredTrackNFT(tokenId, referrerAddress, price);
+							setLoading(false);
+							setPurchaseNFTSuccess(true);
 						},
 						onError: (error) => {
 							console.log("purchaseReferredTrackNFT fetchAddressFromUsername Error:", error);
+							setLoading(false);
 						},
 					});
 				} else {
 					await purchaseTrackNFT(tokenId, price);
+					setLoading(false);
+					setPurchaseNFTSuccess(true);
 				}
-				setLoading(false);
-				setPurchaseNFTSuccess(true);
 			} catch (err) {
 				console.log(err);
 				setLoading(false);

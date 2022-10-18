@@ -784,3 +784,16 @@ button.tooltip-button:active {
 .selected-unlockable-content-span {
 	@apply mt-1 w-[70px] whitespace-nowrap overflow-hidden text-ellipsis;
 }
+
+/**************************************************************************/
+/****************    Track Info (Unlockable Content Card)   ***************/
+/**************************************************************************/
+
+.unlockable-content-card:hover {
+	transform: rotateY(180deg);
+	transform-style: preserve-3d;
+}
+
+.unlockable-content-card-back {
+	transform: rotateY(180deg);
+}

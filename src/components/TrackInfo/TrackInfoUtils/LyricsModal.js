@@ -8,7 +8,6 @@ const LyricsModal = ({ isOpen, setOpen, lyricsUrl }) => {
 		const fetchLyrics = async () => {
 			const res = await fetch(lyricsUrl.replace("ipfs://", process.env.NEXT_PUBLIC_IPFS_NODE_URL));
 			const data = await res.text();
-			console.log(data);
 			setLyrics(data);
 			return data;
 		};

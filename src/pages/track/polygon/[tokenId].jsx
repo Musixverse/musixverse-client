@@ -21,6 +21,7 @@ export async function getStaticProps(context) {
 		const trackId = tokenDetails.trackId;
 		const metadata = JSON.parse(JSON.stringify(tokenDetails.metadata));
 		const otherTokensOfTrack = tokenDetails.otherTokensOfTrack;
+		const comment = tokenDetails.comment;
 		const onSale = tokenDetails.onSale;
 		const price = Moralis.Units.FromWei(tokenDetails.price);
 		const currentOwner = tokenDetails.currentOwner;
@@ -47,6 +48,7 @@ export async function getStaticProps(context) {
 				otherTokensOfTrack,
 				price,
 				onSale,
+				comment,
 				currentOwner,
 				artist,
 				artworkArtistInfo,
@@ -75,6 +77,7 @@ export default function TrackInfo({
 	otherTokensOfTrack,
 	price,
 	onSale,
+	comment,
 	currentOwner,
 	artist,
 	artworkArtistInfo,
@@ -106,8 +109,9 @@ export default function TrackInfo({
 						numberOfCopies={metadata.numberOfCopies}
 						otherTokensOfTrack={otherTokensOfTrack}
 						onSale={onSale}
+						comment={comment}
 					/>
-					<UnlockableContent />
+					<UnlockableContent tokenId={tokenId} currentOwnerAddress={currentOwner.ethAddress} unlockableContent={metadata.unlockableContent} />
 					<TrackDetails tokenId={tokenId} metadata={metadata} collaboratorUsers={collaboratorUsers} />
 					<Collaborators bandId={metadata.bandId} collaborators={metadata.collaborators} collaboratorUsers={collaboratorUsers} />
 					<div className="grid grid-cols-1 md:grid-cols-9 xl:grid-cols-5 gap-y-4 md:gap-6 mt-10">

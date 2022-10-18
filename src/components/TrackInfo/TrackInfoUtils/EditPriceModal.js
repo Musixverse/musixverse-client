@@ -115,7 +115,7 @@ const EditPriceModal = ({ isOpen, setEditPriceModalOpen, tokenId, currentPrice }
 					setEditPriceModalOpen(false);
 				}}
 			></Modal>
-			<EditPriceSuccessModal isOpen={editPriceSuccess} setOpen={setEditPriceSuccess} />
+			<EditPriceSuccessModal isOpen={editPriceSuccess} />
 		</>
 	);
 };

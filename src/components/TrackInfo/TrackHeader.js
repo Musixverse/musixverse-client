@@ -5,6 +5,7 @@ import AudioPlayer from "./AudioPlayer";
 import mxv_verified from "../../../public/assets/mxv_tick.svg";
 import TrackHeaderCta from "./TrackInfoUtils/TrackHeaderCta";
 import TrackEditionDropdown from "./TrackInfoUtils/TrackEditionDropdown";
+import CommentWall from "./CommentWall";
 import ShinyLoader from "../../layout/ShinyLoader";
 
 export default function TrackHeader({
@@ -23,6 +24,7 @@ export default function TrackHeader({
 	numberOfCopies,
 	otherTokensOfTrack,
 	onSale,
+	comment,
 }) {
 	return (
 		<div className={styles["track-header"]}>
@@ -93,7 +95,7 @@ export default function TrackHeader({
 						)}
 					</div>
 
-					<div className="flex justify-between items-end sm:pb-6">
+					<div className="flex justify-between items-end sm:pb-2">
 						<div className="font-tertiary text-7xl flex flex-col sm:flex-row">
 							<span>{title}</span>&nbsp;
 							{localTokenId ? (
@@ -116,19 +118,23 @@ export default function TrackHeader({
 					{/* Audio Player component */}
 					<AudioPlayer tokenId={tokenId} audio_url={audio_url} artistName={artist && artist.name} title={title} />
 
-					<div className="w-full h-full grid content-between pt-6">
-						<div className="pb-6 flex flex-wrap gap-2 w-full">
-							{tags.map((tag, index) => {
-								return (
-									<button
-										key={index}
-										type="button"
-										className="px-6 py-2 mr-2 rounded-full bg-light-200 dark:bg-dark-100 text-sm cursor-default"
-									>
-										{tag}
-									</button>
-								);
-							})}
+					<div className="w-full h-full grid content-between pt-4">
+						<div className="pb-6 grid grid-cols-12 flex-wrap gap-2 w-full justify-between">
+							<div className="col-span-5">
+								{tags.map((tag, index) => {
+									return (
+										<button
+											key={index}
+											type="button"
+											className="px-6 py-2 mr-3 mb-3 rounded-full bg-light-200 dark:bg-dark-100 text-sm cursor-default"
+										>
+											{tag}
+										</button>
+									);
+								})}
+							</div>
+							<div className="col-span-1"></div>
+							<div className="col-span-6">{comment && <CommentWall comment={comment} />}</div>
 						</div>
 
 						{/* Track Header CTA */}

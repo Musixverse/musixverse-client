@@ -1,6 +1,7 @@
 import PriceUpdatedActivity from "./PriceUpdatedActivity";
 import PurchasedActivity from "./PurchasedActivity";
 import OnSaleUpdatedActivity from "./OnSaleUpdatedActivity";
+import CommentUpdatedActivity from "./CommentUpdatedActivity";
 
 const ActivityDetails = ({ activity }) => {
 	return (
@@ -11,6 +12,8 @@ const ActivityDetails = ({ activity }) => {
 				<PurchasedActivity activity={activity} />
 			) : "onSale" in activity ? (
 				<OnSaleUpdatedActivity activity={activity} />
+			) : "newComment" in activity ? (
+				<CommentUpdatedActivity activity={activity} />
 			) : null}
 		</div>
 	);

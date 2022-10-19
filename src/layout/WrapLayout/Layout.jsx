@@ -28,25 +28,27 @@ const Layout = ({ children }) => {
 	router.events.on("routeChangeComplete", () => setLoading(false));
 	router.events.on("routeChangeError", () => setLoading(false));
 
-	window.ethereum.on("accountsChanged", (accounts) => {
-		if (user.attributes.ethAddress !== accounts[0]) {
-			setError((prevState) => ({
-				...prevState,
-				title: "User is not connected to the same wallet",
-				message: "Please connect to the same wallet as your Musixverse account.",
-				showErrorBox: true,
-			}));
+	if (window && window.ethereum) {
+		window.ethereum.on("accountsChanged", (accounts) => {
+			if (user.attributes.ethAddress !== accounts[0]) {
+				setError((prevState) => ({
+					...prevState,
+					title: "User is not connected to the same wallet",
+					message: "Please connect to the same wallet as your Musixverse account.",
+					showErrorBox: true,
+				}));
 
-			window.ethereum.request({
-				method: "wallet_requestPermissions",
-				params: [
-					{
-						eth_accounts: {},
-					},
-				],
-			});
-		}
-	});
+				window.ethereum.request({
+					method: "wallet_requestPermissions",
+					params: [
+						{
+							eth_accounts: {},
+						},
+					],
+				});
+			}
+		});
+	}
 
 	useEffect(() => {
 		if (authError) {
@@ -55,12 +57,28 @@ const Layout = ({ children }) => {
 				authError.message !==
 					"Cannot execute Moralis.enableWeb3(), as Moralis Moralis.enableWeb3() already has been called, but is not finished yet " &&
 				authError.message !== "MetaMask Message Signature: User denied message signature." &&
-				authError.message !== "User closed modal"
+				authError.message !== "User closed modal" &&
+				authError.message !== "Non ethereum enabled browser"
 			) {
 				setError((prevState) => ({
 					...prevState,
 					title: "Auth failed!",
 					message: authError.message,
+					showErrorBox: true,
+				}));
+			}
+			if (authError.message === "Non ethereum enabled browser") {
+				setError((prevState) => ({
+					...prevState,
+					title: "Auth failed! Metamask not found",
+					message: (
+						<>
+							Please download Metamask by clicking here-{" "}
+							<a href="https://metamask.io/download/" target="_blank" rel="noopener noreferrer">
+								https://metamask.io/download/
+							</a>
+						</>
+					),
 					showErrorBox: true,
 				}));
 			}

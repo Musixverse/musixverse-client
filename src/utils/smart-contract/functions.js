@@ -79,6 +79,19 @@ async function connectSmartContract() {
 	// }
 }
 
+// web3 = await Moralis.Web3.enable({
+// 	provider: "walletconnect",
+
+// 	// mobileLinks: [
+// 	//   "rainbow",
+// 	//   "metamask",
+// 	//   "argent",
+// 	//   "trust",
+// 	//   "imtoken",
+// 	//   "pillar",
+// 	// ]
+// });
+
 async function mintTrackNFT(
 	numberOfCopies,
 	price,

@@ -80,33 +80,31 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 
 	const walletconnectLogin = async () => {
 		setLoading(true);
+
 		if (!isAuthenticated) {
-			console.log("here");
 			await authenticate({
 				provider: "walletconnect",
 				chainId: process.env.NEXT_PUBLIC_BLOCKCHAIN_NETWORK_ID,
-			});
-			console.log("here1");
-			// .then(async function (user) {
-			// 	if (user) {
-			// 		await fetch("/api/auth/login", {
-			// 			method: "post",
-			// 			headers: {
-			// 				"Content-Type": "application/json",
-			// 			},
-			// 			body: JSON.stringify({ currentUser: user }),
-			// 		});
-			// 		closeModal();
-			// 		if (router.pathname === "/") router.push("/mxcatalog/new-releases", undefined, { shallow: true });
-			// 	}
-			// 	setLoading(false);
-			// })
-			// .catch(function (error) {
-			// 	console.log("WalletConnect authentication error:", error);
-			// 	setLoading(false);
-			// });
+			})
+				.then(async function (user) {
+					if (user) {
+						await fetch("/api/auth/login", {
+							method: "post",
+							headers: {
+								"Content-Type": "application/json",
+							},
+							body: JSON.stringify({ currentUser: user }),
+						});
+						closeModal();
+						if (router.pathname === "/") router.push("/mxcatalog/new-releases", undefined, { shallow: true });
+					}
+					setLoading(false);
+				})
+				.catch(function (error) {
+					console.log("WalletConnect authentication error:", error);
+					setLoading(false);
+				});
 		}
-		console.log("here2");
 	};
 
 	const magicLogin = async () => {
@@ -128,11 +126,10 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 				});
 		}
 	};
+
 	const [betaAccessGranted, setBetaAccessGranted] = useState(false);
 	const [betaAccessError, setBetaAccessError] = useState(false);
 	const [accessCode, setAccessCode] = useState("");
-
-	const handleAuth = async () => {};
 
 	return (
 		<>
@@ -255,10 +252,7 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 												</div>
 											</button>
 											<button
-												onClick={() => {
-													walletconnectLogin();
-													// handleAuth();
-												}}
+												onClick={() => walletconnectLogin()}
 												className="w-full bg-light-200 hover:bg-light-300 dark:bg-dark-200 dark:hover:bg-[#000] rounded-lg flex items-center p-4 text-sm"
 											>
 												<Image src="/assets/walletconnect.png" alt="WalletConnect Logo" width="40" height="40" />

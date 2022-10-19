@@ -5,7 +5,7 @@ import { unlockableContentUri } from "../../utils/smart-contract/functions";
 import UnlockableContentModal from "./TrackInfoUtils/UnlockableContentModal";
 
 export default function UnlockableContent({ tokenId, currentOwnerAddress, unlockableContent }) {
-	const { user, isWeb3Enabled } = useMoralis();
+	const { user } = useMoralis();
 	const [, , , setError] = useContext(StatusContext);
 	const [unlockableContentUriData, setUnlockableContentUriData] = useState(null);
 	const [isUnlockableContentModalOpen, setUnlockableContentModalOpen] = useState(false);
@@ -30,10 +30,10 @@ export default function UnlockableContent({ tokenId, currentOwnerAddress, unlock
 	};
 
 	useEffect(() => {
-		if (tokenId && isWeb3Enabled && user && currentOwnerAddress === user.attributes.ethAddress) {
+		if (tokenId && user && currentOwnerAddress === user.attributes.ethAddress) {
 			getUnlockableContentUri();
 		}
-	}, [user, tokenId, isWeb3Enabled, currentOwnerAddress]);
+	}, [user, tokenId, currentOwnerAddress]);
 
 	const unlockableContentItems = [
 		{

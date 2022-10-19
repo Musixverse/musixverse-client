@@ -30,7 +30,7 @@ const Layout = ({ children }) => {
 
 	if (window && window.ethereum) {
 		window.ethereum.on("accountsChanged", (accounts) => {
-			if (user.attributes.ethAddress !== accounts[0]) {
+			if (user && user.attributes.ethAddress !== accounts[0]) {
 				setError((prevState) => ({
 					...prevState,
 					title: "User is not connected to the same wallet",

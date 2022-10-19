@@ -1,7 +1,8 @@
 import Web3 from "web3";
 import Moralis from "moralis";
 // Importing contract abi, address, and other variables
-import { MUSIXVERSE_FACET_CONTRACT_ABI } from "../../constants";
+import { MUSIXVERSE_FACET_CONTRACT_ABI, MORALIS_APP_ID, MORALIS_SERVER_URL } from "../../constants";
+
 var MUSIXVERSE;
 
 async function addPolygonTestnetNetwork() {
@@ -79,19 +80,6 @@ async function connectSmartContract() {
 	// }
 }
 
-// web3 = await Moralis.Web3.enable({
-// 	provider: "walletconnect",
-
-// 	// mobileLinks: [
-// 	//   "rainbow",
-// 	//   "metamask",
-// 	//   "argent",
-// 	//   "trust",
-// 	//   "imtoken",
-// 	//   "pillar",
-// 	// ]
-// });
-
 async function mintTrackNFT(
 	numberOfCopies,
 	price,
@@ -103,9 +91,36 @@ async function mintTrackNFT(
 	onSale,
 	unlockTimestamp
 ) {
+	if (window.localStorage.walletconnect) {
+		await Moralis.enableWeb3({ provider: "walletconnect" });
+
+		const sendOptions = {
+			contractAddress: process.env.NEXT_PUBLIC_MXV_DIAMOND_ADDRESS,
+			functionName: "mintTrackNFT",
+			abi: MUSIXVERSE_FACET_CONTRACT_ABI,
+			params: {
+				data: [
+					numberOfCopies,
+					Moralis.Units.Token(String(price), "18"),
+					metadataHash,
+					unlockableContentURIHash,
+					collaborators,
+					percentageContributions,
+					resaleRoyaltyPercentage,
+					onSale,
+					unlockTimestamp,
+				],
+			},
+		};
+
+		const transaction = await Moralis.executeFunction(sendOptions);
+		// Wait until the transaction is confirmed
+		await transaction.wait();
+		return;
+	}
+
 	const { ethereum } = window;
 	const callerAddress = Moralis.User.current().attributes.ethAddress;
-
 	if (callerAddress === ethereum.selectedAddress) {
 		const sendOptions = {
 			contractAddress: process.env.NEXT_PUBLIC_MXV_DIAMOND_ADDRESS,
@@ -143,10 +158,29 @@ async function mintTrackNFT(
 }
 
 async function purchaseTrackNFT(tokenId, price) {
+	const _tokenId = parseInt(tokenId).toString();
+
+	if (window.localStorage.walletconnect) {
+		await Moralis.enableWeb3({ provider: "walletconnect" });
+
+		const sendOptions = {
+			contractAddress: process.env.NEXT_PUBLIC_MXV_DIAMOND_ADDRESS,
+			functionName: "purchaseTrackNFT",
+			abi: MUSIXVERSE_FACET_CONTRACT_ABI,
+			params: {
+				tokenId: _tokenId,
+			},
+			msgValue: Moralis.Units.Token(String(price), "18"),
+		};
+
+		const transaction = await Moralis.executeFunction(sendOptions);
+		// Wait until the transaction is confirmed
+		await transaction.wait();
+		return;
+	}
+
 	const { ethereum } = window;
 	const callerAddress = Moralis.User.current().attributes.ethAddress;
-
-	const _tokenId = parseInt(tokenId).toString();
 
 	if (callerAddress === ethereum.selectedAddress) {
 		const sendOptions = {
@@ -176,11 +210,30 @@ async function purchaseTrackNFT(tokenId, price) {
 }
 
 async function purchaseReferredTrackNFT(tokenId, referrer, price) {
-	const { ethereum } = window;
-	const callerAddress = Moralis.User.current().attributes.ethAddress;
-
 	const _tokenId = parseInt(tokenId).toString();
 
+	if (window.localStorage.walletconnect) {
+		await Moralis.enableWeb3({ provider: "walletconnect" });
+
+		const sendOptions = {
+			contractAddress: process.env.NEXT_PUBLIC_MXV_DIAMOND_ADDRESS,
+			functionName: "purchaseReferredTrackNFT",
+			abi: MUSIXVERSE_FACET_CONTRACT_ABI,
+			params: {
+				tokenId: _tokenId,
+				referrer: referrer,
+			},
+			msgValue: Moralis.Units.Token(String(price), "18"),
+		};
+
+		const transaction = await Moralis.executeFunction(sendOptions);
+		// Wait until the transaction is confirmed
+		await transaction.wait();
+		return;
+	}
+
+	const { ethereum } = window;
+	const callerAddress = Moralis.User.current().attributes.ethAddress;
 	if (callerAddress === ethereum.selectedAddress) {
 		const sendOptions = {
 			contractAddress: process.env.NEXT_PUBLIC_MXV_DIAMOND_ADDRESS,
@@ -210,11 +263,29 @@ async function purchaseReferredTrackNFT(tokenId, referrer, price) {
 }
 
 async function updatePrice(tokenId, newPrice) {
-	const { ethereum } = window;
-	const callerAddress = Moralis.User.current().attributes.ethAddress;
-
 	const _tokenId = parseInt(tokenId).toString();
 
+	if (window.localStorage.walletconnect) {
+		await Moralis.enableWeb3({ provider: "walletconnect" });
+
+		const sendOptions = {
+			contractAddress: process.env.NEXT_PUBLIC_MXV_DIAMOND_ADDRESS,
+			functionName: "updatePrice",
+			abi: MUSIXVERSE_FACET_CONTRACT_ABI,
+			params: {
+				tokenId: _tokenId,
+				newPrice: Moralis.Units.Token(String(newPrice), "18"),
+			},
+		};
+
+		const transaction = await Moralis.executeFunction(sendOptions);
+		// Wait until the transaction is confirmed
+		await transaction.wait();
+		return;
+	}
+
+	const { ethereum } = window;
+	const callerAddress = Moralis.User.current().attributes.ethAddress;
 	if (callerAddress === ethereum.selectedAddress) {
 		const sendOptions = {
 			contractAddress: process.env.NEXT_PUBLIC_MXV_DIAMOND_ADDRESS,
@@ -243,11 +314,28 @@ async function updatePrice(tokenId, newPrice) {
 }
 
 async function toggleOnSale(tokenId) {
-	const { ethereum } = window;
-	const callerAddress = Moralis.User.current().attributes.ethAddress;
-
 	const _tokenId = parseInt(tokenId).toString();
 
+	if (window.localStorage.walletconnect) {
+		await Moralis.enableWeb3({ provider: "walletconnect" });
+
+		const sendOptions = {
+			contractAddress: process.env.NEXT_PUBLIC_MXV_DIAMOND_ADDRESS,
+			functionName: "toggleOnSale",
+			abi: MUSIXVERSE_FACET_CONTRACT_ABI,
+			params: {
+				tokenId: _tokenId,
+			},
+		};
+
+		const transaction = await Moralis.executeFunction(sendOptions);
+		// Wait until the transaction is confirmed
+		await transaction.wait();
+		return;
+	}
+
+	const { ethereum } = window;
+	const callerAddress = Moralis.User.current().attributes.ethAddress;
 	if (callerAddress === ethereum.selectedAddress) {
 		const sendOptions = {
 			contractAddress: process.env.NEXT_PUBLIC_MXV_DIAMOND_ADDRESS,
@@ -275,10 +363,23 @@ async function toggleOnSale(tokenId) {
 }
 
 async function unlockableContentUri(tokenId, callerAddress) {
-	const { ethereum } = window;
-
 	const _tokenId = parseInt(tokenId);
 
+	if (window.localStorage.walletconnect) {
+		await Moralis.enableWeb3({ provider: "walletconnect" });
+
+		const options = {
+			chain: "mumbai",
+			contractAddress: process.env.NEXT_PUBLIC_MXV_DIAMOND_ADDRESS,
+			functionName: "unlockableContentUri",
+			abi: MUSIXVERSE_FACET_CONTRACT_ABI,
+			params: { mxvTokenId: _tokenId, from: callerAddress },
+		};
+		const _unlockableContentUri = await Moralis.executeFunction(options);
+		return _unlockableContentUri;
+	}
+
+	const { ethereum } = window;
 	if (callerAddress === ethereum.selectedAddress) {
 		const options = {
 			chain: "mumbai",
@@ -303,11 +404,30 @@ async function unlockableContentUri(tokenId, callerAddress) {
 }
 
 async function updateCommentOnToken(tokenId, comment) {
-	const { ethereum } = window;
-	const callerAddress = Moralis.User.current().attributes.ethAddress;
-
 	const _tokenId = parseInt(tokenId);
 
+	if (window.localStorage.walletconnect) {
+		await Moralis.enableWeb3({ provider: "walletconnect" });
+
+		const options = {
+			chain: "mumbai",
+			contractAddress: process.env.NEXT_PUBLIC_MXV_DIAMOND_ADDRESS,
+			functionName: "updateCommentOnToken",
+			abi: MUSIXVERSE_FACET_CONTRACT_ABI,
+			params: {
+				_tokenId: _tokenId,
+				_comment: comment,
+			},
+		};
+
+		const transaction = await Moralis.executeFunction(options);
+		// Wait until the transaction is confirmed
+		await transaction.wait();
+		return;
+	}
+
+	const { ethereum } = window;
+	const callerAddress = Moralis.User.current().attributes.ethAddress;
 	if (callerAddress === ethereum.selectedAddress) {
 		const options = {
 			chain: "mumbai",

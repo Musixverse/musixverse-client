@@ -80,7 +80,6 @@ function App({ Component, pageProps, router }) {
 			<Script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></Script>
 			<Script src="/theme.js" strategy="beforeInteractive" />
 			<Script src="https://cdn.withpersona.com/dist/persona-v4.2.0.js"></Script>
-			<Script src="https://github.com/WalletConnect/walletconnect-monorepo/releases/download/1.7.1/web3-provider.min.js"></Script>
 
 			<MoralisProvider appId={MORALIS_APP_ID} serverUrl={MORALIS_SERVER_URL}>
 				<ThemeProvider attribute="class" enableSystem={false}>

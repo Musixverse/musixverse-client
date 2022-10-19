@@ -31,6 +31,9 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 	const handleLogout = async () => {
 		if (router.pathname != "/") router.push("/", undefined, { shallow: true });
 		await logout();
+		if (window.localStorage.walletconnect) {
+			window.localStorage.removeItem("walletconnect");
+		}
 		await fetch("/api/auth/logout", {
 			method: "post",
 			headers: {

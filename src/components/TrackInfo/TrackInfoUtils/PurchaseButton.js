@@ -53,6 +53,13 @@ const PurchaseButton = ({ tokenId, price }) => {
 						showErrorBox: true,
 					});
 				}
+				if (err.message.includes("insufficient funds")) {
+					setError({
+						title: "Insufficient funds",
+						message: "Please get enough funds in your wallet for this transaction",
+						showErrorBox: true,
+					});
+				}
 			}
 		} else {
 			setAuthModalOpen(true);

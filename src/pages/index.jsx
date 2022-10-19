@@ -22,8 +22,8 @@ function Home() {
 				<HeroSection/>
 				<div className="flex flex-col w-full max-w-[1920px] px-6 md:px-8 lg:px-16 xl:px-20 2xl:px-36">
 					<Countdown/>
-					<Section2New />
 					<TopArtist />
+					<Section2New />
 					<Section2 />
 					<Section3 />
 				</div>

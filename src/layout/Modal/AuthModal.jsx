@@ -84,7 +84,7 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 		if (!isAuthenticated) {
 			await authenticate({
 				provider: "walletconnect",
-				chainId: process.env.NEXT_PUBLIC_BLOCKCHAIN_NETWORK_ID,
+				// chainId: process.env.NEXT_PUBLIC_BLOCKCHAIN_NETWORK_ID,
 			})
 				.then(async function (user) {
 					if (user) {

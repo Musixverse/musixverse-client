@@ -4,6 +4,7 @@
  */
 
 import Moralis from "moralis";
+import { MORALIS_APP_ID, MORALIS_SERVER_URL } from "../constants";
 
 export async function isEmailValid(email) {
 	const emailRegex = new RegExp(
@@ -32,6 +33,8 @@ export async function isEmailValidAndAvailable(email) {
 			message: "Please enter a valid email",
 		};
 	}
+
+	await Moralis.start({ serverUrl: MORALIS_SERVER_URL, appId: MORALIS_APP_ID });
 	const emailExists = await Moralis.Cloud.run("checkEmailExists", { email: email });
 	if (emailExists) {
 		return {
@@ -62,6 +65,8 @@ export async function isUsernameValidAndAvailable(username) {
 			message: "Username can only contain alphabets, numbers, and '_'",
 		};
 	}
+
+	await Moralis.start({ serverUrl: MORALIS_SERVER_URL, appId: MORALIS_APP_ID });
 	const usernameExists = await Moralis.Cloud.run("checkUsernameAvailability", { username: username });
 	if (usernameExists || username === "band" || username === "user" || username === "admin") {
 		return {
@@ -108,6 +113,8 @@ export async function isBandUsernameValidAndAvailable(username) {
 			message: "Username can only contain alphabets, numbers, and '_'",
 		};
 	}
+
+	await Moralis.start({ serverUrl: MORALIS_SERVER_URL, appId: MORALIS_APP_ID });
 	const usernameExists = await Moralis.Cloud.run("checkBandUsernameAvailability", { username: username });
 	if (usernameExists || username === "band" || username === "user" || username === "admin") {
 		return {

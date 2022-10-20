@@ -14,7 +14,7 @@ import LoadingContext from "../../../store/loading-context";
 
 export default function AuthModal({ isOpen = "", onClose = "" }) {
 	const router = useRouter();
-	const { authenticate, isAuthenticated, user } = useMoralis();
+	const { authenticate, isAuthenticated, Moralis } = useMoralis();
 	const [, setLoading] = useContext(LoadingContext);
 	const [isModalOpen, setIsModalOpen] = useState(isOpen);
 	const [magicFormOpen, setMagicFormOpen] = useState(false);
@@ -76,15 +76,17 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 					setLoading(false);
 				});
 		}
+		setLoading(false);
 	};
 
 	const walletconnectLogin = async () => {
 		setLoading(true);
+
 		if (!isAuthenticated) {
 			await authenticate({
 				provider: "walletconnect",
+				chainId: process.env.NEXT_PUBLIC_BLOCKCHAIN_NETWORK_ID === 137 ? 137 : "",
 				signingMessage: "Musixverse Authentication",
-				chainId: process.env.NEXT_PUBLIC_BLOCKCHAIN_NETWORK_ID,
 			})
 				.then(async function (user) {
 					if (user) {
@@ -105,6 +107,8 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 					setLoading(false);
 				});
 		}
+
+		setLoading(false);
 	};
 
 	const magicLogin = async () => {

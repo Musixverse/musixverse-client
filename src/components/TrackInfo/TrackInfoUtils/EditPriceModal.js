@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import Image from "next/image";
 import LoadingContext from "../../../../store/loading-context";
+import StatusContext from "../../../../store/status-context";
 import { updatePrice } from "../../../utils/smart-contract/functions";
 import Modal from "../../../layout/Modal/Modal";
 import EditPriceSuccessModal from "./EditPriceSuccessModal";
@@ -8,6 +9,7 @@ import { convertMaticToUSD, convertMaticToINR, truncatePrice } from "../../../ut
 
 const EditPriceModal = ({ isOpen, setEditPriceModalOpen, tokenId, currentPrice }) => {
 	const [, setLoading] = useContext(LoadingContext);
+	const [, , , setError] = useContext(StatusContext);
 
 	const [maticUSD, setMaticUSD] = useState("");
 	const [maticINR, setMaticINR] = useState("");
@@ -42,9 +44,16 @@ const EditPriceModal = ({ isOpen, setEditPriceModalOpen, tokenId, currentPrice }
 			setLoading(false);
 			setEditPriceModalOpen(false);
 			setEditPriceSuccess(true);
-		} catch (error) {
+		} catch (err) {
 			setLoading(false);
 			setEditPriceModalOpen(false);
+			if (err.title === "User is not connected to the same wallet") {
+				setError({
+					title: err.title,
+					message: err.message,
+					showErrorBox: true,
+				});
+			}
 		}
 	};
 

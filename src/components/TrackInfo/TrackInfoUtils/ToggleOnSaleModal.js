@@ -1,5 +1,4 @@
 import { useState, useContext } from "react";
-import { useRouter } from "next/router";
 import LoadingContext from "../../../../store/loading-context";
 import StatusContext from "../../../../store/status-context";
 import { toggleOnSale } from "../../../utils/smart-contract/functions";
@@ -7,8 +6,7 @@ import Modal from "../../../layout/Modal/Modal";
 import ToggleOnSaleSuccessModal from "./ToggleOnSaleSuccessModal";
 
 const ToggleOnSaleModal = ({ isOpen, setToggleOnSaleModalOpen, tokenId, onSale }) => {
-	const router = useRouter();
-	const [loading, setLoading] = useContext(LoadingContext);
+	const [, setLoading] = useContext(LoadingContext);
 	const [, , , setError] = useContext(StatusContext);
 	const [toggleOnSaleSuccess, setToggleOnSaleSuccess] = useState(false);
 
@@ -21,9 +19,16 @@ const ToggleOnSaleModal = ({ isOpen, setToggleOnSaleModalOpen, tokenId, onSale }
 			setLoading(false);
 			setToggleOnSaleModalOpen(false);
 			setToggleOnSaleSuccess(true);
-		} catch (error) {
+		} catch (err) {
 			setLoading(false);
 			setToggleOnSaleModalOpen(false);
+			if (err.title === "User is not connected to the same wallet") {
+				setError({
+					title: err.title,
+					message: err.message,
+					showErrorBox: true,
+				});
+			}
 		}
 	};
 

@@ -52,7 +52,7 @@ function App({ Component, pageProps, router }) {
 		currentDuration: "",
 		playerIsLoaded: false,
 		isPlaying: false,
-	})
+	});
 	// This is a workaround for the issue with the next-themes package. Without this, the theme was not being applied correctly.
 	const [mounted, setMounted] = useState(false);
 	// When mounted on client, now we can show the UI

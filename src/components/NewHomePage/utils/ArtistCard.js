@@ -4,7 +4,7 @@ import Link from "next/link";
 export default function ArtistCard({imageURL,name,description}){
     return(
         <div className="relative z-10">
-            <div className="group flex flex-col justify-end rounded-lg w-56 h-80">
+            <div className="group flex flex-col rounded-lg w-56 h-80">
                 <div className="absolute flex w-full h-full">
                     <Image src={imageURL} alt="Top artist cover art" objectFit="fill" priority></Image>
                 </div>
@@ -13,7 +13,7 @@ export default function ArtistCard({imageURL,name,description}){
                         <i className="fa-solid fa-arrow-right"></i>
                     </Link>
                 </span>
-                <div className="z-10 p-8 align-bottom text-white">
+                <div className="z-10 p-6 pt-44 text-white">
                     <h1 className="font-tertiary text-2xl uppercase">{name}</h1>
                     <p className="font-primary text-sm mt-2">{description}</p>
                 </div>

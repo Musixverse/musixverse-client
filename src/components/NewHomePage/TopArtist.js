@@ -10,7 +10,7 @@ import Sommaiya from "../../../public/assets/new-homepage/sommaiya.png";
 
 export default function TopArtist(){
     return(
-        <div className="relative">
+        <div className="relative mt-16">
             <h1 className="font-primary text-3xl text-center mt-4">Top Artist on M<span className="text-primary-100">x</span> Catalog</h1>
             <div className="w-full mt-10 relative rounded-2xl overflow-hidden">
                 <div className="text-sm z-10 absolute right-6 lg:right-16 text-white mt-10">
@@ -40,10 +40,10 @@ export default function TopArtist(){
                 <div className="carousel-inner relative w-full overflow-hidden">
                     <div className="carousel-item active relative float-left w-full">
                         <div className="w-full flex justify-center gap-x-8">
-                            <ArtistCard name="Sarthak Kalyani" imageURL={Sarthak_Kalyani} description="The Singer who wowed AR Rahman" />
-                            <ArtistCard name="Jatayu" imageURL={Jatayu} description="The Jazz-Rock Quartet introducing Indian tunes to the world" />
-                            <ArtistCard name="Submarine in Space" imageURL={Submarine_in_space} description="The Signer touching all the right cords" />
-                            <ArtistCard name="Sommaiya" imageURL={Sommaiya} description="The artist taking Indian Hip-hop Global" />
+                            <ArtistCard name="Sarthak Kalyani" imageURL={Sarthak_Kalyani} description="The singer who wowed AR Rahman" />
+                            <ArtistCard name="Jatayu" imageURL={Jatayu} description="A Jazz Rock Fusion Band introducing the world to Indian tunes" />
+                            <ArtistCard name="Submarine in Space" imageURL={Submarine_in_space} description="The Critically Acclaimed IInstrumental Jazz-Rock Band" />
+                            <ArtistCard name="Sommaiya" imageURL={Sommaiya} description="A Genreless Musician and Filmmaker leaving his mark from New Delhi to New York" />
                         </div>
                     </div>
                 </div>
@@ -73,13 +73,13 @@ export default function TopArtist(){
                     <div className="carousel-item active relative float-left w-full">
                         <div className="w-full flex justify-center gap-x-8">
                             <ArtistCard name="Sarthak Kalyani" imageURL={Sarthak_Kalyani} description="The Singer who wowed AR Rahman" />
-                            <ArtistCard name="Jatayu" imageURL={Jatayu} description="The Jazz-Rock Quartet introducing Indian tunes to the world" />
+                            <ArtistCard name="Jatayu" imageURL={Jatayu} description="A Jazz Rock Fusion Band introducing the world to Indian tunes" />
                         </div>
                     </div>
                     <div className="carousel-item relative float-left w-full">
                         <div className="w-full flex justify-center gap-x-8">
-                            <ArtistCard name="Submarine in Space" imageURL={Submarine_in_space} description="The Signer touching all the right cords" />
-                            <ArtistCard name="Sommaiya" imageURL={Sommaiya} description="The artist taking Indian Hip-hop Global" />
+                            <ArtistCard name="Submarine in Space" imageURL={Submarine_in_space} description="The Critically Acclaimed IInstrumental Jazz-Rock Band" />
+                            <ArtistCard name="Sommaiya" imageURL={Sommaiya} description="A Genreless Musician and Filmmaker leaving his mark from New Delhi to New York" />
                         </div>
                     </div>
                 </div>
@@ -113,17 +113,17 @@ export default function TopArtist(){
                     </div>
                     <div className="carousel-item relative float-left w-full">
                         <div className="w-full flex justify-center gap-x-8">
-                            <ArtistCard name="Jatayu" imageURL={Jatayu} description="The Jazz-Rock Quartet introducing Indian tunes to the world" />
+                            <ArtistCard name="Jatayu" imageURL={Jatayu} description="A Jazz Rock Fusion Band introducing the world to Indian tunes" />
                         </div>
                     </div>
                     <div className="carousel-item relative float-left w-full">
                         <div className="w-full flex justify-center gap-x-8">
-                            <ArtistCard name="Submarine in Space" imageURL={Submarine_in_space} description="The Signer touching all the right cords" />
+                            <ArtistCard name="Submarine in Space" imageURL={Submarine_in_space} description="The Critically Acclaimed IInstrumental Jazz-Rock Band" />
                         </div>
                     </div>
                     <div className="carousel-item relative float-left w-full">
                         <div className="w-full flex justify-center gap-x-8">
-                            <ArtistCard name="Sommaiya" imageURL={Sommaiya} description="The artist taking Indian Hip-hop Global" />
+                            <ArtistCard name="Sommaiya" imageURL={Sommaiya} description="A Genreless Musician and Filmmaker leaving his mark from New Delhi to New York" />
                         </div>
                     </div>
                 </div>

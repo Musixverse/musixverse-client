@@ -97,7 +97,7 @@ export default function AboutArtist({ username, name, bio, country, createdAt, s
 				}
 			>
 				<div className="space-x-2 md:space-x-5">
-					{country ? <span> {country} </span> : null}
+					{country && country.name ? <span> {country.name} </span> : null}
 					<span>{createdAt ? joined : null}</span>
 				</div>
 				<div className="flex space-x-3 text-dark-100 dark:text-light-200">

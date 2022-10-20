@@ -13,7 +13,7 @@ import youtubeB from "../../../public/assets/logos/youtube_logo_b.svg";
 import youtubeW from "../../../public/assets/logos/youtube_logo_w.svg";
 import LyricsModal from "./TrackInfoUtils/LyricsModal";
 
-export default function TrackDetails({ tokenId, metadata, collaboratorUsers }) {
+export default function TrackDetails({ tokenId, metadata }) {
 	const { theme } = useTheme();
 	var date = new Date(parseInt(metadata.unlockTimestamp) * 1000);
 	var dateStr =
@@ -79,11 +79,11 @@ export default function TrackDetails({ tokenId, metadata, collaboratorUsers }) {
 					</div>
 					<div className="text-left">
 						<h4 className="font-bold font-secondary text-base">Country of Origin</h4>
-						<p>{metadata.location.countryOfOrigin.name}</p>
+						<p>{metadata.location.countryOfOrigin && metadata.location.countryOfOrigin.name ? metadata.location.countryOfOrigin.name : "-"}</p>
 					</div>
 					<div className="text-left">
 						<h4 className="font-bold font-secondary text-base">Location Created</h4>
-						<p>{metadata.location.cityOfOrigin.name}</p>
+						<p>{metadata.location.cityOfOrigin && metadata.location.cityOfOrigin.name ? metadata.location.cityOfOrigin.name : "-"}</p>
 					</div>
 				</div>
 

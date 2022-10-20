@@ -1,13 +1,11 @@
 const { Fragment, useState, useEffect } = require("react");
 import Image from "next/image";
 const { Transition } = require("@headlessui/react");
-import { useMoralis, useMoralisCloudFunction } from "react-moralis";
+import { useMoralis } from "react-moralis";
 
 export default function DeleteDraftModal({ isOpen = "", onClose = "", draftToDelete = "", deleteDraft = "" }) {
 	const { user } = useMoralis();
-
 	const [isModalOpen, setIsModalOpen] = useState(isOpen);
-	const { data: selectedDraft } = useMoralisCloudFunction("getDraftNftData", { objectId: draftToDelete });
 
 	useEffect(() => {
 		setIsModalOpen(isModalOpen);
@@ -70,13 +68,14 @@ export default function DeleteDraftModal({ isOpen = "", onClose = "", draftToDel
 									<div className="text-base font-semibold text-center mt-8">Are you sure you want to delete this draft?</div>
 
 									<div className="flex mt-12 space-x-8 justify-center">
-										{selectedDraft && selectedDraft.attributes.artwork.uri ? (
+										{draftToDelete && draftToDelete.artwork.uri ? (
 											<Image
-												src={selectedDraft.attributes.artwork.uri}
+												src={draftToDelete.artwork.uri}
 												className="group-hover:scale-110 group-hover:duration-500 duration-500 rounded-md"
 												alt="nft cover art"
 												height={120}
 												width={120}
+												quality={40}
 												priority
 											/>
 										) : (
@@ -86,7 +85,7 @@ export default function DeleteDraftModal({ isOpen = "", onClose = "", draftToDel
 										)}
 										<div className="grid content-between">
 											<p className="text-sm">{user && user.attributes.name}</p>
-											<p className="text-2xl font-semibold flex">{selectedDraft && selectedDraft.attributes.title}</p>
+											<p className="text-2xl font-semibold flex">{draftToDelete && draftToDelete.title}</p>
 										</div>
 									</div>
 

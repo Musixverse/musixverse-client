@@ -2,25 +2,21 @@ import { useState, useEffect, useContext } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { useMoralis, useMoralisCloudFunction } from "react-moralis";
+import { useMoralisCloudFunction } from "react-moralis";
+import StatusContext from "../../../store/status-context";
 import CustomButton from "../../layout/CustomButton";
 import mxv_tick from "/public/assets/mxv_tick.svg";
 import BandMembers from "./SettingsUtils/BandMembers";
 import ProfileSection1 from "./SettingsUtils/ProfileSection1";
 import ProfileSection2 from "./SettingsUtils/ProfileSection2";
-import { isNameValid, isBandUsernameValidAndAvailable } from "../../utils/Validate";
 import { sleep } from "../../utils/Sleep";
-import StatusContext from "../../../store/status-context";
+import { isNameValid, isBandUsernameValidAndAvailable } from "../../utils/Validate";
 
-export default function BandDashboard() {
-	const { user } = useMoralis();
+export default function BandDashboard({ bandsOfArtist }) {
 	const router = useRouter();
 	const [, , setSuccess, setError] = useContext(StatusContext);
 
-	// Bands whose invite the artist has accepted via email
-	const [bandsOfArtist, setBandsOfArtist] = useState([]);
-	const [activeBand, setActiveBand] = useState(null);
-
+	const [activeBand, setActiveBand] = useState(bandsOfArtist.length !== 0 ? bandsOfArtist[0] : null);
 	// State Management
 	const [avatar, setAvatar] = useState("");
 	const [coverImage, setCoverImage] = useState("");
@@ -45,29 +41,6 @@ export default function BandDashboard() {
 			setFacebook(activeBand.facebook ? activeBand.facebook : "");
 		}
 	}, [activeBand]);
-
-	useEffect(() => {
-		if (bandsOfArtist.length !== 0) {
-			setActiveBand(bandsOfArtist[0]);
-		}
-	}, [bandsOfArtist]);
-
-	const { fetch: fetchBandsOfArtist } = useMoralisCloudFunction("fetchBandsOfArtist", {
-		autoFetch: false,
-	});
-	useEffect(() => {
-		if (user) {
-			fetchBandsOfArtist({
-				onSuccess: async (object) => {
-					setBandsOfArtist(object);
-					console.log(object);
-				},
-				onError: (error) => {
-					console.log("fetchBandsOfArtist Error:", error);
-				},
-			});
-		}
-	}, [user, fetchBandsOfArtist]);
 
 	// Update Band Information
 	const bandData = {

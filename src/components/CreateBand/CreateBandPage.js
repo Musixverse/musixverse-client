@@ -138,7 +138,7 @@ const CreateBandPage = () => {
 		}
 	}, [user, fetchUserInfoForAddingToBand]);
 
-	// Save Band Draft
+	// Create Band
 	const { fetch: createBand } = useMoralisCloudFunction(
 		"createBand",
 		{ bandName: bandName, bandUsername: bandUsername, bandDescription: bandDescription, avatar: avatar, bandMembers: bandMembers },

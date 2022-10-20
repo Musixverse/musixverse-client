@@ -28,14 +28,14 @@ const ArtistEmailVerificationSuccessModal = ({ isOpen, setOpen }) => {
 				}
 				onClose={() => {
 					setOpen(false);
-					router.push(`/profile/${user.attributes.username}`, undefined, { shallow: true });
+					router.push(`/profile/${user.attributes.username}`);
 				}}
 				buttons={[
 					{
 						role: "custom",
 						onClick: () => {
 							setOpen(false);
-							router.push(`/profile/verify`, undefined, { shallow: true });
+							router.push(`/profile/verify`);
 						},
 						toClose: true,
 						classes:

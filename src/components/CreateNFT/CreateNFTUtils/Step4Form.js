@@ -6,6 +6,7 @@ import Tooltip from "../../../layout/Tooltip/Tooltip";
 import CollaboratorRoleDropdown from "./CollaboratorRoleDropdown";
 import RequiredAsterisk from "../../../layout/RequiredAsterisk";
 import { convertMaticToUSD, convertMaticToINR, truncatePrice } from "../../../utils/GetMarketPrice";
+import { collaboratorRoles } from "../../../constants";
 
 const Step3Form = ({
 	numberOfCopies,
@@ -26,28 +27,6 @@ const Step3Form = ({
 	chosenProfileOrBand,
 	setChosenProfileOrBand,
 }) => {
-	const rolesArray = [
-		"Composer",
-		"Instrumentalist",
-		"Lyricist",
-		"Mastering Engineer",
-		"Mentor",
-		"Mixer",
-		"Mixing Engineer",
-		"Music Arranger",
-		"Music Director",
-		"Music Manager",
-		"Music Producer",
-		"Musician",
-		"Recording Engineer",
-		"Remixer",
-		"Singer",
-		"Songwriter",
-		"Studio Engineer",
-		"Vocalist",
-		"Writer",
-	];
-
 	const [filteredUsers, setFilteredUsers] = useState("");
 	const [usernameEntered, setUsernameEntered] = useState("");
 	const [searchedUsername, setSearchedUsername] = useState("");
@@ -284,7 +263,8 @@ const Step3Form = ({
 							</label>
 						</div>
 
-						{verifiedBandsOfArtist.length > 0 &&
+						{verifiedBandsOfArtist &&
+							verifiedBandsOfArtist.length > 0 &&
 							verifiedBandsOfArtist.map((band) => {
 								return (
 									<div className="flex items-center mt-2" key={band.username}>
@@ -539,7 +519,7 @@ const Step3Form = ({
 
 										<div className="basis-2/5">
 											<CollaboratorRoleDropdown
-												optionsArray={rolesArray}
+												optionsArray={collaboratorRoles}
 												setCollaboratorRole={setCollaboratorRole}
 												index={index}
 												collaboratorList={collaboratorList}

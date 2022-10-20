@@ -122,10 +122,10 @@ export default function UnlockableContent({ tokenId, currentOwnerAddress, unlock
 				</h1>
 				<p className="text-[#777777] font-normal text-xs">Perks that you get after purchasing this music NFT</p>
 
-				<p className="text-sm font-semibold mt-6">About the Unlockable Content</p>
+				{unlockableContent.about && <p className="text-sm font-semibold mt-6">About the Unlockable Content</p>}
 
-				<div className="flex mt-2 space-x-8">
-					<div className="text-sm">{unlockableContent.about}</div>
+				<div className={"flex space-x-8 " + (unlockableContent.about ? "mt-2" : "mt-6")}>
+					{unlockableContent.about && <div className="text-sm">{unlockableContent.about}</div>}
 					<div className="grid grid-cols-3 items-start gap-4">
 						{unlockableContentItems.map((item, index) => {
 							let truncatedUnlockableItemText = item.unlockableItemText;

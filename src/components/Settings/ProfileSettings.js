@@ -23,6 +23,12 @@ export default function ProfileSettings({
 	setTwitter,
 	facebook,
 	setFacebook,
+	country,
+	setCountry,
+	state,
+	setState,
+	city,
+	setCity,
 	handleSave,
 	balance,
 	walletAddress,
@@ -49,6 +55,12 @@ export default function ProfileSettings({
 				setEmail={setEmail}
 				bio={bio}
 				setBio={setBio}
+				country={country}
+				setCountry={setCountry}
+				state={state}
+				setState={setState}
+				city={city}
+				setCity={setCity}
 			/>
 			{/* Section 2 */}
 			<ProfileSection2

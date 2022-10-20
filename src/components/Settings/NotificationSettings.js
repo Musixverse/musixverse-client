@@ -1,34 +1,16 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useContext } from "react";
 import Notification from "./SettingsUtils/Notification";
-import { useMoralis, useMoralisQuery, useMoralisCloudFunction } from "react-moralis";
+import { useMoralisCloudFunction } from "react-moralis";
 import StatusContext from "../../../store/status-context";
 import CustomButton from "../../layout/CustomButton";
 import LoadingContext from "../../../store/loading-context";
 
-export default function NotificationSettings({ walletAddress }) {
+export default function NotificationSettings({ walletAddress, userPreferences }) {
 	const [, , setSuccess] = useContext(StatusContext);
-	const [isLoading, setLoading] = useContext(LoadingContext);
+	const [, setLoading] = useContext(LoadingContext);
 
-	const [newsletter, setNewsletter] = useState("");
-	const [tradeNotifications, setTradeNotifications] = useState("");
-
-	const { user } = useMoralis();
-	const { fetch } = useMoralisQuery("UserPreferences", (query) => query.equalTo("user", user), [user], { autoFetch: false });
-
-	useEffect(() => {
-		setLoading(true);
-		fetch({
-			onSuccess: (object) => {
-				setNewsletter(object[0].attributes.newsletter);
-				setTradeNotifications(object[0].attributes.tradeNotifications);
-			},
-			onError: (error) => {
-				// The object was not retrieved successfully.
-				// error is a Moralis.Error with an error code and message.
-			},
-		});
-		setLoading(false);
-	}, [user]);
+	const [newsletter, setNewsletter] = useState(userPreferences.newsletter || false);
+	const [tradeNotifications, setTradeNotifications] = useState(userPreferences.tradeNotifications || false);
 
 	// Update User Information
 	const newUserPreferences = {
@@ -37,8 +19,10 @@ export default function NotificationSettings({ walletAddress }) {
 	};
 	const { fetch: updateUserPreferences } = useMoralisCloudFunction("updateUserPreferences", newUserPreferences, { autoFetch: false });
 	const handleSave = async () => {
+		setLoading(true);
 		await updateUserPreferences({
 			onSuccess: (data) => {
+				setLoading(false);
 				setSuccess((prevState) => ({
 					...prevState,
 					title: "Preferences updated!",
@@ -48,6 +32,7 @@ export default function NotificationSettings({ walletAddress }) {
 			},
 			onError: (error) => {
 				console.log("updateUserPreferences Error:", error);
+				setLoading(false);
 			},
 		});
 		return;
@@ -62,7 +47,9 @@ export default function NotificationSettings({ walletAddress }) {
 						<b>Selected wallet address for notifications:</b> <span className="max-w-[300px] turncate">{walletAddress}</span>
 					</p>
 				</div>
-				{/* <button className="px-8 py-2 text-[15px] rounded-3xl bg-dark-100 text-light-100 hover:bg-dark-200 font-primary">Reset Settings</button> */}
+				{/* <button className="px-8 py-2 text-[15px] rounded-3xl bg-dark-100 dark:bg-dark-200 text-light-100 hover:bg-dark-200 font-primary">
+					Reset Settings
+				</button> */}
 			</div>
 
 			<Notification

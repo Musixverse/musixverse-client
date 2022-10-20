@@ -25,14 +25,14 @@ const BandCreatedSuccessfullyModal = ({ isOpen, setOpen, bandUsername }) => {
 			}
 			onClose={() => {
 				setOpen(false);
-				router.push(`/profile/band/${bandUsername}`, undefined, { shallow: true });
+				router.push(`/profile/band/${bandUsername}`);
 			}}
 			buttons={[
 				{
 					role: "custom",
 					onClick: () => {
 						setOpen(false);
-						router.push(`/profile/band/${bandUsername}`, undefined, { shallow: true });
+						router.push(`/profile/band/${bandUsername}`);
 					},
 					toClose: true,
 					classes:

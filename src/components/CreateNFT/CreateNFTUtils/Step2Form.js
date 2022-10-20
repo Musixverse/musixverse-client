@@ -3,8 +3,6 @@ import GeographicDetailsInputGroup from "./GeographicDetailsInputGroup";
 import TagsMultiSelect from "./TagsMultiSelect";
 import RequiredAsterisk from "../../../layout/RequiredAsterisk";
 import Tooltip from "../../../layout/Tooltip/Tooltip";
-import InputDropdown from "./InputDropdown";
-import { languageArray } from "../../../constants";
 
 export default function Step2Form({
 	setTrackOrigin,
@@ -15,6 +13,7 @@ export default function Step2Form({
 	vocals,
 	setVocals,
 	setLanguage,
+	location,
 	setLocation,
 	countryOfOrigin,
 	setCountryOfOrigin,
@@ -30,18 +29,17 @@ export default function Step2Form({
 	trackOrigin,
 	parentalAdvisory,
 	language,
-	location,
 }) {
 	const detailsInputGroupValues = { setTrackOrigin, setGenre, recordingYear, setRecordingYear, setParentalAdvisory, genre, trackOrigin, parentalAdvisory };
 	const geographicDetailsInputGroupValues = {
-		setLanguage,
-		setLocation,
-		setCountryOfOrigin,
 		language,
+		setLanguage,
 		location,
-		countryOfOrigin,
+		setLocation,
 		stateOfOrigin,
 		setStateOfOrigin,
+		countryOfOrigin,
+		setCountryOfOrigin,
 	};
 
 	const toggleVocalsRadio = (e) => {

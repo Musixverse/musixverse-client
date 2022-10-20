@@ -7,8 +7,8 @@ export default function ProfileSection3({ balance, walletAddress }) {
 	const copyToClipboard = () => {
 		navigator.clipboard.writeText(walletAddress);
 		setSuccess({
-			title: "Wallet address copied successfully",
-			message: "",
+			title: "Copied to Clipboard",
+			message: "Wallet address copied successfully",
 			showSuccessBox: true,
 		});
 	};
@@ -18,7 +18,7 @@ export default function ProfileSection3({ balance, walletAddress }) {
 			<h1 className="mb-4 self-end text-3xl md:mb-0 md:mr-8 xl:text-4xl font-tertiary">WALLET ADDRESS</h1>
 			<div className="flex items-center justify-between flex-1 px-4 py-2 rounded-lg bg-light-100 dark:bg-[#323232]">
 				<span className="max-w-[180px] md:max-w-[280px] truncate md:text-base align-bottom text-sm font-secondary xl:max-w-none">{walletAddress}</span>
-				<button className="w-fit h-fit" onClick={copyToClipboard}>
+				<button type="button" className="w-fit h-fit" onClick={copyToClipboard}>
 					<i className="far fa-clipboard text-primary-100"></i>
 				</button>
 			</div>

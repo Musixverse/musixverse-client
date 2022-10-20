@@ -276,6 +276,27 @@ export const resaleRoyaltyRanges = [
 	"91%-100%",
 ];
 export const minRecordingYear = 1950;
+export const collaboratorRoles = [
+	"Composer",
+	"Instrumentalist",
+	"Lyricist",
+	"Mastering Engineer",
+	"Mentor",
+	"Mixer",
+	"Mixing Engineer",
+	"Music Arranger",
+	"Music Director",
+	"Music Manager",
+	"Music Producer",
+	"Musician",
+	"Recording Engineer",
+	"Remixer",
+	"Singer",
+	"Songwriter",
+	"Studio Engineer",
+	"Vocalist",
+	"Writer",
+];
 
 /**************************************************************************/
 /********************    Report Profile Filters    ************************/

@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useContext } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { useMoralis, useMoralisCloudFunction } from "react-moralis";
@@ -8,7 +8,7 @@ import styles from "../../../styles/CreateNFT/Step0.module.css";
 import LoadingContext from "../../../store/loading-context";
 import ArtistProfileNotVerifiedModal from "./CreateNFTUtils/ArtistProfileNotVerifiedModal";
 
-const CreateNFTIntro = ({ nextStep, chosenProfileOrBand, userInfo, nftDraftMetadata, nftDrafts, setNftDrafts }) => {
+const CreateNFTIntro = ({ nextStep, chosenProfileOrBand, nftDraftMetadata, nftDrafts, setNftDrafts }) => {
 	const router = useRouter();
 	const { user } = useMoralis();
 	const [, setLoading] = useContext(LoadingContext);
@@ -16,10 +16,6 @@ const CreateNFTIntro = ({ nextStep, chosenProfileOrBand, userInfo, nftDraftMetad
 	const [draftToDelete, setDraftToDelete] = useState("");
 	const [deleteModalOpen, setDeleteModalOpen] = useState(false);
 	const [artistProfileNotVerifiedModalOpen, setArtistProfileNotVerifiedModalOpen] = useState(false);
-
-	useEffect(() => {
-		router.replace("/create-nft", undefined, { shallow: true });
-	}, []);
 
 	const { fetch: deleteNftDraft } = useMoralisCloudFunction(
 		"deleteNftDraft",

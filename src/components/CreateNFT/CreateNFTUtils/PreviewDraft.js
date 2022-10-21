@@ -45,9 +45,13 @@ export default function PreviewDraft({ draft, setDeleteModalOpen, setDraftToDele
 
 	return (
 		<>
-			<div className="w-fit group flex flex-col overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl duration-300 cursor-pointer">
+			<div
+				className={
+					"w-fit group flex flex-col overflow-hidden rounded-2xl shadow-lg duration-300 " + (setDeleteModalOpen && "hover:shadow-2xl cursor-pointer")
+				}
+			>
 				{/* Uploaded Art */}
-				<div className="relative w-[222px] h-[200px] overflow-hidden rounded-t-xl cursor-pointer">
+				<div className="relative w-[222px] h-[200px] overflow-hidden rounded-t-xl">
 					{/* Cover art of NFT */}
 					{draft.artwork.uri === null ? (
 						<div className="dark:bg-[#363636] bg-light-300 w-full h-full rounded-t-xl"></div>
@@ -83,9 +87,9 @@ export default function PreviewDraft({ draft, setDeleteModalOpen, setDraftToDele
 				<div className="dark:bg-dark-200 bg-light-100 w-[222px] h-[128px] p-4 rounded-b-xl flex flex-col justify-between">
 					<div className="flex justify-between w-full">
 						<div className="flex flex-col">
-							<p className="font-secondary text-[#1D1D1D] text-xs dark:text-light-300">
+							<p className="font-secondary text-[#1D1D1D] text-xs text-start dark:text-light-300">
 								{user && chosenProfileOrBand.objectId === "profile"
-									? user.attributes.name
+									? draft.collaboratorList[0].name
 									: user && chosenProfileOrBand.objectId !== "profile"
 									? chosenProfileOrBand.name
 									: null}
@@ -115,19 +119,20 @@ export default function PreviewDraft({ draft, setDeleteModalOpen, setDraftToDele
 								})}
 						</div>
 
-						<button
-							type="button"
-							onClick={(e) => {
-								e.preventDefault();
-								setDeleteModalOpen(true);
-								setDraftToDelete(draft);
-							}}
-							className=""
-						>
-							<div className="hidden group-hover:block justify-center items-center text-base hover:text-error-200">
-								<i className="fa-solid fa-trash"></i>
-							</div>
-						</button>
+						{setDeleteModalOpen && (
+							<button
+								type="button"
+								onClick={(e) => {
+									e.preventDefault();
+									setDeleteModalOpen(true);
+									setDraftToDelete(draft);
+								}}
+							>
+								<div className="hidden group-hover:block justify-center items-center text-base hover:text-error-200">
+									<i className="fa-solid fa-trash"></i>
+								</div>
+							</button>
+						)}
 					</div>
 				</div>
 			</div>

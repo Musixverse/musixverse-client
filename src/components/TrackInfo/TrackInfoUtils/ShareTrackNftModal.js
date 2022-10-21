@@ -73,16 +73,18 @@ const ShareTrackNftModal = ({ isOpen, setOpen, artistName, title, setAuthModalOp
 							</button>
 						</div>
 					) : (
-						<CustomButton
-							onClick={() => {
-								setOpen(false);
-								setAuthModalOpen(true);
-							}}
-							green={true}
-							classes="text-sm px-8 py-3"
-						>
-							Sign up to get your referral link <i className="ml-1 fa-solid fa-right-to-bracket"></i>
-						</CustomButton>
+						<div className="w-full flex items-center justify-center">
+							<CustomButton
+								onClick={() => {
+									setOpen(false);
+									setAuthModalOpen(true);
+								}}
+								green={true}
+								classes="text-sm px-8 py-3"
+							>
+								Sign up to get your referral link <i className="ml-1 fa-solid fa-right-to-bracket"></i>
+							</CustomButton>
+						</div>
 					)}
 
 					<div className="flex justify-between mt-8">

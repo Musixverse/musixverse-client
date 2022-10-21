@@ -504,7 +504,7 @@ const CreateNFT = ({ userInfo }) => {
 				_unlockTimestamp
 			);
 			// TODO: Uncomment the line below
-			await deleteDraft();
+			// await deleteDraft();
 			setLoading(false);
 			setCreateNFTSuccess(true);
 		} catch (error) {

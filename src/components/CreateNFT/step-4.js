@@ -3,7 +3,9 @@ import PreviewNft from "./CreateNFTUtils/PreviewNft";
 import Step4Form from "./CreateNFTUtils/Step4Form";
 import ActionButtons from "./CreateNFTUtils/ActionButtons";
 import StatusContext from "../../../store/status-context";
-import SendInviteModal from "./CreateNFTUtils/SendInviteModal";
+import dynamic from "next/dynamic";
+const SendInviteModal = dynamic(() => import("./CreateNFTUtils/SendInviteModal"));
+const AddCollaboratorModal = dynamic(() => import("./CreateNFTUtils/AddCollaboratorModal"));
 
 export default function PricingAndSplits({
 	step,
@@ -34,6 +36,8 @@ export default function PricingAndSplits({
 	const [, , , setError] = useContext(StatusContext);
 	const [isInvitationModalOpen, setInvitationModalOpen] = useState(false);
 	const [invitedArtistEmail, setInvitedArtistEmail] = useState("");
+	// Add Collaborator Modal
+	const [isAddCollaboratorModalOpen, setAddCollaboratorModalOpen] = useState(false);
 
 	useEffect(() => {
 		if (collaboratorList.reduce((total, currentSplit) => (total = total + Number(currentSplit.split)), 0) === 100) {
@@ -46,7 +50,7 @@ export default function PricingAndSplits({
 	}, [collaboratorList]);
 
 	const nftPreviewValues = { trackTitle, coverArtUrl, audioFileUrl, nftPrice, numberOfCopies, step, collaboratorList, chosenProfileOrBand };
-	const step3FormValues = {
+	const step4FormValues = {
 		numberOfCopies,
 		setNumberOfCopies,
 		nftPrice,
@@ -64,6 +68,7 @@ export default function PricingAndSplits({
 		personalProfileCollaborator,
 		chosenProfileOrBand,
 		setChosenProfileOrBand,
+		setAddCollaboratorModalOpen,
 	};
 	const actionButtonProps = { step, prevStep, setSaveDraftSuccess, nftDraftMetadata };
 
@@ -82,6 +87,14 @@ export default function PricingAndSplits({
 								});
 								return;
 							}
+							if (collaboratorList.some((collaborator) => collaborator.hasAcceptedCollaboratorInvite === false)) {
+								setError({
+									title: "Collaborators haven't accepted collaboration invite yet",
+									message: "Please ask your collaborators to accept the collaboration email invite in order to create the NFT.",
+									showErrorBox: true,
+								});
+								return;
+							}
 							nftCreateFormOnSubmit();
 						}}
 					>
@@ -89,7 +102,7 @@ export default function PricingAndSplits({
 							{/* Preview div */}
 							<PreviewNft {...nftPreviewValues} />
 							{/* Info div */}
-							<Step4Form {...step3FormValues} />
+							<Step4Form {...step4FormValues} />
 						</div>
 
 						{/* Button div */}
@@ -97,12 +110,21 @@ export default function PricingAndSplits({
 					</form>
 				</div>
 			</div>
+
 			<SendInviteModal
 				isOpen={isInvitationModalOpen}
 				setOpen={setInvitationModalOpen}
 				invitedArtistEmail={invitedArtistEmail}
 				onEmailChange={(value) => setInvitedArtistEmail(value)}
 				nftDraftMetadata={nftDraftMetadata}
+			/>
+			<AddCollaboratorModal
+				isOpen={isAddCollaboratorModalOpen}
+				setOpen={setAddCollaboratorModalOpen}
+				nftDraftMetadata={nftDraftMetadata}
+				collaboratorList={collaboratorList}
+				setCollaboratorList={setCollaboratorList}
+				setInvitationModalOpen={setInvitationModalOpen}
 			/>
 		</>
 	);

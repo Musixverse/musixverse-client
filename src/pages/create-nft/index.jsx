@@ -78,7 +78,9 @@ const CreateNFT = ({ userInfo }) => {
 	const [numberOfCopies, setNumberOfCopies] = useState("");
 	const [nftPrice, setNftPrice] = useState("");
 	const [chosenProfileOrBand, setChosenProfileOrBand] = useState({ objectId: "profile" });
-	const [collaboratorList, setCollaboratorList] = useState([{ id: "", name: "", username: "", split: "", role: "", address: "", avatar: "" }]);
+	const [collaboratorList, setCollaboratorList] = useState([
+		{ id: "", name: "", username: "", split: "", role: "", address: "", avatar: "", hasAcceptedCollaboratorInvite: true },
+	]);
 	const [resaleRoyaltyPercent, setResaleRoyaltyPercent] = useState("");
 	const [releaseNow, setReleaseNow] = useState(true);
 	const [unlockTimestamp, setUnlockTimestamp] = useState(new Date().getTime());
@@ -104,11 +106,71 @@ const CreateNFT = ({ userInfo }) => {
 		setStep((currStep) => currStep - 1);
 	};
 
+	useEffect(() => {
+		if (step == 0 && user) {
+			router.replace("/create-nft", undefined, { shallow: true });
+			setTrackTitle("");
+			setTrackBackground("");
+			setAudioFileUrl(null);
+			setAudioFileDuration(null);
+			setAudioFileMimeType(null);
+			setCoverArtUrl(null);
+			setCoverArtMimeType(null);
+			setCreditCoverArtArtist(true);
+			setCoverArtArtist({ id: "", name: "", username: "", address: "", avatar: "", email: "" });
+			setLyrics(null);
+			setTrackOrigin("Original");
+			setGenre("Hip-Hop");
+			setRecordingYear(new Date().getFullYear());
+			setParentalAdvisory("Explicit");
+			setVocals(true);
+			setLanguage("Hindi");
+			setCountryOfOrigin(userInfo && userInfo.country ? userInfo.country : null);
+			setStateOfOrigin(userInfo && userInfo.state ? userInfo.state : null);
+			setLocation(userInfo && userInfo.city ? userInfo.city : null);
+			setIsrc("");
+			setTags([]);
+			setLinks({ spotifyLink: "", appleMusicLink: "", amazonMusicLink: "", youtubeMusicLink: "", other: "" });
+			setUnlockableContent({
+				about: "",
+				secretMessage: "",
+				exclusiveImages: [],
+				exclusiveAudios: [],
+				exclusiveVideos: [],
+			});
+			setNumberOfCopies("");
+			setNftPrice("");
+			setChosenProfileOrBand({ objectId: "profile" });
+			setCollaboratorList([
+				{
+					id: user.id,
+					name: user.attributes.name,
+					username: user.attributes.username,
+					split: 100,
+					role: "Singer",
+					address: user.attributes.ethAddress,
+					avatar: userInfo.avatar,
+					hasAcceptedCollaboratorInvite: true,
+				},
+			]);
+			setResaleRoyaltyPercent("");
+			setReleaseNow(true);
+			setUnlockTimestamp(new Date().getTime());
+		}
+	}, [step, user]);
+
 	// Setting data if a draft is opened
 	const router = useRouter();
 	const { draft } = router.query;
 	const { fetch: getDraftNftData } = useMoralisCloudFunction(
 		"getDraftNftData",
+		{ objectId: draft },
+		{
+			autoFetch: false,
+		}
+	);
+	const { fetch: getUpdatedCollaboratorList } = useMoralisCloudFunction(
+		"getUpdatedCollaboratorList",
 		{ objectId: draft },
 		{
 			autoFetch: false,
@@ -144,15 +206,35 @@ const CreateNFT = ({ userInfo }) => {
 						setUnlockableContent(_draft.attributes.unlockableContent);
 						setNumberOfCopies(_draft.attributes.numberOfCopies);
 						setNftPrice(_draft.attributes.nftPrice);
-						for (var idx in _draft.attributes.collaboratorList) {
-							const _collaborator = _draft.attributes.collaboratorList[idx];
-							const _collaboratorData = await Moralis.Cloud.run("fetchUserFromId", { collaborator: _collaborator });
-							_collaborator.name = _collaboratorData.name;
-							_collaborator.username = _collaboratorData.username;
-							_collaborator.avatar = _collaboratorData.avatar;
-						}
+						await getUpdatedCollaboratorList({
+							onSuccess: async (_updatedCollaboratorList) => {
+								let updatedCollaboratorList = [];
+								for (var idx in _draft.attributes.collaboratorList) {
+									for (var i in _updatedCollaboratorList) {
+										const _collaborator = _draft.attributes.collaboratorList[idx];
+										const _updatedCollaborator = _updatedCollaboratorList[i];
+
+										if (_collaborator.id === _updatedCollaborator._id) {
+											updatedCollaboratorList.push({
+												id: _collaborator.id,
+												name: _updatedCollaborator.name,
+												username: _updatedCollaborator.username,
+												split: _collaborator.split,
+												role: _collaborator.role,
+												address: _collaborator.address,
+												avatar: _updatedCollaborator.avatar,
+												hasAcceptedCollaboratorInvite: _collaborator.hasAcceptedCollaboratorInvite,
+											});
+										}
+									}
+								}
+								setCollaboratorList(updatedCollaboratorList);
+							},
+							onError: (error) => {
+								console.log("getUpdatedCollaboratorList Error:", error);
+							},
+						});
 						setChosenProfileOrBand(_draft.attributes.chosenProfileOrBand);
-						setCollaboratorList(_draft.attributes.collaboratorList);
 						setResaleRoyaltyPercent(_draft.attributes.resaleRoyaltyPercent);
 						setReleaseNow(_draft.attributes.releaseNow);
 						setUnlockTimestamp(_draft.attributes.unlockTimestamp);
@@ -183,6 +265,7 @@ const CreateNFT = ({ userInfo }) => {
 					role: "Singer",
 					address: user.attributes.ethAddress,
 					avatar: userInfo.avatar,
+					hasAcceptedCollaboratorInvite: true,
 				},
 			]);
 			setPersonalProfileCollaborator([

@@ -1,5 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import LoadingContext from "../../../../store/loading-context";
 import StatusContext from "../../../../store/status-context";
 import { updatePrice } from "../../../utils/smart-contract/functions";
@@ -35,6 +36,7 @@ const EditPriceModal = ({ isOpen, setEditPriceModalOpen, tokenId, currentPrice }
 	const truncatedUpdatedmaticUSDPrice = truncatePrice(updatedMaticUSD);
 	const truncatedUpdatedmaticINRPrice = truncatePrice(updatedMaticINR);
 
+	const { asPath } = useRouter();
 	const setNewPrice = async (e) => {
 		e.preventDefault();
 
@@ -44,6 +46,7 @@ const EditPriceModal = ({ isOpen, setEditPriceModalOpen, tokenId, currentPrice }
 			setLoading(false);
 			setEditPriceModalOpen(false);
 			setEditPriceSuccess(true);
+			await fetch(`/api/revalidate-track?path=${asPath}&secret=${process.env.NEXT_PUBLIC_REVALIDATE_SECRET}`);
 		} catch (err) {
 			setLoading(false);
 			setEditPriceModalOpen(false);
@@ -54,6 +57,7 @@ const EditPriceModal = ({ isOpen, setEditPriceModalOpen, tokenId, currentPrice }
 					showErrorBox: true,
 				});
 			}
+			console.error("Error updating price:", err);
 		}
 	};
 

@@ -3,6 +3,7 @@ import { useMoralis } from "react-moralis";
 import StatusContext from "../../../store/status-context";
 import { unlockableContentUri } from "../../utils/smart-contract/functions";
 import UnlockableContentModal from "./TrackInfoUtils/UnlockableContentModal";
+import { sleep } from "../../utils/Sleep";
 
 export default function UnlockableContent({ tokenId, currentOwnerAddress, unlockableContent }) {
 	const { user } = useMoralis();
@@ -12,28 +13,29 @@ export default function UnlockableContent({ tokenId, currentOwnerAddress, unlock
 	const [selectedUnlockableItem, setSelectedUnlockableItem] = useState("");
 	const [selectedUnlockableItemIndex, setSelectedUnlockableItemIndex] = useState(0);
 
-	const getUnlockableContentUri = async () => {
-		try {
-			const _unlockableContentUri = await unlockableContentUri(tokenId, user.attributes.ethAddress);
-			const res = await fetch(_unlockableContentUri);
-			const data = await res.json();
-			setUnlockableContentUriData(data);
-		} catch (err) {
-			if (err.title === "User is not connected to the same wallet") {
-				setError({
-					title: err.title,
-					message: err.message,
-					showErrorBox: true,
-				});
-			}
-		}
-	};
-
 	useEffect(() => {
+		const getUnlockableContentUri = async () => {
+			try {
+				await sleep(1500);
+				const _unlockableContentUri = await unlockableContentUri(tokenId, user.attributes.ethAddress);
+				const res = await fetch(_unlockableContentUri);
+				const data = await res.json();
+				setUnlockableContentUriData(data);
+			} catch (err) {
+				if (err.title === "User is not connected to the same wallet") {
+					setError({
+						title: err.title,
+						message: err.message,
+						showErrorBox: true,
+					});
+				}
+			}
+		};
+
 		if (tokenId && user && currentOwnerAddress === user.attributes.ethAddress) {
 			getUnlockableContentUri();
 		}
-	}, [user, tokenId, currentOwnerAddress]);
+	}, [user, tokenId, currentOwnerAddress, setError]);
 
 	const unlockableContentItems = [
 		{

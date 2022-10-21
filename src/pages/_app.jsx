@@ -65,8 +65,20 @@ function App({ Component, pageProps, router }) {
 	return (
 		<>
 			{/* <!-- Global site tag (gtag.js) - Google Analytics --> */}
-			<Script src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}`} strategy="afterInteractive" />
-			<Script id="google-analytics" strategy="afterInteractive">
+			<Script
+				src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}`}
+				strategy="afterInteractive"
+				onError={(err) => {
+					console.error("Google Tag Manager Script Error:", err);
+				}}
+			/>
+			<Script
+				id="google-analytics"
+				strategy="afterInteractive"
+				onError={(err) => {
+					console.error("Google Analytics Script Error:", err);
+				}}
+			>
 				{`
                     window.dataLayer = window.dataLayer || [];
                     function gtag(){dataLayer.push(arguments);}
@@ -76,10 +88,20 @@ function App({ Component, pageProps, router }) {
                     });
                 `}
 			</Script>
-			<Script src="https://kit.fontawesome.com/8f4546bba1.js" crossOrigin="anonymous"></Script>
-			<Script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></Script>
-			<Script src="/theme.js" strategy="beforeInteractive" />
-			<Script src="https://cdn.withpersona.com/dist/persona-v4.2.0.js"></Script>
+			<Script
+				src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"
+				strategy="lazyOnload"
+				onError={(err) => {
+					console.error("Tailwind Elements Script Error:", err);
+				}}
+			></Script>
+			<Script
+				src="https://cdn.withpersona.com/dist/persona-v4.2.0.js"
+				strategy="lazyOnload"
+				onError={(err) => {
+					console.error("Persona Script Error:", err);
+				}}
+			></Script>
 
 			<MoralisProvider appId={MORALIS_APP_ID} serverUrl={MORALIS_SERVER_URL}>
 				<ThemeProvider attribute="class" enableSystem={false}>

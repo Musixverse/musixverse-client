@@ -78,6 +78,11 @@ export default function Confirm() {
 						<p className="font-secondary text-[15px] text-center">{user && user.attributes.email}</p>
 						<p className="font-secondary text-[15px] text-center mt-4">Please check your inbox and follow instructions in the mail to continue</p>
 						<p className="font-secondary text-[12px] text-center">You will automatically be redirected once you confirm your email</p>
+						<p className="font-secondary text-[13px] text-center mt-6">
+							Didn&apos;t receive the email?
+							<br />
+							Make sure to check your Promotions tab and Spam folder
+						</p>
 					</span>
 					<form onSubmit={backToApp} className="mt-12">
 						{user && user.attributes.isArtist ? (

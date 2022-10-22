@@ -55,7 +55,7 @@ export async function getStaticProps(context) {
 				collaboratorUsers,
 				activity,
 			},
-			revalidate: 1,
+			revalidate: 100,
 		};
 	} catch (error) {
 		return { notFound: true, revalidate: 1, props: {} };

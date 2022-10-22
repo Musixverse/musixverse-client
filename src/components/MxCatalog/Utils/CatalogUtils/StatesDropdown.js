@@ -1,14 +1,14 @@
-import { Fragment, useState, useEffect } from "react";
+import { Fragment, useState } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/solid";
 import styles from "../../../../../styles/CreateNFT/InputDropdown.module.css";
-import { Country, State } from "country-state-city";
+import { State } from "country-state-city";
 
 function classNames(...classes) {
 	return classes.filter(Boolean).join(" ");
 }
 
-export default function CountriesDropdown({ initialValue, setChoice, dropdownType, setCurrentFilterType, countryOfOrigin }) {
+export default function StatesDropdown({ initialValue, setChoice, dropdownType, setCurrentFilterType, countryOfOrigin }) {
 	const [currentFilter, setCurrentFilter] = useState(initialValue === "" ? "Select Here" : initialValue);
 	const stateOfOriginArray = State.getStatesOfCountry(countryOfOrigin.isoCode);
 

@@ -20,9 +20,10 @@ const UnlockableContentModal = ({ isOpen, setOpen, tokenId, selectedUnlockableIt
 		setLoading(true);
 		try {
 			await updateCommentOnToken(tokenId, comment);
-			setLoading(false);
 			setOpen(false);
 			setComment("");
+			await fetch(`/api/revalidate-track?path=${window.location.pathname}&secret=${process.env.NEXT_PUBLIC_REVALIDATE_SECRET}`);
+			setLoading(false);
 			setUpdateCommentSuccess(true);
 		} catch (err) {
 			setLoading(false);

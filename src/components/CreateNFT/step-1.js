@@ -36,19 +36,6 @@ export default function TrackDetails({
 	nftDraftMetadata,
 	chosenProfileOrBand,
 }) {
-	/**
-	 * TODO: Need to add the following-
-	 * Verfied artist check
-	 * Artist name truncation
-	 * Change ETH logo to MATIC
-	 * Add states for the remaining input fields
-	 * Add a form tag in this component to store data on Moralis
-	 * Revoke Object URLs to avoid memo leak
-	 * Refine the CSS for dark mode radio buttons
-	 * Check for new navbar designs
-	 * Responsiveness
-	 * Move CSS from inline to external file
-	 */
 	const [, , , setError] = useContext(StatusContext);
 	const [, setLoading] = useContext(LoadingContext);
 	const [isInvitationModalOpen, setInvitationModalOpen] = useState(false);

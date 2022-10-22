@@ -10,7 +10,7 @@ import StatusContext from "../../../../store/status-context";
 
 export default function ImageUpload({ coverArtUrl, setCoverArtUrl, setCoverArtMimeType }) {
 	const { Moralis } = useMoralis();
-	const [isLoading, setLoading] = useContext(LoadingContext);
+	const [, setLoading] = useContext(LoadingContext);
 	const [, , , setError] = useContext(StatusContext);
 	const [showModal, setShowModal] = useState(false);
 	const [imageToCrop, setImageToCrop] = useState(undefined);
@@ -28,7 +28,16 @@ export default function ImageUpload({ coverArtUrl, setCoverArtUrl, setCoverArtMi
 				const uploadedFile = convertDataURLtoFile(croppedImage, "file");
 				setLoading(true);
 				// Get the uploadFileOnIPFS async function
-				await uploadFileToIPFS(Moralis, uploadedFile).then((url) => setCoverArtUrl(url));
+				try {
+					await uploadFileToIPFS(Moralis, uploadedFile).then((url) => setCoverArtUrl(url));
+				} catch (err) {
+					setError((prevState) => ({
+						...prevState,
+						title: "Oops! Something went wrong.",
+						message: "Please try again later.",
+						showErrorBox: true,
+					}));
+				}
 				setLoading(false);
 			}
 		}

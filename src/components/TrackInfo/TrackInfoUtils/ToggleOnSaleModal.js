@@ -16,8 +16,9 @@ const ToggleOnSaleModal = ({ isOpen, setToggleOnSaleModalOpen, tokenId, onSale }
 		setLoading(true);
 		try {
 			await toggleOnSale(tokenId);
-			setLoading(false);
 			setToggleOnSaleModalOpen(false);
+			await fetch(`/api/revalidate-track?path=${window.location.pathname}&secret=${process.env.NEXT_PUBLIC_REVALIDATE_SECRET}`);
+			setLoading(false);
 			setToggleOnSaleSuccess(true);
 		} catch (err) {
 			setLoading(false);

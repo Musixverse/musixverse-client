@@ -2,7 +2,7 @@ import Confetti from "react-confetti";
 
 export default function SuccessConfetti() {
 	return (
-		<div className="absolute top-0 left-0 w-screen h-screen m-auto">
+		<div className="absolute top-0 left-0 w-full h-full m-auto">
 			<div className="fixed" style={{ zIndex: "55" }}>
 				<Confetti
 					colors={[

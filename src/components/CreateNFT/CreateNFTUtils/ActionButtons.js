@@ -1,28 +1,25 @@
 import { useContext } from "react";
 import { useRouter } from "next/router";
-import { useMoralisCloudFunction } from "react-moralis";
 import RequiredAsterisk from "../../../layout/RequiredAsterisk";
 import LoadingContext from "../../../../store/loading-context";
+import { saveNftCreationProgress } from "./SaveNftCreationProgress";
 
 const ActionButtons = ({ step, prevStep, setSaveDraftSuccess, nftDraftMetadata }) => {
 	const [, setLoading] = useContext(LoadingContext);
-
 	const router = useRouter();
 	const { draft } = router.query;
+
 	// Save Draft Feature
-	const { fetch: saveNftCreationDraft } = useMoralisCloudFunction("saveNftDraft", { metadata: nftDraftMetadata, draftId: draft }, { autoFetch: false });
-	const saveNftDraft = () => {
+	const saveNftDraft = async () => {
 		setLoading(true);
-		saveNftCreationDraft({
-			onSuccess: async (object) => {
-				setLoading(false);
-				setSaveDraftSuccess(true);
-			},
-			onError: (error) => {
-				setLoading(false);
-				console.log("saveNftDraft Error:", error);
-			},
-		});
+		try {
+			await saveNftCreationProgress(nftDraftMetadata, draft);
+			setLoading(false);
+			setSaveDraftSuccess(true);
+		} catch (err) {
+			console.error("saveNftDraft error:", err);
+			setLoading(false);
+		}
 	};
 
 	return (

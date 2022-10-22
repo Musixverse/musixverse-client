@@ -4,6 +4,7 @@ import { useMoralis } from "react-moralis";
 import convertDataURLtoFile from "../../../utils/image-crop/convertDataURLtoFile";
 import uploadFileToIPFS from "../../../utils/image-crop/uploadFileToIPFS";
 import LoadingContext from "../../../../store/loading-context";
+import StatusContext from "../../../../store/status-context";
 import CropImageModal from "../../CreateNFT/CreateNFTUtils/CropImageModal";
 import Tooltip from "../../../layout/Tooltip/Tooltip";
 
@@ -11,6 +12,7 @@ export default function CoverPhoto({ coverImage, setCoverImage }) {
 	const coverPictureInput = useRef(null);
 	const { Moralis } = useMoralis();
 	const [, setLoading] = useContext(LoadingContext);
+	const [, , , setError] = useContext(StatusContext);
 	//Crop Modal states
 	const [showModal, setShowModal] = useState(false);
 	const [imageToCrop, setImageToCrop] = useState(undefined);
@@ -24,17 +26,30 @@ export default function CoverPhoto({ coverImage, setCoverImage }) {
 	const cropModalValues = { showModal, setShowModal, imageToCrop, setCroppedImage, circularCrop, aspectRatio };
 
 	useEffect(() => {
-		if (croppedImage !== undefined) {
-			setLoading(true);
-			// setCoverPhoto(croppedImage);
-			// Get the File from DataURL
-			const uploadedFile = convertDataURLtoFile(croppedImage, "file");
-			// Get the uploadFileOnIPFS async function
+		async function setCoverPhoto() {
+			if (croppedImage !== undefined) {
+				setLoading(true);
+				// setCoverPhoto(croppedImage);
+				// Get the File from DataURL
+				const uploadedFile = convertDataURLtoFile(croppedImage, "file");
+				// Get the uploadFileOnIPFS async function
 
-			uploadFileToIPFS(Moralis, uploadedFile).then((url) => {
-				setLoading(false);
-				setCoverImage(url);
-			});
+				try {
+					await uploadFileToIPFS(Moralis, uploadedFile).then((url) => {
+						setLoading(false);
+						setCoverImage(url);
+					});
+				} catch (err) {
+					setLoading(false);
+					setError((prevState) => ({
+						...prevState,
+						title: "Oops! Something went wrong.",
+						message: "Please try again later.",
+						showErrorBox: true,
+					}));
+				}
+			}
+			setCoverPhoto();
 		}
 	}, [Moralis, croppedImage, setCoverImage, setLoading]);
 

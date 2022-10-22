@@ -7,7 +7,7 @@ import CropImageModal from "../../CreateNFT/CreateNFTUtils/CropImageModal";
 import LoadingContext from "../../../../store/loading-context";
 import Image from "next/image";
 
-export default function SelectAvatar({ defaultAvatarUrls, uploadFile, avatar, setAvatar }) {
+export default function SelectAvatar({ defaultAvatarUrls, avatar, setAvatar }) {
 	const [showModal, setShowModal] = useState(false);
 	const [imageToCrop, setImageToCrop] = useState(undefined);
 	const [croppedImage, setCroppedImage] = useState(undefined);
@@ -29,11 +29,21 @@ export default function SelectAvatar({ defaultAvatarUrls, uploadFile, avatar, se
 				// Get the File from DataURL
 				const uploadedFile = convertDataURLtoFile(croppedImage, "file");
 				setLoading(true);
-				// Get the uploadFileOnIPFS async function
-				await uploadFileToIPFS(Moralis, uploadedFile).then((url) => {
-					setAvatar(url);
+				try {
+					// Get the uploadFileOnIPFS async function
+					await uploadFileToIPFS(Moralis, uploadedFile).then((url) => {
+						setAvatar(url);
+						setLoading(false);
+					});
+				} catch (err) {
 					setLoading(false);
-				});
+					setError((prevState) => ({
+						...prevState,
+						title: "Oops! Something went wrong.",
+						message: "Please try again later.",
+						showErrorBox: true,
+					}));
+				}
 			}
 		}
 		setProfileImage();

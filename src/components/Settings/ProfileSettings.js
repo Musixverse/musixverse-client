@@ -23,6 +23,12 @@ export default function ProfileSettings({
 	setTwitter,
 	facebook,
 	setFacebook,
+	country,
+	setCountry,
+	state,
+	setState,
+	city,
+	setCity,
 	handleSave,
 	balance,
 	walletAddress,
@@ -30,9 +36,9 @@ export default function ProfileSettings({
 	return (
 		<form
 			className="flex-1 mb-32"
-			onSubmit={(e) => {
+			onSubmit={async (e) => {
 				e.preventDefault();
-				handleSave();
+				await handleSave();
 			}}
 		>
 			{/* Section 1 */}
@@ -49,6 +55,12 @@ export default function ProfileSettings({
 				setEmail={setEmail}
 				bio={bio}
 				setBio={setBio}
+				country={country}
+				setCountry={setCountry}
+				state={state}
+				setState={setState}
+				city={city}
+				setCity={setCity}
 			/>
 			{/* Section 2 */}
 			<ProfileSection2

@@ -14,7 +14,12 @@ export default function ProfileSection1({
 	setEmail,
 	bio,
 	setBio,
-	handleSave,
+	country,
+	setCountry,
+	state,
+	setState,
+	city,
+	setCity,
 	isBandSettings,
 }) {
 	return (
@@ -33,6 +38,12 @@ export default function ProfileSection1({
 					setEmail={setEmail}
 					bio={bio}
 					setBio={setBio}
+					country={country}
+					setCountry={setCountry}
+					state={state}
+					setState={setState}
+					city={city}
+					setCity={setCity}
 					isBandSettings={isBandSettings}
 				/>
 			</div>

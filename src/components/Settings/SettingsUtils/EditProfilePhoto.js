@@ -4,6 +4,7 @@ import CustomButton from "../../../layout/CustomButton";
 import convertDataURLtoFile from "../../../utils/image-crop/convertDataURLtoFile";
 import uploadFileToIPFS from "../../../utils/image-crop/uploadFileToIPFS";
 import LoadingContext from "../../../../store/loading-context";
+import StatusContext from "../../../../store/status-context";
 import CropImageModal from "../../CreateNFT/CreateNFTUtils/CropImageModal";
 import Image from "next/image";
 import Tooltip from "../../../layout/Tooltip/Tooltip";
@@ -13,6 +14,7 @@ export default function EditProfilePhoto({ avatar, setAvatar }) {
 	const profilePictureInput = useRef(null);
 	const { Moralis } = useMoralis();
 	const [, setLoading] = useContext(LoadingContext);
+	const [, , , setError] = useContext(StatusContext);
 	// Crop Modal states
 	const [showModal, setShowModal] = useState(false);
 	const [imageToCrop, setImageToCrop] = useState(undefined);
@@ -32,10 +34,20 @@ export default function EditProfilePhoto({ avatar, setAvatar }) {
 			console.log("Compressed file size: ", uploadedFile.size);
 			// Get the uploadFileOnIPFS async function
 
-			uploadFileToIPFS(Moralis, uploadedFile).then((url) => {
+			try {
+				uploadFileToIPFS(Moralis, uploadedFile).then((url) => {
+					setLoading(false);
+					setAvatar(url);
+				});
+			} catch (err) {
 				setLoading(false);
-				setAvatar(url);
-			});
+				setError((prevState) => ({
+					...prevState,
+					title: "Oops! Something went wrong.",
+					message: "Please try again later.",
+					showErrorBox: true,
+				}));
+			}
 		}
 	}, [Moralis, croppedImage, setAvatar, setLoading]);
 

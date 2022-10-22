@@ -41,8 +41,9 @@ const EditPriceModal = ({ isOpen, setEditPriceModalOpen, tokenId, currentPrice }
 		setLoading(true);
 		try {
 			await updatePrice(tokenId, updatedPrice);
-			setLoading(false);
 			setEditPriceModalOpen(false);
+			await fetch(`/api/revalidate-track?path=${window.location.pathname}&secret=${process.env.NEXT_PUBLIC_REVALIDATE_SECRET}`);
+			setLoading(false);
 			setEditPriceSuccess(true);
 		} catch (err) {
 			setLoading(false);
@@ -54,6 +55,7 @@ const EditPriceModal = ({ isOpen, setEditPriceModalOpen, tokenId, currentPrice }
 					showErrorBox: true,
 				});
 			}
+			console.error("Error updating price:", err);
 		}
 	};
 

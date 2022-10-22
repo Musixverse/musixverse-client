@@ -4,10 +4,12 @@ import { useMoralis } from "react-moralis";
 import uploadFileToIPFS from "../../../utils/image-crop/uploadFileToIPFS";
 import uploadMusic from "../../../../public/assets/create-nft/upload-music.svg";
 import LoadingContext from "../../../../store/loading-context";
+import StatusContext from "../../../../store/status-context";
 
 export default function AudioUpload({ audioFileUrl, setAudioFileUrl, setAudioFileDuration, setAudioFileMimeType }) {
 	const { Moralis } = useMoralis();
-	const [isLoading, setLoading] = useContext(LoadingContext);
+	const [, setLoading] = useContext(LoadingContext);
+	const [, , , setError] = useContext(StatusContext);
 
 	const handleAudioUpload = async (event) => {
 		setLoading(true);
@@ -32,7 +34,16 @@ export default function AudioUpload({ audioFileUrl, setAudioFileUrl, setAudioFil
 			};
 			reader.readAsDataURL(fileToUpload);
 
-			await uploadFileToIPFS(Moralis, fileToUpload).then((url) => setAudioFileUrl(url));
+			try {
+				await uploadFileToIPFS(Moralis, fileToUpload).then((url) => setAudioFileUrl(url));
+			} catch (err) {
+				setError((prevState) => ({
+					...prevState,
+					title: "Oops! Something went wrong.",
+					message: "Please try again later.",
+					showErrorBox: true,
+				}));
+			}
 		}
 		setLoading(false);
 	};

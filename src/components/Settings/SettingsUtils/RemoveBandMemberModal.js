@@ -5,7 +5,7 @@ import LoadingContext from "../../../../store/loading-context";
 import StatusContext from "../../../../store/status-context";
 import Modal from "../../../layout/Modal/Modal";
 
-const RemoveBandMemberModal = ({ isOpen, setOpen, bandId, bandMemberToEdit, setBandMembersList }) => {
+const RemoveBandMemberModal = ({ isOpen, setOpen, bandId, username, bandMemberToEdit, setBandMembersList }) => {
 	const [, setLoading] = useContext(LoadingContext);
 	const [, , setSuccess, setError] = useContext(StatusContext);
 
@@ -22,6 +22,7 @@ const RemoveBandMemberModal = ({ isOpen, setOpen, bandId, bandMemberToEdit, setB
 					message: "Selected Band Member was removed successfully!",
 					showSuccessBox: true,
 				}));
+				await fetch(`/api/revalidate-profile?path=/profile/band/${username}&secret=${process.env.NEXT_PUBLIC_REVALIDATE_SECRET}`);
 
 				setBandMembersList((prevState) => {
 					const bandMembers = prevState.filter((bandMember) => bandMember._id !== bandMemberToEdit._id);

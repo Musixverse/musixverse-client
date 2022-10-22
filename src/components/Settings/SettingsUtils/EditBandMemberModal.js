@@ -5,7 +5,7 @@ import LoadingContext from "../../../../store/loading-context";
 import StatusContext from "../../../../store/status-context";
 import Modal from "../../../layout/Modal/Modal";
 
-const EditBandMemberModal = ({ isOpen, setOpen, bandId, bandMemberToEdit, setBandMemberToEdit, setBandMembersList }) => {
+const EditBandMemberModal = ({ isOpen, setOpen, bandId, username, bandMemberToEdit, setBandMemberToEdit, setBandMembersList }) => {
 	const [, setLoading] = useContext(LoadingContext);
 	const [, , setSuccess, setError] = useContext(StatusContext);
 
@@ -26,6 +26,7 @@ const EditBandMemberModal = ({ isOpen, setOpen, bandId, bandMemberToEdit, setBan
 					message: "Band member's info was updated successfully!",
 					showSuccessBox: true,
 				}));
+				await fetch(`/api/revalidate-profile?path=/profile/band/${username}&secret=${process.env.NEXT_PUBLIC_REVALIDATE_SECRET}`);
 
 				setBandMembersList((current) =>
 					current.map((bandMember) => {

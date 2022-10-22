@@ -1,4 +1,4 @@
-import { Fragment, useState, useEffect } from "react";
+import { Fragment, useState } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/solid";
 import styles from "../../../../../styles/CreateNFT/InputDropdown.module.css";
@@ -51,8 +51,10 @@ export default function CountriesDropdown({ initialValue, setChoice, dropdownTyp
 						onClick={handleOptionSelect}
 						data-isocode={option.isoCode}
 					>
-						<span className="text-lg">{option.flag}</span>&nbsp;&nbsp;
-						{option.name.length > 20 ? option.name.substring(0, 17) + "..." : option.name}
+						<div className="flex items-center flex-row-reverse" data-isocode={option.isoCode}>
+							{option.name.length > 20 ? option.name.substring(0, 17) + "..." : option.name}
+							<span className="text-lg">{option.flag}&nbsp;&nbsp;</span>
+						</div>
 					</li>
 				)}
 			</Menu.Item>

@@ -123,7 +123,7 @@ export default function Step1Form({
 						onChange={(e) => {
 							setTrackTitle(e.target.value);
 						}}
-						className="w-full px-4 py-1 mt-1 border-2 border-[#777777] rounded-md shadow-sm outline-none focus:border-primary-100 focus:dark:border-primary-100 dark:bg-[#323232] dark:border-[#323232]"
+						className="w-full px-2 py-1 mt-1 border-2 border-[#777777] rounded-md shadow-sm outline-none focus:border-primary-100 focus:dark:border-primary-100 dark:bg-[#323232] dark:border-[#323232]"
 						required
 					></input>
 					<p className="text-[#777777] mt-1 font-normal text-xs">Feel free to include featured artists and version info in the track title</p>
@@ -264,7 +264,7 @@ export default function Step1Form({
 									</p>
 									<div className="flex flex-col">
 										<input
-											className="dark:text-light-100 dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-100 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-100"
+											className="dark:text-light-100 dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-100 w-full px-2 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-100"
 											id="username"
 											name="username"
 											type="text"
@@ -409,7 +409,7 @@ export default function Step1Form({
 										<p className="text-sm text-[#777777] font-normal mt-2 mb-2">or</p>
 										<div className="flex w-full space-x-2">
 											<input
-												className="dark:text-light-100 dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-100 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-100"
+												className="dark:text-light-100 dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-100 w-full px-2 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-100"
 												type="text"
 												id="name"
 												name="name"
@@ -422,7 +422,7 @@ export default function Step1Form({
 												required
 											/>
 											<input
-												className="dark:text-light-100 dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-100 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-100"
+												className="dark:text-light-100 dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-100 w-full px-2 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-100"
 												type="email"
 												id="email"
 												name="email"

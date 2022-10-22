@@ -1,11 +1,15 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Image from "next/image";
-import { useMoralisCloudFunction } from "react-moralis";
+import { useRouter } from "next/router";
+import { useMoralis } from "react-moralis";
 import DatePicker from "react-datepicker";
 import Tooltip from "../../../layout/Tooltip/Tooltip";
 import CollaboratorRoleDropdown from "./CollaboratorRoleDropdown";
 import RequiredAsterisk from "../../../layout/RequiredAsterisk";
+import LoadingContext from "../../../../store/loading-context";
+import StatusContext from "../../../../store/status-context";
 import { convertMaticToUSD, convertMaticToINR, truncatePrice } from "../../../utils/GetMarketPrice";
+import { collaboratorRoles } from "../../../constants";
 
 const Step3Form = ({
 	numberOfCopies,
@@ -25,32 +29,11 @@ const Step3Form = ({
 	personalProfileCollaborator,
 	chosenProfileOrBand,
 	setChosenProfileOrBand,
+	setAddCollaboratorModalOpen,
 }) => {
-	const rolesArray = [
-		"Composer",
-		"Instrumentalist",
-		"Lyricist",
-		"Mastering Engineer",
-		"Mentor",
-		"Mixer",
-		"Mixing Engineer",
-		"Music Arranger",
-		"Music Director",
-		"Music Manager",
-		"Music Producer",
-		"Musician",
-		"Recording Engineer",
-		"Remixer",
-		"Singer",
-		"Songwriter",
-		"Studio Engineer",
-		"Vocalist",
-		"Writer",
-	];
-
-	const [filteredUsers, setFilteredUsers] = useState("");
-	const [usernameEntered, setUsernameEntered] = useState("");
-	const [searchedUsername, setSearchedUsername] = useState("");
+	const { Moralis } = useMoralis();
+	const [, setLoading] = useContext(LoadingContext);
+	const [, , setSuccess, setError] = useContext(StatusContext);
 
 	const [maticUSD, setMaticUSD] = useState("");
 	const [maticINR, setMaticINR] = useState("");
@@ -84,7 +67,7 @@ const Step3Form = ({
 	};
 
 	// handle input change
-	const handleInputChange = (e, index) => {
+	const handleSplitInputChange = (e, index) => {
 		const { name, value } = e.target;
 		const list = [...collaboratorList];
 		list[index][name] = value;
@@ -98,63 +81,11 @@ const Step3Form = ({
 		setCollaboratorList(list);
 	};
 
-	// handle click event of the Add button
-	const handleAddClick = () => {
-		setCollaboratorList([...collaboratorList, { id: "", name: "", username: "", split: "", role: "Composer", address: "", avatar: "" }]);
-		setUsernameEntered("");
-	};
-
 	const setCollaboratorRole = (index, role) => {
 		const list = [...collaboratorList];
 		list[index]["role"] = role;
 		setCollaboratorList(list);
 	};
-
-	const setCollaboratorInfo = async (user, index) => {
-		const list = [...collaboratorList];
-		list[index]["id"] = user.objectId;
-		list[index]["name"] = user.name;
-		list[index]["username"] = user.username;
-		list[index]["address"] = user.ethAddress;
-		list[index]["avatar"] = user.userInfo[0].avatar;
-		setCollaboratorList(list);
-		setFilteredUsers("");
-	};
-
-	const filterUsers = async (e) => {
-		const keyword = e.target.value;
-		if (keyword === "") {
-			// If the text field is empty, show no users
-			setFilteredUsers("");
-		}
-		setSearchedUsername(keyword);
-	};
-
-	const { fetch: fetchMatchingVerifiedArtists } = useMoralisCloudFunction(
-		"fetchMatchingVerifiedArtists",
-		{ username: searchedUsername },
-		{
-			autoFetch: false,
-		}
-	);
-	useEffect(() => {
-		if (searchedUsername !== "") {
-			fetchMatchingVerifiedArtists({
-				onSuccess: async (object) => {
-					setFilteredUsers(
-						await object.filter(function (userObj) {
-							return !collaboratorList.some(function (collaboratorObj) {
-								return userObj.username === collaboratorObj.username; // return the ones with equal id
-							});
-						})
-					);
-				},
-				onError: (error) => {
-					console.log("fetchMatchingVerifiedArtists Error:", error);
-				},
-			});
-		}
-	}, [searchedUsername]);
 
 	const setBandMembersAsCollaborators = async (band) => {
 		setChosenProfileOrBand(band);
@@ -179,9 +110,37 @@ const Step3Form = ({
 				role: bandMembersList[i].role || "Composer",
 				address: bandMembersList[i].ethAddress,
 				avatar: bandMembersList[i].avatar,
+				hasAcceptedCollaboratorInvite: true,
 			});
 		}
 		setCollaboratorList(listOfMembers);
+	};
+
+	const router = useRouter();
+	const { draft } = router.query;
+	const sendCollaboratorInvitationEmailToArtistWhoHasNotAcceptedInvitation = async (collaborator) => {
+		setLoading(true);
+
+		try {
+			await Moralis.Cloud.run("sendNftCollaboratorInvitationEmailToArtist", { draftId: draft, collaborator: collaborator }).then(() => {
+				setSuccess((prevState) => ({
+					...prevState,
+					title: "Collaborator Invitation Sent",
+					message: `Collaborator invite email was sent successfully to ${collaborator.name}!`,
+					showSuccessBox: true,
+				}));
+			});
+		} catch (error) {
+			setError((prevState) => ({
+				...prevState,
+				title: "Collaborator Invitation Error",
+				message: "There was a problem in sending collaborator invitation. Please try again.",
+				showErrorBox: true,
+			}));
+			console.log("sendNftCollaboratorInvitationEmailToArtist Error:", error);
+		}
+
+		setLoading(false);
 	};
 
 	return (
@@ -284,7 +243,8 @@ const Step3Form = ({
 							</label>
 						</div>
 
-						{verifiedBandsOfArtist.length > 0 &&
+						{verifiedBandsOfArtist &&
+							verifiedBandsOfArtist.length > 0 &&
 							verifiedBandsOfArtist.map((band) => {
 								return (
 									<div className="flex items-center mt-2" key={band.username}>
@@ -314,7 +274,7 @@ const Step3Form = ({
 					</div>
 
 					<div>
-						<p className="mt-8 mb-1 text-sm">
+						<p className="mt-8 mb-2 text-sm">
 							ADD COLLABORATORS AND SPLITS
 							<RequiredAsterisk />
 							<Tooltip
@@ -327,6 +287,35 @@ const Step3Form = ({
 							{collaboratorList.map((collaborator, index) => {
 								return (
 									<div key={index} className="flex gap-2">
+										<div className="flex flex-col self-center">
+											{collaborator.hasAcceptedCollaboratorInvite ? (
+												<Tooltip
+													labelText={
+														<span className="text-primary-200 text-xl">
+															<i className="fa-solid fa-circle-check"></i>
+														</span>
+													}
+													message={"Artist has accepted collaborator invite."}
+													tooltipLocation={"left"}
+												/>
+											) : (
+												<span
+													onClick={() => {
+														sendCollaboratorInvitationEmailToArtistWhoHasNotAcceptedInvitation(collaborator);
+													}}
+												>
+													<Tooltip
+														labelText={
+															<span className="text-error-200 text-xl">
+																<i className="fa-solid fa-circle-xmark"></i>
+															</span>
+														}
+														message={"Artist hasn't accepted collaborator invite yet.\nClick to send invite email again."}
+														tooltipLocation={"left"}
+													/>
+												</span>
+											)}
+										</div>
 										{index == 0 ? (
 											<div className="relative basis-1/2">
 												{collaborator.avatar && (
@@ -353,7 +342,7 @@ const Step3Form = ({
 											</div>
 										) : (
 											<div className="relative basis-1/2">
-												{collaborator.username ? (
+												{collaborator.username && (
 													<>
 														{collaborator.avatar && (
 															<div className="absolute flex items-center h-full ml-2">
@@ -377,149 +366,7 @@ const Step3Form = ({
 															required
 														/>
 													</>
-												) : (
-													<input
-														className="dark:text-light-100 dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-100 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-100"
-														id="username"
-														name="username"
-														type="text"
-														placeholder="Username"
-														value={usernameEntered}
-														autoComplete="off"
-														onChange={(e) => {
-															setUsernameEntered(e.target.value);
-															filterUsers(e);
-														}}
-														required
-													/>
 												)}
-
-												{!collaborator.username && filteredUsers ? (
-													<div className="absolute w-full">
-														{filteredUsers.length > 0 ? (
-															filteredUsers.map((user, idx) => (
-																<a key={user.objectId} className="flex flex-col basis-full">
-																	{filteredUsers.length === 1 ? (
-																		<button
-																			type="button"
-																			className="flex items-center justify-start px-3 py-2 rounded bg-light-100 dark:bg-dark-100 hover:text-light-100 dark:text-light-100 hover:bg-primary-100 dark:hover:bg-primary-100 text-start"
-																			onClick={() => {
-																				setCollaboratorInfo(user, index);
-																			}}
-																		>
-																			{user.userInfo[0] ? (
-																				<Image
-																					src={user.userInfo[0].avatar}
-																					height="30"
-																					width="30"
-																					className="rounded-full"
-																					alt="user's avatar"
-																				/>
-																			) : (
-																				""
-																			)}
-																			<span className="ml-2">{user.name}</span>
-																			<div>
-																				<span className="ml-2 text-xs font-normal">@{user.username}</span>
-																			</div>
-																		</button>
-																	) : idx === 0 ? (
-																		<button
-																			type="button"
-																			className="flex items-center justify-start px-3 py-2 rounded-t bg-light-100 dark:bg-dark-100 hover:text-light-100 dark:text-light-100 hover:bg-primary-100 dark:hover:bg-primary-100 text-start"
-																			onClick={() => {
-																				setCollaboratorInfo(user, index);
-																			}}
-																		>
-																			{user.userInfo[0] ? (
-																				<Image
-																					src={user.userInfo[0].avatar}
-																					height="30"
-																					width="30"
-																					className="rounded-full"
-																					alt="user's avatar"
-																				/>
-																			) : (
-																				""
-																			)}
-																			<span className="ml-2">{user.name}</span>
-																			<div>
-																				<span className="ml-2 text-xs font-normal">@{user.username}</span>
-																			</div>
-																		</button>
-																	) : filteredUsers.length === idx + 1 ? (
-																		<button
-																			type="button"
-																			className="flex items-center justify-start px-3 py-2 rounded-b bg-light-100 dark:bg-dark-100 hover:text-light-100 dark:text-light-100 hover:bg-primary-100 dark:hover:bg-primary-100 text-start"
-																			onClick={() => {
-																				setCollaboratorInfo(user, index);
-																			}}
-																		>
-																			{user.userInfo[0] ? (
-																				<Image
-																					src={user.userInfo[0].avatar}
-																					height="30"
-																					width="30"
-																					className="rounded-full"
-																					alt="user's avatar"
-																				/>
-																			) : (
-																				""
-																			)}
-																			<span className="ml-2">{user.name}</span>
-																			<div>
-																				<span className="ml-2 text-xs font-normal">@{user.username}</span>
-																			</div>
-																		</button>
-																	) : (
-																		<button
-																			type="button"
-																			className="flex items-center justify-start px-3 py-2 bg-light-100 dark:bg-dark-100 hover:text-light-100 dark:text-light-100 hover:bg-primary-100 dark:hover:bg-primary-100 text-start"
-																			onClick={() => {
-																				setCollaboratorInfo(user, index);
-																			}}
-																		>
-																			{user.userInfo[0] ? (
-																				<Image
-																					src={user.userInfo[0].avatar}
-																					height="30"
-																					width="30"
-																					className="rounded-full"
-																					alt="user's avatar"
-																				/>
-																			) : (
-																				""
-																			)}
-																			<span className="ml-2">{user.name}</span>
-																			<div>
-																				<span className="ml-2 text-xs font-normal">@{user.username}</span>
-																			</div>
-																		</button>
-																	)}
-																</a>
-															))
-														) : (
-															<a key={"no"} className="flex flex-col basis-full">
-																<button
-																	type="button"
-																	onClick={() => {
-																		setInvitationModalOpen(true);
-																		setUsernameEntered("");
-																		setSearchedUsername("");
-																	}}
-																	className="justify-start px-6 py-3 rounded bg-light-100 hover:bg-gray-200 dark:bg-dark-100 dark:text-light-100 text-start"
-																>
-																	<span className="text-xs">
-																		No results found.&nbsp;&nbsp;
-																		<a className="cursor-pointer text-primary-200 hover:underline">
-																			Send an Invite <i className="fa-solid fa-arrow-right"></i>
-																		</a>
-																	</span>
-																</button>
-															</a>
-														)}
-													</div>
-												) : null}
 											</div>
 										)}
 
@@ -532,19 +379,20 @@ const Step3Form = ({
 												max={100}
 												placeholder="Split %"
 												value={collaborator.split}
-												onChange={(e) => handleInputChange(e, index)}
+												onChange={(e) => handleSplitInputChange(e, index)}
 												required
 											/>
 										</div>
 
 										<div className="basis-2/5">
 											<CollaboratorRoleDropdown
-												optionsArray={rolesArray}
+												optionsArray={collaboratorRoles}
 												setCollaboratorRole={setCollaboratorRole}
 												index={index}
 												collaboratorList={collaboratorList}
 											/>
 										</div>
+
 										{/* Button to remove more collaborators */}
 										{index !== 0 ? (
 											<div className="flex justify-center items-center">
@@ -568,12 +416,12 @@ const Step3Form = ({
 						</div>
 
 						{/* Button to add more collaborators */}
-						{collaboratorList.length < 10 && (
+						{collaboratorList && collaboratorList.length < 10 && (
 							<div className="flex items-center justify-start mt-4">
 								<button
 									type="button"
 									className="rounded-full flex justify-center items-center w-8 h-8 bg-[#479E00] hover:bg-primary-300 text-white"
-									onClick={handleAddClick}
+									onClick={() => setAddCollaboratorModalOpen(true)}
 								>
 									+
 								</button>
@@ -581,19 +429,17 @@ const Step3Form = ({
 							</div>
 						)}
 
-						<div className="flex justify-center w-full p-3 mt-6 font-medium rounded dark:text-gray-300 bg-light-300 dark:bg-dark-100">
-							<div className="">
-								{collaboratorList.reduce((total, currentSplit) => (total = total + Number(currentSplit.split)), 0) === 100 ? (
-									<span className="text-primary-200">
-										<i className="fa-solid fa-circle-check"></i>
-									</span>
-								) : (
-									<span className="text-error-200">
-										<i className="fa-solid fa-circle-xmark"></i>
-									</span>
-								)}
-								&nbsp;Total: {collaboratorList.reduce((total, currentSplit) => (total = total + Number(currentSplit.split)), 0)}%
-							</div>
+						<div className="w-full flex justify-center space-x-1 p-3 mt-6 font-medium rounded dark:text-gray-300 bg-light-300 dark:bg-dark-100">
+							{collaboratorList.reduce((total, currentSplit) => (total = total + Number(currentSplit.split)), 0) === 100 ? (
+								<span className="text-primary-200">
+									<i className="fa-solid fa-circle-check"></i>
+								</span>
+							) : (
+								<span className="text-error-200">
+									<i className="fa-solid fa-circle-xmark"></i>
+								</span>
+							)}
+							&nbsp;<span>Total: {collaboratorList.reduce((total, currentSplit) => (total = total + Number(currentSplit.split)), 0)}%</span>
 						</div>
 
 						<p className="text-sm text-[#777777] font-normal mt-2">

@@ -3,6 +3,7 @@ import { useMoralis } from "react-moralis";
 import StatusContext from "../../../store/status-context";
 import { unlockableContentUri } from "../../utils/smart-contract/functions";
 import UnlockableContentModal from "./TrackInfoUtils/UnlockableContentModal";
+import { sleep } from "../../utils/Sleep";
 
 export default function UnlockableContent({ tokenId, currentOwnerAddress, unlockableContent }) {
 	const { user } = useMoralis();
@@ -12,28 +13,29 @@ export default function UnlockableContent({ tokenId, currentOwnerAddress, unlock
 	const [selectedUnlockableItem, setSelectedUnlockableItem] = useState("");
 	const [selectedUnlockableItemIndex, setSelectedUnlockableItemIndex] = useState(0);
 
-	const getUnlockableContentUri = async () => {
-		try {
-			const _unlockableContentUri = await unlockableContentUri(tokenId, user.attributes.ethAddress);
-			const res = await fetch(_unlockableContentUri);
-			const data = await res.json();
-			setUnlockableContentUriData(data);
-		} catch (err) {
-			if (err.title === "User is not connected to the same wallet") {
-				setError({
-					title: err.title,
-					message: err.message,
-					showErrorBox: true,
-				});
-			}
-		}
-	};
-
 	useEffect(() => {
+		const getUnlockableContentUri = async () => {
+			try {
+				await sleep(1500);
+				const _unlockableContentUri = await unlockableContentUri(tokenId, user.attributes.ethAddress);
+				const res = await fetch(_unlockableContentUri);
+				const data = await res.json();
+				setUnlockableContentUriData(data);
+			} catch (err) {
+				if (err.title === "User is not connected to the same wallet") {
+					setError({
+						title: err.title,
+						message: err.message,
+						showErrorBox: true,
+					});
+				}
+			}
+		};
+
 		if (tokenId && user && currentOwnerAddress === user.attributes.ethAddress) {
 			getUnlockableContentUri();
 		}
-	}, [user, tokenId, currentOwnerAddress]);
+	}, [user, tokenId, currentOwnerAddress, setError]);
 
 	const unlockableContentItems = [
 		{
@@ -122,10 +124,10 @@ export default function UnlockableContent({ tokenId, currentOwnerAddress, unlock
 				</h1>
 				<p className="text-[#777777] font-normal text-xs">Perks that you get after purchasing this music NFT</p>
 
-				<p className="text-sm font-semibold mt-6">About the Unlockable Content</p>
+				{unlockableContent.about && <p className="text-sm font-semibold mt-6">About the Unlockable Content</p>}
 
-				<div className="flex mt-2 space-x-8">
-					<div className="text-sm">{unlockableContent.about}</div>
+				<div className={"flex space-x-8 " + (unlockableContent.about ? "mt-2" : "mt-6")}>
+					{unlockableContent.about && <div className="text-sm">{unlockableContent.about}</div>}
 					<div className="grid grid-cols-3 items-start gap-4">
 						{unlockableContentItems.map((item, index) => {
 							let truncatedUnlockableItemText = item.unlockableItemText;

@@ -3,28 +3,18 @@ import { useRef } from "react";
 import { useMoralis } from "react-moralis";
 import { truncatePrice } from "../../../utils/GetMarketPrice";
 
-export default function PreviewDraft({
-	draftId,
-	trackTitle,
-	coverArtUrl,
-	audioFileUrl,
-	nftPrice,
-	collaboratorList,
-	setDeleteModalOpen,
-	setDraftToDelete,
-	chosenProfileOrBand,
-}) {
+export default function PreviewDraft({ draft, setDeleteModalOpen, setDraftToDelete, chosenProfileOrBand }) {
 	const { user } = useMoralis();
 
 	const playBtn = useRef(null);
 	const audio = useRef(null);
 
-	let truncatedNftName = trackTitle;
-	if (trackTitle.length > 10) {
+	let truncatedNftName = draft.title;
+	if (draft.title.length > 10) {
 		truncatedNftName = truncatedNftName.substring(0, 8) + "...";
 	}
 
-	const truncatednftPrice = truncatePrice(nftPrice);
+	const truncatednftPrice = truncatePrice(draft.nftPrice);
 
 	const playTrackHandler = () => {
 		const playPause = playBtn.current.children[0];
@@ -55,16 +45,20 @@ export default function PreviewDraft({
 
 	return (
 		<>
-			<div className="w-fit group flex flex-col overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl duration-300 cursor-pointer">
+			<div
+				className={
+					"w-fit group flex flex-col overflow-hidden rounded-2xl shadow-lg duration-300 " + (setDeleteModalOpen && "hover:shadow-2xl cursor-pointer")
+				}
+			>
 				{/* Uploaded Art */}
-				<div className="relative w-[222px] h-[200px] overflow-hidden rounded-t-xl cursor-pointer">
+				<div className="relative w-[222px] h-[200px] overflow-hidden rounded-t-xl">
 					{/* Cover art of NFT */}
-					{coverArtUrl === null ? (
+					{draft.artwork.uri === null ? (
 						<div className="dark:bg-[#363636] bg-light-300 w-full h-full rounded-t-xl"></div>
 					) : (
 						<div className="relative w-full h-full">
 							<Image
-								src={coverArtUrl}
+								src={draft.artwork.uri}
 								className="group-hover:scale-110 group-hover:duration-500 duration-500"
 								alt="nft cover art"
 								objectFit="cover"
@@ -74,7 +68,7 @@ export default function PreviewDraft({
 						</div>
 					)}
 					{/* NFT audio file */}
-					{audioFileUrl == null ? null : (
+					{draft.audio == null ? null : (
 						<div className="z-[1] absolute bottom-0 right-0 p-2">
 							<button
 								type="button"
@@ -84,7 +78,7 @@ export default function PreviewDraft({
 							>
 								<i className="text-lg fas fa-play text-light-200"></i>
 							</button>
-							<audio ref={audio} className="hidden" src={audioFileUrl} onEnded={resetProgress}></audio>
+							<audio ref={audio} className="hidden" src={draft.audio} onEnded={resetProgress}></audio>
 						</div>
 					)}
 				</div>
@@ -93,9 +87,9 @@ export default function PreviewDraft({
 				<div className="dark:bg-dark-200 bg-light-100 w-[222px] h-[128px] p-4 rounded-b-xl flex flex-col justify-between">
 					<div className="flex justify-between w-full">
 						<div className="flex flex-col">
-							<p className="font-secondary text-[#1D1D1D] text-xs dark:text-light-300">
+							<p className="font-secondary text-[#1D1D1D] text-xs text-start dark:text-light-300">
 								{user && chosenProfileOrBand.objectId === "profile"
-									? user.attributes.name
+									? draft.collaboratorList[0].name
 									: user && chosenProfileOrBand.objectId !== "profile"
 									? chosenProfileOrBand.name
 									: null}
@@ -115,8 +109,8 @@ export default function PreviewDraft({
 
 					<div className="flex items-end justify-between font-secondary text-[#1D1D1D] dark:text-light-200 text-xs">
 						<div className="flex -space-x-2 items-end">
-							{collaboratorList &&
-								collaboratorList.map((collaborator, index) => {
+							{draft.collaboratorList &&
+								draft.collaboratorList.map((collaborator, index) => {
 									return collaborator.avatar ? (
 										<div key={index} className={`rounded-full flex items-end relative`}>
 											<Image src={collaborator.avatar} height="30" width="30" alt="collaborator's avatar" className="rounded-full" />
@@ -125,19 +119,20 @@ export default function PreviewDraft({
 								})}
 						</div>
 
-						<button
-							type="button"
-							onClick={(e) => {
-								e.preventDefault();
-								setDeleteModalOpen(true);
-								setDraftToDelete(draftId);
-							}}
-							className=""
-						>
-							<div className="hidden group-hover:block justify-center items-center text-base hover:text-error-200">
-								<i className="fa-solid fa-trash"></i>
-							</div>
-						</button>
+						{setDeleteModalOpen && (
+							<button
+								type="button"
+								onClick={(e) => {
+									e.preventDefault();
+									setDeleteModalOpen(true);
+									setDraftToDelete(draft);
+								}}
+							>
+								<div className="hidden group-hover:block justify-center items-center text-base hover:text-error-200">
+									<i className="fa-solid fa-trash"></i>
+								</div>
+							</button>
+						)}
 					</div>
 				</div>
 			</div>

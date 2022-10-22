@@ -1,33 +1,25 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useContext } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import { useMoralis, useMoralisQuery, useMoralisCloudFunction } from "react-moralis";
+import { useMoralis, useMoralisCloudFunction } from "react-moralis";
 import PreviewDraft from "./CreateNFTUtils/PreviewDraft";
 import DeleteDraftModal from "./CreateNFTUtils/DeleteDraftModal";
 import styles from "../../../styles/CreateNFT/Step0.module.css";
 import LoadingContext from "../../../store/loading-context";
-import { Country, State } from "country-state-city";
 import ArtistProfileNotVerifiedModal from "./CreateNFTUtils/ArtistProfileNotVerifiedModal";
 
-const CreateNFTIntro = ({ nextStep, chosenProfileOrBand }) => {
+const CreateNFTIntro = ({ nextStep, chosenProfileOrBand, nftDraftMetadata, nftDrafts, setNftDrafts }) => {
 	const router = useRouter();
 	const { user } = useMoralis();
 	const [, setLoading] = useContext(LoadingContext);
-
-	const { data: nftDrafts } = useMoralisCloudFunction("fetchNftDrafts");
-	const { data: userInfo } = useMoralisQuery("UserInfo", (query) => query.equalTo("user", user), [user]);
 
 	const [draftToDelete, setDraftToDelete] = useState("");
 	const [deleteModalOpen, setDeleteModalOpen] = useState(false);
 	const [artistProfileNotVerifiedModalOpen, setArtistProfileNotVerifiedModalOpen] = useState(false);
 
-	useEffect(() => {
-		router.replace("/create-nft", undefined, { shallow: true });
-	}, []);
-
 	const { fetch: deleteNftDraft } = useMoralisCloudFunction(
 		"deleteNftDraft",
-		{ objectId: draftToDelete },
+		{ objectId: draftToDelete._id },
 		{
 			autoFetch: false,
 		}
@@ -37,83 +29,23 @@ const CreateNFTIntro = ({ nextStep, chosenProfileOrBand }) => {
 		deleteNftDraft({
 			onSuccess: async (object) => {
 				setDeleteModalOpen(false);
+				setNftDrafts((prevState) => {
+					const _nftDrafts = prevState.filter((nftDraft) => nftDraft._id !== draftToDelete._id);
+					return _nftDrafts;
+				});
+				setDraftToDelete("");
 				setLoading(false);
-				router.reload(window.location.pathname);
 			},
 			onError: (error) => {
 				console.log("deleteNftDraft Error:", error);
+				setLoading(false);
 			},
 		});
 	};
 
-	const _nftDraftMetadata = {
-		step: 1,
-		title: "",
-		description: "",
-		audio: null,
-		duration: null,
-		mimeType: null,
-		artwork: {
-			uri: null,
-			mimeType: "",
-			artist: "",
-			artistAddress: "",
-			invitedArtistId: "",
-		},
-		creditCoverArtArtist: true,
-		coverArtArtist: { id: "", name: "", username: "", address: "", avatar: "", email: "" },
-		lyrics: null,
-		trackOrigin: "Original",
-		genre: "Hip-Hop",
-		recordingYear: new Date().getFullYear(),
-		parentalAdvisory: "Explicit",
-		vocals: true,
-		language: "Hindi",
-		countryOfOrigin: JSON.stringify(Country.getCountryByCode("IN")),
-		stateOfOrigin: JSON.stringify(State.getStateByCodeAndCountry("DL", "IN")),
-		location: JSON.stringify({
-			name: "Delhi",
-			countryCode: "IN",
-			stateCode: "DL",
-			latitude: "28.65195000",
-			longitude: "77.23149000",
-		}),
-		isrc: "",
-		tags: [],
-		links: {
-			spotifyLink: "",
-			appleMusicLink: "",
-			amazonMusicLink: "",
-			youtubeMusicLink: "",
-			other: "",
-		},
-		unlockableContent: {
-			about: "",
-			secretMessage: "",
-			exclusiveImages: [],
-			exclusiveAudios: [],
-			exclusiveVideos: [],
-		},
-		numberOfCopies: "",
-		nftPrice: "",
-		chosenProfileOrBand: { objectId: "profile" },
-		collaboratorList: [
-			{
-				id: user.id,
-				name: user.attributes.name,
-				username: user.attributes.username,
-				split: 100,
-				role: "Singer",
-				address: user.attributes.ethAddress,
-				avatar: userInfo[0] ? userInfo[0].attributes.avatar : "",
-			},
-		],
-		resaleRoyaltyPercent: "",
-		releaseNow: true,
-		unlockTimestamp: new Date().getTime(),
-	};
+	// Create NFT Draft
+	const { fetch: createNftDraft } = useMoralisCloudFunction("saveNftDraft", { metadata: nftDraftMetadata }, { autoFetch: false });
 
-	const { fetch: createNftDraft } = useMoralisCloudFunction("saveNftDraft", { metadata: _nftDraftMetadata }, { autoFetch: false });
 	return (
 		<>
 			<div className="flex flex-col items-center justify-center w-full bg-light-200 dark:bg-dark-200">
@@ -124,10 +56,23 @@ const CreateNFTIntro = ({ nextStep, chosenProfileOrBand }) => {
 							e.preventDefault();
 							if (user && user.attributes.isArtist && user.attributes.isArtistVerified) {
 								await createNftDraft({
-									onSuccess: (draftId) => {
-										router.replace("/create-nft?draft=" + draftId, undefined, { shallow: true });
+									onSuccess: (draft) => {
+										setNftDrafts((prevState) => [
+											...prevState,
+											{
+												_id: draft.id,
+												title: draft.attributes.title,
+												nftPrice: draft.attributes.nftPrice,
+												artwork: draft.attributes.artwork,
+												audio: draft.attributes.audio,
+												collaboratorList: draft.attributes.collaboratorList,
+											},
+										]);
+										router.replace("/create-nft?draft=" + draft.id, undefined, { shallow: true });
 									},
-									onError: (error) => {},
+									onError: (error) => {
+										console.error("createNftDraft error:", error);
+									},
 								});
 								nextStep();
 							} else {
@@ -175,15 +120,10 @@ const CreateNFTIntro = ({ nextStep, chosenProfileOrBand }) => {
 									<div className="flex flex-wrap lg:flex-nowrap gap-8 mt-6 items-center justify-center lg:items-start lg:justify-start">
 										{nftDrafts.map((draft) => {
 											return (
-												<Link key={draft.id} href={`/create-nft?draft=${draft.id}`} passHref={true}>
+												<Link key={draft._id} href={`/create-nft?draft=${draft._id}`} passHref={true}>
 													<a>
 														<PreviewDraft
-															draftId={draft.id}
-															trackTitle={draft.attributes.title}
-															coverArtUrl={draft.attributes.artwork.uri}
-															audioFileUrl={draft.attributes.audio}
-															nftPrice={draft.attributes.nftPrice}
-															collaboratorList={draft.attributes.collaboratorList}
+															draft={draft}
 															setDeleteModalOpen={setDeleteModalOpen}
 															setDraftToDelete={setDraftToDelete}
 															chosenProfileOrBand={chosenProfileOrBand}

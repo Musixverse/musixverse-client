@@ -1,4 +1,4 @@
-import { Fragment, useState, useEffect } from "react";
+import { Fragment, useState } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/solid";
 import styles from "../../../../styles/CreateNFT/InputDropdown.module.css";
@@ -8,23 +8,25 @@ function classNames(...classes) {
 	return classes.filter(Boolean).join(" ");
 }
 
-export default function StatesDropdown({ optionsArray, setChoice, initialValue, countryOfOrigin }) {
-	const [currentFilter, setCurrentFilter] = useState(initialValue);
-
-	useEffect(() => {
-		setChoice(currentFilter);
-	}, []);
+export default function StatesDropdown({ initialValue, setChoice, country, onReset = "" }) {
+	const [currentFilter, setCurrentFilter] = useState(initialValue && initialValue.name ? initialValue : "");
+	const statesArray = State.getStatesOfCountry(country.isoCode);
 
 	const handleOptionSelect = (e) => {
-		let selectedValue = State.getStateByCodeAndCountry(e.target.getAttribute("data-isocode"), JSON.parse(countryOfOrigin).isoCode);
-		setChoice(JSON.stringify(selectedValue));
-		setCurrentFilter(JSON.stringify(selectedValue));
+		if (e.target.textContent === "Select Here (Reset)") {
+			setCurrentFilter(null);
+			setChoice(null);
+			onReset();
+			return;
+		} else {
+			const selectedValue = State.getStateByCodeAndCountry(e.target.getAttribute("data-isocode"), country.isoCode);
+			setCurrentFilter(selectedValue);
+			setChoice(selectedValue);
+		}
 	};
 
-	const selectedState = JSON.parse(currentFilter);
-
 	// Map all the options into a items renderable array
-	const dropdownOptions = optionsArray.map((option, idx) => {
+	const dropdownOptions = statesArray.map((option, idx) => {
 		return (
 			<Menu.Item key={idx}>
 				{({ active }) => (
@@ -36,7 +38,7 @@ export default function StatesDropdown({ optionsArray, setChoice, initialValue, 
 						onClick={handleOptionSelect}
 						data-isocode={option.isoCode}
 					>
-						{option.name.length > 20 ? option.name.substring(0, 17) + "..." : option.name}
+						{option.name}
 					</li>
 				)}
 			</Menu.Item>
@@ -48,9 +50,11 @@ export default function StatesDropdown({ optionsArray, setChoice, initialValue, 
 			{/* The visible dropdown button */}
 			<div>
 				<Menu.Button className={"dark:bg-[#323232] hover:dark:border-[#6cc027] dark:text-light-100 dark:border-[#323232] " + styles["menu-button"]}>
-					<div className="flex items-center">
-						<span>{selectedState.name && selectedState.name.length > 20 ? selectedState.name.substring(0, 17) + "..." : selectedState.name}</span>
-					</div>
+					{!currentFilter || !currentFilter.name ? (
+						<span>-</span>
+					) : (
+						<span>{currentFilter.name && currentFilter.name.length > 20 ? currentFilter.name.substring(0, 17) + "..." : currentFilter.name}</span>
+					)}
 
 					<ChevronDownIcon className="ml-2 h-5 w-5 text-[#6cc027]" aria-hidden="true" />
 				</Menu.Button>
@@ -66,7 +70,24 @@ export default function StatesDropdown({ optionsArray, setChoice, initialValue, 
 				leaveTo="transform opacity-0 scale-95"
 			>
 				<Menu.Items className="absolute right-0 z-10 w-56 mt-3 origin-top-right rounded-md shadow-lg bg-light-300 dark:bg-dark-100 ring-1 ring-black ring-opacity-5 focus:outline-none">
-					<div className={styles["menu-item-div"]}>{dropdownOptions}</div>
+					<div className={styles["menu-item-div"]}>
+						{[
+							<Menu.Item key="-1">
+								{({ active }) => (
+									<li
+										className={classNames(
+											active ? "bg-gray-100 dark:bg-dark-200 text-gray-900" : "text-gray-700",
+											"block px-4 py-2 text-sm cursor-pointer dark:text-light-100"
+										)}
+										onClick={handleOptionSelect}
+									>
+										Select Here (Reset)
+									</li>
+								)}
+							</Menu.Item>,
+							...dropdownOptions,
+						]}
+					</div>
 				</Menu.Items>
 			</Transition>
 		</Menu>

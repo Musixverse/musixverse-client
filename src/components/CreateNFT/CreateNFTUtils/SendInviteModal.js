@@ -7,7 +7,7 @@ import Modal from "../../../layout/Modal/Modal";
 import { isEmailValid } from "../../../utils/Validate";
 
 const SendInviteModal = ({ isOpen, setOpen, invitedArtistEmail, onEmailChange, nftDraftMetadata }) => {
-	const [loading, setLoading] = useContext(LoadingContext);
+	const [, setLoading] = useContext(LoadingContext);
 	const [, , setSuccess, setError] = useContext(StatusContext);
 
 	const router = useRouter();
@@ -18,7 +18,7 @@ const SendInviteModal = ({ isOpen, setOpen, invitedArtistEmail, onEmailChange, n
 		await saveNftCreationDraft({
 			onSuccess: async (object) => {},
 			onError: (error) => {
-				console.log("saveNftDraft Error:", error);
+				console.error("saveNftDraft Error:", error);
 			},
 		});
 	};
@@ -28,7 +28,7 @@ const SendInviteModal = ({ isOpen, setOpen, invitedArtistEmail, onEmailChange, n
 		e.preventDefault();
 		// EMAIL CHECK
 		const emailCheck = await isEmailValid(invitedArtistEmail);
-		console.log(emailCheck);
+
 		if (emailCheck.status === false) {
 			setError({
 				title: emailCheck.title || "Invalid email entered",
@@ -52,7 +52,7 @@ const SendInviteModal = ({ isOpen, setOpen, invitedArtistEmail, onEmailChange, n
 			},
 			onError: (error) => {
 				setLoading(false);
-				console.log("sendInviteEmail Error:", error);
+				console.error("sendInviteEmail Error:", error);
 			},
 		});
 		setOpen(false);

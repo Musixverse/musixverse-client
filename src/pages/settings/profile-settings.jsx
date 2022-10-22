@@ -140,13 +140,14 @@ export default function Settings({ userData }) {
 				}
 
 				await updateUserInfo({
-					onSuccess: (data) => {
+					onSuccess: async (data) => {
 						setSuccess((prevState) => ({
 							...prevState,
 							title: "Profile updated!",
 							message: "Your profile has been updated successfully.",
 							showSuccessBox: true,
 						}));
+						await fetch(`/api/revalidate-profile?path=/profile/${username}&secret=${process.env.NEXT_PUBLIC_REVALIDATE_SECRET}`);
 					},
 				});
 

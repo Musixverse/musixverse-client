@@ -30,6 +30,10 @@ const PurchaseButton = ({ tokenId, price }) => {
 					await fetchAddressFromUsername({
 						onSuccess: async (referrerAddress) => {
 							await purchaseReferredTrackNFT(tokenId, referrerAddress, price);
+							await fetch(`/api/revalidate-track?path=${window.location.pathname}&secret=${process.env.NEXT_PUBLIC_REVALIDATE_SECRET}`);
+							await fetch(
+								`/api/revalidate-profile?path=/profile/${user.attributes.username}&secret=${process.env.NEXT_PUBLIC_REVALIDATE_SECRET}`
+							);
 							setLoading(false);
 							setPurchaseNFTSuccess(true);
 						},
@@ -40,6 +44,8 @@ const PurchaseButton = ({ tokenId, price }) => {
 					});
 				} else {
 					await purchaseTrackNFT(tokenId, price);
+					await fetch(`/api/revalidate-track?path=${window.location.pathname}&secret=${process.env.NEXT_PUBLIC_REVALIDATE_SECRET}`);
+					await fetch(`/api/revalidate-profile?path=/profile/${user.attributes.username}&secret=${process.env.NEXT_PUBLIC_REVALIDATE_SECRET}`);
 					setLoading(false);
 					setPurchaseNFTSuccess(true);
 				}

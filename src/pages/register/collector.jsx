@@ -8,7 +8,7 @@ import LoadingContext from "../../../store/loading-context";
 const Collector_Page = () => {
 	const { user, isInitialized } = useMoralis();
 	// Context Management
-	const [isLoading, setLoading] = useContext(LoadingContext);
+	const [, setLoading] = useContext(LoadingContext);
 
 	useEffect(() => {
 		setLoading(true);
@@ -18,7 +18,7 @@ const Collector_Page = () => {
 		return () => {
 			setLoading(false);
 		};
-	}, [isInitialized, user]);
+	}, [isInitialized, user, setLoading]);
 
 	return (
 		<>

@@ -92,7 +92,7 @@ export default function AboutArtist({ username, name, bio, country, createdAt, s
 			{/* footer section */}
 			<div
 				className={
-					(bio && bioCharacters && bioCharacters.length < maxBioCharacters ? "mt-8" : bio && bioCharacters ? "mt-6" : "mt-14") +
+					(bio && bioCharacters && bioCharacters.length < maxBioCharacters ? "mt-12" : bio && bioCharacters ? "mt-6" : "mt-14") +
 					" w-full flex justify-between items-end xl:items-center text-[#818181] text-[12px] md:text-[15px] font-medium"
 				}
 			>

@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useMoralis } from "react-moralis";
-import minted from "../../../public/assets/MINTED.svg";
 import styles from "../../../styles/TrackInfo/Activity.module.css";
 import { convertTimestampToDate } from "../../utils/ConvertTimestampToDate";
 import LinkToBlockExplorer from "./TrackInfoUtils/LinkToBlockExplorer";

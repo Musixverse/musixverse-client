@@ -36,9 +36,9 @@ export default function ProfileSettings({
 	return (
 		<form
 			className="flex-1 mb-32"
-			onSubmit={(e) => {
+			onSubmit={async (e) => {
 				e.preventDefault();
-				handleSave();
+				await handleSave();
 			}}
 		>
 			{/* Section 1 */}

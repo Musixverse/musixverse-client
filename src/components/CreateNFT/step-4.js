@@ -47,7 +47,7 @@ export default function PricingAndSplits({
 				showErrorBox: false,
 			});
 		}
-	}, [collaboratorList]);
+	}, [collaboratorList, setError]);
 
 	const nftPreviewValues = { trackTitle, coverArtUrl, audioFileUrl, nftPrice, numberOfCopies, step, collaboratorList, chosenProfileOrBand };
 	const step4FormValues = {

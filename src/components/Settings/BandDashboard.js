@@ -92,6 +92,7 @@ export default function BandDashboard({ bandsOfArtist }) {
 							message: "The band profile was updated successfully.",
 							showSuccessBox: true,
 						}));
+						await fetch(`/api/revalidate-profile?path=/profile/band/${username}&secret=${process.env.NEXT_PUBLIC_REVALIDATE_SECRET}`);
 						await sleep(1500);
 						router.push(`/profile/band/${username}`);
 					},
@@ -235,7 +236,12 @@ export default function BandDashboard({ bandsOfArtist }) {
 						/>
 					</form>
 
-					<BandMembers bandId={activeBand.objectId} bandMembers={activeBand.bandMembers} updatedBandMembersList={activeBand.updatedBandMembersList} />
+					<BandMembers
+						bandId={activeBand.objectId}
+						username={username}
+						bandMembers={activeBand.bandMembers}
+						updatedBandMembersList={activeBand.updatedBandMembersList}
+					/>
 				</>
 			)}
 		</div>

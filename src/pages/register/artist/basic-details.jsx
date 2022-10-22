@@ -8,7 +8,7 @@ import LoadingContext from "../../../../store/loading-context";
 const ArtistBasicDetails = () => {
 	const { user, isInitialized } = useMoralis();
 	// Context Management
-	const [isLoading, setLoading] = useContext(LoadingContext);
+	const [, setLoading] = useContext(LoadingContext);
 
 	useEffect(() => {
 		setLoading(true);
@@ -18,7 +18,7 @@ const ArtistBasicDetails = () => {
 		return () => {
 			setLoading(false);
 		};
-	}, [isInitialized, user]);
+	}, [isInitialized, user, setLoading]);
 
 	return (
 		<>

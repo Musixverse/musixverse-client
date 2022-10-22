@@ -12,7 +12,7 @@ const EditBandMemberModal = dynamic(() => import("./EditBandMemberModal"));
 const RemoveBandMemberModal = dynamic(() => import("./RemoveBandMemberModal"));
 const AddBandMemberModal = dynamic(() => import("./AddBandMemberModal"));
 
-const BandMembers = ({ bandId, bandMembers, updatedBandMembersList }) => {
+const BandMembers = ({ bandId, username, bandMembers, updatedBandMembersList }) => {
 	const { Moralis } = useMoralis();
 	const [, setLoading] = useContext(LoadingContext);
 	const [, , setSuccess, setError] = useContext(StatusContext);
@@ -193,6 +193,7 @@ const BandMembers = ({ bandId, bandMembers, updatedBandMembersList }) => {
 				isOpen={isEditBandMemberModalOpen}
 				setOpen={setEditBandMemberModalOpen}
 				bandId={bandId}
+				username={username}
 				bandMemberToEdit={bandMemberToEdit}
 				setBandMemberToEdit={setBandMemberToEdit}
 				setBandMembersList={setBandMembersList}
@@ -201,6 +202,7 @@ const BandMembers = ({ bandId, bandMembers, updatedBandMembersList }) => {
 				isOpen={isRemoveBandMemberModalOpen}
 				setOpen={setRemoveBandMemberModalOpen}
 				bandId={bandId}
+				username={username}
 				bandMemberToEdit={bandMemberToEdit}
 				setBandMembersList={setBandMembersList}
 			/>

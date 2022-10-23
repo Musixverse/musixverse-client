@@ -30,7 +30,7 @@ const ArtistProfileNotVerifiedModal = ({ isOpen, setOpen }) => {
 					role: "custom",
 					onClick: () => {
 						setOpen(false);
-						router.push(`/profile/verify`, undefined, { shallow: true });
+						router.push(`/profile/verify`);
 					},
 					toClose: true,
 					classes:

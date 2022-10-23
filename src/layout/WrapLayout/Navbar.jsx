@@ -29,7 +29,7 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 	}
 
 	const handleLogout = async () => {
-		if (router.pathname != "/") router.push("/", undefined, { shallow: true });
+		if (router.pathname != "/") router.push("/");
 		await logout();
 		if (window.localStorage.walletconnect) {
 			window.localStorage.removeItem("walletconnect");

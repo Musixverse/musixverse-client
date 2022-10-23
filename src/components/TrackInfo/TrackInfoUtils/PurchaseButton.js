@@ -22,7 +22,7 @@ const PurchaseButton = ({ tokenId, price }) => {
 
 	const purchaseToken = async () => {
 		if (user && !user.attributes.emailVerified) {
-			router.push("/register/confirm-email", undefined, { shallow: true });
+			router.push("/register/confirm-email");
 		} else if (user && user.attributes.emailVerified) {
 			setLoading(true);
 			try {

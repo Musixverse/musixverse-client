@@ -136,7 +136,7 @@ export default function Settings({ userData }) {
 						username: username === "" ? undefined : username,
 						email: email === "" ? undefined : email,
 					});
-					router.push("/register/confirm-email", undefined, { shallow: true });
+					router.push("/register/confirm-email");
 				}
 
 				await updateUserInfo({

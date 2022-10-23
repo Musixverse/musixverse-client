@@ -119,7 +119,7 @@ export default function CollectorRegistration() {
 					showErrorBox: true,
 				}));
 			} else {
-				Router.push("/register/confirm-email", undefined, { shallow: true });
+				Router.push("/register/confirm-email");
 			}
 		}
 		return;

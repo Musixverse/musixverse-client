@@ -43,9 +43,9 @@ export default function Confirm() {
 		await refetchUserData();
 
 		if (user.attributes.isArtist) {
-			router.push(`/profile/${user.attributes.username}`, undefined, { shallow: true });
+			router.push(`/profile/${user.attributes.username}`);
 		} else {
-			router.push("/mxcatalog/new-releases", undefined, { shallow: true });
+			router.push("/mxcatalog/new-releases");
 		}
 		return;
 	};

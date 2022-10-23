@@ -21,14 +21,8 @@ function Home() {
 				{/* <Banner /> */}
 				<HeroSection/>
 				<div className="flex flex-col w-full max-w-[1920px] px-6 md:px-8 lg:px-16 xl:px-20 2xl:px-36">
-<<<<<<< HEAD
-					{/* <Countdown/> */}
 					<Section2New />
-=======
-					<Countdown/>
->>>>>>> da485b2e5239556cb25e17bb399e72956734c248
 					<TopArtist />
-					<Section2New />
 					<Section2 />
 					<Section3 />
 				</div>

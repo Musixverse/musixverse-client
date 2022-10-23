@@ -26,7 +26,7 @@ const PersonaVerification = ({ isOpen = "", onClose = "" }) => {
 		const client = new Persona.Client({
 			templateId: process.env.NEXT_PUBLIC_PERSONA_TEMPLATE_ID,
 			environment: process.env.NEXT_PUBLIC_PERSONA_ENVIRONMENT,
-			referenceId: user.id,
+			referenceId: user.attributes.ethAddress,
 			fields: {
 				address_country_code: "IN",
 			},

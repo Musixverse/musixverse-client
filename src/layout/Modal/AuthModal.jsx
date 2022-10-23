@@ -67,7 +67,7 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 							body: JSON.stringify({ currentUser: user }),
 						});
 						closeModal();
-						if (router.pathname === "/") router.push("/mxcatalog/new-releases", undefined, { shallow: true });
+						if (router.pathname === "/") router.push("/mxcatalog/new-releases");
 					}
 					setLoading(false);
 				})
@@ -98,7 +98,7 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 							body: JSON.stringify({ currentUser: user }),
 						});
 						closeModal();
-						if (router.pathname === "/") router.push("/mxcatalog/new-releases", undefined, { shallow: true });
+						if (router.pathname === "/") router.push("/mxcatalog/new-releases");
 					}
 					setLoading(false);
 				})
@@ -122,7 +122,7 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 				.then(function (user) {
 					if (user) {
 						closeModal();
-						if (router.pathname === "/") router.push("/mxcatalog/new-releases", undefined, { shallow: true });
+						if (router.pathname === "/") router.push("/mxcatalog/new-releases");
 					}
 				})
 				.catch(function (error) {

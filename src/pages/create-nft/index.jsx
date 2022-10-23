@@ -506,7 +506,7 @@ const CreateNFT = ({ userInfo }) => {
 			await fetch(`/api/revalidate-mxcatalog?path=/mxcatalog/new-releases&secret=${process.env.NEXT_PUBLIC_REVALIDATE_SECRET}`);
 			await fetch(`/api/revalidate-profile?path=/profile/${user.attributes.username}&secret=${process.env.NEXT_PUBLIC_REVALIDATE_SECRET}`);
 			// TODO: Uncomment the line below
-			await deleteDraft();
+			// await deleteDraft();
 			setLoading(false);
 			setCreateNFTSuccess(true);
 		} catch (error) {

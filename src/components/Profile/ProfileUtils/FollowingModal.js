@@ -83,9 +83,7 @@ export default function FollowersModal({ isOpen, setOpen, username, isBand }) {
 			onClose={() => {
 				setOpen(false);
 				{
-					!isBand
-						? router.push(`/profile/${username}`, undefined, { shallow: true })
-						: router.push(`/profile/band/${username}`, undefined, { shallow: true });
+					!isBand ? router.push(`/profile/${username}`) : router.push(`/profile/band/${username}`);
 				}
 			}}
 		></Modal>

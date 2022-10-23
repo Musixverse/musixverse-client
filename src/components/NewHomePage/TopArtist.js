@@ -7,6 +7,7 @@ import Sarthak_Kalyani from "../../../public/assets/new-homepage/sarthak_kalyani
 import Jatayu from "../../../public/assets/new-homepage/jatayu.png";
 import Submarine_in_space from "../../../public/assets/new-homepage/submarine_in_space.png";
 import Sommaiya from "../../../public/assets/new-homepage/sommaiya.png";
+import Harry from "../../../public/assets/new-homepage/harry.png";
 
 export default function TopArtist(){
     return(
@@ -46,6 +47,14 @@ export default function TopArtist(){
                             <ArtistCard name="Sommaiya" imageURL={Sommaiya} description="A Genreless Musician and Filmmaker leaving his mark from New Delhi to New York" />
                         </div>
                     </div>
+                    <div className="carousel-item relative float-left w-full">
+                        <div className="w-full flex justify-center gap-x-8">
+                            <ArtistCard name="Jatayu" imageURL={Jatayu} description="A Jazz Rock Fusion Band introducing the world to Indian tunes" />
+                            <ArtistCard name="Submarine in Space" imageURL={Submarine_in_space} description="The Critically Acclaimed IInstrumental Jazz-Rock Band" />
+                            <ArtistCard name="Sommaiya" imageURL={Sommaiya} description="A Genreless Musician and Filmmaker leaving his mark from New Delhi to New York" />
+                            <ArtistCard name="Harry Arora" imageURL={Harry} description="The singer touching all the right chords" />
+                        </div>
+                    </div>
                 </div>
                 <button
                     className="carousel-control-prev absolute top-0 bottom-0 flex items-center justify-center p-0 text-center border-0 hover:outline-none hover:no-underline focus:outline-none focus:no-underline left-0"
@@ -80,6 +89,12 @@ export default function TopArtist(){
                         <div className="w-full flex justify-center gap-x-8">
                             <ArtistCard name="Submarine in Space" imageURL={Submarine_in_space} description="The Critically Acclaimed IInstrumental Jazz-Rock Band" />
                             <ArtistCard name="Sommaiya" imageURL={Sommaiya} description="A Genreless Musician and Filmmaker leaving his mark from New Delhi to New York" />
+                        </div>
+                    </div>
+                    <div className="carousel-item relative float-left w-full">
+                        <div className="w-full flex justify-center gap-x-8">
+                            <ArtistCard name="Sommaiya" imageURL={Sommaiya} description="A Genreless Musician and Filmmaker leaving his mark from New Delhi to New York" />
+                            <ArtistCard name="Harry Arora" imageURL={Harry} description="The singer touching all the right chords" />
                         </div>
                     </div>
                 </div>
@@ -124,6 +139,11 @@ export default function TopArtist(){
                     <div className="carousel-item relative float-left w-full">
                         <div className="w-full flex justify-center gap-x-8">
                             <ArtistCard name="Sommaiya" imageURL={Sommaiya} description="A Genreless Musician and Filmmaker leaving his mark from New Delhi to New York" />
+                        </div>
+                    </div>
+                    <div className="carousel-item relative float-left w-full">
+                        <div className="w-full flex justify-center gap-x-8">
+                            <ArtistCard name="Harry Arora" imageURL={Harry} description="The singer touching all the right chords" />
                         </div>
                     </div>
                 </div>

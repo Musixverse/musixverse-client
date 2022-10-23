@@ -126,9 +126,7 @@ export default function FavouritesModal({ isOpen, setOpen, username, favouriteTo
 			onClose={() => {
 				setOpen(false);
 				{
-					!isBand
-						? router.push(`/profile/${username}`, undefined, { shallow: true })
-						: router.push(`/profile/band/${username}`, undefined, { shallow: true });
+					!isBand ? router.push(`/profile/${username}`) : router.push(`/profile/band/${username}`);
 				}
 			}}
 		></Modal>

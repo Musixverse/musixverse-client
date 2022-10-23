@@ -11,7 +11,7 @@ import StatusContext from "../../../../store/status-context";
 import { convertMaticToUSD, convertMaticToINR, truncatePrice } from "../../../utils/GetMarketPrice";
 import { collaboratorRoles } from "../../../constants";
 
-const Step3Form = ({
+const Step4Form = ({
 	numberOfCopies,
 	setNumberOfCopies,
 	nftPrice,
@@ -562,4 +562,4 @@ const Step3Form = ({
 	);
 };
 
-export default Step3Form;
+export default Step4Form;

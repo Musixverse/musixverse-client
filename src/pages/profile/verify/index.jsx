@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Head from "next/head";
+import { useRouter } from "next/router";
 import { useMoralis, useMoralisCloudFunction } from "react-moralis";
 import NameAndIdVerification from "../../../components/Profile/Verification/NameAndIdVerification";
 import SendUsADM from "../../../components/Profile/Verification/SendUsADM";
@@ -9,6 +10,14 @@ import VerificationRequestSubmittedModal from "../../../components/Profile/Verif
 
 const Verify = () => {
 	const { user } = useMoralis();
+
+	const router = useRouter();
+	const { data: artistVerificationInfo } = useMoralisCloudFunction("getVerificationInfo");
+	useEffect(() => {
+		if (artistVerificationInfo && artistVerificationInfo.verificationRequested) {
+			router.push("/profile/verify/verification-requested");
+		}
+	}, [artistVerificationInfo]);
 
 	const [step, setStep] = useState(1);
 	const [isRealNameDifferent, setIsRealNameDifferent] = useState(false);

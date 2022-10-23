@@ -27,14 +27,14 @@ const VerificationRequestSubmittedModal = ({ isOpen, setOpen }) => {
 			}
 			onClose={() => {
 				setOpen(false);
-				router.push(`/mxcatalog/new-releases`, undefined, { shallow: true });
+				router.push(`/mxcatalog/new-releases`);
 			}}
 			buttons={[
 				{
 					role: "custom",
 					onClick: () => {
 						setOpen(false);
-						router.push(`/mxcatalog/new-releases`, undefined, { shallow: true });
+						router.push(`/mxcatalog/new-releases`);
 					},
 					toClose: true,
 					classes:

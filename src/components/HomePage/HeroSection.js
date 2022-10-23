@@ -6,8 +6,8 @@ import Countdown from "./HomePageUtils/Countdown";
 
 export default function HeroSection(){
     return(
-        <div className="flex flex-col items-center w-screen overflow-hidden text-light-200">
-            <div className="w-full relative bg-[url('../../../public/assets/homepage/heroBG.svg')] bg-no-repeat bg-cover bg-center pt-[150px] flex flex-col items-center justify-center">
+        <div className="flex flex-col bg-[url('/assets/homepage/heroBG.svg')] bg-no-repeat bg-cover bg-center items-center w-screen overflow-hidden text-light-200">
+            <div className="w-full relative pt-[150px] flex flex-col items-center justify-center">
                 {/* Intro */}
                 <div className="flex flex-col items-center h-[600px] font-primary absolute z-[7] pt-[10.5rem] sm:pt-[5.5rem]">
                     <h3 className="text-2xl font-medium lg:text-3xl xl:text-4xl">save the date</h3>
@@ -20,11 +20,14 @@ export default function HeroSection(){
                 {/* Traditional Animation */}
                 <div className={"relative w-[400px] h-[400px] sm:w-[600px] sm:h-[600px] flex items-center justify-center "+styles.tradition}>
                     <div className="z-[1] absolute w-[240px] sm:w-[440px] aspect-square bg-[#2e6700] rounded-full"></div>
-                    <div className="z-[2] absolute w-[292px] sm:w-[492px] aspect-square backdrop-blur-[40px] backdrop-brightness-[.7] rounded-full"></div>
+                    <div className="z-[2] absolute w-[292px] sm:w-[475px] aspect-square backdrop-blur-[40px] backdrop-brightness-[1.05] rounded-full"></div>
                     <div className="z-[3] absolute w-[200px] sm:w-[360px] aspect-square bg-[#469A01] rounded-full"></div>
                     <div className="z-[4] absolute w-[140px] sm:w-[260px] aspect-square bg-[#131313] rounded-full"></div>
                     <Image className="z-[5] animate-slowSpin opacity-20" src={traditionalSvg} layout="fill" priority alt="traditional svg"/>
-                    <div className={"z-[6] h-1/2 w-full absolute bottom-0 "+styles['traditonal-overlay']}></div>
+                    <div className="absolute w-screen z-[6] h-[693px] -bottom-40">
+                        <Image layout="fill" objectFit="cover" src={"/assets/homepage/traditionalLayer.svg"} alt="layer"></Image>
+                    </div>
+                    {/* <div className={"z-[6] h-1/2 w-[800px] absolute bottom-0 "+styles['traditonal-overlay']}></div> */}
                 </div>
                 {/* Left fireflies */}
                 <div className={"z-[7] sm:z-[0] "+`${styles.firefly1} ${styles.firefly}`}></div>
@@ -44,7 +47,7 @@ export default function HeroSection(){
                 <div className={"z-[7] "+`${styles.fireflyR6} ${styles.firefly}`}></div>
                 <div className={"z-[7] lg:block hidden "+`${styles.fireflyR7} ${styles.firefly}`}></div>
             </div>
-            <div className="flex bg-[#131313] flex-col w-full max-w-[1920px] px-6 md:px-8 lg:px-16 xl:px-20 2xl:px-36 pb-20">
+            <div className="flex flex-col w-full max-w-[1920px] px-6 md:px-8 lg:px-16 xl:px-20 2xl:px-36 pb-20">
                 <Countdown/>
             </div>
         </div>

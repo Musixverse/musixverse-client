@@ -10,7 +10,7 @@ export default function Countdown(){
     });
     
     useEffect(()=>{
-        const countDownDate = new Date("Oct 24, 2022 00:00:00").getTime();
+        const countDownDate = new Date("Nov 13, 2022 00:00:00").getTime();
         const counterTimeout = setInterval(function() {
             // Get today's date and time
             const now = new Date().getTime();
@@ -36,9 +36,9 @@ export default function Countdown(){
     },[])
 
     return(
-        <div className="pb-12 mt-10 z-10 flex flex-col items-center justify-between relative w-full rounded-[5rem] bg-gradient-to-l from-[#408E00] to-[#193403]">
+        <div className="pb-12 mt-[4.5rem] sm:mt-6 lg:mt-10 z-10 flex flex-col items-center justify-between relative w-full rounded-3xl sm:rounded-[2.5rem] lg:rounded-[4rem] xl:rounded-[5rem] bg-gradient-to-l from-[#408E00] to-[#193403]">
             {/* Counter */}
-            <div className="flex space-x-5">
+            <div className="flex space-x-3 sm:space-x-5">
                 <CountdownCard 
                     number={timeLeft.days < 10? ("0"+timeLeft.days): timeLeft.days} 
                     text={timeLeft.days > 1? "Days":"Day"}
@@ -57,10 +57,10 @@ export default function Countdown(){
                 />
             </div>
             {/* Intro text */}
-            <div className="flex flex-col items-center justify-center w-full mt-16">
-                <h5 className="text-3xl font-medium font-primary">Musixverse Beta Program is full</h5>
-                <p className="text-2xl font-primary">we thank you for the overwhelming Intrest and support</p>
-                <button className="py-2 mt-5 cursor-pointer px-14 rounded-3xl bg-primary-100 font-secondary hover:bg-primary-200 text-light-100">Join Our Waitlist for Priority access</button>
+            <div className="flex flex-col items-center justify-center w-full px-10 mt-6 sm:mt-10 xl:mt-14">
+                <h5 className="text-lg font-medium sm:text-2xl xl:text-3xl font-primary">Musixverse Beta Program is full</h5>
+                <p className="text-base text-center sm:text-xl xl:text-2xl font-primary">we thank you for the overwhelming interest and support</p>
+                <button className="px-10 py-2 mt-5 text-sm cursor-pointer sm:text-base sm:px-14 rounded-2xl sm:rounded-3xl bg-primary-100 font-secondary hover:bg-primary-200 text-light-100">Join our waitlist for Priority Access</button>
             </div>
         </div>
     );

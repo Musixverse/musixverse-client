@@ -79,6 +79,7 @@ module.exports = {
 			},
 			fontSize: {
 				pricing: "clamp(1.75rem, 1.6456rem + 0.4453vw, 2.18rem)",
+				heroMobileHeading: "clamp(2rem, -0.5rem + 12.5vw, 4.5rem)",
 			},
 		},
 	},

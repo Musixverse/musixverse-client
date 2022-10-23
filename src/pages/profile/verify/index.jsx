@@ -14,7 +14,7 @@ const Verify = () => {
 	const router = useRouter();
 	const { data: artistVerificationInfo } = useMoralisCloudFunction("getVerificationInfo");
 	useEffect(() => {
-		if (artistVerificationInfo.verificationRequested) {
+		if (artistVerificationInfo && artistVerificationInfo.verificationRequested) {
 			router.push("/profile/verify/verification-requested");
 		}
 	}, [artistVerificationInfo]);

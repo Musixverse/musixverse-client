@@ -1,5 +1,5 @@
-.faq-item{
-    @apply bg-transparent;
-    border-bottom-left-radius: 0px !important;
-    border-bottom-right-radius: 0px !important;
+.faq-item {
+	@apply bg-transparent;
+	border-bottom-left-radius: 0px !important;
+	border-bottom-right-radius: 0px !important;
 }

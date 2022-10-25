@@ -90,7 +90,6 @@ function App({ Component, pageProps, router }) {
 			</Script>
 			<Script
 				src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"
-				strategy="lazyOnload"
 				onError={(err) => {
 					console.error("Tailwind Elements Script Error:", err);
 				}}
@@ -102,6 +101,8 @@ function App({ Component, pageProps, router }) {
 					console.error("Persona Script Error:", err);
 				}}
 			></Script>
+			<Script src="/theme.js" />
+			<Script src="https://kit.fontawesome.com/8f4546bba1.js" crossOrigin="anonymous"></Script>
 
 			<MoralisProvider appId={MORALIS_APP_ID} serverUrl={MORALIS_SERVER_URL}>
 				<ThemeProvider attribute="class" enableSystem={false}>

@@ -2,11 +2,11 @@ import Link from "next/link";
 
 export default function FloatingHelp() {
 	return (
-		<div className="fixed right-0 bottom-0 z-40 pr-4 pb-4">
+		<div className="hidden sm:block fixed right-0 bottom-0 z-40 pr-4 pb-4">
 			<div className="relative group">
-				<ul className="absolute hidden w-full pb-10 group-hover:block -top-40">
+				<ul className="absolute hidden w-full pb-10 group-hover:block -top-36">
 					<ul className="flex flex-col w-full dark:bg-dark-100 bg-light-300 rounded-xl">
-						<li className="w-full px-4 py-2 text-sm bg-transparent cursor-pointer font-secondary rounded-t-xl whitespace-nowrap hover:bg-light-100 dark:hover:bg-dark-200">
+						<li className="w-full px-4 py-3 text-sm bg-transparent cursor-pointer font-secondary rounded-t-xl whitespace-nowrap hover:bg-light-100 dark:hover:bg-dark-200">
 							<Link href="https://discord.com/invite/rXKb7rCqjG" passHref>
 								<a target="_blank" rel="noopener noreferrer" className="flex items-center">
 									<i className="text-lg fa-brands fa-discord"></i>
@@ -14,7 +14,7 @@ export default function FloatingHelp() {
 								</a>
 							</Link>
 						</li>
-						<li className="w-full px-4 py-2 text-sm bg-transparent cursor-pointer font-secondary whitespace-nowrap hover:bg-light-100 dark:hover:bg-dark-200">
+						<li className="w-full px-4 py-3 text-sm bg-transparent cursor-pointer font-secondary whitespace-nowrap hover:bg-light-100 dark:hover:bg-dark-200">
 							<Link href="https://chat.whatsapp.com/FrWT0eT3uxF9ZKO3bB8GIt" passHref>
 								<a target="_blank" rel="noopener noreferrer" className="flex items-center">
 									<i className="text-lg fa-brands fa-whatsapp"></i>

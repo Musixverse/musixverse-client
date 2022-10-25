@@ -1,5 +1,4 @@
 import Document, { Html, Head, Main, NextScript } from "next/document";
-import Script from "next/script";
 
 export default class CustomDocument extends Document {
 	render() {
@@ -32,8 +31,6 @@ export default class CustomDocument extends Document {
 				<body>
 					<Main />
 					<NextScript />
-					<Script src="/theme.js" strategy="beforeInteractive" />
-					<Script src="https://kit.fontawesome.com/8f4546bba1.js" crossOrigin="anonymous" strategy="beforeInteractive"></Script>
 				</body>
 			</Html>
 		);

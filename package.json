@@ -9,12 +9,12 @@
 		"postbuild": "next-sitemap"
 	},
 	"dependencies": {
-		"@headlessui/react": "^1.6.6",
-		"@heroicons/react": "^1.0.5",
+		"@headlessui/react": "1.6.6",
+		"@heroicons/react": "1.0.6",
 		"@walletconnect/web3-provider": "^1.7.8",
 		"@web3auth/web3auth": "^1.1.1",
 		"cookie": "^0.5.0",
-		"country-state-city": "^3.0.1",
+		"country-state-city": "3.0.1",
 		"ethers": "^5.7.1",
 		"magic-sdk": "^8.0.1",
 		"moralis": "1.8.0",
@@ -30,7 +30,7 @@
 		"react-image-crop": "^8.6.12",
 		"react-moralis": "1.4.0",
 		"react-select": "^5.4.0",
-		"styled-components": "^5.3.5",
+		"styled-components": "5.3.5",
 		"web3": "^1.7.4"
 	},
 	"devDependencies": {
@@ -38,6 +38,6 @@
 		"eslint": "8.6.0",
 		"eslint-config-next": "^12.3.1",
 		"postcss": "^8.4.14",
-		"tailwindcss": "^3.1.4"
+		"tailwindcss": "3.1.4"
 	}
 }

@@ -16,7 +16,7 @@ export default function HeroSection() {
 				<div className="w-full flex flex-col items-center h-[600px] font-primary absolute z-[7] pt-[10.5rem] sm:pt-[5.5rem]">
 					<h3 className="text-2xl font-medium lg:text-3xl xl:text-4xl">save the date</h3>
 					<h1 className="z-[1] font-medium text-heroMobileHeading sm:text-[3rem] md:text-[4.5rem] lg:text-[6.25rem] xl:text-[8rem] leading-none">
-						13
+						20
 						<sup className=" lg:top-[-0.75em] md:top-[-1em] sm:top-[-1.85em] top-[-1.5em] text-[1rem] md:text-[2.5rem] lg:text-[4.25rem] xl:text-[5rem]">
 							th
 						</sup>{" "}
@@ -26,7 +26,7 @@ export default function HeroSection() {
 						<Image priority objectFit="contain" src={artistSvg} alt="artist"></Image>
 					</div>
 					<p className="w-full absolute text-lg sm:text-2xl text-center bottom-[5.5rem] sm:bottom-10 z-[3] max-w-[80%] sm:max-w-[548px]">
-						Get ready to connect with your favorite artists like Never Before
+						Get ready to connect with your favorite artists like never before!
 					</p>
 				</div>
 				{/* Traditional Animation */}

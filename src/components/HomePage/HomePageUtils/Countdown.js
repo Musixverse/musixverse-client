@@ -11,7 +11,7 @@ export default function Countdown() {
 	});
 
 	useEffect(() => {
-		const countDownDate = new Date("Nov 13, 2022 00:00:00").getTime();
+		const countDownDate = new Date("Nov 20, 2022 00:00:00").getTime();
 		const counterTimeout = setInterval(function () {
 			// Get today's date and time
 			const now = new Date().getTime();

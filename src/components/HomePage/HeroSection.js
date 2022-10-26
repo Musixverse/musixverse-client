@@ -9,15 +9,15 @@ export default function HeroSection() {
 		<div className="flex flex-col bg-[url('/assets/homepage/heroBG.svg')] bg-no-repeat bg-cover bg-center items-center w-screen overflow-hidden text-light-200">
 			<div className="w-full relative pt-[150px] flex flex-col items-center justify-center">
 				{/* Intro */}
-				<div className="flex flex-col items-center h-[600px] font-primary absolute z-[7] pt-[10.5rem] sm:pt-[5.5rem]">
+				<div className="w-full flex flex-col items-center h-[600px] font-primary absolute z-[7] pt-[10.5rem] sm:pt-[5.5rem]">
 					<h3 className="text-2xl font-medium lg:text-3xl xl:text-4xl">save the date</h3>
-					<h1 className="z-[1] font-medium text-heroMobileHeading sm:text-[3rem] md:text-[4.5rem] lg:text-[6.5rem] xl:text-[8rem] leading-none">
+					<h1 className="z-[1] font-medium text-heroMobileHeading sm:text-[3rem] md:text-[4.5rem] lg:text-[6.25rem] xl:text-[8rem] leading-none">
 						13th November it is
 					</h1>
 					<div className="absolute z-[2] w-[340px] sm:w-[457px] aspect-square top-[13rem] sm:top-[7.5rem] md:top-[8.5rem] lg:top-[11rem]">
 						<Image priority objectFit="contain" src={artistSvg} alt="artist"></Image>
 					</div>
-					<p className="absolute text-lg sm:text-2xl text-center bottom-[5.5rem] sm:bottom-10 z-[3] max-w-[80%] sm:max-w-[548px]">
+					<p className="w-full absolute text-lg sm:text-2xl text-center bottom-[5.5rem] sm:bottom-10 z-[3] max-w-[80%] sm:max-w-[548px]">
 						Get ready to connect with your favorite artists like Never Before
 					</p>
 				</div>

@@ -37,7 +37,7 @@ export default function Countdown() {
 	return (
 		<div className="pb-16 mt-[4.5rem] sm:mt-6 lg:mt-10 z-10 flex flex-col items-center justify-between relative w-full rounded-3xl sm:rounded-[2.5rem] lg:rounded-[4rem] xl:rounded-[5rem] bg-gradient-to-l from-[#408E00] to-[#265004]">
 			{/* Counter */}
-			<div className="flex space-x-3 sm:space-x-5">
+			<div className="flex items-center justify-center space-x-3 sm:space-x-5">
 				<CountdownCard number={timeLeft.days < 10 ? "0" + timeLeft.days : timeLeft.days} text={timeLeft.days > 1 ? "Days" : "Day"} />
 				<CountdownCard number={timeLeft.hours < 10 ? "0" + timeLeft.hours : timeLeft.hours} text={timeLeft.hours > 1 ? "Hours" : "Hour"} />
 				<CountdownCard number={timeLeft.minutes < 10 ? "0" + timeLeft.minutes : timeLeft.minutes} text={timeLeft.minutes > 1 ? "Minutes" : "Minute"} />

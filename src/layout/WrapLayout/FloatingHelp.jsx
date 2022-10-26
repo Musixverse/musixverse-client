@@ -34,7 +34,7 @@ export default function FloatingHelp() {
 				</ul>
 				<p className="flex items-center px-6 py-3 mt-5 text-sm font-medium md:text-base rounded-lg shadow-2xl font-primary dark:bg-dark-100 bg-light-300">
 					<span className="mr-3 material-symbols-outlined">headset_mic</span>
-					Get Help
+					Get in Touch
 				</p>
 			</div>
 		</div>

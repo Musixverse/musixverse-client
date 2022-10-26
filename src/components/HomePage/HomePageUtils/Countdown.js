@@ -44,11 +44,11 @@ export default function Countdown() {
 				<CountdownCard number={timeLeft.seconds < 10 ? "0" + timeLeft.seconds : timeLeft.seconds} text={timeLeft.seconds > 1 ? "Seconds" : "Second"} />
 			</div>
 			{/* Intro text */}
-			<div className="flex flex-col items-center justify-center w-full px-10 mt-6 sm:mt-10 xl:mt-14">
-				<h5 className="text-lg font-medium sm:text-2xl xl:text-3xl font-primary">Musixverse Beta Program is full</h5>
-				<p className="text-base text-center sm:text-md xl:text-lg font-primary">We thank you for the overwhelming interest and support</p>
+			<div className="flex flex-col items-center justify-center w-full px-4 sm:px-10 mt-6 sm:mt-10 xl:mt-14">
+				<h5 className="text-md font-medium sm:text-2xl xl:text-3xl font-primary">Musixverse Beta Program is full</h5>
+				<p className="text-sm text-center sm:text-md xl:text-lg font-primary">We thank you for the overwhelming interest and support</p>
 				<a
-					className="px-10 py-2 mt-10 text-sm cursor-pointer sm:px-14 rounded-2xl sm:rounded-3xl bg-primary-100 font-secondary hover:bg-primary-200 text-light-100"
+					className="px-6 py-2 mt-10 text-sm cursor-pointer sm:px-10 rounded-2xl sm:rounded-3xl bg-primary-100 font-secondary hover:bg-primary-200 text-light-100"
 					href="https://cfbmusixverse.paperform.co/"
 					target={"_blank"}
 					rel="noopener noreferrer"

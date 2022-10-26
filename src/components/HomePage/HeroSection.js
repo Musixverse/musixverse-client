@@ -11,8 +11,8 @@ export default function HeroSection() {
 				{/* Intro */}
 				<div className="flex flex-col items-center h-[600px] font-primary absolute z-[7] pt-[10.5rem] sm:pt-[5.5rem]">
 					<h3 className="text-2xl font-medium lg:text-3xl xl:text-4xl">save the date</h3>
-					<h1 className="z-[1] font-medium text-heroMobileHeading sm:text-[4.5rem] md:text-[5.5rem] lg:text-[7rem] xl:text-[8.125rem] leading-none">
-						13 November it is
+					<h1 className="z-[1] font-medium text-heroMobileHeading sm:text-[3rem] md:text-[4.5rem] lg:text-[6.5rem] xl:text-[8rem] leading-none">
+						13th November it is
 					</h1>
 					<div className="absolute z-[2] w-[340px] sm:w-[457px] aspect-square top-[13rem] sm:top-[7.5rem] md:top-[8.5rem] lg:top-[11rem]">
 						<Image priority objectFit="contain" src={artistSvg} alt="artist"></Image>

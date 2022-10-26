@@ -103,7 +103,7 @@ export default function NFTCard({
 
 	return (
 		<>
-			<div className={"group " + styles[theme === "light" ? "nft-card" : "nft-card-dark"]}>
+			<div className={"group " + styles[theme === "dark" ? "nft-card-dark" : "nft-card"]}>
 				{/* NFT Image */}
 				<div className="relative w-full h-60">
 					{image && redirectLink ? (

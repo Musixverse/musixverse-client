@@ -60,7 +60,7 @@ export default function AboutArtist({ username, name, bio, country, createdAt, s
 								<p
 									className={
 										"text-[12px] md:text-[15px] pt-3 whitespace-pre-wrap " +
-										(theme === "light" ? styles["about_us"] : styles["about_us_dark"])
+										(theme === "dark" ? styles["about_us_dark"] : styles["about_us"])
 									}
 								>
 									{bioCharacters}

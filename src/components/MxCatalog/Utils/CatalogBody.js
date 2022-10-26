@@ -18,7 +18,7 @@ export default function CatalogBody({ currentSelection, setAppliedFilter, applie
 			<div className="w-full max-w-[1920px] px-6 pt-16 pb-28 md:px-8 lg:px-16 xl:px-20 2xl:px-36">
 				<div className="flex flex-col items-center w-full">
 					<div className="flex text-[#1d1d1d] mb-[35px] items-center space-x-2 sm:text-4xl text-3xl font-tertiary">
-						<Image src={theme === "light" ? "/assets/record_b.svg" : "/assets/record_w.svg"} alt="vinyl disc" height={30} width={30} />
+						<Image src={theme === "dark" ? "/assets/record_w.svg" : "/assets/record_b.svg"} alt="vinyl disc" height={30} width={30} />
 						<p className="dark:text-light-200">{catalogType}</p>
 					</div>
 

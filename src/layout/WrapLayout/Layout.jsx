@@ -90,7 +90,7 @@ const Layout = ({ children }) => {
 			{!router.pathname.startsWith("/admin") && <Navbar authModalOpen={authModalOpen} setAuthModalOpen={setAuthModalOpen} />}
 			<AuthModal isOpen={authModalOpen} onClose={() => setAuthModalOpen(false)} />
 			{children}
-			{isLoading && theme === "light" ? <Loading /> : <LoadingDark />}
+			{isLoading && theme === "dark" ? <LoadingDark /> : <Loading />}
 			{!router.pathname.startsWith("/admin") && <FloatingHelp />}
 			<NewAudioPlayer />
 			<ErrorBox />

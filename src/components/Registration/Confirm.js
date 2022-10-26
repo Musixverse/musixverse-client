@@ -72,7 +72,7 @@ export default function Confirm() {
 			<div className={"dark:bg-dark-200 " + styles["register__container"]}>
 				{/* Main container */}
 				<div className={styles["confirm__container"]}>
-					<Image src={theme === "light" ? B_blackhole : W_blackhole} width={440} height={318} alt="Black-hole" />
+					<Image src={theme === "dark" ? W_blackhole : B_blackhole} width={440} height={318} alt="Black-hole" />
 					<span className="flex flex-col items-center justify-center pt-8">
 						<p className="text-4xl font-tertiary sm:text-5xl text-center">CONFIRM YOUR EMAIL</p>
 						<p className="font-secondary text-[15px] text-center">{user && user.attributes.email}</p>

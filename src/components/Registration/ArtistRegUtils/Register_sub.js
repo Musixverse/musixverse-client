@@ -13,10 +13,10 @@ export default function Register_sub({ artist }) {
 		<Link href={artist ? "/register/artist/basic-details" : "/register/collector"} passHref>
 			<div className="flex items-start justify-between p-3 space-x-4 cursor-pointer bg-light-200 dark:bg-dark-100 dark:hover:bg-dark-200 hover:bg-light-100 rounded-xl">
 				<div className="flex items-start space-x-3">
-					{theme === "light" ? (
-						<Image src={artist ? B_artist_mic : B_collection_category} width={32} height={32} alt="artist_mic" />
-					) : (
+					{theme === "dark" ? (
 						<Image src={artist ? W_artist_mic : W_collection_category} width={32} height={32} alt="artist_mic" />
+					) : (
+						<Image src={artist ? B_artist_mic : B_collection_category} width={32} height={32} alt="artist_mic" />
 					)}
 					<div className="pr-8 sm:pr-10">
 						<p className="mb-1 text-2xl leading-none sm:text-4xl font-tertiary">{artist ? "ARTIST" : "COLLECTOR"}</p>

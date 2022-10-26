@@ -24,7 +24,7 @@ export default function Filter({ appliedFilter, setAppliedFilter, currentSelecti
 					onClick={() => setCurrentFilterType(0)}
 					className="flex items-center justify-center p-4 cursor-pointer rounded-xl bg-light-300 dark:bg-search-200"
 				>
-					<Image src={theme === "light" ? FilterSvg : FilterSvg_white} objectFit="contain" width={25} height={22} alt="Filter" />
+					<Image src={theme === "dark" ? FilterSvg_white : FilterSvg} objectFit="contain" width={25} height={22} alt="Filter" />
 				</div>
 
 				{/* Filter Options */}

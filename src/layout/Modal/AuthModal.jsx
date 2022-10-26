@@ -162,10 +162,10 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 						<div className="max-w-[48rem] sm:w-[80vw] w-11/12 p-4 pl-10 pb-12 bg-white dark:bg-dark-100 rounded-lg">
 							<div className="w-full flex justify-between">
 								<div className="w-full flex flex-col justify-start items-start">
-									{theme === "light" ? (
-										<Image src={logoBlack} alt="MXV Logo" width="80" height="80" />
-									) : (
+									{theme === "dark" ? (
 										<Image src={logoWhite} alt="MXV Logo" width="80" height="80" />
+									) : (
+										<Image src={logoBlack} alt="MXV Logo" width="80" height="80" />
 									)}
 								</div>
 								<div

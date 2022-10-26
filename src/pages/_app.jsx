@@ -101,7 +101,6 @@ function App({ Component, pageProps, router }) {
 					console.error("Persona Script Error:", err);
 				}}
 			></Script>
-			<Script src="/theme.js" />
 			<Script src="https://kit.fontawesome.com/8f4546bba1.js" crossOrigin="anonymous"></Script>
 
 			<MoralisProvider appId={MORALIS_APP_ID} serverUrl={MORALIS_SERVER_URL}>

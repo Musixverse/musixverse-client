@@ -124,7 +124,7 @@ const ProtectedRoutes = ({ router, children }) => {
 		return children;
 	} else {
 		// setLoading(true);
-		isLoading && theme === "light" ? <Loading /> : <LoadingDark />;
+		isLoading && theme === "dark" ? <LoadingDark /> : <Loading />;
 		return null;
 	}
 };

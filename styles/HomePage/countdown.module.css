@@ -3,7 +3,7 @@
 }
 
 .countdown-container__timer-wrapper{
-    @apply flex space-x-3 sm:space-x-5;
+    @apply flex items-center justify-center space-x-3 sm:space-x-5;
 }
 
 .countdown-container__intro-text{

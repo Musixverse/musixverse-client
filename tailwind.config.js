@@ -19,8 +19,8 @@ module.exports = {
 					"100%": { transform: "translateX(0%)" },
 				},
 				slowSpin: {
-					"to": { transform: "rotate(360deg)"},
-				}
+					to: { transform: "rotate(360deg)" },
+				},
 			},
 			width: {
 				responsive: "clamp(367px, calc(22.9375rem + ((1vw - 4.28px) * 45.7775)), 1050px)",
@@ -79,7 +79,7 @@ module.exports = {
 			},
 			fontSize: {
 				pricing: "clamp(1.75rem, 1.6456rem + 0.4453vw, 2.18rem)",
-				heroMobileHeading: "clamp(2rem, -0.5rem + 12.5vw, 4.5rem)",
+				heroMobileHeading: "clamp(2rem, -0.5rem + 12.5vw, 2.5rem)",
 			},
 		},
 	},

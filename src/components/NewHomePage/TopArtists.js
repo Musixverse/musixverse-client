@@ -19,8 +19,10 @@ export default function TopArtists() {
 				<div className="text-sm z-10 absolute right-6 lg:right-16 text-white mt-10">
 					<div className="space-x-4">
 						<span className="py-2 px-8 font-primary cursor-pointer bg-[rgba(255,255,255,0.4)] rounded-3xl">
-							<Link href="/mxcatalog/new-releases" passHref={true}>
-								<span>View all</span>
+							<Link href="https://www.instagram.com/musixverse" passHref>
+								<a target="_blank" rel="noopener noreferrer">
+									<span>View all</span>
+								</a>
 							</Link>
 						</span>
 						<span className="px-3 py-2 font-primary cursor-pointer bg-[rgba(255,255,255,0.4)] rounded-full">
@@ -45,15 +47,27 @@ export default function TopArtists() {
 				<div className="carousel-inner relative w-full overflow-hidden">
 					<div className="carousel-item active relative float-left w-full">
 						<div className="w-full flex justify-center gap-x-8">
-							<ArtistCard name="Sarthak Kalyani" imageURL={Sarthak_Kalyani} description="The singer who wowed AR Rahman" />
-							<ArtistCard name="Jatayu" imageURL={Jatayu} description="A Jazz Rock Fusion Band introducing the world to Indian tunes" />
+							<ArtistCard
+								name="Sarthak Kalyani"
+								instagramProfileURL={"https://www.instagram.com/sarthak.kalyani"}
+								imageURL={Sarthak_Kalyani}
+								description="The singer who wowed AR Rahman"
+							/>
+							<ArtistCard
+								name="Jatayu"
+								instagramProfileURL={"https://www.instagram.com/jatayusounds"}
+								imageURL={Jatayu}
+								description="A Jazz Rock Fusion Band introducing the world to Indian tunes"
+							/>
 							<ArtistCard
 								name="Submarine in Space"
+								instagramProfileURL={"https://www.instagram.com/submarine_in_space"}
 								imageURL={Submarine_in_space}
 								description="The Critically Acclaimed IInstrumental Jazz-Rock Band"
 							/>
 							<ArtistCard
 								name="Sommaiya"
+								instagramProfileURL={"https://www.instagram.com/sommaiya_angrish"}
 								imageURL={Sommaiya}
 								description="A Genreless Musician and Filmmaker leaving his mark from New Delhi to New York"
 							/>
@@ -61,18 +75,30 @@ export default function TopArtists() {
 					</div>
 					<div className="carousel-item relative float-left w-full">
 						<div className="w-full flex justify-center gap-x-8">
-							<ArtistCard name="Jatayu" imageURL={Jatayu} description="A Jazz Rock Fusion Band introducing the world to Indian tunes" />
+							<ArtistCard
+								name="Jatayu"
+								instagramProfileURL={"https://www.instagram.com/jatayusounds"}
+								imageURL={Jatayu}
+								description="A Jazz Rock Fusion Band introducing the world to Indian tunes"
+							/>
 							<ArtistCard
 								name="Submarine in Space"
+								instagramProfileURL={"https://www.instagram.com/submarine_in_space"}
 								imageURL={Submarine_in_space}
 								description="The Critically Acclaimed IInstrumental Jazz-Rock Band"
 							/>
 							<ArtistCard
 								name="Sommaiya"
+								instagramProfileURL={"https://www.instagram.com/sommaiya_angrish"}
 								imageURL={Sommaiya}
 								description="A Genreless Musician and Filmmaker leaving his mark from New Delhi to New York"
 							/>
-							<ArtistCard name="Harry Arora" imageURL={Harry} description="The singer touching all the right chords" />
+							<ArtistCard
+								name="Harry Arora"
+								instagramProfileURL={"https://www.instagram.com/harrythisside"}
+								imageURL={Harry}
+								description="The singer touching all the right chords"
+							/>
 						</div>
 					</div>
 				</div>
@@ -101,19 +127,31 @@ export default function TopArtists() {
 				<div className="carousel-inner relative w-full overflow-hidden">
 					<div className="carousel-item active relative float-left w-full">
 						<div className="w-full flex justify-center gap-x-8">
-							<ArtistCard name="Sarthak Kalyani" imageURL={Sarthak_Kalyani} description="The Singer who wowed AR Rahman" />
-							<ArtistCard name="Jatayu" imageURL={Jatayu} description="A Jazz Rock Fusion Band introducing the world to Indian tunes" />
+							<ArtistCard
+								name="Sarthak Kalyani"
+								instagramProfileURL={"https://www.instagram.com/sarthak.kalyani"}
+								imageURL={Sarthak_Kalyani}
+								description="The Singer who wowed AR Rahman"
+							/>
+							<ArtistCard
+								name="Jatayu"
+								instagramProfileURL={"https://www.instagram.com/jatayusounds"}
+								imageURL={Jatayu}
+								description="A Jazz Rock Fusion Band introducing the world to Indian tunes"
+							/>
 						</div>
 					</div>
 					<div className="carousel-item relative float-left w-full">
 						<div className="w-full flex justify-center gap-x-8">
 							<ArtistCard
 								name="Submarine in Space"
+								instagramProfileURL={"https://www.instagram.com/submarine_in_space"}
 								imageURL={Submarine_in_space}
 								description="The Critically Acclaimed IInstrumental Jazz-Rock Band"
 							/>
 							<ArtistCard
 								name="Sommaiya"
+								instagramProfileURL={"https://www.instagram.com/sommaiya_angrish"}
 								imageURL={Sommaiya}
 								description="A Genreless Musician and Filmmaker leaving his mark from New Delhi to New York"
 							/>
@@ -123,6 +161,7 @@ export default function TopArtists() {
 						<div className="w-full flex justify-center gap-x-8">
 							<ArtistCard
 								name="Sommaiya"
+								instagramProfileURL={"https://www.instagram.com/sommaiya_angrish"}
 								imageURL={Sommaiya}
 								description="A Genreless Musician and Filmmaker leaving his mark from New Delhi to New York"
 							/>
@@ -155,18 +194,29 @@ export default function TopArtists() {
 				<div className="carousel-inner relative w-full overflow-hidden">
 					<div className="carousel-item active relative float-left w-full">
 						<div className="w-full flex justify-center gap-x-8">
-							<ArtistCard name="Sarthak Kalyani" imageURL={Sarthak_Kalyani} description="The Singer who wowed AR Rahman" />
+							<ArtistCard
+								name="Sarthak Kalyani"
+								instagramProfileURL={"https://www.instagram.com/sarthak.kalyani"}
+								imageURL={Sarthak_Kalyani}
+								description="The Singer who wowed AR Rahman"
+							/>
 						</div>
 					</div>
 					<div className="carousel-item relative float-left w-full">
 						<div className="w-full flex justify-center gap-x-8">
-							<ArtistCard name="Jatayu" imageURL={Jatayu} description="A Jazz Rock Fusion Band introducing the world to Indian tunes" />
+							<ArtistCard
+								name="Jatayu"
+								instagramProfileURL={"https://www.instagram.com/jatayusounds"}
+								imageURL={Jatayu}
+								description="A Jazz Rock Fusion Band introducing the world to Indian tunes"
+							/>
 						</div>
 					</div>
 					<div className="carousel-item relative float-left w-full">
 						<div className="w-full flex justify-center gap-x-8">
 							<ArtistCard
 								name="Submarine in Space"
+								instagramProfileURL={"https://www.instagram.com/submarine_in_space"}
 								imageURL={Submarine_in_space}
 								description="The Critically Acclaimed IInstrumental Jazz-Rock Band"
 							/>
@@ -176,6 +226,7 @@ export default function TopArtists() {
 						<div className="w-full flex justify-center gap-x-8">
 							<ArtistCard
 								name="Sommaiya"
+								instagramProfileURL={"https://www.instagram.com/sommaiya_angrish"}
 								imageURL={Sommaiya}
 								description="A Genreless Musician and Filmmaker leaving his mark from New Delhi to New York"
 							/>
@@ -183,7 +234,12 @@ export default function TopArtists() {
 					</div>
 					<div className="carousel-item relative float-left w-full">
 						<div className="w-full flex justify-center gap-x-8">
-							<ArtistCard name="Harry Arora" imageURL={Harry} description="The singer touching all the right chords" />
+							<ArtistCard
+								name="Harry Arora"
+								instagramProfileURL={"https://www.instagram.com/harrythisside"}
+								imageURL={Harry}
+								description="The singer touching all the right chords"
+							/>
 						</div>
 					</div>
 				</div>

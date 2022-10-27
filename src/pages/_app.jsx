@@ -66,6 +66,7 @@ function App({ Component, pageProps }) {
                     page_path: window.location.pathname,
                     });
                 `}
+
 			</Script>
 			<Script
 				src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"

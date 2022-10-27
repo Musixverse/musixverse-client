@@ -6,6 +6,7 @@ import facebook from "../../../public/assets/social/facebook.svg";
 import twitter from "../../../public/assets/social/twitter.svg";
 import instagram from "../../../public/assets/social/instagram.svg";
 import { useTheme } from "next-themes";
+import Link from "next/link";
 
 export default function HomePage_section4() {
     const { theme } = useTheme();

@@ -30,6 +30,7 @@ export default function Banner() {
                     playsInline
                 ></video>
                 {/* <div className="md:hidden">
+
                     <Image 
                         src={
                             theme === "dark" ? 
@@ -41,11 +42,14 @@ export default function Banner() {
                         priority
                     ></Image>
                 </div> */}
+
                 {/* <img
+
                     src={theme === "dark" ? "/assets/homepage/home_dark.png" : "/assets/homepage/home_light.png"}
                     className={"md:hidden w-full h-full object-cover"}
                     alt="background image"
                 ></img> */}
+
             </div>
             {/* <div className="mt-8"> */}
             {/* Inner div for content */}
@@ -67,4 +71,5 @@ export default function Banner() {
             {/* </div> */}
         </div>
     );
+
 }

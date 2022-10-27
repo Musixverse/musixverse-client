@@ -23,6 +23,7 @@ export default function CFB5() {
                         <br />
                         Community Feedback Board (CFB)
                     </p> */}
+
                     <Link href="https://cfbmusixverse.paperform.co/" passHref={true}>
                         <a target="_blank" rel="noopener noreferrer">
                             <button className="px-8 py-3 mt-5 text-xs text-white bg-primary-200 hover:bg-primary-300 font-primary rounded-xl">

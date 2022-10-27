@@ -1,13 +1,12 @@
-import { useState, useEffect } from "react";
-import Router from "next/router";
 import Link from "next/link";
 import { useTheme } from "next-themes";
 import Image from "next/image";
 import logoBlack from "../../../public/logo-black.svg";
 import logoWhite from "../../../public/logo-white.svg";
+import logoIndependence from "../../../public/independence_logo.png";
 
 const Navbar = () => {
-    const { theme, setTheme } = useTheme();
+	const { theme, setTheme } = useTheme();
 
     return (
         <nav className="dark:bg-[rgba(19,19,19,0.4)] flex flex-col items-center justify-center dark:backdrop-blur-[24px] dark:backdrop-brightness-105 fixed top-0 z-40 w-full backdrop-blur-[40px] backdrop-brightness-200 bg-[rgba(255,255,255,0.8)]">

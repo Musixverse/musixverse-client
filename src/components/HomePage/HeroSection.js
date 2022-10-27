@@ -11,7 +11,7 @@ export default function HeroSection() {
 
 	return (
 		<div className="flex flex-col bg-[url('/assets/homepage/heroBG.svg')] bg-no-repeat bg-cover bg-center items-center w-screen overflow-hidden text-light-200">
-			<div className="w-full relative pt-[150px] flex flex-col items-center justify-center">
+			<div className="w-full relative pt-[100px] sm:pt-[150px] flex flex-col items-center justify-center">
 				{/* Intro */}
 				<div className="w-full flex flex-col items-center h-[600px] font-primary absolute z-[7] pt-[10.5rem] sm:pt-[5.5rem]">
 					<h3 className="text-2xl font-medium lg:text-3xl xl:text-4xl">save the date</h3>
@@ -67,7 +67,7 @@ export default function HeroSection() {
 				<div className={"z-[7] lg:block hidden dark:bg-[#7FFF17] " + `${styles.fireflyR7} ${styles.firefly}`}></div>
 			</div>
 
-			<div className="flex flex-col w-full max-w-[1920px] px-6 md:px-8 lg:px-16 xl:px-20 2xl:px-36 pb-28">
+			<div className="flex flex-col w-full max-w-[1920px] px-4 md:px-8 lg:px-16 xl:px-20 2xl:px-36 pb-24">
 				<Countdown />
 			</div>
 		</div>

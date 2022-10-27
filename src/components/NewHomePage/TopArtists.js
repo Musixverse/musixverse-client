@@ -11,7 +11,7 @@ import Harry from "../../../public/assets/new-homepage/harry.png";
 
 export default function TopArtists() {
 	return (
-		<div className="relative mt-24">
+		<div className="relative mt-20">
 			<h1 className="font-primary font-semibold text-3xl text-center">
 				Top Artists on M<span className="text-primary-100">x</span> Catalog
 			</h1>

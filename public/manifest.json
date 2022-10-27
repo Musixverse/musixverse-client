@@ -1,12 +1,12 @@
 {
-    "theme_color": "#6cc027",
-    "background_color": "#6cc027",
+    "theme_color": "#5AB510",
+    "background_color": "#fff",
     "display": "standalone",
     "scope": "/",
     "start_url": "/",
     "name": "Musixverse",
     "short_name": "MXV",
-    "description": "Music NFTs",
+    "description": "Powering music ownership and distribution across the web and beyond",
     "icons": [
         {
             "src": "/icon-192x192.png",

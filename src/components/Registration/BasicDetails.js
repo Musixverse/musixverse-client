@@ -128,7 +128,7 @@ export default function BasicDetails() {
 
 	return (
 		<div className={styles["register"]}>
-			<div className={"dark:bg-dark-200 " + styles["register__container"]}>
+			<div className={"dark:bg-dark-800 " + styles["register__container"]}>
 				{/* Left section */}
 				<div className="lg:max-w-[30vw] pb-6 lg:pb-0">
 					<p className="mt-20 text-5xl font-tertiary max-w-[468px]">ARTIST SIGN UP</p>
@@ -152,7 +152,7 @@ export default function BasicDetails() {
 							value={name}
 							onChange={(e) => setName(e.target.value)}
 							required
-							className="w-full p-1 border-2 border-gray-500 rounded-md shadow-sm outline-none font-secondary focus:border-primary-100"
+							className="w-full p-1 border-2 border-gray-500 rounded-md shadow-sm outline-none font-secondary focus:border-primary-500"
 						/>
 						<div className="flex flex-col sm:flex-row mt-3 text-[16px] font-secondary font-bold space-y-4 sm:space-x-3 sm:space-y-0">
 							<div className="flex-1">
@@ -163,7 +163,7 @@ export default function BasicDetails() {
 									value={username}
 									onChange={(e) => setUsername(e.target.value)}
 									required
-									className="w-full p-1 border-2 border-gray-500 rounded-md shadow-sm outline-none focus:border-primary-100"
+									className="w-full p-1 border-2 border-gray-500 rounded-md shadow-sm outline-none focus:border-primary-500"
 								/>
 							</div>
 							<div className="flex-1">
@@ -174,7 +174,7 @@ export default function BasicDetails() {
 									value={email}
 									onChange={(e) => setEmail(e.target.value)}
 									required
-									className="w-full p-1 border-2 border-gray-500 rounded-md shadow-sm outline-none focus:border-primary-100"
+									className="w-full p-1 border-2 border-gray-500 rounded-md shadow-sm outline-none focus:border-primary-500"
 								/>
 							</div>
 						</div>
@@ -184,7 +184,7 @@ export default function BasicDetails() {
 								<label htmlFor="permissionCheckbox" className="text-[16px] font-secondary font-bold cursor-pointer">
 									I agree with Musixverse&apos;s&nbsp;
 									<Link href="https://drive.google.com/file/d/1U6G3E0oUMo4vSrnhmlc8MiquwY8IrhwH/view?usp=sharing" passHref={true}>
-										<a target="_blank" rel="noopener noreferrer" className="cursor-pointer hover:text-primary-200">
+										<a target="_blank" rel="noopener noreferrer" className="cursor-pointer hover:text-primary-600">
 											Terms and Conditions
 										</a>
 									</Link>

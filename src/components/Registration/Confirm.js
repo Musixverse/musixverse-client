@@ -69,7 +69,7 @@ export default function Confirm() {
 
 	return (
 		<div className={styles["register"]}>
-			<div className={"dark:bg-dark-200 " + styles["register__container"]}>
+			<div className={"dark:bg-dark-800 " + styles["register__container"]}>
 				{/* Main container */}
 				<div className={styles["confirm__container"]}>
 					<Image src={theme === "dark" ? W_blackhole : B_blackhole} width={440} height={318} alt="Black-hole" />
@@ -88,14 +88,14 @@ export default function Confirm() {
 						{user && user.attributes.isArtist ? (
 							<button
 								type="submit"
-								className="flex justify-center items-center space-x-3 bg-light-100 hover:bg-light-200 text-[14px] text-dark-100 py-2 px-6 rounded-lg font-primary font-semibold max-w-[210px]"
+								className="flex justify-center items-center space-x-3 bg-light-100 hover:bg-light-200 text-[14px] text-dark-600 py-2 px-6 rounded-lg font-primary font-semibold max-w-[210px]"
 							>
 								Go to Profile
 							</button>
 						) : (
 							<button
 								type="submit"
-								className="flex justify-center items-center space-x-3 bg-light-100 hover:bg-light-200 text-[14px] text-dark-100 py-2 px-6 rounded-lg mt-6 font-primary font-semibold max-w-[210px]"
+								className="flex justify-center items-center space-x-3 bg-light-100 hover:bg-light-200 text-[14px] text-dark-600 py-2 px-6 rounded-lg mt-6 font-primary font-semibold max-w-[210px]"
 							>
 								Go to Mx Catalog
 							</button>
@@ -103,7 +103,7 @@ export default function Confirm() {
 					</form>
 					<button
 						type="button"
-						className="flex justify-center items-center bg-primary-200 hover:bg-primary-300 text-[14px] text-light-100 py-3 md:px-8 px-4 rounded-lg mt-6 font-primary font-semibold"
+						className="flex justify-center items-center bg-primary-600 hover:bg-primary-700 text-[14px] text-light-100 py-3 md:px-8 px-4 rounded-lg mt-6 font-primary font-semibold"
 						onClick={resendVerificationEmail}
 					>
 						Resend verification email
@@ -111,7 +111,7 @@ export default function Confirm() {
 					<p className="font-secondary text-[14px] text-center mt-8">
 						Email incorrect? Update your email by going to{" "}
 						<Link href="/settings/profile-settings" passHref>
-							<a className="text-primary-200 hover:text-primary-300">Settings</a>
+							<a className="text-primary-600 hover:text-primary-700">Settings</a>
 						</Link>
 					</p>
 				</div>

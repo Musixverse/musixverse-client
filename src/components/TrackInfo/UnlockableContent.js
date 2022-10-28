@@ -118,7 +118,7 @@ export default function UnlockableContent({ tokenId, currentOwnerAddress, unlock
 
 	return (
 		<>
-			<div className="w-full flex flex-col p-8 border-2 bg-light-200 border-light-300 dark:bg-dark-100 dark:border-dark-100 rounded-xl mt-12">
+			<div className="w-full flex flex-col p-8 border-2 bg-light-200 border-light-300 dark:bg-dark-600 dark:border-dark-600 rounded-xl mt-12">
 				<h1 className="font-tertiary text-4xl">
 					REWARDS<i className="fa-solid fa-award ml-2 text-3xl"></i>
 				</h1>
@@ -149,7 +149,7 @@ export default function UnlockableContent({ tokenId, currentOwnerAddress, unlock
 									<div
 										key={index}
 										className={
-											"group relative w-full h-full flex flex-col rounded-lg bg-light-100 dark:bg-dark-200 shadow hover:shadow-primary-100 overflow-hidden transition-all duration-700 unlockable-content-card " +
+											"group relative w-full h-full flex flex-col rounded-lg bg-light-100 dark:bg-dark-800 shadow hover:shadow-primary-500 overflow-hidden transition-all duration-700 unlockable-content-card " +
 											(unlockableContentUriData ? "cursor-pointer hover:bg-light-300/40" : "cursor-not-allowed")
 										}
 										onClick={() => {
@@ -168,7 +168,7 @@ export default function UnlockableContent({ tokenId, currentOwnerAddress, unlock
 											<p className="text-xs mt-2">{item.description}</p>
 											<span className="absolute bottom-2 right-3">
 												{unlockableContentUriData ? (
-													<i className="fa-solid fa-lock-open text-primary-100"></i>
+													<i className="fa-solid fa-lock-open text-primary-500"></i>
 												) : (
 													<i className="fa-solid fa-lock"></i>
 												)}
@@ -181,7 +181,7 @@ export default function UnlockableContent({ tokenId, currentOwnerAddress, unlock
 													<p className="text-sm font-semibold">{item.unlockableHeading}</p>
 													<p className="text-xs mt-2">
 														{index === 0 ? truncatedUnlockableItemText : item.unlockableItemText}&nbsp;&nbsp;
-														{index === 0 && <span className="text-primary-100 underline">Read more</span>}
+														{index === 0 && <span className="text-primary-500 underline">Read more</span>}
 													</p>
 												</div>
 											</div>

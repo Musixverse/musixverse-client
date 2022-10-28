@@ -47,7 +47,7 @@ export default function SocialDetails() {
 
 	return (
 		<div className={styles["register"]}>
-			<div className={"dark:bg-dark-200 " + styles["register__container"]}>
+			<div className={"dark:bg-dark-800 " + styles["register__container"]}>
 				{/* Left section */}
 				<div className="lg:max-w-[30vw] pb-6 lg:pb-0">
 					<p className="mt-20 text-5xl font-tertiary max-w-[468px]">ARTIST SIGN UP</p>
@@ -70,7 +70,7 @@ export default function SocialDetails() {
 							<textarea
 								spellCheck="false"
 								ref={bioRef}
-								className="font-secondary text-base w-full p-1 resize-none h-[200px] mt-2 border-2 border-gray-500 rounded-md shadow-sm outline-none focus:border-primary-100"
+								className="font-secondary text-base w-full p-1 resize-none h-[200px] mt-2 border-2 border-gray-500 rounded-md shadow-sm outline-none focus:border-primary-500"
 							></textarea>
 							<p className="text-[16px] font-primary font-bold mt-4">Add your socials</p>
 							<div className="mt-2">
@@ -79,28 +79,28 @@ export default function SocialDetails() {
 									spellCheck="false"
 									ref={instagramRef}
 									type="text"
-									className="w-full p-1 border-2 border-gray-500 rounded-md shadow-sm outline-none font-secondary focus:border-primary-100"
+									className="w-full p-1 border-2 border-gray-500 rounded-md shadow-sm outline-none font-secondary focus:border-primary-500"
 								/>
 								<p className=" text-[14px] font-secondary font-bold">Facebook</p>
 								<input
 									spellCheck="false"
 									ref={facebookRef}
 									type="text"
-									className="w-full p-1 border-2 border-gray-500 rounded-md shadow-sm outline-none font-secondary focus:border-primary-100"
+									className="w-full p-1 border-2 border-gray-500 rounded-md shadow-sm outline-none font-secondary focus:border-primary-500"
 								/>
 								<p className=" text-[14px] font-secondary font-bold">Twitter</p>
 								<input
 									spellCheck="false"
 									ref={twitterRef}
 									type="text"
-									className="w-full p-1 border-2 border-gray-500 rounded-md shadow-sm outline-none font-secondary focus:border-primary-100"
+									className="w-full p-1 border-2 border-gray-500 rounded-md shadow-sm outline-none font-secondary focus:border-primary-500"
 								/>
 								<p className=" text-[14px] font-secondary font-bold">Spotify</p>
 								<input
 									spellCheck="false"
 									ref={spotifyRef}
 									type="text"
-									className="w-full p-1 border-2 border-gray-500 rounded-md shadow-sm outline-none font-secondary focus:border-primary-100"
+									className="w-full p-1 border-2 border-gray-500 rounded-md shadow-sm outline-none font-secondary focus:border-primary-500"
 								/>
 							</div>
 							{/* Re-design buttons */}
@@ -108,7 +108,7 @@ export default function SocialDetails() {
 								<div className="flex">
 									<button
 										type="submit"
-										className="flex mr-3 justify-center items-center bg-light-100 hover:bg-light-300 text-[14px] text-primary-100 py-3 px-6 rounded-lg mt-6 font-primary font-semibold max-w-[210px]"
+										className="flex mr-3 justify-center items-center bg-light-100 hover:bg-light-300 text-[14px] text-primary-500 py-3 px-6 rounded-lg mt-6 font-primary font-semibold max-w-[210px]"
 									>
 										Skip
 									</button>

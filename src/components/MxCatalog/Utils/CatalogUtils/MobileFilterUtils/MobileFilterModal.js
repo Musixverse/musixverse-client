@@ -30,22 +30,22 @@ export default function MobileFilterModal({ showMobileFilter, setShowMobileFilte
 					</div>
 
 					<div className="flex justify-between w-full text-xs font-semibold md:text-base lg:text-lg my-7 font-primary">
-						<p className={`text-center ${currentFilterType === 1 ? "text-primary-100" : ""}`} onClick={() => setCurrentFilterType(1)}>
+						<p className={`text-center ${currentFilterType === 1 ? "text-primary-500" : ""}`} onClick={() => setCurrentFilterType(1)}>
 							<span className="material-symbols-outlined">queue_music</span>
 							<br />
 							Track Traits
 						</p>
-						<p className={`text-center ${currentFilterType === 2 ? "text-primary-100" : ""}`} onClick={() => setCurrentFilterType(2)}>
+						<p className={`text-center ${currentFilterType === 2 ? "text-primary-500" : ""}`} onClick={() => setCurrentFilterType(2)}>
 							<span className="material-symbols-outlined">library_music</span>
 							<br />
 							NFT Traits
 						</p>
-						<p className={`text-center ${currentFilterType === 3 ? "text-primary-100" : ""}`} onClick={() => setCurrentFilterType(3)}>
+						<p className={`text-center ${currentFilterType === 3 ? "text-primary-500" : ""}`} onClick={() => setCurrentFilterType(3)}>
 							<span className="material-symbols-outlined">dashboard_customize</span>
 							<br />
 							NFT State
 						</p>
-						<p className={`text-center ${currentFilterType === 4 ? "text-primary-100" : ""}`} onClick={() => setCurrentFilterType(4)}>
+						<p className={`text-center ${currentFilterType === 4 ? "text-primary-500" : ""}`} onClick={() => setCurrentFilterType(4)}>
 							<span className="material-symbols-outlined">sort</span>
 							<br />
 							Sort By

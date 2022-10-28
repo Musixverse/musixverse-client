@@ -52,7 +52,7 @@ export default function TrackHeaderCta({ tokenId, unlockTimestamp, price, curren
 	const seconds = parseInt((Math.abs(unlockTime - timeNow) / 1000) % 60);
 
 	return (
-		<div className="bg-light-200 p-5 pt-0 mt-0 rounded-lg dark:bg-dark-100 w-full">
+		<div className="bg-light-200 p-5 pt-0 mt-0 rounded-lg dark:bg-dark-600 w-full">
 			{Date.now() < unlockTimestamp * 1000 ? (
 				<>
 					<div className="flex justify-between items-center mt-4">

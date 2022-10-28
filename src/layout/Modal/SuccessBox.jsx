@@ -34,7 +34,7 @@ const SuccessBox = () => {
 				leaveTo="opacity-0 scale-75 translate-x-1/3"
 			>
 				<div
-					className="fixed bottom-0 right-0 z-50 xl:w-4/12 lg:w-5/12 md:w-8/12 px-5 py-4 border-primary-100 backdrop-blur-[40px] backdrop-brightness-200 bg-light-100 dark:bg-[rgba(19,19,19,0.4)] dark:backdrop-blur-[24px] dark:border-primary-200 border-2 rounded-lg shadow-2xl -translate-x-4 -translate-y-4 break-words"
+					className="fixed bottom-0 right-0 z-50 xl:w-4/12 lg:w-5/12 md:w-8/12 px-5 py-4 border-2 border-success-500 bg-success-100 backdrop-blur-[40px] backdrop-brightness-200 dark:bg-[rgba(19,19,19,0.6)] dark:backdrop-blur-[24px] rounded-lg shadow-2xl -translate-x-4 -translate-y-4 break-words"
 					role="alert"
 				>
 					<strong className="font-semibold">{success.title}</strong>
@@ -43,7 +43,7 @@ const SuccessBox = () => {
 					<span className="block sm:inline">{success.message}</span>
 					<div
 						onClick={handleClose}
-						className="absolute top-1 right-1 w-8 h-8 flex justify-center items-center rounded-md transition-all duration-200 cursor-pointer hover:bg-primary-100 hover:text-light-100"
+						className="absolute top-1 right-1 w-8 h-8 flex justify-center items-center rounded-md transition-all duration-200 cursor-pointer text-success-500 hover:text-light-100 hover:bg-success-500"
 					>
 						<i className="fa-solid fa-xmark"></i>
 					</div>

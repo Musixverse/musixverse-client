@@ -32,7 +32,7 @@ export default function UserInfo({
 						id="name"
 						placeholder="Enter name"
 						spellCheck={false}
-						className="dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-100 w-full px-4 py-2 text-sm border-2 rounded-md shadow-sm outline-none border-light-100 focus:border-primary-100"
+						className="dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-500 w-full px-4 py-2 text-sm border-2 rounded-md shadow-sm outline-none border-light-100 focus:border-primary-500"
 					/>
 				</div>
 				<div className="flex-1 text-sm font-medium md:text-base font-secondary">
@@ -44,7 +44,7 @@ export default function UserInfo({
 						id="username"
 						placeholder="Enter username"
 						spellCheck={false}
-						className="dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-100 w-full px-4 py-2 text-sm border-2 rounded-md shadow-sm outline-none border-light-100 focus:border-primary-100"
+						className="dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-500 w-full px-4 py-2 text-sm border-2 rounded-md shadow-sm outline-none border-light-100 focus:border-primary-500"
 					/>
 				</div>
 				{!isBandSettings && (
@@ -57,7 +57,7 @@ export default function UserInfo({
 							id="email"
 							placeholder="Enter your email"
 							spellCheck={false}
-							className="dark:bg-[#242424] dark:border-[#323232] dark:focus:border-primary-100 w-full px-4 py-2 text-sm border-2 rounded-md shadow-sm outline-none border-light-100 focus:border-primary-100"
+							className="dark:bg-[#242424] dark:border-[#323232] dark:focus:border-primary-500 w-full px-4 py-2 text-sm border-2 rounded-md shadow-sm outline-none border-light-100 focus:border-primary-500"
 						/>
 					</div>
 				)}
@@ -118,7 +118,7 @@ export default function UserInfo({
 					onChange={(e) => setBio(e.target.value)}
 					id="bio"
 					placeholder="Tell your story to the world..."
-					className="resize-none w-full h-[106px] border-2 border-light-100 dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-100 focus:border-primary-100 rounded-lg outline-none px-4 py-3 text-sm"
+					className="resize-none w-full h-[106px] border-2 border-light-100 dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-500 focus:border-primary-500 rounded-lg outline-none px-4 py-3 text-sm"
 				></textarea>
 			</div>
 		</div>

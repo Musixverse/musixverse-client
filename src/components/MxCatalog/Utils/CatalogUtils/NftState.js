@@ -10,7 +10,7 @@ export default function NftState({ appliedFilter, setAppliedFilter, setCurrentFi
 					<p className="font-secondary text-[#7F7F7F] text-[11px] md:text-[13px] lg:text-[15px]">Show NFTs based on these traits</p>
 				</div>
 				<button
-					className="bg-dark-100 text-light-200 text-sm px-6 py-1 rounded"
+					className="bg-dark-600 text-light-200 text-sm px-6 py-1 rounded"
 					onClick={() => {
 						setCurrentFilterType(0);
 						setAppliedFilter({ type: "reset" });

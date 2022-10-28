@@ -35,20 +35,20 @@ export default function Stats({ username, profileDetails }) {
 						<p className="hidden sm:block text-sm">{profileDetails.numberOfTracksByArtist === 1 ? "Track Released" : "Tracks Released"}</p>
 						<p className="block sm:hidden text-sm">{profileDetails.numberOfTracksByArtist === 1 ? "Track" : "Tracks"}</p>
 					</div>
-					<div onClick={() => displayFavourites()} className="shrink px-6 py-5 cursor-pointer text-center hover:bg-light-300 dark:hover:bg-dark-200">
+					<div onClick={() => displayFavourites()} className="shrink px-6 py-5 cursor-pointer text-center hover:bg-light-300 dark:hover:bg-dark-800">
 						<h1 className="text-xl font-bold">
 							<Image src={theme !== "dark" ? recordImageB : recordImageW} width={14} height={14} alt="records" />
 							&nbsp;{profileDetails.numberOfFavouriteTokens || 0}
 						</h1>
 						<p className="text-sm">{profileDetails.numberOfFavouriteTokens === 1 ? "Favourite" : "Favourites"}</p>
 					</div>
-					<div onClick={() => displayFollowers()} className="shrink px-6 py-5 cursor-pointer text-center hover:bg-light-300 dark:hover:bg-dark-200">
+					<div onClick={() => displayFollowers()} className="shrink px-6 py-5 cursor-pointer text-center hover:bg-light-300 dark:hover:bg-dark-800">
 						<h1 className="text-xl font-bold">{profileDetails.numberOfFollowers || 0}</h1>
 						<p className="text-sm">{profileDetails.numberOfFollowers === 1 ? "Follower" : "Followers"}</p>
 					</div>
 					<div
 						onClick={() => displayFollowing()}
-						className="shrink pl-6 pr-8 py-5 cursor-pointer text-center hover:bg-light-300 dark:hover:bg-dark-200 rounded-r-2xl"
+						className="shrink pl-6 pr-8 py-5 cursor-pointer text-center hover:bg-light-300 dark:hover:bg-dark-800 rounded-r-2xl"
 					>
 						<h1 className="text-xl font-bold">{profileDetails.numberOfFollowing || 0}</h1>
 						<p className="text-sm">Following</p>
@@ -58,7 +58,7 @@ export default function Stats({ username, profileDetails }) {
 				<div className="flex grid-cols-3 mt-8 font-medium md:m-0 md:w-fit dark:bg-nav-dark dark:backdrop-blur-xl dark:backdrop-brightness-105 opacity-90 rounded-2xl bg-light-200 backdrop-blur-xl backdrop-brightness-150">
 					<div
 						onClick={() => displayFavourites()}
-						className="shrink pl-8 pr-6 py-5 cursor-pointer text-center hover:bg-light-300 dark:hover:bg-dark-200 rounded-l-2xl"
+						className="shrink pl-8 pr-6 py-5 cursor-pointer text-center hover:bg-light-300 dark:hover:bg-dark-800 rounded-l-2xl"
 					>
 						<h1 className="text-xl font-bold">
 							<Image src={theme !== "dark" ? recordImageB : recordImageW} width={14} height={14} alt="records" />
@@ -66,13 +66,13 @@ export default function Stats({ username, profileDetails }) {
 						</h1>
 						<p className="text-sm">{profileDetails.numberOfFavouriteTokens === 1 ? "Favourite" : "Favourites"}</p>
 					</div>
-					<div onClick={() => displayFollowers()} className="shrink px-6 py-5 cursor-pointer text-center hover:bg-light-300 dark:hover:bg-dark-200">
+					<div onClick={() => displayFollowers()} className="shrink px-6 py-5 cursor-pointer text-center hover:bg-light-300 dark:hover:bg-dark-800">
 						<h1 className="text-xl font-bold">{profileDetails.numberOfFollowers || 0}</h1>
 						<p className="text-sm">{profileDetails.numberOfFollowers === 1 ? "Follower" : "Followers"}</p>
 					</div>
 					<div
 						onClick={() => displayFollowing()}
-						className="shrink pl-6 pr-8 py-5 cursor-pointer text-center hover:bg-light-300 dark:hover:bg-dark-200 rounded-r-2xl hidden font-secondary md:inline-block"
+						className="shrink pl-6 pr-8 py-5 cursor-pointer text-center hover:bg-light-300 dark:hover:bg-dark-800 rounded-r-2xl hidden font-secondary md:inline-block"
 					>
 						<h1 className="text-xl font-bold">{profileDetails.numberOfFollowing || 0}</h1>
 						<p className="text-sm">Following</p>

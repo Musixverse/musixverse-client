@@ -126,7 +126,7 @@ export default function TrackHeader({
 										<button
 											key={index}
 											type="button"
-											className="px-6 py-2 mr-3 mb-3 rounded-full bg-light-200 dark:bg-dark-100 text-sm cursor-default"
+											className="px-6 py-2 mr-3 mb-3 rounded-full bg-light-200 dark:bg-dark-600 text-sm cursor-default"
 										>
 											{tag}
 										</button>

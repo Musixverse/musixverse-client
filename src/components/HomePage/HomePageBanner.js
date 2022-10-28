@@ -48,13 +48,13 @@ export default function Banner() {
 			{/* Inner div for content */}
 			<div className={"text-white dark:text-white mt-52 " + styles["hero-section-container__content-div"]}>
 				<h1 className={styles["hero-section-container__content-div--heading"]}>
-					Welcome to Musixverse <span className={"text-primary-100 " + styles["hero-section-container__content-div--heading"]}>Beta</span>!
+					Welcome to Musixverse <span className={"text-primary-500 " + styles["hero-section-container__content-div--heading"]}>Beta</span>!
 				</h1>
 				<p className={styles["hero-section-container__content-div--description"]}>
 					Musixverse aims to bring together artists and fans like never before, help them do great things, and empower each other in the process.
 				</p>
 				<a
-					className="px-5 py-3 text-xs text-white bg-primary-200 hover:bg-primary-300 font-primary rounded-3xl"
+					className="px-5 py-3 text-xs text-white bg-primary-600 hover:bg-primary-700 font-primary rounded-3xl"
 					href="https://discord.com/invite/rXKb7rCqjG"
 					target={"_blank"}
 					rel="noopener noreferrer"

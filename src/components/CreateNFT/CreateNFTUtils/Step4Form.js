@@ -163,7 +163,7 @@ const Step4Form = ({
 								/>
 							</label>
 							<input
-								className="dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-100 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-100"
+								className="dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-500 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-500"
 								id="nft-copies"
 								value={numberOfCopies}
 								onChange={(e) => {
@@ -189,7 +189,7 @@ const Step4Form = ({
 							</label>
 
 							<input
-								className="dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-100 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-100"
+								className="dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-500 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-500"
 								id="individual-nft-price"
 								value={nftPrice}
 								onChange={(e) => {
@@ -291,7 +291,7 @@ const Step4Form = ({
 											{collaborator.hasAcceptedCollaboratorInvite ? (
 												<Tooltip
 													labelText={
-														<span className="text-primary-200 text-xl">
+														<span className="text-primary-600 text-xl">
 															<i className="fa-solid fa-circle-check"></i>
 														</span>
 													}
@@ -306,7 +306,7 @@ const Step4Form = ({
 												>
 													<Tooltip
 														labelText={
-															<span className="text-error-200 text-xl">
+															<span className="text-error-600 text-xl">
 																<i className="fa-solid fa-circle-xmark"></i>
 															</span>
 														}
@@ -372,7 +372,7 @@ const Step4Form = ({
 
 										<div className="basis-1/5">
 											<input
-												className="dark:bg-[#323232] dark:border-[#323232] dark:text-light-100 dark:focus:border-primary-100 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-100"
+												className="dark:bg-[#323232] dark:border-[#323232] dark:text-light-100 dark:focus:border-primary-500 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-500"
 												name="split"
 												type="number"
 												min={0}
@@ -420,7 +420,7 @@ const Step4Form = ({
 							<div className="flex items-center justify-start mt-4">
 								<button
 									type="button"
-									className="rounded-full flex justify-center items-center w-8 h-8 bg-[#479E00] hover:bg-primary-300 text-white"
+									className="rounded-full flex justify-center items-center w-8 h-8 bg-[#479E00] hover:bg-primary-700 text-white"
 									onClick={() => setAddCollaboratorModalOpen(true)}
 								>
 									+
@@ -429,13 +429,13 @@ const Step4Form = ({
 							</div>
 						)}
 
-						<div className="w-full flex justify-center space-x-1 p-3 mt-6 font-medium rounded dark:text-gray-300 bg-light-300 dark:bg-dark-100">
+						<div className="w-full flex justify-center space-x-1 p-3 mt-6 font-medium rounded dark:text-gray-300 bg-light-300 dark:bg-dark-600">
 							{collaboratorList.reduce((total, currentSplit) => (total = total + Number(currentSplit.split)), 0) === 100 ? (
-								<span className="text-primary-200">
+								<span className="text-primary-600">
 									<i className="fa-solid fa-circle-check"></i>
 								</span>
 							) : (
-								<span className="text-error-200">
+								<span className="text-error-600">
 									<i className="fa-solid fa-circle-xmark"></i>
 								</span>
 							)}
@@ -444,7 +444,7 @@ const Step4Form = ({
 
 						<p className="text-sm text-[#777777] font-normal mt-2">
 							Can&apos;t find your collaborator here? Invite them to Musixverse-&nbsp;
-							<a onClick={() => setInvitationModalOpen(true)} className="cursor-pointer text-primary-200 hover:underline">
+							<a onClick={() => setInvitationModalOpen(true)} className="cursor-pointer text-primary-600 hover:underline">
 								Send an invite
 							</a>
 						</p>
@@ -466,7 +466,7 @@ const Step4Form = ({
 							/>
 						</label>
 						<input
-							className="dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-100 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-100"
+							className="dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-500 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-500"
 							id="resale-royalty-percentage"
 							value={resaleRoyaltyPercent}
 							onChange={(e) => {

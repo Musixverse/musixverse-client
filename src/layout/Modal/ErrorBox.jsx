@@ -43,7 +43,7 @@ const ErrorBox = () => {
 				leaveTo="opacity-0 scale-75 translate-x-full"
 			>
 				<div
-					className="fixed bottom-0 right-0 z-50 xl:w-4/12 lg:w-5/12 md:w-8/12 px-5 py-4 text-light-200 -translate-x-4 -translate-y-4 bg-error-200 border border-none rounded-lg shadow-2xl break-words"
+					className="fixed bottom-0 right-0 z-50 xl:w-4/12 lg:w-5/12 md:w-8/12 px-5 py-4 text-light-200 -translate-x-4 -translate-y-4 bg-error-600/80 border-error-700 border-2 backdrop-blur-[40px] backdrop-brightness-200 rounded-lg shadow-2xl break-words"
 					role="alert"
 				>
 					<strong className="font-semibold">{error.title}</strong>
@@ -52,7 +52,7 @@ const ErrorBox = () => {
 					<span className="block sm:inline">{error.message}</span>
 					<div
 						onClick={handleClose}
-						className="absolute top-1 right-1 w-8 h-8 flex justify-center items-center rounded-md transition-all duration-200 cursor-pointer hover:bg-error-300"
+						className="absolute top-1 right-1 w-8 h-8 flex justify-center items-center rounded-md transition-all duration-200 cursor-pointer hover:bg-error-600"
 					>
 						<i className="fa-solid fa-xmark"></i>
 					</div>

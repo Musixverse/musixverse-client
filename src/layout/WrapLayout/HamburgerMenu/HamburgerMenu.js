@@ -44,7 +44,7 @@ export default function HamburgerMenu({ avatarUrl, truncatedName }) {
 											setTheme(theme === "dark" ? "light" : "dark");
 										}}
 									>
-										<div className="flex items-center justify-center w-9 h-9 rounded-full bg-search-100 dark:bg-search-200 hover:bg-[#bdbdbd] dark:hover:bg-dark-100">
+										<div className="flex items-center justify-center w-9 h-9 rounded-full bg-search-100 dark:bg-search-200 hover:bg-[#bdbdbd] dark:hover:bg-dark-600">
 											{theme === "dark" ? (
 												<svg
 													xmlns="http://www.w3.org/2000/svg"
@@ -112,7 +112,7 @@ export default function HamburgerMenu({ avatarUrl, truncatedName }) {
 												<div className="flex flex-wrap ham_menu_heading mt-5 sm:mt-0  justify-center">Quick Links</div>
 												<div className="flex flex-wrap ham_menu_hover_effect_row md:mt-8 mt-4 justify-center">
 													<Link href={"/"} className="ham_menu_link ham_menu_hover_effect text-center" passHref={true}>
-														<a className="text-white hover:text-primary-100" onClick={closeNavbar}>
+														<a className="text-white hover:text-primary-500" onClick={closeNavbar}>
 															Home
 														</a>
 													</Link>
@@ -123,7 +123,7 @@ export default function HamburgerMenu({ avatarUrl, truncatedName }) {
 														className="ham_menu_link ham_menu_hover_effect text-center"
 														passHref={true}
 													>
-														<a className="text-white hover:text-primary-100" onClick={closeNavbar}>
+														<a className="text-white hover:text-primary-500" onClick={closeNavbar}>
 															New Releases
 														</a>
 													</Link>
@@ -134,7 +134,7 @@ export default function HamburgerMenu({ avatarUrl, truncatedName }) {
 														className="ham_menu_link ham_menu_hover_effect text-center"
 														passHref={true}
 													>
-														<a className="text-white hover:text-primary-100" onClick={closeNavbar}>
+														<a className="text-white hover:text-primary-500" onClick={closeNavbar}>
 															Explore
 														</a>
 													</Link>
@@ -143,7 +143,7 @@ export default function HamburgerMenu({ avatarUrl, truncatedName }) {
 												{user && user.attributes.isArtist && (
 													<div className="flex flex-wrap ham_menu_hover_effect_row justify-center">
 														<Link href={"/create-nft"} className="ham_menu_link ham_menu_hover_effect text-center" passHref={true}>
-															<a className="text-white hover:text-primary-100" onClick={closeNavbar}>
+															<a className="text-white hover:text-primary-500" onClick={closeNavbar}>
 																Create
 															</a>
 														</Link>
@@ -160,7 +160,7 @@ export default function HamburgerMenu({ avatarUrl, truncatedName }) {
 															className="ham_menu_link ham_menu_hover_effect text-center"
 															passHref={true}
 														>
-															<a className="text-white hover:text-primary-100" onClick={closeNavbar}>
+															<a className="text-white hover:text-primary-500" onClick={closeNavbar}>
 																Profile
 															</a>
 														</Link>
@@ -183,7 +183,7 @@ export default function HamburgerMenu({ avatarUrl, truncatedName }) {
 															className="ham_menu_link ham_menu_hover_effect text-center"
 															passHref={true}
 														>
-															<a className="text-white hover:text-primary-100" onClick={closeNavbar}>
+															<a className="text-white hover:text-primary-500" onClick={closeNavbar}>
 																Settings
 															</a>
 														</Link>
@@ -205,28 +205,28 @@ export default function HamburgerMenu({ avatarUrl, truncatedName }) {
 												<div className="flex flex-wrap ham_menu_heading mt-5 sm:mt-0 justify-center">Support</div>
 												<div className="flex flex-wrap ham_menu_hover_effect_row md:mt-8 mt-4 justify-center">
 													<Link href={"/help-center"} className="ham_menu_link ham_menu_hover_effect text-center" passHref={true}>
-														<a className="text-white hover:text-primary-100" onClick={closeNavbar}>
+														<a className="text-white hover:text-primary-500" onClick={closeNavbar}>
 															Help Center
 														</a>
 													</Link>
 												</div>
 												<div className="flex flex-wrap ham_menu_hover_effect_row justify-center">
 													<Link href={"/contact-us"} className="ham_menu_link ham_menu_hover_effect text-center" passHref={true}>
-														<a className="text-white hover:text-primary-100" onClick={closeNavbar}>
+														<a className="text-white hover:text-primary-500" onClick={closeNavbar}>
 															Contact Us
 														</a>
 													</Link>
 												</div>
 												<div className="flex flex-wrap ham_menu_hover_effect_row justify-center">
 													<Link href={"/faq"} className="ham_menu_link ham_menu_hover_effect text-center" passHref={true}>
-														<a className="text-white hover:text-primary-100" onClick={closeNavbar}>
+														<a className="text-white hover:text-primary-500" onClick={closeNavbar}>
 															FAQ
 														</a>
 													</Link>
 												</div>
 												<div className="flex flex-wrap ham_menu_hover_effect_row justify-center">
 													<Link href={"/report-a-bug"} className="ham_menu_link ham_menu_hover_effect text-center" passHref={true}>
-														<a className="text-white hover:text-primary-100" onClick={closeNavbar}>
+														<a className="text-white hover:text-primary-500" onClick={closeNavbar}>
 															Report a Bug
 														</a>
 													</Link>
@@ -237,14 +237,14 @@ export default function HamburgerMenu({ avatarUrl, truncatedName }) {
 												<div className="flex flex-wrap ham_menu_heading mt-5 sm:mt-0 justify-center">General</div>
 												<div className="flex flex-wrap ham_menu_hover_effect_row md:mt-8 mt-4 justify-center">
 													<Link href={"/#section_4"} className="ham_menu_link ham_menu_hover_effect text-center" passHref={true}>
-														<a className="text-white hover:text-primary-100" onClick={closeNavbar}>
+														<a className="text-white hover:text-primary-500" onClick={closeNavbar}>
 															About Us
 														</a>
 													</Link>
 												</div>
 												<div className="flex flex-wrap ham_menu_hover_effect_row justify-center">
 													<Link href={"/cfh/cfb"} className="ham_menu_link ham_menu_hover_effect text-center" passHref={true}>
-														<a className="text-white hover:text-primary-100" onClick={closeNavbar}>
+														<a className="text-white hover:text-primary-500" onClick={closeNavbar}>
 															Community
 														</a>
 													</Link>

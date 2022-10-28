@@ -16,7 +16,7 @@ export default function FilterTrackTraits({ appliedFilter, setAppliedFilter, set
 					</p>
 				</div>
 				<button
-					className="bg-dark-100 text-light-200 text-sm px-6 py-1 rounded"
+					className="bg-dark-600 text-light-200 text-sm px-6 py-1 rounded"
 					onClick={() => {
 						setCurrentFilterType(0);
 						setAppliedFilter({ type: "reset" });

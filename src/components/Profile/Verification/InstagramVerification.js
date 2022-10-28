@@ -74,7 +74,7 @@ const InstagramVerification = ({
 			<div className="w-2/3 flex mt-1">
 				<span className="absolute ml-3 mt-2">@</span>
 				<input
-					className="mr-4 dark:text-light-100 dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-100 w-full pl-8 pr-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-100"
+					className="mr-4 dark:text-light-100 dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-500 w-full pl-8 pr-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-500"
 					id="instagramHandle"
 					name="instagramHandle"
 					type="text"
@@ -111,7 +111,7 @@ const InstagramVerification = ({
 
 			{instagramHandle && instagramHandleSave && (
 				<>
-					<div className="p-10 bg-light-100 dark:bg-dark-100 rounded-lg mt-8">
+					<div className="p-10 bg-light-100 dark:bg-dark-600 rounded-lg mt-8">
 						<p className="text-3xl font-tertiary text-center">Musixverse Profile Verification</p>
 						<p className="mt-10">
 							<b>Stage Name:</b> {user.attributes.name}
@@ -138,7 +138,7 @@ const InstagramVerification = ({
 						<p className="text-center">
 							Click a picture of above text and send a DM to&nbsp;
 							<Link href="https://www.instagram.com/musixverse/" passHref>
-								<a target="_blank" rel="noopener noreferrer" className="text-primary-200 hover:text-primary-300 hover:underline">
+								<a target="_blank" rel="noopener noreferrer" className="text-primary-600 hover:text-primary-700 hover:underline">
 									@musixverse
 								</a>
 							</Link>
@@ -159,13 +159,13 @@ const InstagramVerification = ({
 				<div className="w-2/5 flex justify-between mt-14">
 					<button
 						onClick={() => prevStep()}
-						className="flex w-fit items-center px-10 py-3 text-sm font-primary font-bold rounded-md bg-light-100 dark:bg-[#323232] hover:bg-gray-200 text-primary-100"
+						className="flex w-fit items-center px-10 py-3 text-sm font-primary font-bold rounded-md bg-light-100 dark:bg-[#323232] hover:bg-gray-200 text-primary-500"
 					>
 						Back
 					</button>
 					<button
 						type="submit"
-						className="flex w-fit items-center px-10 py-3 text-sm font-primary font-bold rounded-md bg-primary-200 hover:bg-primary-300 text-light-100"
+						className="flex w-fit items-center px-10 py-3 text-sm font-primary font-bold rounded-md bg-primary-600 hover:bg-primary-700 text-light-100"
 					>
 						Submit
 					</button>

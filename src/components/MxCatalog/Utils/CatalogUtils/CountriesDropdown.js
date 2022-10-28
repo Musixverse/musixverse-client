@@ -45,7 +45,7 @@ export default function CountriesDropdown({ initialValue, setChoice, dropdownTyp
 				{({ active }) => (
 					<li
 						className={classNames(
-							active ? "bg-gray-100 dark:bg-dark-200 text-gray-900" : "text-gray-700",
+							active ? "bg-gray-100 dark:bg-dark-800 text-gray-900" : "text-gray-700",
 							"flex px-4 py-1 items-center text-sm cursor-pointer dark:text-light-100"
 						)}
 						onClick={handleOptionSelect}
@@ -96,14 +96,14 @@ export default function CountriesDropdown({ initialValue, setChoice, dropdownTyp
 				leaveFrom="transform opacity-100 scale-100"
 				leaveTo="transform opacity-0 scale-95"
 			>
-				<Menu.Items className="absolute right-0 z-10 w-56 mt-3 origin-top-right rounded-md shadow-lg bg-light-300 dark:bg-dark-100 ring-1 ring-black ring-opacity-5 focus:outline-none">
+				<Menu.Items className="absolute right-0 z-10 w-56 mt-3 origin-top-right rounded-md shadow-lg bg-light-300 dark:bg-dark-600 ring-1 ring-black ring-opacity-5 focus:outline-none">
 					<div className={styles["menu-item-div"]}>
 						{[
 							<Menu.Item key="-1">
 								{({ active }) => (
 									<li
 										className={classNames(
-											active ? "bg-gray-100 dark:bg-dark-200 text-gray-900" : "text-gray-700",
+											active ? "bg-gray-100 dark:bg-dark-800 text-gray-900" : "text-gray-700",
 											"block px-4 py-2 text-sm cursor-pointer dark:text-light-100"
 										)}
 										onClick={handleOptionSelect}

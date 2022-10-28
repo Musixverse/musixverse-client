@@ -14,7 +14,7 @@ function DoesNotExist() {
 				<meta name="description" content={meta_description} />
 			</Head>
 
-			<main className="m-auto max-w-screen-2xl md:w-11/12 px-4 md:px-20 py-24 text-center bg-light-200 dark:bg-dark-200">
+			<main className="m-auto max-w-screen-2xl md:w-11/12 px-4 md:px-20 py-24 text-center bg-light-200 dark:bg-dark-800">
 				<h1 className="md:text-6xl text-5xl font-primary font-semibold mb-2 pt-20">Musixverse</h1>
 				<p className="md:text-md text-sm">
 					<i>Hear it. Own it. Live it.</i>
@@ -26,7 +26,7 @@ function DoesNotExist() {
 							<div className="mb-16 font-secondary text-lg">User Profile with the username &quot;{username}&quot; does not exist</div>
 
 							<Link href="/" passHref={true}>
-								<button className="px-5 py-3 mt-16 text-xs text-white bg-primary-200 hover:bg-primary-300 font-primary rounded-lg">
+								<button className="px-5 py-3 mt-16 text-xs text-white bg-primary-600 hover:bg-primary-700 font-primary rounded-lg">
 									Go Back to HomePage
 								</button>
 							</Link>

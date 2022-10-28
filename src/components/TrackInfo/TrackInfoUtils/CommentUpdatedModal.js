@@ -17,13 +17,13 @@ const CommentUpdatedModal = ({ isOpen, setOpen, previousComment, newComment }) =
 							<>
 								<div>
 									<p className="text-start font-semibold text-base">Previous Comment</p>
-									<p className="mt-2 p-4 bg-light-200 dark:bg-dark-200 rounded text-start">{previousComment}</p>
+									<p className="mt-2 p-4 bg-light-200 dark:bg-dark-800 rounded text-start">{previousComment}</p>
 								</div>
 								<i className="fa-solid fa-arrow-down-long text-xl text-center my-4"></i>
 							</>
 						)}
 						<p className="text-start font-semibold text-base">New Comment</p>
-						<p className="mt-2 p-4 bg-light-200 dark:bg-dark-200 rounded text-start">{newComment}</p>
+						<p className="mt-2 p-4 bg-light-200 dark:bg-dark-800 rounded text-start">{newComment}</p>
 					</div>
 				}
 				onClose={() => {

@@ -48,10 +48,10 @@ const CreateNFTIntro = ({ nextStep, chosenProfileOrBand, nftDraftMetadata, nftDr
 
 	return (
 		<>
-			<div className="flex flex-col items-center justify-center w-full bg-light-200 dark:bg-dark-200">
+			<div className="flex flex-col items-center justify-center w-full bg-light-200 dark:bg-dark-800">
 				<div className="overflow-x-hidden w-full max-w-[1920px] flex justify-center pt-36 pb-20 sm:px-16 xl:px-20 2xl:px-36">
 					<form
-						className="w-[90vw] sm:w-[80vw] bg-light-100 dark:bg-dark-100 grid lg:grid-cols-3 lg:space-x-10 min-h-full sm:p-14 p-10 lg:pb-10 rounded-2xl backdrop-blur-xl"
+						className="w-[90vw] sm:w-[80vw] bg-light-100 dark:bg-dark-600 grid lg:grid-cols-3 lg:space-x-10 min-h-full sm:p-14 p-10 lg:pb-10 rounded-2xl backdrop-blur-xl"
 						onSubmit={async (e) => {
 							e.preventDefault();
 							if (user && user.attributes.isArtist && user.attributes.isArtistVerified) {
@@ -92,7 +92,7 @@ const CreateNFTIntro = ({ nextStep, chosenProfileOrBand, nftDraftMetadata, nftDr
 								<label htmlFor="T&C" className="cursor-pointer">
 									I have read and agree to the{" "}
 									<Link href="/terms-and-conditions" passHref>
-										<a target="_blank" rel="noopener noreferrer" className="hover:text-primary-100">
+										<a target="_blank" rel="noopener noreferrer" className="hover:text-primary-500">
 											Terms & Conditions
 										</a>
 									</Link>
@@ -104,7 +104,7 @@ const CreateNFTIntro = ({ nextStep, chosenProfileOrBand, nftDraftMetadata, nftDr
 
 							<button
 								type="submit"
-								className="w-fit flex items-center mt-10 px-4 py-3 text-sm font-primary font-bold rounded-md bg-primary-100 hover:bg-primary-200 text-light-100"
+								className="w-fit flex items-center mt-10 px-4 py-3 text-sm font-primary font-bold rounded-md bg-primary-500 hover:bg-primary-600 text-light-100"
 							>
 								Continue
 								<span className="ml-24 text-xl">
@@ -141,9 +141,9 @@ const CreateNFTIntro = ({ nextStep, chosenProfileOrBand, nftDraftMetadata, nftDr
 										<input type="submit" id="create-nft-form-submit" hidden />
 										<label
 											htmlFor="create-nft-form-submit"
-											className="flex justify-center items-center w-10 h-10 border-2 border-dark-100 dark:border-light-300 rounded-full group hover:border-primary-200 dark:hover:border-primary-100 cursor-pointer"
+											className="flex justify-center items-center w-10 h-10 border-2 border-dark-600 dark:border-light-300 rounded-full group hover:border-primary-600 dark:hover:border-primary-500 cursor-pointer"
 										>
-											<i className="fa-solid fa-plus text-2xl dark:text-light-300 group-hover:text-primary-200 dark:group-hover:text-primary-100"></i>
+											<i className="fa-solid fa-plus text-2xl dark:text-light-300 group-hover:text-primary-600 dark:group-hover:text-primary-500"></i>
 										</label>
 										<span className="ml-4 text-sm">You don&apos;t have any drafts yet</span>
 									</div>

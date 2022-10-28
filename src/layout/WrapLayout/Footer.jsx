@@ -17,35 +17,35 @@ const Footer = () => {
 	const [, setAuthModalOpen] = useContext(AuthModalContext);
 
 	return (
-		<div className="flex justify-center w-full dark:bg-dark-200">
-			<div className="footer dark:bg-dark-100">
+		<div className="flex justify-center w-full dark:bg-dark-800">
+			<div className="footer dark:bg-dark-800">
 				<div className="w-full flex justify-between items-center">
 					<Image src={theme === "dark" ? mxvW : mxvB} alt="MXV logo" width="90" height="20" />
-					<p className="font-primary text-lg text-primary-100">Hear it. Own it. Live it.</p>
+					<p className="font-primary text-lg text-primary-500">Hear it. Own it. Live it.</p>
 				</div>
 
 				<div className="grid grid-cols-2 gap-y-10 md:gap-y-0 md:flex flex-wrap font-primary justify-between border-t-2 border-light-300 w-full py-8 mt-5">
 					<div className="flex flex-col space-y-2">
 						<p className="font-semibold text">Quick Links</p>
 						<ul className="space-y-2">
-							<li className="hover:text-primary-100">
+							<li className="hover:text-primary-500">
 								<Link href="/" className="links">
 									Home
 								</Link>
 							</li>
-							<li className="hover:text-primary-100">
+							<li className="hover:text-primary-500">
 								<Link href="/mxcatalog/new-releases">New Releases</Link>
 							</li>
-							<li className="hover:text-primary-100">
+							<li className="hover:text-primary-500">
 								<Link href="/mxcatalog/explore">Explore</Link>
 							</li>
 							<Tooltip
-								labelText={<li className="text-dark-100 dark:text-light-100 cursor-help">Trending</li>}
+								labelText={<li className="text-dark-600 dark:text-light-100 cursor-help">Trending</li>}
 								message="Coming soon!"
 								tooltipLocation="bottom"
 							></Tooltip>
 							{user && user.attributes.isArtist && (
-								<li className="hover:text-primary-100">
+								<li className="hover:text-primary-500">
 									<Link href="/create-nft">Create</Link>
 								</li>
 							)}
@@ -54,14 +54,14 @@ const Footer = () => {
 					<div className="flex flex-col space-y-2">
 						<p className="font-semibold text">Account</p>
 						<ul className="space-y-2">
-							<li className="hover:text-primary-100 cursor-pointer">
+							<li className="hover:text-primary-500 cursor-pointer">
 								{user && isAuthenticated ? (
 									<Link href={`/profile/${user.attributes.username}`}>Profile</Link>
 								) : (
 									<span onClick={() => setAuthModalOpen(true)}>Profile</span>
 								)}
 							</li>
-							<li className="hover:text-primary-100 cursor-pointer">
+							<li className="hover:text-primary-500 cursor-pointer">
 								{user && isAuthenticated ? (
 									<Link href={`/settings/profile-settings`}>Settings</Link>
 								) : (
@@ -69,7 +69,7 @@ const Footer = () => {
 								)}
 							</li>
 							<Tooltip
-								labelText={<li className="text-dark-100 dark:text-light-100 cursor-help">Transactions</li>}
+								labelText={<li className="text-dark-600 dark:text-light-100 cursor-help">Transactions</li>}
 								message="Coming soon!"
 								tooltipLocation="bottom"
 							></Tooltip>
@@ -78,13 +78,13 @@ const Footer = () => {
 					<div className="flex flex-col space-y-2">
 						<p className="font-semibold text">Support</p>
 						<ul className="space-y-2">
-							<li className="hover:text-primary-100">
+							<li className="hover:text-primary-500">
 								<Link href="/contact-us">Contact Us</Link>
 							</li>
-							<li className="hover:text-primary-100">
+							<li className="hover:text-primary-500">
 								<Link href="/faq">FAQ</Link>
 							</li>
-							<li className="hover:text-primary-100">
+							<li className="hover:text-primary-500">
 								<Link href="/report-a-bug">Report a Bug</Link>
 							</li>
 						</ul>
@@ -92,15 +92,15 @@ const Footer = () => {
 					<div className="flex flex-col space-y-2">
 						<p className="font-semibold text">Resources</p>
 						<ul className="space-y-2">
-							<li className="hover:text-primary-100">
+							<li className="hover:text-primary-500">
 								<Link href="/help-center">Help Center</Link>
 							</li>
 							<Tooltip
-								labelText={<li className="text-dark-100 dark:text-light-100 cursor-help">Docs</li>}
+								labelText={<li className="text-dark-600 dark:text-light-100 cursor-help">Docs</li>}
 								message="Coming soon!"
 								tooltipLocation="bottom"
 							></Tooltip>
-							<li className="hover:text-primary-100">
+							<li className="hover:text-primary-500">
 								<Link href="https://medium.com/@musixverse" passHref>
 									<a target="_blank" rel="noopener noreferrer">
 										Blogs
@@ -108,7 +108,7 @@ const Footer = () => {
 								</Link>
 							</li>
 							<Tooltip
-								labelText={<li className="text-dark-100 dark:text-light-100 cursor-help">Media Kit</li>}
+								labelText={<li className="text-dark-600 dark:text-light-100 cursor-help">Media Kit</li>}
 								message="Coming soon!"
 								tooltipLocation="bottom"
 							></Tooltip>
@@ -118,15 +118,15 @@ const Footer = () => {
 					<div className="flex flex-col space-y-2">
 						<p className="font-semibold text">General</p>
 						<ul className="space-y-2">
-							<li className="hover:text-primary-100">
+							<li className="hover:text-primary-500">
 								<Link href="/#section_4">About Us</Link>
 							</li>
-							<li className="hover:text-primary-100">
+							<li className="hover:text-primary-500">
 								<Link href="/cfh/cfb">Community</Link>
 							</li>
 							{/* 
 							<Tooltip
-								labelText={<li className="text-dark-100 dark:text-light-100 cursor-help">Team</li>}
+								labelText={<li className="text-dark-600 dark:text-light-100 cursor-help">Team</li>}
 								message="Coming soon!"
 								tooltipLocation="bottom"
 							></Tooltip> */}

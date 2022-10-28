@@ -102,7 +102,7 @@ export default function EditProfilePhoto({ avatar, setAvatar }) {
 						className="hidden mt-2 mb-2"
 					/>
 					<label
-						className="absolute flex items-center justify-center p-2 pr-1 rounded-lg cursor-pointer right-1 bottom-2 bg-dark-200"
+						className="absolute flex items-center justify-center p-2 pr-1 rounded-lg cursor-pointer right-1 bottom-2 bg-dark-800"
 						htmlFor="upload-image-inp"
 					>
 						<i className="far fa-edit text-light-200"></i>

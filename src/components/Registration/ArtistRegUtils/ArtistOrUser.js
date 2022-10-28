@@ -17,7 +17,7 @@ export default function ArtistOrUser() {
 					</p>
 				</div>
 			</div>
-			<div className="w-16 h-1 -mb-6 mt-44 rounded-xl bg-primary-200"></div>
+			<div className="w-16 h-1 -mb-6 mt-44 rounded-xl bg-primary-600"></div>
 		</div>
 	);
 }

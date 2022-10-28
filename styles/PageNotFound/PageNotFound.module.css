@@ -44,7 +44,6 @@
 	@apply right-5 bottom-5 -rotate-45;
 	-webkit-clip-path: polygon(40% 0, 66% 0, 100% 100%, 0 100%);
 	clip-path: polygon(40% 0, 66% 0, 100% 100%, 0 100%);
-
 }
 
 .disk {
@@ -75,7 +74,7 @@
 }
 
 .disk .inner-circle {
-	@apply w-[90px] h-[90px] bg-primary-100 rounded-full flex justify-center items-center;
+	@apply w-[90px] h-[90px] bg-primary-500 rounded-full flex justify-center items-center;
 	z-index: 2;
 }
 
@@ -96,7 +95,7 @@
 }
 
 .needle-wrapper .base:after {
-	@apply w-[20px] h-[20px] bg-[#615951] rounded-full; 
+	@apply w-[20px] h-[20px] bg-[#615951] rounded-full;
 	content: "";
 }
 
@@ -116,7 +115,7 @@
 }
 
 .needle-wrapper .lines .horizontal {
-	@apply w-[66px] h-[6px] absolute -left-[46px] -bottom-[13px] -rotate-[20deg]; 
+	@apply w-[66px] h-[6px] absolute -left-[46px] -bottom-[13px] -rotate-[20deg];
 }
 
 @-webkit-keyframes circle {

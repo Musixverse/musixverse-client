@@ -10,7 +10,7 @@ const PriceUpdatedActivity = ({ activity }) => {
 
 	return (
 		<>
-			<div className={"dark:bg-dark-200 " + styles["sales-history__action"]}>
+			<div className={"dark:bg-dark-800 " + styles["sales-history__action"]}>
 				<i className="fa-solid fa-pen-to-square text-lg"></i>
 			</div>
 

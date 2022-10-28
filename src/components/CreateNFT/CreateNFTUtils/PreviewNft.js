@@ -63,7 +63,7 @@ export default function PreviewNft({ trackTitle, coverArtUrl, audioFileUrl, nftP
 							type="button"
 							ref={playBtn}
 							onClick={playTrackHandler}
-							className="h-[40px] w-[40px] bg-primary-100 rounded-full flex items-center justify-center"
+							className="h-[40px] w-[40px] bg-primary-500 rounded-full flex items-center justify-center"
 						>
 							<i className="text-lg fas fa-play text-light-200"></i>
 						</button>

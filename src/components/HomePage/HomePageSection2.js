@@ -9,7 +9,7 @@ import bar3 from "../../../public/assets/homepage/bars_3.jpg";
 export default function Section2New() {
 	return (
 		// Outer div
-		<div className={"dark:bg-dark-200 " + styles["section2-container"]}>
+		<div className={"dark:bg-dark-800 " + styles["section2-container"]}>
 			{/* Left Section */}
 			<div className="w-full lg:w-1/2">
 				<div className="mb-20 font-primary">

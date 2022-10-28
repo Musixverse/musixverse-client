@@ -213,7 +213,7 @@ export default function NewAudioPlayer() {
 							<div className="flex items-center justify-center font-semibold">
 								<Image src={"/assets/matic-logo.svg"} width={16} height={16} alt="matic logo" />
 								<span className="ml-1 sm:text-lg">{nftPrice}</span>
-								<button className="ml-4 px-4 py-1 text-xs bg-primary-100 hover:bg-primary-200 rounded-full">View Track</button>
+								<button className="ml-4 px-4 py-1 text-xs bg-primary-500 hover:bg-primary-600 rounded-full">View Track</button>
 							</div>
 						</div>
 					</div>
@@ -232,8 +232,8 @@ export default function NewAudioPlayer() {
 					<p className={"mr-4 font-primary text-sm min-w-[39px]"}>{audioPlayerProps.currentProgress}</p>
 					{audioPlayerProps.playerIsLoaded ? (
 						<div onClick={setProgress} className="bg-light-300 rounded-md cursor-pointer h-[4px] w-10/12 flex items-center">
-							<div ref={progress} className="w-0 h-full bg-primary-100 rounded-l-md"></div>
-							<div className="bg-primary-100 w-[20px] h-[10px] rounded-xl ml-[-11px]"></div>
+							<div ref={progress} className="w-0 h-full bg-primary-500 rounded-l-md"></div>
+							<div className="bg-primary-500 w-[20px] h-[10px] rounded-xl ml-[-11px]"></div>
 						</div>
 					) : (
 						<ShinyLoader classes={"rounded-md my-[10px] h-[4px] w-10/12"} />
@@ -252,7 +252,7 @@ export default function NewAudioPlayer() {
 					<button
 						type="button"
 						onClick={playTrackHandler}
-						className="h-[40px] w-[40px] bg-primary-100 hover:bg-primary-200 rounded-full flex items-center justify-center"
+						className="h-[40px] w-[40px] bg-primary-500 hover:bg-primary-600 rounded-full flex items-center justify-center"
 					>
 						<i className={"text-lg text-light-200 fas " + (audioPlayerProps.isPlaying ? "fa-pause" : "fa-play")}></i>
 					</button>

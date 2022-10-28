@@ -14,18 +14,18 @@ export default function Faq() {
 	return (
 		<div className="w-full space-y-16">
 			<div className="text-center space-y-4">
-				<span className="font-primary text-5xl font-semibold text-primary-100">FAQs</span>
+				<span className="font-primary text-5xl font-semibold text-primary-500">FAQs</span>
 				<div className="text-sm">
 					<p>Please find answers to frequently asked questions here.</p>
 					<p>
 						Visit our&nbsp;
 						<Link href="/help-center" passHref>
-							<a className="text-primary-200" target="_blank" rel="noopener noreferrer">
+							<a className="text-primary-600" target="_blank" rel="noopener noreferrer">
 								Help Center
 							</a>
 						</Link>
 						&nbsp;for more information, or head over to the&nbsp;
-						<a href={DISCORD_SUPPORT_CHANNEL_INVITE_LINK} className="text-primary-200" target="_blank" rel="noopener noreferrer">
+						<a href={DISCORD_SUPPORT_CHANNEL_INVITE_LINK} className="text-primary-600" target="_blank" rel="noopener noreferrer">
 							Support
 						</a>
 						&nbsp;channel on discord and ask your question there.

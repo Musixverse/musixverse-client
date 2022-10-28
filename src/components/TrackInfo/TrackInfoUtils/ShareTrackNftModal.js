@@ -49,12 +49,12 @@ const ShareTrackNftModal = ({ isOpen, setOpen, artistName, title, setAuthModalOp
 			}
 			title={
 				<div className="text-2xl">
-					Share and earn <span className="text-primary-100 text-4xl">10%</span>
+					Share and earn <span className="text-primary-500 text-4xl">10%</span>
 					<p className="text-xs">of the transaction fee whenever someone</p>
 					<p className="text-xs">
 						purchases this NFT using your link.&nbsp;
 						<Link href="/faq" passHref>
-							<a target="_blank" rel="noopener noreferrer" className="hover:underline hover:text-primary-100">
+							<a target="_blank" rel="noopener noreferrer" className="hover:underline hover:text-primary-500">
 								Learn more
 							</a>
 						</Link>
@@ -69,7 +69,7 @@ const ShareTrackNftModal = ({ isOpen, setOpen, artistName, title, setAuthModalOp
 								{currentPageLink}
 							</span>
 							<button className="w-fit h-fit" onClick={copyToClipboard}>
-								<i className="far fa-clipboard text-primary-100"></i>
+								<i className="far fa-clipboard text-primary-500"></i>
 							</button>
 						</div>
 					) : (
@@ -89,7 +89,7 @@ const ShareTrackNftModal = ({ isOpen, setOpen, artistName, title, setAuthModalOp
 
 					<div className="flex justify-between mt-8">
 						<div onClick={copyToClipboard}>
-							<div className="flex items-center rounded-lg p-3 cursor-pointer whitespace-nowrap bg-light-200 hover:bg-light-300 dark:bg-[#323232] dark:hover:bg-dark-200">
+							<div className="flex items-center rounded-lg p-3 cursor-pointer whitespace-nowrap bg-light-200 hover:bg-light-300 dark:bg-[#323232] dark:hover:bg-dark-800">
 								<i className="fa-solid fa-copy text-2xl"></i>
 							</div>
 						</div>
@@ -98,7 +98,7 @@ const ShareTrackNftModal = ({ isOpen, setOpen, artistName, title, setAuthModalOp
 							<a
 								target="_blank"
 								rel="noopener noreferrer"
-								className="flex items-center rounded-lg p-3 cursor-pointer whitespace-nowrap bg-light-200 hover:bg-light-300 dark:bg-[#323232] dark:hover:bg-dark-200"
+								className="flex items-center rounded-lg p-3 cursor-pointer whitespace-nowrap bg-light-200 hover:bg-light-300 dark:bg-[#323232] dark:hover:bg-dark-800"
 							>
 								<i className="fa-brands fa-twitter text-2xl"></i>
 							</a>
@@ -111,7 +111,7 @@ const ShareTrackNftModal = ({ isOpen, setOpen, artistName, title, setAuthModalOp
 							<a
 								target="_blank"
 								rel="noopener noreferrer"
-								className="flex items-center rounded-lg p-3 cursor-pointer whitespace-nowrap bg-light-200 hover:bg-light-300 dark:bg-[#323232] dark:hover:bg-dark-200"
+								className="flex items-center rounded-lg p-3 cursor-pointer whitespace-nowrap bg-light-200 hover:bg-light-300 dark:bg-[#323232] dark:hover:bg-dark-800"
 							>
 								<i className="fa-brands fa-facebook text-2xl"></i>
 							</a>
@@ -121,7 +121,7 @@ const ShareTrackNftModal = ({ isOpen, setOpen, artistName, title, setAuthModalOp
 							<a
 								target="_blank"
 								rel="noopener noreferrer"
-								className="flex items-center rounded-lg p-3 cursor-pointer whitespace-nowrap bg-light-200 hover:bg-light-300 dark:bg-[#323232] dark:hover:bg-dark-200"
+								className="flex items-center rounded-lg p-3 cursor-pointer whitespace-nowrap bg-light-200 hover:bg-light-300 dark:bg-[#323232] dark:hover:bg-dark-800"
 							>
 								<i className="fa-brands fa-whatsapp text-2xl"></i>
 							</a>
@@ -131,7 +131,7 @@ const ShareTrackNftModal = ({ isOpen, setOpen, artistName, title, setAuthModalOp
 							<a
 								target="_blank"
 								rel="noopener noreferrer"
-								className="flex items-center rounded-lg p-3 cursor-pointer whitespace-nowrap bg-light-200 hover:bg-light-300 dark:bg-[#323232] dark:hover:bg-dark-200"
+								className="flex items-center rounded-lg p-3 cursor-pointer whitespace-nowrap bg-light-200 hover:bg-light-300 dark:bg-[#323232] dark:hover:bg-dark-800"
 							>
 								<i className="fa-brands fa-telegram text-2xl"></i>
 							</a>
@@ -141,7 +141,7 @@ const ShareTrackNftModal = ({ isOpen, setOpen, artistName, title, setAuthModalOp
 							<a
 								target="_blank"
 								rel="noopener noreferrer"
-								className="flex items-center rounded-lg p-3 cursor-pointer whitespace-nowrap bg-light-200 hover:bg-light-300 dark:bg-[#323232] dark:hover:bg-dark-200"
+								className="flex items-center rounded-lg p-3 cursor-pointer whitespace-nowrap bg-light-200 hover:bg-light-300 dark:bg-[#323232] dark:hover:bg-dark-800"
 							>
 								<i className="fa-brands fa-linkedin text-2xl"></i>
 							</a>

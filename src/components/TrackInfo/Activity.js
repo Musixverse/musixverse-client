@@ -10,7 +10,7 @@ export default function Activity({ artist, activity }) {
 	const { Moralis } = useMoralis();
 
 	return (
-		<div className={"dark:bg-dark-100 " + styles["sales-history"]}>
+		<div className={"dark:bg-dark-600 " + styles["sales-history"]}>
 			<h1 className={styles["sales-history__heading"]}>Activity</h1>
 			<div className="max-h-32 overflow-y-auto">
 				{activity.tokenActivity &&
@@ -18,7 +18,7 @@ export default function Activity({ artist, activity }) {
 						return <ActivityDetails key={index} activity={_activity} />;
 					})}
 				<div className="flex">
-					<div className={"dark:bg-dark-200 " + styles["sales-history__action"]}>
+					<div className={"dark:bg-dark-800 " + styles["sales-history__action"]}>
 						<i className="fa-solid fa-compact-disc text-xl"></i>
 					</div>
 

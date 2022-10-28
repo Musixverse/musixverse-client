@@ -60,8 +60,8 @@ export default function FollowersModal({ isOpen, setOpen, username, isBand }) {
 			isOpen={isOpen}
 			image={
 				<div className="mx-auto flex items-center relative justify-center h-24 w-24 text-6xl">
-					<label className="flex justify-center items-center w-14 h-14 border-2 rounded-full border-primary-200">
-						<i className="fa-solid fa-users text-2xl text-primary-200"></i>
+					<label className="flex justify-center items-center w-14 h-14 border-2 rounded-full border-primary-600">
+						<i className="fa-solid fa-users text-2xl text-primary-600"></i>
 					</label>
 				</div>
 			}
@@ -71,7 +71,7 @@ export default function FollowersModal({ isOpen, setOpen, username, isBand }) {
 					{followers && followers.length > 0 ? (
 						followers.map((follower) => {
 							return (
-								<div key={follower.username} className="flex p-2 rounded hover:bg-light-200 dark:hover:bg-dark-200">
+								<div key={follower.username} className="flex p-2 rounded hover:bg-light-200 dark:hover:bg-dark-800">
 									<Link href={`/profile/${follower.username}`} passHref>
 										<a target="_blank" rel="noopener noreferrer" className="w-full flex text-start cursor-pointer">
 											<Image src={follower.avatar} className="rounded" height={50} width={50} alt="NFT Artwork" />
@@ -88,7 +88,7 @@ export default function FollowersModal({ isOpen, setOpen, username, isBand }) {
 										<div className="self-center pl-2">
 											<div
 												onClick={() => removeFollower(follower.username)}
-												className="py-1 px-3 flex justify-center items-center rounded transition-all duration-200 cursor-pointer bg-zinc-500/20 hover:bg-error-100/20"
+												className="py-1 px-3 flex justify-center items-center rounded transition-all duration-200 cursor-pointer bg-zinc-500/20 hover:bg-error-600/60"
 											>
 												Remove
 											</div>
@@ -105,7 +105,9 @@ export default function FollowersModal({ isOpen, setOpen, username, isBand }) {
 			onClose={() => {
 				setOpen(false);
 				{
-					!isBand ? router.push(`/profile/${username}`) : router.push(`/profile/band/${username}`);
+					!isBand
+						? router.push(`/profile/${username}`, undefined, { shallow: true })
+						: router.push(`/profile/band/${username}`, undefined, { shallow: true });
 				}
 			}}
 		></Modal>

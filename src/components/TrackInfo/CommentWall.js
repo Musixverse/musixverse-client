@@ -17,7 +17,7 @@ const CommentWall = ({ comment }) => {
 				onClick={() => {
 					setCommentWallModalOpen(true);
 				}}
-				className="relative w-full h-full flex flex-col rounded-lg bg-light-200 dark:bg-dark-100 shadow hover:shadow-primary-100 overflow-hidden transition-all duration-700 cursor-pointer"
+				className="relative w-full h-full flex flex-col rounded-lg bg-light-200 dark:bg-dark-600 shadow hover:shadow-primary-500 overflow-hidden transition-all duration-700 cursor-pointer"
 			>
 				<div className="relative flex flex-col w-full h-full px-4 py-4">
 					<Link href={`/profile/${comment.user.username}`} className="cursor-pointer">

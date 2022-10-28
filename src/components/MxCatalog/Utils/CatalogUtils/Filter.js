@@ -33,7 +33,7 @@ export default function Filter({ appliedFilter, setAppliedFilter, currentSelecti
 						onClick={() => {
 							setCurrentFilterType(1);
 						}}
-						className={(currentFilterType === 1 ? "text-primary-100 " : "") + "flex flex-col items-center justify-center cursor-pointer"}
+						className={(currentFilterType === 1 ? "text-primary-500 " : "") + "flex flex-col items-center justify-center cursor-pointer"}
 					>
 						<span className="material-symbols-outlined">queue_music</span>
 						<p className="w-full my-2">Track&nbsp;Traits</p>
@@ -42,21 +42,21 @@ export default function Filter({ appliedFilter, setAppliedFilter, currentSelecti
 						onClick={() => {
 							setCurrentFilterType(2);
 						}}
-						className={(currentFilterType === 2 ? "text-primary-100 " : "") + "flex flex-col items-center justify-center cursor-pointer"}
+						className={(currentFilterType === 2 ? "text-primary-500 " : "") + "flex flex-col items-center justify-center cursor-pointer"}
 					>
 						<span className="mt-2 material-symbols-outlined">library_music</span>
 						<p className="my-2">NFT Traits</p>
 					</div>
 					<div
 						onClick={() => setCurrentFilterType(3)}
-						className={(currentFilterType === 3 ? "text-primary-100 " : "") + "flex flex-col items-center justify-center cursor-pointer"}
+						className={(currentFilterType === 3 ? "text-primary-500 " : "") + "flex flex-col items-center justify-center cursor-pointer"}
 					>
 						<span className="mt-2 material-symbols-outlined">dashboard_customize</span>
 						<p className="my-2">NFT State</p>
 					</div>
 					<div
 						onClick={() => setCurrentFilterType(4)}
-						className={(currentFilterType === 4 ? "text-primary-100 " : "") + "flex flex-col items-center justify-center cursor-pointer"}
+						className={(currentFilterType === 4 ? "text-primary-500 " : "") + "flex flex-col items-center justify-center cursor-pointer"}
 					>
 						<span className="mt-2 material-symbols-outlined">sort</span>
 						<p className="my-2">Sort By</p>

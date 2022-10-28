@@ -30,8 +30,8 @@ export default function FavouritesModal({ isOpen, setOpen, username, favouriteTo
 			isOpen={isOpen}
 			image={
 				<div className="mx-auto flex items-center relative justify-center h-24 w-24 text-6xl">
-					<label className="flex justify-center items-center w-14 h-14 border-2 rounded-full border-primary-200">
-						<i className="fa-solid fa-heart text-2xl text-primary-200"></i>
+					<label className="flex justify-center items-center w-14 h-14 border-2 rounded-full border-primary-600">
+						<i className="fa-solid fa-heart text-2xl text-primary-600"></i>
 					</label>
 				</div>
 			}
@@ -48,7 +48,7 @@ export default function FavouritesModal({ isOpen, setOpen, username, favouriteTo
 							});
 
 							return (
-								<div key={token.tokenId} className="flex group p-2 rounded hover:bg-light-200 dark:hover:bg-dark-200">
+								<div key={token.tokenId} className="flex group p-2 rounded hover:bg-light-200 dark:hover:bg-dark-800">
 									<Link href={`/track/polygon/${token.tokenId}`} passHref>
 										<a className="w-full flex text-start cursor-pointer group">
 											<Image
@@ -67,25 +67,25 @@ export default function FavouritesModal({ isOpen, setOpen, username, favouriteTo
 												</div>
 												<div className="flex items-end">
 													{!isBand ? (
-														<span className="hidden group-hover:block text-xs mr-2 text-primary-100">{token.genre}</span>
+														<span className="hidden group-hover:block text-xs mr-2 text-primary-500">{token.genre}</span>
 													) : (
 														<>
 															<div className="sm:hidden block w-[80px] md:w-[100px] relative overflow-x-hidden mr-2">
 																<div className="animate-marquee whitespace-nowrap">
-																	<span className="text-xs mr-4 text-primary-100">
-																		<i className="fa-solid fa-heart text-sm mr-1 text-primary-200"></i>
+																	<span className="text-xs mr-4 text-primary-500">
+																		<i className="fa-solid fa-heart text-sm mr-1 text-primary-600"></i>
 																		{token.bandMember.name}
 																	</span>
 																</div>
 																<div className="absolute top-0 animate-marquee2 whitespace-nowrap">
-																	<span className="text-xs mr-4 text-primary-100">
-																		<i className="fa-solid fa-heart text-sm mr-1 text-primary-200"></i>
+																	<span className="text-xs mr-4 text-primary-500">
+																		<i className="fa-solid fa-heart text-sm mr-1 text-primary-600"></i>
 																		{token.bandMember.name}
 																	</span>
 																</div>
 															</div>
-															<span className="hidden sm:block text-xs mr-4 text-primary-100">
-																<i className="fa-solid fa-heart text-sm mr-1 text-primary-200"></i>
+															<span className="hidden sm:block text-xs mr-4 text-primary-500">
+																<i className="fa-solid fa-heart text-sm mr-1 text-primary-600"></i>
 																{token.bandMember.name}
 															</span>
 														</>
@@ -109,7 +109,7 @@ export default function FavouritesModal({ isOpen, setOpen, username, favouriteTo
 										<div className="hidden group-hover:block self-center pl-2">
 											<div
 												onClick={() => removeFromFavourites(token.tokenId)}
-												className="w-8 h-8 flex justify-center items-center rounded-lg transition-all duration-200 cursor-pointer hover:bg-error-100/20"
+												className="w-8 h-8 flex justify-center items-center rounded-lg transition-all duration-200 cursor-pointer hover:bg-error-600/60"
 											>
 												<i className="fa-solid fa-xmark"></i>
 											</div>
@@ -126,7 +126,9 @@ export default function FavouritesModal({ isOpen, setOpen, username, favouriteTo
 			onClose={() => {
 				setOpen(false);
 				{
-					!isBand ? router.push(`/profile/${username}`) : router.push(`/profile/band/${username}`);
+					!isBand
+						? router.push(`/profile/${username}`, undefined, { shallow: true })
+						: router.push(`/profile/band/${username}`, undefined, { shallow: true });
 				}
 			}}
 		></Modal>

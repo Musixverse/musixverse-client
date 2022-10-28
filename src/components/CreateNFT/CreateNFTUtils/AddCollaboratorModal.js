@@ -157,7 +157,7 @@ const AddCollaboratorModal = ({ isOpen, setOpen, nftDraftMetadata, collaboratorL
 													</>
 												) : (
 													<input
-														className="dark:text-light-100 dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-100 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-100"
+														className="dark:text-light-100 dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-500 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-500"
 														id="username"
 														name="username"
 														type="text"
@@ -180,7 +180,7 @@ const AddCollaboratorModal = ({ isOpen, setOpen, nftDraftMetadata, collaboratorL
 																	{filteredUsers.length === 1 ? (
 																		<button
 																			type="button"
-																			className="flex items-center justify-start px-3 py-2 rounded bg-zinc-100 dark:bg-dark-100 hover:text-light-100 dark:text-light-100 hover:bg-primary-100 dark:hover:bg-primary-100 text-start"
+																			className="flex items-center justify-start px-3 py-2 rounded bg-zinc-100 dark:bg-dark-600 hover:text-light-100 dark:text-light-100 hover:bg-primary-500 dark:hover:bg-primary-500 text-start"
 																			onClick={() => {
 																				setCollaboratorInfo(user, index);
 																			}}
@@ -204,7 +204,7 @@ const AddCollaboratorModal = ({ isOpen, setOpen, nftDraftMetadata, collaboratorL
 																	) : idx === 0 ? (
 																		<button
 																			type="button"
-																			className="flex items-center justify-start px-3 py-2 rounded-t bg-zinc-100 dark:bg-dark-100 hover:text-light-100 dark:text-light-100 hover:bg-primary-100 dark:hover:bg-primary-100 text-start"
+																			className="flex items-center justify-start px-3 py-2 rounded-t bg-zinc-100 dark:bg-dark-600 hover:text-light-100 dark:text-light-100 hover:bg-primary-500 dark:hover:bg-primary-500 text-start"
 																			onClick={() => {
 																				setCollaboratorInfo(user, index);
 																			}}
@@ -228,7 +228,7 @@ const AddCollaboratorModal = ({ isOpen, setOpen, nftDraftMetadata, collaboratorL
 																	) : filteredUsers.length === idx + 1 ? (
 																		<button
 																			type="button"
-																			className="flex items-center justify-start px-3 py-2 rounded-b bg-zinc-100 dark:bg-dark-100 hover:text-light-100 dark:text-light-100 hover:bg-primary-100 dark:hover:bg-primary-100 text-start"
+																			className="flex items-center justify-start px-3 py-2 rounded-b bg-zinc-100 dark:bg-dark-600 hover:text-light-100 dark:text-light-100 hover:bg-primary-500 dark:hover:bg-primary-500 text-start"
 																			onClick={() => {
 																				setCollaboratorInfo(user, index);
 																			}}
@@ -252,7 +252,7 @@ const AddCollaboratorModal = ({ isOpen, setOpen, nftDraftMetadata, collaboratorL
 																	) : (
 																		<button
 																			type="button"
-																			className="flex items-center justify-start px-3 py-2 bg-zinc-100 dark:bg-dark-100 hover:text-light-100 dark:text-light-100 hover:bg-primary-100 dark:hover:bg-primary-100 text-start"
+																			className="flex items-center justify-start px-3 py-2 bg-zinc-100 dark:bg-dark-600 hover:text-light-100 dark:text-light-100 hover:bg-primary-500 dark:hover:bg-primary-500 text-start"
 																			onClick={() => {
 																				setCollaboratorInfo(user, index);
 																			}}
@@ -286,11 +286,11 @@ const AddCollaboratorModal = ({ isOpen, setOpen, nftDraftMetadata, collaboratorL
 																		setUsernameEntered("");
 																		setSearchedUsername("");
 																	}}
-																	className="justify-start px-6 py-3 rounded bg-zinc-100 hover:bg-gray-200 dark:bg-dark-100 dark:text-light-100 text-start"
+																	className="justify-start px-6 py-3 rounded bg-zinc-100 hover:bg-gray-200 dark:bg-dark-600 dark:text-light-100 text-start"
 																>
 																	<span className="text-xs">
 																		No results found.&nbsp;&nbsp;
-																		<a className="cursor-pointer text-primary-200 hover:underline">
+																		<a className="cursor-pointer text-primary-600 hover:underline">
 																			Send an Invite <i className="fa-solid fa-arrow-right"></i>
 																		</a>
 																	</span>
@@ -330,13 +330,13 @@ const AddCollaboratorModal = ({ isOpen, setOpen, nftDraftMetadata, collaboratorL
 								<button
 									type="button"
 									onClick={() => setOpen(false)}
-									className="flex items-center mt-6 -mb-6 px-6 py-2 text-sm font-primary font-bold rounded-md bg-light-200 hover:bg-light-300 dark:bg-dark-200 dark:hover:bg-dark-200"
+									className="flex items-center mt-6 -mb-6 px-6 py-2 text-sm font-primary font-bold rounded-md bg-light-200 hover:bg-light-300 dark:bg-dark-800 dark:hover:bg-dark-800"
 								>
 									Cancel
 								</button>
 								<button
 									type="submit"
-									className="flex items-center mt-6 -mb-6 px-6 py-2 text-sm font-primary font-bold rounded-md bg-primary-100 hover:bg-primary-200 text-light-100"
+									className="flex items-center mt-6 -mb-6 px-6 py-2 text-sm font-primary font-bold rounded-md bg-primary-500 hover:bg-primary-600 text-light-100"
 								>
 									Add Collaborator
 									<span className="ml-6 text-lg">

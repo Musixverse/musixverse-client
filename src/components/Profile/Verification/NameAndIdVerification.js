@@ -62,7 +62,7 @@ const NameAndIdVerification = ({
 				The name displayed above is associated with your account on Musixverse. <br />
 				Visit&nbsp;
 				<Link href="/settings/profile-settings" passHref>
-					<a className="text-primary-200 hover:text-primary-300 hover:underline">Profile Settings</a>
+					<a className="text-primary-600 hover:text-primary-700 hover:underline">Profile Settings</a>
 				</Link>
 				&nbsp;if you want to change this.
 			</p>
@@ -114,7 +114,7 @@ const NameAndIdVerification = ({
 					<p className="text-sm font-semibold font-secondary">Enter your real name</p>
 					<div className="flex mt-1">
 						<input
-							className="mr-4 dark:text-light-100 dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-100 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-100"
+							className="mr-4 dark:text-light-100 dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-500 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-500"
 							id="artistRealName"
 							name="artistRealName"
 							type="text"
@@ -167,7 +167,7 @@ const NameAndIdVerification = ({
 				<button
 					type="submit"
 					connectionStatus={false}
-					className="flex w-fit items-center px-10 py-3 text-sm font-primary font-bold rounded-md bg-primary-200 hover:bg-primary-300 text-light-100"
+					className="flex w-fit items-center px-10 py-3 text-sm font-primary font-bold rounded-md bg-primary-600 hover:bg-primary-700 text-light-100"
 				>
 					Continue
 				</button>

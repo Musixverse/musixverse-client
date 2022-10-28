@@ -74,7 +74,7 @@ export default function PreviewDraft({ draft, setDeleteModalOpen, setDraftToDele
 								type="button"
 								ref={playBtn}
 								onClick={playTrackHandler}
-								className="h-[40px] w-[40px] bg-primary-100 rounded-full flex items-center justify-center"
+								className="h-[40px] w-[40px] bg-primary-500 rounded-full flex items-center justify-center"
 							>
 								<i className="text-lg fas fa-play text-light-200"></i>
 							</button>
@@ -84,7 +84,7 @@ export default function PreviewDraft({ draft, setDeleteModalOpen, setDraftToDele
 				</div>
 
 				{/* Content provided */}
-				<div className="dark:bg-dark-200 bg-light-100 w-[222px] h-[128px] p-4 rounded-b-xl flex flex-col justify-between">
+				<div className="dark:bg-dark-800 bg-light-100 w-[222px] h-[128px] p-4 rounded-b-xl flex flex-col justify-between">
 					<div className="flex justify-between w-full">
 						<div className="flex flex-col">
 							<p className="font-secondary text-[#1D1D1D] text-xs text-start dark:text-light-300">
@@ -128,7 +128,7 @@ export default function PreviewDraft({ draft, setDeleteModalOpen, setDraftToDele
 									setDraftToDelete(draft);
 								}}
 							>
-								<div className="hidden group-hover:block justify-center items-center text-base hover:text-error-200">
+								<div className="hidden group-hover:block justify-center items-center text-base hover:text-error-600">
 									<i className="fa-solid fa-trash"></i>
 								</div>
 							</button>

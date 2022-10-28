@@ -41,18 +41,18 @@ const confirm = ({ band }) => {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 
-			<div className="w-full flex flex-col items-center justify-center bg-light-200 dark:bg-dark-200">
+			<div className="w-full flex flex-col items-center justify-center bg-light-200 dark:bg-dark-800">
 				<div className="w-full max-w-[1920px] flex flex-col items-center justify-center pt-36 pb-32 lg:pt-36 px-6 md:px-8 lg:px-16 xl:px-20 2xl:px-36">
-					<div className="w-full items-center justify-center rounded-2xl backdrop-blur-xl bg-light-100 dark:bg-dark-100 min-h-full sm:p-14 py-14 px-6 text-center">
+					<div className="w-full items-center justify-center rounded-2xl backdrop-blur-xl bg-light-100 dark:bg-dark-600 min-h-full sm:p-14 py-14 px-6 text-center">
 						<p className="text-5xl font-tertiary">Woohoo!</p>
 						<p className="text-4xl font-tertiary mt-2">
-							You&apos;ve confirmed that you are a member of <span className="text-primary-100">{band.name}</span>
+							You&apos;ve confirmed that you are a member of <span className="text-primary-500">{band.name}</span>
 						</p>
 
 						<div className="flex items-center justify-center mt-8">
 							<Image src={band.avatar} width="200" height="200" alt="Band avatar" className="rounded-lg" />
 						</div>
-						<p className="text-primary-100 mt-2">@{band.username}</p>
+						<p className="text-primary-500 mt-2">@{band.username}</p>
 
 						{band.bio && <p className="w-full sm:w-2/3 mx-auto text-center mt-4">{band.bio}</p>}
 
@@ -60,7 +60,7 @@ const confirm = ({ band }) => {
 							{band.bandMembers.map((member) => {
 								return (
 									<div
-										className="w-full sm:w-1/3 flex p-2 mt-2 rounded items-center justify-center hover:bg-light-200 dark:hover:bg-dark-200"
+										className="w-full sm:w-1/3 flex p-2 mt-2 rounded items-center justify-center hover:bg-light-200 dark:hover:bg-dark-800"
 										key={member.userId}
 									>
 										<Link href={`/profile/${member.username}`} passHref>
@@ -69,7 +69,7 @@ const confirm = ({ band }) => {
 													{member.hasAcceptedBandInvite ? (
 														<Tooltip
 															labelText={
-																<span className="text-primary-200 text-xl">
+																<span className="text-primary-600 text-xl">
 																	<i className="fa-solid fa-circle-check"></i>
 																</span>
 															}
@@ -79,7 +79,7 @@ const confirm = ({ band }) => {
 													) : (
 														<Tooltip
 															labelText={
-																<span className="text-error-200 text-xl">
+																<span className="text-error-600 text-xl">
 																	<i className="fa-solid fa-circle-xmark"></i>
 																</span>
 															}

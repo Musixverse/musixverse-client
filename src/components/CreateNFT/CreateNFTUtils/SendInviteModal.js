@@ -72,7 +72,7 @@ const SendInviteModal = ({ isOpen, setOpen, invitedArtistEmail, onEmailChange, n
 					<form onSubmit={onFormSubmit}>
 						<div>Enter your friend&apos;s/collaborator&apos;s email to send an invite</div>
 						<input
-							className="mt-2 dark:text-light-100 dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-100 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-100"
+							className="mt-2 dark:text-light-100 dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-500 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-500"
 							type="email"
 							placeholder="Email"
 							autoComplete="off"
@@ -83,7 +83,7 @@ const SendInviteModal = ({ isOpen, setOpen, invitedArtistEmail, onEmailChange, n
 						<div className="flex justify-end">
 							<button
 								type="submit"
-								className="flex items-center mt-10 -mb-6 px-6 py-3 text-sm font-primary font-bold rounded-md bg-primary-100 hover:bg-primary-200 text-light-100"
+								className="flex items-center mt-10 -mb-6 px-6 py-3 text-sm font-primary font-bold rounded-md bg-primary-500 hover:bg-primary-600 text-light-100"
 							>
 								Send Invite
 								<span className="ml-3 text-lg">

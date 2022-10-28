@@ -71,7 +71,7 @@ const BandMembers = ({ bandId, username, bandMembers, updatedBandMembersList }) 
 	};
 
 	return (
-		<div className="w-full mt-10 p-8 xl:p-10 bg-light-300 dark:bg-dark-100 rounded-xl">
+		<div className="w-full mt-10 p-8 xl:p-10 bg-light-300 dark:bg-dark-600 rounded-xl">
 			<p className="font-tertiary text-4xl">Band Members</p>
 
 			<div className="flex flex-col items-start justify-start mt-8">
@@ -79,14 +79,14 @@ const BandMembers = ({ bandId, username, bandMembers, updatedBandMembersList }) 
 					bandMembersList.map((member) => {
 						return (
 							<div key={member._id || member.userId} className="w-full flex items-center justify-start mt-2 gap-6">
-								<div className="w-full sm:w-1/2 flex px-6 py-2 rounded-full items-center justify-center hover:bg-light-200 dark:hover:bg-dark-200">
+								<div className="w-full sm:w-1/2 flex px-6 py-2 rounded-full items-center justify-center hover:bg-light-200 dark:hover:bg-dark-800">
 									<Link href={`/profile/${member.username}`} passHref>
 										<a target="_blank" rel="noopener noreferrer" className="w-full flex text-start cursor-pointer">
 											<div className="flex flex-col self-center mr-2">
 												{member.hasAcceptedBandInvite ? (
 													<Tooltip
 														labelText={
-															<span className="text-primary-200 text-xl">
+															<span className="text-primary-600 text-xl">
 																<i className="fa-solid fa-circle-check"></i>
 															</span>
 														}
@@ -96,7 +96,7 @@ const BandMembers = ({ bandId, username, bandMembers, updatedBandMembersList }) 
 												) : (
 													<Tooltip
 														labelText={
-															<span className="text-error-200 text-xl">
+															<span className="text-error-600 text-xl">
 																<i className="fa-solid fa-circle-xmark"></i>
 															</span>
 														}
@@ -131,7 +131,7 @@ const BandMembers = ({ bandId, username, bandMembers, updatedBandMembersList }) 
 										setBandMemberToEdit(member);
 										setEditBandMemberModalOpen(true);
 									}}
-									className="text-sm bg-primary-100/30 hover:bg-primary-100/60 cursor-pointer px-6 py-1 rounded-full"
+									className="text-sm bg-primary-500/30 hover:bg-primary-500/60 cursor-pointer px-6 py-1 rounded-full"
 								>
 									Edit
 								</span>
@@ -140,7 +140,7 @@ const BandMembers = ({ bandId, username, bandMembers, updatedBandMembersList }) 
 										setBandMemberToEdit(member);
 										setRemoveBandMemberModalOpen(true);
 									}}
-									className="text-sm bg-error-100/30 hover:bg-error-100/60 cursor-pointer px-6 py-1 rounded-full"
+									className="text-sm bg-error-600/30 hover:bg-error-600/60 cursor-pointer px-6 py-1 rounded-full"
 								>
 									Remove
 								</span>
@@ -150,7 +150,7 @@ const BandMembers = ({ bandId, username, bandMembers, updatedBandMembersList }) 
 										onClick={() => {
 											sendBandInvitationEmailToArtistWhoHasNotAcceptedInvitation(member);
 										}}
-										className="text-sm bg-primary-100/30 hover:bg-primary-100/60 cursor-pointer px-6 py-1 rounded-full"
+										className="text-sm bg-primary-500/30 hover:bg-primary-500/60 cursor-pointer px-6 py-1 rounded-full"
 									>
 										Send Invite Email
 									</span>
@@ -164,7 +164,7 @@ const BandMembers = ({ bandId, username, bandMembers, updatedBandMembersList }) 
 				<div className="flex items-center justify-start mt-4">
 					<button
 						type="button"
-						className="rounded-full flex justify-center items-center w-8 h-8 bg-primary-100 hover:bg-primary-200 text-white"
+						className="rounded-full flex justify-center items-center w-8 h-8 bg-primary-500 hover:bg-primary-600 text-white"
 						onClick={() => {
 							setAddBandMemberModalOpen(true);
 						}}
@@ -177,7 +177,7 @@ const BandMembers = ({ bandId, username, bandMembers, updatedBandMembersList }) 
 
 			<p className="text-xs text-[#777777] font-normal mt-6">
 				Can&apos;t find your fellow band member here? Invite them to Musixverse-&nbsp;
-				<a onClick={() => setInvitationModalOpen(true)} className="cursor-pointer text-primary-200 hover:underline">
+				<a onClick={() => setInvitationModalOpen(true)} className="cursor-pointer text-primary-600 hover:underline">
 					Send an invite
 				</a>
 			</p>

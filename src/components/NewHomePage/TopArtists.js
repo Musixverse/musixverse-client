@@ -13,7 +13,7 @@ export default function TopArtists() {
 	return (
 		<div className="relative mt-20">
 			<h1 className="font-primary font-semibold text-3xl text-center">
-				Top Artists on M<span className="text-primary-100">x</span> Catalog
+				Top Artists on M<span className="text-primary-500">x</span> Catalog
 			</h1>
 			<div className="w-full mt-10 relative rounded-2xl overflow-hidden">
 				<div className="text-sm z-10 absolute right-6 lg:right-16 text-white mt-10">

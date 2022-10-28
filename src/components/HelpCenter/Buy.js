@@ -10,9 +10,9 @@ export default function GettingStarted() {
 				{/* FAQ Item Heading */}
 				<button
 					className={
-						"relative flex items-center w-full px-5 py-4 text-sm sm:text-base text-left  transition border-b border-primary-100 rounded-none bg-transparent focus:outline-none dark:hover:text-primary-200 hover:text-primary-200 " +
+						"relative flex items-center w-full px-5 py-4 text-sm sm:text-base text-left  transition border-b border-primary-500 rounded-none bg-transparent focus:outline-none dark:hover:text-primary-600 hover:text-primary-600 " +
 						(idx === 0 ? "" : "collapsed") +
-						(currentlyExpanded === idx ? " text-primary-200" : "text-gray-800 dark:text-light-200")
+						(currentlyExpanded === idx ? " text-primary-600" : "text-gray-800 dark:text-light-200")
 					}
 					type="button"
 					onClick={() => {
@@ -24,8 +24,8 @@ export default function GettingStarted() {
 					aria-expanded="true"
 					aria-controls={elem.content_id}
 				>
-					<span className={"mr-3 material-symbols-outlined text-primary-200 " + (currentlyExpanded === idx ? "hidden" : "")}>add_circle</span>
-					<span className={"mr-3 text-primary-200 material-symbols-outlined " + (currentlyExpanded === idx ? "" : "hidden")}>do_not_disturb_on</span>
+					<span className={"mr-3 material-symbols-outlined text-primary-600 " + (currentlyExpanded === idx ? "hidden" : "")}>add_circle</span>
+					<span className={"mr-3 text-primary-600 material-symbols-outlined " + (currentlyExpanded === idx ? "" : "hidden")}>do_not_disturb_on</span>
 					{elem.heading}
 				</button>
 				{/* FAQ Item Content */}
@@ -37,9 +37,9 @@ export default function GettingStarted() {
 	});
 
 	return (
-		<div className="self-start w-full p-12 pb-16 dark:bg-dark-100 bg-light-100 rounded-xl">
+		<div className="self-start w-full p-12 pb-16 dark:bg-dark-600 bg-light-100 rounded-xl">
 			{/* FAQ Category Heading */}
-			<h3 className="mb-5 text-lg text-center font-medium sm:text-3xl text-primary-200">Buy NFT</h3>
+			<h3 className="mb-5 text-lg text-center font-medium sm:text-3xl text-primary-600">Buy NFT</h3>
 			<div className="w-full rounded-none accordion" id="accordionExample">
 				{buyNFTAccordion}
 			</div>

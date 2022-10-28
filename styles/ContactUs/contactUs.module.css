@@ -7,7 +7,7 @@
 }
 
 .contact_us_heading {
-	@apply font-primary text-5xl font-semibold text-primary-100;
+	@apply font-primary text-5xl font-semibold text-primary-500;
 }
 
 .contact_notice {
@@ -27,7 +27,7 @@
 }
 
 .inputBox input {
-	@apply w-full p-2 text-sm border-[2px] focus:border-primary-100 rounded-md outline-none text-left;
+	@apply w-full p-2 text-sm border-[2px] focus:border-primary-500 rounded-md outline-none text-left;
 }
 
 .inputBox label {
@@ -35,12 +35,12 @@
 }
 
 .textarea_contact {
-	@apply resize-none w-full p-2 border-[2px] focus:border-primary-100 rounded-lg focus:outline-none focus:shadow-none focus:text-primary-100;
+	@apply resize-none w-full p-2 border-[2px] focus:border-primary-500 rounded-lg focus:outline-none focus:shadow-none focus:text-primary-500;
 }
 
 /* CSS for send message button */
 .send_message_btn {
-	@apply w-full font-primary text-sm font-medium shadow-sm px-3 py-3 mt-4 cursor-pointer text-center block border-0 outline-none rounded-md bg-primary-100;
+	@apply w-full font-primary text-sm font-medium shadow-sm px-3 py-3 mt-4 cursor-pointer text-center block border-0 outline-none rounded-md bg-primary-500;
 }
 
 .send_message_btn span {
@@ -62,5 +62,5 @@
 }
 
 .send_message_btn {
-	@apply focus:text-[#202020] focus:bg-primary-100;
+	@apply focus:text-[#202020] focus:bg-primary-500;
 }

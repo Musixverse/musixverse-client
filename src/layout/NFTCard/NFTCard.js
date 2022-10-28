@@ -119,7 +119,7 @@ export default function NFTCard({
 										className={"group-hover:scale-110 group-hover:duration-500 duration-500 " + styles["nft-image"]}
 									/>
 									{favouriteOfBandMember && (
-										<div className="group-hover:bg-dark-100/10 backdrop-blur duration-500 text-light-100 w-full h-full opacity-0 group-hover:opacity-100 flex items-center justify-center absolute">
+										<div className="group-hover:bg-dark-600/10 backdrop-blur duration-500 text-light-100 w-full h-full opacity-0 group-hover:opacity-100 flex items-center justify-center absolute">
 											<div className="relative flex flex-col items-center justify-center">
 												<i className="fa-solid fa-heart text-5xl"></i>
 												<p className="mt-2">{favouriteOfBandMember}</p>
@@ -127,7 +127,7 @@ export default function NFTCard({
 										</div>
 									)}
 									{tokenInCollectionOwnedByBandMember && (
-										<div className="group-hover:bg-dark-100/10 backdrop-blur duration-500 text-light-100 w-full h-full opacity-0 group-hover:opacity-100 flex items-center justify-center absolute">
+										<div className="group-hover:bg-dark-600/10 backdrop-blur duration-500 text-light-100 w-full h-full opacity-0 group-hover:opacity-100 flex items-center justify-center absolute">
 											<div className="relative flex flex-col items-center justify-center">
 												<i className="fa-solid fa-record-vinyl text-5xl"></i>
 												<p className="mt-2">{tokenInCollectionOwnedByBandMember}</p>
@@ -144,7 +144,7 @@ export default function NFTCard({
 					{showNumberOfCopies && numberOfCopies > 1 ? (
 						<button
 							onClick={() => setShowNftCopiesModal(true)}
-							className="absolute flex items-center px-3 py-[0.4rem] font-bold top-4 rounded-lg left-4 hover:bg-light-200 bg-light-100 text-dark-100 dark:bg-dark-100 dark:text-light-100"
+							className="absolute flex items-center px-3 py-[0.4rem] font-bold top-4 rounded-lg left-4 hover:bg-light-200 bg-light-100 text-dark-600 dark:bg-dark-600 dark:text-light-100"
 						>
 							<Image src={multipleNft} height={18} width={18} alt="multiple nft cards" className="dark:invert" />
 							<span className="ml-1 text-sm">x{numberOfCopies}</span>
@@ -153,7 +153,7 @@ export default function NFTCard({
 					<button
 						type="button"
 						onClick={playTrackHandler}
-						className="opacity-0 group-hover:opacity-100 duration-500 h-[40px] w-[40px] absolute bottom-4 right-4 bg-primary-100 hover:bg-primary-200 rounded-full items-center justify-center"
+						className="opacity-0 group-hover:opacity-100 duration-500 h-[40px] w-[40px] absolute bottom-4 right-4 bg-primary-500 hover:bg-primary-600 rounded-full items-center justify-center"
 					>
 						<i
 							className={"text-lg text-light-200 fas " + (audioPlayerProps.isPlaying && trackId === audioPlayerTrackId ? "fa-pause" : "fa-play")}
@@ -164,13 +164,7 @@ export default function NFTCard({
 				{/* NFT Details */}
 				<Link href={redirectLink ? redirectLink : ""} passHref>
 					<a>
-						<div
-							className={
-								!showNumberOfCopies
-									? "dark:bg-dark-200 " + styles["nft-card__description"]
-									: "dark:bg-dark-100 " + styles["nft-card__description"]
-							}
-						>
+						<div className={"dark:bg-dark-600 " + styles["nft-card__description"]}>
 							{/* Artist, Music name and tokenId */}
 							<Section1
 								artistName={truncatedArtistName}

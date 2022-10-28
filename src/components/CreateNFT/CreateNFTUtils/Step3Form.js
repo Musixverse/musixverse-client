@@ -248,7 +248,7 @@ const Step3Form = ({ unlockableContent, setUnlockableContent }) => {
 							}));
 						}}
 						className={
-							"dark:bg-[#323232] dark:focus:bg-[#1a1a1a] dark:border-[#323232] mt-1 w-full p-2 border-[2px] border-[#777777] focus:border-[2px] focus:border-primary-100 dark:focus:border-primary-100 rounded focus:outline-none focus:shadow-none dark:focus:text-primary-100 font-normal resize-none"
+							"dark:bg-[#323232] dark:focus:bg-[#1a1a1a] dark:border-[#323232] mt-1 w-full p-2 border-[2px] border-[#777777] focus:border-[2px] focus:border-primary-500 dark:focus:border-primary-500 rounded focus:outline-none focus:shadow-none dark:focus:text-primary-500 font-normal resize-none"
 						}
 						name="msg"
 						rows="8"
@@ -268,7 +268,7 @@ const Step3Form = ({ unlockableContent, setUnlockableContent }) => {
 							}));
 						}}
 						className={
-							"dark:bg-[#323232] dark:focus:bg-[#1a1a1a] dark:border-[#323232] mt-1 w-full p-2 border-[2px] border-[#777777] focus:border-[2px] focus:border-primary-100 dark:focus:border-primary-100 rounded focus:outline-none focus:shadow-none dark:focus:text-primary-100 font-normal resize-none"
+							"dark:bg-[#323232] dark:focus:bg-[#1a1a1a] dark:border-[#323232] mt-1 w-full p-2 border-[2px] border-[#777777] focus:border-[2px] focus:border-primary-500 dark:focus:border-primary-500 rounded focus:outline-none focus:shadow-none dark:focus:text-primary-500 font-normal resize-none"
 						}
 						name="msg"
 						rows="6"
@@ -290,7 +290,7 @@ const Step3Form = ({ unlockableContent, setUnlockableContent }) => {
 						<div className="flex items-center mt-2 mb-2">
 							<input
 								type="button"
-								className="bg-primary-100 hover:bg-primary-200 text-light-100 text-sm py-1 px-6 rounded-full cursor-pointer"
+								className="bg-primary-500 hover:bg-primary-600 text-light-100 text-sm py-1 px-6 rounded-full cursor-pointer"
 								value="Choose Files"
 								onClick={handleImageFilesClick}
 							/>
@@ -324,7 +324,7 @@ const Step3Form = ({ unlockableContent, setUnlockableContent }) => {
 											</div>
 											<div
 												onClick={() => deleteUnlockableItem("exclusiveImages", index)}
-												className="-ml-6 w-5 h-5 flex justify-center items-center rounded-full transition-all duration-200 cursor-pointer text-light-100 bg-error-100 hover:bg-error-300 z-10"
+												className="-ml-6 w-5 h-5 flex justify-center items-center rounded-full transition-all duration-200 cursor-pointer text-light-100 bg-error-400 hover:bg-error-500 z-10"
 											>
 												<i className="fa-solid fa-xmark text-xs"></i>
 											</div>
@@ -343,7 +343,7 @@ const Step3Form = ({ unlockableContent, setUnlockableContent }) => {
 						<div className="flex items-center mt-2 mb-2">
 							<input
 								type="button"
-								className="bg-primary-100 hover:bg-primary-200 text-light-100 text-sm py-1 px-6 rounded-full cursor-pointer"
+								className="bg-primary-500 hover:bg-primary-600 text-light-100 text-sm py-1 px-6 rounded-full cursor-pointer"
 								value="Choose Files"
 								onClick={handleAudioFilesClick}
 							/>
@@ -376,7 +376,7 @@ const Step3Form = ({ unlockableContent, setUnlockableContent }) => {
 											</div>
 											<div
 												onClick={() => deleteUnlockableItem("exclusiveAudios", index)}
-												className="-ml-6 w-5 h-5 flex justify-center items-center rounded-full transition-all duration-200 cursor-pointer text-light-100 bg-error-100 hover:bg-error-300 z-10"
+												className="-ml-6 w-5 h-5 flex justify-center items-center rounded-full transition-all duration-200 cursor-pointer text-light-100 bg-error-400 hover:bg-error-500 z-10"
 											>
 												<i className="fa-solid fa-xmark text-xs"></i>
 											</div>
@@ -395,7 +395,7 @@ const Step3Form = ({ unlockableContent, setUnlockableContent }) => {
 						<div className="flex items-center mt-2 mb-2">
 							<input
 								type="button"
-								className="bg-primary-100 hover:bg-primary-200 text-light-100 text-sm py-1 px-6 rounded-full cursor-pointer"
+								className="bg-primary-500 hover:bg-primary-600 text-light-100 text-sm py-1 px-6 rounded-full cursor-pointer"
 								value="Choose Files"
 								onClick={handleVideoFilesClick}
 							/>
@@ -428,7 +428,7 @@ const Step3Form = ({ unlockableContent, setUnlockableContent }) => {
 											</div>
 											<div
 												onClick={() => deleteUnlockableItem("exclusiveVideos", index)}
-												className="-ml-6 w-5 h-5 flex justify-center items-center rounded-full transition-all duration-200 cursor-pointer text-light-100 bg-error-100 hover:bg-error-300 z-10"
+												className="-ml-6 w-5 h-5 flex justify-center items-center rounded-full transition-all duration-200 cursor-pointer text-light-100 bg-error-400 hover:bg-error-500 z-10"
 											>
 												<i className="fa-solid fa-xmark text-xs"></i>
 											</div>

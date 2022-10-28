@@ -44,7 +44,7 @@ const UnlockableContentModal = ({ isOpen, setOpen, tokenId, selectedUnlockableIt
 				isOpen={isOpen}
 				classes="max-w-[48rem]"
 				image={
-					<div className="mx-auto flex items-center relative justify-center h-24 w-24 text-5xl text-primary-100">
+					<div className="mx-auto flex items-center relative justify-center h-24 w-24 text-5xl text-primary-500">
 						<i className="fa-solid fa-lock-open"></i>
 					</div>
 				}
@@ -57,7 +57,7 @@ const UnlockableContentModal = ({ isOpen, setOpen, tokenId, selectedUnlockableIt
 							<>
 								<form onSubmit={postComment}>
 									<textarea
-										className="mt-2 dark:text-light-100 dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-100 w-full p-3 text-base border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-100"
+										className="mt-2 dark:text-light-100 dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-500 w-full p-3 text-base border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-500"
 										type="text"
 										placeholder="Type your comment..."
 										autoComplete="off"
@@ -69,7 +69,7 @@ const UnlockableContentModal = ({ isOpen, setOpen, tokenId, selectedUnlockableIt
 									<div className="flex justify-end">
 										<button
 											type="submit"
-											className="flex items-center mt-10 -mb-6 px-6 py-2 text-sm font-primary font-bold rounded-md bg-primary-100 hover:bg-primary-200 text-light-100"
+											className="flex items-center mt-10 -mb-6 px-6 py-2 text-sm font-primary font-bold rounded-md bg-primary-500 hover:bg-primary-600 text-light-100"
 										>
 											Post
 											<span className="ml-3 text-lg">

@@ -67,7 +67,7 @@ export default function AboutArtist({ username, name, bio, country, createdAt, s
 								</p>
 								<button
 									onClick={() => setShowArtistBioModal(true)}
-									className="text-primary-200 hover:text-primary-300 text-[12px] md:text-[15px] mt-2"
+									className="text-primary-600 hover:text-primary-700 text-[12px] md:text-[15px] mt-2"
 								>
 									Read More
 								</button>
@@ -100,7 +100,7 @@ export default function AboutArtist({ username, name, bio, country, createdAt, s
 					{country && country.name ? <span> {country.name} </span> : null}
 					<span>{createdAt ? joined : null}</span>
 				</div>
-				<div className="flex space-x-3 text-dark-100 dark:text-light-200">
+				<div className="flex space-x-3 text-dark-600 dark:text-light-200">
 					<Tooltip
 						labelText={
 							<span className="font-semibold text-sm cursor-help text-center">
@@ -109,7 +109,7 @@ export default function AboutArtist({ username, name, bio, country, createdAt, s
 										onClick={() => setShowReportModal(true)}
 										className="md:w-[36px] md:h-[36px] w-[28px] h-[28px] text-center rounded-full bg-gray-200 dark:bg-[#040404] hover:bg-light-300"
 									>
-										<i className="text-xs md:text-sm fas fa-flag text-dark-100 dark:text-light-100 ml-1.5"></i>
+										<i className="text-xs md:text-sm fas fa-flag text-dark-600 dark:text-light-100 ml-1.5"></i>
 									</button>
 								)}
 								{!user && (
@@ -117,7 +117,7 @@ export default function AboutArtist({ username, name, bio, country, createdAt, s
 										onClick={() => setAuthModalOpen(true)}
 										className="md:w-[36px] md:h-[36px] w-[28px] h-[28px] text-center rounded-full bg-gray-200 dark:bg-[#040404] hover:bg-light-300"
 									>
-										<i className="text-xs md:text-sm fas fa-flag text-dark-100 dark:text-light-100 ml-1.5"></i>
+										<i className="text-xs md:text-sm fas fa-flag text-dark-600 dark:text-light-100 ml-1.5"></i>
 									</button>
 								)}
 							</span>
@@ -126,13 +126,13 @@ export default function AboutArtist({ username, name, bio, country, createdAt, s
 						tooltipLocation="bottom"
 					></Tooltip>
 
-					<button className="md:w-[36px] md:h-[36px] w-[28px] h-[28px] text-center rounded-full bg-gray-200 dark:bg-[#040404] hover:bg-light-300 dark:hover:bg-dark-100 relative group">
+					<button className="md:w-[36px] md:h-[36px] w-[28px] h-[28px] text-center rounded-full bg-gray-200 dark:bg-[#040404] hover:bg-light-300 dark:hover:bg-dark-600 relative group">
 						<i className="fa-solid fa-share-nodes text-lg"></i>
 
 						<ul className="absolute pt-10 bg-transparent hidden right-0 top-0 z-10 text-sm font-medium text-left list-none border-none rounded-xl min-w-[250px] group-hover:block">
-							<ul className="rounded-xl shadow-lg bg-light-100 dark:bg-dark-100 z-40">
+							<ul className="rounded-xl shadow-lg bg-light-100 dark:bg-dark-600 z-40">
 								<li onClick={copyToClipboard}>
-									<div className="flex items-center w-full rounded-t-xl px-4 py-3 bg-transparent cursor-pointer whitespace-nowrap hover:bg-gray-100 dark:hover:bg-dark-200">
+									<div className="flex items-center w-full rounded-t-xl px-4 py-3 bg-transparent cursor-pointer whitespace-nowrap hover:bg-gray-100 dark:hover:bg-dark-800">
 										<i className="fa-solid fa-copy text-lg"></i>
 										<span className="ml-2">Copy Link</span>
 									</div>
@@ -142,7 +142,7 @@ export default function AboutArtist({ username, name, bio, country, createdAt, s
 										<a
 											target="_blank"
 											rel="noopener noreferrer"
-											className="flex items-center w-full px-4 py-3 bg-transparent cursor-pointer whitespace-nowrap hover:bg-gray-100 dark:hover:bg-dark-200"
+											className="flex items-center w-full px-4 py-3 bg-transparent cursor-pointer whitespace-nowrap hover:bg-gray-100 dark:hover:bg-dark-800"
 										>
 											<i className="fa-brands fa-twitter text-lg"></i>
 											<span className="ml-2">Share on Twitter</span>
@@ -157,7 +157,7 @@ export default function AboutArtist({ username, name, bio, country, createdAt, s
 										<a
 											target="_blank"
 											rel="noopener noreferrer"
-											className="flex items-center w-full px-4 py-3 bg-transparent cursor-pointer whitespace-nowrap hover:bg-gray-100 dark:hover:bg-dark-200"
+											className="flex items-center w-full px-4 py-3 bg-transparent cursor-pointer whitespace-nowrap hover:bg-gray-100 dark:hover:bg-dark-800"
 										>
 											<i className="fa-brands fa-facebook text-lg"></i>
 											<span className="ml-2">Share on Facebook</span>
@@ -169,7 +169,7 @@ export default function AboutArtist({ username, name, bio, country, createdAt, s
 										<a
 											target="_blank"
 											rel="noopener noreferrer"
-											className="block w-full px-4 py-3 bg-transparent cursor-pointer whitespace-nowrap hover:bg-gray-100 dark:hover:bg-dark-200"
+											className="block w-full px-4 py-3 bg-transparent cursor-pointer whitespace-nowrap hover:bg-gray-100 dark:hover:bg-dark-800"
 										>
 											<i className="fa-brands fa-whatsapp text-lg"></i>
 											<span className="ml-2">Share on WhatsApp</span>
@@ -181,7 +181,7 @@ export default function AboutArtist({ username, name, bio, country, createdAt, s
 										<a
 											target="_blank"
 											rel="noopener noreferrer"
-											className="block w-full px-4 py-3 bg-transparent cursor-pointer whitespace-nowrap hover:bg-gray-100 dark:hover:bg-dark-200"
+											className="block w-full px-4 py-3 bg-transparent cursor-pointer whitespace-nowrap hover:bg-gray-100 dark:hover:bg-dark-800"
 										>
 											<i className="fa-brands fa-telegram text-lg"></i>
 											<span className="ml-2">Share on Telegram</span>
@@ -196,7 +196,7 @@ export default function AboutArtist({ username, name, bio, country, createdAt, s
 										<a
 											target="_blank"
 											rel="noopener noreferrer"
-											className="block w-full px-4 py-3 bg-transparent cursor-pointer whitespace-nowrap hover:bg-gray-100 dark:hover:bg-dark-200 rounded-b-xl"
+											className="block w-full px-4 py-3 bg-transparent cursor-pointer whitespace-nowrap hover:bg-gray-100 dark:hover:bg-dark-800 rounded-b-xl"
 										>
 											<i className="fa-brands fa-linkedin text-lg"></i>
 											<span className="ml-2">Share on LinkedIn</span>

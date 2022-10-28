@@ -64,7 +64,7 @@ const EditPriceModal = ({ isOpen, setEditPriceModalOpen, tokenId, currentPrice }
 			<Modal
 				isOpen={isOpen}
 				image={
-					<div className="mx-auto flex items-center relative justify-center h-24 w-24 text-5xl text-primary-100">
+					<div className="mx-auto flex items-center relative justify-center h-24 w-24 text-5xl text-primary-500">
 						<i className="fas fa-edit"></i>
 					</div>
 				}
@@ -82,7 +82,7 @@ const EditPriceModal = ({ isOpen, setEditPriceModalOpen, tokenId, currentPrice }
 									setUpdatedPrice(e.target.value);
 								}}
 								placeholder="Enter new price"
-								className="w-full px-2 py-2 border-2 border-[#777777] rounded-md shadow-sm outline-none focus:border-primary-100 focus:dark:border-primary-100 dark:bg-[#323232] dark:border-[#323232]"
+								className="w-full px-2 py-2 border-2 border-[#777777] rounded-md shadow-sm outline-none focus:border-primary-500 focus:dark:border-primary-500 dark:bg-[#323232] dark:border-[#323232]"
 								required
 							></input>
 							<p className="text-[#777777] mt-1 font-normal text-xs">Price of the NFT will be updated to this value if you submit</p>
@@ -115,7 +115,7 @@ const EditPriceModal = ({ isOpen, setEditPriceModalOpen, tokenId, currentPrice }
 
 							<button
 								type="submit"
-								className="rounded-lg px-8 py-2 mt-14 bg-primary-100 font-primary font-semibold text-lg text-light-100 hover:bg-primary-200"
+								className="rounded-lg px-8 py-2 mt-14 bg-primary-500 font-primary font-semibold text-lg text-light-100 hover:bg-primary-600"
 							>
 								Submit
 							</button>

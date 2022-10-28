@@ -33,7 +33,7 @@ const SaveDraftSuccessModal = ({ isOpen, setOpen }) => {
 					},
 					toClose: true,
 					classes:
-						"flex items-center px-4 py-3 mr-2 mb-2 text-sm font-primary font-bold rounded-md bg-primary-100 hover:bg-primary-200 text-light-100",
+						"flex items-center px-4 py-3 mr-2 mb-2 text-sm font-primary font-bold rounded-md bg-primary-500 hover:bg-primary-600 text-light-100",
 					label: (
 						<>
 							View Draft

@@ -38,7 +38,7 @@ export default function NftCopiesModal({ trackCopiesModalValues, showNftCopiesMo
 						leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
 					>
 						<div className="relative inline-block overflow-hidden text-left align-bottom transition-all transform shadow-xl rounded-2xl bg-none sm:my-8 sm:align-middle sm:max-w-3xl sm:w-full">
-							<div className="p-4 bg-light-200 dark:bg-dark-100 dark:backdrop-blur-[7px] backdrop-blur-[7px]">
+							<div className="p-4 bg-light-200 dark:bg-dark-600 dark:backdrop-blur-[7px] backdrop-blur-[7px]">
 								<div className="w-full flex justify-end items-center p-1">
 									<div
 										onClick={() => setShowNftCopiesModal(false)}
@@ -67,7 +67,7 @@ export default function NftCopiesModal({ trackCopiesModalValues, showNftCopiesMo
 														{trackCopiesModalValues.trackName}
 													</p>
 												</div>
-												<div className="flex items-center px-4 py-2 font-bold cursor-default rounded-xl bg-light-100 text-dark-100 dark:bg-dark-200 dark:text-light-100">
+												<div className="flex items-center px-4 py-2 font-bold cursor-default rounded-xl bg-light-100 text-dark-600 dark:bg-dark-800 dark:text-light-100">
 													<Image src={multipleNft} objectFit="contain" alt="multiple nft cards" className="dark:invert" />
 													<span className="ml-2 text-sm">
 														x{trackCopiesModalValues.numberOfCopies}

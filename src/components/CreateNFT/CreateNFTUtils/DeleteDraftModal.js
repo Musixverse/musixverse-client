@@ -53,7 +53,7 @@ export default function DeleteDraftModal({ isOpen = "", onClose = "", draftToDel
 					leaveFrom="opacity-100 scale-100"
 				>
 					<div style={{ zIndex: "50" }} className="flex left-0 top-0 justify-center items-center h-full w-full fixed">
-						<div className="max-w-[40rem] sm:w-full w-11/12 p-4 pl-10 pb-12 bg-white dark:bg-dark-100 rounded-lg">
+						<div className="max-w-[40rem] sm:w-full w-11/12 p-4 pl-10 pb-12 bg-white dark:bg-dark-600 rounded-lg">
 							<div className="w-full flex justify-end">
 								<div
 									onClick={() => closeModal()}
@@ -92,7 +92,7 @@ export default function DeleteDraftModal({ isOpen = "", onClose = "", draftToDel
 									<div className="flex flex-row mt-12 w-full space-x-4">
 										<button
 											onClick={() => closeModal()}
-											className="w-full bg-light-200 dark:bg-dark-200 hover:bg-gray-200 rounded-lg flex justify-center items-center p-4 text-sm"
+											className="w-full bg-light-200 dark:bg-dark-800 hover:bg-gray-200 rounded-lg flex justify-center items-center p-4 text-sm"
 										>
 											<div className="flex justify-center items-center w-full">
 												<i className="fa-solid fa-xmark text-lg"></i>
@@ -103,7 +103,7 @@ export default function DeleteDraftModal({ isOpen = "", onClose = "", draftToDel
 											onClick={() => {
 												deleteDraft();
 											}}
-											className="w-full bg-light-200 dark:bg-dark-200 hover:bg-error-200 dark:hover:bg-error-200 hover:text-light-100 rounded-lg flex justify-center items-center p-4 text-sm"
+											className="w-full bg-light-200 dark:bg-dark-800 hover:bg-error-600 dark:hover:bg-error-600 hover:text-light-100 rounded-lg flex justify-center items-center p-4 text-sm"
 										>
 											<div className="flex justify-center items-center w-full">
 												<i className="fa-solid fa-trash text-lg"></i>

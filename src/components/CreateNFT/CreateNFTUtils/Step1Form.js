@@ -123,7 +123,7 @@ export default function Step1Form({
 						onChange={(e) => {
 							setTrackTitle(e.target.value);
 						}}
-						className="w-full px-2 py-1 mt-1 border-2 border-[#777777] rounded-md shadow-sm outline-none focus:border-primary-100 focus:dark:border-primary-100 dark:bg-[#323232] dark:border-[#323232]"
+						className="w-full px-2 py-1 mt-1 border-2 border-[#777777] rounded-md shadow-sm outline-none focus:border-primary-500 focus:dark:border-primary-500 dark:bg-[#323232] dark:border-[#323232]"
 						required
 					></input>
 					<p className="text-[#777777] mt-1 font-normal text-xs">Feel free to include featured artists and version info in the track title</p>
@@ -149,7 +149,7 @@ export default function Step1Form({
 										setTrackBackground(e.target.value);
 									}}
 									className={
-										"mt-1 dark:bg-[#323232] dark:focus:bg-[#1a1a1a] dark:border-[#323232] w-full p-2 border-[2px] border-[#777777] focus:border-[2px] focus:border-primary-100 dark:focus:border-primary-100 rounded focus:outline-none focus:shadow-none dark:focus:text-primary-100 font-normal resize-none"
+										"mt-1 dark:bg-[#323232] dark:focus:bg-[#1a1a1a] dark:border-[#323232] w-full p-2 border-[2px] border-[#777777] focus:border-[2px] focus:border-primary-500 dark:focus:border-primary-500 rounded focus:outline-none focus:shadow-none dark:focus:text-primary-500 font-normal resize-none"
 									}
 									name="trackBackground"
 									rows="6"
@@ -166,7 +166,7 @@ export default function Step1Form({
 							setLyrics(e.target.value);
 						}}
 						className={
-							"dark:bg-[#323232] dark:focus:bg-[#1a1a1a] dark:border-[#323232] mt-1 w-full p-2 border-[2px] border-[#777777] focus:border-[2px] focus:border-primary-100 dark:focus:border-primary-100 rounded focus:outline-none focus:shadow-none dark:focus:text-primary-100 font-normal resize-none"
+							"dark:bg-[#323232] dark:focus:bg-[#1a1a1a] dark:border-[#323232] mt-1 w-full p-2 border-[2px] border-[#777777] focus:border-[2px] focus:border-primary-500 dark:focus:border-primary-500 rounded focus:outline-none focus:shadow-none dark:focus:text-primary-500 font-normal resize-none"
 						}
 						name="lyrics"
 						rows="4"
@@ -264,7 +264,7 @@ export default function Step1Form({
 									</p>
 									<div className="flex flex-col">
 										<input
-											className="dark:text-light-100 dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-100 w-full px-2 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-100"
+											className="dark:text-light-100 dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-500 w-full px-2 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-500"
 											id="username"
 											name="username"
 											type="text"
@@ -286,7 +286,7 @@ export default function Step1Form({
 														{filteredUsers.length === 1 ? (
 															<button
 																type="button"
-																className="flex items-center justify-start px-3 py-2 rounded bg-light-100 dark:bg-dark-100 hover:text-light-100 dark:text-light-100 hover:bg-primary-100 dark:hover:bg-primary-100 text-start"
+																className="flex items-center justify-start px-3 py-2 rounded bg-light-100 dark:bg-dark-600 hover:text-light-100 dark:text-light-100 hover:bg-primary-500 dark:hover:bg-primary-500 text-start"
 																onClick={() => {
 																	setCoverArtArtistInfo(user);
 																}}
@@ -310,7 +310,7 @@ export default function Step1Form({
 														) : idx === 0 ? (
 															<button
 																type="button"
-																className="flex items-center justify-start px-3 py-2 rounded-t bg-light-100 dark:bg-dark-100 hover:text-light-100 dark:text-light-100 hover:bg-primary-100 dark:hover:bg-primary-100 text-start"
+																className="flex items-center justify-start px-3 py-2 rounded-t bg-light-100 dark:bg-dark-600 hover:text-light-100 dark:text-light-100 hover:bg-primary-500 dark:hover:bg-primary-500 text-start"
 																onClick={() => {
 																	setCoverArtArtistInfo(user);
 																}}
@@ -334,7 +334,7 @@ export default function Step1Form({
 														) : filteredUsers.length === idx + 1 ? (
 															<button
 																type="button"
-																className="flex items-center justify-start px-3 py-2 rounded-b bg-light-100 dark:bg-dark-100 hover:text-light-100 dark:text-light-100 hover:bg-primary-100 dark:hover:bg-primary-100 text-start"
+																className="flex items-center justify-start px-3 py-2 rounded-b bg-light-100 dark:bg-dark-600 hover:text-light-100 dark:text-light-100 hover:bg-primary-500 dark:hover:bg-primary-500 text-start"
 																onClick={() => {
 																	setCoverArtArtistInfo(user);
 																}}
@@ -358,7 +358,7 @@ export default function Step1Form({
 														) : (
 															<button
 																type="button"
-																className="flex items-center justify-start px-3 py-2 bg-light-100 dark:bg-dark-100 hover:text-light-100 dark:text-light-100 hover:bg-primary-100 dark:hover:bg-primary-100 text-start"
+																className="flex items-center justify-start px-3 py-2 bg-light-100 dark:bg-dark-600 hover:text-light-100 dark:text-light-100 hover:bg-primary-500 dark:hover:bg-primary-500 text-start"
 																onClick={() => {
 																	setCoverArtArtistInfo(user);
 																}}
@@ -391,11 +391,11 @@ export default function Step1Form({
 															setUsernameEntered("");
 															setSearchedUsername("");
 														}}
-														className="justify-start px-6 py-3 rounded bg-light-100 hover:bg-gray-200 dark:bg-dark-100 dark:text-light-100 text-start"
+														className="justify-start px-6 py-3 rounded bg-light-100 hover:bg-gray-200 dark:bg-dark-600 dark:text-light-100 text-start"
 													>
 														<span className="text-sm">
 															No results found.&nbsp;&nbsp;
-															<a className="cursor-pointer text-primary-200 hover:underline">
+															<a className="cursor-pointer text-primary-600 hover:underline">
 																Send an Invite <i className="fa-solid fa-arrow-right"></i>
 															</a>
 														</span>
@@ -409,7 +409,7 @@ export default function Step1Form({
 										<p className="text-sm text-[#777777] font-normal mt-2 mb-2">or</p>
 										<div className="flex w-full space-x-2">
 											<input
-												className="dark:text-light-100 dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-100 w-full px-2 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-100"
+												className="dark:text-light-100 dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-500 w-full px-2 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-500"
 												type="text"
 												id="name"
 												name="name"
@@ -422,7 +422,7 @@ export default function Step1Form({
 												required
 											/>
 											<input
-												className="dark:text-light-100 dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-100 w-full px-2 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-100"
+												className="dark:text-light-100 dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-500 w-full px-2 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-500"
 												type="email"
 												id="email"
 												name="email"
@@ -439,7 +439,7 @@ export default function Step1Form({
 
 									<p className="text-sm text-[#777777] font-normal mt-2">
 										You can also invite them by clicking here-{" "}
-										<a onClick={() => setInvitationModalOpen(true)} className="cursor-pointer text-primary-200 hover:underline">
+										<a onClick={() => setInvitationModalOpen(true)} className="cursor-pointer text-primary-600 hover:underline">
 											Invite artist
 										</a>
 									</p>

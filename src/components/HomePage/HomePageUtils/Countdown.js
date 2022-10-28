@@ -49,7 +49,7 @@ export default function Countdown() {
 				<h5 className={styles["countdown-container__intro-text--heading"]}>Musixverse Beta Program is full</h5>
 				<p className={styles["countdown-container__intro-text--body-text"]}>We thank you for the overwhelming interest and support</p>
 				<a
-					className="px-10 py-2 mt-10 text-xs font-medium text-center cursor-pointer sm:text-sm sm:px-14 rounded-2xl sm:rounded-3xl bg-primary-100 font-secondary hover:bg-primary-200 text-light-100"
+					className="px-10 py-2 mt-10 text-xs font-medium text-center cursor-pointer sm:text-sm sm:px-14 rounded-2xl sm:rounded-3xl bg-primary-500 font-secondary hover:bg-primary-600 text-light-100"
 					href="https://cfbmusixverse.paperform.co/"
 					target={"_blank"}
 					rel="noopener noreferrer"

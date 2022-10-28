@@ -60,9 +60,9 @@ export default function Pager(props) {
 
 	return (
 		<div className="flex justify-center mb-11">
-			<div className={"flex rounded-md w-fit items-center " + (theme === "dark" ? "bg-dark-100" : "bg-light-300")}>
+			<div className={"flex rounded-md w-fit items-center " + (theme === "dark" ? "bg-dark-600" : "bg-light-300")}>
 				{/* Previous Page*/}
-				<button className="px-4 py-[7px] text-primary-300 hover:text-primary-200" onClick={handlePageDecrement}>
+				<button className="px-4 py-[7px] text-primary-700 hover:text-primary-600" onClick={handlePageDecrement}>
 					<i className="fas fa-caret-left"></i>
 				</button>
 				{/* Pager Input */}
@@ -71,7 +71,7 @@ export default function Pager(props) {
 					<input
 						ref={inputRef}
 						size={2}
-						className="mx-1 text-sm font-semibold text-center bg-transparent border-b-2 outline-none font-secondary border-primary-100"
+						className="mx-1 text-sm font-semibold text-center bg-transparent border-b-2 outline-none font-secondary border-primary-500"
 						onKeyUp={handlePageRequest}
 						onInput={handlePageInputChange}
 						type={"text"}
@@ -80,7 +80,7 @@ export default function Pager(props) {
 					of <span>{maxPages}</span>
 				</p>
 				{/* Next Page*/}
-				<button className="px-4 py-[7px] text-primary-300 hover:text-primary-200" onClick={handlePageIncrement}>
+				<button className="px-4 py-[7px] text-primary-700 hover:text-primary-600" onClick={handlePageIncrement}>
 					<i className="fas fa-caret-right"></i>
 				</button>
 			</div>

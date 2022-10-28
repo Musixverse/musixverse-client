@@ -6,8 +6,8 @@ export default function NoNfts({ username, favouritesSection = false }) {
 	const { user } = useMoralis();
 
 	return (
-		<div className="flex flex-col items-center justify-center w-full p-20 mt-10 mb-20 rounded-xl dark:bg-dark-100 bg-light-100">
-			<div className="mb-5 rounded-full flex items-center justify-center w-[120px] h-[120px] bg-light-200 dark:bg-dark-200">
+		<div className="flex flex-col items-center justify-center w-full p-20 mt-10 mb-20 rounded-xl dark:bg-dark-600 bg-light-100">
+			<div className="mb-5 rounded-full flex items-center justify-center w-[120px] h-[120px] bg-light-200 dark:bg-dark-800">
 				<Image src={"/assets/profile/no-nfts.svg"} width={70} height={42} alt="music jazz" />
 			</div>
 
@@ -21,13 +21,13 @@ export default function NoNfts({ username, favouritesSection = false }) {
 				{/* If artist then render create nft other wise buy nft */}
 				{user && username === user.attributes.username && user.attributes.isArtist && !favouritesSection ? (
 					<Link href={"/create-nft"} passHref>
-						<button className="py-2 font-medium text-center px-14 hover:bg-primary-200 bg-primary-100 rounded-3xl text-light-100">
+						<button className="py-2 font-medium text-center px-14 hover:bg-primary-600 bg-primary-500 rounded-3xl text-light-100">
 							Create NFTs
 						</button>
 					</Link>
 				) : user && username === user.attributes.username && !favouritesSection ? (
 					<Link href={"/mxcatalog/new-releases"} passHref>
-						<button className="py-2 font-medium text-center px-14 hover:bg-primary-200 bg-primary-100 rounded-3xl text-light-100">Buy NFTs</button>
+						<button className="py-2 font-medium text-center px-14 hover:bg-primary-600 bg-primary-500 rounded-3xl text-light-100">Buy NFTs</button>
 					</Link>
 				) : (
 					<></>

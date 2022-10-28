@@ -60,12 +60,12 @@ export default function AudioUpload({ audioFileUrl, setAudioFileUrl, setAudioFil
 				<div
 					className={
 						"flex relative items-center justify-center w-[65px] h-[65px] rounded-lg bg-light-300 dark:bg-[#1d1d1d] border-2 " +
-						(audioFileUrl === null ? "border-light-300 dark:border-dark-100" : "border-primary-200 dark:border-primary-200")
+						(audioFileUrl === null ? "border-light-300 dark:border-dark-600" : "border-primary-600 dark:border-primary-600")
 					}
 				>
 					<Image src={uploadMusic} objectFit="contain" alt="upload image art digital illustration"></Image>
 					<div className={audioFileUrl === null ? "hidden" : "absolute bottom-2 right-1 bg-light-200 rounded-full h-[20px]"}>
-						<i className={"text-xl text-primary-200 fas fa-check-circle"}></i>
+						<i className={"text-xl text-primary-600 fas fa-check-circle"}></i>
 					</div>
 				</div>
 				<div className="flex-1 font-secondary">
@@ -73,7 +73,7 @@ export default function AudioUpload({ audioFileUrl, setAudioFileUrl, setAudioFil
 					{audioFileUrl === null ? (
 						<p className="text-xs">Any Audio file | Max file size: 500 MB</p>
 					) : (
-						<p className="text-sm text-primary-200">Track Uploaded</p>
+						<p className="text-sm text-primary-600">Track Uploaded</p>
 					)}
 				</div>
 			</label>

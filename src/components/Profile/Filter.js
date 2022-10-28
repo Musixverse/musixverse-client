@@ -88,7 +88,7 @@ export default function Filter({
 	}, [sortingFilter]);
 
 	return (
-		<div className={"dark:bg-dark-100 " + styles["filter-card"]}>
+		<div className={"dark:bg-dark-600 " + styles["filter-card"]}>
 			{/* Left Section */}
 			<div className={styles["filter-card__left-section"]}>
 				<Image src={theme === "dark" ? "/assets/record_w.svg" : "/assets/record_b.svg"} alt="vinyl disc" height={30} width={30}></Image>
@@ -103,7 +103,7 @@ export default function Filter({
 								<span
 									className={
 										"text-sm cursor-pointer " +
-										(currentlyActive == "New Releases" ? "text-dark-100 font-semibold dark:text-light-100" : "font-medium")
+										(currentlyActive == "New Releases" ? "text-dark-600 font-semibold dark:text-light-100" : "font-medium")
 									}
 									onClick={handleFilterChange}
 								>
@@ -112,7 +112,7 @@ export default function Filter({
 								<span
 									className={
 										"text-sm cursor-pointer " +
-										(currentlyActive == "Sold Out" ? "text-dark-100 font-semibold dark:text-light-100" : "font-medium")
+										(currentlyActive == "Sold Out" ? "text-dark-600 font-semibold dark:text-light-100" : "font-medium")
 									}
 									onClick={handleFilterChange}
 								>
@@ -123,7 +123,7 @@ export default function Filter({
 						<span
 							className={
 								"text-sm cursor-pointer " +
-								(currentlyActive == "Collection" ? "text-dark-100 font-semibold dark:text-light-100" : "font-medium")
+								(currentlyActive == "Collection" ? "text-dark-600 font-semibold dark:text-light-100" : "font-medium")
 							}
 							onClick={handleFilterChange}
 						>
@@ -134,7 +134,7 @@ export default function Filter({
 			</div>
 			{/* Right Section */}
 			{currentlyActive !== "Collection" && (
-				<div className={"dark:border-dark-200 dark:bg-dark-200 dark:hover:border-primary-100 " + styles["filter-card__right-section"]}>
+				<div className={"dark:border-dark-800 dark:bg-dark-800 dark:hover:border-primary-500 " + styles["filter-card__right-section"]}>
 					<p className={"dark:text-light-100 " + styles["filter-card__right-section--sort-by"]}>Sort By:</p>
 					<Dropdown setSortingFilter={setSortingFilter} />
 				</div>

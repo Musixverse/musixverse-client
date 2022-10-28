@@ -91,7 +91,7 @@ export default function CoverPhoto({ coverImage, setCoverImage }) {
 					</div>
 					<input ref={coverPictureInput} type="file" id="upload-cover-image" onChange={handleCoverChange} accept="image/*" className="hidden" />
 					<label
-						className="absolute flex items-center justify-center p-2 pr-1 rounded-lg cursor-pointer -right-3 -bottom-2 bg-dark-200"
+						className="absolute flex items-center justify-center p-2 pr-1 rounded-lg cursor-pointer -right-3 -bottom-2 bg-dark-800"
 						htmlFor="upload-cover-image"
 					>
 						<i className="far fa-edit text-light-200"></i>

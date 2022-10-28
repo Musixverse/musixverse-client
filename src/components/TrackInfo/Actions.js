@@ -58,11 +58,11 @@ const Actions = ({ tokenId, artistName, title }) => {
 				onClick={() => {
 					markTokenFavourite();
 				}}
-				className="flex justify-center items-center space-x-2 px-4 py-2 rounded-lg cursor-pointer hover:bg-light-200 dark:hover:bg-dark-100"
+				className="flex justify-center items-center space-x-2 px-4 py-2 rounded-lg cursor-pointer hover:bg-light-200 dark:hover:bg-dark-600"
 			>
 				{isTokenFavourite ? (
 					<>
-						<i className="fa-solid fa-heart text-lg text-primary-200"></i>
+						<i className="fa-solid fa-heart text-lg text-primary-600"></i>
 						<span>Added to Favourites</span>
 					</>
 				) : (
@@ -75,7 +75,7 @@ const Actions = ({ tokenId, artistName, title }) => {
 
 			<button
 				onClick={() => setShareTrackNftModalOpen(true)}
-				className="flex justify-center items-center px-4 py-2 rounded-lg cursor-pointer hover:bg-light-200 dark:hover:bg-dark-100"
+				className="flex justify-center items-center px-4 py-2 rounded-lg cursor-pointer hover:bg-light-200 dark:hover:bg-dark-600"
 			>
 				<div className="flex space-x-2">
 					<i className="fa-solid fa-share-nodes text-lg"></i>

@@ -10,7 +10,7 @@ const CommentUpdatedActivity = ({ activity }) => {
 
 	return (
 		<>
-			<div className={"dark:bg-dark-200 " + styles["sales-history__action"]}>
+			<div className={"dark:bg-dark-800 " + styles["sales-history__action"]}>
 				<i className="fa-solid fa-comment text-lg"></i>
 			</div>
 
@@ -20,7 +20,7 @@ const CommentUpdatedActivity = ({ activity }) => {
 						onClick={() => {
 							setCommentUpdatedModalOpen(true);
 						}}
-						className="text-[#8a8a8a] hover:text-primary-100 cursor-pointer hover:underline"
+						className="text-[#8a8a8a] hover:text-primary-500 cursor-pointer hover:underline"
 					>
 						Comment
 					</span>

@@ -111,7 +111,7 @@ export default function ProfileSection2({ spotify, setSpotify, instagram, setIns
 	// };
 
 	return (
-		<div className="w-full p-8 mt-10 xl:p-10 bg-light-300 dark:bg-dark-100 rounded-xl">
+		<div className="w-full p-8 mt-10 xl:p-10 bg-light-300 dark:bg-dark-600 rounded-xl">
 			<h1 className="mb-8 text-3xl xl:text-4xl font-tertiary min-w-fit">SOCIAL PROFILES</h1>
 			<div className="flex flex-col mb-10 md:mb-6 md:flex-row">
 				<div className="mb-10 md:mb-0 md:mr-2 xl:mr-8 font-secondary">
@@ -132,7 +132,7 @@ export default function ProfileSection2({ spotify, setSpotify, instagram, setIns
 								id="spotify"
 								placeholder="Enter account url"
 								spellCheck={false}
-								className="dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-100 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-light-100 focus:border-primary-100"
+								className="dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-500 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-light-100 focus:border-primary-500"
 							/>
 						</div>
 						<div className="flex-1 text-sm font-medium md:text-base font-secondary">
@@ -144,7 +144,7 @@ export default function ProfileSection2({ spotify, setSpotify, instagram, setIns
 								id="instagram"
 								placeholder="Enter account url"
 								spellCheck={false}
-								className="dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-100 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-light-100 focus:border-primary-100"
+								className="dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-500 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-light-100 focus:border-primary-500"
 							/>
 						</div>
 					</div>
@@ -158,7 +158,7 @@ export default function ProfileSection2({ spotify, setSpotify, instagram, setIns
 								id="twitter"
 								placeholder="Enter account url"
 								spellCheck={false}
-								className="dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-100 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-light-100 focus:border-primary-100"
+								className="dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-500 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-light-100 focus:border-primary-500"
 							/>
 							{/* <ConnectionButton
 								onClick={() => authorizeTwitter()}
@@ -176,7 +176,7 @@ export default function ProfileSection2({ spotify, setSpotify, instagram, setIns
 								id="facebook"
 								placeholder="Enter account url"
 								spellCheck={false}
-								className="dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-100 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-light-100 focus:border-primary-100"
+								className="dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-500 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-light-100 focus:border-primary-500"
 							/>
 						</div>
 					</div>

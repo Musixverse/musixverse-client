@@ -12,15 +12,15 @@ export default function CFB5() {
 		<div className={styles["cfb5__container"]}>
 			<div className={styles["cfb5__card"]}>
 				<div className="self-start lg:self-center">
-					<h1 className="text-3xl font-semibold dark:text-dark-100 font-primary">Get Started</h1>
-					<p className="mt-2 text-sm font-secondary dark:text-dark-100">For more details, you can contact us at</p>
-					<a href="mailto:contact@musixverse.com" target="_blank" rel="noopener noreferrer" className="block text-sm font-primary text-primary-200">
+					<h1 className="text-3xl font-semibold dark:text-dark-600 font-primary">Get Started</h1>
+					<p className="mt-2 text-sm font-secondary dark:text-dark-600">For more details, you can contact us at</p>
+					<a href="mailto:contact@musixverse.com" target="_blank" rel="noopener noreferrer" className="block text-sm font-primary text-primary-600">
 						contact@musixverse.com
 					</a>
 
 					<Link href="https://cfbmusixverse.paperform.co/" passHref={true}>
 						<a target="_blank" rel="noopener noreferrer">
-							<button className="px-8 py-3 mt-5 text-xs text-white bg-primary-200 hover:bg-primary-300 font-primary rounded-xl">
+							<button className="px-8 py-3 mt-5 text-xs text-white bg-primary-600 hover:bg-primary-700 font-primary rounded-xl">
 								Click here join the MXV Insider Community
 							</button>
 						</a>
@@ -28,7 +28,7 @@ export default function CFB5() {
 
 					<div className={styles["cfb5__social"]}>
 						<a
-							className="flex items-center justify-center p-2 rounded-md bg-dark-100"
+							className="flex items-center justify-center p-2 rounded-md bg-dark-600"
 							href="https://discord.com/invite/rXKb7rCqjG"
 							target={"_blank"}
 							rel="noopener noreferrer"
@@ -36,7 +36,7 @@ export default function CFB5() {
 							<Image src={discord} width={20} height={20} alt="discord"></Image>
 						</a>
 						<a
-							className="flex items-center justify-center p-2 rounded-md bg-dark-100"
+							className="flex items-center justify-center p-2 rounded-md bg-dark-600"
 							href="https://twitter.com/musixverse"
 							target={"_blank"}
 							rel="noopener noreferrer"
@@ -44,7 +44,7 @@ export default function CFB5() {
 							<Image src={twitter} width={20} height={20} alt="twitter"></Image>
 						</a>
 						<a
-							className="flex items-center justify-center p-2 rounded-md bg-dark-100"
+							className="flex items-center justify-center p-2 rounded-md bg-dark-600"
 							href=" https://www.instagram.com/musixverse/"
 							target={"_blank"}
 							rel="noopener noreferrer"
@@ -52,7 +52,7 @@ export default function CFB5() {
 							<Image src={instagram} width={20} height={20} alt="instagram"></Image>
 						</a>
 						<a
-							className="flex items-center justify-center p-2 rounded-md bg-dark-100"
+							className="flex items-center justify-center p-2 rounded-md bg-dark-600"
 							href="https://www.facebook.com/Musixverse-104390125641359"
 							target={"_blank"}
 							rel="noopener noreferrer"

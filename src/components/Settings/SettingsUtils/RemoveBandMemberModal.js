@@ -79,7 +79,7 @@ const RemoveBandMemberModal = ({ isOpen, setOpen, bandId, username, bandMemberTo
 							<div className="flex justify-end">
 								<button
 									type="submit"
-									className="flex items-center mt-10 -mb-6 px-6 py-2 text-sm font-primary font-bold rounded-md bg-error-200 hover:bg-error-300 text-light-100"
+									className="flex items-center mt-10 -mb-6 px-6 py-2 text-sm font-primary font-bold rounded-md bg-error-400 hover:bg-error-500 text-light-100"
 								>
 									Remove
 									<span className="ml-6 text-lg">

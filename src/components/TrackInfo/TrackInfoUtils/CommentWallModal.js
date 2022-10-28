@@ -9,7 +9,7 @@ const CommentWallModal = ({ isOpen, setOpen, comment }) => {
 				isOpen={isOpen}
 				classes="max-w-[36rem]"
 				image={
-					<div className="mx-auto flex items-center relative justify-center h-24 w-24 text-5xl text-primary-100">
+					<div className="mx-auto flex items-center relative justify-center h-24 w-24 text-5xl text-primary-500">
 						<i className="fa-solid fa-comment"></i>
 					</div>
 				}

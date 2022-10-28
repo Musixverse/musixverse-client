@@ -113,7 +113,7 @@ export default function BandDashboard({ bandsOfArtist }) {
 
 	return (
 		<div className="w-full flex flex-col">
-			<div className="w-full flex-1 p-10 bg-light-300 dark:bg-dark-100 rounded-xl">
+			<div className="w-full flex-1 p-10 bg-light-300 dark:bg-dark-600 rounded-xl">
 				<div className="w-full flex flex-col items-start justify-between space-y-5 md:flex-row md:space-y-0">
 					<div className="w-full flex flex-col space-y-8">
 						<h1 className="text-4xl font-tertiary">BAND DASHBOARD</h1>

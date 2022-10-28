@@ -34,7 +34,7 @@ export default function TrackDetails({ tokenId, metadata }) {
 	const [isLyricsModalOpen, setLyricsModalOpen] = useState(false);
 
 	return (
-		<div className={"dark:bg-dark-100 dark:border-dark-100 " + styles["track-detail__container"]}>
+		<div className={"dark:bg-dark-600 dark:border-dark-600 " + styles["track-detail__container"]}>
 			<div className="flex flex-col col-span-3 md:col-span-2">
 				<h1 className="font-tertiary text-4xl">TRACK BACKGROUND</h1>
 				<p className="mt-4 pr-2 font-secondary text-base text-justify max-h-[320px] overflow-y-scroll whitespace-pre-wrap">{metadata.description}</p>
@@ -162,7 +162,7 @@ export default function TrackDetails({ tokenId, metadata }) {
 
 				{/* Section 5 */}
 				{metadata.links.spotify || metadata.links.appleMusic || metadata.links.amazonMusic || metadata.links.youtubeMusic || metadata.links.other ? (
-					<div className={"mt-6 dark:bg-dark-200 " + styles["other-details__footer"]}>
+					<div className={"mt-6 dark:bg-dark-800 " + styles["other-details__footer"]}>
 						<h4 className="font-secondary text-lg">Listen on</h4>
 						<div className={styles["footer__icons"]}>
 							{metadata.links.spotify ? (

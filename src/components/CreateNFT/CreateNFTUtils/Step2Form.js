@@ -121,7 +121,7 @@ export default function Step2Form({
 						onChange={(e) => {
 							setIsrc(e.target.value);
 						}}
-						className="w-full px-2 py-2 border-2 border-[#777777] rounded-md shadow-sm outline-none focus:border-primary-100 focus:dark:border-primary-100 dark:bg-[#323232] dark:border-[#323232]"
+						className="w-full px-2 py-2 border-2 border-[#777777] rounded-md shadow-sm outline-none focus:border-primary-500 focus:dark:border-primary-500 dark:bg-[#323232] dark:border-[#323232]"
 					></input>
 
 					<p className="mt-4 text-sm">
@@ -139,7 +139,7 @@ export default function Step2Form({
 							value={links.spotifyLink}
 							onChange={handleLinksChange}
 							placeholder="Spotify Track Link"
-							className="dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-100 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-100"
+							className="dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-500 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-500"
 						/>
 						<input
 							type={"url"}
@@ -147,7 +147,7 @@ export default function Step2Form({
 							value={links.appleMusicLink}
 							onChange={handleLinksChange}
 							placeholder="Apple Music Track Link"
-							className="dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-100 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-100"
+							className="dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-500 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-500"
 						/>
 					</div>
 					<div className="flex justify-between w-full mt-3 space-x-3">
@@ -157,7 +157,7 @@ export default function Step2Form({
 							value={links.amazonMusicLink}
 							onChange={handleLinksChange}
 							placeholder="Amazon Music Track Link"
-							className="dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-100 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-100"
+							className="dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-500 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-500"
 						/>
 						<input
 							type={"url"}
@@ -165,7 +165,7 @@ export default function Step2Form({
 							value={links.youtubeMusicLink}
 							onChange={handleLinksChange}
 							placeholder="Youtube Music Track Link"
-							className="dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-100 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-100"
+							className="dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-500 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-500"
 						/>
 					</div>
 					<input
@@ -174,7 +174,7 @@ export default function Step2Form({
 						value={links.other}
 						onChange={handleLinksChange}
 						placeholder="Any other link"
-						className="mt-3 dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-100 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-100"
+						className="mt-3 dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-500 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-500"
 					/>
 				</div>
 			</div>

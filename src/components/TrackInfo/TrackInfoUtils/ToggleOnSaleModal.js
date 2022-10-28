@@ -38,7 +38,7 @@ const ToggleOnSaleModal = ({ isOpen, setToggleOnSaleModalOpen, tokenId, onSale }
 			<Modal
 				isOpen={isOpen}
 				image={
-					<div className="mx-auto flex items-center relative justify-center h-24 w-24 text-5xl text-primary-100">
+					<div className="mx-auto flex items-center relative justify-center h-24 w-24 text-5xl text-primary-500">
 						<i className="fa-solid fa-sliders"></i>
 					</div>
 				}
@@ -57,7 +57,7 @@ const ToggleOnSaleModal = ({ isOpen, setToggleOnSaleModalOpen, tokenId, onSale }
 						<form onSubmit={toggleOnSaleAttribute}>
 							<button
 								type="submit"
-								className="rounded-lg px-12 py-2 mt-14 bg-primary-100 font-primary font-semibold text-lg text-light-100 hover:bg-primary-200"
+								className="rounded-lg px-12 py-2 mt-14 bg-primary-500 font-primary font-semibold text-lg text-light-100 hover:bg-primary-600"
 							>
 								Confirm
 							</button>

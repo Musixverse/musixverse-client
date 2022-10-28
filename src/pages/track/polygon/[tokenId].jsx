@@ -91,7 +91,7 @@ export default function TrackInfo({
 				<meta name="description" content={meta_description} />
 			</Head>
 
-			<div className="flex flex-col items-center justify-center w-full bg-light-100 dark:bg-dark-200 pt-28 pb-20">
+			<div className="flex flex-col items-center justify-center w-full bg-light-100 dark:bg-dark-900 pt-28 pb-20">
 				<div className="w-full max-w-[1920px] px-10 sm:px-16 xl:px-20 2xl:px-36">
 					<TrackHeader
 						tokenId={tokenId}

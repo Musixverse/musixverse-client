@@ -11,7 +11,7 @@ export default function SortBy({ appliedFilter, setAppliedFilter, setCurrentFilt
 					<p className="font-secondary text-[#7F7F7F] text-[11px] md:text-[13px] lg:text-[15px]">Sort NFTs based on Price or Date </p>
 				</div>
 				<button
-					className="bg-dark-100 text-light-200 text-sm px-6 py-1 rounded"
+					className="bg-dark-600 text-light-200 text-sm px-6 py-1 rounded"
 					onClick={() => {
 						setCurrentFilterType(0);
 						setAppliedFilter({ type: "reset" });

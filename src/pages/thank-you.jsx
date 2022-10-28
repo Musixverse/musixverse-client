@@ -29,7 +29,7 @@ function ThankYou() {
 
 							<div className="flex justify-center mt-4 space-x-5">
 								<a
-									className="flex items-center justify-center p-2 rounded-md bg-dark-100"
+									className="flex items-center justify-center p-2 rounded-md bg-dark-600"
 									href="https://discord.com/invite/rXKb7rCqjG"
 									target={"_blank"}
 									rel="noopener noreferrer"
@@ -37,7 +37,7 @@ function ThankYou() {
 									<Image src={discord} width={20} height={20} alt="discord"></Image>
 								</a>
 								<a
-									className="flex items-center justify-center p-2 rounded-md bg-dark-100"
+									className="flex items-center justify-center p-2 rounded-md bg-dark-600"
 									href="https://twitter.com/musixverse"
 									target={"_blank"}
 									rel="noopener noreferrer"
@@ -45,7 +45,7 @@ function ThankYou() {
 									<Image src={twitter} width={20} height={20} alt="twitter"></Image>
 								</a>
 								<a
-									className="flex items-center justify-center p-2 rounded-md bg-dark-100"
+									className="flex items-center justify-center p-2 rounded-md bg-dark-600"
 									href=" https://www.instagram.com/musixverse/"
 									target={"_blank"}
 									rel="noopener noreferrer"
@@ -53,7 +53,7 @@ function ThankYou() {
 									<Image src={instagram} width={20} height={20} alt="instagram"></Image>
 								</a>
 								<a
-									className="flex items-center justify-center p-2 rounded-md bg-dark-100"
+									className="flex items-center justify-center p-2 rounded-md bg-dark-600"
 									href="https://www.facebook.com/Musixverse-104390125641359"
 									target={"_blank"}
 									rel="noopener noreferrer"
@@ -66,7 +66,7 @@ function ThankYou() {
 				</div>
 
 				<Link href="/" passHref={true}>
-					<button className="px-5 py-3 mt-6 text-xs text-white bg-primary-200 hover:bg-primary-300 font-primary rounded-lg">
+					<button className="px-5 py-3 mt-6 text-xs text-white bg-primary-600 hover:bg-primary-700 font-primary rounded-lg">
 						Go Back to HomePage
 					</button>
 				</Link>

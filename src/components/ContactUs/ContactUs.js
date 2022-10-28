@@ -128,7 +128,7 @@ export default function ContactUs() {
 						<div>
 							Email us at:
 							<br />
-							<a href="mailto:contact@musixverse.com" target="_blank" rel="noopener noreferrer" className="hover:text-primary-100">
+							<a href="mailto:contact@musixverse.com" target="_blank" rel="noopener noreferrer" className="hover:text-primary-500">
 								contact@musixverse.com
 							</a>
 							<br />
@@ -165,7 +165,7 @@ export default function ContactUs() {
 										</div>
 
 										<div className="mt-5">
-											<div className="font-primary text-primary-100 text-sm">
+											<div className="font-primary text-primary-500 text-sm">
 												You can leave an anonymous note but if you do not provide your email, we will not be able to connect with you
 												and respond to your query.
 											</div>
@@ -212,7 +212,7 @@ export default function ContactUs() {
 							Want to explain the issue in detail to our team? Please head over to the support channel on discord and tell us about the problem
 							there.
 							<br />
-							<a href={DISCORD_INVITE_LINK} className="text-primary-100" target="_blank" rel="noopener noreferrer">
+							<a href={DISCORD_INVITE_LINK} className="text-primary-500" target="_blank" rel="noopener noreferrer">
 								Click here to join the discord server
 							</a>
 						</div>

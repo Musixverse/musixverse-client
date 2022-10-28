@@ -10,7 +10,7 @@ export default function DefaultAvatar(props) {
 			<div
 				className={
 					"w-[30px] h-[30px] relative overflow-hidden sm:w-[39px] sm:h-[39px] rounded-full cursor-pointer bg-light-300 " +
-					(currImage === idx + 1 && props.urls.includes(props.avatar) ? "ring-2 ring-offset-2 ring-primary-100" : "")
+					(currImage === idx + 1 && props.urls.includes(props.avatar) ? "ring-2 ring-offset-2 ring-primary-500" : "")
 				}
 				key={idx}
 				onClick={() => {

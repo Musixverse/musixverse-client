@@ -182,7 +182,7 @@ const CreateBandPage = () => {
 
 	return (
 		<>
-			<div className="w-full flex flex-col items-center justify-center bg-light-200 dark:bg-dark-200">
+			<div className="w-full flex flex-col items-center justify-center bg-light-200 dark:bg-dark-800">
 				<div className="w-full max-w-[1920px] flex flex-col lg:flex-row items-center justify-center pt-36 pb-32 lg:pt-36 px-6 md:px-8 lg:px-16 xl:px-20 2xl:px-36">
 					<form
 						onSubmit={async (e) => {
@@ -191,7 +191,7 @@ const CreateBandPage = () => {
 						}}
 						className="w-full"
 					>
-						<div className="w-full rounded-2xl backdrop-blur-xl bg-light-100 dark:bg-dark-100 min-h-full sm:p-14 p-10 lg:pb-10">
+						<div className="w-full rounded-2xl backdrop-blur-xl bg-light-100 dark:bg-dark-600 min-h-full sm:p-14 p-10 lg:pb-10">
 							<div className="w-full">
 								<p className="font-tertiary text-5xl">CREATE BAND</p>
 							</div>
@@ -206,7 +206,7 @@ const CreateBandPage = () => {
 										type={"text"}
 										value={bandName}
 										onChange={(e) => setBandName(e.target.value)}
-										className="w-full px-2 py-1 mt-1 border-2 border-[#777777] rounded-md shadow-sm outline-none focus:border-primary-100 focus:dark:border-primary-100 dark:bg-[#323232] dark:border-[#323232]"
+										className="w-full px-2 py-1 mt-1 border-2 border-[#777777] rounded-md shadow-sm outline-none focus:border-primary-500 focus:dark:border-primary-500 dark:bg-[#323232] dark:border-[#323232]"
 										required
 									></input>
 
@@ -218,7 +218,7 @@ const CreateBandPage = () => {
 										type={"text"}
 										value={bandUsername}
 										onChange={(e) => setBandUsername(e.target.value)}
-										className="w-full px-2 py-1 mt-1 border-2 border-[#777777] rounded-md shadow-sm outline-none focus:border-primary-100 focus:dark:border-primary-100 dark:bg-[#323232] dark:border-[#323232]"
+										className="w-full px-2 py-1 mt-1 border-2 border-[#777777] rounded-md shadow-sm outline-none focus:border-primary-500 focus:dark:border-primary-500 dark:bg-[#323232] dark:border-[#323232]"
 										required
 									></input>
 									<p className="text-[#777777] mt-1 font-normal text-xs">This will be the username of your band on Musixverse</p>
@@ -231,7 +231,7 @@ const CreateBandPage = () => {
 													value={bandDescription}
 													onChange={(e) => setBandDescription(e.target.value)}
 													className={
-														"mt-1 dark:bg-[#323232] dark:focus:bg-[#1a1a1a] dark:border-[#323232] w-full p-2 border-[2px] border-[#777777] focus:border-[2px] focus:border-primary-100 dark:focus:border-primary-100 rounded focus:outline-none focus:shadow-none dark:focus:text-primary-100 font-normal resize-none"
+														"mt-1 dark:bg-[#323232] dark:focus:bg-[#1a1a1a] dark:border-[#323232] w-full p-2 border-[2px] border-[#777777] focus:border-[2px] focus:border-primary-500 dark:focus:border-primary-500 rounded focus:outline-none focus:shadow-none dark:focus:text-primary-500 font-normal resize-none"
 													}
 													name="bandDescription"
 													rows="8"
@@ -266,31 +266,6 @@ const CreateBandPage = () => {
 										{bandMembers.map((member, index) => {
 											return (
 												<div key={index} className="flex gap-2">
-													{/* <div className="flex justify-center items-center">
-														<div>
-															{member.hasAcceptedBandInvite ? (
-																<Tooltip
-																	labelText={
-																		<span className="text-primary-200 text-xl">
-																			<i className="fa-solid fa-circle-check"></i>
-																		</span>
-																	}
-																	message={"Artist has accepted band invite."}
-																	tooltipLocation={"left"}
-																/>
-															) : (
-																<Tooltip
-																	labelText={
-																		<span className="text-error-200 text-xl">
-																			<i className="fa-solid fa-circle-xmark"></i>
-																		</span>
-																	}
-																	message={"Artist hasn't accepted the band invite yet."}
-																	tooltipLocation={"left"}
-																/>
-															)}
-														</div>
-													</div> */}
 													{index == 0 ? (
 														<div className="relative basis-1/2">
 															{member.avatar && (
@@ -343,7 +318,7 @@ const CreateBandPage = () => {
 																</>
 															) : (
 																<input
-																	className="dark:text-light-100 dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-100 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-100"
+																	className="dark:text-light-100 dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-500 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-500"
 																	id="username"
 																	name="username"
 																	type="text"
@@ -366,7 +341,7 @@ const CreateBandPage = () => {
 																				{filteredUsers.length === 1 ? (
 																					<button
 																						type="button"
-																						className="flex items-center justify-start px-3 py-2 rounded bg-zinc-100 dark:bg-dark-100 hover:text-light-100 dark:text-light-100 hover:bg-primary-100 dark:hover:bg-primary-100 text-start"
+																						className="flex items-center justify-start px-3 py-2 rounded bg-zinc-100 dark:bg-dark-600 hover:text-light-100 dark:text-light-100 hover:bg-primary-500 dark:hover:bg-primary-500 text-start"
 																						onClick={() => {
 																							setBandMemberInfo(user, index);
 																						}}
@@ -390,7 +365,7 @@ const CreateBandPage = () => {
 																				) : idx === 0 ? (
 																					<button
 																						type="button"
-																						className="flex items-center justify-start px-3 py-2 rounded-t bg-zinc-100 dark:bg-dark-100 hover:text-light-100 dark:text-light-100 hover:bg-primary-100 dark:hover:bg-primary-100 text-start"
+																						className="flex items-center justify-start px-3 py-2 rounded-t bg-zinc-100 dark:bg-dark-600 hover:text-light-100 dark:text-light-100 hover:bg-primary-500 dark:hover:bg-primary-500 text-start"
 																						onClick={() => {
 																							setBandMemberInfo(user, index);
 																						}}
@@ -414,7 +389,7 @@ const CreateBandPage = () => {
 																				) : filteredUsers.length === idx + 1 ? (
 																					<button
 																						type="button"
-																						className="flex items-center justify-start px-3 py-2 rounded-b bg-zinc-100 dark:bg-dark-100 hover:text-light-100 dark:text-light-100 hover:bg-primary-100 dark:hover:bg-primary-100 text-start"
+																						className="flex items-center justify-start px-3 py-2 rounded-b bg-zinc-100 dark:bg-dark-600 hover:text-light-100 dark:text-light-100 hover:bg-primary-500 dark:hover:bg-primary-500 text-start"
 																						onClick={() => {
 																							setBandMemberInfo(user, index);
 																						}}
@@ -438,7 +413,7 @@ const CreateBandPage = () => {
 																				) : (
 																					<button
 																						type="button"
-																						className="flex items-center justify-start px-3 py-2 bg-zinc-100 dark:bg-dark-100 hover:text-light-100 dark:text-light-100 hover:bg-primary-100 dark:hover:bg-primary-100 text-start"
+																						className="flex items-center justify-start px-3 py-2 bg-zinc-100 dark:bg-dark-600 hover:text-light-100 dark:text-light-100 hover:bg-primary-500 dark:hover:bg-primary-500 text-start"
 																						onClick={() => {
 																							setBandMemberInfo(user, index);
 																						}}
@@ -471,11 +446,11 @@ const CreateBandPage = () => {
 																					setUsernameEntered("");
 																					setSearchedUsername("");
 																				}}
-																				className="justify-start px-6 py-3 rounded bg-zinc-100 hover:bg-gray-200 dark:bg-dark-100 dark:text-light-100 text-start"
+																				className="justify-start px-6 py-3 rounded bg-zinc-100 hover:bg-gray-200 dark:bg-dark-600 dark:text-light-100 text-start"
 																			>
 																				<span className="text-xs">
 																					No results found.&nbsp;&nbsp;
-																					<a className="cursor-pointer text-primary-200 hover:underline">
+																					<a className="cursor-pointer text-primary-600 hover:underline">
 																						Send an Invite <i className="fa-solid fa-arrow-right"></i>
 																					</a>
 																				</span>
@@ -489,7 +464,7 @@ const CreateBandPage = () => {
 
 													<div className="basis-1.5/5">
 														<input
-															className="dark:bg-[#323232] dark:border-[#323232] dark:text-light-100 dark:focus:border-primary-100 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-100"
+															className="dark:bg-[#323232] dark:border-[#323232] dark:text-light-100 dark:focus:border-primary-500 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-500"
 															name="role"
 															type="text"
 															placeholder="Role. Eg. Drummer"
@@ -520,7 +495,7 @@ const CreateBandPage = () => {
 										<div className="flex items-center justify-start mt-4">
 											<button
 												type="button"
-												className="rounded-full flex justify-center items-center w-8 h-8 bg-primary-100 hover:bg-primary-200 text-white"
+												className="rounded-full flex justify-center items-center w-8 h-8 bg-primary-500 hover:bg-primary-600 text-white"
 												onClick={handleAddMemberClick}
 											>
 												+
@@ -531,7 +506,7 @@ const CreateBandPage = () => {
 
 									<p className="text-xs text-[#777777] font-normal mt-6">
 										Can&apos;t find your fellow band member here? Invite them to Musixverse-&nbsp;
-										<a onClick={() => setInvitationModalOpen(true)} className="cursor-pointer text-primary-200 hover:underline">
+										<a onClick={() => setInvitationModalOpen(true)} className="cursor-pointer text-primary-600 hover:underline">
 											Send an invite
 										</a>
 									</p>

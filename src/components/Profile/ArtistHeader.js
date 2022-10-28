@@ -123,7 +123,7 @@ export default function ArtistHeader({ username, profileDetails, setShowArtistBi
 					  user.attributes.isArtist &&
 					  !profileDetails.isBand ? (
 						<Link href="/profile/verify" passHref>
-							<a className="ml-4 font-primary text-sm hover:text-primary-100 cursor-pointer hover:underline">Verify profile</a>
+							<a className="ml-4 font-primary text-sm hover:text-primary-500 cursor-pointer hover:underline">Verify profile</a>
 						</Link>
 					) : null}
 					<p className="font-primary text-sm text-center">@{username}</p>
@@ -148,7 +148,7 @@ export default function ArtistHeader({ username, profileDetails, setShowArtistBi
 											followProfileUser();
 										}}
 										greenOutline={true}
-										classes="text-base px-10 py-1.5 block group-hover:hidden dark:bg-dark-100 rounded-full"
+										classes="text-base px-10 py-1.5 block group-hover:hidden dark:bg-dark-600 rounded-full"
 									>
 										Following
 									</CustomButton>
@@ -204,7 +204,7 @@ export default function ArtistHeader({ username, profileDetails, setShowArtistBi
 						  user.attributes.isArtist &&
 						  !profileDetails.isBand ? (
 							<Link href="/profile/verify" passHref>
-								<a className="ml-4 font-primary text-sm hover:text-primary-100 cursor-pointer hover:underline">Verify profile</a>
+								<a className="ml-4 font-primary text-sm hover:text-primary-500 cursor-pointer hover:underline">Verify profile</a>
 							</Link>
 						) : null}
 						<p className="font-primary text-sm">@{username}</p>
@@ -218,28 +218,28 @@ export default function ArtistHeader({ username, profileDetails, setShowArtistBi
 							{profileDetails.spotify ? (
 								<Link href={profileDetails.spotify}>
 									<a target="_blank" rel="noopener noreferrer" className="link-item">
-										<i className="text-2xl fab fa-spotify hover:text-primary-100"></i>
+										<i className="text-2xl fab fa-spotify hover:text-primary-500"></i>
 									</a>
 								</Link>
 							) : null}
 							{profileDetails.instagram ? (
 								<Link href={profileDetails.instagram}>
 									<a target="_blank" rel="noopener noreferrer" className="link-item">
-										<i className="text-2xl fab fa-instagram hover:text-primary-100"></i>
+										<i className="text-2xl fab fa-instagram hover:text-primary-500"></i>
 									</a>
 								</Link>
 							) : null}
 							{profileDetails.twitter ? (
 								<Link href={profileDetails.twitter}>
 									<a target="_blank" rel="noopener noreferrer" className="link-item">
-										<i className="text-2xl fab fa-twitter hover:text-primary-100"></i>
+										<i className="text-2xl fab fa-twitter hover:text-primary-500"></i>
 									</a>
 								</Link>
 							) : null}
 							{profileDetails.facebook ? (
 								<Link href={profileDetails.facebook}>
 									<a target="_blank" rel="noopener noreferrer" className="link-item">
-										<i className="text-2xl fab fa-facebook-square hover:text-primary-100"></i>
+										<i className="text-2xl fab fa-facebook-square hover:text-primary-500"></i>
 									</a>
 								</Link>
 							) : null}

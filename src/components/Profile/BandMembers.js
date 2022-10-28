@@ -20,12 +20,12 @@ const BandMembers = ({ bandMembers, updatedBandMembersList }) => {
 					return (
 						<Link key={bandMember.userId} href={`/profile/${bandMember.username}`} passHref>
 							<a target="_blank" rel="noopener noreferrer">
-								<div className="group cursor-pointer pl-3 pr-8 py-2 bg-light-100 dark:bg-dark-100 rounded-full flex items-center justify-center  w-fit">
+								<div className="group cursor-pointer pl-3 pr-8 py-2 bg-light-100 dark:bg-dark-600 rounded-full flex items-center justify-center  w-fit">
 									<Image src={bandMember.avatar} width={40} height={40} alt="bandMember image" className="rounded-full" />
 									<div className="ml-4 flex flex-col">
 										<div className="flex items-center space-x-4">
 											<p className="text-sm">{bandMember.name}</p>
-											<p className="text-xs group-hover:text-primary-100">@{bandMember.username}</p>
+											<p className="text-xs group-hover:text-primary-500">@{bandMember.username}</p>
 										</div>
 										<p className="text-xs">{bandMember.role}</p>
 									</div>

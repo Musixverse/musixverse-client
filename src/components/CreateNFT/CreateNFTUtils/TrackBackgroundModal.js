@@ -50,7 +50,7 @@ export default function TrackBackgroundModal({ isOpen, onClose, trackBackground,
 					leaveFrom="opacity-100 scale-100"
 				>
 					<div style={{ zIndex: "50" }} className="flex left-0 top-0 justify-center items-center h-full w-full fixed">
-						<div className="max-w-[48rem] sm:w-full w-11/12 p-4 pl-10 pb-12 bg-white dark:bg-dark-100 rounded-lg">
+						<div className="max-w-[48rem] sm:w-full w-11/12 p-4 pl-10 pb-12 bg-white dark:bg-dark-600 rounded-lg">
 							<div className="w-full flex justify-end">
 								<div
 									onClick={() => closeModal()}
@@ -74,7 +74,7 @@ export default function TrackBackgroundModal({ isOpen, onClose, trackBackground,
 											setTrackBackground(e.target.value);
 										}}
 										className={
-											"mt-8 dark:bg-[#323232] dark:focus:bg-[#1a1a1a] dark:border-[#323232] w-full p-2 border-[2px] border-[#777777] focus:border-[2px] focus:border-primary-100 dark:focus:border-primary-100 rounded focus:outline-none focus:shadow-none dark:focus:text-primary-100 font-normal resize-none"
+											"mt-8 dark:bg-[#323232] dark:focus:bg-[#1a1a1a] dark:border-[#323232] w-full p-2 border-[2px] border-[#777777] focus:border-[2px] focus:border-primary-500 dark:focus:border-primary-500 rounded focus:outline-none focus:shadow-none dark:focus:text-primary-500 font-normal resize-none"
 										}
 										name="trackBackground"
 										rows="8"
@@ -85,7 +85,7 @@ export default function TrackBackgroundModal({ isOpen, onClose, trackBackground,
 										<button
 											type="button"
 											onClick={() => closeModal()}
-											className="sm:w-1/3 w-2/3 bg-light-200 dark:bg-dark-200 hover:bg-primary-100 dark:hover:bg-primary-100 hover:text-light-100 rounded-lg flex justify-center items-center p-4 text-sm"
+											className="sm:w-1/3 w-2/3 bg-light-200 dark:bg-dark-800 hover:bg-primary-500 dark:hover:bg-primary-500 hover:text-light-100 rounded-lg flex justify-center items-center p-4 text-sm"
 										>
 											<div className="flex justify-center items-center w-full">
 												<i className="fas fa-save text-lg"></i>

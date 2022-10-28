@@ -86,9 +86,9 @@ export default function SelectAvatar({ defaultAvatarUrls, avatar, setAvatar }) {
 						<label
 							htmlFor="upload-avatar"
 							className="flex items-center justify-center
-                        text-dark-200 cursor-pointer w-[30px] h-[30px] sm:w-[39px] sm:h-[39px] rounded-full bg-light-300 hover:bg-[#bad9d5] text-[18px] sm:text-[20px]"
+                        text-dark-800 cursor-pointer w-[30px] h-[30px] sm:w-[39px] sm:h-[39px] rounded-full bg-light-300 hover:bg-[#bad9d5] text-[18px] sm:text-[20px]"
 						>
-							<i className="text-dark-200 fa fa-upload"></i>
+							<i className="text-dark-800 fa fa-upload"></i>
 						</label>
 					</div>
 					<input ref={uploadImage} className="hidden" onChange={handleImageUpload} type={"file"} id="upload-avatar" accept="image/*" />

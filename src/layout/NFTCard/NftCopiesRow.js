@@ -8,7 +8,7 @@ const NftCopiesRow = ({ token, trackName }) => {
 	return (
 		<>
 			<Link href={`/track/polygon/${token.tokenId}`} passHref>
-				<a className="flex py-2 px-4 rounded-lg hover:bg-light-300 dark:hover:bg-dark-200">
+				<a className="flex py-2 px-4 rounded-lg hover:bg-light-300 dark:hover:bg-dark-800">
 					<div className="flex justify-between w-full">
 						<p className="font-bold font-secondary">
 							{"#"}

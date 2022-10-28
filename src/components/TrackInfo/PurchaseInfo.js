@@ -8,7 +8,7 @@ export default function PurchaseInfo({ tokenId, resaleRoyaltyPercentage, current
 	const { user } = useMoralis();
 
 	return (
-		<div className={"dark:bg-dark-100 " + styles["purchase-info"]}>
+		<div className={"dark:bg-dark-600 " + styles["purchase-info"]}>
 			{/* Heading DIV */}
 			<div className={styles["purchase-info__heading"]}>
 				<h1 className="font-tertiary text-3xl">PURCHASE INFO</h1>

@@ -14,7 +14,7 @@ export default function CatalogBody({ currentSelection, setAppliedFilter, applie
 	else if (currentSelection === 3) catalogType = "TRENDING NFTs ON MUSIXVERSE";
 
 	return (
-		<div className="flex flex-col items-center justify-center w-full bg-light-200 dark:bg-dark-200">
+		<div className="flex flex-col items-center justify-center w-full bg-light-200 dark:bg-dark-900">
 			<div className="w-full max-w-[1920px] px-6 pt-16 pb-28 md:px-8 lg:px-16 xl:px-20 2xl:px-36">
 				<div className="flex flex-col items-center w-full">
 					<div className="flex text-[#1d1d1d] mb-[35px] items-center space-x-2 sm:text-4xl text-3xl font-tertiary">

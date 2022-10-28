@@ -159,7 +159,7 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 					leaveFrom="opacity-100 scale-100"
 				>
 					<div style={{ zIndex: "50" }} className="flex justify-center items-center h-full w-full fixed">
-						<div className="max-w-[48rem] sm:w-[80vw] w-11/12 p-4 pl-10 pb-12 bg-white dark:bg-dark-100 rounded-lg">
+						<div className="max-w-[48rem] sm:w-[80vw] w-11/12 p-4 pl-10 pb-12 bg-white dark:bg-dark-600 rounded-lg">
 							<div className="w-full flex justify-between">
 								<div className="w-full flex flex-col justify-start items-start">
 									{theme === "dark" ? (
@@ -184,7 +184,7 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 										<p className="text-[10px] text-gray-400 mt-8 sm:mt-36 pr-14">
 											If you do not have an access code yet, please{" "}
 											<Link href={DISCORD_SUPPORT_CHANNEL_INVITE_LINK} passHref>
-												<a target="_blank" rel="noopener noreferrer" className="text-primary-100 hover:text-primary-200">
+												<a target="_blank" rel="noopener noreferrer" className="text-primary-500 hover:text-primary-600">
 													contact our team here
 												</a>
 											</Link>
@@ -213,14 +213,14 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 													setAccessCode(e.target.value);
 													setBetaAccessError(false);
 												}}
-												className="w-full p-2 border-2 border-gray-500 rounded-md shadow-sm outline-none focus:border-primary-100 text-sm"
+												className="w-full p-2 border-2 border-gray-500 rounded-md shadow-sm outline-none focus:border-primary-500 text-sm"
 												required
 											/>
-											{betaAccessError && <span className="text-error-200 text-xs mt-1">Invalid access code</span>}
+											{betaAccessError && <span className="text-error-600 text-xs mt-1">Invalid access code</span>}
 											<div className="flex justify-end mt-12">
 												<button
 													type="submit"
-													className="flex justify-center items-center space-x-3 bg-primary-100 hover:bg-primary-200 text-[14px] text-light-100 py-2 px-6 rounded-lg font-primary font-semibold max-w-[210px]"
+													className="flex justify-center items-center space-x-3 bg-primary-500 hover:bg-primary-600 text-[14px] text-light-100 py-2 px-6 rounded-lg font-primary font-semibold max-w-[210px]"
 												>
 													Submit
 													<span className="ml-2 text-xl">
@@ -245,7 +245,7 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 										<div className="mt-6 w-full space-y-4">
 											<button
 												onClick={() => metamaskLogin()}
-												className="w-full bg-light-200 hover:bg-light-300 dark:bg-dark-200 dark:hover:bg-[#000] rounded-lg flex items-center p-4 text-sm"
+												className="w-full bg-light-200 hover:bg-light-300 dark:bg-dark-800 dark:hover:bg-[#000] rounded-lg flex items-center p-4 text-sm"
 											>
 												<Image src="/assets/metamask.png" alt="Metamask Logo" width="40" height="40" />
 												<div className="flex justify-between items-center w-full">
@@ -257,7 +257,7 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 											</button>
 											<button
 												onClick={() => walletconnectLogin()}
-												className="w-full bg-light-200 hover:bg-light-300 dark:bg-dark-200 dark:hover:bg-[#000] rounded-lg flex items-center p-4 text-sm"
+												className="w-full bg-light-200 hover:bg-light-300 dark:bg-dark-800 dark:hover:bg-[#000] rounded-lg flex items-center p-4 text-sm"
 											>
 												<Image src="/assets/walletconnect.png" alt="WalletConnect Logo" width="40" height="40" />
 												<div className="flex justify-between items-center w-full">
@@ -269,7 +269,7 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 											</button>
 											{/* <button
 												onClick={() => setMagicFormOpen(true)}
-												className="w-full bg-light-200 hover:bg-light-300 dark:bg-dark-200 dark:hover:bg-[#000] rounded-lg flex items-center p-4 text-sm"
+												className="w-full bg-light-200 hover:bg-light-300 dark:bg-dark-800 dark:hover:bg-[#000] rounded-lg flex items-center p-4 text-sm"
 											>
 												<Image src="/assets/magic.svg" alt="Magic Logo" width="35" height="35" />
 												<div className="flex justify-between items-center w-full">
@@ -297,13 +297,13 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 											<input
 												type="email"
 												ref={emailRef}
-												className="w-full p-2 border-2 border-gray-500 rounded-md shadow-sm outline-none focus:border-primary-100 text-sm"
+												className="w-full p-2 border-2 border-gray-500 rounded-md shadow-sm outline-none focus:border-primary-500 text-sm"
 												required
 											/>
 											<div className="flex justify-end mt-12">
 												<button
 													type="submit"
-													className="flex justify-center items-center space-x-3 bg-primary-100 hover:bg-primary-200 text-[14px] text-light-100 py-2 px-6 rounded-lg font-primary font-semibold max-w-[210px]"
+													className="flex justify-center items-center space-x-3 bg-primary-500 hover:bg-primary-600 text-[14px] text-light-100 py-2 px-6 rounded-lg font-primary font-semibold max-w-[210px]"
 												>
 													Submit
 													<span className="ml-2 text-xl">

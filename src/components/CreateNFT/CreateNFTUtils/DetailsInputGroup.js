@@ -49,7 +49,7 @@ export default function DetailsInputGroup({
 						maxLength={4}
 						placeholder="Enter the recording year"
 						spellCheck={false}
-						className="dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-100 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-100"
+						className="dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-500 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-500"
 						required
 					/>
 				</div>
@@ -59,7 +59,9 @@ export default function DetailsInputGroup({
 						<RequiredAsterisk />
 						<Tooltip
 							labelText={<i className="pl-4 fa-solid fa-circle-info"></i>}
-							message={"By marking your asset as explicit for NSFW (Not Safe For Work) content will protect users with safe search while browsing Musixverse."}
+							message={
+								"By marking your asset as explicit for NSFW (Not Safe For Work) content will protect users with safe search while browsing Musixverse."
+							}
 							tooltipLocation={"bottom"}
 						/>
 					</p>

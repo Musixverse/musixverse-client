@@ -32,7 +32,7 @@ export default function UnlockableContent({
 	const { draft } = router.query;
 	return (
 		<>
-			<div className="flex items-center justify-center mb-28 lg:mb-36 bg-light-200 dark:bg-dark-200">
+			<div className="flex items-center justify-center mb-28 lg:mb-36 bg-light-200 dark:bg-dark-800">
 				<div className="flex-col flex w-full max-w-[1920px] mt-28 lg:mt-36 px-6 md:px-8 lg:px-16 xl:px-20 2xl:px-36">
 					<form
 						onSubmit={async (e) => {

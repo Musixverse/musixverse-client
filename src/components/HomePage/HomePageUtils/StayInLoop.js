@@ -35,13 +35,13 @@ export default function StayInLoop() {
 							id="MERGE0"
 							autoCapitalize="off"
 							autoCorrect="off"
-							className="py-3 px-4 text-sm rounded-lg outline-none sm:w-[267px] md:w-[283px] 2xl:w-[315px] font-primary bg-dark-100 text-light-100"
+							className="py-3 px-4 text-sm rounded-lg outline-none sm:w-[267px] md:w-[283px] 2xl:w-[315px] font-primary bg-dark-600 text-light-100"
 							placeholder="Your email address"
 							required
 						></input>
 						<button
 							type="submit"
-							className="max-w-[137px] py-2 mt-3 font-semibold rounded md:mt-0 md:ml-3 px-7 bg-light-100 hover:bg-light-200 dark:text-dark-100"
+							className="max-w-[137px] py-2 mt-3 font-semibold rounded md:mt-0 md:ml-3 px-7 bg-light-100 hover:bg-light-200 dark:text-dark-600"
 						>
 							Subscribe
 						</button>
@@ -50,7 +50,7 @@ export default function StayInLoop() {
 						<p className="mb-1 lg:hidden font-secondary text-light-100">Join the Community</p>
 						<div className={styles["newsletter__social"]}>
 							<a
-								className="flex items-center justify-center p-2 rounded-md bg-dark-100"
+								className="flex items-center justify-center p-2 rounded-md bg-dark-600"
 								href="https://discord.com/invite/rXKb7rCqjG"
 								target={"_blank"}
 								rel="noopener noreferrer"
@@ -58,7 +58,7 @@ export default function StayInLoop() {
 								<Image src={discord} width={20} height={20} alt="discord"></Image>
 							</a>
 							<a
-								className="flex items-center justify-center p-2 rounded-md bg-dark-100"
+								className="flex items-center justify-center p-2 rounded-md bg-dark-600"
 								href="https://twitter.com/musixverse"
 								target={"_blank"}
 								rel="noopener noreferrer"
@@ -66,7 +66,7 @@ export default function StayInLoop() {
 								<Image src={twitter} width={20} height={20} alt="twitter"></Image>
 							</a>
 							<a
-								className="flex items-center justify-center p-2 rounded-md bg-dark-100"
+								className="flex items-center justify-center p-2 rounded-md bg-dark-600"
 								href=" https://www.instagram.com/musixverse/"
 								target={"_blank"}
 								rel="noopener noreferrer"
@@ -74,7 +74,7 @@ export default function StayInLoop() {
 								<Image src={instagram} width={20} height={20} alt="instagram"></Image>
 							</a>
 							<a
-								className="flex items-center justify-center p-2 rounded-md bg-dark-100"
+								className="flex items-center justify-center p-2 rounded-md bg-dark-600"
 								href="https://www.facebook.com/Musixverse-104390125641359"
 								target={"_blank"}
 								rel="noopener noreferrer"

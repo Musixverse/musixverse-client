@@ -73,18 +73,18 @@ export default function ImageUpload({ coverArtUrl, setCoverArtUrl, setCoverArtMi
 				<div
 					className={
 						"flex relative items-center justify-center w-[65px] h-[65px] rounded-lg dark:bg-[#1d1d1d] bg-light-300 border-2 " +
-						(coverArtUrl === null ? "border-light-300 dark:border-dark-100" : "border-primary-200 dark:border-primary-200")
+						(coverArtUrl === null ? "border-light-300 dark:border-dark-600" : "border-primary-600 dark:border-primary-600")
 					}
 				>
 					<Image src={uploadImage} objectFit="contain" alt="upload image art digital illustration"></Image>
 					<div className={coverArtUrl === null ? "hidden" : "absolute bottom-2 right-1 bg-light-200 rounded-full h-[20px]"}>
-						<i className={"text-xl text-primary-200 fas fa-check-circle"}></i>
+						<i className={"text-xl text-primary-600 fas fa-check-circle"}></i>
 					</div>
 				</div>
 				<div className="flex-1 font-secondary">
 					<h3 className="font-semibold">UPLOAD COVER ART</h3>
 					{coverArtUrl !== null ? (
-						<p className="text-sm text-primary-200">Image Uploaded</p>
+						<p className="text-sm text-primary-600">Image Uploaded</p>
 					) : (
 						<p className="text-xs">
 							Any Image file | Max file size: 10MB <br /> Recommended size: 640 x 640 px.

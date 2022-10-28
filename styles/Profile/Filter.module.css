@@ -11,7 +11,7 @@
 }
 
 .filter-card__right-section {
-	@apply flex w-[260px] sm:w-auto ml-8 sm:ml-0 mt-3 sm:mt-0 items-center px-4 py-2 bg-white border-2 rounded-xl hover:border-primary-100;
+	@apply flex w-[260px] sm:w-auto ml-8 sm:ml-0 mt-3 sm:mt-0 items-center px-4 py-2 bg-white border-2 rounded-xl hover:border-primary-500;
 }
 
 .filter-card__right-section--sort-by {

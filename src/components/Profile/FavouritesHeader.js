@@ -6,7 +6,7 @@ export default function FavouritesHeader() {
 	const { theme } = useTheme();
 
 	return (
-		<div className={"dark:bg-dark-100 " + styles["filter-card"]}>
+		<div className={"dark:bg-dark-600 " + styles["filter-card"]}>
 			{/* Left Section */}
 			<div className={styles["filter-card__left-section"]}>
 				<Image src={theme === "dark" ? "/assets/record_w.svg" : "/assets/record_b.svg"} alt="vinyl disc" height={30} width={30}></Image>

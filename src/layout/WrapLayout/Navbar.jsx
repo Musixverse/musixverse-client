@@ -73,37 +73,37 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 						{/* Internal links */}
 						<div className="hidden ml-10 lg:block">
 							<ul className="flex flex-row items-center font-medium md:text-base md:space-x-3 xl:space-x-6 md:mt-0 sm:text-sm">
-								{/* <li className="hidden hover:text-primary-200 md:block">
+								{/* <li className="hidden hover:text-primary-600 md:block">
 									<Link
 										href="/"
-										className="py-2 pl-3 pr-4 text-white rounded hover:text-primary-100 md:bg-transparent md:p-0 dark:text-white"
+										className="py-2 pl-3 pr-4 text-white rounded hover:text-primary-500 md:bg-transparent md:p-0 dark:text-white"
 										aria-current="page"
 									>
 										Home
 									</Link>
 								</li> */}
-								<li className="hover:text-primary-200">
+								<li className="hover:text-primary-600">
 									<Link
 										href="/mxcatalog/new-releases"
-										className="block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:text-primary-100 md:hover:bg-transparent md:border-0 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+										className="block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:text-primary-500 md:hover:bg-transparent md:border-0 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
 									>
 										Mx Catalog
 									</Link>
 								</li>
 								{user && user.attributes.isArtist && (
-									<li className="hover:text-primary-200">
+									<li className="hover:text-primary-600">
 										<Link
 											href="/create-nft"
-											className="block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:text-primary-100 md:hover:bg-transparent md:border-0 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+											className="block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:text-primary-500 md:hover:bg-transparent md:border-0 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
 										>
 											Create
 										</Link>
 									</li>
 								)}
-								<li className="hover:text-primary-200">
+								<li className="hover:text-primary-600">
 									<Link
 										href="/help-center"
-										className="block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:text-primary-100 md:hover:bg-transparent md:border-0 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+										className="block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:text-primary-500 md:hover:bg-transparent md:border-0 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
 									>
 										Resources
 									</Link>
@@ -126,7 +126,7 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 
 								{/* Notification button */}
 								{/* <li className="hidden lg:block">
-									<button className="flex items-center relative justify-center text-lg p-2.5 rounded-full bg-search-100 dark:bg-search-200 text-dark-200 dark:text-white">
+									<button className="flex items-center relative justify-center text-lg p-2.5 rounded-full bg-search-100 dark:bg-search-200 text-dark-800 dark:text-white">
 										Notification icon - when notification is ON
 										<i className="fa fa-bell"></i>
 										Notification icon - when notification is OFF
@@ -144,7 +144,7 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 										className={`flex items-center justify-between w-full " + ${user && isAuthenticated ? "" : "rounded-b-xl py-1"} `}
 										onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
 									>
-										<div className="flex items-center justify-center w-10 h-10 rounded-full bg-search-100 dark:bg-search-200 hover:bg-[#bdbdbd] dark:hover:bg-dark-100">
+										<div className="flex items-center justify-center w-10 h-10 rounded-full bg-search-100 dark:bg-search-200 hover:bg-[#bdbdbd] dark:hover:bg-dark-600">
 											{theme === "dark" ? (
 												<svg
 													xmlns="http://www.w3.org/2000/svg"
@@ -219,7 +219,7 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 										>
 											<li>
 												{isAuthenticated && user && (
-													<div className="flex items-center justify-between w-full px-4 py-3 bg-transparent rounded-t-xl dropdown-item whitespace-nowrap dark:hover:bg-dark-100 active:bg-transparent">
+													<div className="flex items-center justify-between w-full px-4 py-3 bg-transparent rounded-t-xl dropdown-item whitespace-nowrap dark:hover:bg-dark-600 active:bg-transparent">
 														<div>
 															<p>Wallet Address</p>
 															<p>{truncatedWalletAddress}</p>
@@ -237,9 +237,9 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 													</div>
 												)}
 												{/* (
-													<div className="px-4 py-3 bg-transparent rounded-t-xl hover:bg-primary-100 hover:text-light-100">
+													<div className="px-4 py-3 bg-transparent rounded-t-xl hover:bg-primary-500 hover:text-light-100">
 														<a
-															className="block w-full dropdown-item whitespace-nowrap hover:bg-primary-100 active:bg-primary-100"
+															className="block w-full dropdown-item whitespace-nowrap hover:bg-primary-500 active:bg-primary-500"
 															href="#"
 															onClick={() => setAuthModalOpen(true)}
 														>
@@ -251,7 +251,7 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 											{user && isAuthenticated && user.attributes.email && (
 												<li>
 													<Link href={`/profile/${user.attributes.username}`} passHref={true}>
-														<div className="block w-full px-4 py-2 bg-transparent cursor-pointer dropdown-item whitespace-nowrap hover:bg-gray-100 dark:hover:bg-dark-100">
+														<div className="block w-full px-4 py-2 bg-transparent cursor-pointer dropdown-item whitespace-nowrap hover:bg-gray-100 dark:hover:bg-dark-600">
 															Profile
 														</div>
 													</Link>
@@ -260,7 +260,7 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 											{user && isAuthenticated && user.attributes.email && (
 												<li>
 													<Link href="/settings/profile-settings" passHref={true}>
-														<div className="block w-full px-4 py-2 bg-transparent cursor-pointer dropdown-item whitespace-nowrap hover:bg-gray-100 dark:hover:bg-dark-100">
+														<div className="block w-full px-4 py-2 bg-transparent cursor-pointer dropdown-item whitespace-nowrap hover:bg-gray-100 dark:hover:bg-dark-600">
 															Settings
 														</div>
 													</Link>
@@ -269,7 +269,7 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 											{/* {user && isAuthenticated && user.attributes.email && (
 												<li>
 													<Link href="/settings/notifications-settings" passHref={true}>
-														<div className="block w-full px-4 py-2 bg-transparent cursor-pointer dropdown-item whitespace-nowrap hover:bg-gray-100 dark:hover:bg-dark-100">
+														<div className="block w-full px-4 py-2 bg-transparent cursor-pointer dropdown-item whitespace-nowrap hover:bg-gray-100 dark:hover:bg-dark-600">
 															Notification Settings
 														</div>
 													</Link>
@@ -278,7 +278,7 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 											{user && isAuthenticated && user.attributes.email && (
 												<li>
 													<Link href="/settings/account-help" passHref={true}>
-														<div className="block w-full px-4 py-2 bg-transparent cursor-pointer dropdown-item whitespace-nowrap hover:bg-gray-100 dark:hover:bg-dark-100">
+														<div className="block w-full px-4 py-2 bg-transparent cursor-pointer dropdown-item whitespace-nowrap hover:bg-gray-100 dark:hover:bg-dark-600">
 															Account Help
 														</div>
 													</Link>
@@ -287,7 +287,7 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 											{user && isAuthenticated && (
 												<li>
 													<Link href="/contact-us" passHref={true}>
-														<div className="block w-full px-4 py-2 bg-transparent cursor-pointer dropdown-item whitespace-nowrap hover:bg-gray-100 dark:hover:bg-dark-100">
+														<div className="block w-full px-4 py-2 bg-transparent cursor-pointer dropdown-item whitespace-nowrap hover:bg-gray-100 dark:hover:bg-dark-600">
 															Contact Us
 														</div>
 													</Link>
@@ -298,11 +298,11 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 											<li>
 												{isAuthenticated && user ? (
 													<button
-														className="w-full px-4 pt-2 pb-3 font-medium transition-all bg-transparent cursor-pointer rounded-b-xl dark:border-light-300 hover:bg-gray-100 dark:hover:bg-dark-100"
+														className="w-full px-4 pt-2 pb-3 font-medium transition-all bg-transparent cursor-pointer rounded-b-xl dark:border-light-300 hover:bg-gray-100 dark:hover:bg-dark-600"
 														onClick={handleLogout}
 													>
 														<Link
-															className="block w-full text-sm dropdown-item whitespace-nowrap hover:bg-primary-100 active:bg-primary-100"
+															className="block w-full text-sm dropdown-item whitespace-nowrap hover:bg-primary-500 active:bg-primary-500"
 															href="#"
 														>
 															Sign out

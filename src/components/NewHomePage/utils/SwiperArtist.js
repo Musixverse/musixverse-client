@@ -31,8 +31,9 @@ export default function SwiperArtist(){
             }
             // slidesPerView={4}
             // spaceBetween={25}
-            autoHeight={true}
-            centeredSlides={true}
+            autoHeight={false}
+            autowidth={false}
+            // centeredSlides={true}
             enabled={true}
             cssMode={true}
             navigation={true}

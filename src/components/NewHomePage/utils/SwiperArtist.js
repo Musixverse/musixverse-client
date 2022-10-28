@@ -1,38 +1,58 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import "swiper/css/pagination";
-import { Pagination } from "swiper";
+import "swiper/css/navigation";
+import { Navigation, Mousewheel, Keyboard } from "swiper";
 
 import ArtistCard from "./ArtistCard";
 import { TopArtist } from "./TopArtistData";
 
 export default function SwiperArtist(){
     return(
-        <div className="swiper-container">
-            <div className="swiper-wrapper">
-                <Swiper
-                    slidesPerView={3}
-                    spaceBetween={30}
-                    pagination={{
-                    clickable: true,
-                    }}
-                    modules={[Pagination]}
-                    className="mySwiper"
-                >
-                    {TopArtist.map((item, index) => {
-                        return (
-                            <SwiperSlide key={index}>
-                                <ArtistCard
-                                    name={item.name}
-                                    instagramProfileURL={item.instagramProfileURL}
-                                    imageURL={item.imageURL}
-                                    description={item.description}
-                                />
-                            </SwiperSlide>
-                        );
-                    })}
-                </Swiper>
-            </div>    
-        </div>
+        <Swiper
+            breakpoints={
+                {
+                    320: {
+                        slidesPerView: 1,
+                        spaceBetween: 10,
+                    },
+                    640: {
+                        slidesPerView: 2,
+                        spaceBetween: 20,
+                    },
+                    768: {
+                        slidesPerView: 3,
+                        spaceBetween: 20,
+                    },
+                    1024: {
+                        slidesPerView: 4,
+                        spaceBetween: 25,
+                    },
+                }
+            }
+            // slidesPerView={4}
+            // spaceBetween={25}
+            autoHeight={true}
+            centeredSlides={true}
+            enabled={true}
+            cssMode={true}
+            navigation={true}
+            mousewheel={true}
+            keyboard={true}
+            modules={[Navigation, Mousewheel, Keyboard]}
+            className="mx-10 absolute bottom-32"
+        >
+            {TopArtist.map((item, index) => {
+                return (
+                    <SwiperSlide key={index}>
+                        <ArtistCard
+                            name={item.name}
+                            instagramProfileURL={item.instagramProfileURL}
+                            imageURL={item.imageURL}
+                            description={item.description}
+                        />
+                    </SwiperSlide>
+                );
+            })}
+        </Swiper>
     );
 }

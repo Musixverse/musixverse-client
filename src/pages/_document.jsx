@@ -9,6 +9,7 @@ export default class CustomDocument extends Document {
 					<link rel="manifest" href="/manifest.json" />
 					<link rel="apple-touch-icon" href="/icon.png" />
 					<link rel="icon" href="/favicon.ico" />
+					<link rel="shortcut icon" href="/favicon.ico" />
 					<meta name="theme-color" content="#fff" />
 					<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/index.min.css" />
 					{/* Google Fonts */}

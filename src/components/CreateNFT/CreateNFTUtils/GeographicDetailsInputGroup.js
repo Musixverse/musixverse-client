@@ -4,7 +4,7 @@ import CitiesDropdown from "../../Settings/SettingsUtils/CitiesDropdown";
 import InputDropdown from "./InputDropdown";
 import RequiredAsterisk from "../../../layout/RequiredAsterisk";
 import Tooltip from "../../../layout/Tooltip/Tooltip";
-import { languageArray } from "../../../constants";
+import { languageArray } from "../../../config/constants";
 
 export default function GeographicDetailsInputGroup({
 	language,

@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { meta_description } from "../../../constants";
+import { meta_description } from "../../../config/constants";
 import BasicDetails from "../../../components/Registration/BasicDetails";
 import { useEffect, useContext } from "react";
 import { useMoralis } from "react-moralis";

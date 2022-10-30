@@ -10,7 +10,7 @@ import Tooltip from "../../layout/Tooltip/Tooltip";
 import LoadingContext from "../../../store/loading-context";
 import StatusContext from "../../../store/status-context";
 import { isBandUsernameValidAndAvailable } from "../../utils/Validate";
-import { defaultAvatarUrls } from "../../constants";
+import { defaultAvatarUrls } from "../../config/constants";
 
 const CreateBandPage = () => {
 	const { Moralis, user } = useMoralis();

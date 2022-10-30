@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useTheme } from "next-themes";
 import styles from "../../../styles/Help/Help.module.css";
 import ReadSection from "./utils/ReadSection";
-import { DISCORD_SUPPORT_CHANNEL_INVITE_LINK } from "../../constants";
+import { DISCORD_SUPPORT_CHANNEL_INVITE_LINK } from "../../config/constants";
 import getting_started_b from "../../../public/assets/help-center/getting-started_b.png";
 import getting_started_w from "../../../public/assets/help-center/getting-started_w.png";
 import buying_b from "../../../public/assets/help-center/buying_b.png";

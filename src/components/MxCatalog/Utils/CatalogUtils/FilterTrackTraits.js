@@ -1,6 +1,6 @@
 import HorizontalRuler from "../../../../layout/HorizontalRuler";
 import FilterDropdown from "./FilterDropdown";
-import { trackOriginArray, genreArray, parentalAdvisoryArray, languageArray, duration, minRecordingYear } from "../../../../constants";
+import { trackOriginArray, genreArray, parentalAdvisoryArray, languageArray, duration, minRecordingYear } from "../../../../config/constants";
 import TagsMultiSelect from "../../../CreateNFT/CreateNFTUtils/TagsMultiSelect";
 
 export default function FilterTrackTraits({ appliedFilter, setAppliedFilter, setCurrentFilterType }) {

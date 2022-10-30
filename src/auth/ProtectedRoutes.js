@@ -1,9 +1,6 @@
-import { useState, useEffect, useContext } from "react";
+import { useEffect, useContext } from "react";
 import { appRoutes } from "./constants";
 import { useMoralis } from "react-moralis";
-import { useTheme } from "next-themes";
-import Loading from "../layout/Loading/Loading";
-import LoadingDark from "../layout/Loading/LoadingDark";
 import LoadingContext from "../../store/loading-context";
 import AccessLevelContext from "../../store/accessLevel-context";
 
@@ -11,7 +8,6 @@ import AccessLevelContext from "../../store/accessLevel-context";
 const isBrowser = () => typeof window !== "undefined";
 
 const ProtectedRoutes = ({ router, children }) => {
-	const { theme } = useTheme();
 	const [isLoading, setLoading] = useContext(LoadingContext);
 	// Level 0: New user who is not signed in
 	// Level 1: Signed up user who hasn't chosen between a collector/artist profile
@@ -22,8 +18,6 @@ const ProtectedRoutes = ({ router, children }) => {
 	// Level 6: Signed up artist with verified email who does not have a verified artist profile, but has initiated a request for verification
 	// Level 7: Signed up artist with a verified artist profile
 	const [accessLevel, setAccessLevel] = useContext(AccessLevelContext);
-
-	const [showContent, setShowContent] = useState(false);
 
 	// Identify authenticated user
 	const { isAuthenticated, user, isInitialized, isWeb3Enabled, enableWeb3, refetchUserData } = useMoralis();
@@ -64,8 +58,6 @@ const ProtectedRoutes = ({ router, children }) => {
 	useEffect(() => {
 		function checkPath() {
 			if (isInitialized) {
-				setShowContent(false);
-
 				if (!isAuthenticated) {
 					if (isBrowser() && pathIsProtected) {
 						router.push(appRoutes.HOMEPAGE);
@@ -84,7 +76,6 @@ const ProtectedRoutes = ({ router, children }) => {
 					}
 				}
 
-				setShowContent(true);
 				setLoading(false);
 			}
 		}
@@ -121,13 +112,6 @@ const ProtectedRoutes = ({ router, children }) => {
 	}, [isWeb3Enabled, isAuthenticated, enableWeb3]);
 
 	return children;
-	if (showContent) {
-		return children;
-	} else {
-		// setLoading(true);
-		isLoading && theme === "dark" ? <LoadingDark /> : <Loading />;
-		return null;
-	}
 };
 
 export default ProtectedRoutes;

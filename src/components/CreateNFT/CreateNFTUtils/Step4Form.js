@@ -9,7 +9,7 @@ import RequiredAsterisk from "../../../layout/RequiredAsterisk";
 import LoadingContext from "../../../../store/loading-context";
 import StatusContext from "../../../../store/status-context";
 import { convertMaticToUSD, convertMaticToINR, truncatePrice } from "../../../utils/GetMarketPrice";
-import { collaboratorRoles } from "../../../constants";
+import { collaboratorRoles } from "../../../config/constants";
 
 const Step4Form = ({
 	numberOfCopies,

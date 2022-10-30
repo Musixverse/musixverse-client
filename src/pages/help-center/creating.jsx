@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { meta_description } from "../../constants";
+import { meta_description } from "../../config/constants";
 import Create from "../../components/HelpCenter/Create";
 import HelpCenterHeading from "../../components/HelpCenter/utils/HelpCenterHeading";
 

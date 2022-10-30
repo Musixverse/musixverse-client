@@ -1,5 +1,7 @@
 import Document, { Html, Head, Main, NextScript } from "next/document";
 import Script from "next/script";
+import { DefaultSeo } from "next-seo";
+import SEO from "../config/next-seo.config";
 
 export default class CustomDocument extends Document {
 	render() {
@@ -11,6 +13,8 @@ export default class CustomDocument extends Document {
 					<link rel="icon" href="/favicon.ico" />
 					<link rel="shortcut icon" href="/favicon.ico" />
 					<meta name="theme-color" content="#fff" />
+					<DefaultSeo {...SEO} />
+
 					<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/index.min.css" />
 					{/* Google Fonts */}
 					<link rel="preconnect" href="https://fonts.googleapis.com" />

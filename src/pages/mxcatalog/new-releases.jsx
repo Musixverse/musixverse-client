@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Moralis from "moralis/node";
-import { meta_description, MORALIS_APP_ID, MORALIS_SERVER_URL } from "../../constants";
+import { meta_description, MORALIS_APP_ID, MORALIS_SERVER_URL } from "../../config/constants";
 import Marketplace from "../../components/MxCatalog/Utils/Marketplace";
 
 export async function getStaticProps() {

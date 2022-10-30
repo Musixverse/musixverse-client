@@ -1,4 +1,4 @@
-import MusixverseFacet from "./utils/smart-contract/contracts/Musixverse/facets/MusixverseFacet.sol/MusixverseFacet.json";
+import MusixverseFacet from "../utils/smart-contract/contracts/Musixverse/facets/MusixverseFacet.sol/MusixverseFacet.json";
 
 /**************************************************************************/
 /**********************    SEO Meta Descriptions   ************************/

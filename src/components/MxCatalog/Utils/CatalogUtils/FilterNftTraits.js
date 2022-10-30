@@ -1,6 +1,6 @@
 import HorizontalRuler from "../../../../layout/HorizontalRuler";
 import FilterDropdown from "./FilterDropdown";
-import { numberOfCollaborators, numberOfCopies, nftStatus, resaleRoyaltyRanges } from "../../../../constants";
+import { numberOfCollaborators, numberOfCopies, nftStatus, resaleRoyaltyRanges } from "../../../../config/constants";
 import CountriesDropdown from "./CountriesDropdown";
 import StatesDropdown from "./StatesDropdown";
 import CitiesDropdown from "./CitiesDropdown";

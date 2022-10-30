@@ -1,7 +1,7 @@
 import Web3 from "web3";
 import Moralis from "moralis";
 // Importing contract abi, address, and other variables
-import { MUSIXVERSE_FACET_CONTRACT_ABI, MORALIS_APP_ID, MORALIS_SERVER_URL } from "../../constants";
+import { MUSIXVERSE_FACET_CONTRACT_ABI, MORALIS_APP_ID, MORALIS_SERVER_URL } from "../../config/constants";
 
 var MUSIXVERSE;
 

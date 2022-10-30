@@ -13,7 +13,7 @@ import Layout from "../layout/WrapLayout/Layout";
 import ScrollToPageTop from "../utils/ScrollToPageTop";
 import { connectSmartContract } from "../utils/smart-contract/functions";
 import "react-datepicker/dist/react-datepicker.css";
-import { MORALIS_APP_ID, MORALIS_SERVER_URL } from "../constants";
+import { MORALIS_APP_ID, MORALIS_SERVER_URL } from "../config/constants";
 import AudioPlayerContext from "../../store/audioplayer-context";
 
 function App({ Component, pageProps, router }) {

@@ -1,9 +1,9 @@
 import Head from "next/head";
-import { meta_description } from "../../constants";
+import { meta_description } from "../../config/constants";
 import Image from "next/image";
 import Link from "next/link";
 import Moralis from "moralis/node";
-import { MORALIS_APP_ID, MORALIS_SERVER_URL } from "../../constants";
+import { MORALIS_APP_ID, MORALIS_SERVER_URL } from "../../config/constants";
 import CustomButton from "../../layout/CustomButton";
 import Tooltip from "../../layout/Tooltip/Tooltip";
 import PreviewDraft from "../../components/CreateNFT/CreateNFTUtils/PreviewDraft";

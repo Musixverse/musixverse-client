@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { title_main_page, meta_description } from "../constants";
+import { title_main_page, meta_description } from "../config/constants";
 import Banner from "../components/HomePage/HomePageBanner";
 import Section2 from "../components/HomePage/HomePage_section3";
 import Section3 from "../components/HomePage/HomePage_section4";

@@ -23,9 +23,9 @@ export default function SuccessConfetti() {
 						"#79CA25",
 						"#1E7F2D",
 					]}
-					initialVelocityY={1600}
+					initialVelocityY={800}
 					numberOfPieces={1200}
-					friction={0.99}
+					friction={0.96}
 					gravity={0.4}
 				/>
 			</div>

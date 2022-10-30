@@ -50,7 +50,7 @@ const UnlockableContentModal = ({ isOpen, setOpen, tokenId, selectedUnlockableIt
 				}
 				title={selectedUnlockableItem && selectedUnlockableItemIndex === 0 ? selectedUnlockableItem.name : selectedUnlockableItem.unlockableHeading}
 				content={
-					<div className={"text-justify whitespace-pre-wrap " + (selectedUnlockableItemIndex !== 3 && "max-h-[500px] overflow-y-scroll")}>
+					<div className={"text-justify whitespace-pre-wrap " + (selectedUnlockableItemIndex !== 3 && "max-h-[500px] overflow-y-scroll pr-4")}>
 						{selectedUnlockableItemIndex === 0 ? (
 							selectedUnlockableItem && selectedUnlockableItem.unlockableItemText
 						) : selectedUnlockableItemIndex === 3 ? (

@@ -1,17 +1,17 @@
 import Web3 from "web3";
 import Moralis from "moralis";
 // Importing contract abi, address, and other variables
-import { MUSIXVERSE_FACET_CONTRACT_ABI, MORALIS_APP_ID, MORALIS_SERVER_URL } from "../../constants";
+import { MUSIXVERSE_FACET_CONTRACT_ABI } from "../../constants";
 
 var MUSIXVERSE;
 
-async function addPolygonTestnetNetwork() {
+async function addPolygonMainnet() {
 	const { ethereum } = window;
 
 	try {
 		await ethereum.request({
 			method: "wallet_switchEthereumChain",
-			params: [{ chainId: "0x13881" }], // Hexadecimal version of 80001, prefixed with 0x
+			params: [{ chainId: "0x89" }], // Hexadecimal version of 137, prefixed with 0x
 		});
 	} catch (error) {
 		if (error.code === 4902) {
@@ -20,15 +20,15 @@ async function addPolygonTestnetNetwork() {
 					method: "wallet_addEthereumChain",
 					params: [
 						{
-							chainId: "0x13881", // Hexadecimal version of 80001, prefixed with 0x
-							chainName: "POLYGON Testnet",
+							chainId: "0x89", // Hexadecimal version of 80001, prefixed with 0x
+							chainName: "Polygon Mainnet",
 							nativeCurrency: {
 								name: "MATIC",
 								symbol: "MATIC",
 								decimals: 18,
 							},
-							rpcUrls: ["https://matic-mumbai.chainstacklabs.com/"],
-							blockExplorerUrls: ["https://mumbai.polygonscan.com/"],
+							rpcUrls: ["https://matic-mainnet.chainstacklabs.com"],
+							blockExplorerUrls: ["https://polygonscan.com/"],
 							iconUrls: [""],
 						},
 					],
@@ -51,9 +51,9 @@ async function connectSmartContract() {
 	console.log("Contract connected");
 
 	if (ethereum && (await ethereum.request({ method: "net_version" })) !== process.env.NEXT_PUBLIC_BLOCKCHAIN_NETWORK_ID.toString()) {
-		await addPolygonTestnetNetwork();
+		await addPolygonMainnet();
 	} else if (ethereum) {
-		await addPolygonTestnetNetwork();
+		await addPolygonMainnet();
 		window.web3 = new Web3(ethereum);
 	}
 
@@ -494,7 +494,7 @@ async function updateCommentOnToken(tokenId, comment) {
 // }
 
 module.exports = {
-	addPolygonTestnetNetwork,
+	addPolygonMainnet,
 	connectSmartContract,
 	mintTrackNFT,
 	purchaseTrackNFT,

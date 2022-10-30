@@ -12,6 +12,7 @@ import SuccessBox from "../Modal/SuccessBox";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import AuthModal from "../Modal/AuthModal";
+import BrowserNotSupportedModal from "../Modal/BrowserNotSupportedModal";
 import FloatingHelp from "./FloatingHelp";
 import NewAudioPlayer from "../AudioPlayer/NewAudioPlayer";
 
@@ -96,6 +97,7 @@ const Layout = ({ children }) => {
 			<ErrorBox />
 			<SuccessBox />
 			{!router.pathname.startsWith("/admin") && <Footer />}
+			<BrowserNotSupportedModal />
 		</>
 	);
 };

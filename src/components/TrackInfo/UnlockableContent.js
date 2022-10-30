@@ -125,9 +125,8 @@ export default function UnlockableContent({ tokenId, currentOwnerAddress, unlock
 				<p className="text-[#777777] font-normal text-xs">Perks that you get after purchasing this music NFT</p>
 
 				{unlockableContent.about && <p className="text-sm font-semibold mt-6">About the Unlockable Content</p>}
-
 				<div className={"flex space-x-8 " + (unlockableContent.about ? "mt-2" : "mt-6")}>
-					{unlockableContent.about && <div className="text-sm">{unlockableContent.about}</div>}
+					{unlockableContent.about && <div className="text-sm max-w-[300px] max-h-[150px] overflow-y-scroll pr-2">{unlockableContent.about}</div>}
 					<div className="grid grid-cols-3 items-start gap-4">
 						{unlockableContentItems.map((item, index) => {
 							let truncatedUnlockableItemText = item.unlockableItemText;
@@ -150,7 +149,7 @@ export default function UnlockableContent({ tokenId, currentOwnerAddress, unlock
 										key={index}
 										className={
 											"group relative w-full h-full flex flex-col rounded-lg bg-light-100 dark:bg-dark-800 shadow hover:shadow-primary-500 overflow-hidden transition-all duration-700 unlockable-content-card " +
-											(unlockableContentUriData ? "cursor-pointer hover:bg-light-300/40" : "cursor-not-allowed")
+											(unlockableContentUriData ? "cursor-pointer" : "cursor-not-allowed")
 										}
 										onClick={() => {
 											if (unlockableContentUriData && (index === 0 || index === 3 || index === 4 || index === 5 || index === 6)) {

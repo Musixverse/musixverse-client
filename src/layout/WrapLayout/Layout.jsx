@@ -24,11 +24,13 @@ const Layout = ({ children }) => {
 	const router = useRouter();
 	const { theme } = useTheme();
 
-	router.events.on("routeChangeStart", () => setLoading(true));
-	router.events.on("routeChangeComplete", () => setLoading(false));
-	router.events.on("routeChangeError", () => setLoading(false));
+	if (router && router.events) {
+		router.events.on("routeChangeStart", () => setLoading(true));
+		router.events.on("routeChangeComplete", () => setLoading(false));
+		router.events.on("routeChangeError", () => setLoading(false));
+	}
 
-	if (window && window.ethereum) {
+	if (typeof window !== "undefined" && window && window.ethereum) {
 		window.ethereum.on("accountsChanged", (accounts) => {
 			if (user && user.attributes.ethAddress !== accounts[0]) {
 				setError((prevState) => ({

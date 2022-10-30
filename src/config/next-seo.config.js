@@ -11,7 +11,7 @@ export const SEO = {
 		title: "Musixverse",
 		description:
 			"Musixverse is a Music NFT marketplace that will bring Artists and Fans together like never before and unlock novel models of communications and commerce.",
-		images: [{ url: "/site_logo.png" }],
+		images: [{ url: "/site_logo.png", width: 640, height: 640, alt: "Logo" }],
 	},
 	twitter: {
 		handle: "@musixverse",

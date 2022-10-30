@@ -101,7 +101,14 @@ export default function TrackInfo({
 						url: "https://www.musixverse.com",
 						title: "Musixverse - Track Info | " + metadata.title + " by " + metadata.artist,
 						description: metadata.description,
-						images: [{ url: metadata.artwork.uri.replace("ipfs://", process.env.NEXT_PUBLIC_IPFS_NODE_URL) }],
+						images: [
+							{
+								url: metadata.artwork.uri.replace("ipfs://", process.env.NEXT_PUBLIC_IPFS_NODE_URL),
+								width: 640,
+								height: 640,
+								alt: "Cover Art",
+							},
+						],
 						audio: [
 							{
 								url: metadata.audio.replace("ipfs://", process.env.NEXT_PUBLIC_IPFS_NODE_URL),

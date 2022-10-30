@@ -120,6 +120,7 @@ const ProtectedRoutes = ({ router, children }) => {
 		if (!isWeb3Enabled && isAuthenticated) enableWeb3();
 	}, [isWeb3Enabled, isAuthenticated, enableWeb3]);
 
+	return children;
 	if (showContent) {
 		return children;
 	} else {

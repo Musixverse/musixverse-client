@@ -110,7 +110,7 @@ const CreateBandPage = () => {
 	// Adding logged in user as default to bandMembers array state
 	const { fetch: fetchUserInfoForAddingToBand } = useMoralisCloudFunction(
 		"fetchUserInfoForAddingToBand",
-		{ userId: user.id },
+		{ userId: user ? user.id : "" },
 		{
 			autoFetch: false,
 		}

@@ -22,7 +22,11 @@ const NameAndIdVerification = ({
 
 	const [isVerificationModalOpen, setIsVerificationModalOpen] = useState(false);
 
-	const { fetch: setRealName } = useMoralisCloudFunction("setArtistRealName", { userId: user.id, artistRealName: artistRealName }, { autoFetch: false });
+	const { fetch: setRealName } = useMoralisCloudFunction(
+		"setArtistRealName",
+		{ userId: user ? user.id : null, artistRealName: artistRealName },
+		{ autoFetch: false }
+	);
 
 	return (
 		<form
@@ -55,7 +59,7 @@ const NameAndIdVerification = ({
 				id="artistRealName"
 				name="artistRealName"
 				type="text"
-				value={user.attributes.name}
+				value={user ? user.attributes.name : null}
 				readOnly
 			/>
 			<p className="text-[#777777] mt-2 font-normal text-xs">

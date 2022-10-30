@@ -114,7 +114,7 @@ const InstagramVerification = ({
 					<div className="p-10 bg-light-100 dark:bg-dark-600 rounded-lg mt-8">
 						<p className="text-3xl font-tertiary text-center">Musixverse Profile Verification</p>
 						<p className="mt-10">
-							<b>Stage Name:</b> {user.attributes.name}
+							<b>Stage Name:</b> {user ? user.attributes.name : null}
 						</p>
 						{artistRealName && (
 							<p>

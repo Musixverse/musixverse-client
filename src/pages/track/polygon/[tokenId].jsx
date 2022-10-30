@@ -86,15 +86,17 @@ export default function TrackInfo({
 }) {
 	return (
 		<>
-			<Head prefix="og: https://ogp.me/ns#">
+			<Head>
 				<title>Musixverse | Track Info</title>
 				<meta name="description" content={meta_description} />
-				<meta property="og:title" content={metadata.title + " - " + metadata.artist} />
-				<meta property="og:description" content={metadata.description} />
-				<meta property="og:image" content={metadata.artwork.uri.replace("ipfs://", process.env.NEXT_PUBLIC_IPFS_NODE_URL)} />
-				<meta property="og:type" content="website" />
-				<meta property="og:url" content="https://www.musixverse.com" />
-				<meta property="fb:app_id" content={process.env.NEXT_PUBLIC_FACEBOOK_APP_ID} />
+				<meta name="viewport" content="initial-scale=1.0, width=device-width" />
+				<meta property="og:site_name" content="Musixverse" key="og-site" />
+				<meta property="og:title" content={metadata.title + " - " + metadata.artist} key="og-title" />
+				<meta property="og:description" content={metadata.description} key="og-description" />
+				<meta property="og:image" content={metadata.artwork.uri.replace("ipfs://", process.env.NEXT_PUBLIC_IPFS_NODE_URL)} key="og-image" />
+				<meta property="og:type" content="website" key="og-type" />
+				<meta property="og:url" content="https://www.musixverse.com" key="og-url" />
+				<meta property="fb:app_id" content={process.env.NEXT_PUBLIC_FACEBOOK_APP_ID} key="og-fb" />
 
 				<meta name="twitter:card" content="summary" />
 				{/* <meta name="twitter:site" content="@username-example" />

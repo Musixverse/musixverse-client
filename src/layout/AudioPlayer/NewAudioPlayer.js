@@ -19,6 +19,29 @@ export default function NewAudioPlayer() {
 	const audioTag = useRef(null);
 	const progress = useRef(null);
 
+	const getTime = useCallback((queryForCurrTime) => {
+		const duration = Math.floor(queryForCurrTime ? audioTag.current.currentTime : audioTag.current.duration);
+
+		let min = isNaN(duration) === true ? "0" : Math.floor(duration / 60);
+		min = min < 10 ? "0" + min : min;
+
+		let sec = "00";
+
+		if (duration >= 60) {
+			for (var i = 1; i <= 60; i++) {
+				if (duration >= 60 * i && duration < 60 * (i + 1)) {
+					sec = duration - 60 * i;
+					sec = sec < 10 ? "0" + sec : sec;
+				}
+			}
+		} else {
+			sec = duration;
+			sec = sec < 10 ? "0" + sec : sec;
+		}
+
+		return min + ":" + sec;
+	}, []);
+
 	//Effect to be run on queue and currently playing idx
 	useEffect(() => {
 		if (audioTag.current !== null) {
@@ -54,29 +77,6 @@ export default function NewAudioPlayer() {
 			} else audioTag.current.pause();
 		}
 	}, [audioPlayerProps.isPlaying]);
-
-	const getTime = useCallback((queryForCurrTime) => {
-		const duration = Math.floor(queryForCurrTime ? audioTag.current.currentTime : audioTag.current.duration);
-
-		let min = isNaN(duration) === true ? "0" : Math.floor(duration / 60);
-		min = min < 10 ? "0" + min : min;
-
-		let sec = "00";
-
-		if (duration >= 60) {
-			for (var i = 1; i <= 60; i++) {
-				if (duration >= 60 * i && duration < 60 * (i + 1)) {
-					sec = duration - 60 * i;
-					sec = sec < 10 ? "0" + sec : sec;
-				}
-			}
-		} else {
-			sec = duration;
-			sec = sec < 10 ? "0" + sec : sec;
-		}
-
-		return min + ":" + sec;
-	}, []);
 
 	//Initial state
 	if (audioPlayerProps.currentlyPlayingIdx === -1) return null;

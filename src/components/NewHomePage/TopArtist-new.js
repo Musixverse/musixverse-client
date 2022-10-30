@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import CoverImage_d from "../../../public/assets/new-homepage/cover_d.png";
@@ -5,6 +6,9 @@ import CoverImage_m from "../../../public/assets/new-homepage/cover_m.png";
 import SwiperArtist from "./utils/SwiperArtist";
 
 export default function TopArtists() {
+	const [bg,setBg] = useState([CoverImage_d,CoverImage_m]);
+
+
 	return (
 		<div className="relative mt-24">
 			<h1 className="font-primary font-semibold text-3xl text-center">
@@ -30,7 +34,7 @@ export default function TopArtists() {
 					</div>
 				</div>
 				<div className="w-full h-full hidden md:block">
-					<Image src={CoverImage_d} className="hidden" alt="Cover art for Top Artist" layout="responsive" priority />
+					<Image src={bg} className="hidden" alt="Cover art for Top Artist" layout="responsive" priority />
 				</div>
 				<div className="w-full h-full md:hidden">
 					<Image src={CoverImage_m} className="hidden" alt="Cover art for Top Artist" layout="responsive" priority />
@@ -38,7 +42,7 @@ export default function TopArtists() {
 			</div>
 
             {/* Swiper Component for Artist */}
-            <SwiperArtist />
+            <SwiperArtist setCurrBg={setBg}/>
         </div>
     );
 }    

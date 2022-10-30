@@ -99,9 +99,9 @@ export default function TrackInfo({
 				<meta property="fb:app_id" content={process.env.NEXT_PUBLIC_FACEBOOK_APP_ID} key="og-fb"></meta>
 
 				<meta name="twitter:card" content="summary"></meta>
-				{/* <meta name="twitter:site" content="@username-example" />
+				{/* <meta name="twitter:site" content="@musixverse" />
 				<meta name="twitter:card" content="summary || summary_large_image || player || app" />
-				<meta name="twitter:creator" content="@username-example" /> */}
+				<meta name="twitter:creator" content="@musixverse" /> */}
 			</Head>
 
 			<div className="flex flex-col items-center justify-center w-full bg-light-100 dark:bg-dark-900 pt-28 pb-20">

@@ -86,9 +86,20 @@ export default function TrackInfo({
 }) {
 	return (
 		<>
-			<Head>
+			<Head prefix="og: https://ogp.me/ns#">
 				<title>Musixverse | Track Info</title>
 				<meta name="description" content={meta_description} />
+				<meta property="og:title" content={metadata.title + " - " + metadata.artist} />
+				<meta property="og:description" content={metadata.description} />
+				<meta property="og:image" content={metadata.artwork.uri.replace("ipfs://", process.env.NEXT_PUBLIC_IPFS_NODE_URL)} />
+				<meta property="og:type" content="website" />
+				<meta property="og:url" content="https://www.musixverse.com" />
+				<meta property="fb:app_id" content={process.env.NEXT_PUBLIC_FACEBOOK_APP_ID} />
+
+				<meta name="twitter:card" content="summary" />
+				{/* <meta name="twitter:site" content="@username-example" />
+				<meta name="twitter:card" content="summary || summary_large_image || player || app" />
+				<meta name="twitter:creator" content="@username-example" /> */}
 			</Head>
 
 			<div className="flex flex-col items-center justify-center w-full bg-light-100 dark:bg-dark-900 pt-28 pb-20">

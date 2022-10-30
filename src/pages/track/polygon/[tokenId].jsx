@@ -9,6 +9,7 @@ import PurchaseInfo from "../../../components/TrackInfo/PurchaseInfo";
 import Activity from "../../../components/TrackInfo/Activity";
 import SimilarTokens from "../../../components/TrackInfo/SimilarTokens";
 import { MORALIS_APP_ID, MORALIS_SERVER_URL } from "../../../constants";
+import { NextSeo } from "next-seo";
 
 export async function getStaticProps(context) {
 	const { tokenId } = context.params;
@@ -90,19 +91,37 @@ export default function TrackInfo({
 				<title>Musixverse | Track Info</title>
 				<meta name="description" content={meta_description}></meta>
 				<meta name="viewport" content="initial-scale=1.0, width=device-width"></meta>
-				<meta property="og:site_name" content="Musixverse" key="og-site"></meta>
+				{/* <meta property="og:site_name" content="Musixverse" key="og-site"></meta>
 				<meta property="og:title" content={metadata.title + " - " + metadata.artist} key="og-title"></meta>
 				<meta property="og:description" content={metadata.description} key="og-description"></meta>
 				<meta property="og:image" content={metadata.artwork.uri.replace("ipfs://", process.env.NEXT_PUBLIC_IPFS_NODE_URL)} key="og-image"></meta>
 				<meta property="og:type" content="website" key="og-type"></meta>
 				<meta property="og:url" content="https://www.musixverse.com" key="og-url"></meta>
-				<meta property="fb:app_id" content={process.env.NEXT_PUBLIC_FACEBOOK_APP_ID} key="og-fb"></meta>
+				<meta property="fb:app_id" content={process.env.NEXT_PUBLIC_FACEBOOK_APP_ID} key="og-fb"></meta> */}
 
-				<meta name="twitter:card" content="summary"></meta>
+				{/* <meta name="twitter:card" content="summary"></meta> */}
 				{/* <meta name="twitter:site" content="@musixverse" />
 				<meta name="twitter:card" content="summary || summary_large_image || player || app" />
 				<meta name="twitter:creator" content="@musixverse" /> */}
 			</Head>
+
+			<NextSeo
+				title={metadata.title + " - " + metadata.artist}
+				description={metadata.description}
+				canonical="https://www.musixverse.com"
+				openGraph={{
+					url: "https://www.musixverse.com",
+					title: metadata.title + " - " + metadata.artist,
+					description: metadata.description,
+					images: [{ url: metadata.artwork.uri.replace("ipfs://", process.env.NEXT_PUBLIC_IPFS_NODE_URL) }],
+					siteName: "Musixverse",
+				}}
+				twitter={{
+					handle: "@musixverse",
+					site: "@musixverse",
+					cardType: "summary",
+				}}
+			/>
 
 			<div className="flex flex-col items-center justify-center w-full bg-light-100 dark:bg-dark-900 pt-28 pb-20">
 				<div className="w-full max-w-[1920px] px-10 sm:px-16 xl:px-20 2xl:px-36">

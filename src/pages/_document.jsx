@@ -13,7 +13,6 @@ export default class CustomDocument extends Document {
 					<link rel="icon" href="/favicon.ico" />
 					<link rel="shortcut icon" href="/favicon.ico" />
 					<meta name="theme-color" content="#fff" />
-					<DefaultSeo {...SEO} />
 
 					<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/index.min.css" />
 					{/* Google Fonts */}
@@ -33,6 +32,7 @@ export default class CustomDocument extends Document {
 						rel="stylesheet"
 					/>
 				</Head>
+				<DefaultSeo {...SEO} />
 
 				<body>
 					<Main />

@@ -91,43 +91,43 @@ export default function TrackInfo({
 				<title>{"Musixverse - Track Info | " + metadata.title + " by " + metadata.artist}</title>
 				<meta name="description" content={meta_description}></meta>
 				<meta name="viewport" content="initial-scale=1.0, width=device-width"></meta>
-
-				<NextSeo
-					title={"Musixverse - Track Info | " + metadata.title + " by " + metadata.artist}
-					description={metadata.description}
-					canonical="https://www.musixverse.com"
-					openGraph={{
-						siteName: "Musixverse",
-						url: "https://www.musixverse.com",
-						title: "Musixverse - Track Info | " + metadata.title + " by " + metadata.artist,
-						description: metadata.description,
-						images: [
-							{
-								url: metadata.artwork.uri.replace("ipfs://", process.env.NEXT_PUBLIC_IPFS_NODE_URL),
-								width: 640,
-								height: 640,
-								alt: "Cover Art",
-							},
-						],
-						audio: [
-							{
-								url: metadata.audio.replace("ipfs://", process.env.NEXT_PUBLIC_IPFS_NODE_URL),
-								secureUrl: metadata.audio.replace("ipfs://", process.env.NEXT_PUBLIC_IPFS_NODE_URL),
-								type: "audio/mpeg",
-							},
-						],
-					}}
-					twitter={{
-						handle: "@musixverse",
-						creator: "@musixverse",
-						site: "@musixverse",
-						cardType: "summary_large_image",
-					}}
-					facebook={{
-						appId: process.env.NEXT_PUBLIC_FACEBOOK_APP_ID,
-					}}
-				/>
 			</Head>
+
+			<NextSeo
+				title={"Musixverse - Track Info | " + metadata.title + " by " + metadata.artist}
+				description={metadata.description}
+				canonical="https://www.musixverse.com"
+				openGraph={{
+					siteName: "Musixverse",
+					url: "https://www.musixverse.com",
+					title: "Musixverse - Track Info | " + metadata.title + " by " + metadata.artist,
+					description: metadata.description,
+					images: [
+						{
+							url: metadata.artwork.uri.replace("ipfs://", process.env.NEXT_PUBLIC_IPFS_NODE_URL),
+							width: 640,
+							height: 640,
+							alt: "Cover Art",
+						},
+					],
+					audio: [
+						{
+							url: metadata.audio.replace("ipfs://", process.env.NEXT_PUBLIC_IPFS_NODE_URL),
+							secureUrl: metadata.audio.replace("ipfs://", process.env.NEXT_PUBLIC_IPFS_NODE_URL),
+							type: "audio/mpeg",
+						},
+					],
+				}}
+				twitter={{
+					handle: "@musixverse",
+					creator: "@musixverse",
+					site: "@musixverse",
+					cardType: "summary_large_image",
+				}}
+				facebook={{
+					appId: process.env.NEXT_PUBLIC_FACEBOOK_APP_ID,
+				}}
+			/>
 
 			<div className="flex flex-col items-center justify-center w-full bg-light-100 dark:bg-dark-900 pt-28 pb-20">
 				<div className="w-full max-w-[1920px] px-10 sm:px-16 xl:px-20 2xl:px-36">

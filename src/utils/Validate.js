@@ -4,7 +4,7 @@
  */
 
 import Moralis from "moralis";
-import { MORALIS_APP_ID, MORALIS_SERVER_URL } from "../constants";
+import { MORALIS_APP_ID, MORALIS_SERVER_URL } from "../config/constants";
 
 export async function isEmailValid(email) {
 	const emailRegex = new RegExp(

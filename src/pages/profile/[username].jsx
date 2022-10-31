@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Head from "next/head";
 import dynamic from "next/dynamic";
-import { meta_description } from "../../constants";
+import { meta_description } from "../../config/constants";
 import { useRouter } from "next/router";
 import Moralis from "moralis/node";
 import Banner from "../../components/Profile/Banner";
@@ -16,7 +16,7 @@ const ArtistReportModal = dynamic(() => import("../../components/Profile/Profile
 const FavouritesModal = dynamic(() => import("../../components/Profile/ProfileUtils/FavouritesModal"));
 const FollowersModal = dynamic(() => import("../../components/Profile/ProfileUtils/FollowersModal"));
 const FollowingModal = dynamic(() => import("../../components/Profile/ProfileUtils/FollowingModal"));
-import { MORALIS_APP_ID, MORALIS_SERVER_URL } from "../../constants";
+import { MORALIS_APP_ID, MORALIS_SERVER_URL } from "../../config/constants";
 
 export async function getStaticProps(context) {
 	const { username } = context.params;

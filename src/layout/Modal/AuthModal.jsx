@@ -8,7 +8,7 @@ const { Transition } = require("@headlessui/react");
 import { addPolygonTestnetNetwork } from "../../utils/smart-contract/functions";
 import logoBlack from "../../../public/logo-black.svg";
 import logoWhite from "../../../public/logo-white.svg";
-import { DISCORD_SUPPORT_CHANNEL_INVITE_LINK } from "../../constants";
+import { DISCORD_SUPPORT_CHANNEL_INVITE_LINK } from "../../config/constants";
 import RequiredAsterisk from "../RequiredAsterisk";
 import LoadingContext from "../../../store/loading-context";
 

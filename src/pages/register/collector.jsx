@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { meta_description } from "../../constants";
+import { meta_description } from "../../config/constants";
 import CollectorRegistration from "../../components/Registration/CollectorRegistration";
 import { useEffect, useContext } from "react";
 import { useMoralis } from "react-moralis";

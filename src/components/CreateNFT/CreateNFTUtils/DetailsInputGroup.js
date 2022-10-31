@@ -1,7 +1,7 @@
 import InputDropdown from "./InputDropdown";
 import RequiredAsterisk from "../../../layout/RequiredAsterisk";
 import Tooltip from "../../../layout/Tooltip/Tooltip";
-import { trackOriginArray, genreArray, parentalAdvisoryArray, minRecordingYear } from "../../../constants";
+import { trackOriginArray, genreArray, parentalAdvisoryArray, minRecordingYear } from "../../../config/constants";
 
 export default function DetailsInputGroup({
 	setTrackOrigin,

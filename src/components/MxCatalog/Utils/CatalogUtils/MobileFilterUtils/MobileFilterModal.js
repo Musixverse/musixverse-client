@@ -7,6 +7,7 @@ import SortBy from "../SortBy";
 
 export default function MobileFilterModal({ showMobileFilter, setShowMobileFilter, setAppliedFilter, appliedFilter, currentSelection }) {
 	const [currentFilterType, setCurrentFilterType] = useState(1);
+
 	return (
 		<Transition show={showMobileFilter}>
 			<Transition.Child

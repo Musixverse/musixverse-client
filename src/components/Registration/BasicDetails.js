@@ -8,7 +8,7 @@ import Router from "next/router";
 import { useMoralis, useNewMoralisObject } from "react-moralis";
 import StatusContext from "../../../store/status-context";
 import { isUsernameValidAndAvailable, isEmailValidAndAvailable } from "../../utils/Validate";
-import { defaultAvatarUrls } from "../../constants";
+import { defaultAvatarUrls } from "../../config/constants";
 
 export default function BasicDetails() {
 	const [, , , setError] = useContext(StatusContext);

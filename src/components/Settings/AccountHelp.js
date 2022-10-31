@@ -1,6 +1,6 @@
 import Notification from "./SettingsUtils/Notification";
 import Link from "next/link";
-import { DISCORD_SUPPORT_CHANNEL_INVITE_LINK } from "../../constants";
+import { DISCORD_SUPPORT_CHANNEL_INVITE_LINK } from "../../config/constants";
 
 export default function AccountHelp() {
 	return (

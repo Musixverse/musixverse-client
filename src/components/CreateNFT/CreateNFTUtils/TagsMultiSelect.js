@@ -6,7 +6,7 @@ import styleLight from "./MultiSelectStyles/LightStyles";
 import filterStyleLight from "../../MxCatalog/Utils/CatalogUtils/TagsStyleLight";
 import { useTheme } from "next-themes";
 import styles from "../../../../styles/CreateNFT/MultiSelect.module.css";
-import { tagsAvailable } from "../../../constants";
+import { tagsAvailable } from "../../../config/constants";
 
 export default function TagsMultiSelect({ tags, setTags, dropdownType, setAppliedFilter, setCurrentFilterType }) {
 	const { theme } = useTheme();

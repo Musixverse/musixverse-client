@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { meta_description } from "../../constants";
+import { meta_description } from "../../config/constants";
 import Marketplace from "../../components/MxCatalog/Utils/Marketplace";
 
 export default function Trending() {

@@ -19,7 +19,11 @@ const SendUsADM = ({
 	const songLinkRef = useRef(null);
 	const [songLink, setSongLink] = useState("");
 
-	const { fetch: setArtistSongLink } = useMoralisCloudFunction("setArtistSongLink", { userId: user.id, songLink: songLink }, { autoFetch: false });
+	const { fetch: setArtistSongLink } = useMoralisCloudFunction(
+		"setArtistSongLink",
+		{ userId: user ? user.id : null, songLink: songLink },
+		{ autoFetch: false }
+	);
 	const { fetch: getArtistSongLink } = useMoralisCloudFunction("getArtistSongLink");
 	const { fetch: requestForVerification } = useMoralisCloudFunction("requestForVerification", { autoFetch: false });
 

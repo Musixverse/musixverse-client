@@ -3,7 +3,7 @@ import styles from "../../../styles/ContactUs/contactUs.module.css";
 import { useNewMoralisObject } from "react-moralis";
 import StatusContext from "../../../store/status-context";
 import { isEmailValid } from "../../utils/Validate";
-import { DISCORD_INVITE_LINK } from "../../constants";
+import { DISCORD_INVITE_LINK } from "../../config/constants";
 
 export default function ContactUs() {
 	const [, , setSuccess, setError] = useContext(StatusContext);

@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { meta_description } from "../../constants";
+import { meta_description } from "../../config/constants";
 import BannerCFB from "../../components/CFB/BannerCFB";
 import CFB1 from "../../components/CFB/CFB1";
 import CFB4 from "../../components/CFB/CFB4";

@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Moralis from "moralis/node";
-import { MORALIS_APP_ID, MORALIS_SERVER_URL, meta_description } from "../../constants";
+import { MORALIS_APP_ID, MORALIS_SERVER_URL, meta_description } from "../../config/constants";
 import SettingsNav from "../../components/Settings/SettingsNav";
 import BandDashboard from "../../components/Settings/BandDashboard";
 

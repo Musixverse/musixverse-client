@@ -11,7 +11,7 @@ const VerificationRequested = () => {
 				<div className="p-10 bg-light-100 rounded-lg">
 					<p className="text-4xl font-tertiary text-center">Verification Pending...</p>
 					<p className="mt-16">
-						<b>Stage Name:</b> {user.attributes.name}
+						<b>Stage Name:</b> {user ? user.attributes.name : null}
 					</p>
 					{artistVerificationInfo && artistVerificationInfo.artistRealName && (
 						<p>

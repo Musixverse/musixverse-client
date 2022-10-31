@@ -2,7 +2,7 @@ import { useState } from "react";
 import Link from "next/link";
 import Accordion from "./FAQUtils/Accordion";
 import Navigation from "./FAQUtils/Navigation";
-import { DISCORD_SUPPORT_CHANNEL_INVITE_LINK } from "../../constants";
+import { DISCORD_SUPPORT_CHANNEL_INVITE_LINK } from "../../config/constants";
 import { About_Musixverse, Musixverse_NFTs, General_Platform_Features, community } from "./FAQUtils/FaqData";
 
 export default function Faq() {

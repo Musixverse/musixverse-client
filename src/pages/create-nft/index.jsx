@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Moralis from "moralis/node";
-import { MORALIS_APP_ID, MORALIS_SERVER_URL, meta_description } from "../../constants";
+import { MORALIS_APP_ID, MORALIS_SERVER_URL, meta_description } from "../../config/constants";
 import { useState, useEffect, useContext } from "react";
 import { useRouter } from "next/router";
 import { useMoralis, useNewMoralisObject, useMoralisCloudFunction } from "react-moralis";

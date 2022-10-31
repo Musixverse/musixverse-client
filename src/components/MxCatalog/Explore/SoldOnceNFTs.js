@@ -37,7 +37,7 @@ const SoldOnceNFTs = ({ appliedFilter, tracks }) => {
 		<>
 			{loading ? (
 				<LoadingNftCards />
-			) : !loading && tracksWhoseCopiesAreSoldOnce.length === 0 ? (
+			) : !loading && tracksWhoseCopiesAreSoldOnce && tracksWhoseCopiesAreSoldOnce.length === 0 ? (
 				<NoResultsFound />
 			) : (
 				tracksWhoseCopiesAreSoldOnce &&

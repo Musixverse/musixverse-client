@@ -15,14 +15,14 @@ const UnsoldNFT = ({ track }) => {
 		});
 		return (
 			<NFTCard
-				redirectLink={`/track/polygon/${track.unsoldTokens.at(0)}`}
+				redirectLink={`/track/polygon/${track && track.unsoldTokens ? track.unsoldTokens[0] : null}`}
 				trackName={track.title}
 				price={track.price}
 				artistName={track.artist}
 				artistAddress={track.artistAddress}
 				isArtistVerified={track.isArtistVerified}
 				image={track.artwork.uri.replace("ipfs://", process.env.NEXT_PUBLIC_IPFS_NODE_URL)}
-				tokenId={track.unsoldTokens.at(0)}
+				tokenId={track && track.unsoldTokens ? track.unsoldTokens[0] : null}
 				localTokenId={track.localTokenId}
 				numberOfCopies={track.numberOfCopies}
 				collaboratorList={collaboratorList}

@@ -1,7 +1,7 @@
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import { meta_description } from "../constants";
+import { meta_description } from "../config/constants";
 import discord from "../../public/assets/social/discord.svg";
 import facebook from "../../public/assets/social/facebook.svg";
 import twitter from "../../public/assets/social/twitter.svg";

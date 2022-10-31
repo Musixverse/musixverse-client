@@ -2,7 +2,7 @@ import { useState, useContext } from "react";
 import Modal from "../../../layout/Modal/Modal";
 import { useMoralis, useMoralisCloudFunction } from "react-moralis";
 import ReportFilterDropdown from "../../../layout/ReportFilterDropdown";
-import { reportNftFilters } from "../../../constants";
+import { reportNftFilters } from "../../../config/constants";
 import StatusContext from "../../../../store/status-context";
 
 const NftReportModal = ({ isOpen, setOpen, tokenId }) => {

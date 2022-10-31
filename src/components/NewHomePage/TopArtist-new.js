@@ -10,7 +10,7 @@ export default function TopArtists() {
 
 
 	return (
-		<div className="relative mt-24">
+		<div className="relative mt-14">
 			<h1 className="font-primary font-semibold text-3xl text-center">
 				Top Artists on M<span className="text-primary-300">x</span> Catalog
 			</h1>

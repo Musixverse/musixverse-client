@@ -799,3 +799,21 @@ button.tooltip-button:active {
 .unlockable-content-card-back {
 	transform: rotateY(180deg);
 }
+
+
+/**************************************************************************/
+/****************    Top Artist Swiper Component   ************************/
+/**************************************************************************/
+.swiper-container .swiper {
+	padding-left: 60px;
+	padding-right: 60px;
+}
+
+.swiper-button-next:after{
+	color: #5AB510;
+}
+
+.swiper-button-prev:after{
+	color: #5AB510;
+}
+

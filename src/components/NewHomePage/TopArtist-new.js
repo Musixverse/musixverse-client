@@ -1,18 +1,18 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import CoverImage_d from "../../../public/assets/new-homepage/cover_d.png";
-import CoverImage_m from "../../../public/assets/new-homepage/cover_m.png";
+import cover_sarthak from "../../../public/assets/new-homepage/cover_sarthak.png";
+import cover_m from "../../../public/assets/new-homepage/cover_m.png";
 import SwiperArtist from "./utils/SwiperArtist";
 
 export default function TopArtists() {
-	const [bg,setBg] = useState([CoverImage_d,CoverImage_m]);
+	const [bg,setBg] = useState([cover_sarthak,cover_m]);
 
 
 	return (
 		<div className="relative mt-24">
 			<h1 className="font-primary font-semibold text-3xl text-center">
-				Top Artists on M<span className="text-primary-100">x</span> Catalog
+				Top Artists on M<span className="text-primary-300">x</span> Catalog
 			</h1>
 			<div className="w-full mt-10 relative rounded-2xl overflow-hidden">
 				<div className="text-sm z-10 absolute right-6 lg:right-16 text-white mt-10">
@@ -33,11 +33,11 @@ export default function TopArtists() {
 						</span>
 					</div>
 				</div>
-				<div className="w-full h-full hidden md:block">
-					<Image src={bg} className="hidden" alt="Cover art for Top Artist" layout="responsive" priority />
+				<div className="w-full h-full hidden md:block hover:scale-110 duration-500 ease-out">
+					<Image src={bg[0]} className="hidden" alt="Cover art for Top Artist" layout="responsive" priority />
 				</div>
-				<div className="w-full h-full md:hidden">
-					<Image src={CoverImage_m} className="hidden" alt="Cover art for Top Artist" layout="responsive" priority />
+				<div className="w-full h-full md:hidden hover:scale-110 duration-500 ease-out">
+					<Image src={bg[1]} className="hidden" alt="Cover art for Top Artist" layout="responsive" priority />
 				</div>
 			</div>
 

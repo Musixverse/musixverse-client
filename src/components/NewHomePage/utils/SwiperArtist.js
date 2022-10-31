@@ -9,7 +9,7 @@ import { TopArtist } from "./TopArtistData";
 export default function SwiperArtist({setCurrBg}){
 
     const onHover = function(item) {
-        setCurrBg(item.bgURL);
+        setCurrBg([item.bgURL_d,item.bgURL_m]);
     }
 
     return(

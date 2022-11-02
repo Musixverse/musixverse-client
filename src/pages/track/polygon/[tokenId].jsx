@@ -91,6 +91,8 @@ export default function TrackInfo({
 				<title>{"Musixverse - Track Info | " + metadata.title + " by " + metadata.artist}</title>
 				<meta name="description" content={meta_description}></meta>
 				<meta name="viewport" content="initial-scale=1.0, width=device-width"></meta>
+				<meta name="og:image" content={metadata.artwork.uri.replace("ipfs://", process.env.NEXT_PUBLIC_IPFS_NODE_URL)}></meta>
+				<meta name="image" property="og:image" content={metadata.artwork.uri.replace("ipfs://", process.env.NEXT_PUBLIC_IPFS_NODE_URL)}></meta>
 			</Head>
 
 			<NextSeo

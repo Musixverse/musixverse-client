@@ -7,8 +7,8 @@ const VerificationRequested = () => {
 	return (
 		<div className="flex flex-col p-40 pb-32 items-center">
 			<p className="text-4xl font-semibold text-center">Artist Verification</p>
-			<div className="w-2/3 mt-10 p-14 bg-light-300 justify-center rounded-xl">
-				<div className="p-10 bg-light-100 rounded-lg">
+			<div className="w-2/3 mt-10 p-14 bg-light-300 dark:bg-dark-500 justify-center rounded-xl">
+				<div className="p-10 bg-light-100 dark:bg-dark-700 rounded-lg">
 					<p className="text-4xl font-tertiary text-center">Verification Pending...</p>
 					<p className="mt-16">
 						<b>Stage Name:</b> {user ? user.attributes.name : null}
@@ -25,7 +25,15 @@ const VerificationRequested = () => {
 					)}
 					{artistVerificationInfo && artistVerificationInfo.songLink && (
 						<p>
-							<b>Song Link:</b> {artistVerificationInfo.songLink}
+							<b>Song Link:</b>&nbsp;
+							<a
+								href={artistVerificationInfo.songLink}
+								target="_blank"
+								rel="noopener noreferrer"
+								className="hover:underline hover:text-primary-400"
+							>
+								{artistVerificationInfo.songLink}
+							</a>
 						</p>
 					)}
 

@@ -800,7 +800,6 @@ button.tooltip-button:active {
 	transform: rotateY(180deg);
 }
 
-
 /**************************************************************************/
 /****************    Top Artist Swiper Component   ************************/
 /**************************************************************************/
@@ -809,11 +808,10 @@ button.tooltip-button:active {
 	padding-right: 60px;
 }
 
-.swiper-button-next:after{
-	color: #5AB510;
+.swiper-button-next:after {
+	color: #5ab510;
 }
 
-.swiper-button-prev:after{
-	color: #5AB510;
+.swiper-button-prev:after {
+	color: #5ab510;
 }
-

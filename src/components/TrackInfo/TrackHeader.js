@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "../../../styles/TrackInfo/TrackHeader.module.css";
@@ -7,6 +8,7 @@ import TrackHeaderCta from "./TrackInfoUtils/TrackHeaderCta";
 import TrackEditionDropdown from "./TrackInfoUtils/TrackEditionDropdown";
 import CommentWall from "./CommentWall";
 import ShinyLoader from "../../layout/ShinyLoader";
+import CoverArtModal from "./TrackInfoUtils/CoverArtModal";
 
 export default function TrackHeader({
 	tokenId,
@@ -26,6 +28,8 @@ export default function TrackHeader({
 	onSale,
 	comment,
 }) {
+	const [isCoverArtModalOpen, setCoverArtModalOpen] = useState(false);
+
 	return (
 		<div className={styles["track-header"]}>
 			<div className={styles["track-header__container"]}>
@@ -33,20 +37,18 @@ export default function TrackHeader({
 				<div className={"group pr-4 " + styles["track-header__container--trackImage"]}>
 					<div className="h-full w-full relative">
 						{image ? (
-							<Link href={image}>
-								<a target="_blank" rel="noopener noreferrer">
-									<Image
-										src={image}
-										className="rounded-lg"
-										alt="trackImage"
-										width="100%"
-										height="100%"
-										layout="responsive"
-										objectFit="contain"
-										priority
-									/>
-								</a>
-							</Link>
+							<div onClick={() => setCoverArtModalOpen(true)} className="cursor-pointer">
+								<Image
+									src={image}
+									className="rounded-lg"
+									alt="trackImage"
+									width="100%"
+									height="100%"
+									layout="responsive"
+									objectFit="contain"
+									priority
+								/>
+							</div>
 						) : (
 							<ShinyLoader />
 						)}
@@ -152,6 +154,8 @@ export default function TrackHeader({
 					</div>
 				</div>
 			</div>
+
+			<CoverArtModal isOpen={isCoverArtModalOpen} onClose={() => setCoverArtModalOpen(false)} image={image} />
 		</div>
 	);
 }

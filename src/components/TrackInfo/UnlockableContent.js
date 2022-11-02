@@ -5,7 +5,7 @@ import { unlockableContentUri } from "../../utils/smart-contract/functions";
 import UnlockableContentModal from "./TrackInfoUtils/UnlockableContentModal";
 import { sleep } from "../../utils/Sleep";
 
-export default function UnlockableContent({ tokenId, currentOwnerAddress, unlockableContent }) {
+export default function UnlockableContent({ tokenId, currentOwnerAddress, unlockableContent, collaborators }) {
 	const { user } = useMoralis();
 	const [, , , setError] = useContext(StatusContext);
 	const [unlockableContentUriData, setUnlockableContentUriData] = useState(null);
@@ -118,7 +118,12 @@ export default function UnlockableContent({ tokenId, currentOwnerAddress, unlock
 
 	return (
 		<>
-			<div className="w-full flex flex-col p-8 border-2 bg-light-200 border-light-300 dark:bg-dark-600 dark:border-dark-600 rounded-xl mt-12">
+			<div
+				className={
+					"w-full flex flex-col p-8 border-2 bg-light-200 border-light-300 dark:bg-dark-600 dark:border-dark-600 rounded-xl " +
+					(collaborators.length > 1 ? "mt-8" : "mt-12")
+				}
+			>
 				<h1 className="font-tertiary text-4xl">
 					REWARDS<i className="fa-solid fa-award ml-2 text-3xl"></i>
 				</h1>
@@ -127,7 +132,7 @@ export default function UnlockableContent({ tokenId, currentOwnerAddress, unlock
 				{unlockableContent.about && <p className="text-sm font-semibold mt-6">About the Unlockable Content</p>}
 
 				<div className={"flex space-x-8 " + (unlockableContent.about ? "mt-2" : "mt-6")}>
-					{unlockableContent.about && <div className="text-sm">{unlockableContent.about}</div>}
+					{unlockableContent.about && <div className="text-sm max-w-[300px] max-h-[150px] overflow-y-scroll pr-2">{unlockableContent.about}</div>}
 					<div className="grid grid-cols-3 items-start gap-4">
 						{unlockableContentItems.map((item, index) => {
 							let truncatedUnlockableItemText = item.unlockableItemText;
@@ -150,7 +155,7 @@ export default function UnlockableContent({ tokenId, currentOwnerAddress, unlock
 										key={index}
 										className={
 											"group relative w-full h-full flex flex-col rounded-lg bg-light-100 dark:bg-dark-800 shadow hover:shadow-primary-500 overflow-hidden transition-all duration-700 unlockable-content-card " +
-											(unlockableContentUriData ? "cursor-pointer hover:bg-light-300/40" : "cursor-not-allowed")
+											(unlockableContentUriData ? "cursor-pointer" : "cursor-not-allowed")
 										}
 										onClick={() => {
 											if (unlockableContentUriData && (index === 0 || index === 3 || index === 4 || index === 5 || index === 6)) {

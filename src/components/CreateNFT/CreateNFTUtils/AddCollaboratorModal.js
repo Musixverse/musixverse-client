@@ -15,10 +15,6 @@ const AddCollaboratorModal = ({ isOpen, setOpen, nftDraftMetadata, collaboratorL
 		{ id: "", name: "", username: "", split: "", role: "Composer", address: "", avatar: "", hasAcceptedCollaboratorInvite: false },
 	]);
 
-	useEffect(() => {
-		console.log("collaboratorToAdd:", collaboratorToAdd);
-	}, [collaboratorToAdd]);
-
 	const router = useRouter();
 	const { draft } = router.query;
 	const { fetch: addCollaborator } = useMoralisCloudFunction("addCollaborator", { draftId: draft, collaborator: collaboratorToAdd[0] }, { autoFetch: false });

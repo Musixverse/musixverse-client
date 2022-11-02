@@ -511,6 +511,7 @@ const CreateNFT = ({ userInfo }) => {
 			setCreateNFTSuccess(true);
 		} catch (error) {
 			setLoading(false);
+			console.error(error);
 			if (error.title === "User is not connected to the same wallet") {
 				setError({
 					title: error.title,

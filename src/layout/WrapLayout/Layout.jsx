@@ -12,6 +12,7 @@ import SuccessBox from "../Modal/SuccessBox";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import AuthModal from "../Modal/AuthModal";
+import BrowserNotSupportedModal from "../Modal/BrowserNotSupportedModal";
 import FloatingHelp from "./FloatingHelp";
 import NewAudioPlayer from "../AudioPlayer/NewAudioPlayer";
 
@@ -91,6 +92,7 @@ const Layout = ({ children }) => {
 		<>
 			{!router.pathname.startsWith("/admin") && <Navbar authModalOpen={authModalOpen} setAuthModalOpen={setAuthModalOpen} />}
 			<AuthModal isOpen={authModalOpen} onClose={() => setAuthModalOpen(false)} />
+			<BrowserNotSupportedModal />
 			{children}
 			{isLoading && theme === "dark" ? <LoadingDark /> : <Loading />}
 			{!router.pathname.startsWith("/admin") && <FloatingHelp />}

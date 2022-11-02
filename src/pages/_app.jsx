@@ -7,8 +7,10 @@ import StatusContext from "../../store/status-context";
 import LoadingContext from "../../store/loading-context";
 import AuthModalContext from "../../store/authModal-context";
 import AccessLevelContext from "../../store/accessLevel-context";
+import BrowserNotSupportedContext from "../../store/browserNotSupported-context";
 import "../../styles/globals.css";
 import ProtectedRoutes from "../auth/ProtectedRoutes";
+import ErrorBoundary from "../layout/WrapLayout/ErrorBoundary";
 import Layout from "../layout/WrapLayout/Layout";
 import ScrollToPageTop from "../utils/ScrollToPageTop";
 import { connectSmartContract } from "../utils/smart-contract/functions";
@@ -41,6 +43,7 @@ function App({ Component, pageProps, router }) {
 		showSuccessBox: false,
 	});
 	const [authModalOpen, setAuthModalOpen] = useState(false);
+	const [isBrowserNotSupportedModalOpen, setBrowserNotSupportedModalOpen] = useState(false);
 	const [audioPlayerProps, setAudioPlayerProps] = useState({
 		queue: [],
 		// updateQueue to be updated in every play button click on the site
@@ -56,6 +59,9 @@ function App({ Component, pageProps, router }) {
 
 	useEffect(() => {
 		connectSmartContract();
+		if (navigator.userAgent.indexOf("Chrome") == -1 && navigator.userAgent.indexOf("Firefox") == -1) {
+			setBrowserNotSupportedModalOpen(true);
+		}
 	}, []);
 
 	return (
@@ -99,26 +105,30 @@ function App({ Component, pageProps, router }) {
 			></Script>
 			<Script src="https://kit.fontawesome.com/8f4546bba1.js" crossOrigin="anonymous"></Script>
 
-			<MoralisProvider appId={MORALIS_APP_ID} serverUrl={MORALIS_SERVER_URL}>
-				<ThemeProvider attribute="class" enableSystem={false}>
-					<LoadingContext.Provider value={[isLoading, setLoading]}>
-						<AccessLevelContext.Provider value={[accessLevel, setAccessLevel]}>
-							<AuthModalContext.Provider value={[authModalOpen, setAuthModalOpen]}>
-								<StatusContext.Provider value={[error, success, setSuccess, setError]}>
-									<AudioPlayerContext.Provider value={[audioPlayerProps, setAudioPlayerProps]}>
-										<ProtectedRoutes router={router}>
-											<Layout>
-												<ScrollToPageTop />
-												<Component {...pageProps} />
-											</Layout>
-										</ProtectedRoutes>
-									</AudioPlayerContext.Provider>
-								</StatusContext.Provider>
-							</AuthModalContext.Provider>
-						</AccessLevelContext.Provider>
-					</LoadingContext.Provider>
-				</ThemeProvider>
-			</MoralisProvider>
+			<ErrorBoundary>
+				<MoralisProvider appId={MORALIS_APP_ID} serverUrl={MORALIS_SERVER_URL}>
+					<ThemeProvider attribute="class" enableSystem={false}>
+						<BrowserNotSupportedContext.Provider value={[isBrowserNotSupportedModalOpen, setBrowserNotSupportedModalOpen]}>
+							<LoadingContext.Provider value={[isLoading, setLoading]}>
+								<AccessLevelContext.Provider value={[accessLevel, setAccessLevel]}>
+									<AuthModalContext.Provider value={[authModalOpen, setAuthModalOpen]}>
+										<StatusContext.Provider value={[error, success, setSuccess, setError]}>
+											<AudioPlayerContext.Provider value={[audioPlayerProps, setAudioPlayerProps]}>
+												<ProtectedRoutes router={router}>
+													<Layout>
+														<ScrollToPageTop />
+														<Component {...pageProps} />
+													</Layout>
+												</ProtectedRoutes>
+											</AudioPlayerContext.Provider>
+										</StatusContext.Provider>
+									</AuthModalContext.Provider>
+								</AccessLevelContext.Provider>
+							</LoadingContext.Provider>
+						</BrowserNotSupportedContext.Provider>
+					</ThemeProvider>
+				</MoralisProvider>
+			</ErrorBoundary>
 		</>
 	);
 }

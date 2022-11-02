@@ -151,9 +151,16 @@ export default function TrackInfo({
 						onSale={onSale}
 						comment={comment}
 					/>
-					<UnlockableContent tokenId={tokenId} currentOwnerAddress={currentOwner.ethAddress} unlockableContent={metadata.unlockableContent} />
+					{metadata.collaborators.length > 1 && (
+						<Collaborators bandId={metadata.bandId} collaborators={metadata.collaborators} collaboratorUsers={collaboratorUsers} />
+					)}
+					<UnlockableContent
+						tokenId={tokenId}
+						currentOwnerAddress={currentOwner.ethAddress}
+						unlockableContent={metadata.unlockableContent}
+						collaborators={metadata.collaborators}
+					/>
 					<TrackDetails tokenId={tokenId} metadata={metadata} collaboratorUsers={collaboratorUsers} />
-					<Collaborators bandId={metadata.bandId} collaborators={metadata.collaborators} collaboratorUsers={collaboratorUsers} />
 					<div className="grid grid-cols-1 md:grid-cols-9 xl:grid-cols-5 gap-y-4 md:gap-6 mt-10">
 						<PurchaseInfo
 							tokenId={tokenId}

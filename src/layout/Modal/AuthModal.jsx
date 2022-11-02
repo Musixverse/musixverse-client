@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useMoralis } from "react-moralis";
 const { Transition } = require("@headlessui/react");
-import { addPolygonTestnetNetwork } from "../../utils/smart-contract/functions";
+import { addPolygonNetwork } from "../../utils/smart-contract/functions";
 import logoBlack from "../../../public/logo-black.svg";
 import logoWhite from "../../../public/logo-white.svg";
 import { DISCORD_SUPPORT_CHANNEL_INVITE_LINK } from "../../config/constants";
@@ -55,7 +55,7 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 	const metamaskLogin = async () => {
 		setLoading(true);
 		if (!isAuthenticated) {
-			await addPolygonTestnetNetwork();
+			await addPolygonNetwork();
 			await authenticate({ signingMessage: "Musixverse Authentication" })
 				.then(async function (user) {
 					if (user) {
@@ -85,7 +85,7 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 		if (!isAuthenticated) {
 			await authenticate({
 				provider: "walletconnect",
-				chainId: process.env.NEXT_PUBLIC_BLOCKCHAIN_NETWORK_ID === 137 ? 137 : "",
+				chainId: process.env.NEXT_PUBLIC_BLOCKCHAIN_NETWORK_ID === "137" ? 137 : "",
 				signingMessage: "Musixverse Authentication",
 			})
 				.then(async function (user) {

@@ -3,7 +3,9 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://beta.musixverse.com
+Host: https://dev-vxm.vercel.app
 
 # Sitemaps
-Sitemap: https://beta.musixverse.com/sitemap.xml
+Sitemap: https://dev-vxm.vercel.app/sitemap.xml
+Sitemap: https://dev-vxm.vercel.app/sitemap-0.xml
+Sitemap: https://dev-vxm.vercel.app/server-sitemap.xml

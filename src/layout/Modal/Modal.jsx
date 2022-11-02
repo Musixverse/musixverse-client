@@ -75,7 +75,7 @@ export default function Modal({
 									onClick={() => closeModal()}
 									className="w-8 h-8 flex justify-center items-center rounded-lg transition-all duration-200 cursor-pointer hover:bg-zinc-500/20 "
 								>
-									<i className="fa-solid fa-xmark"></i>
+									<i className="fa-solid fa-xmark text-sm"></i>
 								</div>
 							</div>
 							<div className={`w-full flex flex-col mb-4 ${titleClasses ? titleClasses : "justify-between items-center"}`}>

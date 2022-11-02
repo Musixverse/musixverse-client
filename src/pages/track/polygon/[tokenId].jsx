@@ -88,7 +88,7 @@ export default function TrackInfo({
 	return (
 		<>
 			<Head>
-				<title>{"Musixverse - Track Info | " + metadata.title + " by " + metadata.artist}</title>
+				<title>{"Musixverse | Track Info: " + metadata.title + " by " + metadata.artist}</title>
 				<meta name="description" content={meta_description}></meta>
 				<meta name="viewport" content="initial-scale=1.0, width=device-width"></meta>
 				<meta name="og:image" content={metadata.artwork.uri.replace("ipfs://", process.env.NEXT_PUBLIC_IPFS_NODE_URL)}></meta>
@@ -96,13 +96,13 @@ export default function TrackInfo({
 			</Head>
 
 			<NextSeo
-				title={"Musixverse - Track Info | " + metadata.title + " by " + metadata.artist}
+				title={"Musixverse | Track Info: " + metadata.title + " by " + metadata.artist}
 				description={metadata.description}
 				canonical="https://www.musixverse.com"
 				openGraph={{
 					siteName: "Musixverse",
 					url: "https://www.musixverse.com",
-					title: "Musixverse - Track Info | " + metadata.title + " by " + metadata.artist,
+					title: "Musixverse | Track Info : " + metadata.title + " by " + metadata.artist,
 					description: metadata.description,
 					images: [
 						{

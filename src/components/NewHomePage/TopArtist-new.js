@@ -9,7 +9,7 @@ export default function TopArtists() {
 	const [bg, setBg] = useState([cover_sarthak, cover_m]);
 
 	return (
-		<div className="relative mt-24">
+		<div className="relative mt-20">
 			<h1 className="font-primary font-semibold text-3xl text-center">
 				Top Artists on M<span className="text-primary-500">x</span> Catalog
 			</h1>

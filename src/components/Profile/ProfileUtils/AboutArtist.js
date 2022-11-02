@@ -101,36 +101,40 @@ export default function AboutArtist({ username, name, bio, country, createdAt, s
 					<span>{createdAt ? joined : null}</span>
 				</div>
 				<div className="flex space-x-3 text-dark-600 dark:text-light-200">
-					<Tooltip
-						labelText={
-							<span className="font-semibold text-sm cursor-help text-center">
-								{user && username !== user.attributes.username && (
-									<button
-										onClick={() => setShowReportModal(true)}
-										className="md:w-[36px] md:h-[36px] w-[28px] h-[28px] text-center rounded-full bg-gray-200 dark:bg-[#040404] hover:bg-light-300"
-									>
-										<i className="text-xs md:text-sm fas fa-flag text-dark-600 dark:text-light-100 ml-1.5"></i>
-									</button>
-								)}
-								{!user && (
-									<button
-										onClick={() => setAuthModalOpen(true)}
-										className="md:w-[36px] md:h-[36px] w-[28px] h-[28px] text-center rounded-full bg-gray-200 dark:bg-[#040404] hover:bg-light-300"
-									>
-										<i className="text-xs md:text-sm fas fa-flag text-dark-600 dark:text-light-100 ml-1.5"></i>
-									</button>
-								)}
-							</span>
-						}
-						message="Report this Profile"
-						tooltipLocation="bottom"
-					></Tooltip>
+					<div>
+						<Tooltip
+							labelText={
+								<span className="font-semibold text-sm cursor-help text-center">
+									{!user ? (
+										<button
+											onClick={() => setAuthModalOpen(true)}
+											className="md:w-[36px] md:h-[36px] w-[28px] h-[28px] text-center rounded-full bg-gray-200 dark:bg-[#040404] hover:bg-light-300"
+										>
+											<i className="text-xs md:text-sm fas fa-flag text-dark-600 dark:text-light-100 ml-1.5"></i>
+										</button>
+									) : (
+										user &&
+										username !== user.attributes.username && (
+											<button
+												onClick={() => setShowReportModal(true)}
+												className="md:w-[36px] md:h-[36px] w-[28px] h-[28px] text-center rounded-full bg-gray-200 dark:bg-[#040404] hover:bg-light-300"
+											>
+												<i className="text-xs md:text-sm fas fa-flag text-dark-600 dark:text-light-100 ml-1.5"></i>
+											</button>
+										)
+									)}
+								</span>
+							}
+							message="Report this Profile"
+							tooltipLocation="bottom"
+						></Tooltip>
+					</div>
 
 					<button className="md:w-[36px] md:h-[36px] w-[28px] h-[28px] text-center rounded-full bg-gray-200 dark:bg-[#040404] hover:bg-light-300 dark:hover:bg-dark-600 relative group">
 						<i className="fa-solid fa-share-nodes text-lg"></i>
 
-						<ul className="absolute pt-10 bg-transparent hidden right-0 top-0 z-10 text-sm font-medium text-left list-none border-none rounded-xl min-w-[250px] group-hover:block">
-							<ul className="rounded-xl shadow-lg bg-light-100 dark:bg-dark-600 z-40">
+						<ul className="absolute pt-10 bg-transparent hidden group-hover:block right-0 top-0 z-10 text-sm font-medium text-left list-none border-none rounded-xl min-w-[250px]">
+							<ul className="rounded-xl shadow-lg bg-light-100 dark:bg-dark-600 z-50">
 								<li onClick={copyToClipboard}>
 									<div className="flex items-center w-full rounded-t-xl px-4 py-3 bg-transparent cursor-pointer whitespace-nowrap hover:bg-gray-100 dark:hover:bg-dark-800">
 										<i className="fa-solid fa-copy text-lg"></i>

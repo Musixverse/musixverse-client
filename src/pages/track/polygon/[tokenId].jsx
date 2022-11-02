@@ -93,6 +93,7 @@ export default function TrackInfo({
 				<meta name="viewport" content="initial-scale=1.0, width=device-width"></meta>
 				<meta name="og:image" content={metadata.artwork.uri.replace("ipfs://", process.env.NEXT_PUBLIC_IPFS_NODE_URL)}></meta>
 				<meta name="image" property="og:image" content={metadata.artwork.uri.replace("ipfs://", process.env.NEXT_PUBLIC_IPFS_NODE_URL)}></meta>
+				<meta name="twitter:image" content={metadata.artwork.uri.replace("ipfs://", process.env.NEXT_PUBLIC_IPFS_NODE_URL)}></meta>
 			</Head>
 
 			<NextSeo

@@ -159,7 +159,7 @@ const Footer = () => {
 					</div>
 				</div>
 				<p className="font-primary text-xs max-w-sm text-center sm:text-left mx-auto sm:mx-0">
-					©2021 All Rights Reserved. Musixverse logo is a registered trademark of Musixverse Company.
+					©2022 All Rights Reserved. Musixverse logo is a registered trademark of Musixverse Technologies Pvt. Ltd.
 				</p>
 			</div>
 		</div>

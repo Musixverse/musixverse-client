@@ -181,7 +181,7 @@ export default function NewAudioPlayer() {
 
 	//Global Audio Player Component
 	return (
-		<div className="md:w-[364px] group transition-[width] duration-500 ease-in-out fixed z-40 overflow-hidden left-4 bottom-4 md:hover:w-[500px]">
+		<div className="md:w-[364px] md:h-[72px] md:hover:h-[280px] group transition-[width,height] duration-500 ease-in-out fixed z-40 overflow-hidden left-4 bottom-4 md:hover:w-[500px]">
 			{/* Normal state bg-div */}
 			<div
 				className="absolute z-0 w-full h-full rounded-xl"
@@ -192,7 +192,7 @@ export default function NewAudioPlayer() {
 					backgroundRepeat: "no-repeat",
 				}}
 			></div>
-			<div className="bg-[rgba(19,19,19,0.4)] backdrop-blur-[4px] backdrop-brightness-105 text-light-100 relative flex items-center justify-between w-full px-6 py-3 group-hover:p-6 group-hover:flex-col rounded-xl">
+			<div className="bg-[rgba(19,19,19,0.4)] backdrop-blur-[4px] backdrop-brightness-105 text-light-100 relative flex items-center justify-between w-full h-full px-6 py-3 group-hover:p-6 group-hover:flex-col rounded-xl">
 				{/* Normal state */}
 				<div className="flex justify-between w-full">
 					<div className="flex flex-col">

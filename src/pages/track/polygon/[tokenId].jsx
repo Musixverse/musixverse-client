@@ -25,6 +25,7 @@ export async function getStaticProps(context) {
 		const comment = tokenDetails.comment;
 		const onSale = tokenDetails.onSale;
 		const price = Moralis.Units.FromWei(tokenDetails.price);
+		const priceInWei = tokenDetails.price;
 		const currentOwner = tokenDetails.currentOwner;
 		const artist = tokenDetails.artist;
 		const localTokenId = tokenDetails.localTokenId;
@@ -48,6 +49,7 @@ export async function getStaticProps(context) {
 				metadata,
 				otherTokensOfTrack,
 				price,
+				priceInWei,
 				onSale,
 				comment,
 				currentOwner,
@@ -77,6 +79,7 @@ export default function TrackInfo({
 	metadata,
 	otherTokensOfTrack,
 	price,
+	priceInWei,
 	onSale,
 	comment,
 	currentOwner,
@@ -131,7 +134,7 @@ export default function TrackInfo({
 				}}
 			/>
 
-			<div className="flex flex-col items-center justify-center w-full bg-light-100 dark:bg-dark-900 pt-28 pb-20">
+			<div className="flex flex-col items-center justify-center w-full pb-20 bg-light-100 dark:bg-dark-900 pt-28">
 				<div className="w-full max-w-[1920px] px-10 sm:px-16 xl:px-20 2xl:px-36">
 					<TrackHeader
 						tokenId={tokenId}
@@ -145,11 +148,13 @@ export default function TrackInfo({
 						tags={metadata.tags}
 						unlockTimestamp={parseInt(metadata.unlockTimestamp)}
 						price={price}
+						priceInWei={priceInWei}
 						currentOwnerAddress={currentOwner.ethAddress}
 						numberOfCopies={metadata.numberOfCopies}
 						otherTokensOfTrack={otherTokensOfTrack}
 						onSale={onSale}
 						comment={comment}
+						trackId={trackId}
 					/>
 					{metadata.collaborators.length > 1 && (
 						<Collaborators bandId={metadata.bandId} collaborators={metadata.collaborators} collaboratorUsers={collaboratorUsers} />
@@ -161,7 +166,7 @@ export default function TrackInfo({
 						collaborators={metadata.collaborators}
 					/>
 					<TrackDetails tokenId={tokenId} metadata={metadata} collaboratorUsers={collaboratorUsers} />
-					<div className="grid grid-cols-1 md:grid-cols-9 xl:grid-cols-5 gap-y-4 md:gap-6 mt-10">
+					<div className="grid grid-cols-1 mt-10 md:grid-cols-9 xl:grid-cols-5 gap-y-4 md:gap-6">
 						<PurchaseInfo
 							tokenId={tokenId}
 							resaleRoyaltyPercentage={metadata.resaleRoyaltyPercent}

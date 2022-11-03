@@ -25,13 +25,15 @@ export default function TrackHeader({
 	otherTokensOfTrack,
 	onSale,
 	comment,
+	trackId,
+	priceInWei,
 }) {
 	return (
 		<div className={styles["track-header"]}>
 			<div className={styles["track-header__container"]}>
 				{/* Image section */}
 				<div className={"group pr-4 " + styles["track-header__container--trackImage"]}>
-					<div className="h-full w-full relative">
+					<div className="relative w-full h-full">
 						{image ? (
 							<Link href={image}>
 								<a target="_blank" rel="noopener noreferrer">
@@ -52,11 +54,11 @@ export default function TrackHeader({
 						)}
 					</div>
 
-					<div className="absolute hidden group-hover:block pt-2">
+					<div className="absolute hidden pt-2 group-hover:block">
 						{artworkArtistInfo && (artworkInfo.invitedArtistId || artworkInfo.artistAddress) && artworkArtistInfo.avatar ? (
 							<Link href={`/profile/${artworkArtistInfo.username}`} className="cursor-pointer">
 								<a target="_blank" rel="noopener noreferrer">
-									<div className="flex items-center mb-2 font-secondary text-sm">
+									<div className="flex items-center mb-2 text-sm font-secondary">
 										<span className="mr-2">Artwork by-</span>
 										<Image
 											src={artworkArtistInfo.avatar}
@@ -70,7 +72,7 @@ export default function TrackHeader({
 								</a>
 							</Link>
 						) : artworkInfo.artist ? (
-							<div className="flex items-center mb-2 font-secondary text-sm">
+							<div className="flex items-center mb-2 text-sm font-secondary">
 								<span className="mr-2">Artwork by-</span>
 								<span>{artworkInfo.artist}</span>
 							</div>
@@ -80,7 +82,7 @@ export default function TrackHeader({
 
 				{/* Track Details section */}
 				<div className={styles["track-header__container--track-detail"]}>
-					<div className="font-bold pt-8 sm:pt-0 pb-2 items-center flex">
+					<div className="flex items-center pt-8 pb-2 font-bold sm:pt-0">
 						{artist ? (
 							<Link href={artist.isBand ? `/profile/band/${artist.username}` : `/profile/${artist.username}`} className="cursor-pointer">
 								<a target="_blank" rel="noopener noreferrer">
@@ -89,21 +91,21 @@ export default function TrackHeader({
 							</Link>
 						) : null}
 						{artist && artist.isArtistVerified && (
-							<div className="ml-2 align-center flex">
+							<div className="flex ml-2 align-center">
 								<Image src={mxv_verified} width={14} height={14} alt="MXV verified" />
 							</div>
 						)}
 					</div>
 
-					<div className="flex justify-between items-end sm:pb-4">
-						<div className="font-tertiary text-7xl flex flex-col sm:flex-row">
+					<div className="flex items-end justify-between sm:pb-4">
+						<div className="flex flex-col font-tertiary text-7xl sm:flex-row">
 							<span>{title}</span>&nbsp;
 							{localTokenId ? (
 								<>
 									{otherTokensOfTrack.length === 0 ? (
-										<span className="font-primary text-xs items-end flex mb-3 sm:ml-1">#1 of 1</span>
+										<span className="flex items-end mb-3 text-xs font-primary sm:ml-1">#1 of 1</span>
 									) : (
-										<span className="font-primary text-xs items-end flex mb-2 sm:ml-1">
+										<span className="flex items-end mb-2 text-xs font-primary sm:ml-1">
 											<TrackEditionDropdown
 												optionsArray={otherTokensOfTrack}
 												localTokenId={localTokenId}
@@ -116,17 +118,26 @@ export default function TrackHeader({
 						</div>
 					</div>
 					{/* Audio Player component */}
-					<AudioPlayer tokenId={tokenId} audio_url={audio_url} artistName={artist && artist.name} title={title} />
+					<AudioPlayer 
+						tokenId={tokenId} 
+						audio={audio_url} 
+						artistName={artist && artist.name} 
+						isArtistVerified={artist && artist.isArtistVerified} 
+						trackName={title} 
+						image={image}
+						trackId={trackId}
+						price={priceInWei}
+					/>
 
-					<div className="w-full h-full grid content-between pt-6">
-						<div className="pb-6 grid grid-cols-12 flex-wrap gap-2 w-full justify-between">
+					<div className="grid content-between w-full h-full pt-6">
+						<div className="grid flex-wrap justify-between w-full grid-cols-12 gap-2 pb-6">
 							<div className={comment ? "col-span-5" : "col-span-full"}>
 								{tags.map((tag, index) => {
 									return (
 										<button
 											key={index}
 											type="button"
-											className="px-6 py-2 mr-3 mb-3 rounded-full bg-light-200 dark:bg-dark-600 text-sm cursor-default"
+											className="px-6 py-2 mb-3 mr-3 text-sm rounded-full cursor-default bg-light-200 dark:bg-dark-600"
 										>
 											{tag}
 										</button>

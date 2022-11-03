@@ -55,6 +55,7 @@ export default function NewAudioPlayer() {
 							playerIsLoaded: true,
 							isPlaying: true,
 							currentDuration: durTime,
+							audioTag: audioTag.current
 						};
 					});
 					clearInterval(intervalId);
@@ -213,7 +214,7 @@ export default function NewAudioPlayer() {
 							<div className="flex items-center justify-center font-semibold">
 								<Image src={"/assets/matic-logo.svg"} width={16} height={16} alt="matic logo" />
 								<span className="ml-1 sm:text-lg">{nftPrice}</span>
-								<button className="ml-4 px-4 py-1 text-xs bg-primary-500 hover:bg-primary-600 rounded-full">View Track</button>
+								<button className="px-4 py-1 ml-4 text-xs rounded-full bg-primary-500 hover:bg-primary-600">View Track</button>
 							</div>
 						</div>
 					</div>

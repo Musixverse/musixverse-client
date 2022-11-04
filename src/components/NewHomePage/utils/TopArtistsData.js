@@ -42,7 +42,7 @@ export const TopArtistsData = [
 	{
 		name: "Xubaan",
 		instagramProfileURL: "https://www.instagram.com/xubaanindia",
-		imageURL: require("../../../../public/assets/new-homepage/jatayu.png"),
+		imageURL: require("../../../../public/assets/new-homepage/xubaan.png"),
 		description: "The band that is taking the world by storm",
 		bgURL_d: require("../../../../public/assets/new-homepage/cover_xubaan.png"),
 		bgURL_m: require("../../../../public/assets/new-homepage/cover_m.png"),

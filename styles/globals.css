@@ -44,3 +44,19 @@ a {
 .footer {
 	@apply w-full max-w-[1920px] pb-20 px-10 md:px-8 lg:px-16 xl:px-20 2xl:px-36 bg-nav-light backdrop-blur-2xl backdrop-brightness-150;
 }
+
+/**************************************************************************/
+/****************    Top Artist Swiper Component   ************************/
+/**************************************************************************/
+.swiper-container .swiper {
+	padding-left: 60px;
+	padding-right: 60px;
+}
+
+.swiper-button-next:after {
+	color: #5ab510;
+}
+
+.swiper-button-prev:after {
+	color: #5ab510;
+}

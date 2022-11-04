@@ -5,7 +5,7 @@ import Section3 from "../components/HomePage/HomePage_section4";
 import Section4 from "../components/HomePage/HomePage_section5";
 import Section2New from "../components/HomePage/HomePageSection2";
 import HeroSection from "../components/HomePage/HeroSection";
-import TopArtists from "../components/NewHomePage/TopArtists";
+import TopArtists from "../components/NewHomePage/TopArtists-new";
 
 function Home() {
 	return (

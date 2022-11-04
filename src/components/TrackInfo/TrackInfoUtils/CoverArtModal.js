@@ -81,6 +81,10 @@ export default function CoverArtModal({ isOpen = "", onClose = "", image = "", c
 								style={{
 									maxWidth: "100%",
 									height: "auto",
+									width: "auto",
+									maxHeight: "100%",
+									objectFit: "cover",
+									overflow: "hidden",
 								}}
 							/>
 						</div>

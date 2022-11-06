@@ -51,7 +51,6 @@ function App({ Component, pageProps, router }) {
 		// currentlyPlayingIdx to keep an eye on the loadCapacity to reach
 		currentlyPlayingIdx: -1,
 		// 👇 To be updated from globalAudioPlayer and to be consumed in trackInfo
-		currentProgress: "00:00",
 		audioTag: undefined,
 		currentDuration: "",
 		playerIsLoaded: false,

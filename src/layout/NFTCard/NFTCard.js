@@ -95,7 +95,6 @@ export default function NFTCard({
 				queue: newQueue,
 				updateQueue: true,
 				currentlyPlayingIdx: 0,
-				currentProgress: "00:00",
 				playerIsLoaded: false,
 			};
 		});
@@ -119,17 +118,17 @@ export default function NFTCard({
 										className={"group-hover:scale-110 group-hover:duration-500 duration-500 " + styles["nft-image"]}
 									/>
 									{favouriteOfBandMember && (
-										<div className="group-hover:bg-dark-600/10 backdrop-blur duration-500 text-light-100 w-full h-full opacity-0 group-hover:opacity-100 flex items-center justify-center absolute">
+										<div className="absolute flex items-center justify-center w-full h-full duration-500 opacity-0 group-hover:bg-dark-600/10 backdrop-blur text-light-100 group-hover:opacity-100">
 											<div className="relative flex flex-col items-center justify-center">
-												<i className="fa-solid fa-heart text-5xl"></i>
+												<i className="text-5xl fa-solid fa-heart"></i>
 												<p className="mt-2">{favouriteOfBandMember}</p>
 											</div>
 										</div>
 									)}
 									{tokenInCollectionOwnedByBandMember && (
-										<div className="group-hover:bg-dark-600/10 backdrop-blur duration-500 text-light-100 w-full h-full opacity-0 group-hover:opacity-100 flex items-center justify-center absolute">
+										<div className="absolute flex items-center justify-center w-full h-full duration-500 opacity-0 group-hover:bg-dark-600/10 backdrop-blur text-light-100 group-hover:opacity-100">
 											<div className="relative flex flex-col items-center justify-center">
-												<i className="fa-solid fa-record-vinyl text-5xl"></i>
+												<i className="text-5xl fa-solid fa-record-vinyl"></i>
 												<p className="mt-2">{tokenInCollectionOwnedByBandMember}</p>
 											</div>
 										</div>

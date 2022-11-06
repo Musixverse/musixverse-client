@@ -14,40 +14,65 @@ export default function AudioPlayer({
 	trackId,
 	price,
 }) {
-	/*
-		Data needed:
-			from context:
-				currentProgress
-				duration
-				isPlaying
-				trackId
-				isLoaded
-	*/
 	/*******************************
 	 *******  AUDIO PLAYER  ********
 	 *******************************/
 	const [audioPlayerProps, setAudioPlayerProps] = useContext(AudioPlayerContext);
+	const [currTimeStr, setCurrTimeStr] = useState("00:00");
 	const progress = useRef(null);
+	const progressContainer = useRef(null);
 	
 	//Memoize trackID
 	const audioPlayerTrackId = useMemo(() => {
 		return audioPlayerProps.currentlyPlayingIdx === -1 ? undefined : audioPlayerProps.queue[audioPlayerProps.currentlyPlayingIdx].trackId;
 	},[audioPlayerProps.currentlyPlayingIdx, audioPlayerProps.queue]);
 	
-	//Update the width of the progress bar div	
 	useEffect(()=>{
-		if(audioPlayerProps.isPlaying && trackId === audioPlayerTrackId){
-			const currProgressArr = audioPlayerProps.currentProgress.split(":");
-			const currDurationArr = audioPlayerProps.currentDuration.split(":");
-			const currTime = Number(currProgressArr[0])*60+Number(currProgressArr[1]);
-			const durTime = Number(currDurationArr[0])*60+Number(currDurationArr[1]);
+		if(audioPlayerProps.audioTag){
+			// let waitForNextSec = false;
+			audioPlayerProps.audioTag.addEventListener('timeupdate', ()=>{
+				if(!(audioPlayerTrackId && trackId === audioPlayerTrackId))
+					return;
+				
+				const currTime = Math.floor(audioPlayerProps.audioTag.currentTime);
+				//Update the currTime
+				const min = Math.floor(currTime/60);
+				const sec = Math.floor(currTime%60);
+				setCurrTimeStr(() => {
+					return (min < 10? "0"+min:min)+":"+(sec < 10? "0"+sec:sec);
+				});
 
-			const progressPercent = (currTime / durTime) * 100;
-			// Update the width
-			progress.current.style.width = `${progressPercent}%`;
+				//Update progress bar
+				const currDurationArr = audioPlayerProps.currentDuration.split(":");
+				const durTime = Number(currDurationArr[0])*60+Number(currDurationArr[1]);
+				const progressPercent = (currTime / durTime) * 100;
+				if(progress && progress.current)
+					progress.current.style.width = `${progressPercent}%`;
+
+
+				// More optimisation?
+				// waitForNextSec = true;
+				// setTimeout(()=>{
+				// 	waitForNextSec = false
+				// },1000);
+			})
 		}
-	},[audioPlayerProps.currentProgress, audioPlayerProps.isPlaying, trackId, audioPlayerTrackId, audioPlayerProps.currentDuration])
+	},[audioPlayerProps.audioTag, audioPlayerTrackId, trackId, audioPlayerProps.currentDuration]);
 
+
+	//Update the width of the progress bar div	
+	// useEffect(()=>{
+	// 	if(audioPlayerProps.isPlaying && trackId === audioPlayerTrackId){
+	// 		const currProgressArr = audioPlayerProps.currentProgress.split(":");
+	// 		const currDurationArr = audioPlayerProps.currentDuration.split(":");
+	// 		const currTime = Number(currProgressArr[0])*60+Number(currProgressArr[1]);
+	// 		const durTime = Number(currDurationArr[0])*60+Number(currDurationArr[1]);
+
+	// 		const progressPercent = (currTime / durTime) * 100;
+	// 		// Update the width
+	// 		progress.current.style.width = `${progressPercent}%`;
+	// 	}
+	// },[audioPlayerProps.currentProgress, audioPlayerProps.isPlaying, trackId, audioPlayerTrackId, audioPlayerProps.currentDuration])
 	
 	const playTrackHandler = () => {
 		//If same song is played again then dont add again
@@ -79,7 +104,6 @@ export default function AudioPlayer({
 				queue: newQueue,
 				updateQueue: true,
 				currentlyPlayingIdx: 0,
-				currentProgress: "00:00",
 				playerIsLoaded: false,
 			};
 		});
@@ -91,8 +115,8 @@ export default function AudioPlayer({
 		//Get the width to normalise in the width of clicked
 		let toNormalise = progress.current.getBoundingClientRect().x;
 		// Get the width of the progress bar
-		// const width = progressContainer.current.offsetWidth;
-		const width = e.target.offsetWidth;
+		const width = progressContainer.current.offsetWidth;
+		// const width = e.target.offsetWidth;
 		//Normalise the clicked x-axis
 		const clickX = e.clientX - toNormalise;
 		// Fetch the full duration
@@ -114,11 +138,12 @@ export default function AudioPlayer({
 					<div className={styles["music-bar__container--info"]}>
 						{/* Time elapsed */}
 						<p className={"mr-4 " + styles["container__info--duration"]}>
-							{(audioPlayerTrackId && trackId === audioPlayerTrackId)? audioPlayerProps.currentProgress:"00:00"}
+							{currTimeStr}
+							{/* {(audioPlayerTrackId && trackId === audioPlayerTrackId)? currTimeStr:"00:00"} */}
 						</p>
 						{/* MP3 Progress */}
 						{/* {audioIsReady ? ( */}
-							<div onClick={setProgress} className={styles["container__info--progress-container"]}>
+							<div ref={progressContainer} onClick={setProgress} className={styles["container__info--progress-container"]}>
 								<div ref={progress} className={styles["info__progress-container--progress"]}></div>
 								<div className={styles["info__progress-container--slider-box"]}></div>
 							</div>

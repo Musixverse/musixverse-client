@@ -8,16 +8,19 @@
 
 import MarqueeText from "../../utils/MarqueeText";
 import Image from "next/image";
-import { useCallback, useContext, useEffect, useRef } from "react";
+import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import AudioPlayerContext from "../../../store/audioplayer-context";
 import { useMoralis } from "react-moralis";
 import ShinyLoader from "../ShinyLoader";
+import Link from "next/link";
 
 export default function NewAudioPlayer() {
 	const [audioPlayerProps, setAudioPlayerProps] = useContext(AudioPlayerContext);
+	const [currTimeStr, setCurrTimeStr] = useState("00:00");
 	const { Moralis } = useMoralis();
 	const audioTag = useRef(null);
 	const progress = useRef(null);
+	const progressContainer = useRef(null);
 
 	const getTime = useCallback((queryForCurrTime) => {
 		const duration = Math.floor(queryForCurrTime ? audioTag.current.currentTime : audioTag.current.duration);
@@ -55,6 +58,7 @@ export default function NewAudioPlayer() {
 							playerIsLoaded: true,
 							isPlaying: true,
 							currentDuration: durTime,
+							audioTag: audioTag.current
 						};
 					});
 					clearInterval(intervalId);
@@ -69,9 +73,7 @@ export default function NewAudioPlayer() {
 	//Effect to be ran when the isPlaying state changes for
 	//Global play pause functionality across platform
 	useEffect(() => {
-		console.log("Now running");
 		if (audioTag.current !== null) {
-			console.log("Now will change play/pause of player", audioPlayerProps.isPlaying);
 			if (audioPlayerProps.isPlaying) {
 				audioTag.current.play();
 			} else audioTag.current.pause();
@@ -89,15 +91,16 @@ export default function NewAudioPlayer() {
 	const nftPrice = Moralis.Units.FromWei(currSongTraits.price);
 	const isArtistVerified = currSongTraits.isArtistVerified;
 	const audioSrc = currSongTraits.audioURL;
-
+	const tokenId = currSongTraits.tokenId;
+	const redirectLink = `/track/polygon/${tokenId}`;
+	
 	/******************** HELPER METHODS *****************/
 	//Function to get the current time and the duration time
 	const setProgress = (e) => {
 		//Get the width to normalise in the width of clicked
 		let toNormalise = progress.current.getBoundingClientRect().x;
 		// Get the width of the progress bar
-		// const width = progressContainer.current.offsetWidth;
-		const width = e.target.offsetWidth;
+		const width = progressContainer.current.offsetWidth;
 		//Normalise the clicked x-axis
 		const clickX = e.clientX - toNormalise;
 		// Fetch the full duration
@@ -107,7 +110,7 @@ export default function NewAudioPlayer() {
 		//The above line will further trigger the timeUpdate event
 		//to update the progress bar
 	};
-
+	//Method to update the progress and currTime
 	const updateProgress = (e) => {
 		if (progress.current === null) return;
 		// fetch the duration
@@ -119,14 +122,7 @@ export default function NewAudioPlayer() {
 		// Update the width
 		progress.current.style.width = `${progressPercent}%`;
 		// Fetch the current time to update the dom tree
-		const currTime = getTime(true);
-		//Update the context's currTime
-		setAudioPlayerProps((prevProps) => {
-			return {
-				...prevProps,
-				currentProgress: currTime,
-			};
-		});
+		setCurrTimeStr(getTime(true));
 	};
 
 	const playTrackHandler = () => {
@@ -152,11 +148,13 @@ export default function NewAudioPlayer() {
 
 	const nextSong = () => {
 		// Or maybe make the setUpdate queue true and get more songs
-		if (audioPlayerProps.currentlyPlayingIdx === audioPlayerProps.queue.length - 1) return;
+		let newCurrIdx = audioPlayerProps.currentlyPlayingIdx+1;
+		if (audioPlayerProps.currentlyPlayingIdx === audioPlayerProps.queue.length - 1) 
+			newCurrIdx = 0;
 		setAudioPlayerProps((prevProps) => {
 			return {
 				...prevProps,
-				currentlyPlayingIdx: prevProps.currentlyPlayingIdx + 1,
+				currentlyPlayingIdx: newCurrIdx,
 				playerIsLoaded: false,
 			};
 		});
@@ -180,7 +178,7 @@ export default function NewAudioPlayer() {
 
 	//Global Audio Player Component
 	return (
-		<div className="md:w-[364px] group transition-[width] duration-500 ease-in-out fixed z-40 overflow-hidden left-4 bottom-4 md:hover:w-[500px]">
+		<div className="md:w-[364px] md:h-[72px] md:hover:h-[280px] group transition-[width,height] duration-500 ease-in-out fixed z-40 overflow-hidden left-4 bottom-4 md:hover:w-[500px]">
 			{/* Normal state bg-div */}
 			<div
 				className="absolute z-0 w-full h-full rounded-xl"
@@ -191,7 +189,7 @@ export default function NewAudioPlayer() {
 					backgroundRepeat: "no-repeat",
 				}}
 			></div>
-			<div className="bg-[rgba(19,19,19,0.4)] backdrop-blur-[4px] backdrop-brightness-105 text-light-100 relative flex items-center justify-between w-full px-6 py-3 group-hover:p-6 group-hover:flex-col rounded-xl">
+			<div className="bg-[rgba(19,19,19,0.4)] backdrop-blur-[4px] backdrop-brightness-105 text-light-100 relative flex items-center justify-between w-full h-full px-6 py-3 group-hover:p-6 group-hover:flex-col rounded-xl">
 				{/* Normal state */}
 				<div className="flex justify-between w-full">
 					<div className="flex flex-col">
@@ -213,7 +211,9 @@ export default function NewAudioPlayer() {
 							<div className="flex items-center justify-center font-semibold">
 								<Image src={"/assets/matic-logo.svg"} width={16} height={16} alt="matic logo" />
 								<span className="ml-1 sm:text-lg">{nftPrice}</span>
-								<button className="ml-4 px-4 py-1 text-xs bg-primary-500 hover:bg-primary-600 rounded-full">View Track</button>
+								<Link href={redirectLink} passHref>
+									<button className="px-4 py-1 ml-4 text-xs rounded-full bg-primary-500 hover:bg-primary-600">View Track</button>
+								</Link>
 							</div>
 						</div>
 					</div>
@@ -229,9 +229,9 @@ export default function NewAudioPlayer() {
 				</div>
 				{/* Audio Progress Container */}
 				<div className="items-center justify-center hidden w-full mt-8 mb-5 group-hover:flex">
-					<p className={"mr-4 font-primary text-sm min-w-[39px]"}>{audioPlayerProps.currentProgress}</p>
+					<p className={"mr-4 font-primary text-sm min-w-[39px]"}>{currTimeStr}</p>
 					{audioPlayerProps.playerIsLoaded ? (
-						<div onClick={setProgress} className="bg-light-300 rounded-md cursor-pointer h-[4px] w-10/12 flex items-center">
+						<div ref={progressContainer} onClick={setProgress} className="bg-light-300 rounded-md cursor-pointer h-[4px] w-10/12 flex items-center">
 							<div ref={progress} className="w-0 h-full bg-primary-500 rounded-l-md"></div>
 							<div className="bg-primary-500 w-[20px] h-[10px] rounded-xl ml-[-11px]"></div>
 						</div>
@@ -239,7 +239,7 @@ export default function NewAudioPlayer() {
 						<ShinyLoader classes={"rounded-md my-[10px] h-[4px] w-10/12"} />
 					)}
 					<p className={"ml-4 font-primary text-sm min-w-[39px]"}>{audioPlayerProps.playerIsLoaded ? audioPlayerProps.currentDuration : ""}</p>
-					<audio ref={audioTag} src={audioSrc} onTimeUpdate={updateProgress}></audio>
+					<audio ref={audioTag} src={audioSrc} onEnded={nextSong} onTimeUpdate={updateProgress}></audio>
 				</div>
 				{/* Global Audio Controller */}
 				<div className="flex items-center space-x-10 ">

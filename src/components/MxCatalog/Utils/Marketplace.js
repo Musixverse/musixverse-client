@@ -81,16 +81,28 @@ export default function Marketplace({ tracks }) {
 	const [currentSelection, setCurrentSelection] = useState(1);
 	const [appliedFilter, dispatch] = useReducer(reducer, initialState);
 	const [showMobileFilter, setShowMobileFilter] = useState(false);
+	const [currentMobileFilterType, setCurrentMobileFilterType] = useState(1);
 
 	return (
 		<>
-			<MobileFilterModal {...{ showMobileFilter, setShowMobileFilter, appliedFilter, setAppliedFilter: dispatch, currentSelection }} />
+			<MobileFilterModal
+				{...{
+					showMobileFilter,
+					setShowMobileFilter,
+					appliedFilter,
+					setAppliedFilter: dispatch,
+					currentSelection,
+					currentMobileFilterType,
+					setCurrentMobileFilterType,
+				}}
+			/>
 
 			<CatalogNav {...{ currentSelection, setCurrentSelection }} />
 
 			{/* Main Catalog Body */}
 			<CatalogBody
 				setShowMobileFilter={setShowMobileFilter}
+				setCurrentMobileFilterType={setCurrentMobileFilterType}
 				currentSelection={currentSelection}
 				appliedFilter={appliedFilter}
 				setAppliedFilter={dispatch}

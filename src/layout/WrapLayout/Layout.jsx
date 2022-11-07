@@ -17,7 +17,7 @@ import FloatingHelp from "./FloatingHelp";
 import NewAudioPlayer from "../AudioPlayer/NewAudioPlayer";
 
 const Layout = ({ children }) => {
-	const { user, authError } = useMoralis();
+	const { user, authError, Moralis, isInitialized } = useMoralis();
 	const [error, success, , setError] = useContext(StatusContext);
 	const [isLoading, setLoading] = useContext(LoadingContext);
 	const [authModalOpen, setAuthModalOpen] = useContext(AuthModalContext);
@@ -52,6 +52,17 @@ const Layout = ({ children }) => {
 			}
 		});
 	}
+
+	useEffect(() => {
+		if (isInitialized) {
+			const fetchTracks = async () => {
+				const audios = await Moralis.Cloud.run("fetchTracksForAudioPlayer").then((data) => console.log(data));
+				return audios;
+			};
+
+			const tracks = fetchTracks();
+		}
+	}, [Moralis.Cloud, isInitialized]);
 
 	useEffect(() => {
 		if (authError) {

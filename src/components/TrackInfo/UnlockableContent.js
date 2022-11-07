@@ -133,7 +133,7 @@ export default function UnlockableContent({ tokenId, currentOwnerAddress, unlock
 
 				<div className={"flex space-x-8 " + (unlockableContent.about ? "mt-2" : "mt-6")}>
 					{unlockableContent.about && <div className="text-sm max-w-[300px] max-h-[150px] overflow-y-scroll pr-2">{unlockableContent.about}</div>}
-					<div className="grid grid-cols-3 items-start gap-4">
+					<div className="grid sm:grid-cols-3 items-start gap-4">
 						{unlockableContentItems.map((item, index) => {
 							let truncatedUnlockableItemText = item.unlockableItemText;
 

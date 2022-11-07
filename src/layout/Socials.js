@@ -40,7 +40,7 @@ const Socials = () => {
 				</Link>
 			</button>
 			<button className="flex justify-center items-center">
-				<Link href="https://www.linkedin.com/company/musomatic" passHref>
+				<Link href="https://www.linkedin.com/company/musixverse" passHref>
 					<a target="_blank" rel="noopener noreferrer" className="flex justify-center items-center">
 						<Image src={linkedin} width={20} height={20} alt="LinkedIn"></Image>
 					</a>

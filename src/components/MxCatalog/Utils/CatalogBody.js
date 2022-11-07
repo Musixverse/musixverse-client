@@ -7,7 +7,7 @@ const TrendingNFTs = dynamic(() => import("../Trending/TrendingNFTs"));
 import Filter from "./CatalogUtils/Filter";
 const MobileFilter = dynamic(() => import("./CatalogUtils/MobileFilterUtils/MobileFilter"));
 
-export default function CatalogBody({ currentSelection, setAppliedFilter, appliedFilter, setShowMobileFilter, tracks }) {
+export default function CatalogBody({ currentSelection, setCurrentMobileFilterType, setAppliedFilter, appliedFilter, setShowMobileFilter, tracks }) {
 	const { theme } = useTheme();
 	let catalogType = "NEW RELEASES ON MUSIXVERSE";
 	if (currentSelection === 2) catalogType = "EXPLORE THE MUSIXVERSE MARKETPLACE";
@@ -22,7 +22,7 @@ export default function CatalogBody({ currentSelection, setAppliedFilter, applie
 						<p className="dark:text-light-200">{catalogType}</p>
 					</div>
 
-					<MobileFilter {...{ setShowMobileFilter }} />
+					<MobileFilter {...{ setShowMobileFilter, setCurrentMobileFilterType }} />
 
 					<div className="flex items-start justify-between w-full lg:space-x-10">
 						<Filter setAppliedFilter={setAppliedFilter} appliedFilter={appliedFilter} currentSelection={currentSelection} />

@@ -7,7 +7,7 @@ export default function FilterTrackTraits({ appliedFilter, setAppliedFilter, set
 	const recordingYearArray = [...Array(new Date().getFullYear() - minRecordingYear + 1).keys()].map((x) => new Date().getFullYear() - x);
 
 	return (
-		<div className="flex flex-col mt-8 h-3/4 lg:h-[430px] lg:pr-10 overflow-y-scroll">
+		<div className="flex flex-col mt-8 h-3/4 lg:h-[430px] lg:pr-10 pr-4 overflow-y-scroll">
 			<div className="flex justify-between items-end">
 				<div>
 					<h5 className="text-sm font-bold md:text-base lg:text-lg font-secondary">Filter based on Track Traits</h5>

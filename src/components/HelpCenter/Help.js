@@ -18,6 +18,7 @@ import general_w from "../../../public/assets/help-center/faq_w.png";
 
 export default function Help() {
 	const { theme } = useTheme();
+
 	return (
 		<Fragment>
 			<div className={styles["help_us_container"]}>

@@ -4,6 +4,7 @@ import { buyNFT } from "./utils/helpData";
 
 export default function GettingStarted() {
 	const [currentlyExpanded, setCurrentlyExpanded] = useState(0);
+
 	const buyNFTAccordion = buyNFT.map((elem, idx) => {
 		return (
 			<div key={idx} className={"accordion-item " + styles["faq-item"]}>
@@ -24,8 +25,11 @@ export default function GettingStarted() {
 					aria-expanded="true"
 					aria-controls={elem.content_id}
 				>
-					<span className={"mr-3 material-symbols-outlined text-primary-600 " + (currentlyExpanded === idx ? "hidden" : "")}>add_circle</span>
-					<span className={"mr-3 text-primary-600 material-symbols-outlined " + (currentlyExpanded === idx ? "" : "hidden")}>do_not_disturb_on</span>
+					{currentlyExpanded === idx ? (
+						<span className="mr-3 text-primary-600 material-symbols-outlined">do_not_disturb_on</span>
+					) : (
+						<span className="mr-3 material-symbols-outlined text-primary-600">add_circle</span>
+					)}
 					{elem.heading}
 				</button>
 				{/* FAQ Item Content */}

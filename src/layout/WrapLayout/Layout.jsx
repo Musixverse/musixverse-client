@@ -15,12 +15,14 @@ import AuthModal from "../Modal/AuthModal";
 import BrowserNotSupportedModal from "../Modal/BrowserNotSupportedModal";
 import FloatingHelp from "./FloatingHelp";
 import NewAudioPlayer from "../AudioPlayer/NewAudioPlayer";
+import AudioPlayerContext from "../../../store/audioplayer-context";
 
 const Layout = ({ children }) => {
 	const { user, authError, Moralis, isInitialized } = useMoralis();
 	const [error, success, , setError] = useContext(StatusContext);
 	const [isLoading, setLoading] = useContext(LoadingContext);
 	const [authModalOpen, setAuthModalOpen] = useContext(AuthModalContext);
+	const [audioPlayerProps, setAudioPlayerProps] = useContext(AudioPlayerContext)
 
 	const router = useRouter();
 	const { theme } = useTheme();
@@ -56,13 +58,38 @@ const Layout = ({ children }) => {
 	useEffect(() => {
 		if (isInitialized) {
 			const fetchTracks = async () => {
-				const audios = await Moralis.Cloud.run("fetchTracksForAudioPlayer").then((data) => console.log(data));
-				return audios;
+				if(audioPlayerProps.updateQueue){
+					const audios = await Moralis.Cloud.run("fetchTracksForAudioPlayer")
+					.then((data) => {
+						return data.map((item)=>{
+							//Temporarily mapping fake data, need to be replaced
+							return {
+								artistName: item.artist,
+								audioURL: item.audio.replace("ipfs://", process.env.NEXT_PUBLIC_IPFS_NODE_URL),
+								nftCover: item.artwork.uri.replace("ipfs://", process.env.NEXT_PUBLIC_IPFS_NODE_URL),
+								songName: item.title,
+								tokenId: item.tokenId,
+								price: item.price? item.price:"70000000000000000",
+								isArtistVerified: item.isArtistVerified? item.isArtistVerified:true,
+								trackId: item.trackId? item.trackId:2,
+							};
+						})
+					});
+					setAudioPlayerProps((prevprops)=>{
+						const newQueue = [...prevprops.queue, ...audios];
+						return {
+							...prevprops,
+							queue: newQueue,
+							updateQueue: false,
+						};
+					})
+				}
+				// return audios;
 			};
 
-			const tracks = fetchTracks();
+			fetchTracks();
 		}
-	}, [Moralis.Cloud, isInitialized]);
+	}, [Moralis.Cloud, isInitialized, setAudioPlayerProps,audioPlayerProps.updateQueue]);
 
 	useEffect(() => {
 		if (authError) {

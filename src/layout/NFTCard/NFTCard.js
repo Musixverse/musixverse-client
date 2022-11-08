@@ -80,7 +80,7 @@ export default function NFTCard({
 		}
 		setAudioPlayerProps((prevProps) => {
 			const newQueue = [...prevProps.queue];
-			newQueue.unshift({
+			newQueue.push({
 				tokenId: tokenId,
 				audioURL: audio,
 				price: price,
@@ -93,8 +93,7 @@ export default function NFTCard({
 			return {
 				...prevProps,
 				queue: newQueue,
-				updateQueue: true,
-				currentlyPlayingIdx: 0,
+				currentlyPlayingIdx: newQueue.length-1,
 				playerIsLoaded: false,
 			};
 		});

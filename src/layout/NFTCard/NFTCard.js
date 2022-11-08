@@ -93,8 +93,7 @@ export default function NFTCard({
 			return {
 				...prevProps,
 				queue: newQueue,
-				updateQueue: true,
-				currentlyPlayingIdx: prevProps.currentlyPlayingIdx+1,
+				currentlyPlayingIdx: newQueue.length-1,
 				playerIsLoaded: false,
 			};
 		});

@@ -22,13 +22,6 @@ export default function NewAudioPlayer() {
 	const progress = useRef(null);
 	const progressContainer = useRef(null);
 
-	useEffect(()=>{
-		if(audioPlayerProps.audioTag)
-			audioPlayerProps.audioTag.removeEventListener('timeupdate',()=>{
-				console.log("rremoved");
-			});	
-	},[audioPlayerProps.audioTag, audioPlayerProps.currentlyPlayingIdx])
-
 	const getTime = useCallback((queryForCurrTime) => {
 		const duration = Math.floor(queryForCurrTime ? audioTag.current.currentTime : audioTag.current.duration);
 
@@ -95,7 +88,7 @@ export default function NewAudioPlayer() {
 	const trackName = currSongTraits.songName;
 	const singer = currSongTraits.artistName;
 	const imgSrc = currSongTraits.nftCover;
-	const nftPrice = Moralis.Units.FromWei(currSongTraits.price);
+	const nftPrice = Moralis.Units.FromWei(currSongTraits.price? currSongTraits.price:0);
 	const isArtistVerified = currSongTraits.isArtistVerified;
 	const audioSrc = currSongTraits.audioURL;
 	const tokenId = currSongTraits.tokenId;
@@ -156,6 +149,7 @@ export default function NewAudioPlayer() {
 	const nextSong = () => {
 		// Or maybe make the setUpdate queue true and get more songs
 		let newCurrIdx = audioPlayerProps.currentlyPlayingIdx+1;
+		debugger
 		if (audioPlayerProps.currentlyPlayingIdx === audioPlayerProps.queue.length - 1) 
 			newCurrIdx = 0;
 		if(newCurrIdx !== audioPlayerProps.currentlyPlayingIdx){
@@ -172,7 +166,11 @@ export default function NewAudioPlayer() {
 	};
 
 	const prevSong = () => {
-		if (audioPlayerProps.currentlyPlayingIdx !== 0) {
+		let newCurrIdx = audioPlayerProps.currentlyPlayingIdx - 1;
+		if (audioPlayerProps.currentlyPlayingIdx === 0) 
+			newCurrIdx = audioPlayerProps.queue.length-1;
+		
+		if(newCurrIdx !== audioPlayerProps.currentlyPlayingIdx){	
 			setAudioPlayerProps((prevProps) => {
 				return {
 					...prevProps,

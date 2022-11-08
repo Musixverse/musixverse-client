@@ -22,6 +22,13 @@ export default function NewAudioPlayer() {
 	const progress = useRef(null);
 	const progressContainer = useRef(null);
 
+	useEffect(()=>{
+		if(audioPlayerProps.audioTag)
+			audioPlayerProps.audioTag.removeEventListener('timeupdate',()=>{
+				console.log("rremoved");
+			});	
+	},[audioPlayerProps.audioTag, audioPlayerProps.currentlyPlayingIdx])
+
 	const getTime = useCallback((queryForCurrTime) => {
 		const duration = Math.floor(queryForCurrTime ? audioTag.current.currentTime : audioTag.current.duration);
 
@@ -151,13 +158,15 @@ export default function NewAudioPlayer() {
 		let newCurrIdx = audioPlayerProps.currentlyPlayingIdx+1;
 		if (audioPlayerProps.currentlyPlayingIdx === audioPlayerProps.queue.length - 1) 
 			newCurrIdx = 0;
-		setAudioPlayerProps((prevProps) => {
-			return {
-				...prevProps,
-				currentlyPlayingIdx: newCurrIdx,
-				playerIsLoaded: false,
-			};
-		});
+		if(newCurrIdx !== audioPlayerProps.currentlyPlayingIdx){
+			setAudioPlayerProps((prevProps) => {
+				return {
+					...prevProps,
+					currentlyPlayingIdx: newCurrIdx,
+					playerIsLoaded: false,
+				};
+			});
+		}
 		audioTag.current.currentTime = 0;
 		if (!audioPlayerProps.isPlaying) playTrackHandler();
 	};

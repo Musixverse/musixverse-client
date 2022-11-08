@@ -21,7 +21,7 @@ export default function AudioPlayer({
 	const [currTimeStr, setCurrTimeStr] = useState("00:00");
 	const progress = useRef(null);
 	const progressContainer = useRef(null);
-	
+
 	//Memoize trackID
 	const audioPlayerTrackId = useMemo(() => {
 		return audioPlayerProps.currentlyPlayingIdx === -1 ? undefined : audioPlayerProps.queue[audioPlayerProps.currentlyPlayingIdx].trackId;
@@ -30,7 +30,7 @@ export default function AudioPlayer({
 	useEffect(()=>{
 		if(audioPlayerProps.audioTag){
 			// let waitForNextSec = false;
-			audioPlayerProps.audioTag.addEventListener('timeupdate', ()=>{
+			const updateTimeProgress = ()=>{
 				if(!(audioPlayerTrackId && trackId === audioPlayerTrackId))
 					return;
 				
@@ -55,7 +55,18 @@ export default function AudioPlayer({
 				// setTimeout(()=>{
 				// 	waitForNextSec = false
 				// },1000);
-			})
+			}
+			if(audioPlayerTrackId && trackId === audioPlayerTrackId)
+				audioPlayerProps.audioTag.addEventListener('timeupdate', updateTimeProgress)
+			else{
+				if(progress && progress.current)
+					progress.current.style.width = `0%`;
+				setCurrTimeStr("00:00");
+			}
+
+			return ()=>{
+				audioPlayerProps.audioTag.removeEventListener('timeupdate', updateTimeProgress);
+			}
 		}
 	},[audioPlayerProps.audioTag, audioPlayerTrackId, trackId, audioPlayerProps.currentDuration]);
 
@@ -88,7 +99,7 @@ export default function AudioPlayer({
 		}
 		setAudioPlayerProps((prevProps) => {
 			const newQueue = [...prevProps.queue];
-			newQueue.unshift({
+			newQueue.push({
 				tokenId: tokenId,
 				audioURL: audio,
 				price: price,
@@ -103,7 +114,7 @@ export default function AudioPlayer({
 				...prevProps,
 				queue: newQueue,
 				updateQueue: true,
-				currentlyPlayingIdx: 0,
+				currentlyPlayingIdx: prevProps.currentlyPlayingIdx+1,
 				playerIsLoaded: false,
 			};
 		});

@@ -159,7 +159,7 @@ const Step4Form = ({
 								<Tooltip
 									labelText={<i className="pl-4 fa-solid fa-circle-info"></i>}
 									message={
-										"You can create several NFT copies of the same song. Each copy would be unique and will be traded separately. Musixverse recommends keeping the number of copies low to maintain exclusivity."
+										"You can create several NFT copies of the same song. Each copy would be unique and will be traded separately. Musixverse recommends keeping the number of copies low (10 to 100) to maintain exclusivity."
 									}
 									tooltipLocation={"bottom"}
 								/>
@@ -173,12 +173,13 @@ const Step4Form = ({
 								}}
 								type="number"
 								min={1}
-								max={60}
+								max={1000}
 								step="1"
 								placeholder="No. of copies"
 								required
 							/>
 						</div>
+
 						<div className="w-full md:w-1/2">
 							<label htmlFor="individual-nft-price" className="block mb-1 text-sm tracking-wide uppercase">
 								PRICE OF EACH COPY

@@ -23,6 +23,7 @@ const Verify = () => {
 	const [isRealNameDifferent, setIsRealNameDifferent] = useState(false);
 	const [artistRealName, setArtistRealName] = useState("");
 	const [artistRealNameSave, setArtistRealNameSave] = useState(false);
+	const [songLink, setSongLink] = useState("");
 
 	const [isVerificationRequestSubmittedModalOpen, setVerificationRequestSubmittedModalOpen] = useState(false);
 
@@ -67,6 +68,8 @@ const Verify = () => {
 		isRealNameDifferent,
 		realNameDifferentTextMessage,
 		realNameSameTextMessage,
+		songLink,
+		setSongLink,
 		setVerificationRequestSubmittedModalOpen,
 	};
 	const step3Values = {
@@ -75,6 +78,7 @@ const Verify = () => {
 		artistRealName,
 		realNameDifferentTextMessage,
 		realNameSameTextMessage,
+		songLink,
 		setVerificationRequestSubmittedModalOpen,
 	};
 

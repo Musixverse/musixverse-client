@@ -10,6 +10,7 @@ const InstagramVerification = ({
 	artistRealName,
 	realNameDifferentTextMessage,
 	realNameSameTextMessage,
+	songLink,
 	setVerificationRequestSubmittedModalOpen,
 }) => {
 	const { user } = useMoralis();
@@ -19,6 +20,11 @@ const InstagramVerification = ({
 	const [instagramHandle, setInstagramHandle] = useState("");
 	const [instagramHandleSave, setInstagramHandleSave] = useState(false);
 
+	const { fetch: setArtistSongLink } = useMoralisCloudFunction(
+		"setArtistSongLink",
+		{ userId: user ? user.id : null, songLink: songLink },
+		{ autoFetch: false }
+	);
 	const { fetch: setInstagramUsername } = useMoralisCloudFunction("setInstagramUsername", { instagramHandle: instagramHandle }, { autoFetch: false });
 	const { fetch: getInstagramUsername } = useMoralisCloudFunction("getInstagramUsername");
 	const { fetch: requestForVerification } = useMoralisCloudFunction("requestForVerification", { autoFetch: false });
@@ -53,6 +59,15 @@ const InstagramVerification = ({
 					});
 					return;
 				}
+				await setArtistSongLink({
+					onSuccess: async (object) => {
+						setLoading(false);
+					},
+					onError: (error) => {
+						console.log("setArtistSongLink Error:", error);
+						setLoading(false);
+					},
+				});
 				await requestForVerification({
 					onSuccess: async (object) => {
 						if (object) {

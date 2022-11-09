@@ -123,6 +123,9 @@ export default function Step2Form({
 						}}
 						className="w-full px-2 py-2 border-2 border-[#777777] rounded-md shadow-sm outline-none focus:border-primary-500 focus:dark:border-primary-500 dark:bg-[#323232] dark:border-[#323232]"
 					></input>
+					<p className="text-[#777777] mt-1 font-normal text-xs">
+						Only provide ISRC code if this version of the song has one. Do not provide if this is an interim version with no ISRC code.
+					</p>
 
 					<p className="mt-4 text-sm">
 						TAGS

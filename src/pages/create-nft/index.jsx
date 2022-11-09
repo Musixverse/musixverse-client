@@ -36,6 +36,9 @@ const CreateNFT = ({ userInfo }) => {
 	const [, setLoading] = useContext(LoadingContext);
 	const [, , , setError] = useContext(StatusContext);
 	const { Moralis, user } = useMoralis();
+	// Setting data if a draft is opened
+	const router = useRouter();
+	const { draft } = router.query;
 
 	// States
 	const [step, setStep] = useState(draft ? 1 : 0);
@@ -159,9 +162,6 @@ const CreateNFT = ({ userInfo }) => {
 		}
 	}, [step, user]);
 
-	// Setting data if a draft is opened
-	const router = useRouter();
-	const { draft } = router.query;
 	const { fetch: getDraftNftData } = useMoralisCloudFunction(
 		"getDraftNftData",
 		{ objectId: draft },

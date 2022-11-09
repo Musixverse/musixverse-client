@@ -143,6 +143,8 @@ const Step4Form = ({
 		setLoading(false);
 	};
 
+	var timezone = new Date(unlockTimestamp).toTimeString().match(/\((.+)\)/)[1];
+
 	return (
 		<div className="w-full">
 			<p className="mb-10 text-5xl font-normal font-tertiary">PRICING & SPLITS</p>
@@ -465,20 +467,31 @@ const Step4Form = ({
 								tooltipLocation={"bottom"}
 							/>
 						</label>
-						<input
-							className="dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-500 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-500"
-							id="resale-royalty-percentage"
-							value={resaleRoyaltyPercent}
-							onChange={(e) => {
-								setResaleRoyaltyPercent(e.target.value);
-							}}
-							type="number"
-							min={0}
-							max={100}
-							maxLength={3}
-							placeholder="Enter Resale Royalty Percentage"
-							required
-						/>
+						<div className="relative flex flex-col">
+							<input
+								className="dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-500 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-500"
+								id="resale-royalty-percentage"
+								value={resaleRoyaltyPercent}
+								onChange={(e) => {
+									if (e.target.value >= 0 && e.target.value <= 10) {
+										let _royaltyPercent = parseInt(e.target.value);
+										if (isNaN(_royaltyPercent)) {
+											_royaltyPercent = "";
+										}
+										setResaleRoyaltyPercent(_royaltyPercent.toString());
+									}
+								}}
+								type="number"
+								min={0}
+								max={10}
+								maxLength={3}
+								placeholder="Enter Resale Royalty Percentage"
+								required
+							/>
+							{resaleRoyaltyPercent !== null && resaleRoyaltyPercent !== "" && (
+								<span className="absolute h-full flex items-center justify-center ml-10">%</span>
+							)}
+						</div>
 					</div>
 
 					{/* NFT Schedule Radio buttons */}
@@ -531,9 +544,9 @@ const Step4Form = ({
 					) : (
 						<>
 							<div className="flex flex-col text-xs font-normal dark:text-light-300">
-								You can decide to launch your NFT on a later date. Your NFT will be created right now and will appear on the Musixverse
-								marketplace, but will not be available for buying/selling.
-								<div className="flex flex-col mt-5 text-base">
+								You can decide to launch your NFT on a later date. Your NFT will appear on the Musixverse marketplace, but will not be available
+								for buying/selling until the scheduled time.
+								<div className="w-full flex flex-col mt-5 text-base">
 									<span className="mb-2 text-sm">Your NFT will be available for buying/selling on:</span>
 
 									<DatePicker
@@ -552,6 +565,8 @@ const Step4Form = ({
 										disabledKeyboardNavigation
 										showPopperArrow={false}
 									/>
+
+									<span className="mt-2 text-xs">{timezone}</span>
 								</div>
 							</div>
 						</>

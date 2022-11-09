@@ -228,9 +228,7 @@ const Step3Form = ({ unlockableContent, setUnlockableContent }) => {
 		<div className="w-full">
 			<div className="mb-10 text-5xl font-normal font-tertiary">
 				UNLOCKABLE CONTENT
-				<p className="text-xs font-primary">
-					These are the rewards that will only be exclusively accessible by your top fans, i.e. people who will purchase your NFT
-				</p>
+				<p className="text-xs font-primary">These rewards are exclusively accessible by your top fans, i.e. people who will purchase your NFT</p>
 			</div>
 
 			<div className="flex flex-col space-y-20 lg:w-full lg:space-x-10 lg:space-y-0 xl:space-x-20 lg:flex-row">

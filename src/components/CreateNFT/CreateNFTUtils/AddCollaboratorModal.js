@@ -28,7 +28,7 @@ const AddCollaboratorModal = ({ isOpen, setOpen, nftDraftMetadata, collaboratorL
 				setSuccess((prevState) => ({
 					...prevState,
 					title: "Collaborator Added",
-					message: "Selected Collaborator was added successfully!",
+					message: `An invite has been sent to ${collaboratorToAdd[0].name} to collaborate. This NFT cannot be created until the invitation is accepted. Please remind them to accept the invitation.`,
 					showSuccessBox: true,
 				}));
 
@@ -318,7 +318,8 @@ const AddCollaboratorModal = ({ isOpen, setOpen, nftDraftMetadata, collaboratorL
 							button.
 						</p>
 						<p className="text-start text-xs text-[#777777] mt-2">
-							<b>Note:</b>&nbsp;You will not be able to create NFTs until all collaborators have verified the email invite.
+							<b>Note:</b>&nbsp;The collaborator will have to accept your invitation to collaborate before you can create the NFT. You will not be
+							able to create NFTs until all collaborators have verified the email invite.
 						</p>
 
 						<div className="flex justify-end mt-2">

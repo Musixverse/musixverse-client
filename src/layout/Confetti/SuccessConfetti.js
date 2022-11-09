@@ -1,10 +1,15 @@
-import Confetti from "react-confetti";
+import dynamic from "next/dynamic";
+const Confetti = dynamic(() => import("react-confetti"), {
+	ssr: false,
+});
 
 export default function SuccessConfetti() {
 	return (
-		<div className="absolute top-0 left-0 w-full h-full m-auto">
+		<div className="absolute top-0 left-0 w-screen h-screen m-auto">
 			<div className="fixed" style={{ zIndex: "55" }}>
 				<Confetti
+					width={window.innerWidth}
+					height={window.innerHeight}
 					colors={[
 						"#79CA25",
 						"#5AB510",

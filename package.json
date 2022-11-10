@@ -31,6 +31,7 @@
 		"react-image-crop": "^8.6.12",
 		"react-moralis": "1.4.0",
 		"react-select": "^5.4.0",
+		"react-spring-3d-carousel": "^1.2.1",
 		"styled-components": "5.3.5",
 		"swiper": "^8.4.4",
 		"web3": "^1.7.4"

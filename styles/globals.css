@@ -777,7 +777,7 @@ button.tooltip-button:active {
 /**************************************************************************/
 
 .selected-unlockable-content-div {
-	@apply w-full grid grid-cols-5 items-center justify-center;
+	@apply grid items-center justify-center w-full grid-cols-5;
 }
 
 .selected-unlockable-content-item {
@@ -815,4 +815,11 @@ button.tooltip-button:active {
 
 .swiper-button-prev:after {
 	color: #5ab510;
+}
+
+/**************************************************************************/
+/****************    Promo NFT carousel   ************************/
+/**************************************************************************/
+.promo-nft-carousel-container div:first-child>div{
+	/* width: 100% !important; */
 }

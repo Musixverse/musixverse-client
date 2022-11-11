@@ -11,11 +11,13 @@ import logoWhite from "../../../public/logo-white.svg";
 import { DISCORD_SUPPORT_CHANNEL_INVITE_LINK } from "../../config/constants";
 import RequiredAsterisk from "../RequiredAsterisk";
 import LoadingContext from "../../../store/loading-context";
+import StatusContext from "../../../store/status-context";
 
 export default function AuthModal({ isOpen = "", onClose = "" }) {
 	const router = useRouter();
-	const { authenticate, isAuthenticated, Moralis } = useMoralis();
+	const { authenticate, isAuthenticated, isWeb3Enabled, enableWeb3, Moralis } = useMoralis();
 	const [, setLoading] = useContext(LoadingContext);
+	const [, , , setError] = useContext(StatusContext);
 	const [isModalOpen, setIsModalOpen] = useState(isOpen);
 	const [magicFormOpen, setMagicFormOpen] = useState(false);
 	const emailRef = useRef(null);
@@ -52,64 +54,64 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 		} else displayAuthMethods();
 	};
 
-	const metamaskLogin = async () => {
-		setLoading(true);
-		if (!isAuthenticated) {
-			await addPolygonNetwork();
-			await authenticate({ signingMessage: "Musixverse Authentication" })
-				.then(async function (user) {
-					if (user) {
-						await fetch("/api/auth/login", {
-							method: "post",
-							headers: {
-								"Content-Type": "application/json",
-							},
-							body: JSON.stringify({ currentUser: user }),
-						});
-						closeModal();
-						if (router.pathname === "/") router.push("/mxcatalog/new-releases");
-					}
-					setLoading(false);
-				})
-				.catch(function (error) {
-					console.log("Metamask authentication error:", error);
-					setLoading(false);
-				});
-		}
-		setLoading(false);
-	};
+	// const metamaskLogin = async () => {
+	// 	setLoading(true);
+	// 	if (!isAuthenticated) {
+	// 		await addPolygonNetwork();
+	// 		await authenticate({ signingMessage: "Musixverse Authentication" })
+	// 			.then(async function (user) {
+	// 				if (user) {
+	// 					await fetch("/api/auth/login", {
+	// 						method: "post",
+	// 						headers: {
+	// 							"Content-Type": "application/json",
+	// 						},
+	// 						body: JSON.stringify({ currentUser: user }),
+	// 					});
+	// 					closeModal();
+	// 					if (router.pathname === "/") router.push("/mxcatalog/new-releases");
+	// 				}
+	// 				setLoading(false);
+	// 			})
+	// 			.catch(function (error) {
+	// 				console.log("Metamask authentication error:", error);
+	// 				setLoading(false);
+	// 			});
+	// 	}
+	// 	setLoading(false);
+	// };
 
-	const walletconnectLogin = async () => {
-		setLoading(true);
+	// const walletconnectLogin = async () => {
+	// 	setLoading(true);
 
-		if (!isAuthenticated) {
-			await authenticate({
-				provider: "walletconnect",
-				chainId: process.env.NEXT_PUBLIC_BLOCKCHAIN_NETWORK_ID === "137" ? 137 : "",
-				signingMessage: "Musixverse Authentication",
-			})
-				.then(async function (user) {
-					if (user) {
-						await fetch("/api/auth/login", {
-							method: "post",
-							headers: {
-								"Content-Type": "application/json",
-							},
-							body: JSON.stringify({ currentUser: user }),
-						});
-						closeModal();
-						if (router.pathname === "/") router.push("/mxcatalog/new-releases");
-					}
-					setLoading(false);
-				})
-				.catch(function (error) {
-					console.log("WalletConnect authentication error:", error);
-					setLoading(false);
-				});
-		}
+	// 	if (!isAuthenticated) {
+	// 		await authenticate({
+	// 			provider: "walletconnect",
+	// 			chainId: process.env.NEXT_PUBLIC_BLOCKCHAIN_NETWORK_ID === "137" ? 137 : "",
+	// 			signingMessage: "Musixverse Authentication",
+	// 		})
+	// 			.then(async function (user) {
+	// 				if (user) {
+	// 					await fetch("/api/auth/login", {
+	// 						method: "post",
+	// 						headers: {
+	// 							"Content-Type": "application/json",
+	// 						},
+	// 						body: JSON.stringify({ currentUser: user }),
+	// 					});
+	// 					closeModal();
+	// 					if (router.pathname === "/") router.push("/mxcatalog/new-releases");
+	// 				}
+	// 				setLoading(false);
+	// 			})
+	// 			.catch(function (error) {
+	// 				console.log("WalletConnect authentication error:", error);
+	// 				setLoading(false);
+	// 			});
+	// 	}
 
-		setLoading(false);
-	};
+	// 	setLoading(false);
+	// };
 
 	const magicLogin = async () => {
 		if (!isAuthenticated) {
@@ -129,6 +131,142 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 					console.log("Magic authentication error:", error);
 				});
 		}
+	};
+
+	/**
+	 * 1) Connect to a Evm
+	 * 2) Request message to sign using the Moralis Auth Api of moralis (handled on server)
+	 * 3) Login via parse using the signed message (verification handled on server via Moralis Auth Api)
+	 */
+	const handleMetamaskAuth = async () => {
+		setLoading(true);
+		try {
+			await addPolygonNetwork();
+			// Enable web3 to get user address and chain
+			if (!isWeb3Enabled) {
+				await enableWeb3({ provider: "metamask" });
+			}
+			const { account, chainId } = Moralis;
+
+			if (!account) {
+				setLoading(false);
+				setError({
+					title: "Connection failed",
+					message: "No connected account was found",
+					showErrorBox: true,
+				});
+				return;
+			}
+			if (!chainId) {
+				setLoading(false);
+				setError({
+					title: "Connection failed",
+					message: "No connected chain was found",
+					showErrorBox: true,
+				});
+				return;
+			}
+
+			// Get message to sign from the auth api
+			const { message } = await Moralis.Cloud.run("requestMessage", {
+				address: account,
+				chain: parseInt(chainId, 16),
+				networkType: "evm",
+			});
+
+			// Authenticate and login via parse
+			await authenticate({
+				signingMessage: message,
+			})
+				.then(async function (user) {
+					if (user) {
+						await fetch("/api/auth/login", {
+							method: "post",
+							headers: {
+								"Content-Type": "application/json",
+							},
+							body: JSON.stringify({ currentUser: user }),
+						});
+						closeModal();
+						if (router.pathname === "/") router.push("/mxcatalog/new-releases");
+					}
+					setLoading(false);
+				})
+				.catch(function (error) {
+					console.log("Metamask authentication error:", error);
+					setLoading(false);
+				});
+		} catch (error) {
+			setLoading(false);
+			console.error(error);
+		}
+		setLoading(false);
+	};
+
+	const handleWalletconnectAuth = async () => {
+		setLoading(true);
+		try {
+			// Enable web3 to get user address and chain
+			if (!isWeb3Enabled) {
+				await enableWeb3({ provider: "walletconnect" });
+			}
+			const { account, chainId } = Moralis;
+
+			if (!account) {
+				setLoading(false);
+				setError({
+					title: "Connection failed",
+					message: "No connected account was found",
+					showErrorBox: true,
+				});
+				return;
+			}
+			if (!chainId) {
+				setLoading(false);
+				setError({
+					title: "Connection failed",
+					message: "No connected chain was found",
+					showErrorBox: true,
+				});
+				return;
+			}
+
+			// Get message to sign from the auth api
+			const { message } = await Moralis.Cloud.run("requestMessage", {
+				address: account,
+				chain: parseInt(chainId, 16),
+				networkType: "evm",
+			});
+
+			// Authenticate and login via parse
+			await authenticate({
+				provider: "walletconnect",
+				chainId: process.env.NEXT_PUBLIC_BLOCKCHAIN_NETWORK_ID === "137" ? 137 : "",
+				signingMessage: message,
+			})
+				.then(async function (user) {
+					if (user) {
+						await fetch("/api/auth/login", {
+							method: "post",
+							headers: {
+								"Content-Type": "application/json",
+							},
+							body: JSON.stringify({ currentUser: user }),
+						});
+						closeModal();
+						if (router.pathname === "/") router.push("/mxcatalog/new-releases");
+					}
+					setLoading(false);
+				})
+				.catch(function (error) {
+					console.log("WalletConnect authentication error:", error);
+					setLoading(false);
+				});
+		} catch (error) {
+			setLoading(false);
+			console.error(error);
+		}
+		setLoading(false);
 	};
 
 	const [betaAccessGranted, setBetaAccessGranted] = useState(false);
@@ -244,7 +382,7 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 										<div className="text-sm">Available Wallets</div>
 										<div className="mt-6 w-full space-y-4">
 											<button
-												onClick={() => metamaskLogin()}
+												onClick={() => handleMetamaskAuth()}
 												className="w-full bg-light-200 hover:bg-light-300 dark:bg-dark-800 dark:hover:bg-[#000] rounded-lg flex items-center p-4 text-sm"
 											>
 												<Image src="/assets/metamask.png" alt="Metamask Logo" width="40" height="40" />
@@ -256,7 +394,7 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 												</div>
 											</button>
 											<button
-												onClick={() => walletconnectLogin()}
+												onClick={() => handleWalletconnectAuth()}
 												className="w-full bg-light-200 hover:bg-light-300 dark:bg-dark-800 dark:hover:bg-[#000] rounded-lg flex items-center p-4 text-sm"
 											>
 												<Image src="/assets/walletconnect.png" alt="WalletConnect Logo" width="40" height="40" />

@@ -53,7 +53,7 @@ export default function Settings({ userData }) {
 
 		const fetchBalance = async () => {
 			try {
-				const options = { chain: process.env.NEXT_PUBLIC_BLOCKCHAIN_NETWORK };
+				const options = { chain: process.env.NEXT_PUBLIC_BLOCKCHAIN_NETWORK_ID };
 				const _balance = await Moralis.Web3API.account.getNativeBalance(options);
 				const _balanceAmount = parseFloat(_balance.balance) / 10 ** 18 === 0 ? "0" : parseFloat(_balance.balance) / 10 ** 18;
 				setBalance(_balanceAmount > 0 ? _balanceAmount.toFixed(2) : 0);
@@ -131,7 +131,7 @@ export default function Settings({ userData }) {
 						emailRef.current.focus();
 						return;
 					}
-					setUserData({
+					await setUserData({
 						name: name === "" ? undefined : name,
 						username: username === "" ? undefined : username,
 						email: email === "" ? undefined : email,

@@ -8,7 +8,7 @@ export async function getServerSideProps(context) {
 
 		const tokens = await Moralis.Cloud.run("fetchAllTokens");
 		const fields = tokens.map((token) => ({
-			loc: `${process.env.NEXT_PUBLIC_SITE_URL}/track/polygon/${token.tokenId}`,
+			loc: `${process.env.NEXT_PUBLIC_MUSIXVERSE_CLIENT_BASE_URL}/track/polygon/${token.tokenId}`,
 			lastmod: token.block_timestamp.toISOString(),
 		}));
 

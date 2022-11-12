@@ -1,1 +1,1 @@
-# Musixverse-client
+# Musixverse Client

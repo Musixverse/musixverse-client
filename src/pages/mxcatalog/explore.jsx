@@ -1,10 +1,10 @@
 import Head from "next/head";
 import Moralis from "moralis/node";
-import { meta_description, MORALIS_APP_ID, MORALIS_SERVER_URL } from "../../config/constants";
+import { meta_description, PARSE_APP_ID, PARSE_SERVER_URL } from "../../config/constants";
 import Marketplace from "../../components/MxCatalog/Utils/Marketplace";
 
 export async function getStaticProps(context) {
-	await Moralis.start({ serverUrl: MORALIS_SERVER_URL, appId: MORALIS_APP_ID });
+	await Moralis.start({ serverUrl: PARSE_SERVER_URL, appId: PARSE_APP_ID });
 	// Empty filters just because we need to pass appliedFilter as a param to Moralis cloud function
 	const appliedFilter = {
 		trackOrigin: "",

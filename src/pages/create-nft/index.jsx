@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Moralis from "moralis/node";
-import { MORALIS_APP_ID, MORALIS_SERVER_URL, meta_description } from "../../config/constants";
+import { PARSE_APP_ID, PARSE_SERVER_URL, meta_description } from "../../config/constants";
 import { useState, useEffect, useContext } from "react";
 import { useRouter } from "next/router";
 import { useMoralis, useNewMoralisObject, useMoralisCloudFunction } from "react-moralis";
@@ -18,7 +18,7 @@ import StatusContext from "../../../store/status-context";
 
 export async function getServerSideProps(context) {
 	try {
-		await Moralis.start({ serverUrl: MORALIS_SERVER_URL, appId: MORALIS_APP_ID });
+		await Moralis.start({ serverUrl: PARSE_SERVER_URL, appId: PARSE_APP_ID });
 
 		const user = JSON.parse(context.req.cookies.currentUser);
 		const _userInfo = await Moralis.Cloud.run("fetchUserInfoForNftCreation", { userAddress: user.ethAddress });

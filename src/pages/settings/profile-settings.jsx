@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import Moralis from "moralis/node";
-import { MORALIS_APP_ID, MORALIS_SERVER_URL, meta_description } from "../../config/constants";
+import { PARSE_APP_ID, PARSE_SERVER_URL, meta_description } from "../../config/constants";
 import SettingsNav from "../../components/Settings/SettingsNav";
 import ProfileSettings from "../../components/Settings/ProfileSettings";
 import { useMoralis, useMoralisCloudFunction } from "react-moralis";
@@ -14,7 +14,7 @@ export async function getServerSideProps(context) {
 	try {
 		const user = JSON.parse(context.req.cookies.currentUser);
 		const _userId = user.objectId;
-		await Moralis.start({ serverUrl: MORALIS_SERVER_URL, appId: MORALIS_APP_ID });
+		await Moralis.start({ serverUrl: PARSE_SERVER_URL, appId: PARSE_APP_ID });
 
 		const userData = await Moralis.Cloud.run("fetchUserInfo", { userId: _userId });
 
@@ -53,7 +53,7 @@ export default function Settings({ userData }) {
 
 		const fetchBalance = async () => {
 			try {
-				const options = { chain: process.env.NEXT_PUBLIC_BLOCKCHAIN_NETWORK };
+				const options = { chain: process.env.NEXT_PUBLIC_BLOCKCHAIN_NETWORK_ID };
 				const _balance = await Moralis.Web3API.account.getNativeBalance(options);
 				const _balanceAmount = parseFloat(_balance.balance) / 10 ** 18 === 0 ? "0" : parseFloat(_balance.balance) / 10 ** 18;
 				setBalance(_balanceAmount > 0 ? _balanceAmount.toFixed(2) : 0);
@@ -131,7 +131,7 @@ export default function Settings({ userData }) {
 						emailRef.current.focus();
 						return;
 					}
-					setUserData({
+					await setUserData({
 						name: name === "" ? undefined : name,
 						username: username === "" ? undefined : username,
 						email: email === "" ? undefined : email,

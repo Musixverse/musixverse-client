@@ -1,0 +1,25 @@
+/* .white-circle{
+    clip-path: circle(40%);
+    shape-outside: circle(50%);
+} */
+
+div.white-circle::before{
+    /* z-index: -1; */
+    position: absolute;
+    /* top: -1.5em;
+    left: -1.5em;
+    right: -1.5em;
+    bottom: -1.5em; */
+    /* border-color: rgba(255,25,25,0.4); */
+    outline: 70px solid rgba(255,255,255,0.7);
+  	outline-offset: -17px;
+    border-radius: 50%;
+    /* border-width: 5px; */
+    /* background: inherit;
+    background-clip: border-box; */
+    content: '';
+    width: 304px;
+    aspect-ratio: 1;
+    /* height: 316px; */
+    filter: blur(7px) brightness(1.05);
+}

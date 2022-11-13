@@ -29,6 +29,7 @@ export default function TrackHeader({
 	comment,
 	trackId,
 	priceInWei,
+	activity,
 }) {
 	const [isCoverArtModalOpen, setCoverArtModalOpen] = useState(false);
 
@@ -120,12 +121,12 @@ export default function TrackHeader({
 						</div>
 					</div>
 					{/* Audio Player component */}
-					<AudioPlayer 
-						tokenId={tokenId} 
-						audio={audio_url} 
-						artistName={artist && artist.name} 
-						isArtistVerified={artist && artist.isArtistVerified} 
-						trackName={title} 
+					<AudioPlayer
+						tokenId={tokenId}
+						audio={audio_url}
+						artistName={artist && artist.name}
+						isArtistVerified={artist && artist.isArtistVerified}
+						trackName={title}
 						image={image}
 						trackId={trackId}
 						price={priceInWei}
@@ -156,11 +157,15 @@ export default function TrackHeader({
 
 						{/* Track Header CTA */}
 						<TrackHeaderCta
+							trackId={trackId}
 							tokenId={tokenId}
 							unlockTimestamp={unlockTimestamp}
 							price={price}
 							currentOwnerAddress={currentOwnerAddress}
 							onSale={onSale}
+							activity={activity}
+							artistName={artist && artist.name}
+							title={title}
 						/>
 					</div>
 				</div>

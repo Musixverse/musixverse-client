@@ -6,8 +6,10 @@ const EditPriceModal = dynamic(() => import("./EditPriceModal"));
 const NftReportModal = dynamic(() => import("./NftReportModal"));
 import ToggleOnSaleButtons from "./ToggleOnSaleButtons";
 import PurchaseButton from "./PurchaseButton";
+import CustomButton from "../../../layout/CustomButton";
+import ShareTrackNftModal from "./ShareTrackNftModal";
 
-export default function CtaButtons({ currentOwnerAddress, tokenId, price, onSale }) {
+export default function CtaButtons({ currentOwnerAddress, tokenId, trackId, price, onSale, activity, artistName, title }) {
 	const { user } = useMoralis();
 
 	const [, setAuthModalOpen] = useContext(AuthModalContext);
@@ -34,11 +36,16 @@ export default function CtaButtons({ currentOwnerAddress, tokenId, price, onSale
 		}
 	};
 
+	/*******************************
+	 *******  SHARE BUTTON  ********
+	 *******************************/
+	const [isShareTrackNftModalOpen, setShareTrackNftModalOpen] = useState(false);
+
 	return (
 		<>
 			<div className="bg-light-100 w-full rounded-lg p-2 flex justify-between items-center dark:bg-dark-800 ">
 				<div>
-					{user && user.attributes.ethAddress == currentOwnerAddress ? (
+					{user && user.attributes.ethAddress == currentOwnerAddress && activity.tokenActivity ? (
 						<>
 							<button
 								onClick={() => editPrice()}
@@ -54,8 +61,15 @@ export default function CtaButtons({ currentOwnerAddress, tokenId, price, onSale
 								onSale={onSale}
 							/>
 						</>
+					) : user && user.attributes.ethAddress == currentOwnerAddress ? (
+						<CustomButton green={true} onClick={() => setShareTrackNftModalOpen(true)}>
+							<div className="flex justify-center items-center space-x-2">
+								<i className="fa-solid fa-share-nodes text-lg"></i>
+								<span>Share</span>
+							</div>
+						</CustomButton>
 					) : onSale || onSale === null ? (
-						<PurchaseButton tokenId={tokenId} price={price} />
+						<PurchaseButton tokenId={tokenId} trackId={trackId} price={price} />
 					) : (
 						<span className="text-sm ml-4">This NFT is currently not on the marketplace for sale</span>
 					)}
@@ -87,6 +101,13 @@ export default function CtaButtons({ currentOwnerAddress, tokenId, price, onSale
 
 			<EditPriceModal isOpen={editPriceModalOpen} setEditPriceModalOpen={setEditPriceModalOpen} tokenId={tokenId} currentPrice={price} />
 			<NftReportModal isOpen={isNftReportModalOpen} setOpen={setNftReportModalOpen} tokenId={tokenId} />
+			<ShareTrackNftModal
+				isOpen={isShareTrackNftModalOpen}
+				setOpen={setShareTrackNftModalOpen}
+				artistName={artistName}
+				title={title}
+				setAuthModalOpen={setAuthModalOpen}
+			/>
 		</>
 	);
 }

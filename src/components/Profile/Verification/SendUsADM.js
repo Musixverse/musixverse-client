@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext, useRef } from "react";
+import { useEffect, useContext, useRef } from "react";
 import Link from "next/link";
 import Head from "next/head";
 import { useMoralis, useMoralisCloudFunction } from "react-moralis";
@@ -8,6 +8,8 @@ import LoadingContext from "../../../../store/loading-context";
 const SendUsADM = ({
 	nextStep,
 	prevStep,
+	songLink,
+	setSongLink,
 	isRealNameDifferent,
 	realNameDifferentTextMessage,
 	realNameSameTextMessage,
@@ -15,9 +17,8 @@ const SendUsADM = ({
 }) => {
 	const { user } = useMoralis();
 	const [, setLoading] = useContext(LoadingContext);
-	const [, , setSuccess, setError] = useContext(StatusContext);
+	const [, , , setError] = useContext(StatusContext);
 	const songLinkRef = useRef(null);
-	const [songLink, setSongLink] = useState("");
 
 	const { fetch: setArtistSongLink } = useMoralisCloudFunction(
 		"setArtistSongLink",

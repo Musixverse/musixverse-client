@@ -156,6 +156,7 @@ export default function TrackInfo({
 						onSale={onSale}
 						comment={comment}
 						trackId={trackId}
+						activity={activity}
 					/>
 					{metadata.collaborators.length > 1 && (
 						<Collaborators bandId={metadata.bandId} collaborators={metadata.collaborators} collaboratorUsers={collaboratorUsers} />
@@ -169,6 +170,7 @@ export default function TrackInfo({
 					<TrackDetails tokenId={tokenId} metadata={metadata} collaboratorUsers={collaboratorUsers} />
 					<div className="grid grid-cols-1 mt-10 md:grid-cols-9 xl:grid-cols-5 gap-y-4 md:gap-6">
 						<PurchaseInfo
+							trackId={trackId}
 							tokenId={tokenId}
 							resaleRoyaltyPercentage={metadata.resaleRoyaltyPercent}
 							currentOwner={currentOwner}

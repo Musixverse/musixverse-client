@@ -1,4 +1,6 @@
 import MusixverseFacet from "../utils/smart-contract/contracts/Musixverse/facets/MusixverseFacet.sol/MusixverseFacet.json";
+import MusixverseGettersFacet from "../utils/smart-contract/contracts/Musixverse/facets/MusixverseGettersFacet.sol/MusixverseGettersFacet.json";
+import MusixverseSettersFacet from "../utils/smart-contract/contracts/Musixverse/facets/MusixverseSettersFacet.sol/MusixverseSettersFacet.json";
 
 /**************************************************************************/
 /**********************    SEO Meta Descriptions   ************************/
@@ -13,6 +15,8 @@ export const meta_description3 = "The NFT Marketplace for Musicians and Fans";
 /***********************    BLOCKCHAIN CONSTANTS  *************************/
 /**************************************************************************/
 export const MUSIXVERSE_FACET_CONTRACT_ABI = MusixverseFacet.abi;
+export const MUSIXVERSE_GETTERS_FACET_CONTRACT_ABI = MusixverseGettersFacet.abi;
+export const MUSIXVERSE_SETTERS_FACET_CONTRACT_ABI = MusixverseSettersFacet.abi;
 
 /**************************************************************************/
 /******************************    MORALIS  *******************************/

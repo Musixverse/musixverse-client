@@ -16,7 +16,7 @@ export default function UnlockableContent({ tokenId, currentOwnerAddress, unlock
 	useEffect(() => {
 		const getUnlockableContentUri = async () => {
 			try {
-				await sleep(1500);
+				await sleep(1000);
 				const _unlockableContentUri = await unlockableContentUri(tokenId, user.attributes.ethAddress);
 				const res = await fetch(_unlockableContentUri);
 				const data = await res.json();
@@ -132,7 +132,9 @@ export default function UnlockableContent({ tokenId, currentOwnerAddress, unlock
 				{unlockableContent.about && <p className="text-sm font-semibold mt-6">About the Unlockable Content</p>}
 
 				<div className={"flex space-x-8 " + (unlockableContent.about ? "mt-2" : "mt-6")}>
-					{unlockableContent.about && <div className="text-sm max-w-[300px] max-h-[150px] overflow-y-scroll pr-2">{unlockableContent.about}</div>}
+					{unlockableContent.about && (
+						<div className="text-sm max-w-[300px] max-h-[150px] overflow-y-scroll pr-2 whitespace-pre-wrap">{unlockableContent.about}</div>
+					)}
 					<div className="grid sm:grid-cols-3 items-start gap-4">
 						{unlockableContentItems.map((item, index) => {
 							let truncatedUnlockableItemText = item.unlockableItemText;

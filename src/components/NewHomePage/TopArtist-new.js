@@ -3,13 +3,14 @@ import Image from "next/image";
 import Link from "next/link";
 import cover_sarthak from "../../../public/assets/new-homepage/cover_sarthak.png";
 import cover_m from "../../../public/assets/new-homepage/cover_m.png";
+import bg_design from "../../../public/assets/new-homepage/bg_design.png";
 import SwiperArtist from "./utils/SwiperArtist";
 
 export default function TopArtists() {
 	const [bg, setBg] = useState([cover_sarthak, cover_m]);
 
 	return (
-		<div className="relative mt-20">
+		<div className="relative mt-20 mb-28">
 			<h1 className="font-primary font-semibold text-3xl text-center">
 				Top Artists on M<span className="text-primary-500">x</span> Catalog
 			</h1>
@@ -42,6 +43,11 @@ export default function TopArtists() {
 
 			{/* Swiper Component for Artist */}
 			<SwiperArtist setCurrBg={setBg} />
+
+			{/* Bottom image section */}
+			<div className="absolute w-full bottom-[-80px]">
+				<Image src={bg_design} alt="Top Artist section background design" layout="responsive" priority />
+			</div>
 		</div>
 	);
 }

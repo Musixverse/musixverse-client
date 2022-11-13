@@ -1,10 +1,10 @@
 export default function ErrorBoundary({ children, error, errorInfo }) {
 	if (error) {
-		console.error(error);
+		console.error("ErrorBoundary:", error);
 	}
 
 	if (errorInfo) {
-		console.error(errorInfo);
+		console.error("ErrorBoundary:", errorInfo);
 	}
 
 	return children;

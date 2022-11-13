@@ -277,6 +277,7 @@ const CreateNFT = ({ userInfo }) => {
 					role: "Singer",
 					address: user.attributes.ethAddress,
 					avatar: userInfo.avatar,
+					hasAcceptedCollaboratorInvite: true,
 				},
 			]);
 			// setTrackTitle("Rap God");
@@ -379,6 +380,10 @@ const CreateNFT = ({ userInfo }) => {
 			title: trackTitle,
 			artist: _chosenProfileOrBandElem.id === "profile" ? user.attributes.name : _chosenProfileOrBandElem.getAttribute("data-band-name"),
 			artistAddress: user.attributes.ethAddress,
+			// OpenSea standard ⬇️
+			name: user.attributes.name + " - " + trackTitle,
+			image: "ipfs://" + coverArtUrl.replace("https://ipfs.moralis.io:2053/ipfs/", ""),
+			// ********* //
 			bandId: _chosenProfileOrBandElem.id === "profile" ? null : _chosenProfileOrBandElem.getAttribute("data-band-id"),
 			description: trackBackground,
 			audio: "ipfs://" + audioFileUrl.replace("https://ipfs.moralis.io:2053/ipfs/", ""),
@@ -424,8 +429,6 @@ const CreateNFT = ({ userInfo }) => {
 				exclusiveVideos: unlockableContent.exclusiveVideos.length,
 			},
 			// OpenSea standard ⬇️
-			name: user.attributes.name + " - " + trackTitle,
-			image: "ipfs://" + coverArtUrl.replace("https://ipfs.moralis.io:2053/ipfs/", ""),
 			animation_url: "ipfs://" + audioFileUrl.replace("https://ipfs.moralis.io:2053/ipfs/", ""),
 			background_color: "5AB510",
 			external_url: "https://www.musixverse.com",

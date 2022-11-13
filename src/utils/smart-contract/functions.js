@@ -1,7 +1,7 @@
 import Web3 from "web3";
 import Moralis from "moralis";
 // Importing contract abi, address, and other variables
-import { MUSIXVERSE_FACET_CONTRACT_ABI } from "../../config/constants";
+import { MUSIXVERSE_FACET_CONTRACT_ABI, MUSIXVERSE_GETTERS_FACET_CONTRACT_ABI } from "../../config/constants";
 
 var MUSIXVERSE;
 
@@ -186,8 +186,9 @@ async function mintTrackNFT(
 	}
 }
 
-async function purchaseTrackNFT(tokenId, price) {
+async function purchaseTrackNFT(tokenId, trackId, referrer, price) {
 	const _tokenId = parseInt(tokenId).toString();
+	const _trackId = parseInt(trackId).toString();
 
 	if (window.localStorage.walletconnect) {
 		await Moralis.enableWeb3({ provider: "walletconnect" });
@@ -198,58 +199,7 @@ async function purchaseTrackNFT(tokenId, price) {
 			abi: MUSIXVERSE_FACET_CONTRACT_ABI,
 			params: {
 				tokenId: _tokenId,
-			},
-			msgValue: Moralis.Units.Token(String(price), "18"),
-		};
-
-		const transaction = await Moralis.executeFunction(sendOptions);
-		// Wait until the transaction is confirmed
-		await transaction.wait();
-		return;
-	}
-
-	const { ethereum } = window;
-	const callerAddress = Moralis.User.current().attributes.ethAddress;
-
-	if (callerAddress === ethereum.selectedAddress) {
-		const sendOptions = {
-			contractAddress: process.env.NEXT_PUBLIC_MXV_DIAMOND_ADDRESS,
-			functionName: "purchaseTrackNFT",
-			abi: MUSIXVERSE_FACET_CONTRACT_ABI,
-			params: {
-				tokenId: _tokenId,
-			},
-			msgValue: Moralis.Units.Token(String(price), "18"),
-		};
-
-		const transaction = await Moralis.executeFunction(sendOptions);
-		// Wait until the transaction is confirmed
-		await transaction.wait();
-	} else {
-		window.ethereum.request({
-			method: "wallet_requestPermissions",
-			params: [
-				{
-					eth_accounts: {},
-				},
-			],
-		});
-		throw { title: "User is not connected to the same wallet", message: "Please connect to the same wallet as your Musixverse account." };
-	}
-}
-
-async function purchaseReferredTrackNFT(tokenId, referrer, price) {
-	const _tokenId = parseInt(tokenId).toString();
-
-	if (window.localStorage.walletconnect) {
-		await Moralis.enableWeb3({ provider: "walletconnect" });
-
-		const sendOptions = {
-			contractAddress: process.env.NEXT_PUBLIC_MXV_DIAMOND_ADDRESS,
-			functionName: "purchaseReferredTrackNFT",
-			abi: MUSIXVERSE_FACET_CONTRACT_ABI,
-			params: {
-				tokenId: _tokenId,
+				trackId: _trackId,
 				referrer: referrer,
 			},
 			msgValue: Moralis.Units.Token(String(price), "18"),
@@ -263,13 +213,15 @@ async function purchaseReferredTrackNFT(tokenId, referrer, price) {
 
 	const { ethereum } = window;
 	const callerAddress = Moralis.User.current().attributes.ethAddress;
+
 	if (callerAddress === ethereum.selectedAddress) {
 		const sendOptions = {
 			contractAddress: process.env.NEXT_PUBLIC_MXV_DIAMOND_ADDRESS,
-			functionName: "purchaseReferredTrackNFT",
+			functionName: "purchaseTrackNFT",
 			abi: MUSIXVERSE_FACET_CONTRACT_ABI,
 			params: {
 				tokenId: _tokenId,
+				trackId: _trackId,
 				referrer: referrer,
 			},
 			msgValue: Moralis.Units.Token(String(price), "18"),
@@ -401,7 +353,7 @@ async function unlockableContentUri(tokenId, callerAddress) {
 			chain: "mumbai",
 			contractAddress: process.env.NEXT_PUBLIC_MXV_DIAMOND_ADDRESS,
 			functionName: "unlockableContentUri",
-			abi: MUSIXVERSE_FACET_CONTRACT_ABI,
+			abi: MUSIXVERSE_GETTERS_FACET_CONTRACT_ABI,
 			params: { mxvTokenId: _tokenId, from: callerAddress },
 		};
 		const _unlockableContentUri = await Moralis.executeFunction(options);
@@ -414,7 +366,7 @@ async function unlockableContentUri(tokenId, callerAddress) {
 			chain: "mumbai",
 			contractAddress: process.env.NEXT_PUBLIC_MXV_DIAMOND_ADDRESS,
 			functionName: "unlockableContentUri",
-			abi: MUSIXVERSE_FACET_CONTRACT_ABI,
+			abi: MUSIXVERSE_GETTERS_FACET_CONTRACT_ABI,
 			params: { mxvTokenId: _tokenId, from: callerAddress },
 		};
 		const _unlockableContentUri = await Moralis.executeFunction(options);
@@ -527,7 +479,6 @@ module.exports = {
 	connectSmartContract,
 	mintTrackNFT,
 	purchaseTrackNFT,
-	purchaseReferredTrackNFT,
 	updatePrice,
 	toggleOnSale,
 	unlockableContentUri,

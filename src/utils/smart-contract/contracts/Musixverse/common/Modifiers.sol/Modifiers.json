@@ -7,13 +7,38 @@
       "anonymous": false,
       "inputs": [
         {
-          "indexed": false,
+          "indexed": true,
           "internalType": "address",
           "name": "caller",
           "type": "address"
         },
         {
-          "indexed": false,
+          "indexed": true,
+          "internalType": "address",
+          "name": "artistAddress",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "string",
+          "name": "username",
+          "type": "string"
+        }
+      ],
+      "name": "ArtistVerified",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "caller",
+          "type": "address"
+        },
+        {
+          "indexed": true,
           "internalType": "uint256",
           "name": "tokenId",
           "type": "uint256"
@@ -38,19 +63,19 @@
       "anonymous": false,
       "inputs": [
         {
-          "indexed": false,
+          "indexed": true,
           "internalType": "address",
           "name": "creator",
           "type": "address"
         },
         {
-          "indexed": false,
+          "indexed": true,
           "internalType": "uint256",
           "name": "trackId",
           "type": "uint256"
         },
         {
-          "indexed": false,
+          "indexed": true,
           "internalType": "uint256",
           "name": "tokenId",
           "type": "uint256"
@@ -75,13 +100,13 @@
       "anonymous": false,
       "inputs": [
         {
-          "indexed": false,
+          "indexed": true,
           "internalType": "address",
           "name": "caller",
           "type": "address"
         },
         {
-          "indexed": false,
+          "indexed": true,
           "internalType": "uint256",
           "name": "tokenId",
           "type": "uint256"
@@ -100,13 +125,13 @@
       "anonymous": false,
       "inputs": [
         {
-          "indexed": false,
+          "indexed": true,
           "internalType": "address",
           "name": "caller",
           "type": "address"
         },
         {
-          "indexed": false,
+          "indexed": true,
           "internalType": "uint256",
           "name": "tokenId",
           "type": "uint256"
@@ -131,13 +156,13 @@
       "anonymous": false,
       "inputs": [
         {
-          "indexed": false,
+          "indexed": true,
           "internalType": "uint256",
           "name": "tokenId",
           "type": "uint256"
         },
         {
-          "indexed": false,
+          "indexed": true,
           "internalType": "address",
           "name": "referrer",
           "type": "address"
@@ -149,7 +174,7 @@
           "type": "address"
         },
         {
-          "indexed": false,
+          "indexed": true,
           "internalType": "address",
           "name": "newOwner",
           "type": "address"
@@ -168,13 +193,13 @@
       "anonymous": false,
       "inputs": [
         {
-          "indexed": false,
+          "indexed": true,
           "internalType": "address",
           "name": "creator",
           "type": "address"
         },
         {
-          "indexed": false,
+          "indexed": true,
           "internalType": "uint256",
           "name": "trackId",
           "type": "uint256"
@@ -192,7 +217,7 @@
           "type": "uint256"
         },
         {
-          "indexed": false,
+          "indexed": true,
           "internalType": "string",
           "name": "URIHash",
           "type": "string"
@@ -202,8 +227,8 @@
       "type": "event"
     }
   ],
-  "bytecode": "0x6080604052348015600f57600080fd5b50603f80601d6000396000f3fe6080604052600080fdfea2646970667358221220f4c4d234e67c4e1cae2c54b8bb225ee1bef486468ab001a794a126df8c5279c964736f6c63430008040033",
-  "deployedBytecode": "0x6080604052600080fdfea2646970667358221220f4c4d234e67c4e1cae2c54b8bb225ee1bef486468ab001a794a126df8c5279c964736f6c63430008040033",
+  "bytecode": "0x6080604052348015600f57600080fd5b50603f80601d6000396000f3fe6080604052600080fdfea2646970667358221220405f260c2f4fa51a1fc92d41ebea0b4164d5db83df884798d1b89dd2e0408f5a64736f6c63430008040033",
+  "deployedBytecode": "0x6080604052600080fdfea2646970667358221220405f260c2f4fa51a1fc92d41ebea0b4164d5db83df884798d1b89dd2e0408f5a64736f6c63430008040033",
   "linkReferences": {},
   "deployedLinkReferences": {}
 }

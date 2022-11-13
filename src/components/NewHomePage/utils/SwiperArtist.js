@@ -36,8 +36,8 @@ export default function SwiperArtist({ setCurrBg }) {
 						spaceBetween: 40,
 					},
 					1440: {
-						slidesPerView: 5,
-						spaceBetween: 40,
+						slidesPerView: 4,
+						spaceBetween: 20,
 					},
 				}}
 				autoHeight={false}

@@ -48,7 +48,7 @@ const CreateNFTIntro = ({ nextStep, chosenProfileOrBand, nftDraftMetadata, nftDr
 
 	return (
 		<>
-			<div className="flex flex-col items-center justify-center w-full bg-light-200 dark:bg-dark-800">
+			<div className="w-full flex flex-col items-center justify-center pb-16 bg-light-200 dark:bg-dark-800">
 				<div className="overflow-x-hidden w-full max-w-[1920px] flex justify-center pt-36 pb-20 sm:px-16 xl:px-20 2xl:px-36">
 					<form
 						className="w-[90vw] sm:w-[80vw] bg-light-100 dark:bg-dark-600 grid lg:grid-cols-3 lg:space-x-10 min-h-full sm:p-14 p-10 lg:pb-10 rounded-2xl backdrop-blur-xl"

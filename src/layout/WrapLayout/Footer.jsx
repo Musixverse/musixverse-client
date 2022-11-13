@@ -17,8 +17,8 @@ const Footer = () => {
 	const [, setAuthModalOpen] = useContext(AuthModalContext);
 
 	return (
-		<div className="flex justify-center w-full dark:bg-dark-800">
-			<div className="footer dark:bg-dark-800">
+		<div className="flex justify-center w-full dark:bg-dark-900">
+			<div className="footer dark:bg-dark-900">
 				<div className="w-full flex justify-between items-center">
 					<Image src={theme === "dark" ? mxvW : mxvB} alt="MXV logo" width="90" height="20" />
 					<p className="font-primary text-lg text-primary-500">Hear it. Own it. Live it.</p>

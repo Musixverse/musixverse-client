@@ -3,7 +3,7 @@ import instruments from "../../../public/assets/homepage/shareEarnInstrument.png
 
 export default function ShareAndEarn(){
     return(
-        <div className="bg-[url('/assets/homepage/shareEarnBG.png')] relative flex items-center pt-28 bg-no-repeat bg-cover bg-center w-full">
+        <div className="bg-[url('/assets/homepage/shareEarnBG.png')] relative flex items-center md:pt-28 bg-no-repeat bg-cover bg-center w-full">
             <h1 className="hidden md:block text-[#3A3A3A] font-semibold text-8xl pt-8 absolute leading-none z-[1]">Share & <br/> Earn 10%</h1>
             <div className="flex flex-col-reverse md:flex-row items-center z-[2] ml-auto">
                 <div className="relative h-auto w-auto">
@@ -33,7 +33,8 @@ export default function ShareAndEarn(){
 
                             <p className="hidden md:block text-xs text-right">You need to sign into Musixverse to start <br/> earning rewards</p>
                         </div>
-                        <div className="absolute z-[-1] w-full h-9 bg-primary-600 rounded-xl top-[50%]"></div>
+                        <div className="absolute z-[-1] w-full h-9 bg-primary-600 rounded-xl top-5 md:top-[50%]"></div>
+                        <p className="md:hidden mt-4 px-7 text-xs">You need to sign into Musixverse to start <br/> earning rewards</p>
                     </div>
                 </div>
             </div>

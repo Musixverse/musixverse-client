@@ -1,6 +1,6 @@
 import Image from "next/image";
 import getStartedAsFan from "../../../public/assets/homepage/getStartedAsFan.png"
-import styles from "../../../styles/homePage/getStartedAsFan.module.css";
+import styles from "../../../styles/HomePage/getStartedAsFan.module.css";
 
 export default function GetStartedAsFan(){
     return(

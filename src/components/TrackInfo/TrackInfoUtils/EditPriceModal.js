@@ -76,7 +76,7 @@ const EditPriceModal = ({ isOpen, setEditPriceModalOpen, tokenId, currentPrice }
 							<input
 								type="number"
 								step={0.01}
-								min={0}
+								min={0.01}
 								value={updatedPrice}
 								onChange={(e) => {
 									setUpdatedPrice(e.target.value);

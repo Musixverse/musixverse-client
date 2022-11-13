@@ -8,12 +8,12 @@ import Collaborators from "../../../components/TrackInfo/Collaborators";
 import PurchaseInfo from "../../../components/TrackInfo/PurchaseInfo";
 import Activity from "../../../components/TrackInfo/Activity";
 import SimilarTokens from "../../../components/TrackInfo/SimilarTokens";
-import { MORALIS_APP_ID, MORALIS_SERVER_URL } from "../../../config/constants";
+import { PARSE_APP_ID, PARSE_SERVER_URL } from "../../../config/constants";
 import { NextSeo } from "next-seo";
 
 export async function getStaticProps(context) {
 	const { tokenId } = context.params;
-	await Moralis.start({ serverUrl: MORALIS_SERVER_URL, appId: MORALIS_APP_ID });
+	await Moralis.start({ serverUrl: PARSE_SERVER_URL, appId: PARSE_APP_ID });
 
 	try {
 		// Fetch token details

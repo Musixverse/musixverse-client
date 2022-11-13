@@ -3,14 +3,14 @@ import { meta_description } from "../../config/constants";
 import Image from "next/image";
 import Link from "next/link";
 import Moralis from "moralis/node";
-import { MORALIS_APP_ID, MORALIS_SERVER_URL } from "../../config/constants";
+import { PARSE_APP_ID, PARSE_SERVER_URL } from "../../config/constants";
 import CustomButton from "../../layout/CustomButton";
 import Tooltip from "../../layout/Tooltip/Tooltip";
 
 export async function getServerSideProps(context) {
 	try {
 		const { bandId, memberId } = context.query;
-		await Moralis.start({ serverUrl: MORALIS_SERVER_URL, appId: MORALIS_APP_ID });
+		await Moralis.start({ serverUrl: PARSE_SERVER_URL, appId: PARSE_APP_ID });
 
 		const bandData = await Moralis.Cloud.run("setArtistAcceptedBandInvite", { bandId: bandId, memberId: memberId });
 		const band = JSON.parse(bandData);

@@ -15,7 +15,7 @@ import Layout from "../layout/WrapLayout/Layout";
 import ScrollToPageTop from "../utils/ScrollToPageTop";
 import { connectSmartContract } from "../utils/smart-contract/functions";
 import "react-datepicker/dist/react-datepicker.css";
-import { MORALIS_APP_ID, MORALIS_SERVER_URL } from "../config/constants";
+import { PARSE_APP_ID, PARSE_SERVER_URL } from "../config/constants";
 import AudioPlayerContext from "../../store/audioplayer-context";
 
 function App({ Component, pageProps, router }) {
@@ -106,7 +106,7 @@ function App({ Component, pageProps, router }) {
 			<Script src="https://kit.fontawesome.com/8f4546bba1.js" crossOrigin="anonymous"></Script>
 
 			<ErrorBoundary>
-				<MoralisProvider appId={MORALIS_APP_ID} serverUrl={MORALIS_SERVER_URL}>
+				<MoralisProvider appId={PARSE_APP_ID} serverUrl={PARSE_SERVER_URL}>
 					<ThemeProvider attribute="class" enableSystem={false}>
 						<BrowserNotSupportedContext.Provider value={[isBrowserNotSupportedModalOpen, setBrowserNotSupportedModalOpen]}>
 							<LoadingContext.Provider value={[isLoading, setLoading]}>

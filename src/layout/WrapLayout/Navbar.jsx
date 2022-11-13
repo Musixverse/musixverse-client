@@ -41,7 +41,7 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 			},
 			body: JSON.stringify({}),
 		});
-		router.reload(window.location.pathname);
+		// router.reload(window.location.pathname);
 	};
 
 	const [clientWindowHeight, setClientWindowHeight] = useState("");

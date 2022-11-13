@@ -4,7 +4,7 @@
  */
 
 import Moralis from "moralis";
-import { MORALIS_APP_ID, MORALIS_SERVER_URL } from "../config/constants";
+import { PARSE_APP_ID, PARSE_SERVER_URL } from "../config/constants";
 
 export async function isEmailValid(email) {
 	const emailRegex = new RegExp(
@@ -34,7 +34,7 @@ export async function isEmailValidAndAvailable(email) {
 		};
 	}
 
-	await Moralis.start({ serverUrl: MORALIS_SERVER_URL, appId: MORALIS_APP_ID });
+	await Moralis.start({ serverUrl: PARSE_SERVER_URL, appId: PARSE_APP_ID });
 	const emailExists = await Moralis.Cloud.run("checkEmailExists", { email: email });
 	if (emailExists) {
 		return {
@@ -66,7 +66,7 @@ export async function isUsernameValidAndAvailable(username) {
 		};
 	}
 
-	await Moralis.start({ serverUrl: MORALIS_SERVER_URL, appId: MORALIS_APP_ID });
+	await Moralis.start({ serverUrl: PARSE_SERVER_URL, appId: PARSE_APP_ID });
 	const usernameExists = await Moralis.Cloud.run("checkUsernameAvailability", { username: username });
 	if (usernameExists || username === "band" || username === "user" || username === "admin") {
 		return {
@@ -114,7 +114,7 @@ export async function isBandUsernameValidAndAvailable(username) {
 		};
 	}
 
-	await Moralis.start({ serverUrl: MORALIS_SERVER_URL, appId: MORALIS_APP_ID });
+	await Moralis.start({ serverUrl: PARSE_SERVER_URL, appId: PARSE_APP_ID });
 	const usernameExists = await Moralis.Cloud.run("checkBandUsernameAvailability", { username: username });
 	if (usernameExists || username === "band" || username === "user" || username === "admin") {
 		return {

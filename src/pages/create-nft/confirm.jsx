@@ -3,7 +3,7 @@ import { meta_description } from "../../config/constants";
 import Image from "next/image";
 import Link from "next/link";
 import Moralis from "moralis/node";
-import { MORALIS_APP_ID, MORALIS_SERVER_URL } from "../../config/constants";
+import { PARSE_APP_ID, PARSE_SERVER_URL } from "../../config/constants";
 import CustomButton from "../../layout/CustomButton";
 import Tooltip from "../../layout/Tooltip/Tooltip";
 import PreviewDraft from "../../components/CreateNFT/CreateNFTUtils/PreviewDraft";
@@ -11,7 +11,7 @@ import PreviewDraft from "../../components/CreateNFT/CreateNFTUtils/PreviewDraft
 export async function getServerSideProps(context) {
 	try {
 		const { draftId, collaboratorId } = context.query;
-		await Moralis.start({ serverUrl: MORALIS_SERVER_URL, appId: MORALIS_APP_ID });
+		await Moralis.start({ serverUrl: PARSE_SERVER_URL, appId: PARSE_APP_ID });
 
 		const nftDraftData = await Moralis.Cloud.run("setArtistAcceptedNftCollaborationInvite", { draftId: draftId, collaboratorId: collaboratorId });
 		const nftDraft = JSON.parse(nftDraftData);

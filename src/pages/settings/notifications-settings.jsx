@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Moralis from "moralis/node";
-import { MORALIS_APP_ID, MORALIS_SERVER_URL, meta_description } from "../../config/constants";
+import { PARSE_APP_ID, PARSE_SERVER_URL, meta_description } from "../../config/constants";
 import SettingsNav from "../../components/Settings/SettingsNav";
 import NotificationSettings from "../../components/Settings/NotificationSettings";
 import { useMoralis } from "react-moralis";
@@ -9,7 +9,7 @@ export async function getServerSideProps(context) {
 	try {
 		const user = JSON.parse(context.req.cookies.currentUser);
 		const _userId = user.objectId;
-		await Moralis.start({ serverUrl: MORALIS_SERVER_URL, appId: MORALIS_APP_ID });
+		await Moralis.start({ serverUrl: PARSE_SERVER_URL, appId: PARSE_APP_ID });
 
 		const _userPreferences = await Moralis.Cloud.run("fetchUserPreferences", { userId: _userId });
 		const userPreferences = JSON.parse(JSON.stringify(_userPreferences));

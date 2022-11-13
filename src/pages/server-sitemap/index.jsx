@@ -1,10 +1,10 @@
 import { getServerSideSitemap } from "next-sitemap";
 import Moralis from "moralis/node";
-import { MORALIS_APP_ID, MORALIS_SERVER_URL } from "../../config/constants";
+import { PARSE_APP_ID, PARSE_SERVER_URL } from "../../config/constants";
 
 export async function getServerSideProps(context) {
 	try {
-		await Moralis.start({ serverUrl: MORALIS_SERVER_URL, appId: MORALIS_APP_ID });
+		await Moralis.start({ serverUrl: PARSE_SERVER_URL, appId: PARSE_APP_ID });
 
 		const tokens = await Moralis.Cloud.run("fetchAllTokens");
 		const fields = tokens.map((token) => ({

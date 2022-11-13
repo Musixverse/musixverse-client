@@ -19,10 +19,10 @@ export const MUSIXVERSE_GETTERS_FACET_CONTRACT_ABI = MusixverseGettersFacet.abi;
 export const MUSIXVERSE_SETTERS_FACET_CONTRACT_ABI = MusixverseSettersFacet.abi;
 
 /**************************************************************************/
-/******************************    MORALIS  *******************************/
+/*******************************    PARSE  ********************************/
 /**************************************************************************/
-export const MORALIS_APP_ID = process.env.NEXT_PUBLIC_MORALIS_APP_ID;
-export const MORALIS_SERVER_URL = process.env.NEXT_PUBLIC_MORALIS_SERVER_URL;
+export const PARSE_APP_ID = process.env.NEXT_PUBLIC_PARSE_APP_ID;
+export const PARSE_SERVER_URL = process.env.NEXT_PUBLIC_PARSE_SERVER_URL;
 
 /**************************************************************************/
 /******************    Array of default avatar urls   *********************/

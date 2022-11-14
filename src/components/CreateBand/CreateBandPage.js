@@ -13,7 +13,7 @@ import { isBandUsernameValidAndAvailable } from "../../utils/Validate";
 import { defaultAvatarUrls } from "../../config/constants";
 
 const CreateBandPage = () => {
-	const { Moralis, user } = useMoralis();
+	const { user } = useMoralis();
 	const [, setLoading] = useContext(LoadingContext);
 	const [, , , setError] = useContext(StatusContext);
 
@@ -22,12 +22,6 @@ const CreateBandPage = () => {
 	const [bandDescription, setBandDescription] = useState("");
 	const [avatar, setAvatar] = useState(defaultAvatarUrls[0]);
 	const [bandMembers, setBandMembers] = useState([{ userId: "", name: "", username: "", role: "", address: "", avatar: "", hasAcceptedBandInvite: false }]);
-
-	async function uploadFile(data) {
-		const file = new Moralis.File("file", data);
-		await file.saveIPFS();
-		return file;
-	}
 
 	// Invite artist modal states
 	const [isInvitationModalOpen, setInvitationModalOpen] = useState(false);
@@ -243,7 +237,7 @@ const CreateBandPage = () => {
 								</div>
 
 								<div className="w-full col-span-2 pl-32">
-									<SelectAvatar defaultAvatarUrls={defaultAvatarUrls} uploadFile={uploadFile} avatar={avatar} setAvatar={setAvatar} />
+									<SelectAvatar defaultAvatarUrls={defaultAvatarUrls} avatar={avatar} setAvatar={setAvatar} />
 
 									<div className="mt-10 text-base">
 										<span className="font-tertiary text-3xl">ADD MEMBERS</span>

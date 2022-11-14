@@ -12,7 +12,7 @@ import { defaultAvatarUrls } from "../../config/constants";
 
 export default function CollectorRegistration() {
 	const [, , , setError] = useContext(StatusContext);
-	const { Moralis, userError, user, setUserData } = useMoralis();
+	const { userError, user, setUserData } = useMoralis();
 	const { save: saveUserInfo } = useNewMoralisObject("UserInfo");
 	const { save: saveUserPreferences } = useNewMoralisObject("UserPreferences");
 
@@ -25,12 +25,6 @@ export default function CollectorRegistration() {
 	const [name, setName] = useState("");
 	const [username, setUsername] = useState("");
 	const [email, setEmail] = useState("");
-
-	async function uploadFile(data) {
-		const file = new Moralis.File("file", data);
-		await file.saveIPFS();
-		return file;
-	}
 
 	const handleCollectorDetailsSave = async (e) => {
 		e.preventDefault();
@@ -142,7 +136,7 @@ export default function CollectorRegistration() {
 				<RightSection>
 					<p className="text-5xl font-tertiary max-w-[468px] mb-10">YOUR DETAILS</p>
 					<form onSubmit={handleCollectorDetailsSave}>
-						<SelectAvatar defaultAvatarUrls={defaultAvatarUrls} uploadFile={uploadFile} setAvatar={setAvatar} />
+						<SelectAvatar defaultAvatarUrls={defaultAvatarUrls} avatar={avatar} setAvatar={setAvatar} />
 
 						<p className="mt-8 text-[16px] font-secondary font-bold">Your Name*</p>
 						<input

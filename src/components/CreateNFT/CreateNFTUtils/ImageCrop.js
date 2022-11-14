@@ -3,6 +3,7 @@ import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import ReactCrop from "react-image-crop";
 import "react-image-crop/dist/ReactCrop.css";
+import convertDataURLtoFile from "../../../utils/image-crop/convertDataURLtoFile";
 
 function ImageCrop({ imageToCrop, setCroppedImage, setShowModal, circularCrop, aspectRatio }) {
 	//imageToCrop is the user selected image
@@ -54,8 +55,8 @@ function ImageCrop({ imageToCrop, setCroppedImage, setShowModal, circularCrop, a
 
 		// Method 1
 		// DataURL(memory loaded based) is less efficient than ObjectURL(reference based)
-		//qualtiy: 0.15 (60% compression)
-		const base64Image = canvas.toDataURL("image/jpeg", 1);
+		// qualtiy: 0.15 (60% compression)
+		const base64Image = canvas.toDataURL("image/jpeg", 0.6);
 		return base64Image;
 
 		// Method 2

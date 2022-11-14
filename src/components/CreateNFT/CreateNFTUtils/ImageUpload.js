@@ -1,7 +1,6 @@
 import Image from "next/image";
 import { useState, useEffect, useRef, useContext } from "react";
 import { useMoralis } from "react-moralis";
-import convertDataURLtoFile from "../../../utils/image-crop/convertDataURLtoFile";
 import uploadFileToIPFS from "../../../utils/image-crop/uploadFileToIPFS";
 import uploadImage from "../../../../public/assets/create-nft/upload-image.svg";
 import CropImageModal from "./CropImageModal";
@@ -24,12 +23,10 @@ export default function ImageUpload({ coverArtUrl, setCoverArtUrl, setCoverArtMi
 		async function setCoverArt() {
 			if (croppedImage !== undefined) {
 				setCoverArtUrl(croppedImage);
-				// Get the File from DataURL
-				const uploadedFile = convertDataURLtoFile(croppedImage, "file");
 				setLoading(true);
 				// Get the uploadFileOnIPFS async function
 				try {
-					await uploadFileToIPFS(Moralis, uploadedFile).then((url) => setCoverArtUrl(url));
+					await uploadFileToIPFS(Moralis, croppedImage, "cover-art").then((url) => setCoverArtUrl(url));
 				} catch (err) {
 					setError((prevState) => ({
 						...prevState,

@@ -1,7 +1,6 @@
 import { useRef, useState, useEffect, useContext } from "react";
 import { useMoralis } from "react-moralis";
 import DefaultAvatar from "./DefaultAvatar";
-import convertDataURLtoFile from "../../../utils/image-crop/convertDataURLtoFile";
 import uploadFileToIPFS from "../../../utils/image-crop/uploadFileToIPFS";
 import CropImageModal from "../../CreateNFT/CreateNFTUtils/CropImageModal";
 import LoadingContext from "../../../../store/loading-context";
@@ -26,12 +25,10 @@ export default function SelectAvatar({ defaultAvatarUrls, avatar, setAvatar }) {
 			if (croppedImage !== undefined) {
 				// uploadedImage.current.src = croppedImage;
 				setSelectedAvatar(croppedImage);
-				// Get the File from DataURL
-				const uploadedFile = convertDataURLtoFile(croppedImage, "file");
 				setLoading(true);
 				try {
 					// Get the uploadFileOnIPFS async function
-					await uploadFileToIPFS(Moralis, uploadedFile).then((url) => {
+					await uploadFileToIPFS(Moralis, croppedImage, "avatar").then((url) => {
 						setAvatar(url);
 						setLoading(false);
 					});

@@ -1,7 +1,6 @@
 import { useState, useRef, useContext, useEffect } from "react";
 import { useMoralis } from "react-moralis";
 import CustomButton from "../../../layout/CustomButton";
-import convertDataURLtoFile from "../../../utils/image-crop/convertDataURLtoFile";
 import uploadFileToIPFS from "../../../utils/image-crop/uploadFileToIPFS";
 import LoadingContext from "../../../../store/loading-context";
 import StatusContext from "../../../../store/status-context";
@@ -27,15 +26,8 @@ export default function EditProfilePhoto({ avatar, setAvatar }) {
 	useEffect(() => {
 		if (croppedImage !== undefined) {
 			setLoading(true);
-			// profilePicture.current.src = croppedImage;
-			// setProfilePicture(croppedImage);
-			// Get the File from DataURL
-			const uploadedFile = convertDataURLtoFile(croppedImage, "file");
-			console.log("Compressed file size: ", uploadedFile.size);
-			// Get the uploadFileOnIPFS async function
-
 			try {
-				uploadFileToIPFS(Moralis, uploadedFile).then((url) => {
+				uploadFileToIPFS(Moralis, croppedImage, "avatar").then((url) => {
 					setLoading(false);
 					setAvatar(url);
 				});
@@ -49,9 +41,14 @@ export default function EditProfilePhoto({ avatar, setAvatar }) {
 				}));
 			}
 		}
-	}, [Moralis, croppedImage, setAvatar, setLoading]);
+	}, [Moralis, croppedImage, setAvatar, setError, setLoading]);
 
 	const handleAvatarChange = (event) => {
+		// Set quality based on file size
+		// Get the File from DataURL
+		// const avatarInput = document.getElementById("upload-image-inp");
+		// if (avatarInput.files[0].size > 1000000) {
+		// }
 		const imageURL = URL.createObjectURL(event.target.files[0]);
 		profilePictureInput.current.value = "";
 		setImageToCrop(imageURL);

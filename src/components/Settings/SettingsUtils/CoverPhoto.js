@@ -29,13 +29,10 @@ export default function CoverPhoto({ coverImage, setCoverImage }) {
 		async function setCoverPhoto() {
 			if (croppedImage !== undefined) {
 				setLoading(true);
-				// setCoverPhoto(croppedImage);
-				// Get the File from DataURL
-				const uploadedFile = convertDataURLtoFile(croppedImage, "file");
-				// Get the uploadFileOnIPFS async function
 
+				// Get the uploadFileOnIPFS async function
 				try {
-					await uploadFileToIPFS(Moralis, uploadedFile).then((url) => {
+					await uploadFileToIPFS(Moralis, croppedImage, "cover-image").then((url) => {
 						setLoading(false);
 						setCoverImage(url);
 					});

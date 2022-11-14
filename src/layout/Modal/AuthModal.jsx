@@ -54,65 +54,6 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 		} else displayAuthMethods();
 	};
 
-	// const metamaskLogin = async () => {
-	// 	setLoading(true);
-	// 	if (!isAuthenticated) {
-	// 		await addPolygonNetwork();
-	// 		await authenticate({ signingMessage: "Musixverse Authentication" })
-	// 			.then(async function (user) {
-	// 				if (user) {
-	// 					await fetch("/api/auth/login", {
-	// 						method: "post",
-	// 						headers: {
-	// 							"Content-Type": "application/json",
-	// 						},
-	// 						body: JSON.stringify({ currentUser: user }),
-	// 					});
-	// 					closeModal();
-	// 					if (router.pathname === "/") router.push("/mxcatalog/new-releases");
-	// 				}
-	// 				setLoading(false);
-	// 			})
-	// 			.catch(function (error) {
-	// 				console.log("Metamask authentication error:", error);
-	// 				setLoading(false);
-	// 			});
-	// 	}
-	// 	setLoading(false);
-	// };
-
-	// const walletconnectLogin = async () => {
-	// 	setLoading(true);
-
-	// 	if (!isAuthenticated) {
-	// 		await authenticate({
-	// 			provider: "walletconnect",
-	// 			chainId: process.env.NEXT_PUBLIC_BLOCKCHAIN_NETWORK_ID === "137" ? 137 : "",
-	// 			signingMessage: "Musixverse Authentication",
-	// 		})
-	// 			.then(async function (user) {
-	// 				if (user) {
-	// 					await fetch("/api/auth/login", {
-	// 						method: "post",
-	// 						headers: {
-	// 							"Content-Type": "application/json",
-	// 						},
-	// 						body: JSON.stringify({ currentUser: user }),
-	// 					});
-	// 					closeModal();
-	// 					if (router.pathname === "/") router.push("/mxcatalog/new-releases");
-	// 				}
-	// 				setLoading(false);
-	// 			})
-	// 			.catch(function (error) {
-	// 				console.log("WalletConnect authentication error:", error);
-	// 				setLoading(false);
-	// 			});
-	// 	}
-
-	// 	setLoading(false);
-	// };
-
 	const magicLogin = async () => {
 		if (!isAuthenticated) {
 			await authenticate({

@@ -54,6 +54,7 @@ const CreateNFTIntro = ({ nextStep, chosenProfileOrBand, nftDraftMetadata, nftDr
 						className="w-[90vw] sm:w-[80vw] bg-light-100 dark:bg-dark-600 grid lg:grid-cols-3 lg:space-x-10 min-h-full sm:p-14 p-10 lg:pb-10 rounded-2xl backdrop-blur-xl"
 						onSubmit={async (e) => {
 							e.preventDefault();
+							setLoading(true);
 							if (user && user.attributes.isArtist && user.attributes.isArtistVerified) {
 								await createNftDraft({
 									onSuccess: (draft) => {
@@ -69,14 +70,17 @@ const CreateNFTIntro = ({ nextStep, chosenProfileOrBand, nftDraftMetadata, nftDr
 											},
 										]);
 										router.replace("/create-nft?draft=" + draft.id, undefined, { shallow: true });
+										setLoading(false);
 									},
 									onError: (error) => {
 										console.error("createNftDraft error:", error);
+										setLoading(false);
 									},
 								});
 								nextStep();
 							} else {
 								setArtistProfileNotVerifiedModalOpen(true);
+								setLoading(false);
 							}
 						}}
 					>

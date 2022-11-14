@@ -6,6 +6,7 @@ import StatusContext from "../../../../store/status-context";
 import LoadingContext from "../../../../store/loading-context";
 import uploadFileToIPFS from "../../../utils/image-crop/uploadFileToIPFS";
 import { bytesToMegaBytes } from "../../../utils/Convert";
+import { fileToBase64 } from "../../../utils/FileToBase64";
 
 const Step3Form = ({ unlockableContent, setUnlockableContent }) => {
 	const { Moralis } = useMoralis();
@@ -80,10 +81,23 @@ const Step3Form = ({ unlockableContent, setUnlockableContent }) => {
 
 			const _exclusiveImages = [];
 			for (let currentFile of filesInput.files) {
-				const ipfsUrl = await uploadFileToIPFS(Moralis, currentFile).then((url) => {
-					return url;
-				});
-				_exclusiveImages.push({ file: currentFile, ipfsUrl: ipfsUrl });
+				try {
+					const base64File = await fileToBase64(currentFile);
+					const ipfsUrl = await uploadFileToIPFS(Moralis, base64File, "exclusive-image").then((url) => {
+						return url;
+					});
+					_exclusiveImages.push({ file: currentFile, ipfsUrl: ipfsUrl });
+				} catch (error) {
+					console.error(error);
+					if (error.message == "request entity too large") {
+						setError({
+							title: "File too large",
+							message: "Please select files with smaller size",
+							showErrorBox: true,
+						});
+					}
+					return;
+				}
 			}
 
 			setUnlockableContent((prevState) => ({
@@ -132,10 +146,23 @@ const Step3Form = ({ unlockableContent, setUnlockableContent }) => {
 
 			const _exclusiveAudios = [];
 			for (let currentFile of filesInput.files) {
-				const ipfsUrl = await uploadFileToIPFS(Moralis, currentFile).then((url) => {
-					return url;
-				});
-				_exclusiveAudios.push({ file: currentFile, ipfsUrl: ipfsUrl });
+				try {
+					const base64File = await fileToBase64(currentFile);
+					const ipfsUrl = await uploadFileToIPFS(Moralis, base64File, "exclusive-audio").then((url) => {
+						return url;
+					});
+					_exclusiveAudios.push({ file: currentFile, ipfsUrl: ipfsUrl });
+				} catch (error) {
+					console.error(error);
+					if (error.message == "request entity too large") {
+						setError({
+							title: "File too large",
+							message: "Please select files with smaller size",
+							showErrorBox: true,
+						});
+					}
+					return;
+				}
 			}
 
 			setUnlockableContent((prevState) => ({
@@ -184,10 +211,23 @@ const Step3Form = ({ unlockableContent, setUnlockableContent }) => {
 
 			const _exclusiveVideos = [];
 			for (let currentFile of filesInput.files) {
-				const ipfsUrl = await uploadFileToIPFS(Moralis, currentFile).then((url) => {
-					return url;
-				});
-				_exclusiveVideos.push({ file: currentFile, ipfsUrl: ipfsUrl });
+				try {
+					const base64File = await fileToBase64(currentFile);
+					const ipfsUrl = await uploadFileToIPFS(Moralis, base64File, "exclusive-video").then((url) => {
+						return url;
+					});
+					_exclusiveVideos.push({ file: currentFile, ipfsUrl: ipfsUrl });
+				} catch (error) {
+					console.error(error);
+					if (error.message == "request entity too large") {
+						setError({
+							title: "File too large",
+							message: "Please select files with smaller size",
+							showErrorBox: true,
+						});
+					}
+					return;
+				}
 			}
 
 			setUnlockableContent((prevState) => ({

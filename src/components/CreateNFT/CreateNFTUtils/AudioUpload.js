@@ -5,6 +5,7 @@ import uploadFileToIPFS from "../../../utils/image-crop/uploadFileToIPFS";
 import uploadMusic from "../../../../public/assets/create-nft/upload-music.svg";
 import LoadingContext from "../../../../store/loading-context";
 import StatusContext from "../../../../store/status-context";
+import { fileToBase64 } from "../../../utils/FileToBase64";
 
 export default function AudioUpload({ audioFileUrl, setAudioFileUrl, setAudioFileDuration, setAudioFileMimeType }) {
 	const { Moralis } = useMoralis();
@@ -34,8 +35,9 @@ export default function AudioUpload({ audioFileUrl, setAudioFileUrl, setAudioFil
 			};
 			reader.readAsDataURL(fileToUpload);
 
+			const base64Audio = await fileToBase64(fileToUpload);
 			try {
-				await uploadFileToIPFS(Moralis, fileToUpload).then((url) => setAudioFileUrl(url));
+				await uploadFileToIPFS(Moralis, base64Audio, "audio").then((url) => setAudioFileUrl(url));
 			} catch (err) {
 				setError((prevState) => ({
 					...prevState,

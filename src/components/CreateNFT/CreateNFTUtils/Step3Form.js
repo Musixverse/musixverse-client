@@ -64,6 +64,7 @@ const Step3Form = ({ unlockableContent, setUnlockableContent }) => {
 			filesInput.files = new DataTransfer().files;
 			filesInput.value = "";
 
+			setImageFilesChosenText("No file chosen");
 			setUnlockableContent((prevState) => ({
 				...prevState,
 				exclusiveImages: [],
@@ -73,6 +74,7 @@ const Step3Form = ({ unlockableContent, setUnlockableContent }) => {
 				message: "Please select fewer than 10 images",
 				showErrorBox: true,
 			});
+			return;
 		}
 
 		// VALIDATE OR CHECK IF ANY FILE IS SELECTED
@@ -89,12 +91,20 @@ const Step3Form = ({ unlockableContent, setUnlockableContent }) => {
 					_exclusiveImages.push({ file: currentFile, ipfsUrl: ipfsUrl });
 				} catch (error) {
 					console.error(error);
-					if (error.message == "request entity too large") {
+					setLoading(false);
+					if (error.message && error.message == "request entity too large") {
 						setError({
 							title: "File too large",
 							message: "Please select files with smaller size",
 							showErrorBox: true,
 						});
+					} else {
+						setError((prevState) => ({
+							...prevState,
+							title: "Oops! Something went wrong.",
+							message: "Please try again later.",
+							showErrorBox: true,
+						}));
 					}
 					return;
 				}
@@ -129,6 +139,7 @@ const Step3Form = ({ unlockableContent, setUnlockableContent }) => {
 			filesInput.files = new DataTransfer().files;
 			filesInput.value = "";
 
+			setAudioFilesChosenText("No file chosen");
 			setUnlockableContent((prevState) => ({
 				...prevState,
 				exclusiveAudios: [],
@@ -138,6 +149,7 @@ const Step3Form = ({ unlockableContent, setUnlockableContent }) => {
 				message: "Please select fewer than 10 files",
 				showErrorBox: true,
 			});
+			return;
 		}
 
 		// VALIDATE OR CHECK IF ANY FILE IS SELECTED
@@ -154,12 +166,20 @@ const Step3Form = ({ unlockableContent, setUnlockableContent }) => {
 					_exclusiveAudios.push({ file: currentFile, ipfsUrl: ipfsUrl });
 				} catch (error) {
 					console.error(error);
-					if (error.message == "request entity too large") {
+					setLoading(false);
+					if (error.message && error.message == "request entity too large") {
 						setError({
 							title: "File too large",
 							message: "Please select files with smaller size",
 							showErrorBox: true,
 						});
+					} else {
+						setError((prevState) => ({
+							...prevState,
+							title: "Oops! Something went wrong.",
+							message: "Please try again later.",
+							showErrorBox: true,
+						}));
 					}
 					return;
 				}
@@ -194,6 +214,7 @@ const Step3Form = ({ unlockableContent, setUnlockableContent }) => {
 			filesInput.files = new DataTransfer().files;
 			filesInput.value = "";
 
+			setVideoFilesChosenText("No file chosen");
 			setUnlockableContent((prevState) => ({
 				...prevState,
 				exclusiveVideos: [],
@@ -203,6 +224,7 @@ const Step3Form = ({ unlockableContent, setUnlockableContent }) => {
 				message: "Please select fewer than 10 files",
 				showErrorBox: true,
 			});
+			return;
 		}
 
 		// VALIDATE OR CHECK IF ANY FILE IS SELECTED
@@ -219,12 +241,20 @@ const Step3Form = ({ unlockableContent, setUnlockableContent }) => {
 					_exclusiveVideos.push({ file: currentFile, ipfsUrl: ipfsUrl });
 				} catch (error) {
 					console.error(error);
-					if (error.message == "request entity too large") {
+					setLoading(false);
+					if (error.message && error.message == "request entity too large") {
 						setError({
 							title: "File too large",
 							message: "Please select files with smaller size",
 							showErrorBox: true,
 						});
+					} else {
+						setError((prevState) => ({
+							...prevState,
+							title: "Oops! Something went wrong.",
+							message: "Please try again later.",
+							showErrorBox: true,
+						}));
 					}
 					return;
 				}

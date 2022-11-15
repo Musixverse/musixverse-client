@@ -45,7 +45,7 @@ export default function TopArtists() {
 			<SwiperArtist setCurrBg={setBg} />
 
 			{/* Bottom image section */}
-			<div className="hidden md:absolute w-full bottom-[-80px]">
+			<div className="hidden md:block absolute w-full top-3/4">
 				<Image src={bg_design} alt="Top Artist section background design" layout="responsive" priority />
 			</div>
 		</div>

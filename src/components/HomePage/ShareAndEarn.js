@@ -9,7 +9,7 @@ export default function ShareAndEarn(){
                 <div className="relative h-auto w-auto">
                     <Image src={instruments} objectFit="contain" priority alt="guitars"/>    
                 </div>
-                <div className="-ml-12 w-full md:w-fit md:h-fit flex flex-col backdrop-blur-[40px] rounded-3xl p-5 bg-[#282828]">
+                <div className="md:-ml-12 w-full md:w-fit md:h-fit flex flex-col backdrop-blur-[40px] rounded-3xl p-5 bg-[#282828]">
                     <div className="flex justify-between w-full">
                         <h3 className="font-semibold text-4xl mb-3 px-4 pt-4">Share & Earn 10%</h3>
                         <button className="backdrop-blur-[40px] backdrop-brightness-[1.75] p-3 flex items-center justify-center self-start rounded-xl">

@@ -1,14 +1,14 @@
-# musixverse-client
+# Musixverse Client
 
 ## Using Next.js
 
 ### Environment Variables-
 
 ```
-Note: .env, .env.development, and .env.production files should be included in your repository as they define defaults. .env*.local should be added to .gitignore, as those files are intended to be ignored. .env.local is where secrets can be stored.
+Note: .env.example is an example of the secrets file. .env*.local should be added to .gitignore, as those files are intended to be ignored. .env.development.local is where secrets can be stored.
 
 
-Set defaults in .env (all environments), .env.development (development environment), and .env.production (production environment).
+Set defaults in .env.example.
 
 
 Environment Variable Load Order-

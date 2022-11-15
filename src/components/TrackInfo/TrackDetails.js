@@ -11,7 +11,8 @@ import amazonB from "../../../public/assets/logos/amazon_logo_b.svg";
 import amazonW from "../../../public/assets/logos/amazon_logo_w.svg";
 import youtubeB from "../../../public/assets/logos/youtube_logo_b.svg";
 import youtubeW from "../../../public/assets/logos/youtube_logo_w.svg";
-import LyricsModal from "./TrackInfoUtils/LyricsModal";
+import dynamic from "next/dynamic";
+const LyricsModal = dynamic(() => import("./TrackInfoUtils/LyricsModal"));
 
 export default function TrackDetails({ tokenId, metadata }) {
 	const { theme } = useTheme();

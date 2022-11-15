@@ -133,7 +133,11 @@ export default function UnlockableContent({ tokenId, currentOwnerAddress, unlock
 
 				<div className={"flex space-x-8 " + (unlockableContent.about ? "mt-2" : "mt-6")}>
 					{unlockableContent.about && (
-						<div className="text-sm max-w-[300px] max-h-[150px] overflow-y-scroll pr-2 whitespace-pre-wrap">{unlockableContent.about}</div>
+						<div className="text-sm max-w-[300px] overflow-y-scroll pr-2 whitespace-pre-wrap">
+							Your NFT comes with exclusive perks that are only available to you, the NFT owner, as long as you continue to own the NFT.
+							<p className="mt-2">The artist appreciates your support and has put together self-curated items exclusively for you.</p>
+							<p className="mt-2">Buy Now!</p>
+						</div>
 					)}
 					<div className="grid sm:grid-cols-3 items-start gap-4">
 						{unlockableContentItems.map((item, index) => {

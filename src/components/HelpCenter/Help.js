@@ -26,7 +26,7 @@ export default function Help() {
 					{/* Help center Cards */}
 					<div className="grid grid-rows-3 grid-cols-2 sm:grid-rows-2 sm:grid-cols-3 justify-center gap-8">
 						<Link href="/help-center/getting-started" passHref={true}>
-							<div className="col-span-2 sm:col-span-1 sm:row-span-2 flex flex-col justify-center items-center p-6 rounded-lg border-2 dark:border-zinc-700 cursor-pointer shadow hover:shadow-lg duration-300 dark:shadow-slate-400  hover:ring-offset-primary-700">
+							<div className="col-span-2 sm:col-span-1 sm:row-span-2 flex flex-col justify-center items-center p-6 rounded-lg border-2 hover:border-transparent hover:dark:border-transparent dark:border-zinc-700 cursor-pointer shadow hover:shadow-primary-500 transition-all duration-500">
 								<div className="w-24 h-24 relative">
 									<Image
 										src={theme === "dark" ? getting_started_w : getting_started_b}
@@ -40,7 +40,7 @@ export default function Help() {
 							</div>
 						</Link>
 						<Link href="/help-center/buying" passHref={true}>
-							<div className="flex flex-col justify-center items-center p-6 rounded-lg border-2 dark:border-zinc-700 cursor-pointer shadow hover:shadow-lg duration-300 dark:shadow-slate-400  hover:ring-offset-primary-700">
+							<div className="flex flex-col justify-center items-center p-6 rounded-lg border-2 hover:border-transparent hover:dark:border-transparent dark:border-zinc-700 cursor-pointer shadow hover:shadow-primary-500 transition-all duration-500">
 								<div className="w-24 h-24 relative">
 									<Image src={theme === "dark" ? buying_w : buying_b} alt={"Buying"} objectFit="contain" layout="fill" priority />
 								</div>
@@ -48,7 +48,7 @@ export default function Help() {
 							</div>
 						</Link>
 						<Link href="/help-center/selling" passHref={true}>
-							<div className="flex flex-col justify-center items-center p-6 rounded-lg border-2 dark:border-zinc-700 cursor-pointer shadow hover:shadow-lg duration-300 dark:shadow-slate-400  hover:ring-offset-primary-700">
+							<div className="flex flex-col justify-center items-center p-6 rounded-lg border-2 hover:border-transparent hover:dark:border-transparent dark:border-zinc-700 cursor-pointer shadow hover:shadow-primary-500 transition-all duration-500">
 								<div className="w-24 h-24 relative">
 									<Image src={theme === "dark" ? selling_w : selling_b} alt={"Selling"} objectFit="contain" layout="fill" priority />
 								</div>
@@ -56,7 +56,7 @@ export default function Help() {
 							</div>
 						</Link>
 						<Link href="/help-center/creating" passHref={true}>
-							<div className="flex flex-col justify-center items-center p-6 rounded-lg border-2 dark:border-zinc-700 cursor-pointer shadow hover:shadow-lg duration-300 dark:shadow-slate-400  hover:ring-offset-primary-700">
+							<div className="flex flex-col justify-center items-center p-6 rounded-lg border-2 hover:border-transparent hover:dark:border-transparent dark:border-zinc-700 cursor-pointer shadow hover:shadow-primary-500 transition-all duration-500">
 								<div className="w-24 h-24 relative">
 									<Image src={theme === "dark" ? creating_w : creating_b} alt={"Creating"} objectFit="contain" layout="fill" priority />
 								</div>
@@ -64,7 +64,7 @@ export default function Help() {
 							</div>
 						</Link>
 						<Link href="/help-center/faq" passHref={true}>
-							<div className="flex flex-col justify-center items-center p-6 rounded-lg border-2 dark:border-zinc-700 cursor-pointer shadow hover:shadow-lg duration-300 dark:shadow-slate-400  hover:ring-offset-primary-700">
+							<div className="flex flex-col justify-center items-center p-6 rounded-lg border-2 hover:border-transparent hover:dark:border-transparent dark:border-zinc-700 cursor-pointer shadow hover:shadow-primary-500 transition-all duration-500">
 								<div className="w-24 h-24 relative">
 									<Image src={theme === "dark" ? general_w : general_b} alt={"General"} objectFit="contain" layout="fill" priority />
 								</div>

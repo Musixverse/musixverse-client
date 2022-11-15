@@ -13,11 +13,11 @@ export default function PromoCarousel() {
 	}
 
 	return (
-		<div className="flex flex-col items-center flex-1 h-[758px]">
-			<div className="w-[616px] aspect-square relative">
+		<div className="flex flex-col items-center flex-1 h-[426px] lg:h-[592px] xl:h-[758px]">
+			<div className="w-[402px] md:w-[290px] lg:w-[536px] xl:w-[584px] 2xl:w-[616px] aspect-square relative">
 				<Image src={imgSrcs[(currSlide-1)%2]} objectFit="cover" layout="fill" alt="artist"/>
 			</div>
-			<div className="flex-1 -mt-20 promo-carousel-container" id="slider">
+			<div className="flex-1 mb-20 md:mb-0 md:-mt-20 promo-carousel-container" id="slider">
 				<input type="radio" name="slider" id="s1" defaultChecked/>
 				<input type="radio" name="slider" id="s2"/>
 				<input type="radio" name="slider" id="s3"/>

@@ -892,7 +892,7 @@ button.tooltip-button:active {
   /* Next Slide */
 #s1:checked ~ #slide2, #s2:checked ~ #slide3, #s3:checked ~ #slide4, #s4:checked ~ #slide5, #s5:checked ~ #slide1 {
 	/* box-shadow: 0 6px 10px rgba(0,0,0, 0.3), 0 2px 2px rgba(0,0,0, 0.2); */
-	transform: translate3d(40%, 0, -100px) scale(0.75);
+	transform: translate3d(30%, 0, -100px) scale(0.75);
 }
   
   
@@ -914,5 +914,5 @@ button.tooltip-button:active {
   /* Previous Slide */
 #s1:checked ~ #slide5, #s2:checked ~ #slide1, #s3:checked ~ #slide2, #s4:checked ~ #slide3, #s5:checked ~ #slide4 {
 	/* box-shadow: 0 6px 10px rgba(0,0,0, 0.3), 0 2px 2px rgba(0,0,0, 0.2); */
-	transform: translate3d(-40%, 0, -100px) scale(0.75);
+	transform: translate3d(-30%, 0, -100px) scale(0.75);
 }

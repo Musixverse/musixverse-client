@@ -22,7 +22,7 @@ function Home() {
 
 			<div className="relative flex flex-col items-center justify-center bg-light-200 dark:bg-dark-800">
 				{/* <Banner /> */}
-				<HeroSection />
+				{/* <HeroSection /> */}
 				<div className="flex flex-col w-full max-w-[1920px] px-6 md:px-8 lg:px-16 xl:px-20 2xl:px-36">
 					<NewHero/>
 					<TopArtists />

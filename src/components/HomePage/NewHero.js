@@ -14,18 +14,18 @@ const Carousel = dynamic(
 
 export default function NewHero(){
     return (
-        <div className="flex items-center justify-between w-full">
+        <div className="flex flex-col items-center justify-between w-full md:flex-row pt-28">
             {/* Left Section */}
             <div className="flex flex-col">
-                <h1 className="font-semibold text-[4rem] text-[#54B902]">Create. Collect. Trade.</h1>
-                <h1 className="font-semibold text-[4.5rem]">Music Like Never <br/> Before</h1>
+                <h1 className="font-semibold text-3xl leading-[3.5rem] lg:leading-normal lg:text-heroHeader1Lg xl:text-[3.5rem] 2xl:text-[4rem] text-[#54B902]">Create. Collect. Trade.</h1>
+                <h1 className="font-semibold text-4xl leading-[3.5rem] lg:leading-normal lg:text-heroHeader2Lg xl:text-[4rem] 2xl:text-[4.5rem]">Music Like Never <br/> Before</h1>
                 {/* CTAs */}
-                <div className="flex items-center mt-16 space-x-5">
+                <div className="flex items-center mt-8 space-x-3 lg:space-x-5 xl:mt-16">
                     {/* <Link href={"/mxcatalog/new-releases"} passHref> */}
-                        <button className="bg-[#707070] text-center border-[2px] border-[#707070] text-lg rounded-3xl px-14 py-2">Sign up</button>
+                        <button className="bg-[#707070] text-center border-[2px] border-[#707070] text-sm lg:text-base xl:text-lg rounded-3xl px-10 xl:px-14 py-2">Sign up</button>
                     {/* </Link> */}
                     <Link href={"/mxcatalog/new-releases"} passHref>
-                        <button className="bg-none text-lg rounded-3xl text-center px-14 py-2 border-[2px] border-[#62D801]">M<span className="text-primary-400">x</span> Catalog</button>
+                        <button className="bg-none text-sm lg:text-base xl:text-lg rounded-3xl text-center px-10 xl:px-14 py-2 border-[2px] border-[#62D801]">M<span className="text-primary-400">x</span> Catalog</button>
                     </Link>
                 </div>
             </div>

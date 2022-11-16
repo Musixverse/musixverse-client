@@ -1,9 +1,20 @@
 import PromoNftCard from "./PromoNftCards";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 
 export default function PromoCarousel() {
 	const [currSlide, setCurrSlide] = useState(1);
+
+	useEffect(()=>{
+		const carouselRider = setInterval(()=>{
+			setCurrSlide((prevSlide)=>{
+				return (prevSlide)%5+1;
+			});
+		},15000)
+
+		return ()=>clearInterval(carouselRider);
+	},[]);
+
 	const imgSrcs = ["/assets/homepage/harryFull.png","/assets/homepage/zubaanFull.png"]
 
 	//This function has to update the image being displayed
@@ -18,11 +29,11 @@ export default function PromoCarousel() {
 				<Image src={imgSrcs[(currSlide-1)%2]} objectFit="cover" layout="fill" alt="artist"/>
 			</div>
 			<div className="flex-1 mb-20 md:mb-0 md:-mt-20 promo-carousel-container" id="slider">
-				<input type="radio" name="slider" id="s1" defaultChecked/>
-				<input type="radio" name="slider" id="s2"/>
-				<input type="radio" name="slider" id="s3"/>
-				<input type="radio" name="slider" id="s4"/>
-				<input type="radio" name="slider" id="s5"/>
+				<input type="radio" name="slider" id="s1" readOnly defaultChecked checked={currSlide === 1}/>
+				<input type="radio" name="slider" id="s2" readOnly checked={currSlide === 2}/>
+				<input type="radio" name="slider" id="s3" readOnly checked={currSlide === 3}/>
+				<input type="radio" name="slider" id="s4" readOnly checked={currSlide === 4}/>
+				<input type="radio" name="slider" id="s5" readOnly checked={currSlide === 5}/>
 
 				<label onClick={(e)=>{handleNftCardClick(e, 1)}} htmlFor="s1" id="slide1"><PromoNftCard /></label>
 				<label onClick={(e)=>{handleNftCardClick(e, 2)}} htmlFor="s2" id="slide2"><PromoNftCard /></label>

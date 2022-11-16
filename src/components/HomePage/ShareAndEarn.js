@@ -18,13 +18,13 @@ export default function ShareAndEarn(){
                             </span>
                         </button>
                     </div>
-                    <p className="max-w-md mb-3 text-[12px] lg:text-base xl:text-lg px-7">of the transaction fee whenever someone buys an NFT using your link.</p>
-                    <p className="max-w-md text-[12px] lg:text-base xl:text-lg mb-3 md:mb-7 px-7">Become a part of your favorite artist’s success story. Promote their NFTs and earn referral reward.</p>
+                    <p className="max-w-md mb-3 text-[12px] lg:text-base xl:text-lg px-4">of the transaction fee whenever someone buys an NFT using your link.</p>
+                    <p className="max-w-md text-[12px] lg:text-base xl:text-lg mb-3 md:mb-7 px-4">Become a part of your favorite artist’s success story. Promote their NFTs and earn referral reward.</p>
                     <div className="relative">
                         {/* bg-green bar */}
                         {/* CTA */}
                         <div className="backdrop-blur-[40px] w-full backdrop-brightness-[1.75] p-3 rounded-2xl flex items-center justify-between z-20">
-                            <button className="max-w-[148px] md:max-w-none flex items-center justify-between w-full p-3 text-xs font-medium rounded-md lg:p-4 lg:rounded-lg lg:text-base md:w-max bg-primary-500 hover:bg-primary-400">
+                            <button className="max-w-[168px] md:max-w-none flex items-center justify-between w-full p-3 text-xs font-medium rounded-md lg:p-4 lg:rounded-lg lg:text-base md:w-max bg-primary-500 hover:bg-primary-400">
                                 Start Sharing
                                 <span className="ml-6 text-xs lg:ml-10 lg:text-base material-symbols-outlined">
                                     arrow_right_alt
@@ -34,7 +34,7 @@ export default function ShareAndEarn(){
                             <p className="hidden lg:ml-12 text-[10px] lg:text-xs text-right md:block w-max">You need to sign into Musixverse to start <br/> earning rewards</p>
                         </div>
                         <div className="absolute z-[-1] w-full h-9 bg-primary-600 rounded-xl top-5 md:top-[45%]"></div>
-                        <p className="mt-4 text-xs md:hidden px-7">You need to sign into Musixverse to start <br/> earning rewards</p>
+                        <p className="px-4 mt-4 text-xs md:hidden">You need to sign into Musixverse to start <br/> earning rewards</p>
                     </div>
                 </div>
             </div>

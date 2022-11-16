@@ -14,7 +14,7 @@ export default function GetStartedAsFan(){
                     <Image src={"/assets/homepage/fanCirclePpl.svg"} alt="musicians" priority objectFit="contain" layout="fill"/>
                 </div>
                 <div className="absolute w-full h-full items-center justify-end pt-10 md:pt-0 md:justify-end flex flex-col z-[1]">
-                    <h1 className="font-semibold opacity-[0.7] text-4xl md:text-[3.75rem] xl:text-[4.5rem] leading-[1.5] -mb-5 md:block hidden text-light-200 md:text-[#032C2D] md:mr-auto pl-startAsFan2XlHeading">Get Started as<br/> a Fan</h1>
+                    <h1 className="font-semibold opacity-[0.7] text-5xl md:text-[3rem] xl:text-[3.75rem] leading-[1.5] -mb-5 md:block hidden text-light-200 md:text-[#032C2D] md:mr-auto pl-startAsFan2XlHeading">Get Started as<br/> a Fan</h1>
                     <div className="backdrop-blur-[80px] backdrop-brightness-50 rounded-b-[2.5rem] flex w-full p-9">
                         <h4 className="font-semibold text-3xl md:text-4xl text-[#f2f2f2] mr-auto">Get Started as a Fan</h4>
                     </div>
@@ -56,15 +56,15 @@ export default function GetStartedAsFan(){
                 <div className="flex flex-col space-y-4 leading-none lg:flex-row lg:space-y-0">
                     <h1 className="mr-4 text-4xl font-semibold xl:mr-6 2xl:text-5xl">01</h1>
                     <div className="flex flex-col">
-                        <h2 className="mb-1 text-2xl font-semibold 2xl:mb-3 2xl:text-3xl">Get your crypto wallet ready</h2>
-                        <p className="text-lg md:max-w-[340px]">Check out our guide on how to set up a wallet <a href="https://www.instagram.com/p/CiKtwJChpqV/" target={"_blank"} rel="noreferrer" className="text-primary-500 hover:text-primary-400">here</a></p>
+                        <h2 className="mb-1 text-2xl md:max-w-[340px] font-semibold 2xl:mb-3 2xl:text-3xl">Get your crypto wallet ready</h2>
+                        <p className="text-lg md:max-w-[340px]">Check out our guide on how to set up a wallet <a href="https://medium.com/@musixverse/how-to-set-up-a-crypto-wallet-metamask-477be25c0f5f" target={"_blank"} rel="noreferrer" className="text-primary-500 hover:text-primary-400">here</a></p>
                     </div>
                 </div>
 
                 <div className="flex flex-col space-y-4 leading-none lg:flex-row lg:space-y-0">
                     <h1 className="mr-4 text-4xl font-semibold xl:mr-6 2xl:text-5xl">02</h1>
                     <div className="flex flex-col">
-                        <h2 className="mb-1 text-2xl font-semibold 2xl:mb-3 2xl:text-3xl">Sign up as a Collector</h2>
+                        <h2 className="mb-1 text-2xl md:max-w-[340px] font-semibold 2xl:mb-3 2xl:text-3xl">Sign up as a Collector</h2>
                         <p className="text-lg md:max-w-[340px]"><Link href={"/"} passHref><a target={"_blank"} rel="noreferrer" className="text-primary-500 hover:text-primary-400">Connect Wallet</a></Link> to sign up and provide basic information about yourself.</p>
                     </div>
                 </div>
@@ -72,7 +72,7 @@ export default function GetStartedAsFan(){
                 <div className="flex flex-col space-y-4 leading-none lg:flex-row lg:space-y-0">
                     <h1 className="mr-4 text-4xl font-semibold xl:mr-6 2xl:text-5xl">03</h1>
                     <div className="flex flex-col">
-                        <h2 className="mb-1 text-2xl font-semibold 2xl:mb-3 2xl:text-3xl">Browse and buy NFTs</h2>
+                        <h2 className="mb-1 text-2xl md:max-w-[340px] font-semibold 2xl:mb-3 2xl:text-3xl">Browse and buy NFTs</h2>
                         <p className="text-lg md:max-w-[340px]">Find your favorite artists and collect their NFTs.</p>
                     </div>
                 </div>

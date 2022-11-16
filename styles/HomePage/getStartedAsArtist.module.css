@@ -23,3 +23,10 @@ div.white-circle::before{
     /* height: 316px; */
     filter: blur(7px) brightness(1.05);
 }
+
+@media (max-width: 1280px) {
+  div.white-circle::before{
+    width: 284px;
+    outline-offset: -24px;
+  } 
+}

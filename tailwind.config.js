@@ -28,13 +28,14 @@ module.exports = {
 			padding: {
 				responsive: "clamp(75px, calc(4.6875rem + ((1vw - 10.28px) * 12.3318)), 185px)",
 				settingsNav: "clamp(100px, calc(6.25rem + ((1vw - 10.28px) * 10.3139)), 162px)",
+				startAsFan2XlHeading: "clamp(2rem, -7rem + 12.5vw, 8rem)",
 				// 'responsive':'clamp(100px, calc(6.25rem + ((1vw - 10.24px) * 12.2768)), 210px)',
 			},
 			margin: {
 				responsive: "clamp(75px, calc(4.6875rem + ((1vw - 10.28px) * 12.3318)), 185px)",
 				shareEarn2XlHeading: "clamp(-15rem, -75rem + 62.5vw, 0rem)",
-				shareEarnGuitars:"clamp(-10rem, -45.0000rem + 43.7500vw, -3rem)",
-				startAsArtist2XlHeading: "clamp(-28rem, -140.0000rem + 116.6667vw, 0rem)",
+				shareEarnGuitars:"clamp(-10rem, -45rem + 43.75vw, -3rem)",
+				startAsArtist2XlHeading: "clamp(-28rem, -140rem + 116.7vw, 0rem)",
 				// 'responsive':'clamp(100px, calc(6.25rem + ((1vw - 10.24px) * 12.2768)), 210px)',
 			},
 			colors: {

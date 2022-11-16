@@ -22,7 +22,7 @@ export default function NewHero(){
                 {/* CTAs */}
                 <div className="flex items-center mt-8 space-x-3 lg:space-x-5 xl:mt-16">
                     {/* <Link href={"/mxcatalog/new-releases"} passHref> */}
-                        <button className="bg-[#707070] text-center border-[2px] border-[#707070] text-sm lg:text-base xl:text-lg rounded-3xl px-10 xl:px-14 py-2">Sign up</button>
+                        <button className="bg-primary-600 border-primary-600 dark:bg-[#707070] text-center border-[2px] dark:border-[#707070] text-white dark:text-black text-sm lg:text-base xl:text-lg rounded-3xl px-10 xl:px-14 py-2">Sign up</button>
                     {/* </Link> */}
                     <Link href={"/mxcatalog/new-releases"} passHref>
                         <button className="bg-none text-sm lg:text-base xl:text-lg rounded-3xl text-center px-10 xl:px-14 py-2 border-[2px] border-[#62D801]">M<span className="text-primary-400">x</span> Catalog</button>

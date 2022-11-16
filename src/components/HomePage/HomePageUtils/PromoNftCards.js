@@ -28,7 +28,7 @@ export default function PromoNftCard(){
     const tokenId = 17;
 
     return(
-        <div className="bg-[#2d2d2dfb] rounded-3xl flex flex-col p-4">
+        <div className="bg-light-100 dark:bg-[#2d2d2dfb] rounded-3xl flex flex-col p-4">
             {/* NFT details and CTA */}
             <div className="flex justify-between">
                 {/* Cover art */}
@@ -46,7 +46,7 @@ export default function PromoNftCard(){
                 {/* <button className="self-start bg-[rgba(64,63,63,1)] py-4 px-[18px] rounded-3xl"><i className="text-white fas fa-bell"></i></button> */}
             </div>
             {/* Need Conditional Rendering of this part */}
-            <div className="backdrop-blur-[40px] backdrop-brightness-125 bg-[rgba(56,55,55,1)] p-2 lg:p-4 mt-4 xl:mt-7 rounded-lg lg:rounded-2xl drop-timer flex flex-col">
+            <div className="backdrop-blur-[40px] backdrop-brightness-125 bg-light-300 dark:bg-[rgba(56,55,55,1)] p-2 lg:p-4 mt-4 xl:mt-7 rounded-lg lg:rounded-2xl drop-timer flex flex-col">
             {/* <div className="bg-[rgba(56,55,55,1)] p-4 mt-7 rounded-2xl drop-timer flex flex-col"> */}
                 <p className="text-[8px] lg:text-sm font-medium">New Drop Coming soon</p>
                 <div className="flex justify-between w-full">

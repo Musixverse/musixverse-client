@@ -43,19 +43,19 @@ export default function PromoCountdown(){
     return(
         <>
             <div className="flex mt-2 space-x-2">
-                <div className="w-[40px] lg:w-[54px] rounded-lg h-[38px] lg:h-[52px] bg-[rgb(77,76,77)] flex flex-col items-center justify-center">
+                <div className="w-[40px] lg:w-[54px] rounded-lg h-[38px] lg:h-[52px] bg-light-100 dark:bg-[rgb(77,76,77)] flex flex-col items-center justify-center">
                     <h6 className="text-xs font-semibold lg:text-lg xl:text-xl 2xl:text-2xl">{timeLeft.days < 10? "0"+timeLeft.days:timeLeft.days}</h6>
                     <p className="font-medium text-[8px]">{timeLeft.days > 1? "Days":"Day"}</p>
                 </div>
-                <div className="w-[40px] lg:w-[54px] h-[38px] lg:h-[52px] rounded-lg bg-[rgb(77,76,77)] flex flex-col items-center justify-center">
+                <div className="w-[40px] lg:w-[54px] h-[38px] lg:h-[52px] rounded-lg bg-light-100 dark:bg-[rgb(77,76,77)] flex flex-col items-center justify-center">
                     <h6 className="text-xs font-semibold lg:text-lg xl:text-xl 2xl:text-2xl">{timeLeft.hours < 10? "0"+timeLeft.hours:timeLeft.hours}</h6>
                     <p className="font-medium text-[8px]">{timeLeft.hours > 1? "Hours":"Hour"}</p>
                 </div>
-                <div className="w-[40px] lg:w-[54px] h-[38px] lg:h-[52px] rounded-lg bg-[rgb(77,76,77)] flex flex-col items-center justify-center">
+                <div className="w-[40px] lg:w-[54px] h-[38px] lg:h-[52px] rounded-lg bg-light-100 dark:bg-[rgb(77,76,77)] flex flex-col items-center justify-center">
                     <h6 className="text-xs font-semibold lg:text-lg xl:text-xl 2xl:text-2xl">{timeLeft.minutes < 10? "0"+timeLeft.minutes:timeLeft.minutes}</h6>
                     <p className="font-medium text-[8px]">{timeLeft.minutes > 1? "Mins":"Min"}</p>
                 </div>
-                <div className="w-[40px] lg:w-[54px] h-[38px] lg:h-[52px] rounded-lg bg-[rgb(77,76,77)] flex flex-col items-center justify-center">
+                <div className="w-[40px] lg:w-[54px] h-[38px] lg:h-[52px] rounded-lg bg-light-100 dark:bg-[rgb(77,76,77)] flex flex-col items-center justify-center">
                     <h6 className="text-xs font-semibold lg:text-lg xl:text-xl 2xl:text-2xl">{timeLeft.seconds < 10? "0"+timeLeft.seconds:timeLeft.seconds}</h6>
                     <p className="font-medium text-[8px]">{timeLeft.seconds > 1? "Secs":"Sec"}</p>
                 </div>

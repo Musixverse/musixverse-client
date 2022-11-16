@@ -52,7 +52,7 @@ export default function GetStartedAsFan(){
                     </div>
                 </div>
             </div> */}
-            <div className="bg-[#202020] rounded-[1.75rem] md:space-x-4 2xl:rounded-[2.5rem] w-full mt-3 p-8 xl:p-12 2xl:p-14 flex flex-col md:flex-row space-y-14 md:space-y-0 items-start justify-between">
+            <div className="bg-light-300 dark:bg-[#202020] rounded-[1.75rem] md:space-x-4 2xl:rounded-[2.5rem] w-full mt-3 p-8 xl:p-12 2xl:p-14 flex flex-col md:flex-row space-y-14 md:space-y-0 items-start justify-between">
                 <div className="flex flex-col space-y-4 leading-none lg:flex-row lg:space-y-0">
                     <h1 className="mr-4 text-4xl font-semibold xl:mr-6 2xl:text-5xl">01</h1>
                     <div className="flex flex-col">

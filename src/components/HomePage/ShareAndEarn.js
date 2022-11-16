@@ -1,15 +1,19 @@
 import Image from "next/image";
+import { useTheme } from "next-themes";
 import instruments from "../../../public/assets/homepage/shareEarnInstrument.png"
+import instruments_w from "../../../public/assets/homepage/shareEarnInstrument_w.png"
 
 export default function ShareAndEarn(){
+    const { theme } = useTheme();
+
     return(
-        <div className="bg-[url('/assets/homepage/shareEarnBG.png')] relative flex items-center md:pt-28 bg-no-repeat bg-cover bg-center w-full overflow-x-hidden">
+        <div className="bg-[url('/assets/homepage/shareEarnBG_w.png')] dark:bg-[url('/assets/homepage/shareEarnBG.png')] relative flex items-center md:pt-28 bg-no-repeat bg-cover bg-center w-full overflow-x-hidden">
             <h1 className="hidden md:block text-[#3A3A3A] font-semibold text-7xl lg:text-8xl absolute leading-none z-[1] -mt-80 lg:mt-shareEarn2XlHeading">Share & <br/> Earn 10%</h1>
             <div className="flex flex-col-reverse md:flex-row items-center z-[2] md:ml-auto md:w-max w-full">
                 <div className="relative w-[428px] lg:w-[476px] h-[317px] xl:w-[688px] xl:h-[462px] 2xl:w-[754px] 2xl:h-[526px]">
-                    <Image src={instruments} objectFit="contain" layout="fill" priority alt="guitars"/>    
+                    <Image src={theme === "dark" ? instruments : instruments_w} objectFit="contain" layout="fill" priority alt="guitars"/>    
                 </div>
-                <div className="md:-ml-24 xl:ml-shareEarnGuitars 2xl:-ml-12 w-full md:w-fit md:h-fit flex flex-col backdrop-blur-[40px] rounded-3xl p-3 xl:p-5 bg-[#282828]">
+                <div className="md:-ml-24 xl:ml-shareEarnGuitars 2xl:-ml-12 w-full md:w-fit md:h-fit flex flex-col backdrop-blur-[40px] rounded-3xl p-3 xl:p-5 bg-light-300 dark:bg-[#282828]">
                     <div className="flex justify-between w-full">
                         <h3 className="px-4 pt-4 mb-3 text-2xl font-semibold lg:text-3xl xl:text-4xl">Share & Earn 10%</h3>
                         <button className="backdrop-blur-[40px] backdrop-brightness-[1.75] p-3 flex items-center justify-center self-start rounded-xl">

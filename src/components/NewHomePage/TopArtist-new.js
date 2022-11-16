@@ -1,12 +1,15 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useTheme } from "next-themes";
 import cover_sarthak from "../../../public/assets/new-homepage/cover_sarthak.png";
 import cover_m from "../../../public/assets/new-homepage/cover_m.png";
-import bg_design from "../../../public/assets/new-homepage/bg_design.png";
 import SwiperArtist from "./utils/SwiperArtist";
+import swiperBG_b from "../../../public/assets/homepage/swiperBG_b.png";
+import swiperBG_w from "../../../public/assets/homepage/swiperBG_w.png";
 
 export default function TopArtists() {
+	  const { theme } = useTheme();
 	const [bg, setBg] = useState([cover_sarthak, cover_m]);
 
 	return (
@@ -46,7 +49,7 @@ export default function TopArtists() {
 
 			{/* Bottom image section */}
 			<div className="absolute hidden w-full md:block top-3/4">
-				<Image src={bg_design} alt="Top Artist section background design" layout="responsive" priority />
+				<Image src={theme === 'dark'? swiperBG_b:swiperBG_w} alt="Top Artist section background design" layout="responsive" priority />
 			</div>
 		</div>
 	);

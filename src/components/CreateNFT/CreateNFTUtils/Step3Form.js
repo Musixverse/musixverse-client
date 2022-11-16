@@ -64,6 +64,7 @@ const Step3Form = ({ unlockableContent, setUnlockableContent }) => {
 			filesInput.files = new DataTransfer().files;
 			filesInput.value = "";
 
+			setImageFilesChosenText("No file chosen");
 			setUnlockableContent((prevState) => ({
 				...prevState,
 				exclusiveImages: [],
@@ -73,6 +74,7 @@ const Step3Form = ({ unlockableContent, setUnlockableContent }) => {
 				message: "Please select fewer than 10 images",
 				showErrorBox: true,
 			});
+			return;
 		}
 
 		// VALIDATE OR CHECK IF ANY FILE IS SELECTED
@@ -89,12 +91,20 @@ const Step3Form = ({ unlockableContent, setUnlockableContent }) => {
 					_exclusiveImages.push({ file: currentFile, ipfsUrl: ipfsUrl });
 				} catch (error) {
 					console.error(error);
-					if (error.message == "request entity too large") {
+					setLoading(false);
+					if (error.message && error.message == "request entity too large") {
 						setError({
 							title: "File too large",
 							message: "Please select files with smaller size",
 							showErrorBox: true,
 						});
+					} else {
+						setError((prevState) => ({
+							...prevState,
+							title: "Oops! Something went wrong.",
+							message: "Please try again later.",
+							showErrorBox: true,
+						}));
 					}
 					return;
 				}
@@ -129,6 +139,7 @@ const Step3Form = ({ unlockableContent, setUnlockableContent }) => {
 			filesInput.files = new DataTransfer().files;
 			filesInput.value = "";
 
+			setAudioFilesChosenText("No file chosen");
 			setUnlockableContent((prevState) => ({
 				...prevState,
 				exclusiveAudios: [],
@@ -138,6 +149,7 @@ const Step3Form = ({ unlockableContent, setUnlockableContent }) => {
 				message: "Please select fewer than 10 files",
 				showErrorBox: true,
 			});
+			return;
 		}
 
 		// VALIDATE OR CHECK IF ANY FILE IS SELECTED
@@ -154,12 +166,20 @@ const Step3Form = ({ unlockableContent, setUnlockableContent }) => {
 					_exclusiveAudios.push({ file: currentFile, ipfsUrl: ipfsUrl });
 				} catch (error) {
 					console.error(error);
-					if (error.message == "request entity too large") {
+					setLoading(false);
+					if (error.message && error.message == "request entity too large") {
 						setError({
 							title: "File too large",
 							message: "Please select files with smaller size",
 							showErrorBox: true,
 						});
+					} else {
+						setError((prevState) => ({
+							...prevState,
+							title: "Oops! Something went wrong.",
+							message: "Please try again later.",
+							showErrorBox: true,
+						}));
 					}
 					return;
 				}
@@ -194,6 +214,7 @@ const Step3Form = ({ unlockableContent, setUnlockableContent }) => {
 			filesInput.files = new DataTransfer().files;
 			filesInput.value = "";
 
+			setVideoFilesChosenText("No file chosen");
 			setUnlockableContent((prevState) => ({
 				...prevState,
 				exclusiveVideos: [],
@@ -203,6 +224,7 @@ const Step3Form = ({ unlockableContent, setUnlockableContent }) => {
 				message: "Please select fewer than 10 files",
 				showErrorBox: true,
 			});
+			return;
 		}
 
 		// VALIDATE OR CHECK IF ANY FILE IS SELECTED
@@ -219,12 +241,20 @@ const Step3Form = ({ unlockableContent, setUnlockableContent }) => {
 					_exclusiveVideos.push({ file: currentFile, ipfsUrl: ipfsUrl });
 				} catch (error) {
 					console.error(error);
-					if (error.message == "request entity too large") {
+					setLoading(false);
+					if (error.message && error.message == "request entity too large") {
 						setError({
 							title: "File too large",
 							message: "Please select files with smaller size",
 							showErrorBox: true,
 						});
+					} else {
+						setError((prevState) => ({
+							...prevState,
+							title: "Oops! Something went wrong.",
+							message: "Please try again later.",
+							showErrorBox: true,
+						}));
 					}
 					return;
 				}
@@ -273,9 +303,8 @@ const Step3Form = ({ unlockableContent, setUnlockableContent }) => {
 
 			<div className="flex flex-col space-y-20 lg:w-full lg:space-x-10 lg:space-y-0 xl:space-x-20 lg:flex-row">
 				<div className="font-semibold lg:w-1/2 font-secondary">
-					<p className="text-sm">
+					{/* <p className="text-sm">
 						ABOUT THE UNLOCKABLE CONTENT
-						{/* <RequiredAsterisk /> */}
 					</p>
 					<textarea
 						value={unlockableContent.about ?? ""}
@@ -294,9 +323,9 @@ const Step3Form = ({ unlockableContent, setUnlockableContent }) => {
 					<p className="text-[#777777] font-normal text-xs">
 						This should be a pitch about why fans must purchase your music NFT and what unlockable content will they get access to after making the
 						purchase
-					</p>
+					</p> */}
 
-					<p className="text-sm mt-8">MESSAGE FROM THE ARTIST</p>
+					<p className="text-sm">MESSAGE FROM THE ARTIST</p>
 					<textarea
 						value={unlockableContent.secretMessage ?? ""}
 						onChange={(e) => {
@@ -309,7 +338,7 @@ const Step3Form = ({ unlockableContent, setUnlockableContent }) => {
 							"dark:bg-[#323232] dark:focus:bg-[#1a1a1a] dark:border-[#323232] mt-1 w-full p-2 border-[2px] border-[#777777] focus:border-[2px] focus:border-primary-500 dark:focus:border-primary-500 rounded focus:outline-none focus:shadow-none dark:focus:text-primary-500 font-normal resize-none"
 						}
 						name="msg"
-						rows="6"
+						rows="12"
 					></textarea>
 					<p className="text-[#777777] font-normal text-xs">
 						A secret message that you&apos;d like to share with the NFT buyer. This will only be shown to fans who purchase your music NFT. You can

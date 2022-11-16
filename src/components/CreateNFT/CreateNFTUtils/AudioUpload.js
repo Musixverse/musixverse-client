@@ -39,12 +39,20 @@ export default function AudioUpload({ audioFileUrl, setAudioFileUrl, setAudioFil
 			try {
 				await uploadFileToIPFS(Moralis, base64Audio, "audio").then((url) => setAudioFileUrl(url));
 			} catch (err) {
-				setError((prevState) => ({
-					...prevState,
-					title: "Oops! Something went wrong.",
-					message: "Please try again later.",
-					showErrorBox: true,
-				}));
+				if (err.message && err.message == "request entity too large") {
+					setError({
+						title: "File too large",
+						message: "Please select a file with smaller size",
+						showErrorBox: true,
+					});
+				} else {
+					setError((prevState) => ({
+						...prevState,
+						title: "Oops! Something went wrong.",
+						message: "Please try again later.",
+						showErrorBox: true,
+					}));
+				}
 			}
 		}
 		setLoading(false);

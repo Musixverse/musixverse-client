@@ -23,9 +23,7 @@ export default function HowToCreate() {
 			<div className="w-full">
 				<Image src={create_nav} alt="Create tab on Navbar" priority layout="responsive"></Image>
 			</div>
-			<p>
-				You&apos;ll be taken to the NFT item creation page, first agree to the terms and conditions and then follow these steps to create your own NFT.
-			</p>
+			<p>You&apos;ll be taken to the NFT item creation page, first agree to the terms of services and then follow these steps to create your own NFT.</p>
 			<div className="w-full">
 				<Image src={create_page} alt="NFT creation page 1" priority layout="responsive"></Image>
 			</div>

@@ -11,7 +11,8 @@ import amazonB from "../../../public/assets/logos/amazon_logo_b.svg";
 import amazonW from "../../../public/assets/logos/amazon_logo_w.svg";
 import youtubeB from "../../../public/assets/logos/youtube_logo_b.svg";
 import youtubeW from "../../../public/assets/logos/youtube_logo_w.svg";
-import LyricsModal from "./TrackInfoUtils/LyricsModal";
+import dynamic from "next/dynamic";
+const LyricsModal = dynamic(() => import("./TrackInfoUtils/LyricsModal"));
 
 export default function TrackDetails({ tokenId, metadata }) {
 	const { theme } = useTheme();
@@ -26,7 +27,16 @@ export default function TrackDetails({ tokenId, metadata }) {
 		date.getFullYear().toString() +
 		", " +
 		date.toLocaleTimeString() +
-		" IST";
+		" " +
+		date
+			.toLocaleDateString("en-US", {
+				day: "2-digit",
+				timeZoneName: "long",
+			})
+			.substring(4)
+			.match(/\b(\w)/g)
+			.join("");
+
 	var time_in_min = Math.round(parseFloat(metadata.duration) / 60).toString() + " min";
 	var time_in_sec = Math.round(parseFloat(metadata.duration) % 60).toString() + " sec";
 	var time = time_in_min + " " + time_in_sec;

@@ -22,7 +22,7 @@ export default function LockAccount() {
 				<p className="ml-2 font-secondary align-top text-[15px]">
 					Confirm that you agree to all terms, conditions, and policies of Musixverse.{" "}
 					<a href="#" className="font-medium text-primary-500">
-						Terms and conditions.
+						terms of services.
 					</a>
 				</p>
 			</div>

@@ -145,7 +145,7 @@ const Footer = () => {
 							<Link href="/privacy-policy">Privacy Policy</Link>
 						</li>
 						<li className="text-xs text-neutral-400 list-none">
-							<Link href="/terms-and-conditions">Terms of Use</Link>
+							<Link href="/terms-of-services">Terms of Services</Link>
 						</li>
 						<li className="text-xs text-neutral-400 list-none">
 							<Link href="/">Trademark</Link>

@@ -92,18 +92,18 @@ const CreateNFTIntro = ({ nextStep, chosenProfileOrBand, nftDraftMetadata, nftDr
 							</p>
 
 							<div className="flex items-center space-x-4 font-secondary font-bold mt-20">
-								<input type="checkbox" name="Terms and Conditions" id="T&C" className="cursor-pointer" required />
+								<input type="checkbox" name="Terms of Services" id="T&C" className="cursor-pointer" required />
 								<label htmlFor="T&C" className="cursor-pointer">
 									I have read and agree to the{" "}
-									<Link href="/terms-and-conditions" passHref>
+									<Link href="/terms-of-services" passHref>
 										<a target="_blank" rel="noopener noreferrer" className="hover:text-primary-500">
-											Terms & Conditions
+											Terms of Services
 										</a>
 									</Link>
 								</label>
 							</div>
 							<p className="font-secondary text-sm font-medium mt-4 max-w-[340px] mb-6">
-								Confirm that you have read and you agree to our terms and conditions for creating this NFT.
+								Confirm that you have read and you agree to our terms of services for creating this NFT.
 							</p>
 
 							<button

@@ -27,7 +27,16 @@ export default function TrackDetails({ tokenId, metadata }) {
 		date.getFullYear().toString() +
 		", " +
 		date.toLocaleTimeString() +
-		" IST";
+		" " +
+		date
+			.toLocaleDateString("en-US", {
+				day: "2-digit",
+				timeZoneName: "long",
+			})
+			.substring(4)
+			.match(/\b(\w)/g)
+			.join("");
+
 	var time_in_min = Math.round(parseFloat(metadata.duration) / 60).toString() + " min";
 	var time_in_sec = Math.round(parseFloat(metadata.duration) % 60).toString() + " sec";
 	var time = time_in_min + " " + time_in_sec;

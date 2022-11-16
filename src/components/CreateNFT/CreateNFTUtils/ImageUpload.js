@@ -28,12 +28,20 @@ export default function ImageUpload({ coverArtUrl, setCoverArtUrl, setCoverArtMi
 				try {
 					await uploadFileToIPFS(Moralis, croppedImage, "cover-art").then((url) => setCoverArtUrl(url));
 				} catch (err) {
-					setError((prevState) => ({
-						...prevState,
-						title: "Oops! Something went wrong.",
-						message: "Please try again later.",
-						showErrorBox: true,
-					}));
+					if (err.message && err.message == "request entity too large") {
+						setError({
+							title: "File too large",
+							message: "Please select a file with smaller size",
+							showErrorBox: true,
+						});
+					} else {
+						setError((prevState) => ({
+							...prevState,
+							title: "Oops! Something went wrong.",
+							message: "Please try again later.",
+							showErrorBox: true,
+						}));
+					}
 				}
 				setLoading(false);
 			}

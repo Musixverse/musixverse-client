@@ -74,7 +74,8 @@ const CreateNFT = ({ userInfo }) => {
 	// Unlockable Content
 	const [unlockableContent, setUnlockableContent] = useState({
 		about: "",
-		secretMessage: "",
+		secretMessage:
+			"I pour my heart out into creating this song. I hope you enjoy the song every bit as much as I did while creating it. Thank you for all your support.",
 		exclusiveImages: [],
 		exclusiveAudios: [],
 		exclusiveVideos: [],
@@ -137,7 +138,8 @@ const CreateNFT = ({ userInfo }) => {
 			setLinks({ spotifyLink: "", appleMusicLink: "", amazonMusicLink: "", youtubeMusicLink: "", other: "" });
 			setUnlockableContent({
 				about: "",
-				secretMessage: "",
+				secretMessage:
+					"I pour my heart out into creating this song. I hope you enjoy the song every bit as much as I did while creating it. Thank you for all your support.",
 				exclusiveImages: [],
 				exclusiveAudios: [],
 				exclusiveVideos: [],
@@ -422,7 +424,7 @@ const CreateNFT = ({ userInfo }) => {
 				contractAddress: process.env.NEXT_PUBLIC_MXV_DIAMOND_ADDRESS,
 			},
 			unlockableContent: {
-				about: unlockableContent.about,
+				about: "Your NFT comes with exclusive perks that are only available to you, the NFT owner, as long as you continue to own the NFT. The artist appreciates your support and has put together self-curated items exclusively for you. Buy Now!",
 				secretMessage: unlockableContent.secretMessage.length > 0 ? true : false,
 				exclusiveImages: unlockableContent.exclusiveImages.length,
 				exclusiveAudios: unlockableContent.exclusiveAudios.length,
@@ -471,7 +473,7 @@ const CreateNFT = ({ userInfo }) => {
 		await uploadFileToIPFS(Moralis, btoa(unescape(encodeURIComponent(JSON.stringify(nftMetadata)))), "metadata").then((url) => (metadataUrl = url));
 
 		const unlockableContentData = {
-			about: unlockableContent.about,
+			about: "Your NFT comes with exclusive perks that are only available to you, the NFT owner, as long as you continue to own the NFT. The artist appreciates your support and has put together self-curated items exclusively for you. Buy Now!",
 			secretMessage: unlockableContent.secretMessage,
 			exclusiveImages: unlockableContent.exclusiveImages,
 			exclusiveAudios: unlockableContent.exclusiveAudios,

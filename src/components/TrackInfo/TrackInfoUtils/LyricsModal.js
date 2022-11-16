@@ -5,13 +5,15 @@ const LyricsModal = ({ isOpen, setOpen, lyricsUrl }) => {
 	const [lyrics, setLyrics] = useState("");
 
 	useEffect(() => {
-		const fetchLyrics = async () => {
-			const res = await fetch(lyricsUrl.replace("ipfs://", process.env.NEXT_PUBLIC_IPFS_NODE_URL));
-			const data = await res.text();
-			setLyrics(data);
-			return data;
-		};
-		fetchLyrics();
+		if (lyricsUrl) {
+			const fetchLyrics = async () => {
+				const res = await fetch(lyricsUrl.replace("ipfs://", process.env.NEXT_PUBLIC_IPFS_NODE_URL));
+				const data = await res.text();
+				setLyrics(data);
+				return data;
+			};
+			fetchLyrics();
+		}
 	}, [lyricsUrl]);
 
 	return (

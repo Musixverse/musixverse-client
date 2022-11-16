@@ -2,7 +2,7 @@ import Head from "next/head";
 import { meta_description } from "../../config/constants";
 import TermsOfUse from "../../components/TermsOfUse/TermsOfUse";
 
-const TermsAndConditions = ({}) => {
+const TermsOfServices = ({}) => {
 	return (
 		<>
 			<Head>
@@ -20,4 +20,4 @@ const TermsAndConditions = ({}) => {
 	);
 };
 
-export default TermsAndConditions;
+export default TermsOfServices;

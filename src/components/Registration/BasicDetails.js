@@ -179,13 +179,13 @@ export default function BasicDetails() {
 									I agree with Musixverse&apos;s&nbsp;
 									<Link href="https://drive.google.com/file/d/1U6G3E0oUMo4vSrnhmlc8MiquwY8IrhwH/view?usp=sharing" passHref={true}>
 										<a target="_blank" rel="noopener noreferrer" className="cursor-pointer hover:text-primary-600">
-											Terms and Conditions
+											Terms of Services
 										</a>
 									</Link>
 								</label>
 							</div>
 							<p className="text-[13px] font-secondary lg:max-w-[468px] max-w-none">
-								By checking the box above, you agree with Musixverse&apos;s Terms and Conditions and will abide by them.
+								By checking the box above, you agree with Musixverse&apos;s Terms of Services and will abide by them.
 							</p>
 						</div>
 						<Button>Submit</Button>

@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function ArtistCard({ instagramProfileURL, imageURL, name, description }) {
 	return (
-		<div className="relative z-10">
+		<div className="relative z-10 flex justify-center">
 			<Link href={instagramProfileURL ?? ""} passHref>
 				<a target="_blank" href="noopener noreferrer" className="group flex flex-col rounded-lg w-56 h-80 cursor-pointer">
 					<div className="flex w-full h-full">

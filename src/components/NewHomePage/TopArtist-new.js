@@ -36,11 +36,11 @@ export default function TopArtists() {
 						</span>
 					</div>
 				</div>
-				<div className="hidden w-full h-full duration-500 ease-out md:block hover:scale-110">
-					<Image src={bg[0]} className="hidden transition duration-500" alt="Cover art for Top Artist" layout="responsive" priority />
+				<div className="hidden w-full h-full duration-500 transition-all ease-out md:block hover:scale-110">
+					<Image src={bg[0]} alt="Cover art for Top Artist" layout="responsive" priority />
 				</div>
 				<div className="w-full h-full duration-500 ease-out md:hidden hover:scale-110">
-					<Image src={bg[1]} className="hidden transition duration-500" alt="Cover art for Top Artist" layout="responsive" priority />
+					<Image src={bg[1]} alt="Cover art for Top Artist" layout="responsive" priority />
 				</div>
 			</div>
 

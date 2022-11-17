@@ -48,6 +48,7 @@ export default function SwiperArtist({ setCurrBg }) {
 				autoWidth={false}
 				enabled={true}
 				cssMode={true}
+				centerInsufficientSlides={true}
 				navigation={true}
 				mousewheel={true}
 				keyboard={true}

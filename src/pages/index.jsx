@@ -7,6 +7,10 @@ import Section4 from "../components/HomePage/HomePage_section5";
 import Section2New from "../components/HomePage/HomePageSection2";
 import HeroSection from "../components/HomePage/HeroSection";
 import TopArtists from "../components/NewHomePage/TopArtist-new";
+import NewHero from "../components/HomePage/NewHero";
+import ShareAndEarn from "../components/HomePage/ShareAndEarn";
+import GetStartedAsArtist from "../components/HomePage/GetStartedAsArtist";
+import GetStartedAsFan from "../components/HomePage/GetStartedAsFan";
 
 function Home() {
 	return (
@@ -18,14 +22,18 @@ function Home() {
 
 			<div className="relative flex flex-col items-center justify-center bg-light-200 dark:bg-dark-800">
 				{/* <Banner /> */}
-				<HeroSection />
+				{/* <HeroSection /> */}
 				<div className="flex flex-col w-full max-w-[1920px] px-6 md:px-8 lg:px-16 xl:px-20 2xl:px-36">
+					<NewHero/>
 					<TopArtists />
-					<Section2New />
+					<ShareAndEarn/>
+					<GetStartedAsArtist/>
+					<GetStartedAsFan/>
+					{/* <Section2New />
 					<Section2 />
-					<Section3 />
+					<Section3 /> */}
 				</div>
-				<Section4 />
+				{/* <Section4 /> */}
 			</div>
 		</>
 	);

@@ -88,7 +88,9 @@ export default function NewAudioPlayer() {
 	const trackName = currSongTraits.songName;
 	const singer = currSongTraits.artistName;
 	const imgSrc = currSongTraits.nftCover;
-	const nftPrice = Moralis.Units.FromWei(currSongTraits.price? currSongTraits.price:0);
+	let nftPrice = undefined;
+	if(currSongTraits.price)
+		nftPrice = Moralis.Units.FromWei(currSongTraits.price);
 	const isArtistVerified = currSongTraits.isArtistVerified;
 	const audioSrc = currSongTraits.audioURL;
 	const tokenId = currSongTraits.tokenId;
@@ -149,7 +151,6 @@ export default function NewAudioPlayer() {
 	const nextSong = () => {
 		// Or maybe make the setUpdate queue true and get more songs
 		let newCurrIdx = audioPlayerProps.currentlyPlayingIdx+1;
-		debugger
 		if (audioPlayerProps.currentlyPlayingIdx === audioPlayerProps.queue.length - 1) 
 			newCurrIdx = 0;
 		if(newCurrIdx !== audioPlayerProps.currentlyPlayingIdx){
@@ -216,8 +217,8 @@ export default function NewAudioPlayer() {
 						{/* Price of the nft */}
 						<div className="flex-col hidden mt-1 group-hover:flex">
 							<div className="flex items-center justify-center font-semibold">
-								<Image src={"/assets/matic-logo.svg"} width={16} height={16} alt="matic logo" />
-								<span className="ml-1 sm:text-lg">{nftPrice}</span>
+								{nftPrice && <Image src={"/assets/matic-logo.svg"} width={16} height={16} alt="matic logo" />}
+								{nftPrice && <span className="ml-1 sm:text-lg">{nftPrice}</span>}
 								<Link href={redirectLink} passHref>
 									<button className="px-4 py-1 ml-4 text-xs rounded-full bg-primary-500 hover:bg-primary-600">View Track</button>
 								</Link>

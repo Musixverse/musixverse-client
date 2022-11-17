@@ -87,7 +87,7 @@ export const General_Platform_Features = [
 	},
 	{
 		heading: "NFT Draft",
-		body: "Creating an NFT on Musixverse is a smooth process, but still if you want to save the NFT creation progres, you can save the drafts",
+		body: "Creating an NFT on Musixverse is a smooth process, but still if you want to save the NFT creation progress,  you can save it as drafts.",
 		content_id: "collapseSix",
 	},
 	{

@@ -148,7 +148,7 @@ const Footer = () => {
 							<Link href="/terms-of-services">Terms of Services</Link>
 						</li>
 						<li className="text-xs text-neutral-400 list-none">
-							<Link href="/">Trademark</Link>
+							<Link href="https://medium.com/@musixverse">Blogs</Link>
 						</li>
 						<li className="text-xs text-neutral-400 list-none">
 							<Link href="/contact-us">Contact Us</Link>
@@ -159,7 +159,7 @@ const Footer = () => {
 					</div>
 				</div>
 				<p className="font-primary text-xs max-w-sm text-center sm:text-left mx-auto sm:mx-0">
-					©2022 All Rights Reserved. Musixverse logo is a registered trademark of Musixverse Technologies Pvt. Ltd.
+					©2022 All Rights Reserved.
 				</p>
 			</div>
 		</div>

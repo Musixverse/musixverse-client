@@ -5,7 +5,6 @@ import uploadFileToIPFS from "../../../utils/image-crop/uploadFileToIPFS";
 import uploadMusic from "../../../../public/assets/create-nft/upload-music.svg";
 import LoadingContext from "../../../../store/loading-context";
 import StatusContext from "../../../../store/status-context";
-import { fileToBase64 } from "../../../utils/FileToBase64";
 
 export default function AudioUpload({ audioFileUrl, setAudioFileUrl, setAudioFileDuration, setAudioFileMimeType }) {
 	const { Moralis } = useMoralis();
@@ -35,9 +34,12 @@ export default function AudioUpload({ audioFileUrl, setAudioFileUrl, setAudioFil
 			};
 			reader.readAsDataURL(fileToUpload);
 
-			const base64Audio = await fileToBase64(fileToUpload);
+			const formData = new FormData();
+			formData.append("ethAddress", Moralis.User.current().attributes.ethAddress);
+			formData.append("fileType", "audio");
+			formData.append("file", event.target.files[0]);
 			try {
-				await uploadFileToIPFS(Moralis, base64Audio, "audio").then((url) => setAudioFileUrl(url));
+				await uploadFileToIPFS(formData).then((url) => setAudioFileUrl(url));
 			} catch (err) {
 				if (err.message && err.message == "request entity too large") {
 					setError({

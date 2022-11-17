@@ -44,7 +44,7 @@ export default function CtaButtons({ currentOwnerAddress, tokenId, trackId, pric
 	return (
 		<>
 			<div className="bg-light-100 w-full rounded-lg p-2 flex justify-between items-center dark:bg-dark-800 ">
-				<div>
+				<div className="flex">
 					{user && user.attributes.ethAddress == currentOwnerAddress && activity.tokenActivity ? (
 						<>
 							<button
@@ -71,7 +71,9 @@ export default function CtaButtons({ currentOwnerAddress, tokenId, trackId, pric
 					) : onSale || onSale === null ? (
 						<PurchaseButton tokenId={tokenId} trackId={trackId} price={price} />
 					) : (
-						<span className="text-sm ml-4">This NFT is currently not on the marketplace for sale</span>
+						<span className="text-sm sm:ml-4">
+							This NFT is currently not on the marketplace for sale. Other copies of this NFT (if any) may be available for sale.
+						</span>
 					)}
 				</div>
 

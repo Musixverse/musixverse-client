@@ -172,6 +172,7 @@ export default function TrackInfo({
 						<PurchaseInfo
 							trackId={trackId}
 							tokenId={tokenId}
+							unlockTimestamp={parseInt(metadata.unlockTimestamp)}
 							resaleRoyaltyPercentage={metadata.resaleRoyaltyPercent}
 							currentOwner={currentOwner}
 							price={price}

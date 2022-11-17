@@ -6,7 +6,6 @@ import StatusContext from "../../../../store/status-context";
 import LoadingContext from "../../../../store/loading-context";
 import uploadFileToIPFS from "../../../utils/image-crop/uploadFileToIPFS";
 import { bytesToMegaBytes } from "../../../utils/Convert";
-import { fileToBase64 } from "../../../utils/FileToBase64";
 
 const Step3Form = ({ unlockableContent, setUnlockableContent }) => {
 	const { Moralis } = useMoralis();
@@ -84,8 +83,12 @@ const Step3Form = ({ unlockableContent, setUnlockableContent }) => {
 			const _exclusiveImages = [];
 			for (let currentFile of filesInput.files) {
 				try {
-					const base64File = await fileToBase64(currentFile);
-					const ipfsUrl = await uploadFileToIPFS(Moralis, base64File, "exclusive-image").then((url) => {
+					const formData = new FormData();
+					formData.append("ethAddress", Moralis.User.current().attributes.ethAddress);
+					formData.append("fileType", "exclusive-image");
+					formData.append("file", currentFile);
+
+					const ipfsUrl = await uploadFileToIPFS(formData).then((url) => {
 						return url;
 					});
 					_exclusiveImages.push({ file: currentFile, ipfsUrl: ipfsUrl });
@@ -159,8 +162,12 @@ const Step3Form = ({ unlockableContent, setUnlockableContent }) => {
 			const _exclusiveAudios = [];
 			for (let currentFile of filesInput.files) {
 				try {
-					const base64File = await fileToBase64(currentFile);
-					const ipfsUrl = await uploadFileToIPFS(Moralis, base64File, "exclusive-audio").then((url) => {
+					const formData = new FormData();
+					formData.append("ethAddress", Moralis.User.current().attributes.ethAddress);
+					formData.append("fileType", "exclusive-audio");
+					formData.append("file", currentFile);
+
+					const ipfsUrl = await uploadFileToIPFS(formData).then((url) => {
 						return url;
 					});
 					_exclusiveAudios.push({ file: currentFile, ipfsUrl: ipfsUrl });
@@ -234,8 +241,12 @@ const Step3Form = ({ unlockableContent, setUnlockableContent }) => {
 			const _exclusiveVideos = [];
 			for (let currentFile of filesInput.files) {
 				try {
-					const base64File = await fileToBase64(currentFile);
-					const ipfsUrl = await uploadFileToIPFS(Moralis, base64File, "exclusive-video").then((url) => {
+					const formData = new FormData();
+					formData.append("ethAddress", Moralis.User.current().attributes.ethAddress);
+					formData.append("fileType", "exclusive-video");
+					formData.append("file", currentFile);
+
+					const ipfsUrl = await uploadFileToIPFS(formData).then((url) => {
 						return url;
 					});
 					_exclusiveVideos.push({ file: currentFile, ipfsUrl: ipfsUrl });

@@ -1,7 +1,7 @@
 import { useState, useRef, useContext, useEffect } from "react";
 import { useMoralis } from "react-moralis";
 import CustomButton from "../../../layout/CustomButton";
-import uploadFileToIPFS from "../../../utils/image-crop/uploadFileToIPFS";
+import uploadBase64ToIPFS from "../../../utils/image-crop/uploadBase64ToIPFS";
 import LoadingContext from "../../../../store/loading-context";
 import StatusContext from "../../../../store/status-context";
 import CropImageModal from "../../CreateNFT/CreateNFTUtils/CropImageModal";
@@ -27,7 +27,7 @@ export default function EditProfilePhoto({ avatar, setAvatar }) {
 		if (croppedImage !== undefined) {
 			setLoading(true);
 			try {
-				uploadFileToIPFS(Moralis, croppedImage, "avatar").then((url) => {
+				uploadBase64ToIPFS(Moralis, croppedImage, "avatar").then((url) => {
 					setLoading(false);
 					setAvatar(url);
 				});

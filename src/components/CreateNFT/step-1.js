@@ -91,6 +91,7 @@ export default function TrackDetails({
 							}
 							setLoading(false);
 						}}
+						enctype="multipart/form-data"
 					>
 						<div className="flex flex-col w-full space-y-20 md:space-x-10 md:space-y-0 md:flex-row xl:space-x-20">
 							{/* Preview div */}

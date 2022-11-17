@@ -10,7 +10,7 @@ import Tooltip from "../../layout/Tooltip/Tooltip";
 import LoadingContext from "../../../store/loading-context";
 import StatusContext from "../../../store/status-context";
 import { isBandUsernameValidAndAvailable } from "../../utils/Validate";
-import { defaultAvatarUrls } from "../../config/constants";
+import { defaultBandAvatarUrls } from "../../config/constants";
 
 const CreateBandPage = () => {
 	const { user } = useMoralis();
@@ -20,7 +20,7 @@ const CreateBandPage = () => {
 	const [bandName, setBandName] = useState("");
 	const [bandUsername, setBandUsername] = useState("");
 	const [bandDescription, setBandDescription] = useState("");
-	const [avatar, setAvatar] = useState(defaultAvatarUrls[0]);
+	const [avatar, setAvatar] = useState(defaultBandAvatarUrls[0]);
 	const [bandMembers, setBandMembers] = useState([{ userId: "", name: "", username: "", role: "", address: "", avatar: "", hasAcceptedBandInvite: false }]);
 
 	// Invite artist modal states
@@ -237,7 +237,7 @@ const CreateBandPage = () => {
 								</div>
 
 								<div className="w-full col-span-2 pl-32">
-									<SelectAvatar defaultAvatarUrls={defaultAvatarUrls} avatar={avatar} setAvatar={setAvatar} />
+									<SelectAvatar defaultAvatarUrls={defaultBandAvatarUrls} avatar={avatar} setAvatar={setAvatar} />
 
 									<div className="mt-10 text-base">
 										<span className="font-tertiary text-3xl">ADD MEMBERS</span>

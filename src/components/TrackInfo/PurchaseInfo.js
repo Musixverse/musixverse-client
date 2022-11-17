@@ -4,7 +4,7 @@ import { useMoralis } from "react-moralis";
 import styles from "../../../styles/TrackInfo/PurchaseInfo.module.css";
 import PurchaseButton from "./TrackInfoUtils/PurchaseButton";
 
-export default function PurchaseInfo({ trackId, tokenId, resaleRoyaltyPercentage, currentOwner, price, onSale }) {
+export default function PurchaseInfo({ trackId, tokenId, unlockTimestamp, resaleRoyaltyPercentage, currentOwner, price, onSale }) {
 	const { user } = useMoralis();
 
 	return (
@@ -53,10 +53,15 @@ export default function PurchaseInfo({ trackId, tokenId, resaleRoyaltyPercentage
 						<p className="ml-2 font-bold text-pricing font-primary">{price}</p>
 					</div>
 				</div>
-				{user?.attributes.ethAddress !== currentOwner.ethAddress && (onSale || onSale === null) && (
-					<div className={styles["purchase-info__price-div--cta"]}>
-						<PurchaseButton trackId={trackId} tokenId={tokenId} price={price} />
-					</div>
+
+				{Date.now() > unlockTimestamp * 1000 && (
+					<>
+						{user?.attributes.ethAddress !== currentOwner.ethAddress && (onSale || onSale === null) && (
+							<div className={styles["purchase-info__price-div--cta"]}>
+								<PurchaseButton trackId={trackId} tokenId={tokenId} price={price} />
+							</div>
+						)}
+					</>
 				)}
 			</div>
 		</div>

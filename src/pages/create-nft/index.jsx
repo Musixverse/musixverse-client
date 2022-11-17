@@ -15,7 +15,7 @@ import SaveDraftSuccessModal from "../../components/CreateNFT/CreateNFTUtils/Sav
 import { mintTrackNFT } from "../../utils/smart-contract/functions";
 import LoadingContext from "../../../store/loading-context";
 import StatusContext from "../../../store/status-context";
-import uploadFileToIPFS from "../../utils/image-crop/uploadFileToIPFS";
+import uploadBase64ToIPFS from "../../utils/image-crop/uploadBase64ToIPFS";
 
 export async function getServerSideProps(context) {
 	try {
@@ -340,7 +340,7 @@ const CreateNFT = ({ userInfo }) => {
 
 		var lyricsFileUrl;
 		if (lyrics) {
-			await uploadFileToIPFS(Moralis, btoa(unescape(encodeURIComponent(lyrics))), "lyrics").then((url) => (lyricsFileUrl = url));
+			await uploadBase64ToIPFS(Moralis, btoa(unescape(encodeURIComponent(lyrics))), "lyrics").then((url) => (lyricsFileUrl = url));
 		}
 
 		const _tags = tags.map((tag) => tag.value);
@@ -470,7 +470,7 @@ const CreateNFT = ({ userInfo }) => {
 			],
 		};
 		var metadataUrl;
-		await uploadFileToIPFS(Moralis, btoa(unescape(encodeURIComponent(JSON.stringify(nftMetadata)))), "metadata").then((url) => (metadataUrl = url));
+		await uploadBase64ToIPFS(Moralis, btoa(unescape(encodeURIComponent(JSON.stringify(nftMetadata)))), "metadata").then((url) => (metadataUrl = url));
 
 		const unlockableContentData = {
 			about: "Your NFT comes with exclusive perks that are only available to you, the NFT owner, as long as you continue to own the NFT. The artist appreciates your support and has put together self-curated items exclusively for you. Buy Now!",
@@ -480,7 +480,7 @@ const CreateNFT = ({ userInfo }) => {
 			exclusiveVideos: unlockableContent.exclusiveVideos,
 		};
 		var unlockableContentFileUrl;
-		await uploadFileToIPFS(Moralis, btoa(unescape(encodeURIComponent(JSON.stringify(unlockableContentData)))), "unlockable-content").then(
+		await uploadBase64ToIPFS(Moralis, btoa(unescape(encodeURIComponent(JSON.stringify(unlockableContentData)))), "unlockable-content").then(
 			(url) => (unlockableContentFileUrl = url)
 		);
 

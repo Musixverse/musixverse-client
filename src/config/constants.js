@@ -36,6 +36,15 @@ export const defaultAvatarUrls = [
 	"https://ipfs.moralis.io:2053/ipfs/QmQLG2gWQjZK8KD2cifDymfKtYfXjraGAWYAn3XMhz2UCS",
 ];
 
+export const defaultBandAvatarUrls = [
+	"https://ipfs.moralis.io:2053/ipfs/QmYta74C5UFJEHijpczsQV5Kc1RydfPt2bR8kEcoyJcgai/0xe17a44ea7a3f01a5da0366fae40f3b33fab326b4/avatar",
+	"https://ipfs.moralis.io:2053/ipfs/QmVVGmWw8aSmVLMMHpv5z19K78ZBA5K1eFiSr9i7owt8qB/0xe17a44ea7a3f01a5da0366fae40f3b33fab326b4/avatar",
+	"https://ipfs.moralis.io:2053/ipfs/QmQvW3q8KKgbaecQLxnBLgGFMb6XwMcfxHaHwy7tdmB6oG/0xe17a44ea7a3f01a5da0366fae40f3b33fab326b4/avatar",
+	"https://ipfs.moralis.io:2053/ipfs/QmUgHXD9FyoncWKymoWCxYvZHe5XtufNgy4hGmeETMjemU/0xe17a44ea7a3f01a5da0366fae40f3b33fab326b4/avatar",
+	"https://ipfs.moralis.io:2053/ipfs/QmSLRrwkugpHiXAZNQSq4mucYukVTpMoyPtgTRNQcixDby/0xe17a44ea7a3f01a5da0366fae40f3b33fab326b4/avatar",
+	"https://ipfs.moralis.io:2053/ipfs/QmWqhJDYpdL5XceW46kqyLwAbYiihXSwkjQUt5TGPQ2g6C/0xe17a44ea7a3f01a5da0366fae40f3b33fab326b4/avatar",
+];
+
 /**************************************************************************/
 /************************    TRACK ATTRIBUTES    **************************/
 /**************************************************************************/

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { useState, useEffect, useRef, useContext } from "react";
 import { useMoralis } from "react-moralis";
-import uploadFileToIPFS from "../../../utils/image-crop/uploadFileToIPFS";
+import uploadBase64ToIPFS from "../../../utils/image-crop/uploadBase64ToIPFS";
 import uploadImage from "../../../../public/assets/create-nft/upload-image.svg";
 import CropImageModal from "./CropImageModal";
 import LoadingContext from "../../../../store/loading-context";
@@ -26,7 +26,7 @@ export default function ImageUpload({ coverArtUrl, setCoverArtUrl, setCoverArtMi
 				setLoading(true);
 				// Get the uploadFileOnIPFS async function
 				try {
-					await uploadFileToIPFS(Moralis, croppedImage, "cover-art").then((url) => setCoverArtUrl(url));
+					await uploadBase64ToIPFS(Moralis, croppedImage, "cover-art").then((url) => setCoverArtUrl(url));
 				} catch (err) {
 					if (err.message && err.message == "request entity too large") {
 						setError({
@@ -49,8 +49,8 @@ export default function ImageUpload({ coverArtUrl, setCoverArtUrl, setCoverArtMi
 		setCoverArt();
 	}, [croppedImage, setCoverArtUrl, Moralis, setLoading]);
 
-	const handleImageUpload = (event) => {
-		//If file size is > 10MB show error box
+	const handleImageUpload = async (event) => {
+		// If file size is > 10MB show error box
 		if (event.target.files[0].size > 10000000) {
 			setError({
 				title: "File size too large",
@@ -60,7 +60,6 @@ export default function ImageUpload({ coverArtUrl, setCoverArtUrl, setCoverArtMi
 			nftCoverArt.current.value = "";
 			return;
 		}
-		// uploadFileToIPFS(Moralis, event.target.files[0]).then((url) => setCoverArtUrl(url));
 		const imageURL = URL.createObjectURL(event.target.files[0]);
 		setCoverArtMimeType(event.target.files[0].type);
 		nftCoverArt.current.value = "";

@@ -1,8 +1,7 @@
 import { useState, useEffect, useRef, useContext } from "react";
 import Image from "next/image";
 import { useMoralis } from "react-moralis";
-import convertDataURLtoFile from "../../../utils/image-crop/convertDataURLtoFile";
-import uploadFileToIPFS from "../../../utils/image-crop/uploadFileToIPFS";
+import uploadBase64ToIPFS from "../../../utils/image-crop/uploadBase64ToIPFS";
 import LoadingContext from "../../../../store/loading-context";
 import StatusContext from "../../../../store/status-context";
 import CropImageModal from "../../CreateNFT/CreateNFTUtils/CropImageModal";
@@ -13,51 +12,43 @@ export default function CoverPhoto({ coverImage, setCoverImage }) {
 	const { Moralis } = useMoralis();
 	const [, setLoading] = useContext(LoadingContext);
 	const [, , , setError] = useContext(StatusContext);
-	//Crop Modal states
+	// Crop Modal states
 	const [showModal, setShowModal] = useState(false);
 	const [imageToCrop, setImageToCrop] = useState(undefined);
 	const [croppedImage, setCroppedImage] = useState(undefined);
 
-	// const [coverPhoto, setCoverPhoto] = useState(coverImage === undefined? coverImage : "https://ipfs.moralis.io:2053/ipfs/Qmcn1aZ4PKUUzwpTncuSbruwLD98dtiNqvoJG5zm8EMwXZ");
-	// console.log({thisL:coverImage});
-	// console.log("coverpooho",coverPhoto);
 	const aspectRatio = { width: 1918, height: 350 };
 	const circularCrop = false;
 	const cropModalValues = { showModal, setShowModal, imageToCrop, setCroppedImage, circularCrop, aspectRatio };
 
 	useEffect(() => {
-		async function setCoverPhoto() {
-			if (croppedImage !== undefined) {
-				setLoading(true);
-
-				// Get the uploadFileOnIPFS async function
-				try {
-					await uploadFileToIPFS(Moralis, croppedImage, "cover-image").then((url) => {
-						setLoading(false);
-						setCoverImage(url);
-					});
-				} catch (err) {
+		if (croppedImage !== undefined) {
+			setLoading(true);
+			try {
+				uploadBase64ToIPFS(Moralis, croppedImage, "cover-image").then((url) => {
 					setLoading(false);
-					if (err.message && err.message == "request entity too large") {
-						setError({
-							title: "File too large",
-							message: "Please select a file with smaller size",
-							showErrorBox: true,
-						});
-					} else {
-						setError((prevState) => ({
-							...prevState,
-							title: "Oops! Something went wrong.",
-							message: "Please try again later.",
-							showErrorBox: true,
-						}));
-					}
-					return;
+					setCoverImage(url);
+				});
+			} catch (err) {
+				setLoading(false);
+				if (err.message && err.message == "request entity too large") {
+					setError({
+						title: "File too large",
+						message: "Please select a file with smaller size",
+						showErrorBox: true,
+					});
+				} else {
+					setError((prevState) => ({
+						...prevState,
+						title: "Oops! Something went wrong.",
+						message: "Please try again later.",
+						showErrorBox: true,
+					}));
 				}
+				return;
 			}
-			setCoverPhoto();
 		}
-	}, [Moralis, croppedImage, setCoverImage, setLoading]);
+	}, [Moralis, croppedImage, setCoverImage, setError, setLoading]);
 
 	const handleCoverChange = (event) => {
 		const imageURL = URL.createObjectURL(event.target.files[0]);

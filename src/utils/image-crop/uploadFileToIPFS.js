@@ -2,13 +2,15 @@
  * If the uploaded File is null, then the function shall return
  */
 
-export default async function uploadFileToIPFS(Moralis, fileToUpload, fileType) {
+export default async function uploadFileToIPFS(fileToUpload) {
 	if (fileToUpload === null) return null;
 
-	const result = await Moralis.Cloud.run("uploadtoIPFS", {
-		fileToUpload: fileToUpload,
-		ethAddress: Moralis.User.current().attributes.ethAddress,
-		fileType: fileType,
-	});
-	return result[0].path;
+	const ipfsUrl = await fetch(`${process.env.NEXT_PUBLIC_PARSE_SERVER_BASE_URL}/upload-file-to-ipfs`, {
+		method: "POST",
+		body: fileToUpload,
+	})
+		.then((response) => response.json())
+		.then((res) => res.ipfsUrl);
+
+	return ipfsUrl;
 }

@@ -132,19 +132,19 @@ export default function UnlockableContent({ tokenId, currentOwnerAddress, unlock
 				<p className="text-sm font-semibold mt-6">About the Unlockable Content</p>
 
 				<div className={"flex sm:flex-row flex-col gap-x-8 " + (unlockableContent.about ? "mt-2" : "mt-6")}>
-					<div className="text-sm max-w-[300px] overflow-y-scroll pr-2 whitespace-pre-wrap">
-						Your NFT comes with exclusive perks that are only available to you, the NFT owner, as long as you continue to own the NFT.
-						<p className="mt-2">The artist appreciates your support and has put together self-curated items exclusively for you.</p>
-						<p className="mt-2">Buy Now!</p>
-					</div>
+					<div className="grid lg:grid-rows-2 sm:grid-cols-2 lg:grid-cols-4 items-start gap-4">
+						<div className="row-span-1 sm:row-span-2 text-sm  overflow-y-scroll pr-2 whitespace-pre-wrap mb-4 sm:mb-0">
+							Your NFT comes with exclusive perks that are only available to you, the NFT owner, as long as you continue to own the NFT.
+							<p className="mt-2">The artist appreciates your support and has put together self-curated items exclusively for you.</p>
+							<p className="mt-2">Buy Now!</p>
+						</div>
 
-					<div className="grid sm:grid-cols-2 lg:grid-cols-3 items-start gap-4 mt-8 sm:mt-0">
 						{unlockableContentItems.map((item, index) => {
 							let truncatedUnlockableItemText = item.unlockableItemText;
 
 							if (
 								(unlockableContent.secretMessage && index === 0) ||
-								index === 1 ||
+								// index === 1 ||
 								index === 2 ||
 								index === 3 ||
 								(unlockableContent.exclusiveImages > 0 && index === 4) ||
@@ -159,7 +159,7 @@ export default function UnlockableContent({ tokenId, currentOwnerAddress, unlock
 									<div
 										key={index}
 										className={
-											"group relative w-full h-full flex flex-col rounded-lg bg-light-100 dark:bg-dark-800 shadow hover:shadow-primary-500 overflow-hidden transition-all duration-700 unlockable-content-card " +
+											"group relative w-full h-fit sm:h-full flex flex-col rounded-lg bg-light-100 dark:bg-dark-800 shadow hover:shadow-primary-500 overflow-hidden transition-all duration-700 unlockable-content-card " +
 											(unlockableContentUriData ? "cursor-pointer" : "cursor-not-allowed")
 										}
 										onClick={() => {

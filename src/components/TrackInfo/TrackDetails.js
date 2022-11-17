@@ -155,15 +155,6 @@ export default function TrackDetails({ tokenId, metadata }) {
 							<p>{metadata.isrc}</p>
 						</div>
 					) : null}
-					<div className="text-left">
-						<h4 className="font-bold font-secondary text-base">License</h4>
-						<Link href="https://creativecommons.org/publicdomain/zero/1.0/">
-							<a target="_blank" rel="noopener noreferrer">
-								MXV CC0 &nbsp;
-								<i className="fa-solid fa-arrow-right-long"></i>
-							</a>
-						</Link>
-					</div>
 					<div className={metadata.lyrics && metadata.isrc ? "text-left col-span-1" : "text-left col-span-2"}>
 						<h4 className="font-bold font-secondary text-base">Contract Address</h4>
 						<p>{metadata.chainDetails.contractAddress}</p>

@@ -18,6 +18,7 @@ export default function UnlockableContent({ tokenId, currentOwnerAddress, unlock
 			try {
 				await sleep(1000);
 				const _unlockableContentUri = await unlockableContentUri(tokenId, user.attributes.ethAddress);
+				console.log(_unlockableContentUri);
 				const res = await fetch(_unlockableContentUri);
 				const data = await res.json();
 				setUnlockableContentUriData(data);

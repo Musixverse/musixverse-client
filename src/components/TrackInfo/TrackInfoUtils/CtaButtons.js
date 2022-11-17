@@ -71,7 +71,7 @@ export default function CtaButtons({ currentOwnerAddress, tokenId, trackId, pric
 					) : onSale || onSale === null ? (
 						<PurchaseButton tokenId={tokenId} trackId={trackId} price={price} />
 					) : (
-						<span className="text-sm sm:ml-4">
+						<span className="text-sm sm:ml-2">
 							This NFT is currently not on the marketplace for sale. Other copies of this NFT (if any) may be available for sale.
 						</span>
 					)}

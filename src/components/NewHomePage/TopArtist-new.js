@@ -9,7 +9,7 @@ import swiperBG_b from "../../../public/assets/homepage/swiperBG_b.png";
 import swiperBG_w from "../../../public/assets/homepage/swiperBG_w.png";
 
 export default function TopArtists() {
-	  const { theme } = useTheme();
+	const { theme } = useTheme();
 	const [bg, setBg] = useState([cover_sarthak, cover_m]);
 
 	return (
@@ -48,9 +48,9 @@ export default function TopArtists() {
 			<SwiperArtist setCurrBg={setBg} />
 
 			{/* Bottom image section */}
-			<div className="absolute hidden w-full md:block top-3/4">
-				<Image src={theme === 'dark'? swiperBG_b:swiperBG_w} alt="Top Artist section background design" layout="responsive" priority />
-			</div>
+			{/* <div className="absolute hidden w-full md:block top-3/4">
+				<Image src={theme === "dark" ? swiperBG_b : swiperBG_w} alt="Top Artist section background design" layout="responsive" priority />
+			</div> */}
 		</div>
 	);
 }

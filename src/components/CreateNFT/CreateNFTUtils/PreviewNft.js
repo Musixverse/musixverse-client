@@ -57,7 +57,7 @@ export default function PreviewNft({ trackTitle, coverArtUrl, audioFileUrl, nftP
 					</div>
 				)}
 				{/* NFT audio file */}
-				{audioFileUrl == null ? null : (
+				{audioFileUrl ? (
 					<div className="z-[1] absolute bottom-0 right-0 p-2">
 						<button
 							type="button"
@@ -69,7 +69,7 @@ export default function PreviewNft({ trackTitle, coverArtUrl, audioFileUrl, nftP
 						</button>
 						<audio ref={audio} className="hidden" src={audioFileUrl} onEnded={resetProgress}></audio>
 					</div>
-				)}
+				) : null}
 			</div>
 			{/* Content provided */}
 			<div className="dark:bg-[#1D1D1D] bg-light-100 w-[222px] h-[128px] p-4 rounded-b-xl flex flex-col justify-between">

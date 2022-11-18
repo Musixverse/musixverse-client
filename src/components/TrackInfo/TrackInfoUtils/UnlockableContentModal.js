@@ -98,9 +98,15 @@ const UnlockableContentModal = ({ isOpen, setOpen, tokenId, selectedUnlockableIt
 																/>
 															</a>
 														</Link>
-														<span className="selected-unlockable-content-span">{item.file.name}</span>(
-														{bytesToMegaBytes(item.file.size)}
-														&nbsp;MB)
+														<span className="selected-unlockable-content-span">
+															{item.file && item.file.name && item.file.name}
+														</span>
+														{item.file.size && (
+															<>
+																({bytesToMegaBytes(item.file.size)}
+																&nbsp;MB)
+															</>
+														)}
 													</div>
 												</div>
 											);
@@ -121,9 +127,15 @@ const UnlockableContentModal = ({ isOpen, setOpen, tokenId, selectedUnlockableIt
 																<i className="fa-solid fa-record-vinyl text-6xl"></i>
 															</a>
 														</Link>
-														<span className="selected-unlockable-content-span">{item.file.name}</span>(
-														{bytesToMegaBytes(item.file.size)}
-														&nbsp;MB)
+														<span className="selected-unlockable-content-span">
+															{item.file && item.file.name && item.file.name}
+														</span>
+														{item.file.size && (
+															<>
+																({bytesToMegaBytes(item.file.size)}
+																&nbsp;MB)
+															</>
+														)}
 													</div>
 												</div>
 											);
@@ -144,9 +156,15 @@ const UnlockableContentModal = ({ isOpen, setOpen, tokenId, selectedUnlockableIt
 																<Image src={"/assets/video.png"} height={60} width={60} alt="unlockable video" />
 															</a>
 														</Link>
-														<span className="selected-unlockable-content-span">{item.file.name}</span>(
-														{bytesToMegaBytes(item.file.size)}
-														&nbsp;MB)
+														<span className="selected-unlockable-content-span">
+															{item.file && item.file.name && item.file.name}
+														</span>
+														{item.file.size && (
+															<>
+																({bytesToMegaBytes(item.file.size)}
+																&nbsp;MB)
+															</>
+														)}
 													</div>
 												</div>
 											);

@@ -13,7 +13,7 @@ const BandMembers = ({ bandMembers, updatedBandMembersList }) => {
 	});
 
 	return (
-		<div className="mt-8 -mb-4">
+		<div className="mt-8 -mb-8">
 			<p className="font-tertiary text-3xl">Band Members</p>
 			<div className="w-full grid grid-flow-col auto-cols-max mt-2 gap-8 pb-4 overflow-scroll">
 				{bandMembersList.map((bandMember) => {

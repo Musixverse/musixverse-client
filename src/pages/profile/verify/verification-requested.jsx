@@ -4,6 +4,12 @@ const VerificationRequested = () => {
 	const { user } = useMoralis();
 	const { data: artistVerificationInfo } = useMoralisCloudFunction("getVerificationInfo");
 
+	useEffect(() => {
+		if (user && user.attributes.isArtistVerified) {
+			router.push(`/profile/${user.attributes.username}`);
+		}
+	}, [user]);
+
 	return (
 		<div className="flex flex-col p-40 pb-32 items-center">
 			<p className="text-4xl font-semibold text-center">Artist Verification</p>

@@ -9,7 +9,7 @@ export default function ArtistCard({ instagramProfileURL, imageURL_b, imageURL_w
 		<div className="relative z-10 flex justify-center">
 			<Link href={instagramProfileURL ?? ""} passHref>
 				<a target="_blank" href="noopener noreferrer" className="group flex flex-col rounded-lg w-56 h-80 cursor-pointer">
-					<div className="flex w-full h-full">
+					<div className="flex w-full h-full rounded-xl overflow-hidden relative">
 						<Image src={theme === 'dark'? imageURL_b:imageURL_w} alt="Top artist cover art" objectFit="fill" priority></Image>
 					</div>
 					<div className="absolute flex w-56 h-full">

@@ -177,7 +177,7 @@ export default function BasicDetails() {
 								<input id="permissionCheckbox" type="checkbox" required />
 								<label htmlFor="permissionCheckbox" className="text-[16px] font-secondary font-bold cursor-pointer">
 									I agree with Musixverse&apos;s&nbsp;
-									<Link href="https://drive.google.com/file/d/1U6G3E0oUMo4vSrnhmlc8MiquwY8IrhwH/view?usp=sharing" passHref={true}>
+									<Link href="https://drive.google.com/file/d/1Av96OC67-zCfmFuQrAeGT7ruAPcft4Yl/view?usp=sharing" passHref={true}>
 										<a target="_blank" rel="noopener noreferrer" className="cursor-pointer hover:text-primary-600">
 											Terms of Services
 										</a>

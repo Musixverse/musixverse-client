@@ -95,7 +95,7 @@ const CreateNFTIntro = ({ nextStep, chosenProfileOrBand, nftDraftMetadata, nftDr
 								<input type="checkbox" name="Terms of Services" id="T&C" className="cursor-pointer" required />
 								<label htmlFor="T&C" className="cursor-pointer">
 									I have read and agree to the{" "}
-									<Link href="/terms-of-services" passHref>
+									<Link href="https://drive.google.com/file/d/1Av96OC67-zCfmFuQrAeGT7ruAPcft4Yl/view?usp=sharing" passHref>
 										<a target="_blank" rel="noopener noreferrer" className="hover:text-primary-500">
 											Terms of Services
 										</a>

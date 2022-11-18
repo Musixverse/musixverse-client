@@ -8,7 +8,7 @@ import { TopArtistsData } from "./TopArtistsData";
 
 export default function SwiperArtist({ setCurrBg }) {
 	const onHover = function (item) {
-		setCurrBg([item.bgURL_d, item.bgURL_m]);
+		setCurrBg([item.bgURL_d_b,item.bgURL_d_w, item.bgURL_m_b, item.bgURL_m_w]);
 	};
 
 	return (
@@ -61,7 +61,8 @@ export default function SwiperArtist({ setCurrBg }) {
 							<ArtistCard
 								name={artist.name}
 								instagramProfileURL={artist.instagramProfileURL}
-								imageURL={artist.imageURL}
+								imageURL_b={artist.imageURL_b}
+								imageURL_w={artist.imageURL_w}
 								description={artist.description}
 							/>
 						</SwiperSlide>

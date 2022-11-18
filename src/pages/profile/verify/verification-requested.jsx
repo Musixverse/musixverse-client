@@ -1,9 +1,12 @@
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 import { useMoralis, useMoralisCloudFunction } from "react-moralis";
 
 const VerificationRequested = () => {
 	const { user } = useMoralis();
 	const { data: artistVerificationInfo } = useMoralisCloudFunction("getVerificationInfo");
 
+	const router = useRouter();
 	useEffect(() => {
 		if (user && user.attributes.isArtistVerified) {
 			router.push(`/profile/${user.attributes.username}`);

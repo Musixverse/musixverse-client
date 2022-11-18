@@ -50,11 +50,11 @@ export default function ImageUpload({ coverArtUrl, setCoverArtUrl, setCoverArtMi
 	}, [croppedImage, setCoverArtUrl, Moralis, setLoading]);
 
 	const handleImageUpload = async (event) => {
-		// If file size is > 10MB show error box
+		// If file size is > 10 MB show error box
 		if (event.target.files[0].size > 10000000) {
 			setError({
 				title: "File size too large",
-				message: "Uploaded image should be less than 10MB",
+				message: "Uploaded image should be less than 10 MB",
 				showErrorBox: true,
 			});
 			nftCoverArt.current.value = "";
@@ -91,7 +91,7 @@ export default function ImageUpload({ coverArtUrl, setCoverArtUrl, setCoverArtMi
 						<p className="text-sm text-primary-600">Image Uploaded</p>
 					) : (
 						<p className="text-xs">
-							Any Image file | Max file size: 10MB <br /> Recommended size: 640 x 640 px.
+							Any Image file | Max file size: 10 MB <br /> Recommended size: 640 x 640 px
 						</p>
 					)}
 				</div>

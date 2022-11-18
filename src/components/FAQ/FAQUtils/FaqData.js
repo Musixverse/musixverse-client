@@ -442,7 +442,7 @@ export const community = [
 //     },
 //     {
 //         heading: "What should be the size of a music file to be uploaded?",
-//         body: "The file size should remain below a 100MB limit.",
+//         body: "The file size should remain below a 50 MB limit.",
 //         content_id: "collapseFour",
 //     },
 //     {

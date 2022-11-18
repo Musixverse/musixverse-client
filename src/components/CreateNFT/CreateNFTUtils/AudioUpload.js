@@ -39,7 +39,19 @@ export default function AudioUpload({ audioFileUrl, setAudioFileUrl, setAudioFil
 			formData.append("fileType", "audio");
 			formData.append("file", event.target.files[0]);
 			try {
-				await uploadFileToIPFS(formData).then((url) => setAudioFileUrl(url));
+				await uploadFileToIPFS(formData).then((url) => {
+					if (url) {
+						console.log(url);
+						setAudioFileUrl(url);
+					} else {
+						setAudioFileUrl(null);
+						setError({
+							title: "File too large",
+							message: "Please select a file with smaller size",
+							showErrorBox: true,
+						});
+					}
+				});
 			} catch (err) {
 				if (err.message && err.message == "request entity too large") {
 					setError({
@@ -72,20 +84,20 @@ export default function AudioUpload({ audioFileUrl, setAudioFileUrl, setAudioFil
 				<div
 					className={
 						"flex relative items-center justify-center w-[65px] h-[65px] rounded-lg bg-light-300 dark:bg-[#1d1d1d] border-2 " +
-						(audioFileUrl === null ? "border-light-300 dark:border-dark-600" : "border-primary-600 dark:border-primary-600")
+						(audioFileUrl ? "border-primary-600 dark:border-primary-600" : "border-light-300 dark:border-dark-600")
 					}
 				>
 					<Image src={uploadMusic} objectFit="contain" alt="upload image art digital illustration"></Image>
-					<div className={audioFileUrl === null ? "hidden" : "absolute bottom-2 right-1 bg-light-200 rounded-full h-[20px]"}>
+					<div className={audioFileUrl ? "absolute bottom-2 right-1 bg-light-200 rounded-full h-[20px]" : "hidden"}>
 						<i className={"text-xl text-primary-600 fas fa-check-circle"}></i>
 					</div>
 				</div>
 				<div className="flex-1 font-secondary">
 					<h3 className="font-semibold">UPLOAD AUDIO FILE</h3>
-					{audioFileUrl === null ? (
-						<p className="text-xs">Any Audio file | Max file size: 500 MB</p>
-					) : (
+					{audioFileUrl ? (
 						<p className="text-sm text-primary-600">Track Uploaded</p>
+					) : (
+						<p className="text-xs">Any Audio file | Max file size: 50 MB</p>
 					)}
 				</div>
 			</label>

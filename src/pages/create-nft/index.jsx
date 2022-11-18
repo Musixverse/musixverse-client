@@ -15,7 +15,7 @@ import SaveDraftSuccessModal from "../../components/CreateNFT/CreateNFTUtils/Sav
 import { mintTrackNFT } from "../../utils/smart-contract/functions";
 import LoadingContext from "../../../store/loading-context";
 import StatusContext from "../../../store/status-context";
-import uploadBase64ToIPFS from "../../utils/image-crop/uploadBase64ToIPFS";
+import { uploadJSONToIPFS } from "../../utils/image-crop/uploadToIPFS";
 
 export async function getServerSideProps(context) {
 	try {
@@ -340,7 +340,7 @@ const CreateNFT = ({ userInfo }) => {
 
 		var lyricsFileUrl;
 		if (lyrics) {
-			await uploadBase64ToIPFS(Moralis, btoa(unescape(encodeURIComponent(lyrics))), "lyrics").then((url) => (lyricsFileUrl = url));
+			await uploadJSONToIPFS(Moralis, lyrics, "lyrics").then((url) => (lyricsFileUrl = url));
 		}
 
 		const _tags = tags.map((tag) => tag.value);
@@ -384,21 +384,21 @@ const CreateNFT = ({ userInfo }) => {
 			artistAddress: user.attributes.ethAddress,
 			// OpenSea standard ⬇️
 			name: user.attributes.name + " - " + trackTitle,
-			image: "ipfs://" + coverArtUrl.replace("https://ipfs.moralis.io:2053/ipfs/", ""),
+			image: "ipfs://" + coverArtUrl.replace(process.env.NEXT_PUBLIC_IPFS_NODE_URL, ""),
 			// ********* //
 			bandId: _chosenProfileOrBandElem.id === "profile" ? null : _chosenProfileOrBandElem.getAttribute("data-band-id"),
 			description: trackBackground,
-			audio: "ipfs://" + audioFileUrl.replace("https://ipfs.moralis.io:2053/ipfs/", ""),
+			audio: "ipfs://" + audioFileUrl.replace(process.env.NEXT_PUBLIC_IPFS_NODE_URL, ""),
 			duration: audioFileDuration,
 			mimeType: audioFileMimeType,
 			artwork: {
-				uri: "ipfs://" + coverArtUrl.replace("https://ipfs.moralis.io:2053/ipfs/", ""),
+				uri: "ipfs://" + coverArtUrl.replace(process.env.NEXT_PUBLIC_IPFS_NODE_URL, ""),
 				mimeType: coverArtMimeType,
 				artist: creditCoverArtArtist ? coverArtArtist.name : "",
 				artistAddress: creditCoverArtArtist ? coverArtArtist.address : "",
 				invitedArtistId: coverArtArtist.address ? "" : invitedArtworkArtistId,
 			},
-			lyrics: lyrics ? "ipfs://" + lyricsFileUrl.replace("https://ipfs.moralis.io:2053/ipfs/", "") : "",
+			lyrics: lyrics ? "ipfs://" + lyricsFileUrl.replace(process.env.NEXT_PUBLIC_IPFS_NODE_URL, "") : "",
 			genre: genre,
 			language: language,
 			location: {
@@ -417,7 +417,7 @@ const CreateNFT = ({ userInfo }) => {
 			},
 			collaborators: reducedCollaboratorList,
 			numberOfCollaborators: reducedCollaboratorList.length,
-			license: "ipfs://" + coverArtUrl.replace("https://ipfs.moralis.io:2053/ipfs/", ""), // TODO
+			license: "ipfs://" + coverArtUrl.replace(process.env.NEXT_PUBLIC_IPFS_NODE_URL, ""), // TODO
 			unlockTimestamp: _unlockTimestamp,
 			chainDetails: {
 				chainId: process.env.NEXT_PUBLIC_BLOCKCHAIN_NETWORK_ID,
@@ -431,7 +431,7 @@ const CreateNFT = ({ userInfo }) => {
 				exclusiveVideos: unlockableContent.exclusiveVideos.length,
 			},
 			// OpenSea standard ⬇️
-			animation_url: "ipfs://" + audioFileUrl.replace("https://ipfs.moralis.io:2053/ipfs/", ""),
+			animation_url: "ipfs://" + audioFileUrl.replace(process.env.NEXT_PUBLIC_IPFS_NODE_URL, ""),
 			background_color: "5AB510",
 			external_url: "https://www.musixverse.com",
 			attributes: [
@@ -470,7 +470,7 @@ const CreateNFT = ({ userInfo }) => {
 			],
 		};
 		var metadataUrl;
-		await uploadBase64ToIPFS(Moralis, btoa(unescape(encodeURIComponent(JSON.stringify(nftMetadata)))), "metadata").then((url) => (metadataUrl = url));
+		await uploadJSONToIPFS(Moralis, nftMetadata, "metadata").then((url) => (metadataUrl = url));
 
 		const unlockableContentData = {
 			about: "Your NFT comes with exclusive perks that are only available to you, the NFT owner, as long as you continue to own the NFT. The artist appreciates your support and has put together self-curated items exclusively for you. Buy Now!",
@@ -480,9 +480,7 @@ const CreateNFT = ({ userInfo }) => {
 			exclusiveVideos: unlockableContent.exclusiveVideos,
 		};
 		var unlockableContentFileUrl;
-		await uploadBase64ToIPFS(Moralis, btoa(unescape(encodeURIComponent(JSON.stringify(unlockableContentData)))), "unlockable-content").then(
-			(url) => (unlockableContentFileUrl = url)
-		);
+		await uploadJSONToIPFS(Moralis, unlockableContentData, "unlockable-content").then((url) => (unlockableContentFileUrl = url));
 
 		const collaborators = collaboratorList.reduce((result, { address }) => {
 			result.push(address);
@@ -494,8 +492,8 @@ const CreateNFT = ({ userInfo }) => {
 		}, []);
 		const onSale = true;
 
-		const metadataHash = metadataUrl.replace("https://ipfs.moralis.io:2053/ipfs/", "");
-		const unlockableContentURIHash = unlockableContentFileUrl.replace("https://ipfs.moralis.io:2053/ipfs/", "");
+		const metadataHash = metadataUrl.replace(process.env.NEXT_PUBLIC_IPFS_NODE_URL, "");
+		const unlockableContentURIHash = unlockableContentFileUrl.replace(process.env.NEXT_PUBLIC_IPFS_NODE_URL, "");
 		try {
 			await mintTrackNFT(
 				numberOfCopies,

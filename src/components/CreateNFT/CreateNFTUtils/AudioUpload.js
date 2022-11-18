@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import Image from "next/image";
 import { useMoralis } from "react-moralis";
-import uploadFileToIPFS from "../../../utils/image-crop/uploadFileToIPFS";
+import { uploadFileToIPFS } from "../../../utils/image-crop/uploadToIPFS";
 import uploadMusic from "../../../../public/assets/create-nft/upload-music.svg";
 import LoadingContext from "../../../../store/loading-context";
 import StatusContext from "../../../../store/status-context";
@@ -41,7 +41,6 @@ export default function AudioUpload({ audioFileUrl, setAudioFileUrl, setAudioFil
 			try {
 				await uploadFileToIPFS(formData).then((url) => {
 					if (url) {
-						console.log(url);
 						setAudioFileUrl(url);
 					} else {
 						setAudioFileUrl(null);
@@ -97,7 +96,7 @@ export default function AudioUpload({ audioFileUrl, setAudioFileUrl, setAudioFil
 					{audioFileUrl ? (
 						<p className="text-sm text-primary-600">Track Uploaded</p>
 					) : (
-						<p className="text-xs">Any Audio file | Max file size: 50 MB</p>
+						<p className="text-xs">Any Audio file | Max file size: 1 GB</p>
 					)}
 				</div>
 			</label>

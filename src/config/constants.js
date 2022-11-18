@@ -93,6 +93,7 @@ export const genreArray = [
 	"Enka",
 	"French Pop",
 	"Folk",
+	"Genreless",
 	"German Folk",
 	"German Pop",
 	"Fitness & Workout",
@@ -138,6 +139,7 @@ export const parentalAdvisoryArray = [
 export const languageArray = [
 	"Hindi",
 	"English",
+	"English, Hindi",
 	"Arabic",
 	"Armenian",
 	"Assamese",

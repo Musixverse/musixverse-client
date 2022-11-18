@@ -88,7 +88,14 @@ const Step4Form = ({
 	};
 
 	const setBandMembersAsCollaborators = async (band) => {
-		setChosenProfileOrBand(band);
+		setChosenProfileOrBand({
+			objectId: band._id,
+			name: band.name,
+			avatar: band.avatar,
+			bandMembers: band.bandMembers,
+			updatedBandMembersList: band.updatedBandMembersList,
+			username: band.username,
+		});
 
 		const bandMembersList = [];
 		band.bandMembers.map((bandMember) => {
@@ -257,9 +264,9 @@ const Step4Form = ({
 											name="profileChooser"
 											className="hidden"
 											onClick={(e) => setBandMembersAsCollaborators(band)}
-											checked={chosenProfileOrBand.objectId !== "profile" && chosenProfileOrBand.objectId === band.objectId}
+											checked={chosenProfileOrBand.objectId !== "profile" && chosenProfileOrBand.objectId === band._id}
 											data-band-name={band.name}
-											data-band-id={band.objectId}
+											data-band-id={band._id}
 										/>
 										<label
 											htmlFor={`band-${band.username}`}

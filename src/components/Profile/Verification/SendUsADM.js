@@ -65,23 +65,22 @@ const SendUsADM = ({
 					} else {
 						await setArtistSongLink({
 							onSuccess: async (object) => {
-								setLoading(false);
+								await requestForVerification({
+									onSuccess: async (object) => {
+										if (object) {
+											setLoading(false);
+											setVerificationRequestSubmittedModalOpen(true);
+										}
+									},
+									onError: (error) => {
+										setLoading(false);
+										console.log("requestForVerification Error:", error);
+									},
+								});
 							},
 							onError: (error) => {
 								console.log("setArtistSongLink Error:", error);
 								setLoading(false);
-							},
-						});
-						await requestForVerification({
-							onSuccess: async (object) => {
-								if (object) {
-									setLoading(false);
-									setVerificationRequestSubmittedModalOpen(true);
-								}
-							},
-							onError: (error) => {
-								setLoading(false);
-								console.log("requestForVerification Error:", error);
 							},
 						});
 					}

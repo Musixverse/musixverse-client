@@ -7,7 +7,7 @@ export default function AccountHelp() {
 		<div className="flex-1 p-8 pb-12 md:p-10 md:pb-14 bg-light-300 dark:bg-dark-600 rounded-xl">
 			<h1 className="mb-6 text-3xl xl:text-4xl font-tertiary">ACCOUNT HELP</h1>
 			<p className="max-w-[510px] mb-14 font-secondary text-[15px]">
-				Search for any issues related to your NFT or your account. If you don&apos;t find your issue mention you can contact use
+				Search for any issues related to your NFT or your account. If you don&apos;t find your issue mention you can contact us
 			</p>
 			<Notification
 				heading={"General Help"}
@@ -15,7 +15,7 @@ export default function AccountHelp() {
 					<>
 						{" "}
 						Visit our{" "}
-						<Link href={DISCORD_SUPPORT_CHANNEL_INVITE_LINK} passHref>
+						<Link href="/help-center" passHref>
 							<a target="_blank" rel="noopener noreferrer" className="font-medium text-primary-500">
 								help center
 							</a>

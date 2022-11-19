@@ -2,7 +2,7 @@ import Socials from "./Socials";
 
 export default function NewsLetter() {
 	return (
-		<div className="w-full flex justify-center bg-light-300 dark:bg-dark-800">
+		<div className="w-full flex justify-center bg-light-300 dark:bg-dark-700">
 			<div className="font-secondary w-full max-w-[1920px] py-20 px-6 md:px-8 lg:px-16 xl:px-20 2xl:px-36">
 				<p className="font-tertiary text-4xl mb-2">Stay in the loop</p>
 				<div className="flex flex-col md:flex-row justify-between">
@@ -26,7 +26,7 @@ export default function NewsLetter() {
 								id="MERGE0"
 								autoCapitalize="off"
 								autoCorrect="off"
-								className="py-3 px-4 text-sm rounded-lg outline-none sm:w-[267px] md:w-[283px] 2xl:w-[315px] font-primary bg-dark-600 text-light-100"
+								className="py-3 px-4 text-sm rounded-lg outline-none sm:w-[267px] md:w-[283px] 2xl:w-[315px] font-primary bg-dark-700 dark:bg-dark-900 text-light-100"
 								placeholder="Your email address"
 								required
 							></input>

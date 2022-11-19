@@ -57,12 +57,17 @@ function App({ Component, pageProps, router }) {
 		isPlaying: false,
 	});
 
+	// This is a workaround for the issue with the next-themes package. Without this, the theme was not being applied correctly.
+	const [mounted, setMounted] = useState(false);
+	// When mounted on client, now we can show the UI
 	useEffect(() => {
+		setMounted(true);
 		connectSmartContract();
 		if (navigator.userAgent.indexOf("Chrome") == -1 && navigator.userAgent.indexOf("Firefox") == -1) {
 			setBrowserNotSupportedModalOpen(true);
 		}
 	}, []);
+	if (!mounted) return null;
 
 	return (
 		<>

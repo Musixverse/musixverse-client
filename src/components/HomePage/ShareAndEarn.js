@@ -7,7 +7,7 @@ export default function ShareAndEarn() {
 	const { theme } = useTheme();
 
 	return (
-		<div className="bg-[url('/assets/homepage/shareEarnBG_w.png')] dark:bg-[url('/assets/homepage/shareEarnBG.png')] relative flex items-center md:pt-28 bg-no-repeat bg-cover bg-center w-full overflow-x-hidden">
+		<div className="bg-[url('/assets/homepage/shareEarnBG_w.png')] dark:bg-[url('/assets/homepage/shareEarnBG_d.png')] relative flex items-center md:pt-28 bg-no-repeat bg-cover bg-center w-full overflow-x-hidden">
 			<h1 className="hidden md:block text-[#3A3A3A] font-semibold text-7xl lg:text-8xl absolute leading-none z-[1] -mt-80 lg:mt-shareEarn2XlHeading">
 				Share & <br /> Earn 10%
 			</h1>

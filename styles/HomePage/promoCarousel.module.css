@@ -34,3 +34,9 @@
         height: clamp(426px, 177.0000px + 32.4219vw, 592px);
     }
 }
+
+@media (min-width: 360px) and (max-width: 404px){
+    .artist-img{
+        width: 360px;
+    }
+}

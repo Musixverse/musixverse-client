@@ -1,7 +1,7 @@
 import { useState, useRef, useContext, useEffect } from "react";
 import { useMoralis } from "react-moralis";
 import CustomButton from "../../../layout/CustomButton";
-import uploadBase64ToIPFS from "../../../utils/image-crop/uploadBase64ToIPFS";
+import { uploadBase64ToIPFS } from "../../../utils/image-crop/uploadToIPFS";
 import LoadingContext from "../../../../store/loading-context";
 import StatusContext from "../../../../store/status-context";
 import CropImageModal from "../../CreateNFT/CreateNFTUtils/CropImageModal";

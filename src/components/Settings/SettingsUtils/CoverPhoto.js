@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef, useContext } from "react";
 import Image from "next/image";
 import { useMoralis } from "react-moralis";
-import uploadBase64ToIPFS from "../../../utils/image-crop/uploadBase64ToIPFS";
+import { uploadBase64ToIPFS } from "../../../utils/image-crop/uploadToIPFS";
 import LoadingContext from "../../../../store/loading-context";
 import StatusContext from "../../../../store/status-context";
 import CropImageModal from "../../CreateNFT/CreateNFTUtils/CropImageModal";

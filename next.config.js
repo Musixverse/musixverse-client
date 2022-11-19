@@ -13,7 +13,7 @@ module.exports = withPWA({
 		return config;
 	},
 	images: {
-		domains: ["pbs.twimg.com", "gateway.moralisipfs.com", "ipfs.moralis.io"],
+		domains: ["pbs.twimg.com", "gateway.musixverse.com", "ipfs.moralis.io"],
 	},
 	// for running with docker
 	output: "standalone",

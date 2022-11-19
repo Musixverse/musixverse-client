@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useMoralis } from "react-moralis";
 import StatusContext from "../../../../store/status-context";
 import LoadingContext from "../../../../store/loading-context";
-import uploadFileToIPFS from "../../../utils/image-crop/uploadFileToIPFS";
+import { uploadFileToIPFS } from "../../../utils/image-crop/uploadToIPFS";
 import { bytesToMegaBytes } from "../../../utils/Convert";
 
 const Step3Form = ({ unlockableContent, setUnlockableContent }) => {

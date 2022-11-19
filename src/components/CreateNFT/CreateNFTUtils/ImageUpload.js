@@ -51,7 +51,7 @@ export default function ImageUpload({ coverArtUrl, setCoverArtUrl, setCoverArtMi
 
 	const handleImageUpload = async (event) => {
 		// If file size is > 10 MB show error box
-		if (event.target.files[0].size > 10000000) {
+		if (event.target.files[0] && event.target.files[0].size > 10000000) {
 			setError({
 				title: "File size too large",
 				message: "Uploaded image should be less than 10 MB",

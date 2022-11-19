@@ -220,11 +220,13 @@ export const createNFT = [
 		body: (
 			<>
 				<p>
-					Head on to the create page, fill in all the details, and create/schedule your NFT. That’s all you need to do to create an NFT on Musixverse. 
+					Head on to the create page, fill in all the details, and create/schedule your NFT. That’s all you need to do to create an NFT on Musixverse.
 					<br />
 					You can also follow this{" "}
 					<span className="font-medium underline underline-offset-2 text-primary-500">
-						<Link href="https://medium.com/@musixverse/how-to-create-an-nft-on-musixverse-15e58cb2bee1">step-by-step guide to create an NFT on Musixverse.</Link>
+						<Link href="https://medium.com/@musixverse/how-to-create-an-nft-on-musixverse-15e58cb2bee1">
+							step-by-step guide to create an NFT on Musixverse.
+						</Link>
 					</span>
 				</p>
 			</>
@@ -254,7 +256,7 @@ export const createNFT = [
 						<strong>Cover Art:</strong>
 						<ul className="list-disc pl-4">
 							<li>File types supported: Any image file</li>
-							<li>Max file size: 1 GB</li>
+							<li>Max file size: 10 MB</li>
 							<li>Recommended size: 640 x 640 px</li>
 						</ul>
 					</li>
@@ -262,7 +264,7 @@ export const createNFT = [
 						<strong>Audio File:</strong>
 						<ul className="list-disc pl-4">
 							<li>File types supported: Any audio file</li>
-							<li>Max file size: 1 GB</li>
+							<li>Max file size: 200 MB</li>
 						</ul>
 					</li>
 					<li>
@@ -270,11 +272,11 @@ export const createNFT = [
 						Apple Music, etc
 					</li>
 					<li>
-						You can also follow the standard {" "}
+						You can also follow the standard{" "}
 						<span className="font-medium underline underline-offset-2 text-primary-500">
 							<Link href="https://medium.com/@musixverse/musixverse-nft-guidelines-3664764ecd7f">Musixverse NFT guidelines</Link>
-						</span>
-						{" "}to create your NFTs.
+						</span>{" "}
+						to create your NFTs.
 					</li>
 				</ul>
 			</>

@@ -58,7 +58,7 @@ export default function NewAudioPlayer() {
 							playerIsLoaded: true,
 							isPlaying: true,
 							currentDuration: durTime,
-							audioTag: audioTag.current
+							audioTag: audioTag.current,
 						};
 					});
 					clearInterval(intervalId);
@@ -89,13 +89,12 @@ export default function NewAudioPlayer() {
 	const singer = currSongTraits.artistName;
 	const imgSrc = currSongTraits.nftCover;
 	let nftPrice = undefined;
-	if(currSongTraits.price)
-		nftPrice = Moralis.Units.FromWei(currSongTraits.price);
+	if (currSongTraits.price) nftPrice = Moralis.Units.FromWei(currSongTraits.price);
 	const isArtistVerified = currSongTraits.isArtistVerified;
 	const audioSrc = currSongTraits.audioURL;
 	const tokenId = currSongTraits.tokenId;
 	const redirectLink = `/track/polygon/${tokenId}`;
-	
+
 	/******************** HELPER METHODS *****************/
 	//Function to get the current time and the duration time
 	const setProgress = (e) => {
@@ -150,10 +149,9 @@ export default function NewAudioPlayer() {
 
 	const nextSong = () => {
 		// Or maybe make the setUpdate queue true and get more songs
-		let newCurrIdx = audioPlayerProps.currentlyPlayingIdx+1;
-		if (audioPlayerProps.currentlyPlayingIdx === audioPlayerProps.queue.length - 1) 
-			newCurrIdx = 0;
-		if(newCurrIdx !== audioPlayerProps.currentlyPlayingIdx){
+		let newCurrIdx = audioPlayerProps.currentlyPlayingIdx + 1;
+		if (audioPlayerProps.currentlyPlayingIdx === audioPlayerProps.queue.length - 1) newCurrIdx = 0;
+		if (newCurrIdx !== audioPlayerProps.currentlyPlayingIdx) {
 			setAudioPlayerProps((prevProps) => {
 				return {
 					...prevProps,
@@ -168,10 +166,9 @@ export default function NewAudioPlayer() {
 
 	const prevSong = () => {
 		let newCurrIdx = audioPlayerProps.currentlyPlayingIdx - 1;
-		if (audioPlayerProps.currentlyPlayingIdx === 0) 
-			newCurrIdx = audioPlayerProps.queue.length-1;
-		
-		if(newCurrIdx !== audioPlayerProps.currentlyPlayingIdx){	
+		if (audioPlayerProps.currentlyPlayingIdx === 0) newCurrIdx = audioPlayerProps.queue.length - 1;
+
+		if (newCurrIdx !== audioPlayerProps.currentlyPlayingIdx) {
 			setAudioPlayerProps((prevProps) => {
 				return {
 					...prevProps,
@@ -184,9 +181,24 @@ export default function NewAudioPlayer() {
 		if (!audioPlayerProps.isPlaying) playTrackHandler();
 	};
 
+	const handlePlayerClose = () => {
+		setAudioPlayerProps((prevProps) => {
+			return {
+				...prevProps,
+				currentlyPlayingIdx: -1,
+			};
+		});
+	};
+
 	//Global Audio Player Component
 	return (
 		<div className="md:w-[364px] md:h-[72px] md:hover:h-[280px] group transition-[width,height] duration-500 ease-in-out fixed z-40 overflow-hidden left-4 bottom-4 md:hover:w-[500px]">
+			<div
+				onClick={handlePlayerClose}
+				className="rounded-lg p-1 absolute z-10 hidden cursor-pointer top-1 right-1 group-hover:flex items-center justify-center backdrop-blur-[40px] backdrop-brightness-110 hover:backdrop-brightness-150"
+			>
+				<span class="material-symbols-outlined">close</span>
+			</div>
 			{/* Normal state bg-div */}
 			<div
 				className="absolute z-0 w-full h-full rounded-xl"

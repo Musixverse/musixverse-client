@@ -184,7 +184,7 @@ export const createNFT = [
 				<p>
 					Anyone with a verified Artist account can create an NFT on Musixverse. &nbsp;
 					<span className="font-medium underline underline-offset-2 text-primary-500">
-						<Link href="/profile/verify">How do I verify my profile?</Link>
+						<Link href="/profile/verify">How do I verify my Artist profile?</Link>
 					</span>
 				</p>
 			</>
@@ -217,7 +217,18 @@ export const createNFT = [
 	},
 	{
 		heading: "How do I create an NFT on Musixverse?",
-		body: "Head on to the create page, fill in all the details, and create/schedule your NFT. That’s all you need to do to create an NFT on Musixverse.",
+		body: (
+			<>
+				<p>
+					Head on to the create page, fill in all the details, and create/schedule your NFT. That’s all you need to do to create an NFT on Musixverse. 
+					<br />
+					You can also follow this{" "}
+					<span className="font-medium underline underline-offset-2 text-primary-500">
+						<Link href="https://medium.com/@musixverse/how-to-create-an-nft-on-musixverse-15e58cb2bee1">step-by-step guide to create an NFT on Musixverse.</Link>
+					</span>
+				</p>
+			</>
+		),
 		content_id: "collapseThree",
 	},
 	{
@@ -258,6 +269,13 @@ export const createNFT = [
 						<strong>Links to music platforms:</strong> Provide links of the song that you already released to the streaming platforms like Spotify,
 						Apple Music, etc
 					</li>
+					<li>
+						You can also follow the standard {" "}
+						<span className="font-medium underline underline-offset-2 text-primary-500">
+							<Link href="https://medium.com/@musixverse/musixverse-nft-guidelines-3664764ecd7f">Musixverse NFT guidelines</Link>
+						</span>
+						{" "}to create your NFTs.
+					</li>
 				</ul>
 			</>
 		),
@@ -265,7 +283,7 @@ export const createNFT = [
 	},
 	{
 		heading: "How much does it cost to create an NFT?",
-		body: "It costs less than $0.01 to create an NFT.",
+		body: "It costs less than $0.01 to create an NFT. You just need to pay for the gas fees.",
 		content_id: "collapseFive",
 	},
 ];

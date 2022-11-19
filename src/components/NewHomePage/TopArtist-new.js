@@ -2,15 +2,16 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useTheme } from "next-themes";
-import cover_sarthak from "../../../public/assets/new-homepage/cover_sarthak.png";
-import cover_m from "../../../public/assets/new-homepage/cover_m.png";
 import SwiperArtist from "./utils/SwiperArtist";
-import swiperBG_b from "../../../public/assets/homepage/swiperBG_b.png";
-import swiperBG_w from "../../../public/assets/homepage/swiperBG_w.png";
+import swiperBG from "../../../public/assets/homepage/swiperBG.png";
+import sarthak_d_b from "../../../public/assets/new-homepage/cover_sarthak_d.png";
+import sarthak_d_w from "../../../public/assets/new-homepage/cover_sarthak_w.png";
+import sarthak_m_d from "../../../public/assets/new-homepage/sarthak_d.png";
+import sarthak_m_w from "../../../public/assets/new-homepage/sarthak_w.png";
 
 export default function TopArtists() {
-	  const { theme } = useTheme();
-	const [bg, setBg] = useState([cover_sarthak, cover_m]);
+	const { theme } = useTheme();
+	const [bg, setBg] = useState([sarthak_d_b,sarthak_d_w,sarthak_m_d,sarthak_m_w]);
 
 	return (
 		<div className="relative mt-28">
@@ -36,11 +37,11 @@ export default function TopArtists() {
 						</span>
 					</div>
 				</div>
-				<div className="hidden w-full h-full duration-500 ease-out md:block hover:scale-110">
-					<Image src={bg[0]} className="hidden transition duration-500" alt="Cover art for Top Artist" layout="responsive" priority />
+				<div className="hidden w-full h-full duration-500 transition-all ease-out md:block hover:scale-110">
+					<Image src={theme==='dark'? bg[0]:bg[1]} alt="Cover art for Top Artist" layout="responsive" priority />
 				</div>
 				<div className="w-full h-full duration-500 ease-out md:hidden hover:scale-110">
-					<Image src={bg[1]} className="hidden transition duration-500" alt="Cover art for Top Artist" layout="responsive" priority />
+					<Image src={theme==='dark'? bg[2]:bg[3]} alt="Cover art for Top Artist" layout="responsive" priority />
 				</div>
 			</div>
 
@@ -48,8 +49,8 @@ export default function TopArtists() {
 			<SwiperArtist setCurrBg={setBg} />
 
 			{/* Bottom image section */}
-			<div className="absolute hidden w-full md:block top-3/4">
-				<Image src={theme === 'dark'? swiperBG_b:swiperBG_w} alt="Top Artist section background design" layout="responsive" priority />
+			<div className="absolute">
+				<Image src={swiperBG} alt="Top Artist section background design" layout="responsive" priority />
 			</div>
 		</div>
 	);

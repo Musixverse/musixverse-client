@@ -11,6 +11,8 @@ import NewHero from "../components/HomePage/NewHero";
 import ShareAndEarn from "../components/HomePage/ShareAndEarn";
 import GetStartedAsArtist from "../components/HomePage/GetStartedAsArtist";
 import GetStartedAsFan from "../components/HomePage/GetStartedAsFan";
+import GetStartedArtist from "../components/HomePage/GetStartedArtist";
+import GetStartedFan from "../components/HomePage/GetStartedFan";
 
 function Home() {
 	return (
@@ -27,8 +29,10 @@ function Home() {
 					<NewHero/>
 					<TopArtists />
 					<ShareAndEarn/>
-					<GetStartedAsArtist/>
-					<GetStartedAsFan/>
+					<GetStartedArtist/>
+					<GetStartedFan/>
+					{/* <GetStartedAsArtist/> */}
+					{/* <GetStartedAsFan/> */}
 					{/* <Section2New />
 					<Section2 />
 					<Section3 /> */}

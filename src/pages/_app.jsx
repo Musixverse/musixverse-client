@@ -57,17 +57,12 @@ function App({ Component, pageProps, router }) {
 		isPlaying: false,
 	});
 
-	// This is a workaround for the issue with the next-themes package. Without this, the theme was not being applied correctly.
-	const [mounted, setMounted] = useState(false);
-	// When mounted on client, now we can show the UI
 	useEffect(() => {
-		setMounted(true);
 		connectSmartContract();
 		if (navigator.userAgent.indexOf("Chrome") == -1 && navigator.userAgent.indexOf("Firefox") == -1) {
 			setBrowserNotSupportedModalOpen(true);
 		}
 	}, []);
-	if (!mounted) return null;
 
 	return (
 		<>
@@ -112,7 +107,7 @@ function App({ Component, pageProps, router }) {
 
 			<ErrorBoundary>
 				<MoralisProvider appId={PARSE_APP_ID} serverUrl={PARSE_SERVER_URL}>
-					<ThemeProvider attribute="class" enableSystem={false}>
+					<ThemeProvider attribute="class" enableSystem={false} disableTransitionOnChange>
 						<BrowserNotSupportedContext.Provider value={[isBrowserNotSupportedModalOpen, setBrowserNotSupportedModalOpen]}>
 							<LoadingContext.Provider value={[isLoading, setLoading]}>
 								<AccessLevelContext.Provider value={[accessLevel, setAccessLevel]}>

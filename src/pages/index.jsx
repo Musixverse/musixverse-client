@@ -6,14 +6,27 @@ import Section3 from "../components/HomePage/HomePage_section4";
 import Section4 from "../components/HomePage/HomePage_section5";
 import Section2New from "../components/HomePage/HomePageSection2";
 import HeroSection from "../components/HomePage/HeroSection";
-import TopArtists from "../components/NewHomePage/TopArtist-new";
+// import TopArtists from "../components/NewHomePage/TopArtist-new";
 import NewHero from "../components/HomePage/NewHero";
-import ShareAndEarn from "../components/HomePage/ShareAndEarn";
-import GetStartedAsArtist from "../components/HomePage/GetStartedAsArtist";
-import GetStartedAsFan from "../components/HomePage/GetStartedAsFan";
-import GetStartedArtist from "../components/HomePage/GetStartedArtist";
-import GetStartedFan from "../components/HomePage/GetStartedFan";
+// import ShareAndEarn from "../components/HomePage/ShareAndEarn";
+// import GetStartedAsArtist from "../components/HomePage/GetStartedAsArtist";
+// import GetStartedAsFan from "../components/HomePage/GetStartedAsFan";
+// import GetStartedArtist from "../components/HomePage/GetStartedArtist";
+// import GetStartedFan from "../components/HomePage/GetStartedFan";
 import NewsLetter from "../layout/NewsLetter";
+import dynamic from "next/dynamic";
+const TopArtists = dynamic(() => import("../components/NewHomePage/TopArtist-new"), {
+	ssr: false,
+});
+const ShareAndEarn = dynamic(() => import("../components/HomePage/ShareAndEarn"), {
+	ssr: false,
+});
+const GetStartedArtist = dynamic(() => import("../components/HomePage/GetStartedArtist"), {
+	ssr: false,
+});
+const GetStartedFan = dynamic(() => import("../components/HomePage/GetStartedFan"), {
+	ssr: false,
+});
 
 function Home() {
 	return (

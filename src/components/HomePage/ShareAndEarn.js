@@ -16,12 +16,12 @@ export default function ShareAndEarn() {
 				<div className="relative w-[428px] lg:w-[476px] h-[317px] xl:w-[688px] xl:h-[462px] 2xl:w-[754px] 2xl:h-[526px]">
 					<Image src={theme === "dark" ? instruments : instruments_w} objectFit="contain" layout="fill" priority alt="guitars" />
 				</div>
-				<div className="md:-ml-24 xl:ml-shareEarnGuitars 2xl:-ml-12 w-full md:w-fit md:h-fit flex flex-col backdrop-blur-[40px] rounded-3xl p-3 xl:p-5 bg-light-300 dark:bg-[#282828]">
+				<div className="md:-ml-24 xl:ml-shareEarnGuitars 2xl:-ml-32 w-full md:w-fit md:h-fit flex flex-col backdrop-blur-[40px] rounded-3xl p-3 xl:p-5 bg-light-300 dark:bg-[#282828]">
 					<div className="flex justify-between w-full">
 						<h3 className="px-4 pt-4 mb-3 text-2xl font-semibold lg:text-3xl xl:text-4xl">Share & Earn 10%</h3>
-						<button className="backdrop-blur-[40px] backdrop-brightness-[1.75] p-3 flex items-center justify-center self-start rounded-xl">
+						{/* <button className="backdrop-blur-[40px] backdrop-brightness-[1.75] p-3 flex items-center justify-center self-start rounded-xl">
 							<span className="material-symbols-outlined">info</span>
-						</button>
+						</button> */}
 					</div>
 					<p className="max-w-md mb-3 text-[12px] lg:text-base xl:text-lg px-4">
 						of the transaction fee whenever someone buys an NFT using your link.

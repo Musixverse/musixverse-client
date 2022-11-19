@@ -1,13 +1,13 @@
 import Image from "next/image";
 import { useTheme } from "next-themes";
-import instruments from "../../../public/assets/homepage/shareEarnInstrument.png";
-import instruments_w from "../../../public/assets/homepage/shareEarnInstrument_w.png";
+import instruments from "../../../public/assets/homepage/instrument_b.svg";
+import instruments_w from "../../../public/assets/homepage/instrument_w.svg";
 
 export default function ShareAndEarn() {
 	const { theme } = useTheme();
 
 	return (
-		<div className="bg-[url('/assets/homepage/shareEarnBG_w.png')] dark:bg-[url('/assets/homepage/shareEarnBG.png')] relative flex items-center md:pt-20 bg-no-repeat bg-cover bg-center w-full overflow-x-hidden">
+		<div className="relative flex items-center w-full overflow-x-hidden bg-center bg-no-repeat bg-cover md:pt-28">
 			<h1 className="z-10 hidden md:block text-[#3A3A3A] font-semibold text-7xl lg:text-8xl absolute leading-none -mt-80 lg:mt-shareEarn2XlHeading">
 				Share & <br /> Earn 10%
 			</h1>

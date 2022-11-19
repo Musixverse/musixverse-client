@@ -49,9 +49,9 @@ export default function TopArtists() {
 			<SwiperArtist setCurrBg={setBg} />
 
 			{/* Bottom image section */}
-			<div className="absolute">
+			{/* <div className="absolute">
 				<Image src={swiperBG} alt="Top Artist section background design" layout="responsive" priority />
-			</div>
+			</div> */}
 		</div>
 	);
 }

@@ -33,7 +33,7 @@ export default function PromoCarousel() {
 				<Image src={theme === 'dark' ? imgSrcs_darkTheme[(currSlide-1)%2] : imgSrcs_lightTheme[(currSlide-1)%2]} objectFit="cover" layout="fill" alt="artist"/>
 			</div>
 			<div className="flex-1 mb-20 md:mb-0 md:-mt-20 promo-carousel-container" id="slider">
-				<input type="radio" name="slider" id="s1" readOnly defaultChecked checked={currSlide === 1}/>
+				<input type="radio" name="slider" id="s1" readOnly checked={currSlide === 1}/>
 				<input type="radio" name="slider" id="s2" readOnly checked={currSlide === 2}/>
 				<input type="radio" name="slider" id="s3" readOnly checked={currSlide === 3}/>
 				<input type="radio" name="slider" id="s4" readOnly checked={currSlide === 4}/>

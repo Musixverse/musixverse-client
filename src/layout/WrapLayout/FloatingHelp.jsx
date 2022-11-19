@@ -15,7 +15,7 @@ export default function FloatingHelp() {
 							</Link>
 						</li>
 						<li className="w-full px-4 py-3 text-sm bg-transparent cursor-pointer font-secondary whitespace-nowrap hover:bg-light-300 dark:hover:bg-dark-800">
-							<Link href="https://chat.whatsapp.com/FrWT0eT3uxF9ZKO3bB8GIt" passHref>
+							<Link href="https://chat.whatsapp.com/KNT3YkJubsV7VagUeGMDr7" passHref>
 								<a target="_blank" rel="noopener noreferrer" className="flex items-center">
 									<i className="text-lg fa-brands fa-whatsapp"></i>
 									<span className="ml-2">WhatsApp</span>

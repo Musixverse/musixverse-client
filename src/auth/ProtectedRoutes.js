@@ -3,6 +3,7 @@ import { appRoutes } from "./constants";
 import { useMoralis } from "react-moralis";
 import LoadingContext from "../../store/loading-context";
 import AccessLevelContext from "../../store/accessLevel-context";
+import { getCookie, deleteCookie, setCookie } from "cookies-next";
 
 // Check if user is on the client (browser) or server
 const isBrowser = () => typeof window !== "undefined";
@@ -20,7 +21,7 @@ const ProtectedRoutes = ({ router, children }) => {
 	const [accessLevel, setAccessLevel] = useContext(AccessLevelContext);
 
 	// Identify authenticated user
-	const { isAuthenticated, user, isInitialized, isWeb3Enabled, enableWeb3, refetchUserData } = useMoralis();
+	const { isAuthenticated, user, isInitialized, logout, isWeb3Enabled, enableWeb3, refetchUserData } = useMoralis();
 
 	const protectedRoutes = [appRoutes.REGISTER, appRoutes.SETTINGS, appRoutes.CREATE_NFT];
 	/**
@@ -89,7 +90,6 @@ const ProtectedRoutes = ({ router, children }) => {
 				setAccessLevel(0);
 			} else {
 				// Authenticated
-				refetchData();
 				if (isBrowser() && !user.attributes.email) {
 					setAccessLevel(1);
 				} else if (isBrowser() && !user.attributes.emailVerified && !user.attributes.isArtist) {
@@ -106,6 +106,32 @@ const ProtectedRoutes = ({ router, children }) => {
 			}
 		}
 	}, [router.pathname, isInitialized, isAuthenticated]);
+
+	useEffect(() => {
+		const handleLogout = async () => {
+			if (router.pathname != "/") router.push("/");
+			await logout();
+			if (window.localStorage.walletconnect) {
+				window.localStorage.removeItem("walletconnect");
+			}
+			await fetch("/api/auth/logout", {
+				method: "post",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({}),
+			});
+		};
+
+		if (isInitialized) {
+			if (getCookie("logout") === true) {
+				if (isAuthenticated) {
+					handleLogout();
+				}
+				deleteCookie("logout");
+			}
+		}
+	}, [router.pathname, isInitialized, isAuthenticated, logout, router]);
 
 	useEffect(() => {
 		if (!isWeb3Enabled && isAuthenticated) enableWeb3();

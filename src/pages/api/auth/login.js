@@ -6,6 +6,7 @@ export default function handler(req, res) {
 		cookie.serialize("currentUser", JSON.stringify(req.body.currentUser), {
 			httpOnly: true,
 			secure: process.env.NODE_ENV !== "development",
+			maxAge: 24 * 60 * 60, // seconds
 			sameSite: "strict",
 			path: "/",
 		})

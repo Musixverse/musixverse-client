@@ -4,7 +4,7 @@ import styles from "../../../styles/HomePage/getStartedArtist.module.css";
 
 export default function GetStartedArtist(){
     return(
-        <div className="rounded-[1.5rem] md:p-0 p-4 lg:rounded-[2.5rem] xl:rounded-[3.5rem] flex flex-col md:flex-row md:items-center bg-[#202020] mt-28">
+        <div className="rounded-[1.5rem] md:p-0 p-4 lg:rounded-[2.5rem] xl:rounded-[3.5rem] flex flex-col md:flex-row md:items-center bg-light-100 dark:bg-[#202020] mt-28">
             <div className={styles['img']}>
                 <Image alt="artists" src={"/assets/homepage/startArtistdark.png"} priority objectFit="cover" layout="fill"/>
             </div>
@@ -17,7 +17,7 @@ export default function GetStartedArtist(){
                             <h1 className={styles['units']}>01</h1>
                             <div className="flex flex-col">
                                 <h2 className={styles['info-headers']}>Get your crypto wallet ready</h2>
-                                <p className={styles['info-body']}>Check out our guide on how to set up a wallet <a href="https://medium.com/@musixverse/how-to-set-up-a-crypto-wallet-metamask-477be25c0f5f" target={"_blank"} rel="noreferrer" className="text-primary-500 hover:text-primary-400">here</a></p>
+                                <p className={styles['info-body']}>Check out our guide on how to set up a wallet <a href="https://medium.com/@musixverse/how-to-set-up-a-crypto-wallet-metamask-477be25c0f5f" target={"_blank"} rel="noreferrer" className="text-primary-500 hover:text-primary-400">here.</a></p>
                             </div>
                         </div>
                         <div className="flex flex-col mt-4 md:mt-0 md:ml-4 xl:ml-8 md:flex-row">

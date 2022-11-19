@@ -12,18 +12,38 @@ export default function PromoCarousel() {
 	let xDown = null;
 	let yDown = null;
 
-	useEffect(()=>{
-		const carouselRider = setInterval(()=>{
-			setCurrSlide((prevSlide)=>{
-				return (prevSlide)%5+1;
+	useEffect(() => {
+		const carouselRider = setInterval(() => {
+			setCurrSlide((prevSlide) => {
+				return (prevSlide) % 5 + 1;
 			});
-		},15000)
+		}, 15000)
 
-		return ()=>clearInterval(carouselRider);
-	},[]);
+		return () => clearInterval(carouselRider);
+	}, []);
 
-	const imgSrcs_darkTheme = ["/assets/homepage/harryFull_d.png","/assets/homepage/zubaanFull_d.png"]
-	const imgSrcs_lightTheme = ["/assets/homepage/harryFull_w.png","/assets/homepage/zubaanFull_w.png"]
+	const imgSrcs_darkTheme = [
+		"/assets/homepage/slider/harryFull_b.png",
+		"/assets/homepage/slider/zubaanFull_b.png",
+		"/assets/homepage/slider/jatayuFull_b.png",
+		"/assets/homepage/slider/sarthakFull_b.png",
+		"/assets/homepage/slider/poojaFull_b.png",
+		"/assets/homepage/slider/sommaiyaFull_b.png",
+		"/assets/homepage/slider/submarineFull_b.png",
+		"/assets/homepage/slider/adityaFull_b.png",
+		"/assets/homepage/slider/mxvFull_b.png",
+	]
+	const imgSrcs_lightTheme = [
+		"/assets/homepage/slider/harryFull_w.png",
+		"/assets/homepage/slider/zubaanFull_w.png",
+		"/assets/homepage/slider/jatayuFull_w.png",
+		"/assets/homepage/slider/sarthakFull_w.png",
+		"/assets/homepage/slider/poojaFull_w.png",
+		"/assets/homepage/slider/sommaiyaFull_w.png",
+		"/assets/homepage/slider/submarineFull_w.png",
+		"/assets/homepage/slider/adityaFull_w.png",
+		"/assets/homepage/slider/mxvFull_w.png",
+	]
 
 	//This function has to update the image being displayed
 	const handleNftCardClick = (e, idx) => {
@@ -74,11 +94,11 @@ export default function PromoCarousel() {
 				<Image src={theme === 'dark' ? imgSrcs_darkTheme[(currSlide-1)%2] : imgSrcs_lightTheme[(currSlide-1)%2]} objectFit="cover" layout="fill" alt="artist"/>
 			</div>
 			<div className="flex-1 mb-20 md:mb-0 md:-mt-20 promo-carousel-container" id="slider">
-				<input type="radio" name="slider" id="s1" readOnly checked={currSlide === 1}/>
-				<input type="radio" name="slider" id="s2" readOnly checked={currSlide === 2}/>
-				<input type="radio" name="slider" id="s3" readOnly checked={currSlide === 3}/>
-				<input type="radio" name="slider" id="s4" readOnly checked={currSlide === 4}/>
-				<input type="radio" name="slider" id="s5" readOnly checked={currSlide === 5}/>
+				<input type="radio" name="slider" id="s1" readOnly checked={currSlide === 1} />
+				<input type="radio" name="slider" id="s2" readOnly checked={currSlide === 2} />
+				<input type="radio" name="slider" id="s3" readOnly checked={currSlide === 3} />
+				<input type="radio" name="slider" id="s4" readOnly checked={currSlide === 4} />
+				<input type="radio" name="slider" id="s5" readOnly checked={currSlide === 5} />
 
 				<label onTouchStart={handleTouchStart} onTouchMove={handleTouchMove} onClick={(e)=>{handleNftCardClick(e, 1)}} htmlFor="s1" id="slide1"><PromoNftCard /></label>
 				<label onTouchStart={handleTouchStart} onTouchMove={handleTouchMove} onClick={(e)=>{handleNftCardClick(e, 2)}} htmlFor="s2" id="slide2"><PromoNftCard /></label>

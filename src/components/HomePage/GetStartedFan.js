@@ -3,16 +3,18 @@ import Image from "next/image";
 import { useMoralis } from "react-moralis";
 import styles from "../../../styles/HomePage/getStartedFan.module.css";
 import AuthModalContext from "../../../store/authModal-context";
+import { useTheme } from "next-themes";
 
 export default function GetStartedFan() {
+	const { theme } = useTheme();
 	const [, setAuthModalOpen] = useContext(AuthModalContext);
 	const { user, isAuthenticated } = useMoralis();
 
 	return (
-		<div className="rounded-[1.5rem] md:p-0 p-4 lg:rounded-[2.5rem] xl:rounded-[3.5rem] flex flex-col md:flex-row-reverse md:items-center bg-[#202020] my-28">
-			<div className={styles["img"]}>
-				<Image alt="artists" src={"/assets/homepage/startFandark.png"} priority objectFit="cover" layout="fill" />
-			</div>
+		<div className="rounded-[1.5rem] md:p-0 p-4 lg:rounded-[2.5rem] xl:rounded-[3.5rem] flex flex-col md:flex-row-reverse md:items-center bg-light-100 dark:bg-[#202020] my-28">
+		<div className={styles['img']}>
+			<Image alt="artists" src={theme==="dark"?"/assets/homepage/startFandark.png":"/assets/homepage/startFanlight.png"} priority objectFit="cover" layout="fill"/>
+		</div>
 
 			<div className="flex flex-col flex-1 md:pl-16">
 				<h2 className={styles["get-started-heading"]}>Get Started as a Fan</h2>

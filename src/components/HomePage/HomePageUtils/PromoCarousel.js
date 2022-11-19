@@ -58,7 +58,7 @@ export default function PromoCarousel() {
 				setCurrSlide((prev)=>{return prev === 1? 5:prev-1});
 			} else {
 				/* right swipe */
-				setCurrSlide((prev)=>{return prev === 5? 0:prev+1});
+				setCurrSlide((prev)=>{return prev === 5? 1:prev+1});
 			}
 		}
 		/* reset values */

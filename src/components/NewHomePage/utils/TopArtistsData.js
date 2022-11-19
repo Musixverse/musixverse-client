@@ -26,7 +26,7 @@ export const TopArtistsData = [
 		instagramProfileURL: "https://www.instagram.com/submarine_in_space",
 		imageURL_b: require("../../../../public/assets/new-homepage/submarine_c_d.png"),
 		imageURL_w: require("../../../../public/assets/new-homepage/submarine_c_w.png"),
-		description: "The Critically Acclaimed IInstrumental Jazz-Rock Band",
+		description: "The Critically Acclaimed Instrumental Jazz-Rock Band",
 		bgURL_d_b: require("../../../../public/assets/new-homepage/cover_submarine_d.png"),
 		bgURL_m_b: require("../../../../public/assets/new-homepage/submarine_d.png"),
 		bgURL_d_w: require("../../../../public/assets/new-homepage/cover_submarine_w.png"),

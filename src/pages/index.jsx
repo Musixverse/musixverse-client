@@ -13,6 +13,7 @@ import GetStartedAsArtist from "../components/HomePage/GetStartedAsArtist";
 import GetStartedAsFan from "../components/HomePage/GetStartedAsFan";
 import GetStartedArtist from "../components/HomePage/GetStartedArtist";
 import GetStartedFan from "../components/HomePage/GetStartedFan";
+import NewsLetter from "../layout/NewsLetter";
 
 function Home() {
 	return (
@@ -26,17 +27,18 @@ function Home() {
 				{/* <Banner /> */}
 				{/* <HeroSection /> */}
 				<div className="flex flex-col w-full max-w-[1920px] px-6 md:px-8 lg:px-16 xl:px-20 2xl:px-36">
-					<NewHero/>
+					<NewHero />
 					<TopArtists />
-					<ShareAndEarn/>
-					<GetStartedArtist/>
-					<GetStartedFan/>
+					<ShareAndEarn />
+					<GetStartedArtist />
+					<GetStartedFan />
 					{/* <GetStartedAsArtist/> */}
 					{/* <GetStartedAsFan/> */}
 					{/* <Section2New />
 					<Section2 />
 					<Section3 /> */}
 				</div>
+				<NewsLetter />
 				{/* <Section4 /> */}
 			</div>
 		</>

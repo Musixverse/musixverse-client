@@ -19,7 +19,7 @@ export default function GetStartedArtist() {
 				<div className="flex flex-col w-full">
 					<div className="flex md:flex-row flex-col items-start justify-between w-full max-w-[90%]">
 						<div className="flex flex-col md:flex-row">
-							<h1 className={styles["units"]}>01</h1>
+							<h1 className={"w-[39px] xl:w-[49px] 2xl:w-[59px] overflow-visible "+styles["units"]}>01</h1>
 							<div className="flex flex-col">
 								<h2 className={styles["info-headers"]}>Get your crypto wallet ready</h2>
 								<p className={styles["info-body"]}>
@@ -58,7 +58,7 @@ export default function GetStartedArtist() {
 						</div>
 					</div>
 					<div className="flex flex-col my-4 md:my-0 md:mt-7 md:flex-row">
-						<h1 className={styles["units"]}>03</h1>
+						<h1 className={"w-[39px] xl:w-[49px] 2xl:w-[59px] overflow-visible "+styles["units"]}>03</h1>
 						<div className="flex flex-col">
 							<h2 className={styles["info-headers"]}>Verify and Create</h2>
 							<p className={styles["info-body"]}>Verify your artist profile using a government issued ID and start minting NFTs.</p>

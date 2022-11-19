@@ -8,7 +8,7 @@ export default function ShareAndEarn() {
 
 	return (
 		<div className="bg-[url('/assets/homepage/shareEarnBG_w.png')] dark:bg-[url('/assets/homepage/shareEarnBG.png')] relative flex items-center md:pt-20 bg-no-repeat bg-cover bg-center w-full overflow-x-hidden">
-			<h1 className="hidden md:block text-[#3A3A3A] font-semibold text-7xl lg:text-8xl absolute leading-none z-[1] -mt-80 lg:mt-shareEarn2XlHeading">
+			<h1 className="z-10 hidden md:block text-[#3A3A3A] font-semibold text-7xl lg:text-8xl absolute leading-none -mt-80 lg:mt-shareEarn2XlHeading">
 				Share & <br /> Earn 10%
 			</h1>
 			<div className="flex flex-col-reverse md:flex-row items-center z-[2] md:ml-auto md:w-max w-full">

@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useTheme } from "next-themes";
 import styles from "../../../../styles/HomePage/promoCarousel.module.css";
 import { useRouter } from "next/router";
+import ArtistIntro from "./ArtistIntro";
 
 export default function PromoCarousel() {
 	const { theme } = useTheme();
@@ -80,11 +81,17 @@ export default function PromoCarousel() {
 				<input type="radio" name="slider" id="s4" readOnly checked={currSlide === 4}/>
 				<input type="radio" name="slider" id="s5" readOnly checked={currSlide === 5}/>
 
-				<label onTouchStart={handleTouchStart} onTouchMove={handleTouchMove} onClick={(e)=>{handleNftCardClick(e, 1)}} htmlFor="s1" id="slide1"><PromoNftCard /></label>
+				<label onTouchStart={handleTouchStart} onTouchMove={handleTouchMove} onClick={(e)=>{handleNftCardClick(e, 1)}} htmlFor="s1" id="slide1"><ArtistIntro/></label>
+				<label onTouchStart={handleTouchStart} onTouchMove={handleTouchMove} onClick={(e)=>{handleNftCardClick(e, 2)}} htmlFor="s2" id="slide2"><ArtistIntro/></label>
+				<label onTouchStart={handleTouchStart} onTouchMove={handleTouchMove} onClick={(e)=>{handleNftCardClick(e, 3)}} htmlFor="s3" id="slide3"><ArtistIntro/></label>
+				<label onTouchStart={handleTouchStart} onTouchMove={handleTouchMove} onClick={(e)=>{handleNftCardClick(e, 4)}} htmlFor="s4" id="slide4"><ArtistIntro/></label>
+				<label onTouchStart={handleTouchStart} onTouchMove={handleTouchMove} onClick={(e)=>{handleNftCardClick(e, 5)}} htmlFor="s5" id="slide5"><ArtistIntro/></label>
+
+				{/* <label onTouchStart={handleTouchStart} onTouchMove={handleTouchMove} onClick={(e)=>{handleNftCardClick(e, 1)}} htmlFor="s1" id="slide1"><PromoNftCard /></label>
 				<label onTouchStart={handleTouchStart} onTouchMove={handleTouchMove} onClick={(e)=>{handleNftCardClick(e, 2)}} htmlFor="s2" id="slide2"><PromoNftCard /></label>
 				<label onTouchStart={handleTouchStart} onTouchMove={handleTouchMove} onClick={(e)=>{handleNftCardClick(e, 3)}} htmlFor="s3" id="slide3"><PromoNftCard /></label>
 				<label onTouchStart={handleTouchStart} onTouchMove={handleTouchMove} onClick={(e)=>{handleNftCardClick(e, 4)}} htmlFor="s4" id="slide4"><PromoNftCard /></label>
-				<label onTouchStart={handleTouchStart} onTouchMove={handleTouchMove} onClick={(e)=>{handleNftCardClick(e, 5)}} htmlFor="s5" id="slide5"><PromoNftCard /></label>
+				<label onTouchStart={handleTouchStart} onTouchMove={handleTouchMove} onClick={(e)=>{handleNftCardClick(e, 5)}} htmlFor="s5" id="slide5"><PromoNftCard /></label> */}
 			</div>
 		</div>
 	);

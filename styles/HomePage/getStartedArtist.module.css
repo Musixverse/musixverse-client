@@ -93,6 +93,23 @@
     }
 }
 
+@media (min-width: 340px) and (max-width: 768px){
+    .img{
+        width: 100%;
+        border-radius: 1.5rem;
+    }
+    .get-started-heading{
+        margin-top: 0.75rem;
+    }
+    .info-headers{
+        font-size: 16px;
+        /* line-height: 2.5rem; */
+    }
+    .info-body{
+        font-size: 12px;
+    }
+}
+
 @media (max-width: 380px){
     .img{
         width: 100%;

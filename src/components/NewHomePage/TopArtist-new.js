@@ -38,10 +38,10 @@ export default function TopArtists() {
 					</div>
 				</div>
 				<div className="hidden w-full h-full duration-500 transition-all ease-out md:block hover:scale-110">
-					<Image src={theme==='dark'? bg[0]:bg[1]} alt="Cover art for Top Artist" layout="responsive" priority />
+					<Image src={theme==="dark"? bg[0]:bg[1]} alt="Cover art for Top Artist" layout="responsive" priority />
 				</div>
 				<div className="w-full h-full duration-500 ease-out md:hidden hover:scale-110">
-					<Image src={theme==='dark'? bg[2]:bg[3]} alt="Cover art for Top Artist" layout="responsive" priority />
+					<Image src={theme==="dark"? bg[2]:bg[3]} alt="Cover art for Top Artist" layout="responsive" priority />
 				</div>
 			</div>
 

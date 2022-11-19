@@ -9,7 +9,7 @@ export default function GetStartedArtist(){
     return(
         <div className="rounded-[1.5rem] md:p-0 p-4 lg:rounded-[2.5rem] xl:rounded-[3.5rem] flex flex-col md:flex-row md:items-center bg-light-100 dark:bg-[#202020] mt-28">
             <div className={styles['img']}>
-                <Image alt="artists" src={theme==='dark'? "/assets/homepage/startArtistdark.png": "/assets/homepage/startArtistlight.png"} priority objectFit="cover" layout="fill"/>
+                <Image alt="artists" src={theme==="dark"? "/assets/homepage/startArtistdark.png": "/assets/homepage/startArtistlight.png"} priority objectFit="cover" layout="fill"/>
             </div>
 
             <div className="flex flex-col flex-1 pr-12">

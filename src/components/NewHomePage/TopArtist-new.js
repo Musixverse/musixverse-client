@@ -11,10 +11,10 @@ import sarthak_m_w from "../../../public/assets/new-homepage/sarthak_w.png";
 
 export default function TopArtists() {
 	const { theme } = useTheme();
-	const [bg, setBg] = useState([sarthak_d_b,sarthak_d_w,sarthak_m_d,sarthak_m_w]);
+	const [bg, setBg] = useState([sarthak_d_b, sarthak_d_w, sarthak_m_d, sarthak_m_w]);
 
 	return (
-		<div className="relative mt-28">
+		<div className="relative mt-28 md:mt-40">
 			<h1 className="text-3xl font-semibold text-center font-primary">
 				Top Artists on M<span className="text-primary-500">x</span> Catalog
 			</h1>
@@ -38,10 +38,10 @@ export default function TopArtists() {
 					</div>
 				</div>
 				<div className="hidden w-full h-full duration-500 transition-all ease-out md:block hover:scale-110">
-					<Image src={theme==='dark'? bg[0]:bg[1]} alt="Cover art for Top Artist" layout="responsive" priority />
+					<Image src={theme === "dark" ? bg[0] : bg[1]} alt="Cover art for Top Artist" layout="responsive" priority />
 				</div>
 				<div className="w-full h-full duration-500 ease-out md:hidden hover:scale-110">
-					<Image src={theme==='dark'? bg[2]:bg[3]} alt="Cover art for Top Artist" layout="responsive" priority />
+					<Image src={theme === "dark" ? bg[2] : bg[3]} alt="Cover art for Top Artist" layout="responsive" priority />
 				</div>
 			</div>
 

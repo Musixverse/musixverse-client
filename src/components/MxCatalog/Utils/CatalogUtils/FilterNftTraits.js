@@ -12,7 +12,7 @@ export default function FilterNftTraits({ appliedFilter, setAppliedFilter, setCu
 				<div>
 					<h5 className="text-sm font-bold md:text-base lg:text-lg font-secondary">Filter based on NFT Traits</h5>
 					<p className="font-secondary text-[#7F7F7F] text-[11px] md:text-[13px] lg:text-[15px]">
-						Select NFT Traits such as no. of copies, status and others
+						Select NFT Traits such as no. of copies, status, and others
 					</p>
 				</div>
 				<button

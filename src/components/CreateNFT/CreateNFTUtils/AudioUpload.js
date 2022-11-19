@@ -16,6 +16,17 @@ export default function AudioUpload({ audioFileUrl, setAudioFileUrl, setAudioFil
 		var target = event.target;
 		var fileToUpload = event.target.files[0];
 
+		// If file size is > 200 MB show error box
+		if (event.target.files[0] && event.target.files[0].size > 200000000) {
+			setLoading(false);
+			setError({
+				title: "File size too large",
+				message: "Uploaded file should be less than 200 MB",
+				showErrorBox: true,
+			});
+			return;
+		}
+
 		var audio = document.createElement("audio");
 		if (target.files && fileToUpload) {
 			var reader = new FileReader();
@@ -96,7 +107,7 @@ export default function AudioUpload({ audioFileUrl, setAudioFileUrl, setAudioFil
 					{audioFileUrl ? (
 						<p className="text-sm text-primary-600">Track Uploaded</p>
 					) : (
-						<p className="text-xs">Any Audio file | Max file size: 1 GB</p>
+						<p className="text-xs">Any Audio file | Max file size: 200 MB</p>
 					)}
 				</div>
 			</label>

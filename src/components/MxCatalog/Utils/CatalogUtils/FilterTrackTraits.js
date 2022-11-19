@@ -12,7 +12,7 @@ export default function FilterTrackTraits({ appliedFilter, setAppliedFilter, set
 				<div>
 					<h5 className="text-sm font-bold md:text-base lg:text-lg font-secondary">Filter based on Track Traits</h5>
 					<p className="font-secondary text-[#7F7F7F] text-[11px] md:text-[13px] lg:text-[15px]">
-						Select Track Traits such as Genre, Language and others
+						Select Track Traits such as Genre, Language, and others
 					</p>
 				</div>
 				<button

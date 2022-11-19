@@ -70,6 +70,16 @@ export default function SelectAvatar({ defaultAvatarUrls, avatar, setAvatar }) {
 	};
 
 	const handleImageUpload = (event) => {
+		// If file size is > 10 MB show error box
+		if (event.target.files[0] && event.target.files[0].size > 10000000) {
+			setError({
+				title: "File size too large",
+				message: "Uploaded image should be less than 10 MB",
+				showErrorBox: true,
+			});
+			uploadImage.current.value = "";
+			return;
+		}
 		const imageURL = URL.createObjectURL(event.target.files[0]);
 		uploadImage.current.value = "";
 		setImageToCrop(imageURL);

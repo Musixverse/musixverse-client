@@ -6,6 +6,8 @@ async function uploadFileToIPFS(fileToUpload) {
 
 	const ipfsHash = await fetch(`${process.env.NEXT_PUBLIC_PARSE_SERVER_BASE_URL}/upload-file-to-ipfs`, {
 		method: "POST",
+		maxContentLength: Infinity,
+		maxBodyLength: Infinity,
 		body: fileToUpload,
 	})
 		.then((response) => response.json())
@@ -40,6 +42,8 @@ async function uploadBase64ToIPFS(Moralis, fileToUpload, fileType) {
 
 	const ipfsHash = await fetch(`${process.env.NEXT_PUBLIC_PARSE_SERVER_BASE_URL}/upload-file-to-ipfs`, {
 		method: "POST",
+		maxContentLength: Infinity,
+		maxBodyLength: Infinity,
 		body: formData,
 	})
 		.then((response) => response.json())
@@ -59,6 +63,8 @@ async function uploadJSONToIPFS(Moralis, fileToUpload, fileType) {
 			Connection: "keep-alive",
 			Accept: "*",
 		},
+		maxContentLength: Infinity,
+		maxBodyLength: Infinity,
 		body: JSON.stringify({
 			ethAddress: Moralis.User.current().attributes.ethAddress,
 			file: fileToUpload,

@@ -12,6 +12,7 @@ import { DISCORD_SUPPORT_CHANNEL_INVITE_LINK } from "../../config/constants";
 import RequiredAsterisk from "../RequiredAsterisk";
 import LoadingContext from "../../../store/loading-context";
 import StatusContext from "../../../store/status-context";
+import { deleteCookie } from "cookies-next";
 
 export default function AuthModal({ isOpen = "", onClose = "" }) {
 	const router = useRouter();
@@ -116,7 +117,7 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 			});
 
 			// Authenticate and login via parse
-			await authenticate({
+			authenticate({
 				signingMessage: message,
 			})
 				.then(async function (user) {
@@ -127,9 +128,11 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 								"Content-Type": "application/json",
 							},
 							body: JSON.stringify({ currentUser: user }),
+						}).then(() => {
+							deleteCookie("logout");
+							closeModal();
+							if (router.pathname === "/") router.push("/mxcatalog/new-releases");
 						});
-						closeModal();
-						if (router.pathname === "/") router.push("/mxcatalog/new-releases");
 					}
 					setLoading(false);
 				})

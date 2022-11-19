@@ -45,7 +45,7 @@ export default function SwiperArtist({ setCurrBg }) {
 					},
 				}}
 				autoHeight={false}
-				autoWidth={false}
+				autowidth={"false"}
 				enabled={true}
 				cssMode={true}
 				navigation={true}

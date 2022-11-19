@@ -128,10 +128,9 @@ const ProtectedRoutes = ({ router, children }) => {
 				if (isAuthenticated) {
 					handleLogout();
 				}
-				deleteCookie("logout");
 			}
 		}
-	}, [router.pathname, isInitialized, isAuthenticated, logout, router]);
+	}, [router.pathname, isInitialized, logout, router]);
 
 	useEffect(() => {
 		if (!isWeb3Enabled && isAuthenticated) enableWeb3();

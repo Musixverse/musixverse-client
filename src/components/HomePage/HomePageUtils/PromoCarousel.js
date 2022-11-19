@@ -86,7 +86,6 @@ export default function PromoCarousel() {
 		xDown = null;
 		yDown = null;
 	};
-	console.log("HSUHSUHSUH", currSlide);
 	return (
 		<div className={styles['wrapper-container']}>
 			<div 

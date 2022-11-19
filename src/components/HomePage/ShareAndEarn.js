@@ -2,6 +2,7 @@ import Image from "next/image";
 import { useTheme } from "next-themes";
 import instruments from "../../../public/assets/homepage/instrument_b.svg";
 import instruments_w from "../../../public/assets/homepage/instrument_w.svg";
+import Link from "next/link";
 
 export default function ShareAndEarn() {
 	const { theme } = useTheme();
@@ -32,11 +33,12 @@ export default function ShareAndEarn() {
 						{/* bg-green bar */}
 						{/* CTA */}
 						<div className="backdrop-blur-[40px] w-full backdrop-brightness-[1.75] p-3 rounded-2xl flex items-center justify-between z-20">
-							<button className="max-w-[168px] md:max-w-none flex items-center justify-between w-full p-3 text-xs font-medium rounded-md lg:p-4 lg:rounded-lg lg:text-base md:w-max bg-primary-500 hover:bg-primary-400 text-light-100 transition duration-300">
-								Start Sharing
-								<span className="ml-6 text-xs lg:ml-10 lg:text-base material-symbols-outlined">arrow_right_alt</span>
-							</button>
-
+							<Link href={"/mxcatalog/new-releases"} passHref>
+								<button className="max-w-[168px] md:max-w-none flex items-center justify-between w-full p-3 text-xs font-medium rounded-md lg:p-4 lg:rounded-lg lg:text-base md:w-max bg-primary-500 hover:bg-primary-400 text-light-100 transition duration-300">
+									Browse and Share
+									<span className="ml-6 text-xs lg:ml-10 lg:text-base material-symbols-outlined">arrow_right_alt</span>
+								</button>
+							</Link>
 							<p className="hidden lg:ml-12 text-[10px] lg:text-xs text-right md:block w-max">
 								You need to sign into Musixverse to start <br /> earning rewards
 							</p>

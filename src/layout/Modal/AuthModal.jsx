@@ -310,6 +310,7 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 										</form>
 									</div>
 								</div> */}
+
 							{!magicFormOpen ? (
 								<div className="w-full flex flex-col sm:flex-row sm:space-x-4 mt-4 pr-4">
 									<div className="sm:w-2/5">

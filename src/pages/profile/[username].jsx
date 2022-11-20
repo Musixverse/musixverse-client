@@ -39,7 +39,7 @@ export async function getStaticProps(context) {
 	// Passing data to the page using props
 	return {
 		props: { profileDetails },
-		revalidate: 10,
+		revalidate: 2,
 	};
 }
 

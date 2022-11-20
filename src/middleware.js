@@ -16,9 +16,7 @@ export function middleware(NextRequest) {
 		) {
 			return NextResponse.next();
 		} else {
-			const response = NextResponse.next();
-			response.cookies.set("logout", true);
-			return response;
+			return NextResponse.next();
 		}
 	}
 }

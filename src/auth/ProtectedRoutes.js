@@ -3,7 +3,6 @@ import { appRoutes } from "./constants";
 import { useMoralis } from "react-moralis";
 import LoadingContext from "../../store/loading-context";
 import AccessLevelContext from "../../store/accessLevel-context";
-import { getCookie, deleteCookie, setCookie } from "cookies-next";
 
 // Check if user is on the client (browser) or server
 const isBrowser = () => typeof window !== "undefined";
@@ -106,31 +105,6 @@ const ProtectedRoutes = ({ router, children }) => {
 			}
 		}
 	}, [router.pathname, isInitialized, isAuthenticated]);
-
-	useEffect(() => {
-		const handleLogout = async () => {
-			if (router.pathname != "/") router.push("/");
-			await logout();
-			if (window.localStorage.walletconnect) {
-				window.localStorage.removeItem("walletconnect");
-			}
-			await fetch("/api/auth/logout", {
-				method: "post",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify({}),
-			});
-		};
-
-		if (isInitialized) {
-			if (getCookie("logout") === true) {
-				if (isAuthenticated) {
-					handleLogout();
-				}
-			}
-		}
-	}, [router.pathname, isInitialized, logout, router]);
 
 	useEffect(() => {
 		if (!isWeb3Enabled && isAuthenticated) enableWeb3();

@@ -48,8 +48,6 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 	const closeModal = () => {
 		if (!magicFormOpen) {
 			handleChange();
-			setAccessCode("");
-			setBetaAccessGranted(false);
 			onClose();
 		} else displayAuthMethods();
 	};
@@ -212,10 +210,6 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 		setLoading(false);
 	};
 
-	const [betaAccessGranted, setBetaAccessGranted] = useState(false);
-	const [betaAccessError, setBetaAccessError] = useState(false);
-	const [accessCode, setAccessCode] = useState("");
-
 	return (
 		<>
 			<Transition show={isModalOpen}>
@@ -257,62 +251,7 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 								</div>
 							</div>
 
-							{!betaAccessGranted ? (
-								<div className="w-full flex flex-col sm:flex-row mt-4 pr-4">
-									<div className="sm:w-2/5">
-										<div className="text-xl font-semibold font-primary">Jump into Musixverse!</div>
-										<p className="text-sm mt-4 pr-14">Please enter an access code to try out Musixverse Beta.</p>
-										<p className="text-[10px] text-gray-400 mt-8 sm:mt-36 pr-14">
-											If you do not have an access code yet, please{" "}
-											<Link href={DISCORD_SUPPORT_CHANNEL_INVITE_LINK} passHref>
-												<a target="_blank" rel="noopener noreferrer" className="text-primary-500 hover:text-primary-600">
-													contact our team here
-												</a>
-											</Link>
-											.
-										</p>
-									</div>
-									<div className="sm:w-3/5">
-										<form
-											onSubmit={(e) => {
-												e.preventDefault();
-												if (accessCode === "MXVBETAQPALZM") {
-													setBetaAccessGranted(true);
-												} else {
-													setBetaAccessError(true);
-												}
-											}}
-										>
-											<p className="text-sm dark:text-light-200 mb-2">
-												Access Code
-												<RequiredAsterisk />
-											</p>
-											<input
-												type="text"
-												value={accessCode}
-												onChange={(e) => {
-													setAccessCode(e.target.value);
-													setBetaAccessError(false);
-												}}
-												className="w-full p-2 border-2 border-gray-500 rounded-md shadow-sm outline-none focus:border-primary-500 text-sm"
-												required
-											/>
-											{betaAccessError && <span className="text-error-600 text-xs mt-1">Invalid access code</span>}
-											<div className="flex justify-end mt-12">
-												<button
-													type="submit"
-													className="flex justify-center items-center space-x-3 bg-primary-500 hover:bg-primary-600 text-[14px] text-light-100 py-2 px-6 rounded-lg font-primary font-semibold max-w-[210px]"
-												>
-													Submit
-													<span className="ml-2 text-xl">
-														<i className="fa-solid fa-arrow-right-long"></i>
-													</span>
-												</button>
-											</div>
-										</form>
-									</div>
-								</div>
-							) : !magicFormOpen ? (
+							{!magicFormOpen ? (
 								<div className="w-full flex flex-col sm:flex-row sm:space-x-4 mt-4 pr-4">
 									<div className="sm:w-2/5">
 										<div className="text-xl font-semibold font-primary">Jump into Musixverse!</div>

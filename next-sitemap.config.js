@@ -1,5 +1,5 @@
 module.exports = {
-	siteUrl: process.env.NEXT_PUBLIC_MUSIXVERSE_CLIENT_BASE_URL || "https://www.musixverse.com",
+	siteUrl: process.env.NEXT_PUBLIC_MUSIXVERSE_CLIENT_BASE_URL || "https://musixverse.com",
 	generateRobotsTxt: true,
 	robotsTxtOptions: {
 		additionalSitemaps: [

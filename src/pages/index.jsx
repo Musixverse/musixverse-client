@@ -53,6 +53,7 @@ function Home() {
 				</div>
 				<NewsLetter />
 				{/* <Section4 /> */}
+				</div>
 			</div>
 		</>
 	);

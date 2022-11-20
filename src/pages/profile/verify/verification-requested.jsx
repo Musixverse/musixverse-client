@@ -14,9 +14,10 @@ const VerificationRequested = () => {
 	}, [user]);
 
 	return (
-		<div className="flex flex-col p-40 pb-32 items-center">
+		<div className="flex flex-col py-40 md:px-40 px-4 pb-32 items-center">
 			<p className="text-4xl font-semibold text-center">Artist Verification</p>
-			<div className="w-2/3 mt-10 p-14 bg-light-300 dark:bg-dark-500 justify-center rounded-xl">
+
+			<div className="w-full md:w-2/3 mt-10 p-8 md:p-14 bg-light-300 dark:bg-dark-500 justify-center rounded-xl">
 				<div className="p-10 bg-light-100 dark:bg-dark-700 rounded-lg">
 					<p className="text-4xl font-tertiary text-center">Verification Pending...</p>
 					<p className="mt-16">

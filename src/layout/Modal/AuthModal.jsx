@@ -127,9 +127,10 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 								"Content-Type": "application/json",
 							},
 							body: JSON.stringify({ currentUser: user }),
+						}).then(() => {
+							closeModal();
+							if (router.pathname === "/") router.push("/mxcatalog/new-releases");
 						});
-						closeModal();
-						if (router.pathname === "/") router.push("/mxcatalog/new-releases");
 					}
 					setLoading(false);
 				})
@@ -193,9 +194,10 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 								"Content-Type": "application/json",
 							},
 							body: JSON.stringify({ currentUser: user }),
+						}).then(() => {
+							closeModal();
+							if (router.pathname === "/") router.push("/mxcatalog/new-releases");
 						});
-						closeModal();
-						if (router.pathname === "/") router.push("/mxcatalog/new-releases");
 					}
 					setLoading(false);
 				})

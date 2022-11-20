@@ -27,9 +27,9 @@ export default function Help() {
 					<div className="grid grid-rows-3 grid-cols-2 sm:grid-rows-2 sm:grid-cols-3 justify-center gap-8">
 						<Link href="/help-center/getting-started" passHref={true}>
 							<div className="col-span-2 sm:col-span-1 sm:row-span-2 flex flex-col justify-center items-center p-6 rounded-lg border-2 hover:border-transparent hover:dark:border-transparent dark:border-zinc-700 cursor-pointer shadow hover:shadow-primary-500 transition-all duration-500">
-								<div className="w-24 h-24 relative">
+								<div className="w-32 h-32 relative">
 									<Image
-										src={theme === "dark" ? getting_started_w : getting_started_b}
+										src={theme === "dark" ? getting_started_b : getting_started_w}
 										alt={"Getting Started"}
 										objectFit="contain"
 										layout="fill"
@@ -41,32 +41,32 @@ export default function Help() {
 						</Link>
 						<Link href="/help-center/buying" passHref={true}>
 							<div className="flex flex-col justify-center items-center p-6 rounded-lg border-2 hover:border-transparent hover:dark:border-transparent dark:border-zinc-700 cursor-pointer shadow hover:shadow-primary-500 transition-all duration-500">
-								<div className="w-24 h-24 relative">
-									<Image src={theme === "dark" ? buying_w : buying_b} alt={"Buying"} objectFit="contain" layout="fill" priority />
+								<div className="w-28 h-28 relative">
+									<Image src={theme === "dark" ? buying_b : buying_w} alt={"Buying"} objectFit="contain" layout="fill" priority />
 								</div>
 								<p className="text-lg font-semibold mt-4">Buying</p>
 							</div>
 						</Link>
 						<Link href="/help-center/selling" passHref={true}>
 							<div className="flex flex-col justify-center items-center p-6 rounded-lg border-2 hover:border-transparent hover:dark:border-transparent dark:border-zinc-700 cursor-pointer shadow hover:shadow-primary-500 transition-all duration-500">
-								<div className="w-24 h-24 relative">
-									<Image src={theme === "dark" ? selling_w : selling_b} alt={"Selling"} objectFit="contain" layout="fill" priority />
+								<div className="w-28 h-28 relative">
+									<Image src={theme === "dark" ? selling_b : selling_w} alt={"Selling"} objectFit="contain" layout="fill" priority />
 								</div>
 								<p className="text-lg font-semibold mt-4">Selling</p>
 							</div>
 						</Link>
 						<Link href="/help-center/creating" passHref={true}>
 							<div className="flex flex-col justify-center items-center p-6 rounded-lg border-2 hover:border-transparent hover:dark:border-transparent dark:border-zinc-700 cursor-pointer shadow hover:shadow-primary-500 transition-all duration-500">
-								<div className="w-24 h-24 relative">
-									<Image src={theme === "dark" ? creating_w : creating_b} alt={"Creating"} objectFit="contain" layout="fill" priority />
+								<div className="w-28 h-28 relative">
+									<Image src={theme === "dark" ? creating_b : creating_w} alt={"Creating"} objectFit="contain" layout="fill" priority />
 								</div>
 								<p className="text-lg font-semibold mt-4">Creating</p>
 							</div>
 						</Link>
 						<Link href="/help-center/faq" passHref={true}>
 							<div className="flex flex-col justify-center items-center p-6 rounded-lg border-2 hover:border-transparent hover:dark:border-transparent dark:border-zinc-700 cursor-pointer shadow hover:shadow-primary-500 transition-all duration-500">
-								<div className="w-24 h-24 relative">
-									<Image src={theme === "dark" ? general_w : general_b} alt={"General"} objectFit="contain" layout="fill" priority />
+								<div className="w-28 h-28 relative">
+									<Image src={theme === "dark" ? general_b : general_w} alt={"General"} objectFit="contain" layout="fill" priority />
 								</div>
 								<p className="text-lg font-semibold mt-4">FAQs</p>
 							</div>

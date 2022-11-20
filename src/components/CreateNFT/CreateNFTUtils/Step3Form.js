@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useMoralis } from "react-moralis";
 import StatusContext from "../../../../store/status-context";
 import LoadingContext from "../../../../store/loading-context";
-import uploadFileToIPFS from "../../../utils/image-crop/uploadFileToIPFS";
+import { uploadFileToIPFS } from "../../../utils/image-crop/uploadToIPFS";
 import { bytesToMegaBytes } from "../../../utils/Convert";
 
 const Step3Form = ({ unlockableContent, setUnlockableContent }) => {
@@ -83,6 +83,16 @@ const Step3Form = ({ unlockableContent, setUnlockableContent }) => {
 			const _exclusiveImages = [];
 			for (let currentFile of filesInput.files) {
 				try {
+					// If file size is > 200 MB show error box
+					if (currentFile.size > 200000000) {
+						setLoading(false);
+						setError({
+							title: "File size too large",
+							message: "Uploaded file should be less than 200 MB",
+							showErrorBox: true,
+						});
+						return;
+					}
 					const formData = new FormData();
 					formData.append("ethAddress", Moralis.User.current().attributes.ethAddress);
 					formData.append("fileType", "exclusive-image");
@@ -162,6 +172,17 @@ const Step3Form = ({ unlockableContent, setUnlockableContent }) => {
 			const _exclusiveAudios = [];
 			for (let currentFile of filesInput.files) {
 				try {
+					// If file size is > 200 MB show error box
+					if (currentFile.size > 200000000) {
+						setLoading(false);
+						setError({
+							title: "File size too large",
+							message: "Uploaded file should be less than 200 MB",
+							showErrorBox: true,
+						});
+						return;
+					}
+
 					const formData = new FormData();
 					formData.append("ethAddress", Moralis.User.current().attributes.ethAddress);
 					formData.append("fileType", "exclusive-audio");
@@ -241,6 +262,17 @@ const Step3Form = ({ unlockableContent, setUnlockableContent }) => {
 			const _exclusiveVideos = [];
 			for (let currentFile of filesInput.files) {
 				try {
+					// If file size is > 200 MB show error box
+					if (currentFile.size > 200000000) {
+						setLoading(false);
+						setError({
+							title: "File size too large",
+							message: "Uploaded file should be less than 200 MB",
+							showErrorBox: true,
+						});
+						return;
+					}
+
 					const formData = new FormData();
 					formData.append("ethAddress", Moralis.User.current().attributes.ethAddress);
 					formData.append("fileType", "exclusive-video");

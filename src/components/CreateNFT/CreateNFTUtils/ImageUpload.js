@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { useState, useEffect, useRef, useContext } from "react";
 import { useMoralis } from "react-moralis";
-import uploadBase64ToIPFS from "../../../utils/image-crop/uploadBase64ToIPFS";
+import { uploadBase64ToIPFS } from "../../../utils/image-crop/uploadToIPFS";
 import uploadImage from "../../../../public/assets/create-nft/upload-image.svg";
 import CropImageModal from "./CropImageModal";
 import LoadingContext from "../../../../store/loading-context";
@@ -51,7 +51,7 @@ export default function ImageUpload({ coverArtUrl, setCoverArtUrl, setCoverArtMi
 
 	const handleImageUpload = async (event) => {
 		// If file size is > 10 MB show error box
-		if (event.target.files[0].size > 10000000) {
+		if (event.target.files[0] && event.target.files[0].size > 10000000) {
 			setError({
 				title: "File size too large",
 				message: "Uploaded image should be less than 10 MB",

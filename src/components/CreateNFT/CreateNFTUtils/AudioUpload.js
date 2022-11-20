@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import Image from "next/image";
 import { useMoralis } from "react-moralis";
-import uploadFileToIPFS from "../../../utils/image-crop/uploadFileToIPFS";
+import { uploadFileToIPFS } from "../../../utils/image-crop/uploadToIPFS";
 import uploadMusic from "../../../../public/assets/create-nft/upload-music.svg";
 import LoadingContext from "../../../../store/loading-context";
 import StatusContext from "../../../../store/status-context";
@@ -15,6 +15,17 @@ export default function AudioUpload({ audioFileUrl, setAudioFileUrl, setAudioFil
 		setLoading(true);
 		var target = event.target;
 		var fileToUpload = event.target.files[0];
+
+		// If file size is > 200 MB show error box
+		if (event.target.files[0] && event.target.files[0].size > 200000000) {
+			setLoading(false);
+			setError({
+				title: "File size too large",
+				message: "Uploaded file should be less than 200 MB",
+				showErrorBox: true,
+			});
+			return;
+		}
 
 		var audio = document.createElement("audio");
 		if (target.files && fileToUpload) {
@@ -41,7 +52,6 @@ export default function AudioUpload({ audioFileUrl, setAudioFileUrl, setAudioFil
 			try {
 				await uploadFileToIPFS(formData).then((url) => {
 					if (url) {
-						console.log(url);
 						setAudioFileUrl(url);
 					} else {
 						setAudioFileUrl(null);
@@ -97,7 +107,7 @@ export default function AudioUpload({ audioFileUrl, setAudioFileUrl, setAudioFil
 					{audioFileUrl ? (
 						<p className="text-sm text-primary-600">Track Uploaded</p>
 					) : (
-						<p className="text-xs">Any Audio file | Max file size: 50 MB</p>
+						<p className="text-xs">Any Audio file | Max file size: 200 MB</p>
 					)}
 				</div>
 			</label>

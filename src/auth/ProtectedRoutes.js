@@ -20,7 +20,7 @@ const ProtectedRoutes = ({ router, children }) => {
 	const [accessLevel, setAccessLevel] = useContext(AccessLevelContext);
 
 	// Identify authenticated user
-	const { isAuthenticated, user, isInitialized, isWeb3Enabled, enableWeb3, refetchUserData } = useMoralis();
+	const { isAuthenticated, user, isInitialized, logout, isWeb3Enabled, enableWeb3, refetchUserData } = useMoralis();
 
 	const protectedRoutes = [appRoutes.REGISTER, appRoutes.SETTINGS, appRoutes.CREATE_NFT];
 	/**
@@ -89,7 +89,6 @@ const ProtectedRoutes = ({ router, children }) => {
 				setAccessLevel(0);
 			} else {
 				// Authenticated
-				refetchData();
 				if (isBrowser() && !user.attributes.email) {
 					setAccessLevel(1);
 				} else if (isBrowser() && !user.attributes.emailVerified && !user.attributes.isArtist) {

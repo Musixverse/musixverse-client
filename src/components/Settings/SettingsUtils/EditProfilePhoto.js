@@ -1,7 +1,7 @@
 import { useState, useRef, useContext, useEffect } from "react";
 import { useMoralis } from "react-moralis";
 import CustomButton from "../../../layout/CustomButton";
-import uploadBase64ToIPFS from "../../../utils/image-crop/uploadBase64ToIPFS";
+import { uploadBase64ToIPFS } from "../../../utils/image-crop/uploadToIPFS";
 import LoadingContext from "../../../../store/loading-context";
 import StatusContext from "../../../../store/status-context";
 import CropImageModal from "../../CreateNFT/CreateNFTUtils/CropImageModal";
@@ -53,11 +53,16 @@ export default function EditProfilePhoto({ avatar, setAvatar }) {
 	}, [Moralis, croppedImage, setAvatar, setError, setLoading]);
 
 	const handleAvatarChange = (event) => {
-		// Set quality based on file size
-		// Get the File from DataURL
-		// const avatarInput = document.getElementById("upload-image-inp");
-		// if (avatarInput.files[0].size > 1000000) {
-		// }
+		// If file size is > 10 MB show error box
+		if (event.target.files[0] && event.target.files[0].size > 10000000) {
+			setError({
+				title: "File size too large",
+				message: "Uploaded image should be less than 10 MB",
+				showErrorBox: true,
+			});
+			profilePictureInput.current.value = "";
+			return;
+		}
 		const imageURL = URL.createObjectURL(event.target.files[0]);
 		profilePictureInput.current.value = "";
 		setImageToCrop(imageURL);

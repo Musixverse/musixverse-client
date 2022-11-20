@@ -107,7 +107,7 @@ function App({ Component, pageProps, router }) {
 
 			<ErrorBoundary>
 				<MoralisProvider appId={PARSE_APP_ID} serverUrl={PARSE_SERVER_URL}>
-					<ThemeProvider attribute="class" enableSystem={false}>
+					<ThemeProvider attribute="class" enableSystem={false} disableTransitionOnChange>
 						<BrowserNotSupportedContext.Provider value={[isBrowserNotSupportedModalOpen, setBrowserNotSupportedModalOpen]}>
 							<LoadingContext.Provider value={[isLoading, setLoading]}>
 								<AccessLevelContext.Provider value={[accessLevel, setAccessLevel]}>

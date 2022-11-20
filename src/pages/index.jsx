@@ -6,11 +6,27 @@ import Section3 from "../components/HomePage/HomePage_section4";
 import Section4 from "../components/HomePage/HomePage_section5";
 import Section2New from "../components/HomePage/HomePageSection2";
 import HeroSection from "../components/HomePage/HeroSection";
-import TopArtists from "../components/NewHomePage/TopArtist-new";
 import NewHero from "../components/HomePage/NewHero";
-import ShareAndEarn from "../components/HomePage/ShareAndEarn";
-import GetStartedAsArtist from "../components/HomePage/GetStartedAsArtist";
-import GetStartedAsFan from "../components/HomePage/GetStartedAsFan";
+// import TopArtists from "../components/NewHomePage/TopArtist-new";
+// import ShareAndEarn from "../components/HomePage/ShareAndEarn";
+// import GetStartedAsArtist from "../components/HomePage/GetStartedAsArtist";
+// import GetStartedAsFan from "../components/HomePage/GetStartedAsFan";
+// import GetStartedArtist from "../components/HomePage/GetStartedArtist";
+// import GetStartedFan from "../components/HomePage/GetStartedFan";
+import NewsLetter from "../layout/NewsLetter";
+import dynamic from "next/dynamic";
+const TopArtists = dynamic(() => import("../components/NewHomePage/TopArtist-new"), {
+	ssr: false,
+});
+const ShareAndEarn = dynamic(() => import("../components/HomePage/ShareAndEarn"), {
+	ssr: false,
+});
+const GetStartedArtist = dynamic(() => import("../components/HomePage/GetStartedArtist"), {
+	ssr: false,
+});
+const GetStartedFan = dynamic(() => import("../components/HomePage/GetStartedFan"), {
+	ssr: false,
+});
 
 function Home() {
 	return (
@@ -24,16 +40,20 @@ function Home() {
 				{/* <Banner /> */}
 				<HeroSection />
 				<div className="flex flex-col w-full max-w-[1920px] px-6 md:px-8 lg:px-16 xl:px-20 2xl:px-36">
-					{/* <NewHero /> */}
+					<NewHero />
 					<TopArtists />
-					{/* <ShareAndEarn />
-					<GetStartedAsArtist />
-					<GetStartedAsFan /> */}
-					<Section2New />
+					<ShareAndEarn />
+					<GetStartedArtist />
+					<GetStartedFan />
+					{/* <GetStartedAsArtist/> */}
+					{/* <GetStartedAsFan/> */}
+					{/* <Section2New />
 					<Section2 />
 					<Section3 />
 				</div>
+				<NewsLetter />
 				{/* <Section4 /> */}
+				</div>
 			</div>
 		</>
 	);

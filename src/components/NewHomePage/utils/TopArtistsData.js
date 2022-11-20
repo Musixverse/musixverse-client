@@ -66,7 +66,7 @@ export const TopArtistsData = [
 		bgURL_m_w: require("../../../../public/assets/new-homepage/xubaan_w.png"),
 	},
 	{
-		name: "Aditya Kalwal",
+		name: "Aditya Kalway",
 		instagramProfileURL: "https://www.instagram.com/adityakalway/",
 		imageURL_b: require("../../../../public/assets/new-homepage/aditya_c_d.png"),
 		imageURL_w: require("../../../../public/assets/new-homepage/aditya_c_w.png"),

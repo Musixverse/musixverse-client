@@ -31,7 +31,7 @@ export default function PromoCarousel() {
 		{artistName:"Pooja Tiwari",imgSrc: "/assets/homepage/slider/poojaFull_b.png"},
 		{artistName:"Sommaiya",imgSrc: "/assets/homepage/slider/sommaiyaFull_b.png"},
 		{artistName:"Submarine In Space",imgSrc: "/assets/homepage/slider/submarineFull_b.png"},
-		{artistName:"Aditya Kalwal",imgSrc: "/assets/homepage/slider/adityaFull_b.png"}
+		{artistName:"Aditya Kalway",imgSrc: "/assets/homepage/slider/adityaFull_b.png"}
 	]
 	const imgSrcs_lightTheme = [
 		{artistName:"Harry Arora",imgSrc:"/assets/homepage/slider/harryFull_w.png"},
@@ -41,7 +41,7 @@ export default function PromoCarousel() {
 		{artistName:"Pooja Tiwari",imgSrc: "/assets/homepage/slider/poojaFull_w.png"},
 		{artistName:"Sommaiya",imgSrc: "/assets/homepage/slider/sommaiyaFull_w.png"},
 		{artistName:"Submarine In Space",imgSrc: "/assets/homepage/slider/submarineFull_w.png"},
-		{artistName:"Aditya Kalwal",imgSrc: "/assets/homepage/slider/adityaFull_w.png"}
+		{artistName:"Aditya Kalway",imgSrc: "/assets/homepage/slider/adityaFull_w.png"}
 	]
 
 	const imgs = theme === "dark"? imgSrcs_darkTheme:imgSrcs_lightTheme;

@@ -48,8 +48,6 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 	const closeModal = () => {
 		if (!magicFormOpen) {
 			handleChange();
-			setAccessCode("");
-			setBetaAccessGranted(false);
 			onClose();
 		} else displayAuthMethods();
 	};
@@ -212,9 +210,9 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 		setLoading(false);
 	};
 
-	const [betaAccessGranted, setBetaAccessGranted] = useState(false);
-	const [betaAccessError, setBetaAccessError] = useState(false);
-	const [accessCode, setAccessCode] = useState("");
+	// const [betaAccessGranted, setBetaAccessGranted] = useState(false);
+	// const [betaAccessError, setBetaAccessError] = useState(false);
+	// const [accessCode, setAccessCode] = useState("");
 
 	return (
 		<>
@@ -257,7 +255,7 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 								</div>
 							</div>
 
-							{!betaAccessGranted ? (
+							{/* {!betaAccessGranted ? (
 								<div className="w-full flex flex-col sm:flex-row mt-4 pr-4">
 									<div className="sm:w-2/5">
 										<div className="text-xl font-semibold font-primary">Jump into Musixverse!</div>
@@ -311,8 +309,8 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 											</div>
 										</form>
 									</div>
-								</div>
-							) : !magicFormOpen ? (
+								</div> */}
+							{!magicFormOpen ? (
 								<div className="w-full flex flex-col sm:flex-row sm:space-x-4 mt-4 pr-4">
 									<div className="sm:w-2/5">
 										<div className="text-xl font-semibold font-primary">Jump into Musixverse!</div>

@@ -4,10 +4,10 @@ export const SEO = {
 	defaultTitle: "Musixverse",
 	description:
 		"Musixverse is a Music NFT marketplace that will bring Artists and Fans together like never before and unlock novel models of communications and commerce.",
-	canonical: "https://www.musixverse.com",
+	canonical: "https://musixverse.com",
 	openGraph: {
 		siteName: "Musixverse",
-		url: "https://www.musixverse.com",
+		url: "https://musixverse.com",
 		title: "Musixverse",
 		description:
 			"Musixverse is a Music NFT marketplace that will bring Artists and Fans together like never before and unlock novel models of communications and commerce.",

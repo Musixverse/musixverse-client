@@ -47,9 +47,9 @@ function Home() {
 					<GetStartedFan />
 					{/* <GetStartedAsArtist/> */}
 					{/* <GetStartedAsFan/> */}
-					{/* <Section2New />
-					<Section2 />
-					<Section3 /> */}
+					{/* <Section2New /> */}
+					{/* <Section2 /> */}
+					{/* <Section3 /> */}
 				</div>
 				<NewsLetter />
 				{/* <Section4 /> */}

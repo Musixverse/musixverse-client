@@ -119,7 +119,7 @@ const Footer = () => {
 						<p className="font-semibold text">General</p>
 						<ul className="space-y-2">
 							<li className="hover:text-primary-500">
-								<Link href="/#section_4">About Us</Link>
+								<Link href="/">About Us</Link>
 							</li>
 							<li className="hover:text-primary-500">
 								<Link href="/cfh/cfb">Community</Link>

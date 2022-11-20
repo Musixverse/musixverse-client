@@ -8,7 +8,7 @@ export default function ShareAndEarn() {
 	const { theme } = useTheme();
 
 	return (
-		<div className="relative flex items-center w-full overflow-x-hidden bg-center bg-no-repeat bg-cover md:pt-28">
+		<div className="relative flex items-center w-full overflow-x-hidden bg-center bg-no-repeat bg-cover md:pt-20">
 			<h1 className="z-10 hidden md:block text-[#3A3A3A] font-semibold text-7xl lg:text-8xl absolute leading-none -mt-80 lg:mt-shareEarn2XlHeading">
 				Share & <br /> Earn 10%
 			</h1>
@@ -27,14 +27,14 @@ export default function ShareAndEarn() {
 						of the transaction fee whenever someone buys an NFT using your link.
 					</p>
 					<p className="max-w-md text-[12px] lg:text-base xl:text-lg mb-3 md:mb-7 px-4">
-						Become a part of your favorite artist’s success story. Promote their NFTs and earn referral reward.
+						Become a part of your favorite artist’s success story. Promote their NFTs and earn referral rewards.
 					</p>
 					<div className="relative">
 						{/* bg-green bar */}
 						{/* CTA */}
 						<div className="backdrop-blur-[40px] w-full backdrop-brightness-[1.75] p-3 rounded-2xl flex items-center justify-between z-20">
 							<Link href={"/mxcatalog/new-releases"} passHref>
-								<button className="max-w-[168px] md:max-w-none flex items-center justify-between w-full p-3 text-xs font-medium rounded-md lg:p-4 lg:rounded-lg lg:text-base md:w-max bg-primary-500 hover:bg-primary-400 text-light-100 transition duration-300">
+								<button className="max-w-fit md:max-w-none flex items-center justify-between w-full p-3 text-xs font-medium rounded-md lg:p-4 lg:rounded-lg lg:text-base md:w-max bg-primary-500 hover:bg-primary-400 text-light-100 transition duration-300">
 									Browse and Share
 									<span className="ml-6 text-xs lg:ml-10 lg:text-base material-symbols-outlined">arrow_right_alt</span>
 								</button>

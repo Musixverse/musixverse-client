@@ -417,7 +417,7 @@ const CreateNFT = ({ userInfo }) => {
 			},
 			collaborators: reducedCollaboratorList,
 			numberOfCollaborators: reducedCollaboratorList.length,
-			license: "ipfs://" + coverArtUrl.replace(process.env.NEXT_PUBLIC_IPFS_NODE_URL, ""), // TODO
+			license: "ipfs://" + "QmNxzFrUXvz1Hgst4uSxNir1EEJzGyuemAWsDgfuoqn29T", // TODO: Update this whenever Terms of Services are updated
 			unlockTimestamp: _unlockTimestamp,
 			chainDetails: {
 				chainId: process.env.NEXT_PUBLIC_BLOCKCHAIN_NETWORK_ID,

@@ -89,11 +89,20 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 
 			if (!account) {
 				setLoading(false);
-				setError({
-					title: "Connection failed",
-					message: "No connected account was found",
+				setError((prevState) => ({
+					...prevState,
+					title: "Auth failed! Metamask not found",
+					message: (
+						<>
+							Please download Metamask by clicking here-{" "}
+							<a href="https://metamask.io/download/" target="_blank" rel="noopener noreferrer">
+								https://metamask.io/download/
+							</a>
+							. If you&apos;re on a mobile device, please login using WalletConnect.
+						</>
+					),
 					showErrorBox: true,
-				});
+				}));
 				return;
 			}
 			if (!chainId) {
@@ -360,6 +369,15 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 												</div>
 											</button> */}
 										</div>
+										<p className="text-[15px] text-gray-400 mt-4 sm:mt-16">
+											Having problems setting up your wallet? Follow this&nbsp;
+											<Link href={"https://medium.com/@musixverse/how-to-set-up-a-crypto-wallet-metamask-477be25c0f5f"} passHref>
+												<a target="_blank" rel="noopener noreferrer" className="text-primary-500 hover:text-primary-600">
+													guide
+												</a>
+											</Link>
+											.
+										</p>
 									</div>
 								</div>
 							) : (

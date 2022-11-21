@@ -92,21 +92,6 @@ const Layout = ({ children }) => {
 
 	useEffect(() => {
 		if (authError) {
-			if (
-				authError.message !== "Web3Auth: User closed login modal." &&
-				authError.message !==
-					"Cannot execute Moralis.enableWeb3(), as Moralis Moralis.enableWeb3() already has been called, but is not finished yet " &&
-				authError.message !== "MetaMask Message Signature: User denied message signature." &&
-				authError.message !== "User closed modal" &&
-				authError.message !== "Non ethereum enabled browser"
-			) {
-				setError((prevState) => ({
-					...prevState,
-					title: "Auth failed!",
-					message: authError.message,
-					showErrorBox: true,
-				}));
-			}
 			if (authError.message === "Non ethereum enabled browser") {
 				setError((prevState) => ({
 					...prevState,
@@ -119,6 +104,21 @@ const Layout = ({ children }) => {
 							</a>
 						</>
 					),
+					showErrorBox: true,
+				}));
+				return;
+			}
+			if (
+				authError.message !== "Web3Auth: User closed login modal." &&
+				authError.message !==
+					"Cannot execute Moralis.enableWeb3(), as Moralis Moralis.enableWeb3() already has been called, but is not finished yet " &&
+				authError.message !== "MetaMask Message Signature: User denied message signature." &&
+				authError.message !== "User closed modal"
+			) {
+				setError((prevState) => ({
+					...prevState,
+					title: "Auth failed!",
+					message: authError.message,
 					showErrorBox: true,
 				}));
 			}

@@ -16,8 +16,12 @@ const Verify = () => {
 	useEffect(() => {
 		if (artistVerificationInfo && artistVerificationInfo.verificationRequested) {
 			router.push("/profile/verify/verification-requested");
+			return;
 		}
-	}, [artistVerificationInfo]);
+		if (user && !user.attributes.isArtist) {
+			router.push(`/profile/${user.attributes.username}`);
+		}
+	}, [user, artistVerificationInfo]);
 
 	const [step, setStep] = useState(1);
 	const [isRealNameDifferent, setIsRealNameDifferent] = useState(false);

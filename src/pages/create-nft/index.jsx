@@ -309,25 +309,6 @@ const CreateNFT = ({ userInfo }) => {
 		}
 	}, [user, userInfo]);
 
-	// Delete draft from the database after NFT is created
-	const { fetch: deleteNftDraft } = useMoralisCloudFunction(
-		"deleteNftDraft",
-		{ objectId: draft },
-		{
-			autoFetch: false,
-		}
-	);
-	const deleteDraft = async () => {
-		await deleteNftDraft({
-			onSuccess: async (object) => {
-				// Draft deleted from database
-			},
-			onError: (error) => {
-				console.log("deleteNftDraft Error:", error);
-			},
-		});
-	};
-
 	// Save invited artwork artist if they are not on Musixverse yet
 	const { save: saveInvitedArtworkArtist } = useNewMoralisObject("InvitedArtworkArtist");
 	// Function to run when Create NFT button is pressed
@@ -506,10 +487,6 @@ const CreateNFT = ({ userInfo }) => {
 				onSale,
 				_unlockTimestamp
 			);
-			await fetch(`/api/revalidate-mxcatalog?path=/mxcatalog/new-releases&secret=${process.env.NEXT_PUBLIC_REVALIDATE_SECRET}`);
-			await fetch(`/api/revalidate-profile?path=/profile/${user.attributes.username}&secret=${process.env.NEXT_PUBLIC_REVALIDATE_SECRET}`);
-			// TODO: Uncomment the line below
-			await deleteDraft();
 			setLoading(false);
 			setCreateNFTSuccess(true);
 		} catch (error) {

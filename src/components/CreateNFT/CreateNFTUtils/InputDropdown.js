@@ -18,7 +18,7 @@ export default function InputDropdown({ optionsArray, setChoice, initialValue })
 		//Currently, I have attached the idx with the selcted item
 		//So we can keep a track of indx instead of keeping the entire string
 		//In our main nft creation states...
-		// console.log(e.target.value);
+
 		let selectedValue = e.target.textContent;
 		setChoice(selectedValue);
 		// selectedValue = selectedValue.length > 20 ? selectedValue.substring(0, 17) + "..." : selectedValue;

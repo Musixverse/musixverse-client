@@ -4,7 +4,7 @@ import ImageCrop from "./ImageCrop";
 
 export default function CropImageModal({ showModal, setShowModal, imageToCrop, setCroppedImage, circularCrop, aspectRatio }) {
 	const cancelButtonRef = useRef(null);
-	// console.log(showModal);
+
 	return (
 		<Transition.Root show={showModal} as={Fragment}>
 			<Dialog

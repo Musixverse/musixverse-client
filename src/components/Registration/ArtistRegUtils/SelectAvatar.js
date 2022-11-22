@@ -57,7 +57,7 @@ export default function SelectAvatar({ defaultAvatarUrls, avatar, setAvatar }) {
 
 	const circularCrop = true;
 	const aspectRatio = { width: 1, height: 1 };
-	// console.log(showModal);
+
 	// const cropModalValues = { showModal, setShowModal, imageToCrop, setCroppedImage, circularCrop, aspectRatio };
 
 	const handleImageSelection = (selectedUrl) => {

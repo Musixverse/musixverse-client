@@ -20,16 +20,17 @@ const ProtectedRoutes = ({ router, children }) => {
 	const [accessLevel, setAccessLevel] = useContext(AccessLevelContext);
 
 	// Identify authenticated user
-	const { isAuthenticated, user, isInitialized, logout, isWeb3Enabled, enableWeb3, refetchUserData } = useMoralis();
+	const { isAuthenticated, user, isInitialized, isWeb3Enabled, enableWeb3, refetchUserData } = useMoralis();
 
-	const protectedRoutes = [appRoutes.REGISTER, appRoutes.SETTINGS, appRoutes.CREATE_NFT];
+	// @dev These routes are protected for unauthenticated users
+	const protectedRoutes = [appRoutes.REGISTER, appRoutes.SETTINGS, appRoutes.CREATE_NFT, appRoutes.CREATE_BAND];
 	/**
 	 * @const pathIsProtected Checks if path exists in the protectedRoutes array
 	 */
 	const pathIsProtected = protectedRoutes.some((route) => router.pathname.includes(route));
 
 	// @dev These routes are protected until a user confirms their email
-	const protectedRoutesForAuthenticatedUserEmailUnverified = [appRoutes.REGISTER, appRoutes.CREATE_NFT];
+	const protectedRoutesForAuthenticatedUserEmailUnverified = [appRoutes.REGISTER, appRoutes.CREATE_NFT, appRoutes.CREATE_BAND];
 	/**
 	 * @const pathIsProtectedForAuthenticatedUserEmailUnverified Checks if path exists in the protectedRoutesForAuthenticatedUserEmailUnverified array
 	 */
@@ -37,19 +38,19 @@ const ProtectedRoutes = ({ router, children }) => {
 		router.pathname.includes(route)
 	);
 
+	// @dev These routes are protected for a logged in user who is not an artist
+	const protectedRoutesForCollectors = [appRoutes.CREATE_NFT, appRoutes.CREATE_BAND];
+	/**
+	 * @const pathIsProtectedForCollector Checks if path exists in the protectedRoutesForCollectors array
+	 */
+	const pathIsProtectedForCollector = protectedRoutesForCollectors.some((route) => router.pathname.includes(route));
+
 	// @dev These routes are protected for a logged in user
 	const protectedRoutesForAuthenticatedUser = [appRoutes.REGISTER];
 	/**
 	 * @const pathIsProtectedForAuthenticatedUser Checks if path exists in the protectedRoutesForAuthenticatedUser array
 	 */
 	const pathIsProtectedForAuthenticatedUser = protectedRoutesForAuthenticatedUser.some((route) => router.pathname.includes(route));
-
-	// @dev These routes are protected for a logged in user
-	const protectedRoutesForCollectors = [appRoutes.CREATE_NFT];
-	/**
-	 * @const pathIsProtectedForCollector Checks if path exists in the protectedRoutesForCollectors array
-	 */
-	const pathIsProtectedForCollector = protectedRoutesForCollectors.some((route) => router.pathname.includes(route));
 
 	async function refetchData() {
 		await refetchUserData();
@@ -69,10 +70,10 @@ const ProtectedRoutes = ({ router, children }) => {
 						if (!router.pathname.startsWith(appRoutes.REGISTER)) router.push(appRoutes.REGISTER);
 					} else if (isBrowser() && pathIsProtectedForAuthenticatedUserEmailUnverified && !user.attributes.emailVerified) {
 						router.push(appRoutes.CONFIRM_EMAIL);
-					} else if (isBrowser() && pathIsProtectedForAuthenticatedUser) {
-						router.push(appRoutes.HOMEPAGE);
 					} else if (isBrowser() && !user.attributes.isArtist && pathIsProtectedForCollector) {
 						router.push(appRoutes.MARKETPLACE);
+					} else if (isBrowser() && pathIsProtectedForAuthenticatedUser) {
+						router.push(appRoutes.HOMEPAGE);
 					}
 				}
 

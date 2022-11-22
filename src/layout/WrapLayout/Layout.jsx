@@ -60,7 +60,6 @@ const Layout = ({ children }) => {
 			const fetchTracks = async () => {
 				if (audioPlayerProps.updateQueue) {
 					const audios = await Moralis.Cloud.run("fetchTracksForAudioPlayer").then((data) => {
-						console.log(data);
 						return data.map((item) => {
 							// Temporarily mapping fake data, need to be replaced
 							return {

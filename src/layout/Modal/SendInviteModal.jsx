@@ -14,7 +14,6 @@ const SendInviteModal = ({ isOpen, setOpen, onClose = "", invitedArtistEmail, on
 		e.preventDefault();
 		// EMAIL CHECK
 		const emailCheck = await isEmailValid(invitedArtistEmail);
-		console.log(emailCheck);
 		if (emailCheck.status === false) {
 			setError({
 				title: emailCheck.title || "Invalid email entered",

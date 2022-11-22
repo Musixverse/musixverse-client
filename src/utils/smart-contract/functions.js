@@ -8,62 +8,65 @@ var MUSIXVERSE;
 async function addPolygonNetwork() {
 	const { ethereum } = window;
 
-	try {
-		await ethereum.request({
-			method: "wallet_switchEthereumChain",
-			params: [
-				{
-					chainId:
-						process.env.NEXT_PUBLIC_BLOCKCHAIN_NETWORK_ID === "80001"
-							? "0x13881" // Hexadecimal version of 80001, prefixed with 0x
-							: process.env.NEXT_PUBLIC_BLOCKCHAIN_NETWORK_ID === "137"
-							? "0x89" // Hexadecimal version of 137, prefixed with 0x
-							: null,
-				},
-			],
-		});
-	} catch (error) {
-		if (error.code === 4902) {
-			try {
-				await ethereum.request({
-					method: "wallet_addEthereumChain",
-					params: [
-						{
-							chainId:
-								process.env.NEXT_PUBLIC_BLOCKCHAIN_NETWORK_ID === "80001"
-									? "0x13881" // Hexadecimal version of 80001, prefixed with 0x
-									: process.env.NEXT_PUBLIC_BLOCKCHAIN_NETWORK_ID === "137"
-									? "0x89" // Hexadecimal version of 137, prefixed with 0x
-									: null,
-							chainName:
-								process.env.NEXT_PUBLIC_BLOCKCHAIN_NETWORK_ID === "80001"
-									? "Polygon Mumbai Testnet"
-									: process.env.NEXT_PUBLIC_BLOCKCHAIN_NETWORK_ID === "137"
-									? "Polygon Mainnet"
-									: null,
-							nativeCurrency: {
-								name: "MATIC",
-								symbol: "MATIC",
-								decimals: 18,
+	if (window && window.localStorage.walletconnect) {
+	} else {
+		try {
+			await ethereum.request({
+				method: "wallet_switchEthereumChain",
+				params: [
+					{
+						chainId:
+							process.env.NEXT_PUBLIC_BLOCKCHAIN_NETWORK_ID === "80001"
+								? "0x13881" // Hexadecimal version of 80001, prefixed with 0x
+								: process.env.NEXT_PUBLIC_BLOCKCHAIN_NETWORK_ID === "137"
+								? "0x89" // Hexadecimal version of 137, prefixed with 0x
+								: null,
+					},
+				],
+			});
+		} catch (error) {
+			if (error.code === 4902) {
+				try {
+					await ethereum.request({
+						method: "wallet_addEthereumChain",
+						params: [
+							{
+								chainId:
+									process.env.NEXT_PUBLIC_BLOCKCHAIN_NETWORK_ID === "80001"
+										? "0x13881" // Hexadecimal version of 80001, prefixed with 0x
+										: process.env.NEXT_PUBLIC_BLOCKCHAIN_NETWORK_ID === "137"
+										? "0x89" // Hexadecimal version of 137, prefixed with 0x
+										: null,
+								chainName:
+									process.env.NEXT_PUBLIC_BLOCKCHAIN_NETWORK_ID === "80001"
+										? "Polygon Mumbai Testnet"
+										: process.env.NEXT_PUBLIC_BLOCKCHAIN_NETWORK_ID === "137"
+										? "Polygon Mainnet"
+										: null,
+								nativeCurrency: {
+									name: "MATIC",
+									symbol: "MATIC",
+									decimals: 18,
+								},
+								rpcUrls:
+									process.env.NEXT_PUBLIC_BLOCKCHAIN_NETWORK_ID === "80001"
+										? ["https://matic-mumbai.chainstacklabs.com/"]
+										: process.env.NEXT_PUBLIC_BLOCKCHAIN_NETWORK_ID === "137"
+										? ["https://matic-mainnet.chainstacklabs.com"]
+										: null,
+								blockExplorerUrls:
+									process.env.NEXT_PUBLIC_BLOCKCHAIN_NETWORK_ID === "80001"
+										? ["https://mumbai.polygonscan.com/"]
+										: process.env.NEXT_PUBLIC_BLOCKCHAIN_NETWORK_ID === "137"
+										? ["https://polygonscan.com/"]
+										: null,
+								iconUrls: [""],
 							},
-							rpcUrls:
-								process.env.NEXT_PUBLIC_BLOCKCHAIN_NETWORK_ID === "80001"
-									? ["https://matic-mumbai.chainstacklabs.com/"]
-									: process.env.NEXT_PUBLIC_BLOCKCHAIN_NETWORK_ID === "137"
-									? ["https://matic-mainnet.chainstacklabs.com"]
-									: null,
-							blockExplorerUrls:
-								process.env.NEXT_PUBLIC_BLOCKCHAIN_NETWORK_ID === "80001"
-									? ["https://mumbai.polygonscan.com/"]
-									: process.env.NEXT_PUBLIC_BLOCKCHAIN_NETWORK_ID === "137"
-									? ["https://polygonscan.com/"]
-									: null,
-							iconUrls: [""],
-						},
-					],
-				});
-			} catch (addError) {
-				console.log("Did not add network");
+						],
+					});
+				} catch (addError) {
+					console.log("Did not add network");
+				}
 			}
 		}
 	}

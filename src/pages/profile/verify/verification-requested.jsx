@@ -10,6 +10,10 @@ const VerificationRequested = () => {
 	useEffect(() => {
 		if (user && user.attributes.isArtistVerified) {
 			router.push(`/profile/${user.attributes.username}`);
+			return;
+		}
+		if (user && !user.attributes.isArtist) {
+			router.push(`/profile/${user.attributes.username}`);
 		}
 	}, [user]);
 

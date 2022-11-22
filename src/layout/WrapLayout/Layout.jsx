@@ -18,7 +18,7 @@ import NewAudioPlayer from "../AudioPlayer/NewAudioPlayer";
 import AudioPlayerContext from "../../../store/audioplayer-context";
 
 const Layout = ({ children }) => {
-	const { user, authError, Moralis, isInitialized } = useMoralis();
+	const { user, authError, Moralis, logout, isInitialized } = useMoralis();
 	const [error, success, , setError] = useContext(StatusContext);
 	const [isLoading, setLoading] = useContext(LoadingContext);
 	const [authModalOpen, setAuthModalOpen] = useContext(AuthModalContext);
@@ -91,6 +91,22 @@ const Layout = ({ children }) => {
 	}, [Moralis.Cloud, isInitialized, setAudioPlayerProps, audioPlayerProps.updateQueue]);
 
 	useEffect(() => {
+		const handleLogout = async () => {
+			if (router.pathname != "/") router.push("/");
+			await logout();
+			if (window.localStorage.walletconnect) {
+				window.localStorage.removeItem("walletconnect");
+			}
+			await fetch("/api/auth/logout", {
+				method: "post",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({}),
+			});
+			router.reload(window.location.pathname);
+		};
+
 		if (authError) {
 			if (authError.message === "Non ethereum enabled browser") {
 				setError((prevState) => ({
@@ -106,6 +122,10 @@ const Layout = ({ children }) => {
 					),
 					showErrorBox: true,
 				}));
+				return;
+			}
+			if (authError.message === "Moralis auth failed, invalid data") {
+				handleLogout();
 				return;
 			}
 			if (

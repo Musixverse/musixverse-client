@@ -1,4 +1,4 @@
-# Musixverse Client
+# Musixverse client
 
 ## Using Next.js
 

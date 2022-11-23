@@ -10,8 +10,25 @@ import HamburgerMenu from "./HamburgerMenu/HamburgerMenu";
 
 const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 	const { theme, setTheme } = useTheme();
-	const { isAuthenticated, logout, user } = useMoralis();
+	const { isAuthenticated, logout, user, Moralis } = useMoralis();
 	const router = useRouter();
+	const [balance, setBalance] = useState(0);
+
+	useEffect(() => {
+		const fetchBalance = async () => {
+			try {
+				const options = { chain: process.env.NEXT_PUBLIC_BLOCKCHAIN_NETWORK_ID };
+				const _balance = await Moralis.Web3API.account.getNativeBalance(options);
+				const _balanceAmount = parseFloat(_balance.balance) / 10 ** 18 === 0 ? "0" : parseFloat(_balance.balance) / 10 ** 18;
+				setBalance(_balanceAmount > 0 ? _balanceAmount.toFixed(2) : 0);
+			} catch (error) {
+				console.log("ERROR-", error);
+			}
+		};
+		if (user) {
+			fetchBalance();
+		}
+	}, [user, Moralis.Web3API.account]);
 
 	const { data: avatarUrl } = useMoralisCloudFunction("fetchUserAvatarFromAddress", { address: user ? user.attributes.ethAddress : null });
 
@@ -219,21 +236,24 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 										>
 											<li>
 												{isAuthenticated && user && (
-													<div className="flex items-center justify-between w-full px-4 py-3 bg-transparent rounded-t-xl dropdown-item whitespace-nowrap dark:hover:bg-dark-600 active:bg-transparent">
-														<div>
-															<p>Wallet Address</p>
-															<p>{truncatedWalletAddress}</p>
+													<div className="flex flex-col px-4 pt-3 pb-2">
+														<div className="flex items-center justify-between w-full bg-transparent rounded-t-xl dropdown-item whitespace-nowrap active:bg-transparent active:dark:text-light-100">
+															<div>
+																<p>Wallet Address</p>
+																<p>{truncatedWalletAddress}</p>
+															</div>
+															{avatarUrl ? (
+																<Image
+																	src={avatarUrl}
+																	alt={user.walletAddress}
+																	width={40}
+																	height={40}
+																	objectFit="contain"
+																	className="rounded-lg"
+																/>
+															) : null}
 														</div>
-														{avatarUrl ? (
-															<Image
-																src={avatarUrl}
-																alt={user.walletAddress}
-																width={40}
-																height={40}
-																objectFit="contain"
-																className="rounded-lg"
-															/>
-														) : null}
+														<p className="mt-1">Balance: {balance} MATIC</p>
 													</div>
 												)}
 												{/* (

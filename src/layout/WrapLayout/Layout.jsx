@@ -28,32 +28,32 @@ const Layout = ({ children }) => {
 	const { theme } = useTheme();
 
 	if (router && router.events) {
-		router.events.on("routeChangeStart", () => setLoading({ status: true }));
-		router.events.on("routeChangeComplete", () => setLoading({ status: false }));
-		router.events.on("routeChangeError", () => setLoading({ status: false }));
+		router.events.on("routeChangeStart", () => setLoading((prevState) => ({ ...prevState, status: true })));
+		router.events.on("routeChangeComplete", () => setLoading((prevState) => ({ ...prevState, status: false })));
+		router.events.on("routeChangeError", () => setLoading((prevState) => ({ ...prevState, status: false })));
 	}
 
-	if (typeof window !== "undefined" && window && window.ethereum) {
-		window.ethereum.on("accountsChanged", (accounts) => {
-			if (user && user.attributes.ethAddress !== accounts[0]) {
-				setError((prevState) => ({
-					...prevState,
-					title: "User is not connected to the same wallet",
-					message: "Please connect to the same wallet as your Musixverse account.",
-					showErrorBox: true,
-				}));
+	// if (typeof window !== "undefined" && window && window.ethereum) {
+	// 	window.ethereum.on("accountsChanged", (accounts) => {
+	// 		if (user && user.attributes.ethAddress !== accounts[0]) {
+	// 			setError((prevState) => ({
+	// 				...prevState,
+	// 				title: "User is not connected to the same wallet",
+	// 				message: "Please connect to the same wallet as your Musixverse account.",
+	// 				showErrorBox: true,
+	// 			}));
 
-				window.ethereum.request({
-					method: "wallet_requestPermissions",
-					params: [
-						{
-							eth_accounts: {},
-						},
-					],
-				});
-			}
-		});
-	}
+	// 			window.ethereum.request({
+	// 				method: "wallet_requestPermissions",
+	// 				params: [
+	// 					{
+	// 						eth_accounts: {},
+	// 					},
+	// 				],
+	// 			});
+	// 		}
+	// 	});
+	// }
 
 	useEffect(() => {
 		if (isInitialized) {

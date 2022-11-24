@@ -34,7 +34,7 @@ export async function getStaticProps(context) {
 	// Passing data to the Page using props
 	return {
 		props: { tracksWhoseCopiesAreSoldOnce },
-		revalidate: 2,
+		revalidate: 10,
 	};
 }
 

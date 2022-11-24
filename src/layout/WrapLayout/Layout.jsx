@@ -27,11 +27,13 @@ const Layout = ({ children }) => {
 	const router = useRouter();
 	const { theme } = useTheme();
 
-	if (router && router.events) {
-		router.events.on("routeChangeStart", () => setLoading((prevState) => ({ ...prevState, status: true })));
-		router.events.on("routeChangeComplete", () => setLoading((prevState) => ({ ...prevState, status: false })));
-		router.events.on("routeChangeError", () => setLoading((prevState) => ({ ...prevState, status: false })));
-	}
+	useEffect(() => {
+		if (router && router.events) {
+			router.events.on("routeChangeStart", () => setLoading((prevState) => ({ ...prevState, status: true })));
+			router.events.on("routeChangeComplete", () => setLoading((prevState) => ({ ...prevState, status: false })));
+			router.events.on("routeChangeError", () => setLoading((prevState) => ({ ...prevState, status: false })));
+		}
+	}, [router.events, setLoading]);
 
 	// if (typeof window !== "undefined" && window && window.ethereum) {
 	// 	window.ethereum.on("accountsChanged", (accounts) => {
@@ -150,7 +152,7 @@ const Layout = ({ children }) => {
 			<AuthModal isOpen={authModalOpen} onClose={() => setAuthModalOpen(false)} />
 			<BrowserNotSupportedModal />
 			{children}
-			{isLoading.status && theme === "dark" ? <LoadingDark /> : <Loading />}
+			{isLoading.status && theme === "dark" ? <LoadingDark /> : isLoading.status && <Loading />}
 			{!router.pathname.startsWith("/admin") && <FloatingHelp />}
 			<NewAudioPlayer />
 			<ErrorBox />

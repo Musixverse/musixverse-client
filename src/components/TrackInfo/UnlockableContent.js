@@ -12,7 +12,6 @@ export default function UnlockableContent({ tokenId, currentOwnerAddress, unlock
 	const [isUnlockableContentModalOpen, setUnlockableContentModalOpen] = useState(false);
 	const [selectedUnlockableItem, setSelectedUnlockableItem] = useState("");
 	const [selectedUnlockableItemIndex, setSelectedUnlockableItemIndex] = useState(0);
-	console.log(currentOwnerAddress);
 
 	useEffect(() => {
 		const getUnlockableContentUri = async () => {

@@ -37,14 +37,16 @@ export default function UnlockableContent({
 					<form
 						onSubmit={async (e) => {
 							e.preventDefault();
-							setLoading(true);
+							setLoading({
+								status: true,
+							});
 
 							await saveNftCreationProgress(nftDraftMetadata, draft);
 
 							if (step < 4) nextStep();
-							setLoading(false);
+							setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 						}}
-						enctype="multipart/form-data"
+						encType="multipart/form-data"
 					>
 						<div className="flex flex-col w-full space-y-20 md:space-x-10 md:space-y-0 md:flex-row xl:space-x-20">
 							{/* Preview div */}

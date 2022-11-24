@@ -126,7 +126,10 @@ const Step4Form = ({
 	const router = useRouter();
 	const { draft } = router.query;
 	const sendCollaboratorInvitationEmailToArtistWhoHasNotAcceptedInvitation = async (collaborator) => {
-		setLoading(true);
+		setLoading({
+			status: true,
+			title: "Sending Invite...",
+		});
 
 		try {
 			await Moralis.Cloud.run("sendNftCollaboratorInvitationEmailToArtist", { draftId: draft, collaborator: collaborator }).then(() => {
@@ -147,7 +150,7 @@ const Step4Form = ({
 			console.log("sendNftCollaboratorInvitationEmailToArtist Error:", error);
 		}
 
-		setLoading(false);
+		setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 	};
 
 	var timezone = new Date(unlockTimestamp).toTimeString().match(/\((.+)\)/)[1];

@@ -87,14 +87,16 @@ export default function ComprehensiveDetails({
 					onSubmit={async (e) => {
 						e.preventDefault();
 
-						setLoading(true);
+						setLoading({
+							status: true,
+						});
 						if (tags.length < 1) {
 							setError({
 								title: "Tags not selected!",
 								message: "You need to select at least 1 tag to proceed.",
 								showErrorBox: true,
 							});
-							setLoading(false);
+							setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 							return;
 						}
 						if (isrc) {
@@ -106,14 +108,14 @@ export default function ComprehensiveDetails({
 									message: isrcCheck.message,
 									showErrorBox: true,
 								});
-								setLoading(false);
+								setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 								return;
 							}
 						}
 
 						await saveNftCreationProgress(nftDraftMetadata, draft);
 						if (step < 3) nextStep();
-						setLoading(false);
+						setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 					}}
 				>
 					<div className="flex flex-col w-full space-y-20 md:space-x-10 md:space-y-0 md:flex-row xl:space-x-20">

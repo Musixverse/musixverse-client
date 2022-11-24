@@ -13,7 +13,10 @@ export default function FavouritesModal({ isOpen, setOpen, username, favouriteTo
 	const { user, Moralis } = useMoralis();
 
 	const removeFromFavourites = async (tokenId) => {
-		setLoading(true);
+		setLoading({
+			status: true,
+			title: "Removing Favourite...",
+		});
 		await Moralis.Cloud.run("removeTokenFromFavourites", { tokenId: tokenId }).then(async () => {
 			setFavouriteTokens((favouriteTokens) =>
 				favouriteTokens.filter((token) => {
@@ -21,7 +24,7 @@ export default function FavouritesModal({ isOpen, setOpen, username, favouriteTo
 					return token.tokenId !== tokenId;
 				})
 			);
-			setLoading(false);
+			setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 		});
 	};
 

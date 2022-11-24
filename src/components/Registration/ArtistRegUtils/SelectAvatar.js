@@ -25,15 +25,22 @@ export default function SelectAvatar({ defaultAvatarUrls, avatar, setAvatar }) {
 			if (croppedImage !== undefined) {
 				// uploadedImage.current.src = croppedImage;
 				setSelectedAvatar(croppedImage);
-				setLoading(true);
+				setLoading({
+					status: true,
+					title: "Uploading Avatar",
+					message: "Please wait while we upload your file...",
+					showProgressBar: false,
+					progress: 0,
+				});
+
 				try {
 					// Get the uploadBase64ToIPFS async function
-					await uploadBase64ToIPFS(Moralis, croppedImage, "avatar").then((url) => {
+					await uploadBase64ToIPFS(Moralis, croppedImage, "avatar", setLoading).then((url) => {
 						setAvatar(url);
-						setLoading(false);
+						setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 					});
 				} catch (err) {
-					setLoading(false);
+					setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 					if (err.message && err.message == "request entity too large") {
 						setError({
 							title: "File too large",

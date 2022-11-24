@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 import Head from "next/head";
+import { useTheme } from "next-themes";
 import { title_main_page, meta_description } from "../config/constants";
+import LoadingSection from "../layout/Loading/LoadingSection";
+import LoadingSectionDark from "../layout/Loading/LoadingSectionDark";
 import Banner from "../components/HomePage/HomePageBanner";
 import Section2 from "../components/HomePage/HomePage_section3";
 import Section3 from "../components/HomePage/HomePage_section4";
@@ -18,6 +21,7 @@ import NewsLetter from "../layout/NewsLetter";
 
 function Home({}) {
 	const [mounted, setMounted] = useState(false);
+	const { theme } = useTheme();
 
 	useEffect(() => {
 		setMounted(true);
@@ -30,7 +34,7 @@ function Home({}) {
 				<meta name="description" content={meta_description} />
 			</Head>
 
-			{mounted && (
+			{mounted ? (
 				<div className="relative flex flex-col items-center justify-center bg-light-200 dark:bg-dark-800">
 					{/* <Banner /> */}
 					{/* <HeroSection /> */}
@@ -49,6 +53,10 @@ function Home({}) {
 					<NewsLetter />
 					{/* <Section4 /> */}
 				</div>
+			) : theme === "dark" ? (
+				<LoadingSectionDark />
+			) : (
+				<LoadingSection />
 			)}
 		</>
 	);

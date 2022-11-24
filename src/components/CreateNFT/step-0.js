@@ -25,7 +25,10 @@ const CreateNFTIntro = ({ nextStep, chosenProfileOrBand, nftDraftMetadata, nftDr
 		}
 	);
 	const deleteDraft = () => {
-		setLoading(true);
+		setLoading({
+			status: true,
+			title: "Deleting Draft...",
+		});
 		deleteNftDraft({
 			onSuccess: async (object) => {
 				setDeleteModalOpen(false);
@@ -34,11 +37,11 @@ const CreateNFTIntro = ({ nextStep, chosenProfileOrBand, nftDraftMetadata, nftDr
 					return _nftDrafts;
 				});
 				setDraftToDelete("");
-				setLoading(false);
+				setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 			},
 			onError: (error) => {
 				console.log("deleteNftDraft Error:", error);
-				setLoading(false);
+				setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 			},
 		});
 	};
@@ -54,7 +57,9 @@ const CreateNFTIntro = ({ nextStep, chosenProfileOrBand, nftDraftMetadata, nftDr
 						className="w-[90vw] sm:w-[80vw] bg-light-100 dark:bg-dark-600 grid lg:grid-cols-3 lg:space-x-10 min-h-full sm:p-14 p-10 lg:pb-10 rounded-2xl backdrop-blur-xl"
 						onSubmit={async (e) => {
 							e.preventDefault();
-							setLoading(true);
+							setLoading({
+								status: true,
+							});
 							if (user && user.attributes.isArtist && user.attributes.isArtistVerified) {
 								await createNftDraft({
 									onSuccess: (draft) => {
@@ -70,17 +75,17 @@ const CreateNFTIntro = ({ nextStep, chosenProfileOrBand, nftDraftMetadata, nftDr
 											},
 										]);
 										router.replace("/create-nft?draft=" + draft.id, undefined, { shallow: true });
-										setLoading(false);
+										setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 									},
 									onError: (error) => {
 										console.error("createNftDraft error:", error);
-										setLoading(false);
+										setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 									},
 								});
 								nextStep();
 							} else {
 								setArtistProfileNotVerifiedModalOpen(true);
-								setLoading(false);
+								setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 							}
 						}}
 					>

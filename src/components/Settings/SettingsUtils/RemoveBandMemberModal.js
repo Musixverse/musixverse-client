@@ -12,7 +12,10 @@ const RemoveBandMemberModal = ({ isOpen, setOpen, bandId, username, bandMemberTo
 	const { fetch: removeBandMember } = useMoralisCloudFunction("removeBandMember", { bandId: bandId, bandMember: bandMemberToEdit }, { autoFetch: false });
 
 	const removeSelectedBandMember = async () => {
-		setLoading(true);
+		setLoading({
+			status: true,
+			title: "Removing Member from Band...",
+		});
 
 		await removeBandMember({
 			onSuccess: async (object) => {
@@ -40,7 +43,7 @@ const RemoveBandMemberModal = ({ isOpen, setOpen, bandId, username, bandMemberTo
 			},
 		});
 
-		setLoading(false);
+		setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 		setOpen(false);
 	};
 

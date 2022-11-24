@@ -38,15 +38,18 @@ const EditPriceModal = ({ isOpen, setEditPriceModalOpen, tokenId, currentPrice }
 	const setNewPrice = async (e) => {
 		e.preventDefault();
 
-		setLoading(true);
+		setLoading({
+			status: true,
+			title: "Updating Price...",
+		});
 		try {
 			await updatePrice(tokenId, updatedPrice);
 			setEditPriceModalOpen(false);
 			await fetch(`/api/revalidate-track?path=${window.location.pathname}&secret=${process.env.NEXT_PUBLIC_REVALIDATE_SECRET}`);
-			setLoading(false);
+			setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 			setEditPriceSuccess(true);
 		} catch (err) {
-			setLoading(false);
+			setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 			setEditPriceModalOpen(false);
 			if (err.title === "User is not connected to the same wallet") {
 				setError({

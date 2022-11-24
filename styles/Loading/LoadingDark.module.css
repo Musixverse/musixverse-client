@@ -8,7 +8,7 @@
 	top: 0;
 	width: 100%;
 	height: 100vh;
-	background-color: rgba(0, 0, 0, 0.85);
+	background-color: rgba(0, 0, 0, 0.1);
 	backdrop-filter: blur(4px);
 	display: flex;
 	flex-direction: column;
@@ -78,4 +78,15 @@
 	100% {
 		transform: rotate(1turn);
 	}
+}
+
+.loading_container > p {
+	position: relative;
+	font-size: 18px;
+	font-weight: 500;
+}
+
+.loading_container > p > span {
+	margin-top: 20px;
+	font-size: 12px;
 }

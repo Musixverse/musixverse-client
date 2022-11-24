@@ -313,7 +313,11 @@ const CreateNFT = ({ userInfo }) => {
 	const { save: saveInvitedArtworkArtist } = useNewMoralisObject("InvitedArtworkArtist");
 	// Function to run when Create NFT button is pressed
 	const nftCreateFormOnSubmit = async () => {
-		setLoading(true);
+		setLoading({
+			status: true,
+			title: "NFT creation in progress...",
+			message: "Please wait while we communicate with the blockchain",
+		});
 		const reducedCollaboratorList = collaboratorList.reduce((result, { name, address, split, role }) => {
 			result.push({ name, address, split, role });
 			return result;
@@ -487,10 +491,10 @@ const CreateNFT = ({ userInfo }) => {
 				onSale,
 				_unlockTimestamp
 			);
-			setLoading(false);
+			setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 			setCreateNFTSuccess(true);
 		} catch (error) {
-			setLoading(false);
+			setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 			console.error(error);
 			if (error.title === "User is not connected to the same wallet") {
 				setError({

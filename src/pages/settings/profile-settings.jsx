@@ -49,7 +49,9 @@ export default function Settings({ userData }) {
 	const [balance, setBalance] = useState(0);
 
 	useEffect(() => {
-		setLoading(true);
+		setLoading({
+			status: true,
+		});
 
 		const fetchBalance = async () => {
 			try {
@@ -67,7 +69,7 @@ export default function Settings({ userData }) {
 			setUsername(user.attributes.username);
 			setEmail(user.attributes.email);
 		}
-		setLoading(false);
+		setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 	}, [user, setLoading, Moralis.Web3API.account]);
 
 	// Update User Information

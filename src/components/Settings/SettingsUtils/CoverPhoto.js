@@ -23,14 +23,21 @@ export default function CoverPhoto({ coverImage, setCoverImage }) {
 
 	useEffect(() => {
 		if (croppedImage !== undefined) {
-			setLoading(true);
+			setLoading({
+				status: true,
+				title: "Uploading Cover Photo",
+				message: "Please wait while we upload your file...",
+				showProgressBar: false,
+				progress: 0,
+			});
+
 			try {
-				uploadBase64ToIPFS(Moralis, croppedImage, "cover-image").then((url) => {
-					setLoading(false);
+				uploadBase64ToIPFS(Moralis, croppedImage, "cover-image", setLoading).then((url) => {
+					setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 					setCoverImage(url);
 				});
 			} catch (err) {
-				setLoading(false);
+				setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 				if (err.message && err.message == "request entity too large") {
 					setError({
 						title: "File too large",

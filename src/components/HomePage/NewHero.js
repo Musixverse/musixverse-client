@@ -3,16 +3,10 @@ import { useMoralis } from "react-moralis";
 import { useRouter } from "next/router";
 import PromoNftCard from "./HomePageUtils/PromoNftCards";
 import dynamic from "next/dynamic";
-import Image from "next/image";
 import Link from "next/link";
 import styles from "../../../styles/HomePage/newHero.module.css";
 import AuthModalContext from "../../../store/authModal-context";
-// import Carousel from "react-spring-3d-carousel";
-// import { Carousal } from "3d-react-carousal";
-
-const Carousel = dynamic(() => import("./HomePageUtils/PromoCarousel"), {
-	ssr: false,
-});
+import Carousel from "./HomePageUtils/PromoCarousel";
 
 export default function NewHero() {
 	const router = useRouter();

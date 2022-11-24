@@ -15,15 +15,18 @@ const SwitchAccountModal = ({ isOpen, setOpen, isArtist }) => {
 	const switchAccount = async (e) => {
 		e.preventDefault();
 
-		setLoading(true);
+		setLoading({
+			status: true,
+			title: "Switching Account Type...",
+		});
 		try {
 			setOpen(false);
 			const _result = await Moralis.Cloud.run("switchAccountType");
 			setUpdatedUser(_result);
-			setLoading(false);
+			setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 			setSwitchAccountSuccess(true);
 		} catch (err) {
-			setLoading(false);
+			setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 			setOpen(false);
 			setError({
 				title: err.title || (err.data && err.data.title) || "Oops! Something went wrong.",

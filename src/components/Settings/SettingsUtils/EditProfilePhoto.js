@@ -9,7 +9,6 @@ import Image from "next/image";
 import Tooltip from "../../../layout/Tooltip/Tooltip";
 
 export default function EditProfilePhoto({ avatar, setAvatar }) {
-	// const profilePicture = useRef(null);
 	const profilePictureInput = useRef(null);
 	const { Moralis } = useMoralis();
 	const [, setLoading] = useContext(LoadingContext);
@@ -18,21 +17,20 @@ export default function EditProfilePhoto({ avatar, setAvatar }) {
 	const [showModal, setShowModal] = useState(false);
 	const [imageToCrop, setImageToCrop] = useState(undefined);
 	const [croppedImage, setCroppedImage] = useState(undefined);
-	// const [profilePicture, setProfilePicture] = useState(avatar? avatar : "https://ipfs.moralis.io:2053/ipfs/Qmcn1aZ4PKUUzwpTncuSbruwLD98dtiNqvoJG5zm8EMwXZ")
 	const aspectRatio = { width: 1, height: 1 };
 	const circularCrop = false;
 	const cropModalValues = { showModal, setShowModal, imageToCrop, setCroppedImage, circularCrop, aspectRatio };
 
 	useEffect(() => {
 		if (croppedImage !== undefined) {
-			setLoading(true);
+			setLoading({ status: true, title: "Uploading Avatar", message: "Please wait while we upload your file...", showProgressBar: false, progress: 0 });
 			try {
-				uploadBase64ToIPFS(Moralis, croppedImage, "avatar").then((url) => {
-					setLoading(false);
+				uploadBase64ToIPFS(Moralis, croppedImage, "avatar", setLoading).then((url) => {
+					setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 					setAvatar(url);
 				});
 			} catch (err) {
-				setLoading(false);
+				setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 				if (err.message && err.message == "request entity too large") {
 					setError({
 						title: "File too large",
@@ -96,13 +94,6 @@ export default function EditProfilePhoto({ avatar, setAvatar }) {
 							priority
 						/>
 					</div>
-
-					{/* <img
-						className="w-[130px] h-[130px] md:w-[150px] md:h-[150px] rounded-full"
-						ref={profilePicture}
-						src={avatar || "https://ipfs.moralis.io:2053/ipfs/Qmcn1aZ4PKUUzwpTncuSbruwLD98dtiNqvoJG5zm8EMwXZ"}
-						alt="Current Avatar"
-					></img> */}
 
 					<input
 						ref={profilePictureInput}

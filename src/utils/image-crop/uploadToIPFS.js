@@ -1,17 +1,24 @@
 /**
  * If the uploaded File is null, then the function shall return
  */
-async function uploadFileToIPFS(fileToUpload) {
+import axios from "axios";
+
+async function uploadFileToIPFS(fileToUpload, setLoading) {
 	if (fileToUpload === null) return null;
 
-	const ipfsHash = await fetch(`${process.env.NEXT_PUBLIC_PARSE_SERVER_BASE_URL}/upload-file-to-ipfs`, {
-		method: "POST",
+	const result = await axios.post(`${process.env.NEXT_PUBLIC_PARSE_SERVER_BASE_URL}/upload-file-to-ipfs`, fileToUpload, {
 		maxContentLength: Infinity,
 		maxBodyLength: Infinity,
-		body: fileToUpload,
-	})
-		.then((response) => response.json())
-		.then((res) => res.ipfsHash);
+		onUploadProgress: (progressEvent) => {
+			var _percentage = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+			setLoading((prevState) => ({
+				...prevState,
+				showProgressBar: true,
+				progress: _percentage,
+			}));
+		},
+	});
+	const ipfsHash = result.data.ipfsHash;
 
 	const ipfsUrl = process.env.NEXT_PUBLIC_IPFS_NODE_URL + ipfsHash;
 	return ipfsUrl;
@@ -30,7 +37,7 @@ async function dataURLtoFile(dataurl, filename) {
 	return new File([u8arr], filename, { type: mime });
 }
 
-async function uploadBase64ToIPFS(Moralis, fileToUpload, fileType) {
+async function uploadBase64ToIPFS(Moralis, fileToUpload, fileType, setLoading) {
 	if (fileToUpload === null) return null;
 
 	const file = await dataURLtoFile(fileToUpload, `${fileType}.jpeg`);
@@ -40,14 +47,22 @@ async function uploadBase64ToIPFS(Moralis, fileToUpload, fileType) {
 	formData.append("fileType", fileType);
 	formData.append("file", file);
 
-	const ipfsHash = await fetch(`${process.env.NEXT_PUBLIC_PARSE_SERVER_BASE_URL}/upload-file-to-ipfs`, {
-		method: "POST",
+	const result = await axios.post(`${process.env.NEXT_PUBLIC_PARSE_SERVER_BASE_URL}/upload-file-to-ipfs`, formData, {
 		maxContentLength: Infinity,
 		maxBodyLength: Infinity,
-		body: formData,
-	})
-		.then((response) => response.json())
-		.then((res) => res.ipfsHash);
+		headers: {
+			"Content-Type": "multipart/form-data",
+		},
+		onUploadProgress: (progressEvent) => {
+			var _percentage = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+			setLoading((prevState) => ({
+				...prevState,
+				showProgressBar: true,
+				progress: _percentage,
+			}));
+		},
+	});
+	const ipfsHash = result.data.ipfsHash;
 
 	const ipfsUrl = process.env.NEXT_PUBLIC_IPFS_NODE_URL + ipfsHash;
 	return ipfsUrl;

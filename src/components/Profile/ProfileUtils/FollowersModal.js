@@ -17,7 +17,10 @@ export default function FollowersModal({ isOpen, setOpen, username, isBand }) {
 	const { fetch: fetchBandFollowers } = useMoralisCloudFunction("fetchBandFollowers", { username: username }, { autoFetch: false });
 
 	const removeFollower = async (followerUsername) => {
-		setLoading(true);
+		setLoading({
+			status: true,
+			title: "Removing Follower...",
+		});
 		await Moralis.Cloud.run("removeFollower", { username: followerUsername }).then(async () => {
 			await fetchFollowers({
 				onSuccess: (data) => {
@@ -27,7 +30,7 @@ export default function FollowersModal({ isOpen, setOpen, username, isBand }) {
 					console.log("fetchFollowers Error:", error);
 				},
 			});
-			setLoading(false);
+			setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 		});
 	};
 

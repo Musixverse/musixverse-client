@@ -78,7 +78,10 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 	 * 3) Login via parse using the signed message (verification handled on server via Moralis Auth Api)
 	 */
 	const handleMetamaskAuth = async () => {
-		setLoading(true);
+		setLoading({
+			status: true,
+			message: "Please approve the login from your wallet...",
+		});
 		try {
 			await addPolygonNetwork();
 			// Enable web3 to get user address and chain
@@ -88,7 +91,7 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 			const { account, chainId } = Moralis;
 
 			if (!account) {
-				setLoading(false);
+				setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 				setError((prevState) => ({
 					...prevState,
 					title: "Auth failed! Metamask not found",
@@ -106,7 +109,7 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 				return;
 			}
 			if (!chainId) {
-				setLoading(false);
+				setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 				setError({
 					title: "Connection failed",
 					message: "No connected chain was found",
@@ -139,21 +142,24 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 							if (router.pathname === "/") router.push("/mxcatalog/new-releases");
 						});
 					}
-					setLoading(false);
+					setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 				})
 				.catch(function (error) {
 					console.log("Metamask authentication error:", error);
-					setLoading(false);
+					setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 				});
 		} catch (error) {
-			setLoading(false);
+			setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 			console.error(error);
 		}
-		setLoading(false);
+		setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 	};
 
 	const handleWalletconnectAuth = async () => {
-		setLoading(true);
+		setLoading({
+			status: true,
+			message: "Please approve the login from your wallet...",
+		});
 		try {
 			// Enable web3 to get user address and chain
 			if (!isWeb3Enabled) {
@@ -162,7 +168,7 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 			const { account, chainId } = Moralis;
 
 			if (!account) {
-				setLoading(false);
+				setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 				setError({
 					title: "Connection failed",
 					message: "No connected account was found",
@@ -171,7 +177,7 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 				return;
 			}
 			if (!chainId) {
-				setLoading(false);
+				setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 				setError({
 					title: "Connection failed",
 					message: "No connected chain was found",
@@ -206,17 +212,17 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 							if (router.pathname === "/") router.push("/mxcatalog/new-releases");
 						});
 					}
-					setLoading(false);
+					setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 				})
 				.catch(function (error) {
 					console.log("WalletConnect authentication error:", error);
-					setLoading(false);
+					setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 				});
 		} catch (error) {
-			setLoading(false);
+			setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 			console.error(error);
 		}
-		setLoading(false);
+		setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 	};
 
 	// const [betaAccessGranted, setBetaAccessGranted] = useState(false);

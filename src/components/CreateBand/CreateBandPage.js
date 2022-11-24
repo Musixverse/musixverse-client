@@ -161,14 +161,17 @@ const CreateBandPage = () => {
 			}
 		}
 
-		setLoading(true);
+		setLoading({
+			status: true,
+			title: "Creating Band...",
+		});
 		await createBand({
 			onSuccess: async (object) => {
 				setIsBandCreatedSuccessfullyModalOpen(true);
-				setLoading(false);
+				setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 			},
 			onError: (error) => {
-				setLoading(false);
+				setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 				console.log("createBand Error:", error);
 			},
 		});

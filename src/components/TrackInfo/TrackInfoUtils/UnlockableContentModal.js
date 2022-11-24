@@ -17,16 +17,19 @@ const UnlockableContentModal = ({ isOpen, setOpen, tokenId, selectedUnlockableIt
 	const postComment = async (e) => {
 		e.preventDefault();
 
-		setLoading(true);
+		setLoading({
+			status: true,
+			title: "Please sign the transaction in your wallet...",
+		});
 		try {
 			await updateCommentOnToken(tokenId, comment);
 			setOpen(false);
 			setComment("");
 			await fetch(`/api/revalidate-track?path=${window.location.pathname}&secret=${process.env.NEXT_PUBLIC_REVALIDATE_SECRET}`);
-			setLoading(false);
+			setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 			setUpdateCommentSuccess(true);
 		} catch (err) {
-			setLoading(false);
+			setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 			setOpen(false);
 			if (err.title === "User is not connected to the same wallet") {
 				setError({

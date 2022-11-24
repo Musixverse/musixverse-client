@@ -11,14 +11,17 @@ const ActionButtons = ({ step, prevStep, setSaveDraftSuccess, nftDraftMetadata }
 
 	// Save Draft Feature
 	const saveNftDraft = async () => {
-		setLoading(true);
+		setLoading({
+			status: true,
+			title: "Saving Draft...",
+		});
 		try {
 			await saveNftCreationProgress(nftDraftMetadata, draft);
-			setLoading(false);
+			setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 			setSaveDraftSuccess(true);
 		} catch (err) {
 			console.error("saveNftDraft error:", err);
-			setLoading(false);
+			setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 		}
 	};
 

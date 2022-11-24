@@ -49,9 +49,11 @@ const InstagramVerification = ({
 		<form
 			onSubmit={async (e) => {
 				e.preventDefault();
-				setLoading(true);
+				setLoading({
+					status: true,
+				});
 				if (!instagramHandle || !instagramHandleSave) {
-					setLoading(false);
+					setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 					setError({
 						title: "Instagram username is missing",
 						message: "Please enter and save your instagram username to continue",
@@ -64,19 +66,19 @@ const InstagramVerification = ({
 						await requestForVerification({
 							onSuccess: async (object) => {
 								if (object) {
-									setLoading(false);
+									setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 									setVerificationRequestSubmittedModalOpen(true);
 								}
 							},
 							onError: (error) => {
-								setLoading(false);
+								setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 								console.log("requestForVerification Error:", error);
 							},
 						});
 					},
 					onError: (error) => {
 						console.log("setArtistSongLink Error:", error);
-						setLoading(false);
+						setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 					},
 				});
 			}}
@@ -105,15 +107,17 @@ const InstagramVerification = ({
 				/>
 				<ConnectionButton
 					onClick={() => {
-						setLoading(true);
+						setLoading({
+							status: true,
+						});
 						setInstagramUsername({
 							onSuccess: async (object) => {
 								setInstagramHandleSave(true);
-								setLoading(false);
+								setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 							},
 							onError: (error) => {
 								console.log("setInstagramUsername Error:", error);
-								setLoading(false);
+								setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 							},
 						});
 					}}

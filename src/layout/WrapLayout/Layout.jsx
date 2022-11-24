@@ -28,9 +28,9 @@ const Layout = ({ children }) => {
 	const { theme } = useTheme();
 
 	if (router && router.events) {
-		router.events.on("routeChangeStart", () => setLoading(true));
-		router.events.on("routeChangeComplete", () => setLoading(false));
-		router.events.on("routeChangeError", () => setLoading(false));
+		router.events.on("routeChangeStart", () => setLoading({ status: true }));
+		router.events.on("routeChangeComplete", () => setLoading({ status: false }));
+		router.events.on("routeChangeError", () => setLoading({ status: false }));
 	}
 
 	if (typeof window !== "undefined" && window && window.ethereum) {
@@ -150,7 +150,7 @@ const Layout = ({ children }) => {
 			<AuthModal isOpen={authModalOpen} onClose={() => setAuthModalOpen(false)} />
 			<BrowserNotSupportedModal />
 			{children}
-			{isLoading && theme === "dark" ? <LoadingDark /> : <Loading />}
+			{isLoading.status && theme === "dark" ? <LoadingDark /> : isLoading.status && <Loading />}
 			{!router.pathname.startsWith("/admin") && <FloatingHelp />}
 			<NewAudioPlayer />
 			<ErrorBox />

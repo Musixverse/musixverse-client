@@ -6,7 +6,7 @@ import NoResultsFound from "../Utils/NoResultsFound";
 import LoadingContext from "../../../../store/loading-context";
 
 const UnsoldNFTs = ({ appliedFilter, tracks }) => {
-	const [loading, setLoading] = useContext(LoadingContext);
+	const [isLoading, setLoading] = useContext(LoadingContext);
 	const [tracksWhoseAllCopiesAreNotSold, setTracksWhoseAllCopiesAreNotSold] = useState(tracks);
 	const [hasLoadedOnce, setLoadedOnce] = useState(false);
 
@@ -18,14 +18,17 @@ const UnsoldNFTs = ({ appliedFilter, tracks }) => {
 
 	useEffect(() => {
 		if (hasLoadedOnce) {
-			setLoading(true);
+			setLoading({
+				status: true,
+				title: "Applying Filter...",
+			});
 			fetchTracksWhoseAllCopiesAreNotSold({
 				onSuccess: async (object) => {
-					setLoading(false);
+					setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 					setTracksWhoseAllCopiesAreNotSold(object);
 				},
 				onError: (error) => {
-					setLoading(false);
+					setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 					console.log("fetchTracksWhoseAllCopiesAreNotSold Error:", error);
 				},
 			});
@@ -35,9 +38,9 @@ const UnsoldNFTs = ({ appliedFilter, tracks }) => {
 
 	return (
 		<>
-			{loading ? (
+			{isLoading.status ? (
 				<LoadingNftCards />
-			) : !loading && tracksWhoseAllCopiesAreNotSold && tracksWhoseAllCopiesAreNotSold.length === 0 ? (
+			) : !isLoading.status && tracksWhoseAllCopiesAreNotSold && tracksWhoseAllCopiesAreNotSold.length === 0 ? (
 				<NoResultsFound />
 			) : (
 				tracksWhoseAllCopiesAreNotSold &&

@@ -78,14 +78,18 @@ const Step3Form = ({ unlockableContent, setUnlockableContent }) => {
 
 		// VALIDATE OR CHECK IF ANY FILE IS SELECTED
 		if (filesInput.files.length > 0) {
-			setLoading(true);
+			if (filesInput.files.length == 1) {
+				setLoading({ status: true, title: "Uploading Image", message: "Please wait while we upload your file..." });
+			} else {
+				setLoading({ status: true, title: "Uploading Images", message: "Please wait while we upload your files..." });
+			}
 
 			const _exclusiveImages = [];
 			for (let currentFile of filesInput.files) {
 				try {
 					// If file size is > 200 MB show error box
 					if (currentFile.size > 200000000) {
-						setLoading(false);
+						setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 						setError({
 							title: "File size too large",
 							message: "Uploaded file should be less than 200 MB",
@@ -98,13 +102,13 @@ const Step3Form = ({ unlockableContent, setUnlockableContent }) => {
 					formData.append("fileType", "exclusive-image");
 					formData.append("file", currentFile);
 
-					const ipfsUrl = await uploadFileToIPFS(formData).then((url) => {
+					const ipfsUrl = await uploadFileToIPFS(formData, setLoading).then((url) => {
 						return url;
 					});
 					_exclusiveImages.push({ file: currentFile, ipfsUrl: ipfsUrl });
 				} catch (error) {
 					console.error(error);
-					setLoading(false);
+					setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 					if (error.message && error.message == "request entity too large") {
 						setError({
 							title: "File too large",
@@ -127,7 +131,7 @@ const Step3Form = ({ unlockableContent, setUnlockableContent }) => {
 				...prevState,
 				exclusiveImages: _exclusiveImages,
 			}));
-			setLoading(false);
+			setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 		} else {
 			// TOTAL FILE COUNT
 			setImageFilesChosenText("No file chosen");
@@ -167,14 +171,18 @@ const Step3Form = ({ unlockableContent, setUnlockableContent }) => {
 
 		// VALIDATE OR CHECK IF ANY FILE IS SELECTED
 		if (filesInput.files.length > 0) {
-			setLoading(true);
+			if (filesInput.files.length == 1) {
+				setLoading({ status: true, title: "Uploading Audio", message: "Please wait while we upload your file..." });
+			} else {
+				setLoading({ status: true, title: "Uploading Audios", message: "Please wait while we upload your files..." });
+			}
 
 			const _exclusiveAudios = [];
 			for (let currentFile of filesInput.files) {
 				try {
 					// If file size is > 200 MB show error box
 					if (currentFile.size > 200000000) {
-						setLoading(false);
+						setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 						setError({
 							title: "File size too large",
 							message: "Uploaded file should be less than 200 MB",
@@ -188,13 +196,13 @@ const Step3Form = ({ unlockableContent, setUnlockableContent }) => {
 					formData.append("fileType", "exclusive-audio");
 					formData.append("file", currentFile);
 
-					const ipfsUrl = await uploadFileToIPFS(formData).then((url) => {
+					const ipfsUrl = await uploadFileToIPFS(formData, setLoading).then((url) => {
 						return url;
 					});
 					_exclusiveAudios.push({ file: currentFile, ipfsUrl: ipfsUrl });
 				} catch (error) {
 					console.error(error);
-					setLoading(false);
+					setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 					if (error.message && error.message == "request entity too large") {
 						setError({
 							title: "File too large",
@@ -217,7 +225,7 @@ const Step3Form = ({ unlockableContent, setUnlockableContent }) => {
 				...prevState,
 				exclusiveAudios: _exclusiveAudios,
 			}));
-			setLoading(false);
+			setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 		} else {
 			// TOTAL FILE COUNT
 			setAudioFilesChosenText("No file chosen");
@@ -257,14 +265,18 @@ const Step3Form = ({ unlockableContent, setUnlockableContent }) => {
 
 		// VALIDATE OR CHECK IF ANY FILE IS SELECTED
 		if (filesInput.files.length > 0) {
-			setLoading(true);
+			if (filesInput.files.length == 1) {
+				setLoading({ status: true, title: "Uploading Video", message: "Please wait while we upload your file..." });
+			} else {
+				setLoading({ status: true, title: "Uploading Videos", message: "Please wait while we upload your files..." });
+			}
 
 			const _exclusiveVideos = [];
 			for (let currentFile of filesInput.files) {
 				try {
 					// If file size is > 200 MB show error box
 					if (currentFile.size > 200000000) {
-						setLoading(false);
+						setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 						setError({
 							title: "File size too large",
 							message: "Uploaded file should be less than 200 MB",
@@ -278,13 +290,13 @@ const Step3Form = ({ unlockableContent, setUnlockableContent }) => {
 					formData.append("fileType", "exclusive-video");
 					formData.append("file", currentFile);
 
-					const ipfsUrl = await uploadFileToIPFS(formData).then((url) => {
+					const ipfsUrl = await uploadFileToIPFS(formData, setLoading).then((url) => {
 						return url;
 					});
 					_exclusiveVideos.push({ file: currentFile, ipfsUrl: ipfsUrl });
 				} catch (error) {
 					console.error(error);
-					setLoading(false);
+					setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 					if (error.message && error.message == "request entity too large") {
 						setError({
 							title: "File too large",
@@ -307,7 +319,7 @@ const Step3Form = ({ unlockableContent, setUnlockableContent }) => {
 				...prevState,
 				exclusiveVideos: _exclusiveVideos,
 			}));
-			setLoading(false);
+			setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 		} else {
 			// TOTAL FILE COUNT
 			setVideoFilesChosenText("No file chosen");

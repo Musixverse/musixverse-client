@@ -11,12 +11,14 @@ const Confirm_Page = () => {
 	const [, setLoading] = useContext(LoadingContext);
 
 	useEffect(() => {
-		setLoading(true);
+		setLoading({
+			status: true,
+		});
 		if (isInitialized && user) {
-			setLoading(false);
+			setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 		}
 		return () => {
-			setLoading(false);
+			setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 		};
 	}, [isInitialized, user, setLoading]);
 

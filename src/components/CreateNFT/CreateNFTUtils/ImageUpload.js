@@ -23,10 +23,16 @@ export default function ImageUpload({ coverArtUrl, setCoverArtUrl, setCoverArtMi
 		async function setCoverArt() {
 			if (croppedImage !== undefined) {
 				setCoverArtUrl(croppedImage);
-				setLoading(true);
-				// Get the uploadFileOnIPFS async function
+				setLoading({
+					status: true,
+					title: "Uploading Cover Art",
+					message: "Please wait while we upload your file...",
+					showProgressBar: false,
+					progress: 0,
+				});
+
 				try {
-					await uploadBase64ToIPFS(Moralis, croppedImage, "cover-art").then((url) => setCoverArtUrl(url));
+					await uploadBase64ToIPFS(Moralis, croppedImage, "cover-art", setLoading).then((url) => setCoverArtUrl(url));
 				} catch (err) {
 					if (err.message && err.message == "request entity too large") {
 						setError({
@@ -43,7 +49,7 @@ export default function ImageUpload({ coverArtUrl, setCoverArtUrl, setCoverArtMi
 						}));
 					}
 				}
-				setLoading(false);
+				setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 			}
 		}
 		setCoverArt();

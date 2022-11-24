@@ -253,7 +253,11 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 																/>
 															) : null}
 														</div>
-														<p className="mt-1">Balance: {balance} MATIC</p>
+														<p className="mt-1">
+															Balance:&nbsp;&nbsp;
+															<Image src={"/assets/matic-logo.svg"} width={12} height={12} alt="matic logo" /> {balance}
+															&nbsp;MATIC
+														</p>
 													</div>
 												)}
 												{/* (

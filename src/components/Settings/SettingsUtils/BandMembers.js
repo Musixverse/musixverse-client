@@ -46,7 +46,10 @@ const BandMembers = ({ bandId, username, bandMembers, updatedBandMembersList }) 
 	const [isAddBandMemberModalOpen, setAddBandMemberModalOpen] = useState(false);
 
 	const sendBandInvitationEmailToArtistWhoHasNotAcceptedInvitation = async (member) => {
-		setLoading(true);
+		setLoading({
+			status: true,
+			title: "Sending Invite...",
+		});
 
 		try {
 			await Moralis.Cloud.run("sendBandInvitationEmailToArtist", { bandId: bandId, bandMember: member }).then(() => {
@@ -67,7 +70,7 @@ const BandMembers = ({ bandId, username, bandMembers, updatedBandMembersList }) 
 			console.log("sendBandInvitationEmailToArtist Error:", error);
 		}
 
-		setLoading(false);
+		setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 	};
 
 	return (

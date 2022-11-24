@@ -30,7 +30,13 @@ function App({ Component, pageProps, router }) {
 		};
 	}, [router.events]);
 
-	const [isLoading, setLoading] = useState(false);
+	const [isLoading, setLoading] = useState({
+		status: false,
+		title: "",
+		message: "",
+		showProgressBar: false,
+		progress: 0,
+	});
 	const [accessLevel, setAccessLevel] = useState(0);
 	const [error, setError] = useState({
 		title: "",

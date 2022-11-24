@@ -14,7 +14,7 @@ export default function ProfileSection2({ spotify, setSpotify, instagram, setIns
 	// 				sessionStorage.setItem("oauth_token_secret", data.responseData.oauth_token_secret);
 	// 			}
 	// 			window.open(data.responseData.url, "_self");
-	// 			setLoading(false);
+	// 			setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 	// 		})
 	// 		.catch((err) => {
 	// 			console.log("authorizeTwitter error:", err);
@@ -69,7 +69,7 @@ export default function ProfileSection2({ spotify, setSpotify, instagram, setIns
 	// const verifyIdentityVerificationTweet = async () => {
 	// 	setLoading(true);
 	// 	if (!isTwitterAccountConnected) {
-	// 		setLoading(false);
+	// 		setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 	// 		setError({
 	// 			title: "Twitter account not connected",
 	// 			message: "You need to connect your Twitter account to continue",
@@ -87,7 +87,7 @@ export default function ProfileSection2({ spotify, setSpotify, instagram, setIns
 	// 		.then((res) => res.json())
 	// 		.then(async (data) => {
 	// 			if (data.code === 200) {
-	// 				setLoading(false);
+	// 				setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 	// 				setSuccess({
 	// 					title: "You've been verified successfully",
 	// 					message: "You'll be redirected to your profile page now",
@@ -96,7 +96,7 @@ export default function ProfileSection2({ spotify, setSpotify, instagram, setIns
 	// 				await sleep(1500);
 	// 				router.replace(`/profile/${user.attributes.username}`, undefined, { shallow: true });
 	// 			} else {
-	// 				setLoading(false);
+	// 				setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 	// 				setError({
 	// 					title: "Tweet Missing",
 	// 					message: "Please send the tweet to complete verification",
@@ -105,7 +105,7 @@ export default function ProfileSection2({ spotify, setSpotify, instagram, setIns
 	// 			}
 	// 		})
 	// 		.catch((err) => {
-	// 			setLoading(false);
+	// 			setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 	// 			console.log("verifyIdentityVerificationTweet error:", err);
 	// 		});
 	// };

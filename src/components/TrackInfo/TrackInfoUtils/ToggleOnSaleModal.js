@@ -13,15 +13,18 @@ const ToggleOnSaleModal = ({ isOpen, setToggleOnSaleModalOpen, tokenId, onSale }
 	const toggleOnSaleAttribute = async (e) => {
 		e.preventDefault();
 
-		setLoading(true);
+		setLoading({
+			status: true,
+			title: "Please sign the transaction in your wallet...",
+		});
 		try {
 			await toggleOnSale(tokenId);
 			setToggleOnSaleModalOpen(false);
 			await fetch(`/api/revalidate-track?path=${window.location.pathname}&secret=${process.env.NEXT_PUBLIC_REVALIDATE_SECRET}`);
-			setLoading(false);
+			setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 			setToggleOnSaleSuccess(true);
 		} catch (err) {
-			setLoading(false);
+			setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 			setToggleOnSaleModalOpen(false);
 			if (err.title === "User is not connected to the same wallet") {
 				setError({

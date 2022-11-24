@@ -12,13 +12,13 @@ export default function AudioUpload({ audioFileUrl, setAudioFileUrl, setAudioFil
 	const [, , , setError] = useContext(StatusContext);
 
 	const handleAudioUpload = async (event) => {
-		setLoading(true);
+		setLoading({ status: true, title: "Uploading Audio", message: "Please wait while we upload your file...", showProgressBar: false, progress: 0 });
 		var target = event.target;
 		var fileToUpload = event.target.files[0];
 
 		// If file size is > 200 MB show error box
 		if (event.target.files[0] && event.target.files[0].size > 200000000) {
-			setLoading(false);
+			setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 			setError({
 				title: "File size too large",
 				message: "Uploaded file should be less than 200 MB",
@@ -50,7 +50,7 @@ export default function AudioUpload({ audioFileUrl, setAudioFileUrl, setAudioFil
 			formData.append("fileType", "audio");
 			formData.append("file", event.target.files[0]);
 			try {
-				await uploadFileToIPFS(formData).then((url) => {
+				await uploadFileToIPFS(formData, setLoading).then((url) => {
 					if (url) {
 						setAudioFileUrl(url);
 					} else {
@@ -79,7 +79,7 @@ export default function AudioUpload({ audioFileUrl, setAudioFileUrl, setAudioFil
 				}
 			}
 		}
-		setLoading(false);
+		setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 	};
 
 	return (

@@ -26,6 +26,11 @@ const SendInviteModal = ({ isOpen, setOpen, invitedArtistEmail, onEmailChange, n
 	const { fetch: sendInviteEmail } = useMoralisCloudFunction("sendInviteEmail", { email: invitedArtistEmail }, { autoFetch: false });
 	const onFormSubmit = async (e) => {
 		e.preventDefault();
+		setLoading({
+			status: true,
+			title: "Sending Invite...",
+		});
+
 		// EMAIL CHECK
 		const emailCheck = await isEmailValid(invitedArtistEmail);
 
@@ -35,13 +40,13 @@ const SendInviteModal = ({ isOpen, setOpen, invitedArtistEmail, onEmailChange, n
 				message: emailCheck.message,
 				showErrorBox: true,
 			});
+			setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 			return;
 		}
 
-		setLoading(true);
 		await sendInviteEmail({
 			onSuccess: async (object) => {
-				setLoading(false);
+				setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 				await saveNftDraft();
 				setSuccess((prevState) => ({
 					...prevState,
@@ -51,7 +56,7 @@ const SendInviteModal = ({ isOpen, setOpen, invitedArtistEmail, onEmailChange, n
 				}));
 			},
 			onError: (error) => {
-				setLoading(false);
+				setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 				console.error("sendInviteEmail Error:", error);
 			},
 		});

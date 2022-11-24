@@ -43,11 +43,11 @@ const NameAndIdVerification = ({
 				setRealName({
 					onSuccess: async (object) => {
 						setArtistRealNameSave(true);
-						setLoading(false);
+						setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 					},
 					onError: (error) => {
 						console.log("setRealName Error:", error);
-						setLoading(false);
+						setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 					},
 				});
 				nextStep();
@@ -135,18 +135,20 @@ const NameAndIdVerification = ({
 						/>
 						<ConnectionButton
 							onClick={() => {
-								setLoading(true);
+								setLoading({
+									status: true,
+								});
 								if (artistRealName == "") {
 									setIsRealNameDifferent(false);
 								}
 								setRealName({
 									onSuccess: async (object) => {
 										setArtistRealNameSave(true);
-										setLoading(false);
+										setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 									},
 									onError: (error) => {
 										console.log("setRealName Error:", error);
-										setLoading(false);
+										setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 									},
 								});
 							}}

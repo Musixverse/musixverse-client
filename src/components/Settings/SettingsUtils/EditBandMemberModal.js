@@ -16,7 +16,10 @@ const EditBandMemberModal = ({ isOpen, setOpen, bandId, username, bandMemberToEd
 	);
 
 	const updateBandMember = async () => {
-		setLoading(true);
+		setLoading({
+			status: true,
+			title: "Updating Member Info...",
+		});
 
 		await updateBandMemberRole({
 			onSuccess: async (object) => {
@@ -48,7 +51,7 @@ const EditBandMemberModal = ({ isOpen, setOpen, bandId, username, bandMemberToEd
 			},
 		});
 
-		setLoading(false);
+		setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 		setOpen(false);
 	};
 

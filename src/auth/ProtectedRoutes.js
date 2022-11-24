@@ -8,7 +8,7 @@ import AccessLevelContext from "../../store/accessLevel-context";
 const isBrowser = () => typeof window !== "undefined";
 
 const ProtectedRoutes = ({ router, children }) => {
-	const [isLoading, setLoading] = useContext(LoadingContext);
+	const [, setLoading] = useContext(LoadingContext);
 	// Level 0: New user who is not signed in
 	// Level 1: Signed up user who hasn't chosen between a collector/artist profile
 	// Level 2: Signed up collector who hasn't verified email
@@ -77,7 +77,7 @@ const ProtectedRoutes = ({ router, children }) => {
 					}
 				}
 
-				setLoading(false);
+				setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 			}
 		}
 		checkPath();

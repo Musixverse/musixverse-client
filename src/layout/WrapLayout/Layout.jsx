@@ -150,7 +150,7 @@ const Layout = ({ children }) => {
 			<AuthModal isOpen={authModalOpen} onClose={() => setAuthModalOpen(false)} />
 			<BrowserNotSupportedModal />
 			{children}
-			{isLoading.status && theme === "dark" ? <LoadingDark /> : isLoading.status && <Loading />}
+			{isLoading.status && theme === "dark" ? <LoadingDark /> : <Loading />}
 			{!router.pathname.startsWith("/admin") && <FloatingHelp />}
 			<NewAudioPlayer />
 			<ErrorBox />

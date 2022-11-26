@@ -128,7 +128,13 @@ export default function TrackDetails({ tokenId, metadata }) {
 					</div>
 					<div className="text-left">
 						<h4 className="text-base font-bold font-secondary">Blockchain</h4>
-						<p>{parseInt(metadata.chainDetails.chainId) === 80001 ? "Polygon" : ""}</p>
+						<p>
+							{parseInt(metadata.chainDetails.chainId) === 80001
+								? "Polygon Testnet"
+								: parseInt(metadata.chainDetails.chainId) === 137
+								? "Polygon"
+								: ""}
+						</p>
 					</div>
 
 					<div className="col-span-2 text-left">

@@ -12,7 +12,6 @@ import { DISCORD_SUPPORT_CHANNEL_INVITE_LINK } from "../../config/constants";
 import RequiredAsterisk from "../RequiredAsterisk";
 import LoadingContext from "../../../store/loading-context";
 import StatusContext from "../../../store/status-context";
-import { deleteCookie } from "cookies-next";
 
 export default function AuthModal({ isOpen = "", onClose = "" }) {
 	const router = useRouter();
@@ -49,8 +48,6 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 	const closeModal = () => {
 		if (!magicFormOpen) {
 			handleChange();
-			setAccessCode("");
-			setBetaAccessGranted(false);
 			onClose();
 		} else displayAuthMethods();
 	};
@@ -81,7 +78,10 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 	 * 3) Login via parse using the signed message (verification handled on server via Moralis Auth Api)
 	 */
 	const handleMetamaskAuth = async () => {
-		setLoading(true);
+		setLoading({
+			status: true,
+			message: "Please approve the login from your wallet...",
+		});
 		try {
 			await addPolygonNetwork();
 			// Enable web3 to get user address and chain
@@ -91,16 +91,25 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 			const { account, chainId } = Moralis;
 
 			if (!account) {
-				setLoading(false);
-				setError({
-					title: "Connection failed",
-					message: "No connected account was found",
+				setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
+				setError((prevState) => ({
+					...prevState,
+					title: "Auth failed! Metamask not found",
+					message: (
+						<>
+							Please download Metamask by clicking here-{" "}
+							<a href="https://metamask.io/download/" target="_blank" rel="noopener noreferrer">
+								https://metamask.io/download/
+							</a>
+							. If you&apos;re on a mobile device, please login using WalletConnect.
+						</>
+					),
 					showErrorBox: true,
-				});
+				}));
 				return;
 			}
 			if (!chainId) {
-				setLoading(false);
+				setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 				setError({
 					title: "Connection failed",
 					message: "No connected chain was found",
@@ -129,26 +138,28 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 							},
 							body: JSON.stringify({ currentUser: user }),
 						}).then(() => {
-							deleteCookie("logout");
 							closeModal();
 							if (router.pathname === "/") router.push("/mxcatalog/new-releases");
 						});
 					}
-					setLoading(false);
+					setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 				})
 				.catch(function (error) {
 					console.log("Metamask authentication error:", error);
-					setLoading(false);
+					setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 				});
 		} catch (error) {
-			setLoading(false);
+			setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 			console.error(error);
 		}
-		setLoading(false);
+		setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 	};
 
 	const handleWalletconnectAuth = async () => {
-		setLoading(true);
+		setLoading({
+			status: true,
+			message: "Please approve the login from your wallet...",
+		});
 		try {
 			// Enable web3 to get user address and chain
 			if (!isWeb3Enabled) {
@@ -157,7 +168,7 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 			const { account, chainId } = Moralis;
 
 			if (!account) {
-				setLoading(false);
+				setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 				setError({
 					title: "Connection failed",
 					message: "No connected account was found",
@@ -166,7 +177,7 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 				return;
 			}
 			if (!chainId) {
-				setLoading(false);
+				setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 				setError({
 					title: "Connection failed",
 					message: "No connected chain was found",
@@ -197,27 +208,26 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 							},
 							body: JSON.stringify({ currentUser: user }),
 						}).then(() => {
-							deleteCookie("logout");
 							closeModal();
 							if (router.pathname === "/") router.push("/mxcatalog/new-releases");
 						});
 					}
-					setLoading(false);
+					setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 				})
 				.catch(function (error) {
 					console.log("WalletConnect authentication error:", error);
-					setLoading(false);
+					setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 				});
 		} catch (error) {
-			setLoading(false);
+			setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 			console.error(error);
 		}
-		setLoading(false);
+		setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 	};
 
-	const [betaAccessGranted, setBetaAccessGranted] = useState(false);
-	const [betaAccessError, setBetaAccessError] = useState(false);
-	const [accessCode, setAccessCode] = useState("");
+	// const [betaAccessGranted, setBetaAccessGranted] = useState(false);
+	// const [betaAccessError, setBetaAccessError] = useState(false);
+	// const [accessCode, setAccessCode] = useState("");
 
 	return (
 		<>
@@ -260,7 +270,7 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 								</div>
 							</div>
 
-							{!betaAccessGranted ? (
+							{/* {!betaAccessGranted ? (
 								<div className="w-full flex flex-col sm:flex-row mt-4 pr-4">
 									<div className="sm:w-2/5">
 										<div className="text-xl font-semibold font-primary">Jump into Musixverse!</div>
@@ -314,8 +324,9 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 											</div>
 										</form>
 									</div>
-								</div>
-							) : !magicFormOpen ? (
+								</div> */}
+
+							{!magicFormOpen ? (
 								<div className="w-full flex flex-col sm:flex-row sm:space-x-4 mt-4 pr-4">
 									<div className="sm:w-2/5">
 										<div className="text-xl font-semibold font-primary">Jump into Musixverse!</div>
@@ -364,6 +375,15 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 												</div>
 											</button> */}
 										</div>
+										<p className="text-[15px] text-gray-400 mt-4 sm:mt-16">
+											Having problems setting up your wallet? Follow this&nbsp;
+											<Link href={"https://medium.com/@musixverse/how-to-set-up-a-crypto-wallet-metamask-477be25c0f5f"} passHref>
+												<a target="_blank" rel="noopener noreferrer" className="text-primary-500 hover:text-primary-600">
+													guide
+												</a>
+											</Link>
+											.
+										</p>
 									</div>
 								</div>
 							) : (

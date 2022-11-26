@@ -1,6 +1,9 @@
-import Head from "next/head";
 import { useState, useEffect } from "react";
+import Head from "next/head";
+import { useTheme } from "next-themes";
 import { title_main_page, meta_description } from "../config/constants";
+import LoadingSection from "../layout/Loading/LoadingSection";
+import LoadingSectionDark from "../layout/Loading/LoadingSectionDark";
 import Banner from "../components/HomePage/HomePageBanner";
 import Section2 from "../components/HomePage/HomePage_section3";
 import Section3 from "../components/HomePage/HomePage_section4";
@@ -15,22 +18,11 @@ import GetStartedFan from "../components/HomePage/GetStartedFan";
 // import GetStartedAsArtist from "../components/HomePage/GetStartedAsArtist";
 // import GetStartedAsFan from "../components/HomePage/GetStartedAsFan";
 import NewsLetter from "../layout/NewsLetter";
-import dynamic from "next/dynamic";
-// const TopArtists = dynamic(() => import("../components/NewHomePage/TopArtist-new"), {
-// 	ssr: false,
-// });
-// const ShareAndEarn = dynamic(() => import("../components/HomePage/ShareAndEarn"), {
-// 	ssr: false,
-// });
-// const GetStartedArtist = dynamic(() => import("../components/HomePage/GetStartedArtist"), {
-// 	ssr: false,
-// });
-// const GetStartedFan = dynamic(() => import("../components/HomePage/GetStartedFan"), {
-// 	ssr: false,
-// });
 
-function Home() {
+function Home({}) {
 	const [mounted, setMounted] = useState(false);
+	const { theme } = useTheme();
+
 	useEffect(() => {
 		setMounted(true);
 	}, []);
@@ -42,7 +34,7 @@ function Home() {
 				<meta name="description" content={meta_description} />
 			</Head>
 
-			{mounted && (
+			{mounted ? (
 				<div className="relative flex flex-col items-center justify-center bg-light-200 dark:bg-dark-800">
 					{/* <Banner /> */}
 					{/* <HeroSection /> */}
@@ -54,13 +46,17 @@ function Home() {
 						<GetStartedFan />
 						{/* <GetStartedAsArtist/> */}
 						{/* <GetStartedAsFan/> */}
-						{/* <Section2New />
-					<Section2 />
-					<Section3 /> */}
+						{/* <Section2New /> */}
+						{/* <Section2 /> */}
+						{/* <Section3 /> */}
 					</div>
 					<NewsLetter />
 					{/* <Section4 /> */}
 				</div>
+			) : theme === "dark" ? (
+				<LoadingSectionDark />
+			) : (
+				<LoadingSection />
 			)}
 		</>
 	);

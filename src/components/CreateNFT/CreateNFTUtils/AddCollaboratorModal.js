@@ -22,7 +22,10 @@ const AddCollaboratorModal = ({ isOpen, setOpen, nftDraftMetadata, collaboratorL
 	const addSelectedCollaborator = async (e) => {
 		e.preventDefault();
 
-		setLoading(true);
+		setLoading({
+			status: true,
+			title: "Adding Collaborator...",
+		});
 		await addCollaborator({
 			onSuccess: async (object) => {
 				setSuccess((prevState) => ({
@@ -47,7 +50,7 @@ const AddCollaboratorModal = ({ isOpen, setOpen, nftDraftMetadata, collaboratorL
 			},
 		});
 
-		setLoading(false);
+		setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 		setOpen(false);
 	};
 

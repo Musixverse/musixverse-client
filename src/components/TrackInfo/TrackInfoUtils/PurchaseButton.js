@@ -25,7 +25,10 @@ const PurchaseButton = ({ tokenId, trackId, price }) => {
 		if (user && !user.attributes.emailVerified) {
 			router.push("/register/confirm-email");
 		} else if (user && user.attributes.emailVerified) {
-			setLoading(true);
+			setLoading({
+				status: true,
+				title: "Please sign the transaction in your wallet...",
+			});
 			try {
 				if (ref) {
 					await fetchAddressFromUsername({
@@ -35,7 +38,7 @@ const PurchaseButton = ({ tokenId, trackId, price }) => {
 							await fetch(
 								`/api/revalidate-profile?path=/profile/${user.attributes.username}&secret=${process.env.NEXT_PUBLIC_REVALIDATE_SECRET}`
 							);
-							setLoading(false);
+							setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 							setPurchaseNFTSuccess(true);
 						},
 						onError: (error) => {
@@ -47,19 +50,19 @@ const PurchaseButton = ({ tokenId, trackId, price }) => {
 									showErrorBox: true,
 								});
 							}
-							setLoading(false);
+							setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 						},
 					});
 				} else {
 					await purchaseTrackNFT(tokenId, trackId, ethers.constants.AddressZero, price);
 					await fetch(`/api/revalidate-track?path=${window.location.pathname}&secret=${process.env.NEXT_PUBLIC_REVALIDATE_SECRET}`);
 					await fetch(`/api/revalidate-profile?path=/profile/${user.attributes.username}&secret=${process.env.NEXT_PUBLIC_REVALIDATE_SECRET}`);
-					setLoading(false);
+					setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 					setPurchaseNFTSuccess(true);
 				}
 			} catch (err) {
 				console.error(err);
-				setLoading(false);
+				setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 				if (err.title && err.title === "User is not connected to the same wallet") {
 					setError({
 						title: err.title,
@@ -68,6 +71,13 @@ const PurchaseButton = ({ tokenId, trackId, price }) => {
 					});
 				}
 				if (err.message && err.message.includes("insufficient funds")) {
+					setError({
+						title: "Insufficient funds",
+						message: "Please get enough funds in your wallet for this transaction",
+						showErrorBox: true,
+					});
+				}
+				if (err.data && err.data.message.includes("insufficient funds")) {
 					setError({
 						title: "Insufficient funds",
 						message: "Please get enough funds in your wallet for this transaction",

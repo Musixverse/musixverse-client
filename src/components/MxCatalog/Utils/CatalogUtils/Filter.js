@@ -94,7 +94,7 @@ export default function Filter({ appliedFilter, setAppliedFilter, currentSelecti
 					leaveFrom="opacity-100 scale-100"
 					leaveTo="opacity-0 scale-75 translate-x-1/3"
 				>
-					<div className="z-40 absolute self-start p-12 ml-7 backdrop-blur-[40px] backdrop-brightness-200 bg-light-100 dark:bg-[rgba(19,19,19,0.4)] dark:backdrop-blur-[24px] dark:border-search-200 dark:border-2 rounded-2xl">
+					<div className="z-40 absolute self-start p-12 ml-7 backdrop-blur-[40px] backdrop-brightness-200 bg-light-100 dark:bg-[rgba(19,19,19,0.8)] dark:backdrop-blur-[24px] dark:border-search-200 dark:border-2 rounded-2xl">
 						<div className="flex justify-between w-full">
 							<h3 className="text-4xl font-tertiary">MARKETPLACE FILTERS</h3>
 							<div

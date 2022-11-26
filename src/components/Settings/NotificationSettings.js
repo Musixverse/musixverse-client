@@ -19,10 +19,13 @@ export default function NotificationSettings({ walletAddress, userPreferences })
 	};
 	const { fetch: updateUserPreferences } = useMoralisCloudFunction("updateUserPreferences", newUserPreferences, { autoFetch: false });
 	const handleSave = async () => {
-		setLoading(true);
+		setLoading({
+			status: true,
+			title: "Updating Preferences...",
+		});
 		await updateUserPreferences({
 			onSuccess: (data) => {
-				setLoading(false);
+				setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 				setSuccess((prevState) => ({
 					...prevState,
 					title: "Preferences updated!",
@@ -32,7 +35,7 @@ export default function NotificationSettings({ walletAddress, userPreferences })
 			},
 			onError: (error) => {
 				console.log("updateUserPreferences Error:", error);
-				setLoading(false);
+				setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 			},
 		});
 		return;

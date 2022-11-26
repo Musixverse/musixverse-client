@@ -16,7 +16,10 @@ const AddBandMemberModal = ({ isOpen, setOpen, bandId, setBandMembersList, setIn
 	const { fetch: addBandMember } = useMoralisCloudFunction("addBandMember", { bandId: bandId, bandMember: bandMemberToAdd[0] }, { autoFetch: false });
 
 	const addSelectedBandMember = async () => {
-		setLoading(true);
+		setLoading({
+			status: true,
+			title: "Adding Member to Band...",
+		});
 
 		await addBandMember({
 			onSuccess: async (object) => {
@@ -46,7 +49,7 @@ const AddBandMemberModal = ({ isOpen, setOpen, bandId, setBandMembersList, setIn
 			},
 		});
 
-		setLoading(false);
+		setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 		setOpen(false);
 	};
 

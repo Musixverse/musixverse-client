@@ -309,30 +309,15 @@ const CreateNFT = ({ userInfo }) => {
 		}
 	}, [user, userInfo]);
 
-	// Delete draft from the database after NFT is created
-	const { fetch: deleteNftDraft } = useMoralisCloudFunction(
-		"deleteNftDraft",
-		{ objectId: draft },
-		{
-			autoFetch: false,
-		}
-	);
-	const deleteDraft = async () => {
-		await deleteNftDraft({
-			onSuccess: async (object) => {
-				// Draft deleted from database
-			},
-			onError: (error) => {
-				console.log("deleteNftDraft Error:", error);
-			},
-		});
-	};
-
 	// Save invited artwork artist if they are not on Musixverse yet
 	const { save: saveInvitedArtworkArtist } = useNewMoralisObject("InvitedArtworkArtist");
 	// Function to run when Create NFT button is pressed
 	const nftCreateFormOnSubmit = async () => {
-		setLoading(true);
+		setLoading({
+			status: true,
+			title: "NFT creation in progress...",
+			message: "Please wait while we communicate with the blockchain",
+		});
 		const reducedCollaboratorList = collaboratorList.reduce((result, { name, address, split, role }) => {
 			result.push({ name, address, split, role });
 			return result;
@@ -417,7 +402,7 @@ const CreateNFT = ({ userInfo }) => {
 			},
 			collaborators: reducedCollaboratorList,
 			numberOfCollaborators: reducedCollaboratorList.length,
-			license: "ipfs://" + coverArtUrl.replace(process.env.NEXT_PUBLIC_IPFS_NODE_URL, ""), // TODO
+			license: "ipfs://" + "QmNxzFrUXvz1Hgst4uSxNir1EEJzGyuemAWsDgfuoqn29T", // TODO: Update this whenever Terms of Services are updated
 			unlockTimestamp: _unlockTimestamp,
 			chainDetails: {
 				chainId: process.env.NEXT_PUBLIC_BLOCKCHAIN_NETWORK_ID,
@@ -506,14 +491,10 @@ const CreateNFT = ({ userInfo }) => {
 				onSale,
 				_unlockTimestamp
 			);
-			await fetch(`/api/revalidate-mxcatalog?path=/mxcatalog/new-releases&secret=${process.env.NEXT_PUBLIC_REVALIDATE_SECRET}`);
-			await fetch(`/api/revalidate-profile?path=/profile/${user.attributes.username}&secret=${process.env.NEXT_PUBLIC_REVALIDATE_SECRET}`);
-			// TODO: Uncomment the line below
-			await deleteDraft();
-			setLoading(false);
+			setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 			setCreateNFTSuccess(true);
 		} catch (error) {
-			setLoading(false);
+			setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 			console.error(error);
 			if (error.title === "User is not connected to the same wallet") {
 				setError({

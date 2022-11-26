@@ -52,9 +52,11 @@ const SendUsADM = ({
 			<form
 				onSubmit={async (e) => {
 					e.preventDefault();
-					setLoading(true);
+					setLoading({
+						status: true,
+					});
 					if (songLinkRef.current.value === "") {
-						setLoading(false);
+						setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 						setError({
 							title: "Song link is missing",
 							message: "Please provide a link to any of your song",
@@ -68,19 +70,19 @@ const SendUsADM = ({
 								await requestForVerification({
 									onSuccess: async (object) => {
 										if (object) {
-											setLoading(false);
+											setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 											setVerificationRequestSubmittedModalOpen(true);
 										}
 									},
 									onError: (error) => {
-										setLoading(false);
+										setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 										console.log("requestForVerification Error:", error);
 									},
 								});
 							},
 							onError: (error) => {
 								console.log("setArtistSongLink Error:", error);
-								setLoading(false);
+								setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 							},
 						});
 					}

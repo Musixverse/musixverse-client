@@ -12,10 +12,15 @@ const SendInviteModal = ({ isOpen, setOpen, onClose = "", invitedArtistEmail, on
 	const { fetch: sendInviteEmail } = useMoralisCloudFunction("sendInviteEmail", { email: invitedArtistEmail }, { autoFetch: false });
 	const onFormSubmit = async (e) => {
 		e.preventDefault();
+		setLoading({
+			status: true,
+			title: "Sending Invite...",
+		});
+
 		// EMAIL CHECK
 		const emailCheck = await isEmailValid(invitedArtistEmail);
-		console.log(emailCheck);
 		if (emailCheck.status === false) {
+			setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 			setError({
 				title: emailCheck.title || "Invalid email entered",
 				message: emailCheck.message,
@@ -24,10 +29,9 @@ const SendInviteModal = ({ isOpen, setOpen, onClose = "", invitedArtistEmail, on
 			return;
 		}
 
-		setLoading(true);
 		await sendInviteEmail({
 			onSuccess: async (object) => {
-				setLoading(false);
+				setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 				setSuccess((prevState) => ({
 					...prevState,
 					title: "Invite sent successfully!",
@@ -37,7 +41,7 @@ const SendInviteModal = ({ isOpen, setOpen, onClose = "", invitedArtistEmail, on
 				onClose();
 			},
 			onError: (error) => {
-				setLoading(false);
+				setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 				console.log("sendInviteEmail Error:", error);
 			},
 		});

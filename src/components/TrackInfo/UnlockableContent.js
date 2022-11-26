@@ -18,7 +18,6 @@ export default function UnlockableContent({ tokenId, currentOwnerAddress, unlock
 			try {
 				await sleep(1000);
 				const _unlockableContentUri = await unlockableContentUri(tokenId, user.attributes.ethAddress);
-				console.log(_unlockableContentUri);
 				const res = await fetch(_unlockableContentUri);
 				const data = await res.json();
 				setUnlockableContentUriData(data);
@@ -76,23 +75,21 @@ export default function UnlockableContent({ tokenId, currentOwnerAddress, unlock
 		{
 			name: "Exclusive Images",
 			description:
-				"These are images that are not visible to the general public. You'll have exclusive access to these images as long as you hold the NFT.",
+				"These are photographs, posters, artworks, and cover art that are not available to the general public. You'll have exclusive access to these images as long as you hold the NFT.",
 			unlockableHeading: "Exclusive Images",
 			unlockableItemText: "Click on this card to view all exclusive images.",
 			unlockableItemData: unlockableContentUriData ? unlockableContentUriData.exclusiveImages : null,
 		},
 		{
 			name: "Exclusive Audios",
-			description:
-				"These are audio files that are not visible to the general public. You'll have exclusive access to these files as long as you hold the NFT.",
+			description: "These audio files could be unreleased music, stems, or a special audio message from the artist to their fan.",
 			unlockableHeading: "Exclusive Audios",
 			unlockableItemText: "Click on this card to view all exclusive audios.",
 			unlockableItemData: unlockableContentUriData ? unlockableContentUriData.exclusiveAudios : null,
 		},
 		{
 			name: "Exclusive Videos",
-			description:
-				"These are video files that are not visible to the general public. You'll have exclusive access to these videos as long as you hold the NFT.",
+			description: "Exclusive videos and footage can even go to the extent of unreleased / making of music videos and footage from gigs.",
 			unlockableHeading: "Exclusive Videos",
 			unlockableItemText: "Click on this card to view all exclusive videos.",
 			unlockableItemData: unlockableContentUriData ? unlockableContentUriData.exclusiveVideos : null,

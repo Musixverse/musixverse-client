@@ -3,13 +3,12 @@ import { appRoutes } from "./constants";
 import { useMoralis } from "react-moralis";
 import LoadingContext from "../../store/loading-context";
 import AccessLevelContext from "../../store/accessLevel-context";
-import { getCookie, deleteCookie, setCookie } from "cookies-next";
 
 // Check if user is on the client (browser) or server
 const isBrowser = () => typeof window !== "undefined";
 
 const ProtectedRoutes = ({ router, children }) => {
-	const [isLoading, setLoading] = useContext(LoadingContext);
+	const [, setLoading] = useContext(LoadingContext);
 	// Level 0: New user who is not signed in
 	// Level 1: Signed up user who hasn't chosen between a collector/artist profile
 	// Level 2: Signed up collector who hasn't verified email
@@ -21,16 +20,17 @@ const ProtectedRoutes = ({ router, children }) => {
 	const [accessLevel, setAccessLevel] = useContext(AccessLevelContext);
 
 	// Identify authenticated user
-	const { isAuthenticated, user, isInitialized, logout, isWeb3Enabled, enableWeb3, refetchUserData } = useMoralis();
+	const { isAuthenticated, user, isInitialized, isWeb3Enabled, enableWeb3, refetchUserData } = useMoralis();
 
-	const protectedRoutes = [appRoutes.REGISTER, appRoutes.SETTINGS, appRoutes.CREATE_NFT];
+	// @dev These routes are protected for unauthenticated users
+	const protectedRoutes = [appRoutes.REGISTER, appRoutes.SETTINGS, appRoutes.CREATE_NFT, appRoutes.CREATE_BAND];
 	/**
 	 * @const pathIsProtected Checks if path exists in the protectedRoutes array
 	 */
 	const pathIsProtected = protectedRoutes.some((route) => router.pathname.includes(route));
 
 	// @dev These routes are protected until a user confirms their email
-	const protectedRoutesForAuthenticatedUserEmailUnverified = [appRoutes.REGISTER, appRoutes.CREATE_NFT];
+	const protectedRoutesForAuthenticatedUserEmailUnverified = [appRoutes.REGISTER, appRoutes.CREATE_NFT, appRoutes.CREATE_BAND];
 	/**
 	 * @const pathIsProtectedForAuthenticatedUserEmailUnverified Checks if path exists in the protectedRoutesForAuthenticatedUserEmailUnverified array
 	 */
@@ -38,19 +38,19 @@ const ProtectedRoutes = ({ router, children }) => {
 		router.pathname.includes(route)
 	);
 
+	// @dev These routes are protected for a logged in user who is not an artist
+	const protectedRoutesForCollectors = [appRoutes.CREATE_NFT, appRoutes.CREATE_BAND];
+	/**
+	 * @const pathIsProtectedForCollector Checks if path exists in the protectedRoutesForCollectors array
+	 */
+	const pathIsProtectedForCollector = protectedRoutesForCollectors.some((route) => router.pathname.includes(route));
+
 	// @dev These routes are protected for a logged in user
 	const protectedRoutesForAuthenticatedUser = [appRoutes.REGISTER];
 	/**
 	 * @const pathIsProtectedForAuthenticatedUser Checks if path exists in the protectedRoutesForAuthenticatedUser array
 	 */
 	const pathIsProtectedForAuthenticatedUser = protectedRoutesForAuthenticatedUser.some((route) => router.pathname.includes(route));
-
-	// @dev These routes are protected for a logged in user
-	const protectedRoutesForCollectors = [appRoutes.CREATE_NFT];
-	/**
-	 * @const pathIsProtectedForCollector Checks if path exists in the protectedRoutesForCollectors array
-	 */
-	const pathIsProtectedForCollector = protectedRoutesForCollectors.some((route) => router.pathname.includes(route));
 
 	async function refetchData() {
 		await refetchUserData();
@@ -70,14 +70,14 @@ const ProtectedRoutes = ({ router, children }) => {
 						if (!router.pathname.startsWith(appRoutes.REGISTER)) router.push(appRoutes.REGISTER);
 					} else if (isBrowser() && pathIsProtectedForAuthenticatedUserEmailUnverified && !user.attributes.emailVerified) {
 						router.push(appRoutes.CONFIRM_EMAIL);
-					} else if (isBrowser() && pathIsProtectedForAuthenticatedUser) {
-						router.push(appRoutes.HOMEPAGE);
 					} else if (isBrowser() && !user.attributes.isArtist && pathIsProtectedForCollector) {
 						router.push(appRoutes.MARKETPLACE);
+					} else if (isBrowser() && pathIsProtectedForAuthenticatedUser) {
+						router.push(appRoutes.HOMEPAGE);
 					}
 				}
 
-				setLoading(false);
+				setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 			}
 		}
 		checkPath();
@@ -106,31 +106,6 @@ const ProtectedRoutes = ({ router, children }) => {
 			}
 		}
 	}, [router.pathname, isInitialized, isAuthenticated]);
-
-	useEffect(() => {
-		const handleLogout = async () => {
-			if (router.pathname != "/") router.push("/");
-			await logout();
-			if (window.localStorage.walletconnect) {
-				window.localStorage.removeItem("walletconnect");
-			}
-			await fetch("/api/auth/logout", {
-				method: "post",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify({}),
-			});
-		};
-
-		if (isInitialized) {
-			if (getCookie("logout") === true) {
-				if (isAuthenticated) {
-					handleLogout();
-				}
-			}
-		}
-	}, [router.pathname, isInitialized, logout, router]);
 
 	useEffect(() => {
 		if (!isWeb3Enabled && isAuthenticated) enableWeb3();

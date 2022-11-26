@@ -11,21 +11,21 @@ const PurchasedActivity = ({ activity }) => {
 	return (
 		<>
 			<div className={"dark:bg-dark-800 " + styles["sales-history__action"]}>
-				<i className="fa-solid fa-gavel text-lg"></i>
+				<i className="text-lg fa-solid fa-gavel"></i>
 			</div>
 
 			<div className="ml-3 font-secondary">
 				<p className="font-medium">
 					Purchased for &nbsp;
 					<Image src={"/assets/matic-logo.svg"} width={15} height={15} alt="matic icon" />
-					<span className="ml-1 font-primary font-semibold">{Moralis.Units.FromWei(activity.price)}</span>
+					<span className="ml-1 font-semibold font-primary">{Moralis.Units.FromWei(activity.price)}</span>
 				</p>
 
 				<p className="text-[#8a8a8a] text-sm">
 					by&nbsp;
 					{activity ? (
 						<Link href={`/profile/${activity.caller.username}`} className="cursor-pointer">
-							<a target="_blank" rel="noopener noreferrer">
+							<a>
 								@{activity.caller.username}&nbsp;
 							</a>
 						</Link>
@@ -34,7 +34,7 @@ const PurchasedActivity = ({ activity }) => {
 						<>
 							using referral link of&nbsp;
 							<Link href={`/profile/${activity.referrer.username}`} className="cursor-pointer">
-								<a target="_blank" rel="noopener noreferrer">
+								<a>
 									@{activity.referrer.username}&nbsp;
 								</a>
 							</Link>

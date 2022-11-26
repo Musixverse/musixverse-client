@@ -16,7 +16,7 @@ export default function AccountHelp() {
 						{" "}
 						Visit our{" "}
 						<Link href="/help-center" passHref>
-							<a target="_blank" rel="noopener noreferrer" className="font-medium text-primary-500">
+							<a className="font-medium text-primary-500">
 								help center
 							</a>
 						</Link>{" "}

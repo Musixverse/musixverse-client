@@ -71,22 +71,22 @@ const BandMembers = ({ bandId, username, bandMembers, updatedBandMembersList }) 
 	};
 
 	return (
-		<div className="w-full mt-10 p-8 xl:p-10 bg-light-300 dark:bg-dark-600 rounded-xl">
-			<p className="font-tertiary text-4xl">Band Members</p>
+		<div className="w-full p-8 mt-10 xl:p-10 bg-light-300 dark:bg-dark-600 rounded-xl">
+			<p className="text-4xl font-tertiary">Band Members</p>
 
 			<div className="flex flex-col items-start justify-start mt-8">
 				{bandMembersList &&
 					bandMembersList.map((member) => {
 						return (
-							<div key={member._id || member.userId} className="w-full flex items-center justify-start mt-2 gap-6">
-								<div className="w-full sm:w-1/2 flex px-6 py-2 rounded-full items-center justify-center hover:bg-light-200 dark:hover:bg-dark-800">
+							<div key={member._id || member.userId} className="flex items-center justify-start w-full gap-6 mt-2">
+								<div className="flex items-center justify-center w-full px-6 py-2 rounded-full sm:w-1/2 hover:bg-light-200 dark:hover:bg-dark-800">
 									<Link href={`/profile/${member.username}`} passHref>
-										<a target="_blank" rel="noopener noreferrer" className="w-full flex text-start cursor-pointer">
+										<a className="flex w-full cursor-pointer text-start">
 											<div className="flex flex-col self-center mr-2">
 												{member.hasAcceptedBandInvite ? (
 													<Tooltip
 														labelText={
-															<span className="text-primary-600 text-xl">
+															<span className="text-xl text-primary-600">
 																<i className="fa-solid fa-circle-check"></i>
 															</span>
 														}
@@ -96,7 +96,7 @@ const BandMembers = ({ bandId, username, bandMembers, updatedBandMembersList }) 
 												) : (
 													<Tooltip
 														labelText={
-															<span className="text-error-600 text-xl">
+															<span className="text-xl text-error-600">
 																<i className="fa-solid fa-circle-xmark"></i>
 															</span>
 														}
@@ -106,7 +106,7 @@ const BandMembers = ({ bandId, username, bandMembers, updatedBandMembersList }) 
 												)}
 											</div>
 											<Image src={member.avatar} height={50} width={50} alt="Band member avatar" className="rounded-full" />
-											<div className="w-full flex justify-between">
+											<div className="flex justify-between w-full">
 												<div className="flex flex-col place-content-between">
 													<p className="ml-4 text-sm font-semibold">
 														{member.name}
@@ -116,7 +116,7 @@ const BandMembers = ({ bandId, username, bandMembers, updatedBandMembersList }) 
 															</span>
 														)}
 													</p>
-													<p className="ml-4 text-xs items-end">@{member.username}</p>
+													<p className="items-end ml-4 text-xs">@{member.username}</p>
 												</div>
 												<div className="flex flex-col self-center">
 													<p className="text-xs">{member.role}</p>
@@ -131,7 +131,7 @@ const BandMembers = ({ bandId, username, bandMembers, updatedBandMembersList }) 
 										setBandMemberToEdit(member);
 										setEditBandMemberModalOpen(true);
 									}}
-									className="text-sm bg-primary-500/30 hover:bg-primary-500/60 cursor-pointer px-6 py-1 rounded-full"
+									className="px-6 py-1 text-sm rounded-full cursor-pointer bg-primary-500/30 hover:bg-primary-500/60"
 								>
 									Edit
 								</span>
@@ -140,7 +140,7 @@ const BandMembers = ({ bandId, username, bandMembers, updatedBandMembersList }) 
 										setBandMemberToEdit(member);
 										setRemoveBandMemberModalOpen(true);
 									}}
-									className="text-sm bg-error-600/30 hover:bg-error-600/60 cursor-pointer px-6 py-1 rounded-full"
+									className="px-6 py-1 text-sm rounded-full cursor-pointer bg-error-600/30 hover:bg-error-600/60"
 								>
 									Remove
 								</span>
@@ -150,7 +150,7 @@ const BandMembers = ({ bandId, username, bandMembers, updatedBandMembersList }) 
 										onClick={() => {
 											sendBandInvitationEmailToArtistWhoHasNotAcceptedInvitation(member);
 										}}
-										className="text-sm bg-primary-500/30 hover:bg-primary-500/60 cursor-pointer px-6 py-1 rounded-full"
+										className="px-6 py-1 text-sm rounded-full cursor-pointer bg-primary-500/30 hover:bg-primary-500/60"
 									>
 										Send Invite Email
 									</span>
@@ -164,7 +164,7 @@ const BandMembers = ({ bandId, username, bandMembers, updatedBandMembersList }) 
 				<div className="flex items-center justify-start mt-4">
 					<button
 						type="button"
-						className="rounded-full flex justify-center items-center w-8 h-8 bg-primary-500 hover:bg-primary-600 text-white"
+						className="flex items-center justify-center w-8 h-8 text-white rounded-full bg-primary-500 hover:bg-primary-600"
 						onClick={() => {
 							setAddBandMemberModalOpen(true);
 						}}

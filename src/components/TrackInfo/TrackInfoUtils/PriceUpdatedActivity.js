@@ -11,24 +11,24 @@ const PriceUpdatedActivity = ({ activity }) => {
 	return (
 		<>
 			<div className={"dark:bg-dark-800 " + styles["sales-history__action"]}>
-				<i className="fa-solid fa-pen-to-square text-lg"></i>
+				<i className="text-lg fa-solid fa-pen-to-square"></i>
 			</div>
 
 			<div className="ml-3 font-secondary">
 				<p className="font-medium">
 					Updated price from &nbsp;
 					<Image src={"/assets/matic-logo.svg"} width={15} height={15} alt="matic icon" />
-					<span className="ml-1 font-primary font-semibold">{Moralis.Units.FromWei(activity.oldPrice)}</span>
+					<span className="ml-1 font-semibold font-primary">{Moralis.Units.FromWei(activity.oldPrice)}</span>
 					<span className="ml-2 mr-2">to</span>
 					<Image src={"/assets/matic-logo.svg"} width={15} height={15} alt="matic icon" />
-					<span className="ml-1 font-primary font-semibold">{Moralis.Units.FromWei(activity.newPrice)}</span>
+					<span className="ml-1 font-semibold font-primary">{Moralis.Units.FromWei(activity.newPrice)}</span>
 				</p>
 
 				<p className="text-[#8a8a8a] text-sm">
 					by&nbsp;
 					{activity ? (
 						<Link href={`/profile/${activity.caller.username}`} className="cursor-pointer">
-							<a target="_blank" rel="noopener noreferrer">
+							<a>
 								@{activity.caller.username}&nbsp;
 							</a>
 						</Link>

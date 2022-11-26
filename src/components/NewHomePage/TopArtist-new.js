@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useTheme } from "next-themes";
 import SwiperArtist from "./utils/SwiperArtist";
-import swiperBG from "../../../public/assets/homepage/swiperBG.png";
+// import swiperBG from "../../../public/assets/homepage/swiperBG.png";
 import sarthak_d_b from "../../../public/assets/new-homepage/cover_sarthak_d.png";
 import sarthak_d_w from "../../../public/assets/new-homepage/cover_sarthak_w.png";
 import sarthak_m_d from "../../../public/assets/new-homepage/sarthak_d.png";

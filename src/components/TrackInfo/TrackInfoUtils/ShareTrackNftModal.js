@@ -43,18 +43,18 @@ const ShareTrackNftModal = ({ isOpen, setOpen, artistName, title, setAuthModalOp
 		<Modal
 			isOpen={isOpen}
 			image={
-				<div className="mx-auto flex items-center relative justify-center h-24 w-24">
+				<div className="relative flex items-center justify-center w-24 h-24 mx-auto">
 					<Image src={successLogo} layout="fill" alt="Success" />
 				</div>
 			}
 			title={
 				<div className="text-2xl">
-					Share and earn <span className="text-primary-500 text-4xl">10%</span>
+					Share and earn <span className="text-4xl text-primary-500">10%</span>
 					<p className="text-xs">of the transaction fee whenever someone</p>
 					<p className="text-xs">
 						purchases this NFT using your link.&nbsp;
 						<Link href="/faq" passHref>
-							<a target="_blank" rel="noopener noreferrer" className="hover:underline hover:text-primary-500">
+							<a className="hover:underline hover:text-primary-500">
 								Learn more
 							</a>
 						</Link>
@@ -73,7 +73,7 @@ const ShareTrackNftModal = ({ isOpen, setOpen, artistName, title, setAuthModalOp
 							</button>
 						</div>
 					) : (
-						<div className="w-full flex items-center justify-center">
+						<div className="flex items-center justify-center w-full">
 							<CustomButton
 								onClick={() => {
 									setOpen(false);
@@ -90,7 +90,7 @@ const ShareTrackNftModal = ({ isOpen, setOpen, artistName, title, setAuthModalOp
 					<div className="flex justify-between mt-8">
 						<div onClick={copyToClipboard}>
 							<div className="flex items-center rounded-lg p-3 cursor-pointer whitespace-nowrap bg-light-200 hover:bg-light-300 dark:bg-[#323232] dark:hover:bg-dark-800">
-								<i className="fa-solid fa-copy text-2xl"></i>
+								<i className="text-2xl fa-solid fa-copy"></i>
 							</div>
 						</div>
 
@@ -100,7 +100,7 @@ const ShareTrackNftModal = ({ isOpen, setOpen, artistName, title, setAuthModalOp
 								rel="noopener noreferrer"
 								className="flex items-center rounded-lg p-3 cursor-pointer whitespace-nowrap bg-light-200 hover:bg-light-300 dark:bg-[#323232] dark:hover:bg-dark-800"
 							>
-								<i className="fa-brands fa-twitter text-2xl"></i>
+								<i className="text-2xl fa-brands fa-twitter"></i>
 							</a>
 						</Link>
 
@@ -113,7 +113,7 @@ const ShareTrackNftModal = ({ isOpen, setOpen, artistName, title, setAuthModalOp
 								rel="noopener noreferrer"
 								className="flex items-center rounded-lg p-3 cursor-pointer whitespace-nowrap bg-light-200 hover:bg-light-300 dark:bg-[#323232] dark:hover:bg-dark-800"
 							>
-								<i className="fa-brands fa-facebook text-2xl"></i>
+								<i className="text-2xl fa-brands fa-facebook"></i>
 							</a>
 						</Link>
 
@@ -123,7 +123,7 @@ const ShareTrackNftModal = ({ isOpen, setOpen, artistName, title, setAuthModalOp
 								rel="noopener noreferrer"
 								className="flex items-center rounded-lg p-3 cursor-pointer whitespace-nowrap bg-light-200 hover:bg-light-300 dark:bg-[#323232] dark:hover:bg-dark-800"
 							>
-								<i className="fa-brands fa-whatsapp text-2xl"></i>
+								<i className="text-2xl fa-brands fa-whatsapp"></i>
 							</a>
 						</Link>
 
@@ -133,7 +133,7 @@ const ShareTrackNftModal = ({ isOpen, setOpen, artistName, title, setAuthModalOp
 								rel="noopener noreferrer"
 								className="flex items-center rounded-lg p-3 cursor-pointer whitespace-nowrap bg-light-200 hover:bg-light-300 dark:bg-[#323232] dark:hover:bg-dark-800"
 							>
-								<i className="fa-brands fa-telegram text-2xl"></i>
+								<i className="text-2xl fa-brands fa-telegram"></i>
 							</a>
 						</Link>
 
@@ -143,7 +143,7 @@ const ShareTrackNftModal = ({ isOpen, setOpen, artistName, title, setAuthModalOp
 								rel="noopener noreferrer"
 								className="flex items-center rounded-lg p-3 cursor-pointer whitespace-nowrap bg-light-200 hover:bg-light-300 dark:bg-[#323232] dark:hover:bg-dark-800"
 							>
-								<i className="fa-brands fa-linkedin text-2xl"></i>
+								<i className="text-2xl fa-brands fa-linkedin"></i>
 							</a>
 						</Link>
 					</div>

@@ -11,7 +11,7 @@ const CommentUpdatedActivity = ({ activity }) => {
 	return (
 		<>
 			<div className={"dark:bg-dark-800 " + styles["sales-history__action"]}>
-				<i className="fa-solid fa-comment text-lg"></i>
+				<i className="text-lg fa-solid fa-comment"></i>
 			</div>
 
 			<div className="ml-3 font-secondary">
@@ -31,7 +31,7 @@ const CommentUpdatedActivity = ({ activity }) => {
 					by&nbsp;
 					{activity ? (
 						<Link href={`/profile/${activity.caller.username}`} className="cursor-pointer">
-							<a target="_blank" rel="noopener noreferrer">
+							<a>
 								@{activity.caller.username}&nbsp;
 							</a>
 						</Link>

@@ -13,14 +13,14 @@ export default function Faq() {
 
 	return (
 		<div className="w-full space-y-16">
-			<div className="text-center space-y-4">
-				<span className="font-primary text-5xl font-semibold text-primary-500">FAQs</span>
+			<div className="space-y-4 text-center">
+				<span className="text-5xl font-semibold font-primary text-primary-500">FAQs</span>
 				<div className="text-sm">
 					<p>Please find answers to frequently asked questions here.</p>
 					<p>
 						Visit our&nbsp;
 						<Link href="/help-center" passHref>
-							<a className="text-primary-600" target="_blank" rel="noopener noreferrer">
+							<a className="text-primary-600">
 								Help Center
 							</a>
 						</Link>
@@ -33,7 +33,7 @@ export default function Faq() {
 				</div>
 			</div>
 
-			<div className="flex flex-col w-full pb-28 space-y-12 lg:flex-row lg:space-x-12 lg:space-y-0">
+			<div className="flex flex-col w-full space-y-12 pb-28 lg:flex-row lg:space-x-12 lg:space-y-0">
 				<Navigation currentSelection={currentSelection} setCurrentSelection={setCurrentSelection} categories={categories} />
 				<Accordion category={categories[currentSelection]} data={accordionData[currentSelection]} />
 			</div>

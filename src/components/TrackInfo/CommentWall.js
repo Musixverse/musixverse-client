@@ -17,18 +17,18 @@ const CommentWall = ({ comment }) => {
 				onClick={() => {
 					setCommentWallModalOpen(true);
 				}}
-				className="relative w-full h-full flex flex-col rounded-lg bg-light-200 dark:bg-dark-600 shadow hover:shadow-primary-500 overflow-hidden transition-all duration-700 cursor-pointer"
+				className="relative flex flex-col w-full h-full overflow-hidden transition-all duration-700 rounded-lg shadow cursor-pointer bg-light-200 dark:bg-dark-600 hover:shadow-primary-500"
 			>
 				<div className="relative flex flex-col w-full h-full px-4 py-4">
 					<Link href={`/profile/${comment.user.username}`} className="cursor-pointer">
-						<a target="_blank" rel="noopener noreferrer" className="flex items-center space-x-2 w-fit">
-							<div className="rounded-full flex relative">
+						<a className="flex items-center space-x-2 w-fit">
+							<div className="relative flex rounded-full">
 								<Image priority src={comment.user.avatar} height="30" width="30" alt="current owner avatar" className="rounded-full" />
 							</div>
 							<p className="text-sm font-semibold">{comment.user.name}</p>
 						</a>
 					</Link>
-					<p className="text-sm mt-4">{truncatedComment}</p>
+					<p className="mt-4 text-sm">{truncatedComment}</p>
 				</div>
 			</div>
 			<CommentWallModal isOpen={isCommentWallModalOpen} setOpen={setCommentWallModalOpen} comment={comment} />

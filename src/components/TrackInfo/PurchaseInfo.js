@@ -11,7 +11,7 @@ export default function PurchaseInfo({ trackId, tokenId, unlockTimestamp, resale
 		<div className={"dark:bg-dark-600 " + styles["purchase-info"]}>
 			{/* Heading DIV */}
 			<div className={styles["purchase-info__heading"]}>
-				<h1 className="font-tertiary text-3xl">PURCHASE INFO</h1>
+				<h1 className="text-3xl font-tertiary">PURCHASE INFO</h1>
 
 				<p className={"text-right " + styles["purchase-info__heading--p"]}>
 					Resale Royalty Percentage
@@ -32,8 +32,8 @@ export default function PurchaseInfo({ trackId, tokenId, unlockTimestamp, resale
 							href={currentOwner.isBand ? `/profile/band/${currentOwner.username}` : `/profile/${currentOwner.username}`}
 							className="cursor-pointer"
 						>
-							<a target="_blank" rel="noopener noreferrer" className="flex items-center space-x-1">
-								<div className="rounded-full flex relative">
+							<a className="flex items-center space-x-1">
+								<div className="relative flex rounded-full">
 									<Image priority src={currentOwner.avatar} height="20" width="20" alt="current owner avatar" className="rounded-full" />
 								</div>
 								<p className="font-secondary">@{currentOwner.username}</p>

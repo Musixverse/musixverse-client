@@ -12,21 +12,21 @@ export default function Activity({ artist, activity }) {
 	return (
 		<div className={"dark:bg-dark-600 " + styles["sales-history"]}>
 			<h1 className={styles["sales-history__heading"]}>Activity</h1>
-			<div className="max-h-32 overflow-y-auto">
+			<div className="overflow-y-auto max-h-32">
 				{activity.tokenActivity &&
 					activity.tokenActivity.map((_activity, index) => {
 						return <ActivityDetails key={index} activity={_activity} />;
 					})}
 				<div className="flex">
 					<div className={"dark:bg-dark-800 " + styles["sales-history__action"]}>
-						<i className="fa-solid fa-compact-disc text-xl"></i>
+						<i className="text-xl fa-solid fa-compact-disc"></i>
 					</div>
 
 					<div className="ml-3 font-secondary">
-						<div className="flex items-center text-sm sm:text-base font-medium">
+						<div className="flex items-center text-sm font-medium sm:text-base">
 							Minted with a base price of &nbsp;
 							<Image src={"/assets/matic-logo.svg"} width={15} height={15} alt="matic icon" />
-							<p className="ml-1 font-primary font-semibold">
+							<p className="ml-1 font-semibold font-primary">
 								{activity.tokenMintedInfo ? Moralis.Units.FromWei(activity.tokenMintedInfo.price) : ""}
 							</p>
 						</div>
@@ -34,7 +34,7 @@ export default function Activity({ artist, activity }) {
 							by&nbsp;
 							{artist ? (
 								<Link href={artist.isBand ? `/profile/band/${artist.username}` : `/profile/${artist.username}`} className="cursor-pointer">
-									<a target="_blank" rel="noopener noreferrer">
+									<a>
 										@{artist.username}&nbsp;
 									</a>
 								</Link>

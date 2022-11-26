@@ -40,9 +40,9 @@ export default function FollowersModal({ isOpen, setOpen, username, isBand }) {
 		<Modal
 			isOpen={isOpen}
 			image={
-				<div className="mx-auto flex items-center relative justify-center h-24 w-24 text-6xl">
-					<label className="flex justify-center items-center w-14 h-14 border-2 rounded-full border-primary-600">
-						<i className="fa-solid fa-people-group text-2xl text-primary-600"></i>
+				<div className="relative flex items-center justify-center w-24 h-24 mx-auto text-6xl">
+					<label className="flex items-center justify-center border-2 rounded-full w-14 h-14 border-primary-600">
+						<i className="text-2xl fa-solid fa-people-group text-primary-600"></i>
 					</label>
 				</div>
 			}
@@ -52,16 +52,16 @@ export default function FollowersModal({ isOpen, setOpen, username, isBand }) {
 					{following && following.length > 0 ? (
 						following.map((follower) => {
 							return (
-								<div key={follower.username} className="flex group p-2 rounded hover:bg-light-200 dark:hover:bg-dark-800">
+								<div key={follower.username} className="flex p-2 rounded group hover:bg-light-200 dark:hover:bg-dark-800">
 									<Link href={`/profile/${follower.username}`} passHref>
-										<a target="_blank" rel="noopener noreferrer" className="w-full flex text-start cursor-pointer group">
+										<a className="flex w-full cursor-pointer text-start group">
 											<Image src={follower.avatar} className="rounded" height={50} width={50} alt="NFT Artwork" />
-											<div className="w-full flex justify-between">
-												<div className="flex flex-col place-content-between relative">
+											<div className="flex justify-between w-full">
+												<div className="relative flex flex-col place-content-between">
 													<p className="ml-4 text-sm font-semibold">
 														<span className="absolute w-max">{follower.name}</span>
 													</p>
-													<p className="ml-4 text-xs items-end">@{follower.username}</p>
+													<p className="items-end ml-4 text-xs">@{follower.username}</p>
 												</div>
 
 												{isBand && follower.followerName && (

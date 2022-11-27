@@ -53,21 +53,21 @@ const Actions = ({ tokenId, artistName, title }) => {
 	const [isShareTrackNftModalOpen, setShareTrackNftModalOpen] = useState(false);
 
 	return (
-		<div className="flex flex-row space-x-2 md:space-x-4 text-xs">
+		<div className="flex flex-row space-x-2 text-xs md:space-x-4">
 			<button
 				onClick={() => {
 					markTokenFavourite();
 				}}
-				className="flex justify-center items-center space-x-2 px-4 py-2 rounded-lg cursor-pointer hover:bg-light-200 dark:hover:bg-dark-600"
+				className="flex items-center justify-center px-4 py-2 space-x-2 rounded-lg cursor-pointer hover:bg-light-200 dark:hover:bg-dark-600"
 			>
 				{isTokenFavourite ? (
 					<>
-						<i className="fa-solid fa-heart text-lg text-primary-600"></i>
+						<i className="text-lg fa-solid fa-heart text-primary-600"></i>
 						<span>Added to Favourites</span>
 					</>
 				) : (
 					<>
-						<i className="fa-solid fa-heart text-lg text-zinc-300"></i>
+						<i className="text-lg fa-solid fa-heart text-zinc-300"></i>
 						<span>Add to Favourites</span>
 					</>
 				)}
@@ -75,16 +75,16 @@ const Actions = ({ tokenId, artistName, title }) => {
 
 			<button
 				onClick={() => setShareTrackNftModalOpen(true)}
-				className="flex justify-center items-center px-4 py-2 rounded-lg cursor-pointer hover:bg-light-200 dark:hover:bg-dark-600"
+				className="flex items-center justify-center px-4 py-2 rounded-lg cursor-pointer hover:bg-light-200 dark:hover:bg-dark-600"
 			>
 				<div className="flex space-x-2">
-					<i className="fa-solid fa-share-nodes text-lg"></i>
+					<i className="text-lg fa-solid fa-share-nodes"></i>
 					<span>Share</span>
 				</div>
 			</button>
 
-			<button className="flex justify-center items-center space-x-2 px-4 py-2 rounded-lg cursor-none">
-				<Image src={mxvVerified} width={18} height={18} alt="Authentic License"></Image>
+			<button className="flex items-center justify-center px-4 py-2 space-x-2 rounded-lg cursor-none">
+				<Image className="dark:invert" src={mxvVerified} width={18} height={18} alt="Authentic License"></Image>
 				<span>MXV Cerified</span>
 			</button>
 

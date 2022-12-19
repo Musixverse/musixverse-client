@@ -5,11 +5,11 @@
 .menu-item-div {
 	@apply py-1 max-h-[200px] overflow-y-scroll;
 }
-/* Scroller CSS */
+/*
 .menu-item-div::-webkit-scrollbar {
 	width: 0em;
 }
-/* For the background of scroll bar */
+
 .menu-item-div::-webkit-scrollbar-track {
 	@apply my-2 rounded-full bg-none;
 }
@@ -17,3 +17,4 @@
 .menu-item-div::-webkit-scrollbar-thumb {
 	@apply bg-[rgba(80,80,80,0.4)] backdrop-blur-xl backdrop-brightness-105 rounded-full;
 }
+*/

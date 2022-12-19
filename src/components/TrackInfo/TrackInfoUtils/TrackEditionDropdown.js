@@ -13,7 +13,7 @@ export default function TrackEditionDropdown({ optionsArray, localTokenId, numbe
 
 	useEffect(() => {
 		setCurrentFilter("#" + localTokenId + " of " + numberOfCopies);
-	}, [localTokenId]);
+	}, [localTokenId, numberOfCopies]);
 
 	// Map all the options into a items renderable array
 	const dropdownOptions = optionsArray.map((option, idx) => {
@@ -24,8 +24,8 @@ export default function TrackEditionDropdown({ optionsArray, localTokenId, numbe
 						<a>
 							<li
 								className={classNames(
-									active ? "bg-gray-100 dark:bg-dark-200 text-gray-900" : "text-gray-700",
-									"block px-4 py-2 text-xs cursor-pointer dark:text-light-100 hover:bg-light-200 dark:hover:bg-dark-200"
+									active ? "bg-gray-100 dark:bg-dark-800 text-gray-900" : "text-gray-700",
+									"block px-4 py-2 text-xs cursor-pointer dark:text-light-100 hover:bg-light-200 dark:hover:bg-dark-800"
 								)}
 							>
 								#{option.localTokenId} of {numberOfCopies}
@@ -41,7 +41,7 @@ export default function TrackEditionDropdown({ optionsArray, localTokenId, numbe
 		<Menu as="div" className="relative inline-block w-full text-left text-xs">
 			{/* The visible dropdown button */}
 			<div>
-				<Menu.Button className={"dark:bg-dark-200 hover:dark:border-[#6cc027] dark:text-light-100 " + styles["menu-button"]}>
+				<Menu.Button className={"dark:bg-dark-800 hover:dark:border-[#6cc027] dark:text-light-100 " + styles["menu-button"]}>
 					{currentFilter}
 					<ChevronDownIcon className="ml-1 h-4 w-4 text-[#6cc027]" aria-hidden="true" />
 				</Menu.Button>
@@ -56,7 +56,7 @@ export default function TrackEditionDropdown({ optionsArray, localTokenId, numbe
 				leaveFrom="transform opacity-100 scale-100"
 				leaveTo="transform opacity-0 scale-95"
 			>
-				<Menu.Items className="text-center absolute w-max right-0 z-10 mt-2 origin-top-right rounded-md shadow-lg bg-light-300 dark:bg-dark-100 ring-1 ring-black ring-opacity-5 focus:outline-none">
+				<Menu.Items className="text-center absolute w-max right-0 z-10 mt-2 origin-top-right rounded-md shadow-lg bg-light-300 dark:bg-dark-600 ring-1 ring-black ring-opacity-5 focus:outline-none">
 					<div className={styles["menu-item-div"]}>{dropdownOptions}</div>
 				</Menu.Items>
 			</Transition>

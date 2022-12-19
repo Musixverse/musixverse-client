@@ -1,13 +1,11 @@
 const { Fragment, useState, useEffect } = require("react");
 import Image from "next/image";
 const { Transition } = require("@headlessui/react");
-import { useMoralis, useMoralisCloudFunction } from "react-moralis";
+import { useMoralis } from "react-moralis";
 
 export default function DeleteDraftModal({ isOpen = "", onClose = "", draftToDelete = "", deleteDraft = "" }) {
 	const { user } = useMoralis();
-
 	const [isModalOpen, setIsModalOpen] = useState(isOpen);
-	const { data: selectedDraft } = useMoralisCloudFunction("getDraftNftData", { objectId: draftToDelete });
 
 	useEffect(() => {
 		setIsModalOpen(isModalOpen);
@@ -21,10 +19,6 @@ export default function DeleteDraftModal({ isOpen = "", onClose = "", draftToDel
 	useEffect(() => {
 		setIsModalOpen(isOpen);
 	}, [isOpen]);
-
-	useEffect(() => {
-		console.log("selectedDraft", selectedDraft);
-	}, [selectedDraft]);
 
 	const handleChange = () => {
 		setIsModalOpen(!isModalOpen);
@@ -59,7 +53,7 @@ export default function DeleteDraftModal({ isOpen = "", onClose = "", draftToDel
 					leaveFrom="opacity-100 scale-100"
 				>
 					<div style={{ zIndex: "50" }} className="flex left-0 top-0 justify-center items-center h-full w-full fixed">
-						<div className="max-w-[40rem] sm:w-full w-11/12 p-4 pl-10 pb-12 bg-white dark:bg-dark-100 rounded-lg">
+						<div className="max-w-[40rem] sm:w-full w-11/12 p-4 pl-10 pb-12 bg-white dark:bg-dark-600 rounded-lg">
 							<div className="w-full flex justify-end">
 								<div
 									onClick={() => closeModal()}
@@ -74,13 +68,14 @@ export default function DeleteDraftModal({ isOpen = "", onClose = "", draftToDel
 									<div className="text-base font-semibold text-center mt-8">Are you sure you want to delete this draft?</div>
 
 									<div className="flex mt-12 space-x-8 justify-center">
-										{selectedDraft && selectedDraft.attributes.artwork.uri ? (
+										{draftToDelete && draftToDelete.artwork.uri ? (
 											<Image
-												src={selectedDraft.attributes.artwork.uri}
+												src={draftToDelete.artwork.uri}
 												className="group-hover:scale-110 group-hover:duration-500 duration-500 rounded-md"
 												alt="nft cover art"
 												height={120}
 												width={120}
+												quality={40}
 												priority
 											/>
 										) : (
@@ -90,14 +85,14 @@ export default function DeleteDraftModal({ isOpen = "", onClose = "", draftToDel
 										)}
 										<div className="grid content-between">
 											<p className="text-sm">{user && user.attributes.name}</p>
-											<p className="text-2xl font-semibold flex">{selectedDraft && selectedDraft.attributes.title}</p>
+											<p className="text-2xl font-semibold flex">{draftToDelete && draftToDelete.title}</p>
 										</div>
 									</div>
 
 									<div className="flex flex-row mt-12 w-full space-x-4">
 										<button
 											onClick={() => closeModal()}
-											className="w-full bg-light-200 dark:bg-dark-200 hover:bg-gray-200 rounded-lg flex justify-center items-center p-4 text-sm"
+											className="w-full bg-light-200 dark:bg-dark-800 hover:bg-gray-200 rounded-lg flex justify-center items-center p-4 text-sm"
 										>
 											<div className="flex justify-center items-center w-full">
 												<i className="fa-solid fa-xmark text-lg"></i>
@@ -108,7 +103,7 @@ export default function DeleteDraftModal({ isOpen = "", onClose = "", draftToDel
 											onClick={() => {
 												deleteDraft();
 											}}
-											className="w-full bg-light-200 dark:bg-dark-200 hover:bg-error-200 dark:hover:bg-error-200 hover:text-light-100 rounded-lg flex justify-center items-center p-4 text-sm"
+											className="w-full bg-light-200 dark:bg-dark-800 hover:bg-error-600 dark:hover:bg-error-600 hover:text-light-100 rounded-lg flex justify-center items-center p-4 text-sm"
 										>
 											<div className="flex justify-center items-center w-full">
 												<i className="fa-solid fa-trash text-lg"></i>

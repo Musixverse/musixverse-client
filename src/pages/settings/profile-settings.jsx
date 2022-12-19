@@ -1,72 +1,79 @@
 import { useState, useEffect, useContext } from "react";
+import { useRouter } from "next/router";
 import Head from "next/head";
-import { meta_description } from "../../constants";
+import Moralis from "moralis/node";
+import { PARSE_APP_ID, PARSE_SERVER_URL, meta_description } from "../../config/constants";
 import SettingsNav from "../../components/Settings/SettingsNav";
 import ProfileSettings from "../../components/Settings/ProfileSettings";
-import { useMoralis, useMoralisQuery, useMoralisCloudFunction } from "react-moralis";
+import { useMoralis, useMoralisCloudFunction } from "react-moralis";
 import StatusContext from "../../../store/status-context";
 import LoadingContext from "../../../store/loading-context";
-import { BLOCKCHAIN_NETWORK } from "../../constants";
+import { isNameValid, isUsernameValidAndAvailable, isEmailValidAndAvailable } from "../../utils/Validate";
 
-export default function Settings() {
-	const { user, setUserData, Moralis, isInitialized, refetchUserData } = useMoralis();
+export async function getServerSideProps(context) {
+	try {
+		const user = JSON.parse(context.req.cookies.currentUser);
+		const _userId = user.objectId;
+		await Moralis.start({ serverUrl: PARSE_SERVER_URL, appId: PARSE_APP_ID });
+
+		const userData = await Moralis.Cloud.run("fetchUserInfo", { userId: _userId });
+
+		return {
+			props: { userData }, // will be passed to the page component as props
+		};
+	} catch (error) {
+		return { notFound: true, props: {} };
+	}
+}
+
+export default function Settings({ userData }) {
+	const { user, setUserData, Moralis, refetchUserData } = useMoralis();
+	const router = useRouter();
 	// Context Management
-	const [isLoading, setLoading] = useContext(LoadingContext);
+	const [, setLoading] = useContext(LoadingContext);
 	const [, , setSuccess, setError] = useContext(StatusContext);
 	// State Management
-	const [avatar, setAvatar] = useState("");
-	const [coverImage, setCoverImage] = useState("");
+	const [avatar, setAvatar] = useState(userData.avatar ?? "");
+	const [coverImage, setCoverImage] = useState(userData.coverImage ?? "");
 	const [name, setName] = useState("");
 	const [username, setUsername] = useState("");
 	const [email, setEmail] = useState("");
-	const [bio, setBio] = useState("");
-	const [spotify, setSpotify] = useState("");
-	const [instagram, setInstagram] = useState("");
-	const [twitter, setTwitter] = useState("");
-	const [facebook, setFacebook] = useState("");
+	const [bio, setBio] = useState(userData.bio ?? "");
+	const [spotify, setSpotify] = useState(userData.spotify ?? "");
+	const [instagram, setInstagram] = useState(userData.instagram ?? "");
+	const [twitter, setTwitter] = useState(userData.twitter ?? "");
+	const [facebook, setFacebook] = useState(userData.facebook ?? "");
+	const [country, setCountry] = useState(userData.country ?? "");
+	const [state, setState] = useState(userData.state ?? "");
+	const [city, setCity] = useState(userData.city ?? "");
 	const [balance, setBalance] = useState(0);
 
-	const fetchBalance = async () => {
-		try {
-			const options = { chain: BLOCKCHAIN_NETWORK };
-			const _balance = await Moralis.Web3API.account.getNativeBalance(options);
-			const _balanceAmount = parseFloat(_balance.balance) / 10 ** 18 === 0 ? "0" : parseFloat(_balance.balance) / 10 ** 18;
-			setBalance(_balanceAmount > 0 ? _balanceAmount.toFixed(4) : 0);
-		} catch (error) {
-			console.log("ERROR-", error);
-		}
-	};
-
 	useEffect(() => {
-		setLoading(true);
-		if (isInitialized && user) {
+		setLoading({
+			status: true,
+		});
+
+		const fetchBalance = async () => {
+			try {
+				const options = { chain: process.env.NEXT_PUBLIC_BLOCKCHAIN_NETWORK_ID };
+				const _balance = await Moralis.Web3API.account.getNativeBalance(options);
+				const _balanceAmount = parseFloat(_balance.balance) / 10 ** 18 === 0 ? "0" : parseFloat(_balance.balance) / 10 ** 18;
+				setBalance(_balanceAmount > 0 ? _balanceAmount.toFixed(2) : 0);
+			} catch (error) {
+				console.log("ERROR-", error);
+			}
+		};
+		if (user) {
 			fetchBalance();
 			setName(user.attributes.name);
 			setUsername(user.attributes.username);
 			setEmail(user.attributes.email);
 		}
-		return () => {
-			setLoading(false);
-		};
-	}, [user]);
-
-	const { data: userInfo } = useMoralisQuery("UserInfo", (query) => query.equalTo("user", user), [user]);
-	useEffect(() => {
-		if (userInfo[0]) {
-			setAvatar(userInfo[0].attributes.avatar);
-			setAvatar(userInfo[0].attributes.avatar);
-			setCoverImage(userInfo[0].attributes.coverImage);
-			setBio(userInfo[0].attributes.bio ? userInfo[0].attributes.bio : "");
-			setSpotify(userInfo[0].attributes.spotify ? userInfo[0].attributes.spotify : "");
-			setInstagram(userInfo[0].attributes.instagram ? userInfo[0].attributes.instagram : "");
-			setTwitter(userInfo[0].attributes.twitter ? userInfo[0].attributes.twitter : "");
-			setFacebook(userInfo[0].attributes.facebook ? userInfo[0].attributes.facebook : "");
-			setLoading(false);
-		}
-	}, [userInfo]);
+		setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
+	}, [user, setLoading, Moralis.Web3API.account]);
 
 	// Update User Information
-	const userData = {
+	const updatedUserData = {
 		avatar: avatar,
 		coverImage: coverImage,
 		bio: bio === "" ? undefined : bio,
@@ -74,58 +81,75 @@ export default function Settings() {
 		instagram: instagram === "" ? undefined : instagram,
 		twitter: twitter === "" ? undefined : twitter,
 		facebook: facebook === "" ? undefined : facebook,
+		country: country === "" ? undefined : country,
+		state: state === "" ? undefined : state,
+		city: city === "" ? undefined : city,
 	};
-	const { fetch: updateUserInfo } = useMoralisCloudFunction("updateUserInfo", userData, { autoFetch: false });
+	const { fetch: updateUserInfo } = useMoralisCloudFunction("updateUserInfo", updatedUserData, { autoFetch: false });
 	const handleSave = async () => {
 		try {
-			const usernameRegex = /^\w+$/;
-			if (name.length === 0) {
+			// Name CHECK
+			const nameCheck = await isNameValid(name);
+			if (nameCheck.status === false) {
 				setError({
-					title: "Invalid credentials!",
-					message: "Name field can't be empty",
+					title: nameCheck.title || "Invalid credentials!",
+					message: nameCheck.message,
 					showErrorBox: true,
 				});
 				return;
-			} else if (username.length < 2) {
-				setError({
-					title: "Invalid credentials!",
-					message: "Username length should be greater than 1",
-					showErrorBox: true,
-				});
-				return;
-			} else if (!usernameRegex.test(username)) {
-				setError({
-					title: "Invalid credentials!",
-					message: "Username can only contain alphabets, numbers, and '_'",
-					showErrorBox: true,
-				});
-				return;
-			} else if (name !== "" && username !== "" && email !== "") {
-				if (email === user.attributes.email && username === user.attributes.username) {
+			}
+
+			if (name !== "" && username !== "" && email !== "") {
+				if (email === user.attributes.email && username === user.attributes.username && name === user.attributes.name) {
+					// do nothing
+				} else if (email === user.attributes.email && username === user.attributes.username) {
 					setUserData({
 						name: name === "" ? undefined : name,
 					});
 				} else if (email === user.attributes.email) {
+					// USERNAME CHECK
+					const usernameCheck = await isUsernameValidAndAvailable(username);
+					if (usernameCheck.status === false) {
+						setError({
+							title: usernameCheck.title || "Invalid credentials!",
+							message: usernameCheck.message,
+							showErrorBox: true,
+						});
+						return;
+					}
 					setUserData({
 						name: name === "" ? undefined : name,
 						username: username === "" ? undefined : username,
 					});
 				} else {
-					setUserData({
+					// EMAIL CHECK
+					const emailCheck = await isEmailValidAndAvailable(email);
+					if (emailCheck.status === false) {
+						setError({
+							title: emailCheck.title || "Invalid credentials!",
+							message: emailCheck.message,
+							showErrorBox: true,
+						});
+						emailRef.current.focus();
+						return;
+					}
+					await setUserData({
 						name: name === "" ? undefined : name,
 						username: username === "" ? undefined : username,
 						email: email === "" ? undefined : email,
 					});
+					router.push("/register/confirm-email");
 				}
 
 				await updateUserInfo({
-					onSuccess: (data) => {
+					onSuccess: async (data) => {
 						setSuccess((prevState) => ({
 							...prevState,
 							title: "Profile updated!",
 							message: "Your profile has been updated successfully.",
 							showSuccessBox: true,
 						}));
+						await fetch(`/api/revalidate-profile?path=/profile/${username}&secret=${process.env.NEXT_PUBLIC_REVALIDATE_SECRET}`);
 					},
 				});
 
@@ -145,7 +169,7 @@ export default function Settings() {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 
-			<div className="flex items-center justify-center bg-light-200 dark:bg-dark-200">
+			<div className="flex items-center justify-center bg-light-200 dark:bg-dark-800">
 				<div className="lg:flex-row flex-col flex w-full max-w-[1920px] mt-28 lg:mt-36 px-6 md:px-8 lg:px-16 xl:px-20 2xl:px-36">
 					<SettingsNav />
 					<ProfileSettings
@@ -169,6 +193,12 @@ export default function Settings() {
 						setTwitter={setTwitter}
 						facebook={facebook}
 						setFacebook={setFacebook}
+						country={country}
+						setCountry={setCountry}
+						state={state}
+						setState={setState}
+						city={city}
+						setCity={setCity}
 						handleSave={handleSave}
 						balance={balance}
 						walletAddress={user ? user.attributes.ethAddress : ""}

@@ -1,23 +1,23 @@
 .track-header {
-    /* @apply px-24 py-10 mt-12; */
-    @apply my-10;
+	/* @apply px-24 py-10 mt-12; */
+	@apply my-10;
 }
 
 .track-header__container {
-    /* @apply flex flex-row justify-center items-center space-x-5; */
-    @apply grid grid-cols-5 gap-6;
+	/* @apply flex flex-row justify-center items-center space-x-5; */
+	@apply grid grid-cols-1 md:grid md:grid-cols-12 md:gap-6;
 }
 
 .track-header__container--trackImage {
-    /* @apply max-w-[474px]; */
-    @apply col-span-2;
+	/* @apply max-w-[474px]; */
+	@apply md:col-span-5;
 }
 
 .track-header__container--track-detail {
-    /* @apply flex flex-col px-5 w-[860px] space-y-2 col-span-3; */
-    @apply flex flex-col space-y-2 col-span-3 mt-2;
+	/* @apply flex flex-col px-5 w-[860px] space-y-2 col-span-3; */
+	@apply flex flex-col space-y-2 col-span-7 mt-2;
 }
 
 .track-detail--button button {
-    @apply flex flex-row justify-center items-center;
+	@apply flex flex-row justify-center items-center;
 }

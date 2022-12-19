@@ -3,7 +3,7 @@ import Image from "next/image";
 import CtaButtons from "./CtaButtons";
 import { convertMaticToUSD, convertMaticToINR, truncatePrice } from "../../../utils/GetMarketPrice";
 
-export default function TrackHeaderCta({ tokenId, unlockTimestamp, price, currentOwnerAddress }) {
+export default function TrackHeaderCta({ tokenId, trackId, unlockTimestamp, price, currentOwnerAddress, onSale, activity, artistName, title }) {
 	const [maticUSD, setMaticUSD] = useState("");
 	const [maticINR, setMaticINR] = useState("");
 	const [saleStart, setSaleStart] = useState("");
@@ -52,7 +52,7 @@ export default function TrackHeaderCta({ tokenId, unlockTimestamp, price, curren
 	const seconds = parseInt((Math.abs(unlockTime - timeNow) / 1000) % 60);
 
 	return (
-		<div className="bg-light-200 p-5 pt-0 mt-0 rounded-lg dark:bg-dark-100 w-full">
+		<div className="bg-light-200 p-5 pt-0 mt-0 rounded-lg dark:bg-dark-600 w-full">
 			{Date.now() < unlockTimestamp * 1000 ? (
 				<>
 					<div className="flex justify-between items-center mt-4">
@@ -124,7 +124,17 @@ export default function TrackHeaderCta({ tokenId, unlockTimestamp, price, curren
 			</div>
 
 			{Date.now() > unlockTimestamp * 1000 && (
-				<CtaButtons currentOwnerAddress={currentOwnerAddress} tokenId={tokenId} price={price} unlockTimestamp={unlockTimestamp} />
+				<CtaButtons
+					currentOwnerAddress={currentOwnerAddress}
+					trackId={trackId}
+					tokenId={tokenId}
+					price={price}
+					unlockTimestamp={unlockTimestamp}
+					onSale={onSale}
+					activity={activity}
+					artistName={artistName}
+					title={title}
+				/>
 			)}
 		</div>
 	);

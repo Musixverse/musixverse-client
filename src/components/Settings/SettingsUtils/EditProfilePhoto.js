@@ -1,16 +1,18 @@
 import { useState, useRef, useContext, useEffect } from "react";
 import { useMoralis } from "react-moralis";
 import CustomButton from "../../../layout/CustomButton";
-import convertDataURLtoFile from "../../../utils/image-crop/convertDataURLtoFile";
-import uploadFileToIPFS from "../../../utils/image-crop/uploadFileToIPFS";
+import { uploadBase64ToIPFS } from "../../../utils/image-crop/uploadToIPFS";
 import LoadingContext from "../../../../store/loading-context";
+import StatusContext from "../../../../store/status-context";
 import CropImageModal from "../../CreateNFT/CreateNFTUtils/CropImageModal";
+import Image from "next/image";
+import Tooltip from "../../../layout/Tooltip/Tooltip";
 
-export default function EditProfilePhoto({ avatar, setAvatar, handleSave }) {
-	const profilePicture = useRef(null);
+export default function EditProfilePhoto({ avatar, setAvatar }) {
 	const profilePictureInput = useRef(null);
 	const { Moralis } = useMoralis();
 	const [, setLoading] = useContext(LoadingContext);
+	const [, , , setError] = useContext(StatusContext);
 	// Crop Modal states
 	const [showModal, setShowModal] = useState(false);
 	const [imageToCrop, setImageToCrop] = useState(undefined);
@@ -21,21 +23,44 @@ export default function EditProfilePhoto({ avatar, setAvatar, handleSave }) {
 
 	useEffect(() => {
 		if (croppedImage !== undefined) {
-			setLoading(true);
-			profilePicture.current.src = croppedImage;
-			// Get the File from DataURL
-			const uploadedFile = convertDataURLtoFile(croppedImage, "file");
-			// Get the uploadFileOnIPFS async function
-
-			uploadFileToIPFS(Moralis, uploadedFile).then((url) => {
-				setLoading(false);
-				console.log(url);
-				setAvatar(url);
-			});
+			setLoading({ status: true, title: "Uploading Avatar", message: "Please wait while we upload your file...", showProgressBar: false, progress: 0 });
+			try {
+				uploadBase64ToIPFS(Moralis, croppedImage, "avatar", setLoading).then((url) => {
+					setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
+					setAvatar(url);
+				});
+			} catch (err) {
+				setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
+				if (err.message && err.message == "request entity too large") {
+					setError({
+						title: "File too large",
+						message: "Please select a file with smaller size",
+						showErrorBox: true,
+					});
+				} else {
+					setError((prevState) => ({
+						...prevState,
+						title: "Oops! Something went wrong.",
+						message: "Please try again later.",
+						showErrorBox: true,
+					}));
+				}
+				return;
+			}
 		}
-	}, [Moralis, croppedImage, setAvatar, setLoading]);
+	}, [Moralis, croppedImage, setAvatar, setError, setLoading]);
 
 	const handleAvatarChange = (event) => {
+		// If file size is > 10 MB show error box
+		if (event.target.files[0] && event.target.files[0].size > 10000000) {
+			setError({
+				title: "File size too large",
+				message: "Uploaded image should be less than 10 MB",
+				showErrorBox: true,
+			});
+			profilePictureInput.current.value = "";
+			return;
+		}
 		const imageURL = URL.createObjectURL(event.target.files[0]);
 		profilePictureInput.current.value = "";
 		setImageToCrop(imageURL);
@@ -46,15 +71,29 @@ export default function EditProfilePhoto({ avatar, setAvatar, handleSave }) {
 		<>
 			<div className="flex flex-col">
 				<p className="mb-5 text-sm font-medium md:text-base font-secondary">
-					Profile Picture<i className="ml-2 text-base md:text-lg fa fa-info-circle"></i>
+					Profile Picture
+					<Tooltip
+						labelText={<i className="ml-2 text-base md:text-lg fa fa-info-circle"></i>}
+						message={"Recommended dimensions: 		640 x 640 px"}
+						tooltipLocation={"bottom"}
+					/>
 				</p>
-				<label className="relative w-fit cursor-pointer" htmlFor="upload-image-inp">
-					<img
-						className="w-[130px] h-[130px] md:w-[150px] md:h-[150px] rounded-full"
-						ref={profilePicture}
-						src={avatar || "https://ipfs.moralis.io:2053/ipfs/Qmcn1aZ4PKUUzwpTncuSbruwLD98dtiNqvoJG5zm8EMwXZ"}
-						alt="Current Avatar"
-					></img>
+				<label className="relative cursor-pointer w-fit" htmlFor="upload-image-inp">
+					<div className="w-[130px] h-[130px] md:w-[150px] md:h-[150px] rounded-full relative overflow-hidden">
+						<Image
+							src={
+								croppedImage
+									? croppedImage
+									: avatar
+									? avatar
+									: "https://ipfs.moralis.io:2053/ipfs/Qmcn1aZ4PKUUzwpTncuSbruwLD98dtiNqvoJG5zm8EMwXZ"
+							}
+							objectFit="contain"
+							layout="fill"
+							alt="Current Avatar"
+							priority
+						/>
+					</div>
 
 					<input
 						ref={profilePictureInput}
@@ -62,18 +101,21 @@ export default function EditProfilePhoto({ avatar, setAvatar, handleSave }) {
 						id="upload-image-inp"
 						onChange={handleAvatarChange}
 						accept="image/*"
-						className="hidden mt-2 mb-5"
+						className="hidden mt-2 mb-2"
 					/>
 					<label
-						className="absolute flex items-center justify-center p-2 pr-1 rounded-lg cursor-pointer right-1 bottom-2 bg-dark-200"
+						className="absolute flex items-center justify-center p-2 pr-1 rounded-lg cursor-pointer right-1 bottom-2 bg-dark-800"
 						htmlFor="upload-image-inp"
 					>
 						<i className="far fa-edit text-light-200"></i>
 					</label>
 				</label>
+
 				<div className="flex h-full">
-					<div className="self-end" onClick={handleSave}>
-						<CustomButton green={true}>Save Changes</CustomButton>
+					<div className="self-end mb-1">
+						<CustomButton green={true} classes="text-sm px-8 py-3">
+							Save Changes
+						</CustomButton>
 					</div>
 				</div>
 			</div>

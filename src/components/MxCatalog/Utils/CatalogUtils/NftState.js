@@ -3,9 +3,22 @@ import ToggleButtonReducer from "../../../../layout/ToggleButton/ToggleButtonRed
 
 export default function NftState({ appliedFilter, setAppliedFilter, setCurrentFilterType }) {
 	return (
-		<div className="flex w-[657px] flex-col mt-8 max-h-[425px] overflow-y-scroll">
-			<h5 className="text-lg font-bold font-secondary">Filter based on NFT State</h5>
-			<p className="font-secondary text-[#7F7F7F] text-[15px]">Show NFTs based on these traits</p>
+		<div className="flex lg:w-[657px] flex-col mt-8 h-3/4 lg:h-[430px] overflow-y-scroll">
+			<div className="flex justify-between items-end">
+				<div>
+					<h5 className="text-sm font-bold lg:text-lg font-secondary">Filter based on NFT State</h5>
+					<p className="font-secondary text-[#7F7F7F] text-[11px] md:text-[13px] lg:text-[15px]">Show NFTs based on these traits</p>
+				</div>
+				<button
+					className="bg-dark-600 text-light-200 text-sm px-6 py-1 rounded"
+					onClick={() => {
+						setCurrentFilterType(0);
+						setAppliedFilter({ type: "reset" });
+					}}
+				>
+					Reset
+				</button>
+			</div>
 			<HorizontalRuler />
 
 			{/* <div className="flex items-center justify-between my-2">
@@ -14,7 +27,7 @@ export default function NftState({ appliedFilter, setAppliedFilter, setCurrentFi
 			</div>
 			<HorizontalRuler /> */}
 
-			<div className="flex items-center justify-between my-2">
+			<div className="flex items-center justify-between my-2 text-sm lg:text-base">
 				<p className="font-secondary">Has Splits</p>
 				<ToggleButtonReducer
 					toggleState={appliedFilter.hasSplits}
@@ -25,7 +38,7 @@ export default function NftState({ appliedFilter, setAppliedFilter, setCurrentFi
 			</div>
 			<HorizontalRuler />
 
-			<div className="flex items-center justify-between my-2">
+			<div className="flex items-center justify-between my-2 text-sm lg:text-base">
 				<p className="font-secondary">Has Vocals</p>
 				<ToggleButtonReducer
 					toggleState={appliedFilter.hasVocals}
@@ -36,7 +49,7 @@ export default function NftState({ appliedFilter, setAppliedFilter, setCurrentFi
 			</div>
 			<HorizontalRuler />
 
-			<div className="flex items-center justify-between my-2">
+			<div className="flex items-center justify-between my-2 text-sm lg:text-base">
 				<p className="font-secondary">Has Lyrics</p>
 				<ToggleButtonReducer
 					toggleState={appliedFilter.hasLyrics}

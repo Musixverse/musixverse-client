@@ -7,19 +7,81 @@
       "anonymous": false,
       "inputs": [
         {
+          "indexed": true,
+          "internalType": "address",
+          "name": "caller",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "artistAddress",
+          "type": "address"
+        },
+        {
           "indexed": false,
+          "internalType": "string",
+          "name": "username",
+          "type": "string"
+        },
+        {
+          "indexed": true,
+          "internalType": "string",
+          "name": "indexedUsername",
+          "type": "string"
+        }
+      ],
+      "name": "ArtistVerified",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "caller",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "tokenId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "previousComment",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "newComment",
+          "type": "string"
+        }
+      ],
+      "name": "TokenCommentUpdated",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
           "internalType": "address",
           "name": "creator",
           "type": "address"
         },
         {
-          "indexed": false,
+          "indexed": true,
           "internalType": "uint256",
           "name": "trackId",
           "type": "uint256"
         },
         {
-          "indexed": false,
+          "indexed": true,
           "internalType": "uint256",
           "name": "tokenId",
           "type": "uint256"
@@ -44,13 +106,13 @@
       "anonymous": false,
       "inputs": [
         {
-          "indexed": false,
+          "indexed": true,
           "internalType": "address",
           "name": "caller",
           "type": "address"
         },
         {
-          "indexed": false,
+          "indexed": true,
           "internalType": "uint256",
           "name": "tokenId",
           "type": "uint256"
@@ -69,13 +131,13 @@
       "anonymous": false,
       "inputs": [
         {
-          "indexed": false,
+          "indexed": true,
           "internalType": "address",
           "name": "caller",
           "type": "address"
         },
         {
-          "indexed": false,
+          "indexed": true,
           "internalType": "uint256",
           "name": "tokenId",
           "type": "uint256"
@@ -100,16 +162,34 @@
       "anonymous": false,
       "inputs": [
         {
-          "indexed": false,
+          "indexed": true,
           "internalType": "uint256",
           "name": "tokenId",
           "type": "uint256"
         },
         {
-          "indexed": false,
+          "indexed": true,
           "internalType": "address",
           "name": "referrer",
           "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "referralFee",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "platformFee",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "royaltyAmount",
+          "type": "uint256"
         },
         {
           "indexed": false,
@@ -119,6 +199,12 @@
         },
         {
           "indexed": false,
+          "internalType": "uint256",
+          "name": "valueToPreviousOwner",
+          "type": "uint256"
+        },
+        {
+          "indexed": true,
           "internalType": "address",
           "name": "newOwner",
           "type": "address"
@@ -137,13 +223,13 @@
       "anonymous": false,
       "inputs": [
         {
-          "indexed": false,
+          "indexed": true,
           "internalType": "address",
           "name": "creator",
           "type": "address"
         },
         {
-          "indexed": false,
+          "indexed": true,
           "internalType": "uint256",
           "name": "trackId",
           "type": "uint256"
@@ -165,14 +251,20 @@
           "internalType": "string",
           "name": "URIHash",
           "type": "string"
+        },
+        {
+          "indexed": true,
+          "internalType": "string",
+          "name": "indexedURIHash",
+          "type": "string"
         }
       ],
       "name": "TrackMinted",
       "type": "event"
     }
   ],
-  "bytecode": "0x6080604052348015600f57600080fd5b50603f80601d6000396000f3fe6080604052600080fdfea264697066735822122080266fef07dbe6d6e863f97e470ff658a504d2c50a741786f5eb8907f4c2b97e64736f6c63430008040033",
-  "deployedBytecode": "0x6080604052600080fdfea264697066735822122080266fef07dbe6d6e863f97e470ff658a504d2c50a741786f5eb8907f4c2b97e64736f6c63430008040033",
+  "bytecode": "0x6080604052348015600f57600080fd5b50603f80601d6000396000f3fe6080604052600080fdfea264697066735822122063c80d8e5bb63ab1d7454e5450bfefaa4df24cbcb4c1df96ac7f73858dd4bd5b64736f6c63430008040033",
+  "deployedBytecode": "0x6080604052600080fdfea264697066735822122063c80d8e5bb63ab1d7454e5450bfefaa4df24cbcb4c1df96ac7f73858dd4bd5b64736f6c63430008040033",
   "linkReferences": {},
   "deployedLinkReferences": {}
 }

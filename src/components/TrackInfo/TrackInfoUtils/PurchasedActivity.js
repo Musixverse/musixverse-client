@@ -1,56 +1,45 @@
-import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useMoralis, useMoralisCloudFunction } from "react-moralis";
-import { BLOCKCHAIN_NETWORK } from "../../../constants";
+import { useMoralis } from "react-moralis";
 import { convertTimestampToDate } from "../../../utils/ConvertTimestampToDate";
 import LinkToBlockExplorer from "./LinkToBlockExplorer";
-import auction from "../../../../public/assets/auction.svg";
 import styles from "../../../../styles/TrackInfo/Activity.module.css";
 
 const PurchasedActivity = ({ activity }) => {
 	const { Moralis } = useMoralis();
-	const [transaction, setTransaction] = useState("");
-	const { data: fetchedUser } = useMoralisCloudFunction("fetchUsernameFromAddress", { address: transaction.from_address });
-
-	const getTransactionDetails = async () => {
-		const options = {
-			chain: BLOCKCHAIN_NETWORK,
-			transaction_hash: activity.transaction_hash,
-		};
-		const _transaction = await Moralis.Web3API.native.getTransaction(options);
-		setTransaction(_transaction);
-	};
-
-	useEffect(() => {
-		async function getDetails() {
-			await getTransactionDetails();
-		}
-		getDetails();
-	}, [activity]);
 
 	return (
 		<>
-			<div className={"dark:bg-dark-200 " + styles["sales-history__action"]}>
-				<Image src={auction} alt="minting logo" width={25} height={25}></Image>
+			<div className={"dark:bg-dark-800 " + styles["sales-history__action"]}>
+				<i className="text-lg fa-solid fa-gavel"></i>
 			</div>
 
 			<div className="ml-3 font-secondary">
 				<p className="font-medium">
 					Purchased for &nbsp;
 					<Image src={"/assets/matic-logo.svg"} width={15} height={15} alt="matic icon" />
-					<span className="ml-1 font-primary font-semibold">{Moralis.Units.FromWei(activity.price)}</span>
+					<span className="ml-1 font-semibold font-primary">{Moralis.Units.FromWei(activity.price)}</span>
 				</p>
 
 				<p className="text-[#8a8a8a] text-sm">
 					by&nbsp;
-					{fetchedUser ? (
-						<Link href={`/profile/${fetchedUser.username}`} className="cursor-pointer">
-							<a target="_blank" rel="noopener noreferrer">
-								@{fetchedUser.username}&nbsp;
+					{activity ? (
+						<Link href={`/profile/${activity.caller.username}`} className="cursor-pointer">
+							<a>
+								@{activity.caller.username}&nbsp;
 							</a>
 						</Link>
 					) : null}
+					{activity && activity.referrer && (
+						<>
+							using referral link of&nbsp;
+							<Link href={`/profile/${activity.referrer.username}`} className="cursor-pointer">
+								<a>
+									@{activity.referrer.username}&nbsp;
+								</a>
+							</Link>
+						</>
+					)}
 					on&nbsp;
 					{convertTimestampToDate(activity.block_timestamp)}
 					<LinkToBlockExplorer transactionHash={activity.transaction_hash} />

@@ -1,6 +1,7 @@
 import InputDropdown from "./InputDropdown";
-import RequiredAsterisk from "./RequiredAsterisk";
-import { trackOriginArray, genreArray, parentalAdvisoryArray, minRecordingYear } from "../../../constants";
+import RequiredAsterisk from "../../../layout/RequiredAsterisk";
+import Tooltip from "../../../layout/Tooltip/Tooltip";
+import { trackOriginArray, genreArray, parentalAdvisoryArray, minRecordingYear } from "../../../config/constants";
 
 export default function DetailsInputGroup({
 	setTrackOrigin,
@@ -48,7 +49,7 @@ export default function DetailsInputGroup({
 						maxLength={4}
 						placeholder="Enter the recording year"
 						spellCheck={false}
-						className="dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-100 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-100"
+						className="dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-500 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-500"
 						required
 					/>
 				</div>
@@ -56,6 +57,13 @@ export default function DetailsInputGroup({
 					<p className="mb-1 text-sm">
 						PARENTAL ADVISORY
 						<RequiredAsterisk />
+						<Tooltip
+							labelText={<i className="pl-4 fa-solid fa-circle-info"></i>}
+							message={
+								"By marking your asset as explicit for NSFW (Not Safe For Work) content will protect users with safe search while browsing Musixverse."
+							}
+							tooltipLocation={"bottom"}
+						/>
 					</p>
 					<InputDropdown optionsArray={parentalAdvisoryArray} setChoice={setParentalAdvisory} initialValue={parentalAdvisory} />
 				</div>

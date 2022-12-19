@@ -5,9 +5,10 @@ import LoadingNftCards from "../Utils/LoadingNftCards";
 import NoResultsFound from "../Utils/NoResultsFound";
 import LoadingContext from "../../../../store/loading-context";
 
-const UnsoldNFTs = ({ appliedFilter }) => {
-	const [loading, setLoading] = useContext(LoadingContext);
-	const [tracksWhoseAllCopiesAreNotSold, setTracksWhoseAllCopiesAreNotSold] = useState(false);
+const UnsoldNFTs = ({ appliedFilter, tracks }) => {
+	const [isLoading, setLoading] = useContext(LoadingContext);
+	const [tracksWhoseAllCopiesAreNotSold, setTracksWhoseAllCopiesAreNotSold] = useState(tracks);
+	const [hasLoadedOnce, setLoadedOnce] = useState(false);
 
 	const { fetch: fetchTracksWhoseAllCopiesAreNotSold } = useMoralisCloudFunction(
 		"fetchTracksWhoseAllCopiesAreNotSold",
@@ -16,24 +17,30 @@ const UnsoldNFTs = ({ appliedFilter }) => {
 	);
 
 	useEffect(() => {
-		setLoading(true);
-		fetchTracksWhoseAllCopiesAreNotSold({
-			onSuccess: async (object) => {
-				setLoading(false);
-				setTracksWhoseAllCopiesAreNotSold(object);
-			},
-			onError: (error) => {
-				setLoading(false);
-				console.log("fetchTracksWhoseAllCopiesAreNotSold Error:", error);
-			},
-		});
+		if (hasLoadedOnce) {
+			setLoading({
+				status: true,
+				title: "Applying Filter...",
+			});
+			fetchTracksWhoseAllCopiesAreNotSold({
+				onSuccess: async (object) => {
+					setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
+					setTracksWhoseAllCopiesAreNotSold(object);
+				},
+				onError: (error) => {
+					setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
+					console.log("fetchTracksWhoseAllCopiesAreNotSold Error:", error);
+				},
+			});
+		}
+		setLoadedOnce(true);
 	}, [appliedFilter, fetchTracksWhoseAllCopiesAreNotSold]);
 
 	return (
 		<>
-			{loading && !tracksWhoseAllCopiesAreNotSold ? (
+			{isLoading.status ? (
 				<LoadingNftCards />
-			) : !loading && tracksWhoseAllCopiesAreNotSold.length === 0 ? (
+			) : !isLoading.status && tracksWhoseAllCopiesAreNotSold && tracksWhoseAllCopiesAreNotSold.length === 0 ? (
 				<NoResultsFound />
 			) : (
 				tracksWhoseAllCopiesAreNotSold &&

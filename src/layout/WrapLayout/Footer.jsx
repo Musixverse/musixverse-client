@@ -1,82 +1,90 @@
+import { useContext } from "react";
 import { useTheme } from "next-themes";
 import Link from "next/link";
 import Image from "next/image";
 import { useMoralis } from "react-moralis";
 import mxvB from "../../../public/assets/homepage/mxv_logo_b.svg";
 import mxvW from "../../../public/assets/homepage/mxv_logo_w.svg";
-import discord from "../../../public/assets/social/discord.svg";
-import facebook from "../../../public/assets/social/facebook.svg";
-import twitter from "../../../public/assets/social/twitter.svg";
-import instagram from "../../../public/assets/social/instagram.svg";
-import youtube from "../../../public/assets/social/youtube.svg";
-import telegram from "../../../public/assets/social/telegram.svg";
-import linkedin from "../../../public/assets/social/linkedin.svg";
+import Socials from "../Socials";
 import MXV_emblemW from "../../../public/assets/MXV_emblem_white.png";
 import MXV_emblemB from "../../../public/assets/MXV_emblem_black.png";
+import Tooltip from "../Tooltip/Tooltip";
+import AuthModalContext from "../../../store/authModal-context";
 
 const Footer = () => {
 	const { theme } = useTheme();
 	const { isAuthenticated, user } = useMoralis();
+	const [, setAuthModalOpen] = useContext(AuthModalContext);
 
 	return (
-		<div className="flex justify-center w-full dark:bg-dark-200">
-			<div className="footer dark:bg-dark-100">
+		<div className="flex justify-center w-full dark:bg-dark-900">
+			<div className="footer dark:bg-dark-900">
 				<div className="w-full flex justify-between items-center">
-					<Image src={theme === "dark" ? mxvW : mxvB} alt="MXV logo" width="90" height="20"></Image>
-					<p className="font-primary text-lg text-primary-100">Hear it. Own it. Live it.</p>
+					<Image src={theme === "dark" ? mxvW : mxvB} alt="MXV logo" width="90" height="20" />
+					<p className="font-primary sm:text-lg text-base text-primary-500">Hear it. Own it. Live it.</p>
 				</div>
 
-				<div className="grid grid-cols-2 gap-y-10 md:gap-y-0 md:flex flex-wrap font-primary justify-between border-t-2 border-b-2 border-light-300 w-full py-8 mt-5">
+				<div className="grid grid-cols-2 gap-y-10 md:gap-y-0 md:flex flex-wrap font-primary justify-between border-t-2 border-light-300 w-full py-8 mt-5">
 					<div className="flex flex-col space-y-2">
 						<p className="font-semibold text">Quick Links</p>
 						<ul className="space-y-2">
-							<li className="hover:text-primary-100">
+							<li className="hover:text-primary-500">
 								<Link href="/" className="links">
 									Home
 								</Link>
 							</li>
-							<li className="hover:text-primary-100">
+							<li className="hover:text-primary-500">
 								<Link href="/mxcatalog/new-releases">New Releases</Link>
 							</li>
-							<li className="hover:text-primary-100">
+							<li className="hover:text-primary-500">
 								<Link href="/mxcatalog/explore">Explore</Link>
 							</li>
-							<li className="hover:text-primary-100">
-								<Link href="/trending">Trending</Link>
-							</li>
-							<li className="hover:text-primary-100">
-								<Link href="/create-nft">Create</Link>
-							</li>
+							<Tooltip
+								labelText={<li className="text-dark-600 dark:text-light-100 cursor-help">Trending</li>}
+								message="Coming soon!"
+								tooltipLocation="bottom"
+							></Tooltip>
+							{user && user.attributes.isArtist && (
+								<li className="hover:text-primary-500">
+									<Link href="/create-nft">Create</Link>
+								</li>
+							)}
 						</ul>
 					</div>
 					<div className="flex flex-col space-y-2">
 						<p className="font-semibold text">Account</p>
 						<ul className="space-y-2">
-							<li className="hover:text-primary-100">
-								{user && isAuthenticated && <Link href={`/profile/${user.attributes.username}`}>Profile</Link>}
+							<li className="hover:text-primary-500 cursor-pointer">
+								{user && isAuthenticated ? (
+									<Link href={`/profile/${user.attributes.username}`}>Profile</Link>
+								) : (
+									<span onClick={() => setAuthModalOpen(true)}>Profile</span>
+								)}
 							</li>
-							<li className="hover:text-primary-100">
-								<Link href="/">Dashboard</Link>
+							<li className="hover:text-primary-500 cursor-pointer">
+								{user && isAuthenticated ? (
+									<Link href={`/settings/profile-settings`}>Settings</Link>
+								) : (
+									<span onClick={() => setAuthModalOpen(true)}>Settings</span>
+								)}
 							</li>
-							<li className="hover:text-primary-100">
-								<Link href="/404">Transactions</Link>
-							</li>
-							<li className="hover:text-primary-100">{user && isAuthenticated && <Link href="/settings/profile-settings">Settings</Link>}</li>
+							<Tooltip
+								labelText={<li className="text-dark-600 dark:text-light-100 cursor-help">Transactions</li>}
+								message="Coming soon!"
+								tooltipLocation="bottom"
+							></Tooltip>
 						</ul>
 					</div>
 					<div className="flex flex-col space-y-2">
 						<p className="font-semibold text">Support</p>
 						<ul className="space-y-2">
-							<li className="hover:text-primary-100">
+							<li className="hover:text-primary-500">
 								<Link href="/contact-us">Contact Us</Link>
 							</li>
-							<li className="hover:text-primary-100">
+							<li className="hover:text-primary-500">
 								<Link href="/faq">FAQ</Link>
 							</li>
-							<li className="hover:text-primary-100">
-								<Link href="/404">Help</Link>
-							</li>
-							<li className="hover:text-primary-100">
+							<li className="hover:text-primary-500">
 								<Link href="/report-a-bug">Report a Bug</Link>
 							</li>
 						</ul>
@@ -84,39 +92,45 @@ const Footer = () => {
 					<div className="flex flex-col space-y-2">
 						<p className="font-semibold text">Resources</p>
 						<ul className="space-y-2">
-							<li className="hover:text-primary-100">
-								<Link href="/404">Blogs</Link>
+							<li className="hover:text-primary-500">
+								<Link href="/help-center">Help Center</Link>
 							</li>
-							<li className="hover:text-primary-100">
-								<Link href="/404">Docs</Link>
+							<Tooltip
+								labelText={<li className="text-dark-600 dark:text-light-100 cursor-help">Docs</li>}
+								message="Coming soon!"
+								tooltipLocation="bottom"
+							></Tooltip>
+							<li className="hover:text-primary-500">
+								<Link href="https://medium.com/@musixverse" passHref>
+									<a target="_blank" rel="noopener noreferrer">
+										Blogs
+									</a>
+								</Link>
 							</li>
-							<li className="hover:text-primary-100">
-								{" "}
-								<Link href="/404">Media Kit</Link>
-							</li>
-							<li className="hover:text-primary-100">
-								<Link href="/404">Partners</Link>
-							</li>
+							<Tooltip
+								labelText={<li className="text-dark-600 dark:text-light-100 cursor-help">Media Kit</li>}
+								message="Coming soon!"
+								tooltipLocation="bottom"
+							></Tooltip>
+							{/* <li className="cursor-not-allowed">Partners</li> */}
 						</ul>
 					</div>
 					<div className="flex flex-col space-y-2">
 						<p className="font-semibold text">General</p>
 						<ul className="space-y-2">
-							<li className="hover:text-primary-100">
+							<li className="hover:text-primary-500">
 								<Link href="/">About Us</Link>
 							</li>
-							<li className="hover:text-primary-100">
-								<Link href="/team">Team</Link>
-							</li>
-							<li className="hover:text-primary-100">
-								<Link href="/404">Careers</Link>
-							</li>
-							<li className="hover:text-primary-100">
-								<Link href="/404">MXV Greenpaper</Link>
-							</li>
-							<li className="hover:text-primary-100">
+							<li className="hover:text-primary-500">
 								<Link href="/cfh/cfb">Community</Link>
 							</li>
+							{/* 
+							<Tooltip
+								labelText={<li className="text-dark-600 dark:text-light-100 cursor-help">Team</li>}
+								message="Coming soon!"
+								tooltipLocation="bottom"
+							></Tooltip> */}
+							{/* <li className="cursor-not-allowed">Careers</li> */}
 						</ul>
 					</div>
 				</div>
@@ -124,67 +138,23 @@ const Footer = () => {
 				<div className="flex flex-col justify-center items-center space-y-5 mb-4 sm:flex-row sm:justify-between sm:items-center w-full mt-3 sm:space-y-2 sm:mb-0">
 					<div className="space-y-2">
 						<p className="font-semibold text-lg text-center sm:text-left">Follow us on</p>
-						<div className="footer__social mt-2">
-							<button className="flex justify-center items-center">
-								<Link href="https://www.youtube.com/channel/UCloNloMRDKaB-0e-xeaTdXw" passHref>
-									<a target="_blank" rel="noopener noreferrer" className="flex justify-center items-center">
-										<Image src={youtube} width={20} height={20} alt="YouTube"></Image>
-									</a>
-								</Link>
-							</button>
-							<button className="flex justify-center items-center">
-								<Link href="https://t.me/+7e4mG5yhutswNWVl" passHref>
-									<a target="_blank" rel="noopener noreferrer" className="flex justify-center items-center">
-										<Image src={telegram} width={20} height={20} alt="Telegram"></Image>
-									</a>
-								</Link>
-							</button>
-							<button className="flex justify-center items-center">
-								<Link href="https://www.linkedin.com/company/musomatic" passHref>
-									<a target="_blank" rel="noopener noreferrer" className="flex justify-center items-center">
-										<Image src={linkedin} width={20} height={20} alt="LinkedIn"></Image>
-									</a>
-								</Link>
-							</button>
-							<button className="flex justify-center items-center">
-								<Link href="https://discord.com/invite/rXKb7rCqjG" passHref>
-									<a target="_blank" rel="noopener noreferrer" className="flex justify-center items-center">
-										<Image src={discord} width={20} height={20} alt="discord"></Image>
-									</a>
-								</Link>
-							</button>
-							<button className="flex justify-center items-center">
-								<Link href="https://www.facebook.com/Musixverse-104390125641359" passHref>
-									<a target="_blank" rel="noopener noreferrer" className="flex justify-center items-center">
-										<Image src={facebook} width={20} height={20} alt="facebook"></Image>
-									</a>
-								</Link>
-							</button>
-							<button className="flex justify-center items-center">
-								<Link href="https://twitter.com/musixverse" passHref>
-									<a target="_blank" rel="noopener noreferrer" className="flex justify-center items-center">
-										<Image src={twitter} width={20} height={20} alt="twitter"></Image>
-									</a>
-								</Link>
-							</button>
-							<button className="flex justify-center items-center">
-								<Link href="https://www.instagram.com/musixverse/" passHref>
-									<a target="_blank" rel="noopener noreferrer" className="flex justify-center items-center">
-										<Image src={instagram} width={20} height={20} alt="instagram"></Image>
-									</a>
-								</Link>
-							</button>
-						</div>
+						<Socials />
 					</div>
 					<div className="grid grid-cols-2 gap-2 gap-x-10 md:gap-x-8 md:pt-6 lg:gap-0 lg:flex justify-between lg:space-x-6 xl:space-x-28 font-primary">
 						<li className="text-xs text-neutral-400 list-none">
-							<Link href="/privacy-policy">Privacy Policy</Link>
+							<Link href="https://drive.google.com/file/d/1cbK9O_fKX4eaIQgIU9Lc2JADUg5P3Qz8/view?usp=sharing">
+								<a target="_blank" rel="noopener noreferrer">Privacy Policy</a>
+							</Link>
 						</li>
 						<li className="text-xs text-neutral-400 list-none">
-							<Link href="/terms-and-conditions">Terms of Use</Link>
+							<Link href="https://drive.google.com/file/d/1Av96OC67-zCfmFuQrAeGT7ruAPcft4Yl/view?usp=sharing">
+								<a target="_blank" rel="noopener noreferrer">Terms of Services</a>
+							</Link>
 						</li>
 						<li className="text-xs text-neutral-400 list-none">
-							<Link href="/">Trademark</Link>
+							<Link href="https://medium.com/@musixverse">
+							<a target="_blank" rel="noopener noreferrer">Blogs</a>
+							</Link>
 						</li>
 						<li className="text-xs text-neutral-400 list-none">
 							<Link href="/contact-us">Contact Us</Link>
@@ -195,7 +165,7 @@ const Footer = () => {
 					</div>
 				</div>
 				<p className="font-primary text-xs max-w-sm text-center sm:text-left mx-auto sm:mx-0">
-					©2021 All Rights Reserved. Musixverse logo is a registered trademark of Musixverse Company.
+					©2022 All Rights Reserved.
 				</p>
 			</div>
 		</div>

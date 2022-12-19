@@ -2,10 +2,11 @@ import { useContext } from "react";
 import PreviewNft from "./CreateNFTUtils/PreviewNft";
 import Step2Form from "./CreateNFTUtils/Step2Form";
 import ActionButtons from "./CreateNFTUtils/ActionButtons";
-import RequiredAsterisk from "./CreateNFTUtils/RequiredAsterisk";
 import StatusContext from "../../../store/status-context";
+import LoadingContext from "../../../store/loading-context";
 import { useRouter } from "next/router";
 import { saveNftCreationProgress } from "./CreateNFTUtils/SaveNftCreationProgress";
+import { isIsrcValid } from "../../utils/Validate";
 
 export default function ComprehensiveDetails({
 	step,
@@ -43,10 +44,12 @@ export default function ComprehensiveDetails({
 	location,
 	setSaveDraftSuccess,
 	nftDraftMetadata,
+	chosenProfileOrBand,
 }) {
 	const [, , , setError] = useContext(StatusContext);
+	const [, setLoading] = useContext(LoadingContext);
 
-	const nftPreviewValues = { trackTitle, coverArtUrl, audioFileUrl, nftPrice, numberOfCopies, step, collaboratorList };
+	const nftPreviewValues = { trackTitle, coverArtUrl, audioFileUrl, nftPrice, numberOfCopies, step, collaboratorList, chosenProfileOrBand };
 	const step2FormValues = {
 		setTrackOrigin,
 		setGenre,
@@ -78,22 +81,41 @@ export default function ComprehensiveDetails({
 	const router = useRouter();
 	const { draft } = router.query;
 	return (
-		<div className="flex items-center justify-center mb-28 lg:mb-36 bg-light-200 dark:bg-dark-200">
+		<div className="flex items-center justify-center pb-12 bg-light-200 dark:bg-dark-800">
 			<div className="flex-col flex w-full max-w-[1920px] mt-28 lg:mt-36 px-6 md:px-8 lg:px-16 xl:px-20 2xl:px-36">
 				<form
 					onSubmit={async (e) => {
 						e.preventDefault();
+
+						setLoading({
+							status: true,
+						});
 						if (tags.length < 1) {
 							setError({
 								title: "Tags not selected!",
 								message: "You need to select at least 1 tag to proceed.",
 								showErrorBox: true,
 							});
+							setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 							return;
-						} else {
-							await saveNftCreationProgress(nftDraftMetadata, draft);
-							nextStep();
 						}
+						if (isrc) {
+							// ISRC CHECK
+							const isrcCheck = isIsrcValid(isrc);
+							if (isrcCheck.status === false) {
+								setError({
+									title: isrcCheck.title,
+									message: isrcCheck.message,
+									showErrorBox: true,
+								});
+								setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
+								return;
+							}
+						}
+
+						await saveNftCreationProgress(nftDraftMetadata, draft);
+						if (step < 3) nextStep();
+						setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 					}}
 				>
 					<div className="flex flex-col w-full space-y-20 md:space-x-10 md:space-y-0 md:flex-row xl:space-x-20">

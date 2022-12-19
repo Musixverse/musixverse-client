@@ -1,23 +1,45 @@
 import Head from "next/head";
-import { meta_description } from "../../constants";
+import Moralis from "moralis/node";
+import { PARSE_APP_ID, PARSE_SERVER_URL, meta_description } from "../../config/constants";
 import { useState, useEffect, useContext } from "react";
 import { useRouter } from "next/router";
-import { useMoralis, useMoralisQuery, useNewMoralisObject, useMoralisCloudFunction } from "react-moralis";
+import { useMoralis, useNewMoralisObject, useMoralisCloudFunction } from "react-moralis";
 import ScrollToPageTop from "../../utils/ScrollToPageTop";
 import CreateNFTIntro from "../../components/CreateNFT/step-0";
 import TrackDetails from "../../components/CreateNFT/step-1";
 import ComprehensiveDetails from "../../components/CreateNFT/step-2";
-import PricingAndSplits from "../../components/CreateNFT/step-3";
+import UnlockableContent from "../../components/CreateNFT/step-3";
+import PricingAndSplits from "../../components/CreateNFT/step-4";
 import SuccessModal from "../../components/CreateNFT/CreateNFTUtils/SuccessModal";
 import SaveDraftSuccessModal from "../../components/CreateNFT/CreateNFTUtils/SaveDraftSuccessModal";
 import { mintTrackNFT } from "../../utils/smart-contract/functions";
-import { BLOCKCHAIN_NETWORK_ID, MXV_DIAMOND_ADDRESS } from "../../constants";
 import LoadingContext from "../../../store/loading-context";
-import { Country, State } from "country-state-city";
+import StatusContext from "../../../store/status-context";
+import { uploadJSONToIPFS } from "../../utils/image-crop/uploadToIPFS";
 
-const CreateNFT = () => {
-	const [isLoading, setLoading] = useContext(LoadingContext);
+export async function getServerSideProps(context) {
+	try {
+		await Moralis.start({ serverUrl: PARSE_SERVER_URL, appId: PARSE_APP_ID });
+
+		const user = JSON.parse(context.req.cookies.currentUser);
+		const _userInfo = await Moralis.Cloud.run("fetchUserInfoForNftCreation", { userAddress: user.ethAddress });
+		const userInfo = JSON.parse(JSON.stringify(_userInfo));
+
+		return {
+			props: { userInfo }, // will be passed to the page component as props
+		};
+	} catch (error) {
+		return { notFound: true, props: {} };
+	}
+}
+
+const CreateNFT = ({ userInfo }) => {
+	const [, setLoading] = useContext(LoadingContext);
+	const [, , , setError] = useContext(StatusContext);
 	const { Moralis, user } = useMoralis();
+	// Setting data if a draft is opened
+	const router = useRouter();
+	const { draft } = router.query;
 
 	// States
 	const [step, setStep] = useState(draft ? 1 : 0);
@@ -37,15 +59,9 @@ const CreateNFT = () => {
 	const [parentalAdvisory, setParentalAdvisory] = useState("Explicit");
 	const [vocals, setVocals] = useState(true);
 	const [language, setLanguage] = useState("Hindi");
-	const [countryOfOrigin, setCountryOfOrigin] = useState(Country.getCountryByCode("IN"));
-	const [stateOfOrigin, setStateOfOrigin] = useState(State.getStateByCodeAndCountry("DL", "IN"));
-	const [location, setLocation] = useState({
-		name: "Delhi",
-		countryCode: "IN",
-		stateCode: "DL",
-		latitude: "28.65195000",
-		longitude: "77.23149000",
-	});
+	const [countryOfOrigin, setCountryOfOrigin] = useState(userInfo && userInfo.country ? userInfo.country : null);
+	const [stateOfOrigin, setStateOfOrigin] = useState(userInfo && userInfo.state ? userInfo.state : null);
+	const [location, setLocation] = useState(userInfo && userInfo.city ? userInfo.city : null);
 	const [isrc, setIsrc] = useState("");
 	const [tags, setTags] = useState([]);
 	const [links, setLinks] = useState({
@@ -55,16 +71,35 @@ const CreateNFT = () => {
 		youtubeMusicLink: "",
 		other: "",
 	});
+	// Unlockable Content
+	const [unlockableContent, setUnlockableContent] = useState({
+		about: "",
+		secretMessage:
+			"I pour my heart out into creating this song. I hope you enjoy the song every bit as much as I did while creating it. Thank you for all your support.",
+		exclusiveImages: [],
+		exclusiveAudios: [],
+		exclusiveVideos: [],
+	});
 	const [numberOfCopies, setNumberOfCopies] = useState("");
 	const [nftPrice, setNftPrice] = useState("");
-	const [collaboratorList, setCollaboratorList] = useState([{ id: "", name: "", username: "", split: "", role: "", address: "", avatar: "" }]);
+	const [chosenProfileOrBand, setChosenProfileOrBand] = useState({ objectId: "profile" });
+	const [collaboratorList, setCollaboratorList] = useState([
+		{ id: "", name: "", username: "", split: "", role: "", address: "", avatar: "", hasAcceptedCollaboratorInvite: true },
+	]);
 	const [resaleRoyaltyPercent, setResaleRoyaltyPercent] = useState("");
 	const [releaseNow, setReleaseNow] = useState(true);
 	const [unlockTimestamp, setUnlockTimestamp] = useState(new Date().getTime());
+
+	// Drafts
+	const [nftDrafts, setNftDrafts] = useState(userInfo.nftDrafts);
 	// Creation success modal state
 	const [createNFTSuccess, setCreateNFTSuccess] = useState(false);
 	// Draft saved modal state
 	const [saveDraftSuccess, setSaveDraftSuccess] = useState(false);
+	// Personal Profile Collaborator Data
+	const [personalProfileCollaborator, setPersonalProfileCollaborator] = useState([]);
+	// Verified Bands Of artist
+	const verifiedBandsOfArtist = userInfo.verifiedBandsOfArtist;
 
 	// Continue to next step
 	const nextStep = () => {
@@ -76,9 +111,60 @@ const CreateNFT = () => {
 		setStep((currStep) => currStep - 1);
 	};
 
-	// Setting data if a draft is opened
-	const router = useRouter();
-	const { draft } = router.query;
+	useEffect(() => {
+		if (step == 0 && user) {
+			router.replace("/create-nft", undefined, { shallow: true });
+			setTrackTitle("");
+			setTrackBackground("");
+			setAudioFileUrl(null);
+			setAudioFileDuration(null);
+			setAudioFileMimeType(null);
+			setCoverArtUrl(null);
+			setCoverArtMimeType(null);
+			setCreditCoverArtArtist(true);
+			setCoverArtArtist({ id: "", name: "", username: "", address: "", avatar: "", email: "" });
+			setLyrics(null);
+			setTrackOrigin("Original");
+			setGenre("Hip-Hop");
+			setRecordingYear(new Date().getFullYear());
+			setParentalAdvisory("Explicit");
+			setVocals(true);
+			setLanguage("Hindi");
+			setCountryOfOrigin(userInfo && userInfo.country ? userInfo.country : null);
+			setStateOfOrigin(userInfo && userInfo.state ? userInfo.state : null);
+			setLocation(userInfo && userInfo.city ? userInfo.city : null);
+			setIsrc("");
+			setTags([]);
+			setLinks({ spotifyLink: "", appleMusicLink: "", amazonMusicLink: "", youtubeMusicLink: "", other: "" });
+			setUnlockableContent({
+				about: "",
+				secretMessage:
+					"I pour my heart out into creating this song. I hope you enjoy the song every bit as much as I did while creating it. Thank you for all your support.",
+				exclusiveImages: [],
+				exclusiveAudios: [],
+				exclusiveVideos: [],
+			});
+			setNumberOfCopies("");
+			setNftPrice("");
+			setChosenProfileOrBand({ objectId: "profile" });
+			setCollaboratorList([
+				{
+					id: user.id,
+					name: user.attributes.name,
+					username: user.attributes.username,
+					split: 100,
+					role: "Singer",
+					address: user.attributes.ethAddress,
+					avatar: userInfo.avatar,
+					hasAcceptedCollaboratorInvite: true,
+				},
+			]);
+			setResaleRoyaltyPercent("");
+			setReleaseNow(true);
+			setUnlockTimestamp(new Date().getTime());
+		}
+	}, [step, user]);
+
 	const { fetch: getDraftNftData } = useMoralisCloudFunction(
 		"getDraftNftData",
 		{ objectId: draft },
@@ -86,8 +172,15 @@ const CreateNFT = () => {
 			autoFetch: false,
 		}
 	);
+	const { fetch: getUpdatedCollaboratorList } = useMoralisCloudFunction(
+		"getUpdatedCollaboratorList",
+		{ objectId: draft },
+		{
+			autoFetch: false,
+		}
+	);
 	useEffect(() => {
-		if (draft) {
+		if (draft && user) {
 			getDraftNftData({
 				onSuccess: async (_draft) => {
 					if (_draft) {
@@ -113,9 +206,38 @@ const CreateNFT = () => {
 						setIsrc(_draft.attributes.isrc);
 						setTags(_draft.attributes.tags);
 						setLinks(_draft.attributes.links);
+						setUnlockableContent(_draft.attributes.unlockableContent);
 						setNumberOfCopies(_draft.attributes.numberOfCopies);
 						setNftPrice(_draft.attributes.nftPrice);
-						setCollaboratorList(_draft.attributes.collaboratorList);
+						await getUpdatedCollaboratorList({
+							onSuccess: async (_updatedCollaboratorList) => {
+								let updatedCollaboratorList = [];
+								for (var idx in _draft.attributes.collaboratorList) {
+									for (var i in _updatedCollaboratorList) {
+										const _collaborator = _draft.attributes.collaboratorList[idx];
+										const _updatedCollaborator = _updatedCollaboratorList[i];
+
+										if (_collaborator.id === _updatedCollaborator._id) {
+											updatedCollaboratorList.push({
+												id: _collaborator.id,
+												name: _updatedCollaborator.name,
+												username: _updatedCollaborator.username,
+												split: _collaborator.split,
+												role: _collaborator.role,
+												address: _collaborator.address,
+												avatar: _updatedCollaborator.avatar,
+												hasAcceptedCollaboratorInvite: _collaborator.hasAcceptedCollaboratorInvite,
+											});
+										}
+									}
+								}
+								setCollaboratorList(updatedCollaboratorList);
+							},
+							onError: (error) => {
+								console.log("getUpdatedCollaboratorList Error:", error);
+							},
+						});
+						setChosenProfileOrBand(_draft.attributes.chosenProfileOrBand);
 						setResaleRoyaltyPercent(_draft.attributes.resaleRoyaltyPercent);
 						setReleaseNow(_draft.attributes.releaseNow);
 						setUnlockTimestamp(_draft.attributes.unlockTimestamp);
@@ -125,19 +247,42 @@ const CreateNFT = () => {
 					}
 				},
 				onError: (error) => {
-					console.log("deleteNftDraft Error:", error);
+					console.log("getDraftNftData Error:", error);
 					router.replace("/create-nft", undefined, { shallow: true });
 				},
 			});
 		} else if (draft == undefined) {
 			setStep(0);
 		}
-	}, [draft]);
+	}, [draft, user]);
 
 	// Adding logged in user as default to the collaboratorList
-	const { data: userInfo } = useMoralisQuery("UserInfo", (query) => query.equalTo("user", user), [user]);
 	useEffect(() => {
-		if (user && userInfo[0]) {
+		if (user && userInfo) {
+			setCollaboratorList([
+				{
+					id: user.id,
+					name: user.attributes.name,
+					username: user.attributes.username,
+					split: 100,
+					role: "Singer",
+					address: user.attributes.ethAddress,
+					avatar: userInfo.avatar,
+					hasAcceptedCollaboratorInvite: true,
+				},
+			]);
+			setPersonalProfileCollaborator([
+				{
+					id: user.id,
+					name: user.attributes.name,
+					username: user.attributes.username,
+					split: 100,
+					role: "Singer",
+					address: user.attributes.ethAddress,
+					avatar: userInfo.avatar,
+					hasAcceptedCollaboratorInvite: true,
+				},
+			]);
 			// setTrackTitle("Rap God");
 			// setTrackBackground(
 			// 	"Lorem Ipsum is simply a dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic type"
@@ -148,66 +293,39 @@ const CreateNFT = () => {
 			// setAudioFileDuration("90.30");
 			// setAudioFileMimeType("audio/mpeg");
 			// setLyrics("");
-			// 		setIsrc("USUM72208965");
-			// 		setLinks({
-			// 			spotifyLink: "https://open.spotify.com/track/6gI9b2VsoWhjhIuIeToDVs?si=abfe744344f04c4d",
-			// 			appleMusicLink:
-			// 				"https://music.apple.com/us/album/1626195790?app=music&at=11laLe&ct=LFV_a8488c4eb6c29dd9e04fa7ed8a69fad5&itscg=30440&itsct=catchall_p1&lId=25738567&cId=none&sr=1&src=Linkfire&ls=1",
-			// 			amazonMusicLink:
-			// 				"https://music.amazon.com/albums/B0B2CCS4WD?tag=univemuisc-central-21&ie=UTF8&linkCode=as2&ascsubtag=a8488c4eb6c29dd9e04fa7ed8a69fad5&ref=dmm_acq_soc_in_u_lfire_lp_x_a8488c4eb6c29dd9e04fa7ed8a69fad5",
-			// 			youtubeMusicLink: "",
-			// 			other: "https://www.jiosaavn.com/track/die-hard/H1AvZE1lYwY",
-			// 		});
-			// 		setNumberOfCopies(4);
-			// 		setNftPrice(12.4);
-			// 		setResaleRoyaltyPercent(5);
-			setCollaboratorList([
-				{
-					id: user.id,
-					name: user.attributes.name,
-					username: user.attributes.username,
-					split: 100,
-					role: "Singer",
-					address: user.attributes.ethAddress,
-					avatar: userInfo[0].attributes.avatar,
-				},
-			]);
+			// setIsrc("USUM72208965");
+			// setLinks({
+			// 	spotifyLink: "https://open.spotify.com/track/6gI9b2VsoWhjhIuIeToDVs?si=abfe744344f04c4d",
+			// 	appleMusicLink:
+			// 		"https://music.apple.com/us/album/1626195790?app=music&at=11laLe&ct=LFV_a8488c4eb6c29dd9e04fa7ed8a69fad5&itscg=30440&itsct=catchall_p1&lId=25738567&cId=none&sr=1&src=Linkfire&ls=1",
+			// 	amazonMusicLink:
+			// 		"https://music.amazon.com/albums/B0B2CCS4WD?tag=univemuisc-central-21&ie=UTF8&linkCode=as2&ascsubtag=a8488c4eb6c29dd9e04fa7ed8a69fad5&ref=dmm_acq_soc_in_u_lfire_lp_x_a8488c4eb6c29dd9e04fa7ed8a69fad5",
+			// 	youtubeMusicLink: "",
+			// 	other: "https://www.jiosaavn.com/track/die-hard/H1AvZE1lYwY",
+			// });
+			// setNumberOfCopies(4);
+			// setNftPrice(12.4);
+			// setResaleRoyaltyPercent(5);
 		}
 	}, [user, userInfo]);
-
-	// Delete draft from the database after NFT is created
-	const { fetch: deleteNftDraft } = useMoralisCloudFunction(
-		"deleteNftDraft",
-		{ objectId: draft },
-		{
-			autoFetch: false,
-		}
-	);
-	const deleteDraft = async () => {
-		await deleteNftDraft({
-			onSuccess: async (object) => {
-				// Draft deleted from database
-			},
-			onError: (error) => {
-				console.log("deleteNftDraft Error:", error);
-			},
-		});
-	};
 
 	// Save invited artwork artist if they are not on Musixverse yet
 	const { save: saveInvitedArtworkArtist } = useNewMoralisObject("InvitedArtworkArtist");
 	// Function to run when Create NFT button is pressed
 	const nftCreateFormOnSubmit = async () => {
-		setLoading(true);
+		setLoading({
+			status: true,
+			title: "NFT creation in progress...",
+			message: "Please wait while we communicate with the blockchain",
+		});
 		const reducedCollaboratorList = collaboratorList.reduce((result, { name, address, split, role }) => {
 			result.push({ name, address, split, role });
 			return result;
 		}, []);
 
-		var lyricsFile;
+		var lyricsFileUrl;
 		if (lyrics) {
-			lyricsFile = new Moralis.File("lyricsFile.txt", { base64: btoa(unescape(encodeURIComponent(lyrics))) });
-			await lyricsFile.saveIPFS();
+			await uploadJSONToIPFS(Moralis, lyrics, "lyrics").then((url) => (lyricsFileUrl = url));
 		}
 
 		const _tags = tags.map((tag) => tag.value);
@@ -235,29 +353,43 @@ const CreateNFT = () => {
 
 		const _unlockTimestamp = Math.round(unlockTimestamp / 1000);
 
+		// Personal profile or band profile
+		let _chosenProfileOrBandElem = "";
+		const profileOrBandChoices = document.getElementsByName("profileChooser");
+		for (let i = 0; i < profileOrBandChoices.length; i++) {
+			if (profileOrBandChoices[i].checked) {
+				_chosenProfileOrBandElem = profileOrBandChoices[i];
+			}
+		}
+
 		const nftMetadata = {
 			version: "1.0",
 			title: trackTitle,
-			artist: user.attributes.name,
+			artist: _chosenProfileOrBandElem.id === "profile" ? user.attributes.name : _chosenProfileOrBandElem.getAttribute("data-band-name"),
 			artistAddress: user.attributes.ethAddress,
+			// OpenSea standard ⬇️
+			name: user.attributes.name + " - " + trackTitle,
+			image: "ipfs://" + coverArtUrl.replace(process.env.NEXT_PUBLIC_IPFS_NODE_URL, ""),
+			// ********* //
+			bandId: _chosenProfileOrBandElem.id === "profile" ? null : _chosenProfileOrBandElem.getAttribute("data-band-id"),
 			description: trackBackground,
-			audio: "ipfs://" + audioFileUrl.replace("https://ipfs.moralis.io:2053/ipfs/", ""),
+			audio: "ipfs://" + audioFileUrl.replace(process.env.NEXT_PUBLIC_IPFS_NODE_URL, ""),
 			duration: audioFileDuration,
 			mimeType: audioFileMimeType,
 			artwork: {
-				uri: "ipfs://" + coverArtUrl.replace("https://ipfs.moralis.io:2053/ipfs/", ""),
+				uri: "ipfs://" + coverArtUrl.replace(process.env.NEXT_PUBLIC_IPFS_NODE_URL, ""),
 				mimeType: coverArtMimeType,
 				artist: creditCoverArtArtist ? coverArtArtist.name : "",
 				artistAddress: creditCoverArtArtist ? coverArtArtist.address : "",
 				invitedArtistId: coverArtArtist.address ? "" : invitedArtworkArtistId,
 			},
-			lyrics: lyrics ? "ipfs://" + lyricsFile.hash() : "",
+			lyrics: lyrics ? "ipfs://" + lyricsFileUrl.replace(process.env.NEXT_PUBLIC_IPFS_NODE_URL, "") : "",
 			genre: genre,
 			language: language,
 			location: {
-				countryOfOrigin: JSON.parse(countryOfOrigin),
-				stateOfOrigin: JSON.parse(stateOfOrigin),
-				cityOfOrigin: JSON.parse(location),
+				countryOfOrigin: countryOfOrigin,
+				stateOfOrigin: stateOfOrigin,
+				cityOfOrigin: location,
 			},
 			isrc: isrc,
 			tags: _tags,
@@ -270,16 +402,21 @@ const CreateNFT = () => {
 			},
 			collaborators: reducedCollaboratorList,
 			numberOfCollaborators: reducedCollaboratorList.length,
-			license: "ipfs://" + coverArtUrl.replace("https://ipfs.moralis.io:2053/ipfs/", ""), // TODO
+			license: "ipfs://" + "QmNxzFrUXvz1Hgst4uSxNir1EEJzGyuemAWsDgfuoqn29T", // TODO: Update this whenever Terms of Services are updated
 			unlockTimestamp: _unlockTimestamp,
 			chainDetails: {
-				chainId: BLOCKCHAIN_NETWORK_ID,
-				contractAddress: MXV_DIAMOND_ADDRESS,
+				chainId: process.env.NEXT_PUBLIC_BLOCKCHAIN_NETWORK_ID,
+				contractAddress: process.env.NEXT_PUBLIC_MXV_DIAMOND_ADDRESS,
+			},
+			unlockableContent: {
+				about: "Your NFT comes with exclusive perks that are only available to you, the NFT owner, as long as you continue to own the NFT. The artist appreciates your support and has put together self-curated items exclusively for you. Buy Now!",
+				secretMessage: unlockableContent.secretMessage.length > 0 ? true : false,
+				exclusiveImages: unlockableContent.exclusiveImages.length,
+				exclusiveAudios: unlockableContent.exclusiveAudios.length,
+				exclusiveVideos: unlockableContent.exclusiveVideos.length,
 			},
 			// OpenSea standard ⬇️
-			name: user.attributes.name + " - " + trackTitle,
-			image: "ipfs://" + coverArtUrl.replace("https://ipfs.moralis.io:2053/ipfs/", ""),
-			animation_url: "ipfs://" + audioFileUrl.replace("https://ipfs.moralis.io:2053/ipfs/", ""),
+			animation_url: "ipfs://" + audioFileUrl.replace(process.env.NEXT_PUBLIC_IPFS_NODE_URL, ""),
 			background_color: "5AB510",
 			external_url: "https://www.musixverse.com",
 			attributes: [
@@ -317,11 +454,19 @@ const CreateNFT = () => {
 				},
 			],
 		};
+		var metadataUrl;
+		await uploadJSONToIPFS(Moralis, nftMetadata, "metadata").then((url) => (metadataUrl = url));
 
-		const file = new Moralis.File("file.json", { base64: btoa(unescape(encodeURIComponent(JSON.stringify(nftMetadata)))) });
-		await file.saveIPFS();
+		const unlockableContentData = {
+			about: "Your NFT comes with exclusive perks that are only available to you, the NFT owner, as long as you continue to own the NFT. The artist appreciates your support and has put together self-curated items exclusively for you. Buy Now!",
+			secretMessage: unlockableContent.secretMessage,
+			exclusiveImages: unlockableContent.exclusiveImages,
+			exclusiveAudios: unlockableContent.exclusiveAudios,
+			exclusiveVideos: unlockableContent.exclusiveVideos,
+		};
+		var unlockableContentFileUrl;
+		await uploadJSONToIPFS(Moralis, unlockableContentData, "unlockable-content").then((url) => (unlockableContentFileUrl = url));
 
-		const metadataHash = file.hash();
 		const collaborators = collaboratorList.reduce((result, { address }) => {
 			result.push(address);
 			return result;
@@ -332,14 +477,32 @@ const CreateNFT = () => {
 		}, []);
 		const onSale = true;
 
+		const metadataHash = metadataUrl.replace(process.env.NEXT_PUBLIC_IPFS_NODE_URL, "");
+		const unlockableContentURIHash = unlockableContentFileUrl.replace(process.env.NEXT_PUBLIC_IPFS_NODE_URL, "");
 		try {
-			await mintTrackNFT(numberOfCopies, nftPrice, metadataHash, collaborators, percentageContributions, resaleRoyaltyPercent, onSale, _unlockTimestamp);
-			// TODO: Uncomment the line below
-			// await deleteDraft();
-			setLoading(false);
+			await mintTrackNFT(
+				numberOfCopies,
+				nftPrice,
+				metadataHash,
+				unlockableContentURIHash,
+				collaborators,
+				percentageContributions,
+				resaleRoyaltyPercent,
+				onSale,
+				_unlockTimestamp
+			);
+			setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 			setCreateNFTSuccess(true);
 		} catch (error) {
-			setLoading(false);
+			setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
+			console.error(error);
+			if (error.title === "User is not connected to the same wallet") {
+				setError({
+					title: error.title,
+					message: error.message,
+					showErrorBox: true,
+				});
+			}
 		}
 	};
 
@@ -366,20 +529,22 @@ const CreateNFT = () => {
 		parentalAdvisory: parentalAdvisory,
 		vocals: vocals,
 		language: language,
-		location: location,
 		countryOfOrigin: countryOfOrigin,
 		stateOfOrigin: stateOfOrigin,
+		location: location,
 		isrc: isrc,
 		tags: tags,
 		links: links,
+		unlockableContent: unlockableContent,
 		numberOfCopies: numberOfCopies,
 		nftPrice: nftPrice,
+		chosenProfileOrBand: chosenProfileOrBand,
 		collaboratorList: collaboratorList,
 		resaleRoyaltyPercent: resaleRoyaltyPercent,
 		releaseNow: releaseNow,
 		unlockTimestamp: unlockTimestamp,
 	};
-	const step0Values = { nextStep, nftDraftMetadata };
+	const step0Values = { nextStep, chosenProfileOrBand, userInfo, nftDraftMetadata, nftDrafts, setNftDrafts };
 	const step1Values = {
 		step,
 		prevStep,
@@ -409,6 +574,7 @@ const CreateNFT = () => {
 		collaboratorList,
 		setSaveDraftSuccess,
 		nftDraftMetadata,
+		chosenProfileOrBand,
 	};
 	const step2Values = {
 		step,
@@ -446,8 +612,25 @@ const CreateNFT = () => {
 		location,
 		setSaveDraftSuccess,
 		nftDraftMetadata,
+		chosenProfileOrBand,
 	};
 	const step3Values = {
+		step,
+		nextStep,
+		prevStep,
+		trackTitle,
+		coverArtUrl,
+		audioFileUrl,
+		nftPrice,
+		numberOfCopies,
+		collaboratorList,
+		setSaveDraftSuccess,
+		nftDraftMetadata,
+		chosenProfileOrBand,
+		unlockableContent,
+		setUnlockableContent,
+	};
+	const step4Values = {
 		step,
 		prevStep,
 		coverArtUrl,
@@ -468,11 +651,15 @@ const CreateNFT = () => {
 		nftCreateFormOnSubmit,
 		setSaveDraftSuccess,
 		nftDraftMetadata,
+		verifiedBandsOfArtist,
+		personalProfileCollaborator,
+		chosenProfileOrBand,
+		setChosenProfileOrBand,
 	};
 
 	switch (step) {
 		case 0:
-			return (
+			return user ? (
 				<>
 					<Head>
 						<title>Musixverse | Create NFT</title>
@@ -482,10 +669,10 @@ const CreateNFT = () => {
 					<ScrollToPageTop samePage={true} changingValue={step} />
 					<CreateNFTIntro {...step0Values} />
 				</>
-			);
+			) : null;
 
 		case 1:
-			return (
+			return user ? (
 				<>
 					<Head>
 						<title>Musixverse | Create NFT - Track Details</title>
@@ -494,12 +681,12 @@ const CreateNFT = () => {
 					</Head>
 					<ScrollToPageTop samePage={true} changingValue={step} />
 					<TrackDetails {...step1Values} />
-					<SaveDraftSuccessModal isOpen={saveDraftSuccess} setOpen={setSaveDraftSuccess} setStep={setStep} />
+					<SaveDraftSuccessModal isOpen={saveDraftSuccess} setOpen={setSaveDraftSuccess} />
 				</>
-			);
+			) : null;
 
 		case 2:
-			return (
+			return user ? (
 				<>
 					<Head>
 						<title>Musixverse | Create NFT - Comprehensive Details</title>
@@ -508,12 +695,26 @@ const CreateNFT = () => {
 					</Head>
 					<ScrollToPageTop samePage={true} changingValue={step} />
 					<ComprehensiveDetails {...step2Values} />
-					<SaveDraftSuccessModal isOpen={saveDraftSuccess} setOpen={setSaveDraftSuccess} setStep={setStep} />
+					<SaveDraftSuccessModal isOpen={saveDraftSuccess} setOpen={setSaveDraftSuccess} />
 				</>
-			);
+			) : null;
 
 		case 3:
-			return (
+			return user ? (
+				<>
+					<Head>
+						<title>Musixverse | Create NFT - Unlockable Content</title>
+						<meta name="description" content={meta_description} />
+						<link rel="icon" href="/favicon.ico" />
+					</Head>
+					<ScrollToPageTop samePage={true} changingValue={step} />
+					<UnlockableContent {...step3Values} />
+					<SaveDraftSuccessModal isOpen={saveDraftSuccess} setOpen={setSaveDraftSuccess} />
+				</>
+			) : null;
+
+		case 4:
+			return user ? (
 				<>
 					<Head>
 						<title>Musixverse | Create NFT - Pricing and Splits</title>
@@ -521,11 +722,11 @@ const CreateNFT = () => {
 						<link rel="icon" href="/favicon.ico" />
 					</Head>
 					<ScrollToPageTop samePage={true} changingValue={step} />
-					<PricingAndSplits {...step3Values} />
-					<SuccessModal isOpen={createNFTSuccess} />
-					<SaveDraftSuccessModal isOpen={saveDraftSuccess} setOpen={setSaveDraftSuccess} setStep={setStep} />
+					<PricingAndSplits {...step4Values} />
+					<SuccessModal isOpen={createNFTSuccess} setOpen={setCreateNFTSuccess} />
+					<SaveDraftSuccessModal isOpen={saveDraftSuccess} setOpen={setSaveDraftSuccess} />
 				</>
-			);
+			) : null;
 	}
 };
 

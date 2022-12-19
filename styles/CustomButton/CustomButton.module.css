@@ -1,7 +1,0 @@
-.button--green {
-    @apply text-white text-xs bg-primary-200 hover:bg-primary-300 font-primary rounded-3xl px-5 py-3;
-}
-
-.button--white {
-    @apply text-black text-xs bg-light-100 hover:bg-light-200 font-primary rounded-3xl px-5 py-3;
-}

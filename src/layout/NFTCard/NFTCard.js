@@ -1,32 +1,44 @@
+import { useContext, useMemo, useState } from "react";
 import Image from "next/image";
-import { useTheme } from "next-themes";
-import { useMoralisCloudFunction } from "react-moralis";
-import styles from "../../../styles/NFTCard/Nftcard.module.css";
-import Section2 from "./Section2";
-import Section1 from "./Section1";
-import multipleNft from "../../../public/assets/nftcard/nftcards.svg";
-import { useMemo, useState } from "react";
-import NftCopiesModal from "./NftCopiesModal";
 import Link from "next/link";
+import { useTheme } from "next-themes";
+import styles from "../../../styles/NFTCard/Nftcard.module.css";
+import multipleNft from "../../../public/assets/nftcard/nftcards.svg";
+import ShinyLoader from "../../layout/ShinyLoader";
+import dynamic from "next/dynamic";
+const NftCopiesModal = dynamic(() => import("./NftCopiesModal"));
+import Section1 from "./Section1";
+import Section2 from "./Section2";
+import AudioPlayerContext from "../../../store/audioplayer-context";
 
 export default function NFTCard({
 	redirectLink,
 	trackName,
+	price,
 	artistName,
 	artistAddress,
+	isArtistVerified,
 	image,
 	tokenId,
+	localTokenId,
 	numberOfCopies,
+	otherTokensOfTrack,
 	collaboratorList,
 	unsoldTrackData,
 	soldOnceTrackData,
 	likeCount,
 	lastPrice,
 	showNumberOfCopies = true,
+	audio,
+	trackId,
+	favouriteOfBandMember,
+	tokenInCollectionOwnedByBandMember,
 }) {
 	const [showNftCopiesModal, setShowNftCopiesModal] = useState(false);
+	const [audioPlayerProps, setAudioPlayerProps] = useContext(AudioPlayerContext);
 	const { theme } = useTheme();
-	const { data: artist } = useMoralisCloudFunction("fetchUsernameFromAddress", { address: artistAddress });
+
+	const audioPlayerTrackId = audioPlayerProps.currentlyPlayingIdx === -1 ? undefined : audioPlayerProps.queue[audioPlayerProps.currentlyPlayingIdx].trackId;
 
 	const truncatedArtistName = useMemo(() => {
 		let returnedString = artistName;
@@ -34,28 +46,62 @@ export default function NFTCard({
 		return returnedString;
 	}, [artistName]);
 
-	let truncatedNftName = trackName;
-	if (trackName && trackName.length > 10) {
-		truncatedNftName = trackName.substring(0, 10) + "...";
-	}
-
 	const trackCopiesModalValues = {
 		redirectLink,
 		trackName,
+		trackId,
+		audio,
+		price,
 		artistName,
 		artistAddress,
+		isArtistVerified,
 		image,
 		tokenId,
+		localTokenId,
 		numberOfCopies,
 		collaboratorList,
+		otherTokensOfTrack,
 		unsoldTrackData,
 		soldOnceTrackData,
 		showNumberOfCopies: false,
 	};
 
+	const playTrackHandler = () => {
+		//If same song is played again then dont add again
+		//Instead need a logic to pause it in the audioplayer...
+		if (audioPlayerTrackId && trackId === audioPlayerTrackId) {
+			setAudioPlayerProps((prevProps) => {
+				return {
+					...prevProps,
+					isPlaying: !prevProps.isPlaying,
+				};
+			});
+			return;
+		}
+		setAudioPlayerProps((prevProps) => {
+			const newQueue = [...prevProps.queue];
+			newQueue.push({
+				tokenId: tokenId,
+				audioURL: audio,
+				price: price,
+				artistName: artistName,
+				isArtistVerified: isArtistVerified,
+				songName: trackName,
+				nftCover: image,
+				trackId: trackId,
+			});
+			return {
+				...prevProps,
+				queue: newQueue,
+				currentlyPlayingIdx: newQueue.length-1,
+				playerIsLoaded: false,
+			};
+		});
+	};
+
 	return (
 		<>
-			<div className={"group " + styles[theme === "light" ? "nft-card" : "nft-card-dark"]}>
+			<div className={"group " + styles[theme === "dark" ? "nft-card-dark" : "nft-card"]}>
 				{/* NFT Image */}
 				<div className="relative w-full h-60">
 					{image && redirectLink ? (
@@ -70,48 +116,67 @@ export default function NFTCard({
 										priority
 										className={"group-hover:scale-110 group-hover:duration-500 duration-500 " + styles["nft-image"]}
 									/>
+									{favouriteOfBandMember && (
+										<div className="absolute flex items-center justify-center w-full h-full duration-500 opacity-0 group-hover:bg-dark-600/10 backdrop-blur text-light-100 group-hover:opacity-100">
+											<div className="relative flex flex-col items-center justify-center">
+												<i className="text-5xl fa-solid fa-heart"></i>
+												<p className="mt-2">{favouriteOfBandMember}</p>
+											</div>
+										</div>
+									)}
+									{tokenInCollectionOwnedByBandMember && (
+										<div className="absolute flex items-center justify-center w-full h-full duration-500 opacity-0 group-hover:bg-dark-600/10 backdrop-blur text-light-100 group-hover:opacity-100">
+											<div className="relative flex flex-col items-center justify-center">
+												<i className="text-5xl fa-solid fa-record-vinyl"></i>
+												<p className="mt-2">{tokenInCollectionOwnedByBandMember}</p>
+											</div>
+										</div>
+									)}
 								</div>
 							</a>
 						</Link>
 					) : (
-						<div className="w-full h-full bg-gray-300 dark:bg-[#363636] animate-pulse"></div>
+						<ShinyLoader />
 					)}
 
 					{showNumberOfCopies && numberOfCopies > 1 ? (
 						<button
 							onClick={() => setShowNftCopiesModal(true)}
-							className="absolute flex items-center px-3 py-[0.4rem] font-bold top-4 rounded-lg left-4 hover:bg-light-200 bg-light-100 text-dark-100 dark:bg-dark-100 dark:text-light-100"
+							className="absolute flex items-center px-3 py-[0.4rem] font-bold top-4 rounded-lg left-4 hover:bg-light-200 bg-light-100 text-dark-600 dark:bg-dark-600 dark:text-light-100"
 						>
 							<Image src={multipleNft} height={18} width={18} alt="multiple nft cards" className="dark:invert" />
 							<span className="ml-1 text-sm">x{numberOfCopies}</span>
 						</button>
 					) : null}
+					<button
+						type="button"
+						onClick={playTrackHandler}
+						className="opacity-0 group-hover:opacity-100 duration-500 h-[40px] w-[40px] absolute bottom-4 right-4 bg-primary-500 hover:bg-primary-600 rounded-full items-center justify-center"
+					>
+						<i
+							className={"text-lg text-light-200 fas " + (audioPlayerProps.isPlaying && trackId === audioPlayerTrackId ? "fa-pause" : "fa-play")}
+						></i>
+					</button>
 				</div>
 
 				{/* NFT Details */}
 				<Link href={redirectLink ? redirectLink : ""} passHref>
 					<a>
-						<div
-							className={
-								!showNumberOfCopies
-									? "dark:bg-dark-200 " + styles["nft-card__description"]
-									: "dark:bg-dark-100 " + styles["nft-card__description"]
-							}
-						>
+						<div className={"dark:bg-dark-600 " + styles["nft-card__description"]}>
 							{/* Artist, Music name and tokenId */}
 							<Section1
 								artistName={truncatedArtistName}
-								trackName={truncatedNftName}
-								tokenId={tokenId}
-								unsoldTrackData={unsoldTrackData}
+								trackName={trackName}
+								price={price}
+								isArtistVerified={isArtistVerified}
 								soldOnceTrackData={soldOnceTrackData}
-								isVerified={artist ? artist.isArtistVerified : false}
 							/>
 							{/* LIKES and Prev Price Section */}
 							<Section2
 								collaboratorList={collaboratorList}
 								numberOfCopies={numberOfCopies}
 								tokenId={tokenId}
+								localTokenId={localTokenId}
 								unsoldTrackData={unsoldTrackData}
 								likeCount={likeCount}
 								lastPrice={lastPrice}

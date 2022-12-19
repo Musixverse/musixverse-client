@@ -1,10 +1,8 @@
 import Modal from "../../../layout/Modal/Modal";
 import { useRouter } from "next/router";
-import { useMoralis } from "react-moralis";
 
-const SaveDraftSuccessModal = ({ isOpen, setOpen, setStep }) => {
+const SaveDraftSuccessModal = ({ isOpen, setOpen }) => {
 	const router = useRouter();
-	const { user } = useMoralis();
 
 	return (
 		<Modal
@@ -24,17 +22,18 @@ const SaveDraftSuccessModal = ({ isOpen, setOpen, setStep }) => {
 			}
 			onClose={() => {
 				setOpen(false);
-				setStep(0);
+				router.replace("/create-nft").then(() => router.reload());
 			}}
 			buttons={[
 				{
 					role: "custom",
 					onClick: () => {
 						setOpen(false);
-						setStep(0);
+						router.replace("/create-nft").then(() => router.reload());
 					},
 					toClose: true,
-					classes: "flex items-center px-4 py-3 text-sm font-primary font-bold rounded-md bg-primary-100 hover:bg-primary-200 text-light-100",
+					classes:
+						"flex items-center px-4 py-3 mr-2 mb-2 text-sm font-primary font-bold rounded-md bg-primary-500 hover:bg-primary-600 text-light-100",
 					label: (
 						<>
 							View Draft

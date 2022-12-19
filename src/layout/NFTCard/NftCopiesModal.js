@@ -1,15 +1,12 @@
 import { Transition, Dialog } from "@headlessui/react";
-import { Fragment, useEffect } from "react";
-import { useMoralisCloudFunction } from "react-moralis";
-import NFTCard from "./NFTCard";
-import multipleNft from "../../../public/assets/nftcard/nftcards.svg";
-import NftCopiesRow from "./NftCopiesRow";
+import { Fragment } from "react";
 import Image from "next/image";
+import multipleNft from "../../../public/assets/nftcard/nftcards.svg";
+import dynamic from "next/dynamic";
+const NFTCard = dynamic(() => import("./NFTCard"));
+const NftCopiesRow = dynamic(() => import("./NftCopiesRow"));
 
 export default function NftCopiesModal({ trackCopiesModalValues, showNftCopiesModal, setShowNftCopiesModal }) {
-	const { data: otherTokensOfTrack } = useMoralisCloudFunction("fetchOtherTokensOfTrack", { tokenId: trackCopiesModalValues.tokenId });
-	const { data: localTokenId } = useMoralisCloudFunction("fetchLocalTokenId", { tokenId: trackCopiesModalValues.tokenId });
-
 	return (
 		<Transition.Root show={showNftCopiesModal} as={Fragment}>
 			<Dialog as="div" className="fixed inset-0 top-0 left-0 z-50 w-screen h-screen overflow-y-auto" onClose={() => setShowNftCopiesModal(false)}>
@@ -41,7 +38,7 @@ export default function NftCopiesModal({ trackCopiesModalValues, showNftCopiesMo
 						leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
 					>
 						<div className="relative inline-block overflow-hidden text-left align-bottom transition-all transform shadow-xl rounded-2xl bg-none sm:my-8 sm:align-middle sm:max-w-3xl sm:w-full">
-							<div className="p-4 bg-light-200 dark:bg-dark-100 dark:backdrop-blur-[7px] backdrop-blur-[7px]">
+							<div className="p-4 bg-light-200 dark:bg-dark-600 dark:backdrop-blur-[7px] backdrop-blur-[7px]">
 								<div className="w-full flex justify-end items-center p-1">
 									<div
 										onClick={() => setShowNftCopiesModal(false)}
@@ -56,8 +53,8 @@ export default function NftCopiesModal({ trackCopiesModalValues, showNftCopiesMo
 									<div className="flex w-full">
 										<div className="flex flex-col justify-center items-center">
 											<NFTCard {...trackCopiesModalValues} />
-											<span className="mt-3 text-sm">
-												#{localTokenId} of {trackCopiesModalValues.numberOfCopies}
+											<span className="mt-4 text-xs text-[#777777]">
+												#{trackCopiesModalValues.localTokenId} of {trackCopiesModalValues.numberOfCopies}
 											</span>
 										</div>
 
@@ -70,7 +67,7 @@ export default function NftCopiesModal({ trackCopiesModalValues, showNftCopiesMo
 														{trackCopiesModalValues.trackName}
 													</p>
 												</div>
-												<div className="flex items-center px-4 py-2 font-bold cursor-default rounded-xl hover:bg-light-200 bg-light-100 text-dark-100 dark:bg-dark-200 dark:text-light-100">
+												<div className="flex items-center px-4 py-2 font-bold cursor-default rounded-xl bg-light-100 text-dark-600 dark:bg-dark-800 dark:text-light-100">
 													<Image src={multipleNft} objectFit="contain" alt="multiple nft cards" className="dark:invert" />
 													<span className="ml-2 text-sm">
 														x{trackCopiesModalValues.numberOfCopies}
@@ -81,8 +78,12 @@ export default function NftCopiesModal({ trackCopiesModalValues, showNftCopiesMo
 
 											{/* NFT Copies section */}
 											<div className="mt-8 max-h-72 overflow-scroll pr-4">
-												{otherTokensOfTrack?.map((token, idx) => {
-													return <NftCopiesRow token={token.attributes} trackName={trackCopiesModalValues.trackName} key={idx} />;
+												{trackCopiesModalValues.otherTokensOfTrack?.map((token, idx) => {
+													return (
+														trackCopiesModalValues.tokenId !== token.tokenId && (
+															<NftCopiesRow token={token} trackName={trackCopiesModalValues.trackName} key={idx} />
+														)
+													);
 												})}
 											</div>
 										</div>

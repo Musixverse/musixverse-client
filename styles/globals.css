@@ -1,3 +1,4 @@
+/*
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
@@ -7,6 +8,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
 
 @import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0");
+*/
 
 @tailwind base;
 @tailwind components;
@@ -17,8 +19,8 @@ body {
 	padding: 0 !important;
 	margin: 0 !important;
 	@apply font-primary;
-	@apply bg-light-200 dark:bg-dark-100 scroll-smooth;
-	@apply text-dark-100 dark:text-light-100;
+	@apply bg-light-200 dark:bg-dark-600 scroll-smooth;
+	@apply text-dark-600 dark:text-light-100;
 	z-index: -2 !important;
 }
 
@@ -52,7 +54,7 @@ a {
 }
 
 .search-btn {
-	@apply flex items-center justify-center float-right p-2 duration-300 rounded-full cursor-pointer dark:text-white w-7 h-7 bg-search-100 dark:bg-dark-100 hover:bg-dark-200;
+	@apply flex items-center justify-center float-right p-2 duration-300 rounded-full cursor-pointer dark:text-white w-7 h-7 bg-search-100 dark:bg-dark-600 hover:bg-dark-800;
 	text-decoration: none;
 }
 
@@ -66,7 +68,7 @@ a {
 	font-size: 12px;
 	font-weight: normal;
 	transition: 0.4s;
-	line-height: 25px;
+	line-height: 28px;
 	width: 0px;
 	@apply text-black dark:text-white;
 }
@@ -93,15 +95,7 @@ a {
 
 @media (max-width: 786px) {
 	.hamburger_menu.hamburger_menu {
-		margin-top: 60px;
-	}
-
-	.quick_hamburger_nav_div {
-		margin-top: 25px !important;
-	}
-
-	.quick_hamburger_nav.quick_hamburger_nav {
-		color: rgb(83, 194, 75);
+		margin-top: 32px;
 	}
 }
 
@@ -158,29 +152,29 @@ a:hover {
 	width: 60%;
 	height: 3px;
 	border-radius: 1.2px;
-	background-color: #111;
 	transition: 0.4s;
+	@apply bg-black dark:bg-white;
 }
 
 .hamburger > div:before {
+	@apply bg-black dark:bg-white;
 	content: "";
 	position: absolute;
 	width: 75%;
 	height: 3px;
 	border-radius: 1.5px;
-	background-color: #111;
 	top: -10px;
 	right: 0;
 	transition: 0.4s;
 }
 
 .hamburger > div:after {
+	@apply bg-black dark:bg-white;
 	content: "";
 	position: absolute;
 	width: 85%;
 	height: 3px;
 	border-radius: 1.5px;
-	background-color: #111;
 	top: 10px;
 	right: 0;
 	transition: 0.4s;
@@ -227,8 +221,7 @@ a:hover {
 	position: absolute;
 	width: 100vw;
 	margin: -100px 0 0 0;
-	padding: 50px;
-	padding-top: 125px;
+	padding: 125px 30px 40px 30px;
 	right: -120px;
 	background: #0d0d0d;
 	list-style-type: none;
@@ -408,22 +401,12 @@ a:hover {
 	width: 150px;
 }
 
-.quick_hamburger_nav {
-	font-size: 1.4em;
-	color: #fff;
-	font-weight: 600;
-}
-
-.quick_hamburger_nav:hover {
-	color: rgb(83, 194, 75);
-}
-
 .hamburger_menu {
 	margin-top: 100px;
 }
 
 .ham_menu_hover_effect_row {
-	height: 38px !important;
+	height: 32px !important;
 }
 
 .ham_menu_heading {
@@ -436,7 +419,7 @@ a:hover {
 
 .ham_menu_link {
 	color: #fff;
-	font-size: 1.1em;
+	font-size: 1em;
 	font-family: var(--Poppins);
 	text-align: left;
 }
@@ -462,8 +445,9 @@ a:hover {
 }
 
 .connect_link {
-	@apply text-white hover:text-primary-100;
+	@apply text-white hover:text-primary-500;
 }
+
 /**************************************************************************/
 /*****************************    Footer   ********************************/
 /**************************************************************************/
@@ -477,10 +461,10 @@ a:hover {
 }
 
 .footer__social button {
-	@apply p-2 border-none rounded-md bg-dark-200 hover:bg-dark-100 hover:animate-bounce;
+	@apply p-2 border-none rounded-md bg-dark-800 hover:bg-dark-600 hover:animate-bounce;
 }
 
-input[type="radio"]:checked + label span {
+input[type="radio"]:checked + label > span {
 	background-color: #479e00;
 	box-shadow: 0px 0px 0px 2px white inset;
 }
@@ -538,11 +522,11 @@ html {
 
 .react-datepicker__day:hover,
 .react-datepicker__time-list-item:hover {
-	@apply bg-primary-200 text-light-100 !important;
+	@apply bg-primary-600 text-light-100 !important;
 }
 /* 
 .react-datepicker__day--today{
-    @apply font-bold dark:text-primary-100;
+    @apply font-bold dark:text-primary-500;
 } */
 
 .react-datepicker__day--disabled {
@@ -550,6 +534,7 @@ html {
 }
 
 .react-datepicker__input-container > input {
+	width: 100%;
 	padding: 4px 16px 4px 20px;
 	border-radius: 4px;
 	border: 2px solid transparent;
@@ -561,7 +546,7 @@ html {
 }
 
 .react-datepicker__day--selected {
-	@apply dark:bg-primary-200 !important;
+	@apply dark:bg-primary-600 !important;
 }
 
 .react-datepicker__month-container,
@@ -570,7 +555,7 @@ html {
 }
 
 .react-datepicker__navigation-icon {
-	@apply dark:text-primary-200 !important;
+	@apply dark:text-primary-600 !important;
 }
 
 /**************************************************************************/
@@ -579,12 +564,11 @@ html {
 
 .tooltip-button {
 	background: none;
-	font-family: var(--Poppins);
-	font-weight: 400;
-	font-size: 0.75rem;
+	font-family: "Roboto", "sans-serif";
 	color: #7a7a7a;
 	border: none;
 	padding: 0px;
+	margin: 0px;
 	/* height: fit-content !important; */
 	min-width: fit-content;
 }
@@ -613,7 +597,10 @@ button.tooltip-button:active {
 
 [data-tooltip] {
 	position: relative;
-	z-index: 10;
+}
+
+[data-tooltip]:hover {
+	z-index: 10 !important;
 }
 
 /* Positioning and visibility settings of the tooltip */
@@ -631,6 +618,7 @@ button.tooltip-button:active {
 
 /* The actual tooltip with a dynamic width */
 [data-tooltip]:before {
+	@apply dark:bg-dark-600 bg-light-100;
 	content: attr(data-tooltip);
 	padding: 10px 18px;
 	min-width: 50px;
@@ -640,11 +628,9 @@ button.tooltip-button:active {
 	border: 1.5px solid #6cc027;
 	border-radius: 6px;
 	font-size: 14px;
-	background-color: rgba(255, 255, 255, 0);
-	backdrop-filter: blur(4px);
 	/* background-image: linear-gradient(30deg, rgba(44, 53, 59, 0.9), rgba(48, 54, 59, 0.9), rgba(42, 56, 59, 0.9)); */
-	box-shadow: 0px 0px 24px rgba(0, 0, 0, 0.1);
-	font-family: var(--Poppins);
+	/* box-shadow: 0px 0px 24px rgba(0, 0, 0, 0.1); */
+	font-family: "Roboto", "sans-serif";
 	text-align: center;
 	white-space: pre-wrap;
 	transform: translate(-50%, -5px) scale(0.5);
@@ -766,4 +752,251 @@ button.tooltip-button:active {
 	border-width: 0px 5px 5px 5px;
 	border-color: transparent transparent #6cc027 transparent;
 	transform-origin: bottom;
+}
+
+/* Tooltip Theme */
+
+[data-tooltip-theme="glass"]:before {
+	@apply dark:bg-dark-600/80 bg-light-100/10;
+}
+
+/**************************************************************************/
+/**********************    Profile Verification   *************************/
+/**************************************************************************/
+
+.instagram {
+	background: #f09433;
+	background: -moz-linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+	background: -webkit-linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+	background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f09433', endColorstr='#bc1888',GradientType=1 );
+}
+
+/**************************************************************************/
+/*****************    Create NFT (Unlockable Content)   *******************/
+/**************************************************************************/
+
+.selected-unlockable-content-div {
+	@apply grid items-center justify-center w-full grid-cols-5;
+}
+
+.selected-unlockable-content-item {
+	@apply mt-2 w-full flex flex-col items-center justify-center text-center text-xs font-normal text-[#777777];
+}
+
+.selected-unlockable-content-span {
+	@apply mt-1 w-[70px] whitespace-nowrap overflow-hidden text-ellipsis;
+}
+
+/**************************************************************************/
+/****************    Track Info (Unlockable Content Card)   ***************/
+/**************************************************************************/
+
+.unlockable-content-card:hover {
+	transform: rotateY(180deg);
+	transform-style: preserve-3d;
+}
+
+.unlockable-content-card-back {
+	transform: rotateY(180deg);
+}
+
+/**************************************************************************/
+/****************    Top Artist Swiper Component   ************************/
+/**************************************************************************/
+.swiper-container .swiper {
+	padding-left: 60px;
+	padding-right: 60px;
+}
+
+.swiper-button-next:after {
+	color: #5ab510;
+}
+
+.swiper-button-prev:after {
+	color: #5ab510;
+}
+
+/**************************************************************************/
+/****************    Promo NFT carousel   ************************/
+/**************************************************************************/
+
+#slider {
+	position: relative;
+	width: 50%;
+	height: 30vw;
+	/* margin: 80px auto; */
+	/* font-family: 'Helvetica Neue', sans-serif; */
+	perspective: 1400px;
+	transform-style: preserve-3d;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#slider input[type="radio"] {
+	position: relative;
+	top: 108%;
+	left: 50%;
+	width: 18px;
+	height: 18px;
+	margin: 0 15px 0 0;
+	opacity: 0.4;
+	transform: translateX(-83px);
+	cursor: pointer;
+	display: none;
+}
+
+#slider input[type="radio"]:nth-child(5) {
+	margin-right: 0px;
+}
+
+#slider input[type="radio"]:checked {
+	opacity: 1;
+}
+
+#slider label {
+	position: absolute;
+	width: max-content;
+	/* filter: brightness(1.05); */
+	/* backdrop-filter: blur(10px) brightness(1); */
+	/* width: 100%;
+	height: 100%; */
+	/* left: 0;
+	top: 0; */
+	/* color: white;
+	font-size: 70px;
+	font-weight: bold;
+	border-radius: 5px; */
+	cursor: pointer;
+	/* display: flex;
+	align-items: center;
+	justify-content: center; */
+	transition: transform 400ms ease;
+}
+
+/* Slider Functionality */
+
+/* Active Slide */
+#s1:checked ~ #slide1,
+#s2:checked ~ #slide2,
+#s3:checked ~ #slide3,
+#s4:checked ~ #slide4,
+#s5:checked ~ #slide5,
+#s6:checked ~ #slide6,
+#s7:checked ~ #slide7,
+#s8:checked ~ #slide8 {
+	/* box-shadow: 0 13px 26px rgba(0,0,0, 0.3), 0 12px 6px rgba(0,0,0, 0.2); */
+	transform: translate3d(0%, 0, 0px);
+}
+
+/* Next Slide */
+#s1:checked ~ #slide2,
+#s2:checked ~ #slide3,
+#s3:checked ~ #slide4,
+#s4:checked ~ #slide5,
+#s5:checked ~ #slide6,
+#s6:checked ~ #slide7,
+#s7:checked ~ #slide8,
+#s8:checked ~ #slide1 {
+	/* box-shadow: 0 6px 10px rgba(0,0,0, 0.3), 0 2px 2px rgba(0,0,0, 0.2); */
+	transform: translate3d(30%, 0, -100px) scale(0.75);
+}
+
+/* Next to Next Slide */
+#s1:checked ~ #slide3,
+#s1:checked ~ #slide4,
+#s1:checked ~ #slide5,
+#s1:checked ~ #slide6,
+#s1:checked ~ #slide7,
+#s2:checked ~ #slide4,
+#s2:checked ~ #slide5,
+#s2:checked ~ #slide6,
+#s2:checked ~ #slide7,
+#s2:checked ~ #slide8,
+#s3:checked ~ #slide5,
+#s3:checked ~ #slide6,
+#s3:checked ~ #slide7,
+#s3:checked ~ #slide8,
+#s3:checked ~ #slide1,
+#s4:checked ~ #slide6,
+#s4:checked ~ #slide7,
+#s4:checked ~ #slide8,
+#s4:checked ~ #slide1,
+#s4:checked ~ #slide2,
+#s5:checked ~ #slide7,
+#s5:checked ~ #slide8,
+#s5:checked ~ #slide1,
+#s5:checked ~ #slide2,
+#s5:checked ~ #slide3,
+#s6:checked ~ #slide8,
+#s6:checked ~ #slide1,
+#s6:checked ~ #slide2,
+#s6:checked ~ #slide3,
+#s6:checked ~ #slide4,
+#s7:checked ~ #slide1,
+#s7:checked ~ #slide2,
+#s7:checked ~ #slide3,
+#s7:checked ~ #slide4,
+#s7:checked ~ #slide5,
+#s8:checked ~ #slide2,
+#s8:checked ~ #slide3,
+#s8:checked ~ #slide4,
+#s8:checked ~ #slide5,
+#s8:checked ~ #slide6 {
+	/* box-shadow: 0 1px 4px rgba(0,0,0, 0.4); */
+	transform: translate3d(0%, 0, -250px);
+	/* display: none; */
+}
+
+/* Previous to Previous Slide */
+#s1:checked ~ #slide7,
+#s2:checked ~ #slide8,
+#s3:checked ~ #slide1,
+#s4:checked ~ #slide2,
+#s5:checked ~ #slide3,
+#s6:checked ~ #slide4,
+#s7:checked ~ #slide5,
+#s8:checked ~ #slide6 {
+	/* box-shadow: 0 1px 4px rgba(0,0,0, 0.4); */
+	transform: translate3d(0%, 0, -250px);
+	/* display: none; */
+}
+/* Previous Slide */
+#s1:checked ~ #slide8,
+#s2:checked ~ #slide1,
+#s3:checked ~ #slide2,
+#s4:checked ~ #slide3,
+#s5:checked ~ #slide4,
+#s6:checked ~ #slide5,
+#s7:checked ~ #slide6,
+#s8:checked ~ #slide7 {
+	/* box-shadow: 0 6px 10px rgba(0,0,0, 0.3), 0 2px 2px rgba(0,0,0, 0.2); */
+	transform: translate3d(-30%, 0, -100px) scale(0.75);
+}
+
+@media (max-width: 404px) {
+	/* prev slide  */
+	#s1:checked ~ #slide8,
+	#s2:checked ~ #slide1,
+	#s3:checked ~ #slide2,
+	#s4:checked ~ #slide3,
+	#s5:checked ~ #slide4,
+	#s6:checked ~ #slide5,
+	#s7:checked ~ #slide6,
+	#s8:checked ~ #slide7 {
+		/* box-shadow: 0 6px 10px rgba(0,0,0, 0.3), 0 2px 2px rgba(0,0,0, 0.2); */
+		transform: translate3d(-25%, 0, -100px) scale(0.75);
+	}
+	#s1:checked ~ #slide2,
+	#s2:checked ~ #slide3,
+	#s3:checked ~ #slide4,
+	#s4:checked ~ #slide5,
+	#s5:checked ~ #slide6,
+	#s6:checked ~ #slide7,
+	#s7:checked ~ #slide8,
+	#s8:checked ~ #slide1 {
+		/* box-shadow: 0 6px 10px rgba(0,0,0, 0.3), 0 2px 2px rgba(0,0,0, 0.2); */
+		transform: translate3d(25%, 0, -100px) scale(0.75);
+	}
 }

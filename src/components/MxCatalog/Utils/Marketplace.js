@@ -1,6 +1,32 @@
-import { useEffect, useReducer, useState } from "react";
+import { useReducer, useState } from "react";
+import dynamic from "next/dynamic";
 import CatalogBody from "./CatalogBody";
 import CatalogNav from "./CatalogNav";
+const MobileFilterModal = dynamic(() => import("./CatalogUtils/MobileFilterUtils/MobileFilterModal"));
+
+const initialState = {
+	trackOrigin: "",
+	recordingYear: "",
+	genre: "",
+	language: "",
+	duration: "",
+	numberOfCollaborators: "",
+	tags: "",
+	parentalAdvisory: "",
+	status: "",
+	countryOfOrigin: "",
+	stateOfOrigin: "",
+	cityOfOrigin: "",
+	numberOfCopies: "",
+	resaleRoyaltyPercent: "",
+
+	verifiedOnly: false,
+	hasSplits: false,
+	hasVocals: false,
+	hasLyrics: false,
+
+	sortingFilter: "dateNewest",
+};
 
 const reducer = (state, action) => {
 	switch (action.type) {
@@ -42,49 +68,46 @@ const reducer = (state, action) => {
 			return { ...state, hasLyrics: action.selectedChoice };
 		case "SORTINGFILTER":
 			return { ...state, sortingFilter: action.selectedChoice };
+		case "reset":
+			return initialState;
 		default:
 			return state;
 	}
 };
 
-export default function Marketplace() {
+export default function Marketplace({ tracks }) {
 	// Will be maintaining a state here for the type of marketplace (currentSelection (Integer))
 	// Initially set to load the newly released nfts first
 	const [currentSelection, setCurrentSelection] = useState(1);
-	const [appliedFilter, dispatch] = useReducer(reducer, {
-		trackOrigin: "",
-		recordingYear: "",
-		genre: "",
-		language: "",
-		duration: "",
-		numberOfCollaborators: "",
-		tags: "",
-		parentalAdvisory: "",
-		status: "",
-		countryOfOrigin: "",
-		stateOfOrigin: "",
-		cityOfOrigin: "",
-		numberOfCopies: "",
-		resaleRoyaltyPercent: "",
-
-		verifiedOnly: false,
-		hasSplits: false,
-		hasVocals: false,
-		hasLyrics: false,
-
-		sortingFilter: "dateNewest",
-	});
-
-	useEffect(() => {
-		console.log("UPDATED FILTERS: ", appliedFilter);
-	}, [appliedFilter]);
+	const [appliedFilter, dispatch] = useReducer(reducer, initialState);
+	const [showMobileFilter, setShowMobileFilter] = useState(false);
+	const [currentMobileFilterType, setCurrentMobileFilterType] = useState(1);
 
 	return (
 		<>
+			<MobileFilterModal
+				{...{
+					showMobileFilter,
+					setShowMobileFilter,
+					appliedFilter,
+					setAppliedFilter: dispatch,
+					currentSelection,
+					currentMobileFilterType,
+					setCurrentMobileFilterType,
+				}}
+			/>
+
 			<CatalogNav {...{ currentSelection, setCurrentSelection }} />
 
 			{/* Main Catalog Body */}
-			<CatalogBody currentSelection={currentSelection} appliedFilter={appliedFilter} setAppliedFilter={dispatch} />
+			<CatalogBody
+				setShowMobileFilter={setShowMobileFilter}
+				setCurrentMobileFilterType={setCurrentMobileFilterType}
+				currentSelection={currentSelection}
+				appliedFilter={appliedFilter}
+				setAppliedFilter={dispatch}
+				tracks={tracks}
+			/>
 		</>
 	);
 }

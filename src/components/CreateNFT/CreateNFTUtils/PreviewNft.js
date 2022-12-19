@@ -3,7 +3,7 @@ import { useRef } from "react";
 import { useMoralis } from "react-moralis";
 import { truncatePrice } from "../../../utils/GetMarketPrice";
 
-export default function PreviewNft({ trackTitle, coverArtUrl, audioFileUrl, nftPrice, numberOfCopies, step, collaboratorList }) {
+export default function PreviewNft({ trackTitle, coverArtUrl, audioFileUrl, nftPrice, numberOfCopies, step, collaboratorList, chosenProfileOrBand }) {
 	const { user } = useMoralis();
 
 	const playBtn = useRef(null);
@@ -45,7 +45,7 @@ export default function PreviewNft({ trackTitle, coverArtUrl, audioFileUrl, nftP
 
 	return (
 		<div className="flex-1 lg:mt-0">
-			<p className="mb-16 font-semibold font-secondary">STEP {step} OF 3</p>
+			<p className="mb-16 font-semibold font-secondary">STEP {step} OF 4</p>
 			{/* Uploaded Art */}
 			<div className="relative w-[220px] h-[220px] overflow-hidden rounded-t-xl">
 				{/* Cover art of NFT */}
@@ -57,25 +57,31 @@ export default function PreviewNft({ trackTitle, coverArtUrl, audioFileUrl, nftP
 					</div>
 				)}
 				{/* NFT audio file */}
-				{audioFileUrl == null ? null : (
+				{audioFileUrl ? (
 					<div className="z-[1] absolute bottom-0 right-0 p-2">
 						<button
 							type="button"
 							ref={playBtn}
 							onClick={playTrackHandler}
-							className="h-[40px] w-[40px] bg-primary-100 rounded-full flex items-center justify-center"
+							className="h-[40px] w-[40px] bg-primary-500 rounded-full flex items-center justify-center"
 						>
-							<i className="text-lg fas fa-play text-dark-200"></i>
+							<i className="text-lg fas fa-play text-light-200"></i>
 						</button>
 						<audio ref={audio} className="hidden" src={audioFileUrl} onEnded={resetProgress}></audio>
 					</div>
-				)}
+				) : null}
 			</div>
 			{/* Content provided */}
 			<div className="dark:bg-[#1D1D1D] bg-light-100 w-[222px] h-[128px] p-4 rounded-b-xl flex flex-col justify-between">
 				<div className="flex justify-between w-full">
 					<div className="flex flex-col">
-						<p className="font-secondary text-[#1D1D1D] text-xs dark:text-light-300">{user && user.attributes.name}</p>
+						<p className="font-secondary text-[#1D1D1D] text-xs dark:text-light-300">
+							{user && chosenProfileOrBand.objectId === "profile"
+								? user.attributes.name
+								: user && chosenProfileOrBand.objectId !== "profile"
+								? chosenProfileOrBand.name
+								: null}
+						</p>
 						<p className="font-semibold font-primary text-[#1D1D1D] dark:text-light-200 text-lg">{truncatedNftName}</p>
 					</div>
 

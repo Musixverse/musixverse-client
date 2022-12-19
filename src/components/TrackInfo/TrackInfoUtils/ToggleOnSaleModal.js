@@ -1,5 +1,4 @@
 import { useState, useContext } from "react";
-import { useRouter } from "next/router";
 import LoadingContext from "../../../../store/loading-context";
 import StatusContext from "../../../../store/status-context";
 import { toggleOnSale } from "../../../utils/smart-contract/functions";
@@ -7,23 +6,33 @@ import Modal from "../../../layout/Modal/Modal";
 import ToggleOnSaleSuccessModal from "./ToggleOnSaleSuccessModal";
 
 const ToggleOnSaleModal = ({ isOpen, setToggleOnSaleModalOpen, tokenId, onSale }) => {
-	const router = useRouter();
-	const [loading, setLoading] = useContext(LoadingContext);
+	const [, setLoading] = useContext(LoadingContext);
 	const [, , , setError] = useContext(StatusContext);
 	const [toggleOnSaleSuccess, setToggleOnSaleSuccess] = useState(false);
 
 	const toggleOnSaleAttribute = async (e) => {
 		e.preventDefault();
 
-		setLoading(true);
+		setLoading({
+			status: true,
+			title: "Please sign the transaction in your wallet...",
+		});
 		try {
 			await toggleOnSale(tokenId);
-			setLoading(false);
 			setToggleOnSaleModalOpen(false);
+			await fetch(`/api/revalidate-track?path=${window.location.pathname}&secret=${process.env.NEXT_PUBLIC_REVALIDATE_SECRET}`);
+			setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 			setToggleOnSaleSuccess(true);
-		} catch (error) {
-			setLoading(false);
+		} catch (err) {
+			setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 			setToggleOnSaleModalOpen(false);
+			if (err.title === "User is not connected to the same wallet") {
+				setError({
+					title: err.title,
+					message: err.message,
+					showErrorBox: true,
+				});
+			}
 		}
 	};
 
@@ -32,7 +41,7 @@ const ToggleOnSaleModal = ({ isOpen, setToggleOnSaleModalOpen, tokenId, onSale }
 			<Modal
 				isOpen={isOpen}
 				image={
-					<div className="mx-auto flex items-center relative justify-center h-24 w-24 text-5xl text-primary-100">
+					<div className="mx-auto flex items-center relative justify-center h-24 w-24 text-5xl text-primary-500">
 						<i className="fa-solid fa-sliders"></i>
 					</div>
 				}
@@ -51,7 +60,7 @@ const ToggleOnSaleModal = ({ isOpen, setToggleOnSaleModalOpen, tokenId, onSale }
 						<form onSubmit={toggleOnSaleAttribute}>
 							<button
 								type="submit"
-								className="rounded-lg px-12 py-2 mt-14 bg-primary-100 font-primary font-semibold text-lg text-light-100 hover:bg-primary-200"
+								className="rounded-lg px-12 py-2 mt-14 bg-primary-500 font-primary font-semibold text-lg text-light-100 hover:bg-primary-600"
 							>
 								Confirm
 							</button>

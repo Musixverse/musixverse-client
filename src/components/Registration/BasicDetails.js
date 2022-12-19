@@ -1,21 +1,22 @@
 import { useState, useRef, useContext } from "react";
+import Link from "next/link";
 import RightSection from "./ArtistRegUtils/RightSection";
 import styles from "../../../styles/Registration/Artist.module.css";
 import Button from "./ArtistRegUtils/Button";
 import SelectAvatar from "./ArtistRegUtils/SelectAvatar";
 import Router from "next/router";
-import { useMoralis, useNewMoralisObject, useMoralisCloudFunction } from "react-moralis";
+import { useMoralis, useNewMoralisObject } from "react-moralis";
 import StatusContext from "../../../store/status-context";
+import { isUsernameValidAndAvailable, isEmailValidAndAvailable } from "../../utils/Validate";
+import { defaultAvatarUrls } from "../../config/constants";
 
 export default function BasicDetails() {
 	const [, , , setError] = useContext(StatusContext);
-	const { Moralis, userError, user, setUserData } = useMoralis();
+	const { userError, user, setUserData } = useMoralis();
 	const { save: saveUserInfo } = useNewMoralisObject("UserInfo");
 	const { save: saveUserPreferences } = useNewMoralisObject("UserPreferences");
 
-	const [avatar, setAvatar] = useState(
-		"https://lh3.googleusercontent.com/MA0m87sfDmKHswPN39ycJkOUMS9C2wLqF5jz3SRpA8ij_V2Z-o3iPnViH1bT8_QISKwnCYSIO5ngL_85H60bpE9R6mogFuMjumBfB3w=s0"
-	);
+	const [avatar, setAvatar] = useState(defaultAvatarUrls[0]);
 
 	const nameRef = useRef(null);
 	const usernameRef = useRef(null);
@@ -25,88 +26,32 @@ export default function BasicDetails() {
 	const [username, setUsername] = useState("");
 	const [email, setEmail] = useState("");
 
-	const { fetch: checkUsernameAvailability } = useMoralisCloudFunction("checkUsernameAvailability", { username: username }, { autoFetch: false });
-	const { fetch: checkEmailExists } = useMoralisCloudFunction("checkEmailExists", { email: email }, { autoFetch: false });
-
-	async function uploadFile(data) {
-		const file = new Moralis.File("file", data);
-		await file.saveIPFS();
-		return file;
-	}
-
 	const handleBasicDetailsSave = async (e) => {
 		e.preventDefault();
 
-		// USERNAME CHECKS
-		const usernameRegex = /^\w+$/;
-		if (username.length < 2) {
+		// USERNAME CHECK
+		const usernameCheck = await isUsernameValidAndAvailable(username);
+		if (usernameCheck.status === false) {
 			setError({
-				title: "Invalid credentials!",
-				message: "Username length should be greater than 1",
-				showErrorBox: true,
-			});
-			usernameRef.current.focus();
-			return;
-		} else if (!usernameRegex.test(username)) {
-			setError({
-				title: "Invalid credentials!",
-				message: "Username can only contain alphabets, numbers, and '_'",
+				title: usernameCheck.title || "Invalid credentials!",
+				message: usernameCheck.message,
 				showErrorBox: true,
 			});
 			usernameRef.current.focus();
 			return;
 		}
 
-		// EMAIL CHECKS
-		const emailRegex = new RegExp(
-			/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i
-		);
-		if (!emailRegex.test(email)) {
+		// EMAIL CHECK
+		const emailCheck = await isEmailValidAndAvailable(email);
+		if (emailCheck.status === false) {
 			setError({
-				title: "Invalid credentials!",
-				message: "Please enter a valid email",
+				title: emailCheck.title || "Invalid credentials!",
+				message: emailCheck.message,
 				showErrorBox: true,
 			});
 			emailRef.current.focus();
 			return;
 		}
-
-		let usernameExists = false;
-		await checkUsernameAvailability({
-			onSuccess: async (object) => {
-				console.log("object", object, user);
-				if (object) {
-					setError({
-						title: object,
-						message: "Please choose another username.",
-						showErrorBox: true,
-					});
-					usernameExists = true;
-				}
-			},
-			onError: (error) => {
-				console.log("checkUsernameAvailability Error:", error);
-			},
-		});
-		if (usernameExists) return;
-
-		let emailExists = false;
-		await checkEmailExists({
-			onSuccess: async (object) => {
-				if (object) {
-					setError({
-						title: object,
-						message: "Please sign up using another email address.",
-						showErrorBox: true,
-					});
-					emailExists = true;
-				}
-			},
-			onError: (error) => {
-				console.log("checkEmailExists Error:", error);
-			},
-		});
-		if (emailExists) return;
 
 		if (name !== "" && username !== "" && email !== "") {
 			await setUserData({
@@ -168,7 +113,7 @@ export default function BasicDetails() {
 					showErrorBox: true,
 				}));
 			} else {
-				Router.push("/register/confirm-email", undefined, { shallow: true });
+				Router.push("/register/confirm-email");
 			}
 		}
 
@@ -177,14 +122,14 @@ export default function BasicDetails() {
 
 	return (
 		<div className={styles["register"]}>
-			<div className={"dark:bg-dark-200 " + styles["register__container"]}>
+			<div className={"dark:bg-dark-800 " + styles["register__container"]}>
 				{/* Left section */}
 				<div className="lg:max-w-[30vw] pb-6 lg:pb-0">
 					<p className="mt-20 text-5xl font-tertiary max-w-[468px]">ARTIST SIGN UP</p>
 					<p className="text-[15px] font-secondary mt-4 max-w-none lg:max-w-[650px]">
-						Artists are the heart and soul of Musixverse. As an artist, you will be able to package your music into limited edition NFTs and sell
-						directly to your fans. In the process you will establish unique connections that your fans long for. You will also be able to explore,
-						buy, and trade NFTs of other artists.
+						Artists are the heart and soul of Musixverse. As an artist, you can package your music into limited edition NFTs and sell them directly
+						to your fans. In the process, you will establish unique connections that your fans long for. You will also be able to explore, buy, and
+						trade NFTs of other artists.
 					</p>
 					<p className="text-[15px] font-secondary mt-4">Thank you for choosing Musixverse!</p>
 				</div>
@@ -193,7 +138,7 @@ export default function BasicDetails() {
 				<RightSection>
 					<p className="text-5xl font-tertiary max-w-[468px] mb-10">YOUR DETAILS</p>
 					<form onSubmit={handleBasicDetailsSave}>
-						<SelectAvatar uploadFile={uploadFile} setAvatar={setAvatar} />
+						<SelectAvatar defaultAvatarUrls={defaultAvatarUrls} avatar={avatar} setAvatar={setAvatar} />
 						<p className="mt-8 text-[16px] font-secondary font-bold">Your Name</p>
 						<input
 							type="text"
@@ -201,7 +146,7 @@ export default function BasicDetails() {
 							value={name}
 							onChange={(e) => setName(e.target.value)}
 							required
-							className="w-full p-1 border-2 border-gray-500 rounded-md shadow-sm outline-none font-secondary focus:border-primary-100"
+							className="w-full p-1 border-2 border-gray-500 rounded-md shadow-sm outline-none font-secondary focus:border-primary-500"
 						/>
 						<div className="flex flex-col sm:flex-row mt-3 text-[16px] font-secondary font-bold space-y-4 sm:space-x-3 sm:space-y-0">
 							<div className="flex-1">
@@ -212,7 +157,7 @@ export default function BasicDetails() {
 									value={username}
 									onChange={(e) => setUsername(e.target.value)}
 									required
-									className="w-full p-1 border-2 border-gray-500 rounded-md shadow-sm outline-none focus:border-primary-100"
+									className="w-full p-1 border-2 border-gray-500 rounded-md shadow-sm outline-none focus:border-primary-500"
 								/>
 							</div>
 							<div className="flex-1">
@@ -223,7 +168,7 @@ export default function BasicDetails() {
 									value={email}
 									onChange={(e) => setEmail(e.target.value)}
 									required
-									className="w-full p-1 border-2 border-gray-500 rounded-md shadow-sm outline-none focus:border-primary-100"
+									className="w-full p-1 border-2 border-gray-500 rounded-md shadow-sm outline-none focus:border-primary-500"
 								/>
 							</div>
 						</div>
@@ -231,11 +176,16 @@ export default function BasicDetails() {
 							<div className="flex items-center justify-start mb-2 space-x-3">
 								<input id="permissionCheckbox" type="checkbox" required />
 								<label htmlFor="permissionCheckbox" className="text-[16px] font-secondary font-bold cursor-pointer">
-									I agree with Musixverse&apos;s Terms annd Conditions
+									I agree with Musixverse&apos;s&nbsp;
+									<Link href="https://drive.google.com/file/d/1Av96OC67-zCfmFuQrAeGT7ruAPcft4Yl/view?usp=sharing" passHref={true}>
+										<a target="_blank" rel="noopener noreferrer" className="cursor-pointer hover:text-primary-600">
+											Terms of Services
+										</a>
+									</Link>
 								</label>
 							</div>
 							<p className="text-[13px] font-secondary lg:max-w-[468px] max-w-none">
-								By checking the box above, you agree with Musixverse&apos;s Terms and Conditions and will abide by them.
+								By checking the box above, you agree with Musixverse&apos;s Terms of Services and will abide by them.
 							</p>
 						</div>
 						<Button>Submit</Button>

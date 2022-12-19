@@ -1,11 +1,23 @@
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useTheme } from "next-themes";
 import styles from "../../../styles/TrackInfo/TrackDetails.module.css";
-import TrackDetail from "./TrackInfoUtils/TrackDetail";
+import spotifyB from "../../../public/assets/logos/spotify_logo_b.svg";
+import spotifyW from "../../../public/assets/logos/spotify_logo_w.svg";
+import appleB from "../../../public/assets/logos/apple_logo_b.svg";
+import appleW from "../../../public/assets/logos/apple_logo_w.svg";
+import amazonB from "../../../public/assets/logos/amazon_logo_b.svg";
+import amazonW from "../../../public/assets/logos/amazon_logo_w.svg";
+import youtubeB from "../../../public/assets/logos/youtube_logo_b.svg";
+import youtubeW from "../../../public/assets/logos/youtube_logo_w.svg";
+import dynamic from "next/dynamic";
+const LyricsModal = dynamic(() => import("./TrackInfoUtils/LyricsModal"));
 
 export default function TrackDetails({ tokenId, metadata }) {
-	var date = new Date(metadata.unlockTimestamp * 1000);
-	var dateStr =
+	const { theme } = useTheme();
+	const date = new Date(parseInt(metadata.unlockTimestamp) * 1000);
+	const dateStr =
 		date.toLocaleString("default", {
 			month: "long",
 		}) +
@@ -15,34 +27,51 @@ export default function TrackDetails({ tokenId, metadata }) {
 		date.getFullYear().toString() +
 		", " +
 		date.toLocaleTimeString() +
-		" IST";
+		" " +
+		date
+			.toLocaleDateString("en-US", {
+				day: "2-digit",
+				timeZoneName: "long",
+			})
+			.substring(4)
+			.match(/\b(\w)/g)
+			.join("");
+
+	const time_in_min = Math.floor(metadata.duration / 60).toString() + " min";
+	const time_in_sec = Math.floor(metadata.duration % 60).toString() + " sec";
+	const time = time_in_min + " " + time_in_sec;
+
+	const [isLyricsModalOpen, setLyricsModalOpen] = useState(false);
 
 	return (
-		<div className={"dark:bg-dark-100 dark:border-dark-100 " + styles["track-detail__container"]}>
-			<TrackDetail description={metadata.description} collaborators={metadata.collaborators} />
+		<div className={"dark:bg-dark-600 dark:border-dark-600 " + styles["track-detail__container"]}>
+			<div className="flex flex-col col-span-3 md:col-span-2">
+				<h1 className="text-4xl font-tertiary">TRACK BACKGROUND</h1>
+				<p className="mt-4 pr-2 font-secondary text-base text-justify max-h-[320px] overflow-y-scroll whitespace-pre-wrap">{metadata.description}</p>
+			</div>
 
 			{/* OTHER DETAILS */}
 			<div className={styles["track-info__other-details"]}>
 				{/* <div className={styles['other-details__title']}> */}
-				<h1 className="font-tertiary text-[36px]">OTHER DETAILS</h1>
+				<h1 className="text-4xl font-tertiary">SONG DETAILS</h1>
 				{/* </div> */}
 
-				<div className={styles["other-details__section1"]}>
+				<div className={styles["other-details__section2"]}>
 					<div className="text-left">
-						<h4 className="font-bold font-secondary text-[16px]">{metadata.attributes[2].trait_type}</h4>
-						<p>{metadata.attributes[2].value}</p>
+						<h4 className="text-base font-bold font-secondary">Track Origin (Version)</h4>
+						<p>{metadata.trackOrigin}</p>
 					</div>
 					<div className="text-left">
-						<h4 className="font-bold font-secondary text-[16px]">{metadata.attributes[3].trait_type}</h4>
-						<p>{metadata.attributes[3].value}</p>
+						<h4 className="text-base font-bold font-secondary">Genre</h4>
+						<p>{metadata.genre}</p>
 					</div>
 					<div className="text-left">
-						<h4 className="font-bold font-secondary text-[16px]">{metadata.attributes[4].trait_type}</h4>
-						<p>{metadata.attributes[4].value}</p>
+						<h4 className="text-base font-bold font-secondary">Recording Year</h4>
+						<p>{metadata.recordingYear}</p>
 					</div>
 					<div className="text-left">
-						<h4 className="font-bold font-secondary text-[16px]">{metadata.attributes[5].trait_type}</h4>
-						<p>{metadata.attributes[5].value}</p>
+						<h4 className="text-base font-bold font-secondary">Parental Advisory</h4>
+						<p>{metadata.parentalAdvisory}</p>
 					</div>
 				</div>
 
@@ -51,20 +80,20 @@ export default function TrackDetails({ tokenId, metadata }) {
 				{/* Section 2 */}
 				<div className={styles["other-details__section2"]}>
 					<div className="text-left">
-						<h4 className="font-bold font-secondary text-[16px]">Duration</h4>
-						<p>{metadata.duration} seconds</p>
+						<h4 className="text-base font-bold font-secondary">Duration</h4>
+						<p>{time}</p>
 					</div>
 					<div className="text-left">
-						<h4 className="font-bold font-secondary text-[16px]">Language</h4>
+						<h4 className="text-base font-bold font-secondary">Language</h4>
 						<p>{metadata.language}</p>
 					</div>
 					<div className="text-left">
-						<h4 className="font-bold font-secondary text-[16px]">Country of Origin</h4>
-						<p>{metadata.location.countryOfOrigin.name}</p>
+						<h4 className="text-base font-bold font-secondary">Country of Origin</h4>
+						<p>{metadata.location.countryOfOrigin && metadata.location.countryOfOrigin.name ? metadata.location.countryOfOrigin.name : "-"}</p>
 					</div>
 					<div className="text-left">
-						<h4 className="font-bold font-secondary text-[16px]">Location Created</h4>
-						<p>{metadata.location.cityOfOrigin.name}</p>
+						<h4 className="text-base font-bold font-secondary">Location Created</h4>
+						<p>{metadata.location.cityOfOrigin && metadata.location.cityOfOrigin.name ? metadata.location.cityOfOrigin.name : "-"}</p>
 					</div>
 				</div>
 
@@ -73,19 +102,19 @@ export default function TrackDetails({ tokenId, metadata }) {
 				{/* Section 2 */}
 				<div className={styles["other-details__section2"]}>
 					<div className="text-left">
-						<h4 className="font-bold font-secondary text-[16px]">{metadata.attributes[6].trait_type}</h4>
-						<p>{metadata.attributes[6].value}</p>
+						<h4 className="text-base font-bold font-secondary">Vocals</h4>
+						<p>{metadata.vocals}</p>
 					</div>
 					<div className="text-left">
-						<h4 className="font-bold font-secondary text-[16px]">{metadata.attributes[7].trait_type}</h4>
-						<p>{metadata.attributes[7].value}</p>
+						<h4 className="text-base font-bold font-secondary">Has Collaborators</h4>
+						<p>{metadata.hasCollaborators}</p>
 					</div>
 					<div className="text-left">
-						<h4 className="font-bold font-secondary text-[16px]">{metadata.attributes[0].trait_type}</h4>
-						<p>{metadata.attributes[0].value}</p>
+						<h4 className="text-base font-bold font-secondary">Number of Copies</h4>
+						<p>{metadata.numberOfCopies}</p>
 					</div>
 					<div className="text-left">
-						<h4 className="font-bold font-secondary text-[16px]">Unique Token ID</h4>
+						<h4 className="text-base font-bold font-secondary">Unique Token ID</h4>
 						<p>{tokenId}</p>
 					</div>
 				</div>
@@ -94,16 +123,22 @@ export default function TrackDetails({ tokenId, metadata }) {
 
 				<div className={styles["other-details__section2"]}>
 					<div className="text-left">
-						<h4 className="font-bold font-secondary text-[16px]">Token Standard</h4>
+						<h4 className="text-base font-bold font-secondary">Token Standard</h4>
 						<p>ERC-1155</p>
 					</div>
 					<div className="text-left">
-						<h4 className="font-bold font-secondary text-[16px]">Blockchain</h4>
-						<p>Polygon</p>
+						<h4 className="text-base font-bold font-secondary">Blockchain</h4>
+						<p>
+							{parseInt(metadata.chainDetails.chainId) === 80001
+								? "Polygon Testnet"
+								: parseInt(metadata.chainDetails.chainId) === 137
+								? "Polygon"
+								: ""}
+						</p>
 					</div>
 
-					<div className="text-left col-span-2">
-						<h4 className="font-bold font-secondary text-[16px]">Unlocked On</h4>
+					<div className="col-span-2 text-left">
+						<h4 className="text-base font-bold font-secondary">Unlocked On</h4>
 						<p>{dateStr.toString()}</p>
 					</div>
 				</div>
@@ -113,66 +148,55 @@ export default function TrackDetails({ tokenId, metadata }) {
 				<div className={styles["other-details__section2"]}>
 					{metadata.lyrics ? (
 						<div className="text-left">
-							<h4 className="font-bold font-secondary text-[16px]">Lyrics</h4>
-							<Link href={metadata.lyrics.replace("ipfs://", process.env.NEXT_PUBLIC_IPFS_NODE_URL)}>
-								<a target="_blank" rel="noopener noreferrer">
-									Available &nbsp;
-									<i className="fa-solid fa-arrow-right-long"></i>
-								</a>
-							</Link>
+							<h4 className="text-base font-bold font-secondary">Lyrics</h4>
+							<span onClick={() => setLyricsModalOpen(true)} className="cursor-pointer">
+								Available &nbsp;
+								<i className="fa-solid fa-arrow-right-long"></i>
+							</span>
 						</div>
 					) : null}
 					{metadata.isrc ? (
 						<div className="text-left">
-							<h4 className="font-bold font-secondary text-[16px]">ISRC</h4>
+							<h4 className="text-base font-bold font-secondary">ISRC</h4>
 							<p>{metadata.isrc}</p>
 						</div>
 					) : null}
-					<div className="text-left">
-						<h4 className="font-bold font-secondary text-[16px]">License</h4>
-						<Link href="https://creativecommons.org/publicdomain/zero/1.0/">
-							<a target="_blank" rel="noopener noreferrer">
-								MXV CC0 &nbsp;
-								<i className="fa-solid fa-arrow-right-long"></i>
-							</a>
-						</Link>
-					</div>
 					<div className={metadata.lyrics && metadata.isrc ? "text-left col-span-1" : "text-left col-span-2"}>
-						<h4 className="font-bold font-secondary text-[16px]">Contract Address</h4>
+						<h4 className="text-base font-bold font-secondary">Contract Address</h4>
 						<p>{metadata.chainDetails.contractAddress}</p>
 					</div>
 				</div>
 
 				{/* Section 5 */}
 				{metadata.links.spotify || metadata.links.appleMusic || metadata.links.amazonMusic || metadata.links.youtubeMusic || metadata.links.other ? (
-					<div className={"mt-6 dark:bg-dark-200 " + styles["other-details__footer"]}>
-						<h4 className="font-secondary text-[18px]">Listen on</h4>
+					<div className={"mt-6 dark:bg-dark-800 " + styles["other-details__footer"]}>
+						<h4 className="text-lg font-secondary">Listen on</h4>
 						<div className={styles["footer__icons"]}>
 							{metadata.links.spotify ? (
 								<Link href={metadata.links.spotify}>
 									<a target="_blank" rel="noopener noreferrer">
-										<Image src="https://img.icons8.com/ios-filled/50/000000/spotify.png" width={25} height={25} alt="spotify" />
+										<Image src={theme === "dark" ? spotifyW : spotifyB} width={25} height={25} alt="spotify" />
 									</a>
 								</Link>
 							) : null}
 							{metadata.links.appleMusic ? (
 								<Link href={metadata.links.appleMusic}>
 									<a target="_blank" rel="noopener noreferrer">
-										<Image src="https://img.icons8.com/ios-filled/50/000000/apple-music.png" width={25} height={25} alt="apple-music" />
+										<Image src={theme === "dark" ? appleW : appleB} width={25} height={25} alt="apple-music" />
 									</a>
 								</Link>
 							) : null}
 							{metadata.links.amazonMusic ? (
 								<Link href={metadata.links.amazonMusic}>
 									<a target="_blank" rel="noopener noreferrer">
-										<Image src="https://img.icons8.com/color/48/000000/amazon.png" width={25} height={25} alt="amazon-music" />
+										<Image src={theme === "dark" ? amazonW : amazonB} width={25} height={25} alt="amazon-music" />
 									</a>
 								</Link>
 							) : null}
 							{metadata.links.youtubeMusic ? (
 								<Link href={metadata.links.youtubeMusic}>
 									<a target="_blank" rel="noopener noreferrer">
-										<Image src="https://img.icons8.com/bubbles/50/000000/youtube-music.png" width={25} height={25} alt="youtube-music" />
+										<Image src={theme === "dark" ? youtubeW : youtubeB} width={25} height={25} alt="youtube-music" />
 									</a>
 								</Link>
 							) : null}
@@ -187,6 +211,7 @@ export default function TrackDetails({ tokenId, metadata }) {
 					</div>
 				) : null}
 			</div>
+			<LyricsModal isOpen={isLyricsModalOpen} setOpen={setLyricsModalOpen} lyricsUrl={metadata.lyrics} />
 		</div>
 	);
 }

@@ -1,16 +1,16 @@
 import Image from "next/image";
 import { useState, useEffect, useRef, useContext } from "react";
 import { useMoralis } from "react-moralis";
-import convertDataURLtoFile from "../../../utils/image-crop/convertDataURLtoFile";
-import uploadFileToIPFS from "../../../utils/image-crop/uploadFileToIPFS";
+import { uploadBase64ToIPFS } from "../../../utils/image-crop/uploadToIPFS";
 import uploadImage from "../../../../public/assets/create-nft/upload-image.svg";
 import CropImageModal from "./CropImageModal";
 import LoadingContext from "../../../../store/loading-context";
+import StatusContext from "../../../../store/status-context";
 
 export default function ImageUpload({ coverArtUrl, setCoverArtUrl, setCoverArtMimeType }) {
 	const { Moralis } = useMoralis();
-	const [isLoading, setLoading] = useContext(LoadingContext);
-
+	const [, setLoading] = useContext(LoadingContext);
+	const [, , , setError] = useContext(StatusContext);
 	const [showModal, setShowModal] = useState(false);
 	const [imageToCrop, setImageToCrop] = useState(undefined);
 	const [croppedImage, setCroppedImage] = useState(undefined);
@@ -23,19 +23,49 @@ export default function ImageUpload({ coverArtUrl, setCoverArtUrl, setCoverArtMi
 		async function setCoverArt() {
 			if (croppedImage !== undefined) {
 				setCoverArtUrl(croppedImage);
-				// Get the File from DataURL
-				const uploadedFile = convertDataURLtoFile(croppedImage, "file");
-				setLoading(true);
-				// Get the uploadFileOnIPFS async function
-				await uploadFileToIPFS(Moralis, uploadedFile).then((url) => setCoverArtUrl(url));
-				setLoading(false);
+				setLoading({
+					status: true,
+					title: "Uploading Cover Art",
+					message: "Please wait while we upload your file...",
+					showProgressBar: false,
+					progress: 0,
+				});
+
+				try {
+					await uploadBase64ToIPFS(Moralis, croppedImage, "cover-art", setLoading).then((url) => setCoverArtUrl(url));
+				} catch (err) {
+					if (err.message && err.message == "request entity too large") {
+						setError({
+							title: "File too large",
+							message: "Please select a file with smaller size",
+							showErrorBox: true,
+						});
+					} else {
+						setError((prevState) => ({
+							...prevState,
+							title: "Oops! Something went wrong.",
+							message: "Please try again later.",
+							showErrorBox: true,
+						}));
+					}
+				}
+				setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 			}
 		}
 		setCoverArt();
-	}, [croppedImage, setCoverArtUrl]);
+	}, [croppedImage, setCoverArtUrl, Moralis, setLoading]);
 
-	const handleImageUpload = (event) => {
-		// uploadFileToIPFS(Moralis, event.target.files[0]).then((url) => setCoverArtUrl(url));
+	const handleImageUpload = async (event) => {
+		// If file size is > 10 MB show error box
+		if (event.target.files[0] && event.target.files[0].size > 10000000) {
+			setError({
+				title: "File size too large",
+				message: "Uploaded image should be less than 10 MB",
+				showErrorBox: true,
+			});
+			nftCoverArt.current.value = "";
+			return;
+		}
 		const imageURL = URL.createObjectURL(event.target.files[0]);
 		setCoverArtMimeType(event.target.files[0].type);
 		nftCoverArt.current.value = "";
@@ -53,20 +83,22 @@ export default function ImageUpload({ coverArtUrl, setCoverArtUrl, setCoverArtMi
 				<div
 					className={
 						"flex relative items-center justify-center w-[65px] h-[65px] rounded-lg dark:bg-[#1d1d1d] bg-light-300 border-2 " +
-						(coverArtUrl === null ? "border-light-300 dark:border-dark-100" : "border-primary-200 dark:border-primary-200")
+						(coverArtUrl === null ? "border-light-300 dark:border-dark-600" : "border-primary-600 dark:border-primary-600")
 					}
 				>
 					<Image src={uploadImage} objectFit="contain" alt="upload image art digital illustration"></Image>
 					<div className={coverArtUrl === null ? "hidden" : "absolute bottom-2 right-1 bg-light-200 rounded-full h-[20px]"}>
-						<i className={"text-xl text-primary-200 fas fa-check-circle"}></i>
+						<i className={"text-xl text-primary-600 fas fa-check-circle"}></i>
 					</div>
 				</div>
 				<div className="flex-1 font-secondary">
 					<h3 className="font-semibold">UPLOAD COVER ART</h3>
 					{coverArtUrl !== null ? (
-						<p className="text-sm text-primary-200">Image Uploaded</p>
+						<p className="text-sm text-primary-600">Image Uploaded</p>
 					) : (
-						<p className="text-sm">Recommended Size: 640px X 640px</p>
+						<p className="text-xs">
+							Any Image file | Max file size: 10 MB <br /> Recommended size: 640 x 640 px
+						</p>
 					)}
 				</div>
 			</label>

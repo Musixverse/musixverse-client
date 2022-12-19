@@ -1,0 +1,15 @@
+.help_us_container {
+	@apply w-[100xw] flex flex-col justify-center items-center;
+}
+
+.help_us {
+	@apply w-full text-center;
+}
+
+.help_notice {
+	@apply font-primary dark:text-white text-sm;
+}
+
+.email_us {
+	@apply font-primary mt-24 dark:text-[#afafaf];
+}

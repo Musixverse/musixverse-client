@@ -1,15 +1,15 @@
 import { useState, useEffect, useContext } from "react";
 import Image from "next/image";
-import { useRouter } from "next/router";
 import LoadingContext from "../../../../store/loading-context";
+import StatusContext from "../../../../store/status-context";
 import { updatePrice } from "../../../utils/smart-contract/functions";
 import Modal from "../../../layout/Modal/Modal";
 import EditPriceSuccessModal from "./EditPriceSuccessModal";
 import { convertMaticToUSD, convertMaticToINR, truncatePrice } from "../../../utils/GetMarketPrice";
 
 const EditPriceModal = ({ isOpen, setEditPriceModalOpen, tokenId, currentPrice }) => {
-	const router = useRouter();
-	const [loading, setLoading] = useContext(LoadingContext);
+	const [, setLoading] = useContext(LoadingContext);
+	const [, , , setError] = useContext(StatusContext);
 
 	const [maticUSD, setMaticUSD] = useState("");
 	const [maticINR, setMaticINR] = useState("");
@@ -38,15 +38,27 @@ const EditPriceModal = ({ isOpen, setEditPriceModalOpen, tokenId, currentPrice }
 	const setNewPrice = async (e) => {
 		e.preventDefault();
 
-		setLoading(true);
+		setLoading({
+			status: true,
+			title: "Updating Price...",
+		});
 		try {
 			await updatePrice(tokenId, updatedPrice);
-			setLoading(false);
 			setEditPriceModalOpen(false);
+			await fetch(`/api/revalidate-track?path=${window.location.pathname}&secret=${process.env.NEXT_PUBLIC_REVALIDATE_SECRET}`);
+			setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 			setEditPriceSuccess(true);
-		} catch (error) {
-			setLoading(false);
+		} catch (err) {
+			setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 			setEditPriceModalOpen(false);
+			if (err.title === "User is not connected to the same wallet") {
+				setError({
+					title: err.title,
+					message: err.message,
+					showErrorBox: true,
+				});
+			}
+			console.error("Error updating price:", err);
 		}
 	};
 
@@ -55,7 +67,7 @@ const EditPriceModal = ({ isOpen, setEditPriceModalOpen, tokenId, currentPrice }
 			<Modal
 				isOpen={isOpen}
 				image={
-					<div className="mx-auto flex items-center relative justify-center h-24 w-24 text-5xl text-primary-100">
+					<div className="mx-auto flex items-center relative justify-center h-24 w-24 text-5xl text-primary-500">
 						<i className="fas fa-edit"></i>
 					</div>
 				}
@@ -67,13 +79,13 @@ const EditPriceModal = ({ isOpen, setEditPriceModalOpen, tokenId, currentPrice }
 							<input
 								type="number"
 								step={0.01}
-								min={0}
+								min={0.01}
 								value={updatedPrice}
 								onChange={(e) => {
 									setUpdatedPrice(e.target.value);
 								}}
 								placeholder="Enter new price"
-								className="w-full px-2 py-2 border-2 border-[#777777] rounded-md shadow-sm outline-none focus:border-primary-100 focus:dark:border-primary-100 dark:bg-[#323232] dark:border-[#323232]"
+								className="w-full px-2 py-2 border-2 border-[#777777] rounded-md shadow-sm outline-none focus:border-primary-500 focus:dark:border-primary-500 dark:bg-[#323232] dark:border-[#323232]"
 								required
 							></input>
 							<p className="text-[#777777] mt-1 font-normal text-xs">Price of the NFT will be updated to this value if you submit</p>
@@ -106,7 +118,7 @@ const EditPriceModal = ({ isOpen, setEditPriceModalOpen, tokenId, currentPrice }
 
 							<button
 								type="submit"
-								className="rounded-lg px-8 py-2 mt-14 bg-primary-100 font-primary font-semibold text-lg text-light-100 hover:bg-primary-200"
+								className="rounded-lg px-8 py-2 mt-14 bg-primary-500 font-primary font-semibold text-lg text-light-100 hover:bg-primary-600"
 							>
 								Submit
 							</button>

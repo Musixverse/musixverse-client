@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { meta_description } from "../../constants";
+import { meta_description } from "../../config/constants";
 import Register from "../../components/Registration/Register";
 import { useEffect, useContext } from "react";
 import { useMoralis } from "react-moralis";
@@ -8,19 +8,20 @@ import LoadingContext from "../../../store/loading-context";
 const Register_Page = () => {
 	const { user, isInitialized } = useMoralis();
 	// Context Management
-	const [isLoading, setLoading] = useContext(LoadingContext);
+	const [, setLoading] = useContext(LoadingContext);
 
 	useEffect(() => {
-		setLoading(true);
+		setLoading({
+			status: true,
+		});
 		if (isInitialized && user) {
-			setLoading(false);
+			setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 		}
 		return () => {
-			setLoading(false);
+			setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 		};
-	}, [isInitialized, user]);
+	}, [isInitialized, user, setLoading]);
 
-	if (user.attributes.email) return null;
 	return (
 		<>
 			<Head>

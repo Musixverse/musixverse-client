@@ -6,6 +6,7 @@ export default function Modal({
 	isOpen = "",
 	image = "",
 	title = "",
+	titleClasses = "",
 	content = "",
 	buttons = [],
 	classes = "",
@@ -67,21 +68,21 @@ export default function Modal({
 					leaveTo="opacity-0 scale-75"
 					leaveFrom="opacity-100 scale-100"
 				>
-					<div style={{ zIndex: "50" }} className="flex left-0 top-0 justify-center items-center h-full w-full fixed">
-						<div className={`max-w-[32rem] sm:w-full w-11/12 ${classes ? classes : "p-4 bg-white dark:bg-dark-100 rounded-lg"}`}>
+					<div style={{ zIndex: "60" }} className="flex left-0 top-0 justify-center items-center h-full w-full fixed">
+						<div className={`sm:w-full w-11/12 p-4 bg-white dark:bg-dark-600 rounded-lg ${classes ? classes : "max-w-[32rem]"}`}>
 							<div className="w-full flex justify-end items-center">
 								<div
 									onClick={() => closeModal()}
 									className="w-8 h-8 flex justify-center items-center rounded-lg transition-all duration-200 cursor-pointer hover:bg-zinc-500/20 "
 								>
-									<i className="fa-solid fa-xmark"></i>
+									<i className="fa-solid fa-xmark text-sm"></i>
 								</div>
 							</div>
-							<div className="w-full flex flex-col justify-between items-center mb-4">
+							<div className={`w-full flex flex-col mb-4 ${titleClasses ? titleClasses : "justify-between items-center"}`}>
 								{image}
 								<div className="font-medium text-xl text-center">{title}</div>
 							</div>
-							<div className="text-sm pt-6 pb-4 px-8 text-center">{content}</div>
+							<div className="text-sm pt-6 pb-4 px-2 sm:px-8 text-center">{content}</div>
 							<div className="mt-6 flex justify-end items-center gap-2 mb-2 mr-2">
 								{buttons.map((button, index) => (
 									<button

@@ -12,7 +12,7 @@ export default function HomePage_section4() {
 	const { theme } = useTheme();
 	return (
 		<>
-			<div className={"dark:bg-dark-100 " + styles["HomePage_section4__container"]}>
+			<div className={"dark:bg-dark-600 " + styles["HomePage_section4__container"]}>
 				<div>
 					<p className="max-w-2xl text-xl font-semibold font-primary md:text-3xl">
 						Join our Insider Community to get beta access and exclusive privileges on Musixverse
@@ -24,13 +24,13 @@ export default function HomePage_section4() {
 				</div>
 				<div className={styles["section2__card--innercard"]}>
 					<div className="flex flex-col">
-						<p className="text-xs font-normal md:text-sm dark:text-dark-200 font-secondary">
+						<p className="text-xs font-normal md:text-sm dark:text-dark-800 font-secondary">
 							To know more about the Musixverse Insider Community,
 							<br />
 							tap the button below
 						</p>
 						<Link href="cfh/cfb" passHref>
-							<button className="px-8 py-3 mt-6 text-xs text-white bg-primary-200 hover:bg-primary-300 font-primary rounded-xl">
+							<button className="px-8 py-3 mt-6 text-xs text-white bg-primary-600 hover:bg-primary-700 font-primary rounded-xl">
 								Explore the MXV Insider Community
 							</button>
 						</Link>
@@ -38,18 +38,18 @@ export default function HomePage_section4() {
 					<div className="items-end">
 						<div className={styles["newsletter__social"]}>
 							<a
-								className="flex items-center justify-center p-2 rounded-md bg-dark-100"
+								className="flex items-center justify-center p-2 rounded-md bg-dark-600"
 								href="https://discord.com/invite/rXKb7rCqjG"
 								target={"_blank"}
 								rel="noopener noreferrer"
 							>
 								<Image src={discord} width={20} height={20} alt="discord"></Image>
 							</a>
-							{/* <a className="flex items-center justify-center p-2 rounded-md bg-dark-100" href="https://discord.com/invite/rXKb7rCqjG" target={"_blank"} rel="noopener noreferrer">
+							{/* <a className="flex items-center justify-center p-2 rounded-md bg-dark-600" href="https://discord.com/invite/rXKb7rCqjG" target={"_blank"} rel="noopener noreferrer">
                                 <Image src={facebook} width={20} height={20} alt="facebook"></Image>
                             </a> */}
 							<a
-								className="flex items-center justify-center p-2 rounded-md bg-dark-100"
+								className="flex items-center justify-center p-2 rounded-md bg-dark-600"
 								href="https://twitter.com/musixverse"
 								target={"_blank"}
 								rel="noopener noreferrer"
@@ -57,7 +57,7 @@ export default function HomePage_section4() {
 								<Image src={twitter} width={20} height={20} alt="twitter"></Image>
 							</a>
 							<a
-								className="flex items-center justify-center p-2 rounded-md bg-dark-100"
+								className="flex items-center justify-center p-2 rounded-md bg-dark-600"
 								href=" https://www.instagram.com/musixverse/"
 								target={"_blank"}
 								rel="noopener noreferrer"
@@ -65,7 +65,7 @@ export default function HomePage_section4() {
 								<Image src={instagram} width={20} height={20} alt="instagram"></Image>
 							</a>
 							<a
-								className="flex items-center justify-center p-2 rounded-md bg-dark-100"
+								className="flex items-center justify-center p-2 rounded-md bg-dark-600"
 								href="https://www.facebook.com/Musixverse-104390125641359"
 								target={"_blank"}
 								rel="noopener noreferrer"

@@ -1,28 +1,8 @@
-import { useEffect } from "react";
-import { useMoralisCloudFunction } from "react-moralis";
 import CollaboratorImage from "./CollaboratorImage";
 import styles from "../../../styles/NFTCard/Section2.module.css";
+import ShinyLoader from "../../layout/ShinyLoader";
 
-export default function Section2({ collaboratorList, numberOfCopies, tokenId, unsoldTrackData, lastPrice }) {
-	const { fetch: fetchLocalTokenId, data: localTokenId } = useMoralisCloudFunction(
-		"fetchLocalTokenId",
-		{
-			tokenId: tokenId,
-		},
-		{ autoFetch: false }
-	);
-
-	useEffect(() => {
-		if (tokenId) {
-			fetchLocalTokenId({
-				onSuccess: async (object) => {},
-				onError: (error) => {
-					console.log("fetchLocalTokenId Error:", error);
-				},
-			});
-		}
-	}, [tokenId, fetchLocalTokenId]);
-
+export default function Section2({ collaboratorList, numberOfCopies, tokenId, localTokenId, unsoldTrackData, lastPrice }) {
 	// const likeBtn = useRef();
 	// let likeCount = props.likeCount;
 
@@ -77,7 +57,7 @@ export default function Section2({ collaboratorList, numberOfCopies, tokenId, un
 					)}
 				</div>
 			) : (
-				<div className="w-full h-4 mt-2 dark:bg-[#363636] bg-light-300 animate-pulse self-center rounded-lg"></div>
+				<ShinyLoader classes="w-full h-4 mt-2 self-center rounded-lg" />
 			)}
 		</div>
 	);

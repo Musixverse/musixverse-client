@@ -1,29 +1,28 @@
 import { useContext } from "react";
 import { useRouter } from "next/router";
-import { useMoralisCloudFunction } from "react-moralis";
-import RequiredAsterisk from "./RequiredAsterisk";
+import RequiredAsterisk from "../../../layout/RequiredAsterisk";
 import LoadingContext from "../../../../store/loading-context";
+import { saveNftCreationProgress } from "./SaveNftCreationProgress";
 
 const ActionButtons = ({ step, prevStep, setSaveDraftSuccess, nftDraftMetadata }) => {
-	const [loading, setLoading] = useContext(LoadingContext);
-
+	const [, setLoading] = useContext(LoadingContext);
 	const router = useRouter();
 	const { draft } = router.query;
+
 	// Save Draft Feature
-	const { fetch: saveNftCreationDraft } = useMoralisCloudFunction("saveNftDraft", { metadata: nftDraftMetadata, draftId: draft }, { autoFetch: false });
-	const saveNftDraft = () => {
-		setLoading(true);
-		saveNftCreationDraft({
-			onSuccess: async (object) => {
-				console.log("object:", object);
-				setLoading(false);
-				setSaveDraftSuccess(true);
-			},
-			onError: (error) => {
-				setLoading(false);
-				console.log("fetchMatchingUsers Error:", error);
-			},
+	const saveNftDraft = async () => {
+		setLoading({
+			status: true,
+			title: "Saving Draft...",
 		});
+		try {
+			await saveNftCreationProgress(nftDraftMetadata, draft);
+			setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
+			setSaveDraftSuccess(true);
+		} catch (err) {
+			console.error("saveNftDraft error:", err);
+			setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
+		}
 	};
 
 	return (
@@ -34,7 +33,7 @@ const ActionButtons = ({ step, prevStep, setSaveDraftSuccess, nftDraftMetadata }
 					onClick={() => {
 						prevStep();
 					}}
-					className="flex items-center px-4 py-3 text-sm font-primary font-bold rounded-md bg-light-100 hover:bg-[#dde7e7e3] dark:bg-[#323232] dark:hover:bg-dark-100 dark:border-[#323232]"
+					className="flex items-center px-4 py-3 text-sm font-primary font-bold rounded-md bg-light-100 hover:bg-[#dde7e7e3] dark:bg-[#323232] dark:hover:bg-dark-600 dark:border-[#323232]"
 				>
 					<span className="mr-10 text-xl">
 						<i className="fa-solid fa-arrow-left-long"></i>
@@ -46,15 +45,15 @@ const ActionButtons = ({ step, prevStep, setSaveDraftSuccess, nftDraftMetadata }
 					onClick={() => {
 						saveNftDraft();
 					}}
-					className="flex items-center px-10 py-3 text-sm font-primary font-bold rounded-md bg-[#dde7e7e3] hover:bg-[#D7E0DF] dark:bg-[#323232] dark:hover:bg-dark-100 dark:border-[#323232]"
+					className="flex items-center px-10 py-3 text-sm font-primary font-bold rounded-md bg-[#dde7e7e3] hover:bg-[#D7E0DF] dark:bg-[#323232] dark:hover:bg-dark-600 dark:border-[#323232]"
 				>
 					Save Draft
 				</button>
 				<button
 					type="submit"
-					className="flex items-center justify-between px-4 py-3 text-sm font-bold rounded-md font-primary bg-primary-100 hover:bg-primary-200 text-light-100"
+					className="flex items-center justify-between px-4 py-3 text-sm font-bold rounded-md font-primary bg-primary-500 hover:bg-primary-600 text-light-100"
 				>
-					{step === 3 ? "Create" : "Next"}
+					{step === 4 ? "Create" : "Next"}
 					<span className="ml-24 text-xl">
 						<i className="fa-solid fa-arrow-right-long"></i>
 					</span>

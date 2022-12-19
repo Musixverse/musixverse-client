@@ -1,38 +1,13 @@
-import { useState, useEffect } from "react";
-import Image from "next/image";
 import Link from "next/link";
-import { useMoralis, useMoralisCloudFunction } from "react-moralis";
-import { BLOCKCHAIN_NETWORK } from "../../../constants";
 import { convertTimestampToDate } from "../../../utils/ConvertTimestampToDate";
 import LinkToBlockExplorer from "./LinkToBlockExplorer";
-import auction from "../../../../public/assets/auction.svg";
 import styles from "../../../../styles/TrackInfo/Activity.module.css";
 
 const PurchasedActivity = ({ activity }) => {
-	const { Moralis } = useMoralis();
-	const [transaction, setTransaction] = useState("");
-	const { data: fetchedUser } = useMoralisCloudFunction("fetchUsernameFromAddress", { address: transaction.from_address });
-
-	const getTransactionDetails = async () => {
-		const options = {
-			chain: BLOCKCHAIN_NETWORK,
-			transaction_hash: activity.transaction_hash,
-		};
-		const _transaction = await Moralis.Web3API.native.getTransaction(options);
-		setTransaction(_transaction);
-	};
-
-	useEffect(() => {
-		async function getDetails() {
-			await getTransactionDetails();
-		}
-		getDetails();
-	}, [activity]);
-
 	return (
 		<>
-			<div className={"dark:bg-dark-200 " + styles["sales-history__action"]}>
-				<Image src={auction} alt="minting logo" width={25} height={25}></Image>
+			<div className={"dark:bg-dark-800 " + styles["sales-history__action"]}>
+				<i className="text-lg fa-solid fa-pen-to-square"></i>
 			</div>
 
 			<div className="ml-3 font-secondary">
@@ -43,10 +18,10 @@ const PurchasedActivity = ({ activity }) => {
 
 				<p className="text-[#8a8a8a] text-sm">
 					by&nbsp;
-					{fetchedUser ? (
-						<Link href={`/profile/${fetchedUser.username}`} className="cursor-pointer">
-							<a target="_blank" rel="noopener noreferrer">
-								@{fetchedUser.username}&nbsp;
+					{activity ? (
+						<Link href={`/profile/${activity.caller.username}`} className="cursor-pointer">
+							<a>
+								@{activity.caller.username}&nbsp;
 							</a>
 						</Link>
 					) : null}

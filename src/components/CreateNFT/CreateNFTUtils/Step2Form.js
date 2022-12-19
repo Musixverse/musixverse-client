@@ -1,9 +1,8 @@
 import DetailsInputGroup from "./DetailsInputGroup";
 import GeographicDetailsInputGroup from "./GeographicDetailsInputGroup";
 import TagsMultiSelect from "./TagsMultiSelect";
-import RequiredAsterisk from "./RequiredAsterisk";
-import InputDropdown from "./InputDropdown";
-import { languageArray } from "../../../constants";
+import RequiredAsterisk from "../../../layout/RequiredAsterisk";
+import Tooltip from "../../../layout/Tooltip/Tooltip";
 
 export default function Step2Form({
 	setTrackOrigin,
@@ -14,6 +13,7 @@ export default function Step2Form({
 	vocals,
 	setVocals,
 	setLanguage,
+	location,
 	setLocation,
 	countryOfOrigin,
 	setCountryOfOrigin,
@@ -29,18 +29,17 @@ export default function Step2Form({
 	trackOrigin,
 	parentalAdvisory,
 	language,
-	location,
 }) {
 	const detailsInputGroupValues = { setTrackOrigin, setGenre, recordingYear, setRecordingYear, setParentalAdvisory, genre, trackOrigin, parentalAdvisory };
 	const geographicDetailsInputGroupValues = {
-		setLanguage,
-		setLocation,
-		setCountryOfOrigin,
 		language,
+		setLanguage,
 		location,
-		countryOfOrigin,
+		setLocation,
 		stateOfOrigin,
 		setStateOfOrigin,
+		countryOfOrigin,
+		setCountryOfOrigin,
 	};
 
 	const toggleVocalsRadio = (e) => {
@@ -79,7 +78,6 @@ export default function Step2Form({
 								className="hidden"
 								onClick={(e) => toggleVocalsRadio(e)}
 								checked={vocals}
-								onChange={(e) => {}}
 							/>
 							<label htmlFor="othervocalsyes" className="flex items-center text-sm font-normal cursor-pointer font-secondary">
 								<span className="inline-block w-6 h-6 mr-1 border-2 rounded-full border-[#363636] flex-no-shrink"></span>
@@ -94,7 +92,6 @@ export default function Step2Form({
 								className="hidden"
 								onClick={(e) => toggleVocalsRadio(e)}
 								checked={!vocals}
-								onChange={(e) => {}}
 							/>
 							<label htmlFor="othervocalsno" className="flex items-center text-sm font-normal cursor-pointer font-secondary">
 								<span className="inline-block w-6 h-6 mr-1 border-2 rounded-full border-[#363636] flex-no-shrink"></span>
@@ -108,15 +105,27 @@ export default function Step2Form({
 
 				{/* Uploads */}
 				<div className="font-semibold lg:w-1/2 font-secondary">
-					<p className="mb-1 text-sm">ISRC</p>
+					<p className="mb-1 text-sm">
+						ISRC
+						<Tooltip
+							labelText={<i className="pl-2 fa-solid fa-circle-info"></i>}
+							message={
+								"The International Standard Recording Code (ISRC) is an international standard code for uniquely identifying sound recordings and music video recordings."
+							}
+							tooltipLocation={"bottom"}
+						/>
+					</p>
 					<input
 						type={"text"}
 						value={isrc ?? ""}
 						onChange={(e) => {
 							setIsrc(e.target.value);
 						}}
-						className="w-full px-2 py-2 border-2 border-[#777777] rounded-md shadow-sm outline-none focus:border-primary-100 focus:dark:border-primary-100 dark:bg-[#323232] dark:border-[#323232]"
+						className="w-full px-2 py-2 border-2 border-[#777777] rounded-md shadow-sm outline-none focus:border-primary-500 focus:dark:border-primary-500 dark:bg-[#323232] dark:border-[#323232]"
 					></input>
+					<p className="text-[#777777] mt-1 font-normal text-xs">
+						Only provide ISRC code if this version of the song has one. Do not provide if this is an interim version with no ISRC code.
+					</p>
 
 					<p className="mt-4 text-sm">
 						TAGS
@@ -133,7 +142,7 @@ export default function Step2Form({
 							value={links.spotifyLink}
 							onChange={handleLinksChange}
 							placeholder="Spotify Track Link"
-							className="dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-100 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-100"
+							className="dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-500 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-500"
 						/>
 						<input
 							type={"url"}
@@ -141,7 +150,7 @@ export default function Step2Form({
 							value={links.appleMusicLink}
 							onChange={handleLinksChange}
 							placeholder="Apple Music Track Link"
-							className="dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-100 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-100"
+							className="dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-500 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-500"
 						/>
 					</div>
 					<div className="flex justify-between w-full mt-3 space-x-3">
@@ -151,7 +160,7 @@ export default function Step2Form({
 							value={links.amazonMusicLink}
 							onChange={handleLinksChange}
 							placeholder="Amazon Music Track Link"
-							className="dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-100 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-100"
+							className="dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-500 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-500"
 						/>
 						<input
 							type={"url"}
@@ -159,7 +168,7 @@ export default function Step2Form({
 							value={links.youtubeMusicLink}
 							onChange={handleLinksChange}
 							placeholder="Youtube Music Track Link"
-							className="dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-100 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-100"
+							className="dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-500 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-500"
 						/>
 					</div>
 					<input
@@ -168,7 +177,7 @@ export default function Step2Form({
 						value={links.other}
 						onChange={handleLinksChange}
 						placeholder="Any other link"
-						className="mt-3 dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-100 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-100"
+						className="mt-3 dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-500 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-500"
 					/>
 				</div>
 			</div>

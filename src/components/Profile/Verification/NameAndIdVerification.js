@@ -2,19 +2,31 @@ import { useState, useContext } from "react";
 import Link from "next/link";
 import { useMoralis, useMoralisCloudFunction } from "react-moralis";
 import PersonaVerification from "./PersonaVerification";
-import VerificationButton from "./VerificationButton";
+import ConnectionButton from "../../../layout/ConnectionButton";
 import StatusContext from "../../../../store/status-context";
 import LoadingContext from "../../../../store/loading-context";
 
-const NameAndIdVerification = ({ nextStep, isStageNameDifferent, setIsStageNameDifferent, artistStageName, setArtistStageName, personaInquiryIdData }) => {
+const NameAndIdVerification = ({
+	nextStep,
+	isRealNameDifferent,
+	setIsRealNameDifferent,
+	artistRealName,
+	setArtistRealName,
+	artistRealNameSave,
+	setArtistRealNameSave,
+	personaInquiryIdData,
+}) => {
 	const { user } = useMoralis();
 	const [, , , setError] = useContext(StatusContext);
 	const [, setLoading] = useContext(LoadingContext);
 
 	const [isVerificationModalOpen, setIsVerificationModalOpen] = useState(false);
-	const [artistStageNameSave, setArtistStageNameSave] = useState(false);
 
-	const { fetch: setStageName } = useMoralisCloudFunction("setArtistStageName", { userId: user.id, artistStageName: artistStageName }, { autoFetch: false });
+	const { fetch: setRealName } = useMoralisCloudFunction(
+		"setArtistRealName",
+		{ userId: user ? user.id : null, artistRealName: artistRealName },
+		{ autoFetch: false }
+	);
 
 	return (
 		<form
@@ -28,61 +40,72 @@ const NameAndIdVerification = ({ nextStep, isStageNameDifferent, setIsStageNameD
 					});
 					return;
 				}
+				setRealName({
+					onSuccess: async (object) => {
+						setArtistRealNameSave(true);
+						setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
+					},
+					onError: (error) => {
+						console.log("setRealName Error:", error);
+						setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
+					},
+				});
 				nextStep();
 			}}
 		>
-			<p className="text-4xl font-tertiary">1. Verify your Real Name</p>
-			<p className="text-[#777777] font-normal text-xs">(This is the name on a Government Issued ID)</p>
-
+			<p className="text-4xl font-tertiary">1. Verify your Stage Name</p>
 			<input
-				className="dark:text-light-100 dark:bg-[#323232] dark:border-[#323232] px-4 py-2 mt-4 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777]"
+				className="dark:text-light-100 dark:bg-[#323232] dark:border-[#323232] px-4 py-2 mt-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777]"
 				id="artistRealName"
 				name="artistRealName"
 				type="text"
-				value={user.attributes.name}
+				value={user ? user.attributes.name : null}
 				readOnly
 			/>
-			<p className="text-[#777777] mt-1 font-normal text-xs">
+			<p className="text-[#777777] mt-2 font-normal text-xs">
 				The name displayed above is associated with your account on Musixverse. <br />
 				Visit&nbsp;
 				<Link href="/settings/profile-settings" passHref>
-					<a className="text-primary-200 hover:text-primary-300 hover:underline">Profile Settings</a>
+					<a className="text-primary-600 hover:text-primary-700 hover:underline">Profile Settings</a>
 				</Link>
 				&nbsp;if you want to change this.
 			</p>
 
-			<p className="text-4xl font-tertiary mt-16">2. Verify your Stage Name</p>
-			<div className="w-2/3 text-sm mt-2">Is your stage name different from your real name?</div>
+			<p className="text-4xl font-tertiary mt-16">2. Verify your Real Name</p>
+			<p className="text-[#777777] font-normal text-xs">(This is the name on a Government Issued ID)</p>
+			<div className="w-2/3 text-sm mt-2">Is your real name different from your stage name?</div>
 			<div className="flex flex-col mb-6">
 				<div className="flex items-center mt-2 space-x-10">
 					<div className="flex items-center">
 						<input
-							id="isStageNameDifferent"
+							id="isRealNameDifferent"
 							onChange={(e) => {
-								setIsStageNameDifferent(true);
+								setIsRealNameDifferent(true);
 							}}
 							type="radio"
 							name="radio"
-							checked={isStageNameDifferent}
+							checked={isRealNameDifferent}
 							className="hidden"
 						/>
-						<label htmlFor="isStageNameDifferent" className="flex items-center text-sm font-normal cursor-pointer font-secondary">
+						<label htmlFor="isRealNameDifferent" className="flex items-center text-sm font-normal cursor-pointer font-secondary">
 							<span className="inline-block w-6 h-6 mr-1 border-2 rounded-full border-[#363636] flex-no-shrink"></span>
 							Yes
 						</label>
 					</div>
 					<div className="flex items-center">
 						<input
-							id="isStageNameSame"
+							id="isRealNameSame"
 							type="radio"
 							onChange={(e) => {
-								setIsStageNameDifferent(false);
+								setIsRealNameDifferent(false);
+								setArtistRealName("");
+								setArtistRealNameSave(false);
 							}}
 							name="radio"
-							checked={!isStageNameDifferent}
+							checked={!isRealNameDifferent}
 							className="hidden"
 						/>
-						<label htmlFor="isStageNameSame" className="flex items-center text-sm font-normal cursor-pointer font-secondary">
+						<label htmlFor="isRealNameSame" className="flex items-center text-sm font-normal cursor-pointer font-secondary">
 							<span className="inline-block w-6 h-6 mr-1 border-2 rounded-full border-[#363636] flex-no-shrink"></span>
 							No
 						</label>
@@ -90,44 +113,46 @@ const NameAndIdVerification = ({ nextStep, isStageNameDifferent, setIsStageNameD
 				</div>
 			</div>
 
-			{isStageNameDifferent && (
+			{isRealNameDifferent && (
 				<div className="w-2/3 flex flex-col text-xs">
-					<p className="text-sm font-semibold font-secondary">Enter your stage name</p>
+					<p className="text-sm font-semibold font-secondary">Enter your real name</p>
 					<div className="flex mt-1">
 						<input
-							className="mr-4 dark:text-light-100 dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-100 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-100"
-							id="artistStageName"
-							name="artistStageName"
+							className="mr-4 dark:text-light-100 dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-500 w-full px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-500"
+							id="artistRealName"
+							name="artistRealName"
 							type="text"
-							placeholder="Your stage name"
+							placeholder="Your real name"
 							autoComplete="off"
-							value={artistStageName}
+							value={artistRealName}
 							onChange={(e) => {
-								setArtistStageName(e.target.value);
+								setArtistRealName(e.target.value);
 							}}
 							onClick={() => {
-								setArtistStageNameSave(false);
+								setArtistRealNameSave(false);
 							}}
 							required
 						/>
-						<VerificationButton
+						<ConnectionButton
 							onClick={() => {
-								setLoading(true);
-								if (artistStageName == "") {
-									setIsStageNameDifferent(false);
+								setLoading({
+									status: true,
+								});
+								if (artistRealName == "") {
+									setIsRealNameDifferent(false);
 								}
-								setStageName({
+								setRealName({
 									onSuccess: async (object) => {
-										setArtistStageNameSave(true);
-										setLoading(false);
+										setArtistRealNameSave(true);
+										setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 									},
 									onError: (error) => {
-										console.log("setStageName Error:", error);
-										setLoading(false);
+										console.log("setRealName Error:", error);
+										setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 									},
 								});
 							}}
-							verifiedStatus={artistStageNameSave}
+							connectionStatus={artistRealNameSave}
 							buttonText="Save"
 							verifiedText="Saved"
 						/>
@@ -137,9 +162,9 @@ const NameAndIdVerification = ({ nextStep, isStageNameDifferent, setIsStageNameD
 
 			<p className="text-4xl font-tertiary mt-16 mb-2">3. Verify Government Issued ID</p>
 
-			<VerificationButton
+			<ConnectionButton
 				onClick={() => setIsVerificationModalOpen(true)}
-				verifiedStatus={personaInquiryIdData ? personaInquiryIdData.isPersonaVerified : false}
+				connectionStatus={personaInquiryIdData ? personaInquiryIdData.isPersonaVerified : false}
 				buttonText="Verify"
 				verifiedText="Verified successfully"
 			/>
@@ -147,8 +172,8 @@ const NameAndIdVerification = ({ nextStep, isStageNameDifferent, setIsStageNameD
 			<div className="flex justify-center mt-20">
 				<button
 					type="submit"
-					verifiedStatus={false}
-					className="flex w-fit items-center px-10 py-3 text-sm font-primary font-bold rounded-md bg-primary-200 hover:bg-primary-300 text-light-100"
+					connectionStatus={false}
+					className="flex w-fit items-center px-10 py-3 text-sm font-primary font-bold rounded-md bg-primary-600 hover:bg-primary-700 text-light-100"
 				>
 					Continue
 				</button>

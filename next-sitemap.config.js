@@ -1,10 +1,11 @@
-/** @type {import('next-sitemap').IConfig} */
-
 module.exports = {
-  siteUrl: process.env.SITE_URL || 'https://musixverse.vercel.app',
-  generateRobotsTxt: true, // (optional)
-  // ...other options
-}
-
-
-// TODO: add Additionals sitemap link to this component
+	siteUrl: process.env.NEXT_PUBLIC_MUSIXVERSE_CLIENT_BASE_URL || "https://musixverse.com",
+	generateRobotsTxt: true,
+	robotsTxtOptions: {
+		additionalSitemaps: [
+			`${process.env.NEXT_PUBLIC_MUSIXVERSE_CLIENT_BASE_URL}/sitemap.xml`,
+			`${process.env.NEXT_PUBLIC_MUSIXVERSE_CLIENT_BASE_URL}/sitemap-0.xml`,
+			`${process.env.NEXT_PUBLIC_MUSIXVERSE_CLIENT_BASE_URL}/server-sitemap.xml`,
+		],
+	},
+};

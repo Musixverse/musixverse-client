@@ -1,0 +1,35 @@
+.hero-header1{
+    @apply font-semibold text-3xl leading-[3.5rem] lg:leading-normal lg:text-heroHeader1Lg xl:text-[3.5rem] 2xl:text-[4rem] text-[#54B902];
+}
+
+.hero-header2{
+    @apply font-semibold text-4xl leading-[3.5rem] lg:leading-normal lg:text-heroHeader2Lg xl:text-[4rem] 2xl:text-[4.5rem];
+}
+
+
+@media (min-width: 1280px) {
+    .hero-header1{
+        font-size: clamp(3.5rem, 1.5000rem + 2.0833vw, 4rem);
+    }
+    .hero-header2{
+        font-size: clamp(4rem, 2.0000rem + 2.0833vw, 4.5rem);
+    }
+}
+
+@media (min-width: 1024px) and (max-width: 1280px) {
+    .hero-header1{
+        font-size: clamp(2rem, -4.0000rem + 9.3750vw, 3.5rem);
+    }
+    .hero-header2{
+        font-size: clamp(2.5rem, -3.5000rem + 9.3750vw, 4rem);    
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .hero-header1{
+        font-size: clamp(1.75rem, 0.7500rem + 1.5625vw, 2rem);
+    }
+    .hero-header2{
+        font-size: clamp(2.25rem, 1.2500rem + 1.5625vw, 2.5rem);
+    }
+}

@@ -24,7 +24,7 @@ const Footer = () => {
 					<p className="font-primary sm:text-lg text-base text-primary-500">Hear it. Own it. Live it.</p>
 				</div>
 
-				<div className="grid grid-cols-2 gap-y-10 md:gap-y-0 md:flex flex-wrap font-primary justify-between border-t-2 border-light-300 w-full py-8 mt-5">
+				<div className="grid grid-cols-2 gap-y-10 md:gap-y-0 md:flex flex-wrap font-primary justify-between border-t-2 border-light-300 dark:border-light-900 w-full py-8 mt-5">
 					<div className="flex flex-col space-y-2">
 						<p className="font-semibold text">Quick Links</p>
 						<ul className="space-y-2">
@@ -143,17 +143,23 @@ const Footer = () => {
 					<div className="grid grid-cols-2 gap-2 gap-x-10 md:gap-x-8 md:pt-6 lg:gap-0 lg:flex justify-between lg:space-x-6 xl:space-x-28 font-primary">
 						<li className="text-xs text-neutral-400 list-none">
 							<Link href="https://drive.google.com/file/d/1cbK9O_fKX4eaIQgIU9Lc2JADUg5P3Qz8/view?usp=sharing">
-								<a target="_blank" rel="noopener noreferrer">Privacy Policy</a>
+								<a target="_blank" rel="noopener noreferrer">
+									Privacy Policy
+								</a>
 							</Link>
 						</li>
 						<li className="text-xs text-neutral-400 list-none">
 							<Link href="https://drive.google.com/file/d/1Av96OC67-zCfmFuQrAeGT7ruAPcft4Yl/view?usp=sharing">
-								<a target="_blank" rel="noopener noreferrer">Terms of Services</a>
+								<a target="_blank" rel="noopener noreferrer">
+									Terms of Services
+								</a>
 							</Link>
 						</li>
 						<li className="text-xs text-neutral-400 list-none">
 							<Link href="https://medium.com/@musixverse">
-							<a target="_blank" rel="noopener noreferrer">Blogs</a>
+								<a target="_blank" rel="noopener noreferrer">
+									Blogs
+								</a>
 							</Link>
 						</li>
 						<li className="text-xs text-neutral-400 list-none">
@@ -164,9 +170,7 @@ const Footer = () => {
 						<Image src={theme === "dark" ? MXV_emblemW : MXV_emblemB} width={95} height={95} objectFit="contain" alt="MXV emblem"></Image>
 					</div>
 				</div>
-				<p className="font-primary text-xs max-w-sm text-center sm:text-left mx-auto sm:mx-0">
-					©2022 All Rights Reserved.
-				</p>
+				<p className="font-primary text-xs max-w-sm text-center sm:text-left mx-auto sm:mx-0">©2022 All Rights Reserved.</p>
 			</div>
 		</div>
 	);

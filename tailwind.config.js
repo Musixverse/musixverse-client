@@ -34,7 +34,7 @@ module.exports = {
 			margin: {
 				responsive: "clamp(75px, calc(4.6875rem + ((1vw - 10.28px) * 12.3318)), 185px)",
 				shareEarn2XlHeading: "clamp(-15rem, -75rem + 62.5vw, 0rem)",
-				shareEarnGuitars:"clamp(-10rem, -45rem + 43.75vw, -3rem)",
+				shareEarnGuitars: "clamp(-10rem, -45rem + 43.75vw, -3rem)",
 				startAsArtist2XlHeading: "clamp(-28rem, -140rem + 116.7vw, 0rem)",
 				// 'responsive':'clamp(100px, calc(6.25rem + ((1vw - 10.24px) * 12.2768)), 210px)',
 			},
@@ -71,6 +71,7 @@ module.exports = {
 					700: "#181818",
 					800: "#131313",
 					900: "#0e0e0e",
+					1000: "#080808",
 				},
 				info: {
 					100: "#C2D0F2",

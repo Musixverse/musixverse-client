@@ -1,5 +1,5 @@
-import { NextRequest, NextResponse } from "next/server";
-const PUBLIC_FILE = /\.(.*)$/;
+// import { NextRequest, NextResponse } from "next/server";
+// const PUBLIC_FILE = /\.(.*)$/;
 
 // export function middleware(NextRequest) {
 // 	const { pathname } = NextRequest.nextUrl;

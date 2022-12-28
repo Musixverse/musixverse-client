@@ -63,12 +63,12 @@ const Actions = ({ tokenId, artistName, title }) => {
 				{isTokenFavourite ? (
 					<>
 						<i className="text-lg fa-solid fa-heart text-primary-600"></i>
-						<span>Added to Favourites</span>
+						<span>Added to Favorites</span>
 					</>
 				) : (
 					<>
 						<i className="text-lg fa-solid fa-heart text-zinc-300"></i>
-						<span>Add to Favourites</span>
+						<span>Add to Favorites</span>
 					</>
 				)}
 			</button>

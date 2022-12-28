@@ -7,6 +7,7 @@ import { useMoralis, useMoralisCloudFunction } from "react-moralis";
 import logoBlack from "../../../public/logo-black.svg";
 import logoWhite from "../../../public/logo-white.svg";
 import HamburgerMenu from "./HamburgerMenu/HamburgerMenu";
+import { loadTransak } from "../../utils/TransakOnRamp";
 
 const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 	const { theme, setTheme } = useTheme();
@@ -244,41 +245,32 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 										>
 											<li>
 												{isAuthenticated && user && (
-													<div className="flex flex-col px-4 pt-3 pb-2">
-														<div className="flex items-center justify-between w-full bg-transparent rounded-t-xl dropdown-item whitespace-nowrap active:bg-transparent active:dark:text-light-100">
-															<div>
-																<p>Wallet Address</p>
-																<p>{truncatedWalletAddress}</p>
+													<Link href="/settings/profile-settings" passHref={true}>
+														<div className="flex flex-col px-4 pt-3 pb-2 cursor-pointer rounded-t-xl hover:bg-gray-100 dark:hover:bg-dark-600">
+															<div className="flex items-center justify-between w-full bg-transparent rounded-t-xl dropdown-item whitespace-nowrap active:bg-transparent active:dark:text-light-100">
+																<div>
+																	<p>Wallet Address</p>
+																	<p>{truncatedWalletAddress}</p>
+																</div>
+																{avatarUrl ? (
+																	<Image
+																		src={avatarUrl}
+																		alt={user.walletAddress}
+																		width={40}
+																		height={40}
+																		objectFit="contain"
+																		className="rounded-lg"
+																	/>
+																) : null}
 															</div>
-															{avatarUrl ? (
-																<Image
-																	src={avatarUrl}
-																	alt={user.walletAddress}
-																	width={40}
-																	height={40}
-																	objectFit="contain"
-																	className="rounded-lg"
-																/>
-															) : null}
+															<p className="mt-1">
+																Balance:&nbsp;&nbsp;
+																<Image src={"/assets/matic-logo.svg"} width={12} height={12} alt="matic logo" /> {balance}
+																&nbsp;MATIC
+															</p>
 														</div>
-														<p className="mt-1">
-															Balance:&nbsp;&nbsp;
-															<Image src={"/assets/matic-logo.svg"} width={12} height={12} alt="matic logo" /> {balance}
-															&nbsp;MATIC
-														</p>
-													</div>
+													</Link>
 												)}
-												{/* (
-													<div className="px-4 py-3 bg-transparent rounded-t-xl hover:bg-primary-500 hover:text-light-100">
-														<a
-															className="block w-full dropdown-item whitespace-nowrap hover:bg-primary-500 active:bg-primary-500"
-															href="#"
-															onClick={() => setAuthModalOpen(true)}
-														>
-															Connect wallet
-														</a>
-													</div>
-												) */}
 											</li>
 											{user && isAuthenticated && user.attributes.email && (
 												<li>
@@ -298,15 +290,18 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 													</Link>
 												</li>
 											)}
-											{/* {user && isAuthenticated && user.attributes.email && (
+											{user && isAuthenticated && user.attributes.email && (
 												<li>
-													<Link href="/settings/notifications-settings" passHref={true}>
-														<div className="block w-full px-4 py-2 bg-transparent cursor-pointer dropdown-item whitespace-nowrap hover:bg-gray-100 dark:hover:bg-dark-600">
-															Notification Settings
-														</div>
-													</Link>
+													<div
+														onClick={() => loadTransak(user)}
+														className="block w-full px-4 py-2 bg-transparent cursor-pointer dropdown-item whitespace-nowrap hover:bg-gray-100 dark:hover:bg-dark-600"
+													>
+														Buy MATIC&nbsp;&nbsp;
+														<Image src={"/assets/matic-logo.svg"} width={14} height={14} alt="matic logo" />
+													</div>
 												</li>
-											)} */}
+											)}
+
 											{user && isAuthenticated && user.attributes.email && (
 												<li>
 													<Link href="/settings/account-help" passHref={true}>

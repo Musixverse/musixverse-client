@@ -1,13 +1,13 @@
 import { Fragment, useState, useEffect } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/solid";
-import styles from "../../../../styles/CreateNFT/InputDropdown.module.css";
+import styles from "../../../styles/CreateNFT/InputDropdown.module.css";
 
 function classNames(...classes) {
 	return classes.filter(Boolean).join(" ");
 }
 
-export default function InputDropdown({ optionsArray, setChoice, initialValue }) {
+export default function InputDropdown({ optionsArray, setChoice, initialValue, classes }) {
 	const [currentFilter, setCurrentFilter] = useState(initialValue);
 
 	useEffect(() => {
@@ -49,7 +49,7 @@ export default function InputDropdown({ optionsArray, setChoice, initialValue })
 		<Menu as="div" className="relative inline-block w-full text-left">
 			{/* The visible dropdown button */}
 			<div>
-				<Menu.Button className={"dark:bg-[#323232] hover:dark:border-[#6cc027] dark:text-light-100 dark:border-[#323232] " + styles["menu-button"]}>
+				<Menu.Button className={`dark:bg-[#323232] hover:dark:border-[#6cc027] dark:text-light-100 dark:border-[#323232] ` + styles["menu-button"]}>
 					{currentFilter.length > 20 ? currentFilter.substring(0, 17) + "..." : currentFilter}
 					<ChevronDownIcon className="ml-2 h-5 w-5 text-[#6cc027]" aria-hidden="true" />
 				</Menu.Button>

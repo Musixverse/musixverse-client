@@ -18,6 +18,17 @@ import "react-datepicker/dist/react-datepicker.css";
 import { PARSE_APP_ID, PARSE_SERVER_URL } from "../config/constants";
 import AudioPlayerContext from "../../store/audioplayer-context";
 
+// Moralis v2 auth
+import { createClient, configureChains, defaultChains, WagmiConfig } from "wagmi";
+import { publicProvider } from "wagmi/providers/public";
+import { SessionProvider } from "next-auth/react";
+const { provider, webSocketProvider } = configureChains(defaultChains, [publicProvider()]);
+const client = createClient({
+	provider,
+	webSocketProvider,
+	autoConnect: true,
+});
+
 function App({ Component, pageProps, router }) {
 	useEffect(() => {
 		const handleRouteChange = (url) => {
@@ -114,24 +125,28 @@ function App({ Component, pageProps, router }) {
 			<ErrorBoundary>
 				<MoralisProvider appId={PARSE_APP_ID} serverUrl={PARSE_SERVER_URL}>
 					<ThemeProvider attribute="class" enableSystem={false} disableTransitionOnChange>
-						<BrowserNotSupportedContext.Provider value={[isBrowserNotSupportedModalOpen, setBrowserNotSupportedModalOpen]}>
-							<LoadingContext.Provider value={[isLoading, setLoading]}>
-								<AccessLevelContext.Provider value={[accessLevel, setAccessLevel]}>
-									<AuthModalContext.Provider value={[authModalOpen, setAuthModalOpen]}>
-										<StatusContext.Provider value={[error, success, setSuccess, setError]}>
-											<AudioPlayerContext.Provider value={[audioPlayerProps, setAudioPlayerProps]}>
-												<ProtectedRoutes router={router}>
-													<Layout>
-														<ScrollToPageTop />
-														<Component {...pageProps} />
-													</Layout>
-												</ProtectedRoutes>
-											</AudioPlayerContext.Provider>
-										</StatusContext.Provider>
-									</AuthModalContext.Provider>
-								</AccessLevelContext.Provider>
-							</LoadingContext.Provider>
-						</BrowserNotSupportedContext.Provider>
+						<WagmiConfig client={client}>
+							<SessionProvider session={pageProps.session} refetchInterval={0}>
+								<BrowserNotSupportedContext.Provider value={[isBrowserNotSupportedModalOpen, setBrowserNotSupportedModalOpen]}>
+									<LoadingContext.Provider value={[isLoading, setLoading]}>
+										<AccessLevelContext.Provider value={[accessLevel, setAccessLevel]}>
+											<AuthModalContext.Provider value={[authModalOpen, setAuthModalOpen]}>
+												<StatusContext.Provider value={[error, success, setSuccess, setError]}>
+													<AudioPlayerContext.Provider value={[audioPlayerProps, setAudioPlayerProps]}>
+														<ProtectedRoutes router={router}>
+															<Layout>
+																<ScrollToPageTop />
+																<Component {...pageProps} />
+															</Layout>
+														</ProtectedRoutes>
+													</AudioPlayerContext.Provider>
+												</StatusContext.Provider>
+											</AuthModalContext.Provider>
+										</AccessLevelContext.Provider>
+									</LoadingContext.Provider>
+								</BrowserNotSupportedContext.Provider>
+							</SessionProvider>
+						</WagmiConfig>
 					</ThemeProvider>
 				</MoralisProvider>
 			</ErrorBoundary>

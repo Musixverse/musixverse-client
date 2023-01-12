@@ -12,12 +12,22 @@ import { DISCORD_SUPPORT_CHANNEL_INVITE_LINK } from "../../config/constants";
 import RequiredAsterisk from "../RequiredAsterisk";
 import LoadingContext from "../../../store/loading-context";
 import StatusContext from "../../../store/status-context";
+import AuthModalContext from "../../../store/authModal-context";
+
+import { MetaMaskConnector } from "wagmi/connectors/metaMask";
+import { MagicAuthConnector } from "@everipedia/wagmi-magic-connector";
+import { signIn } from "next-auth/react";
+import { useAccount, useConnect, useSignMessage, useDisconnect } from "wagmi";
+import { useAuthRequestChallengeEvm } from "@moralisweb3/next";
+import axios from "axios";
+import Parse from "parse";
 
 export default function AuthModal({ isOpen = "", onClose = "" }) {
 	const router = useRouter();
-	const { authenticate, isAuthenticated, isWeb3Enabled, enableWeb3, Moralis } = useMoralis();
+	const { authenticate, isAuthenticated, isWeb3Enabled, enableWeb3, Moralis, setUserData } = useMoralis();
 	const [, setLoading] = useContext(LoadingContext);
 	const [, , , setError] = useContext(StatusContext);
+	const [authModalOpen, setAuthModalOpen] = useContext(AuthModalContext);
 	const [isModalOpen, setIsModalOpen] = useState(isOpen);
 	const [magicFormOpen, setMagicFormOpen] = useState(false);
 	const emailRef = useRef(null);
@@ -54,21 +64,83 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 
 	const magicLogin = async () => {
 		if (!isAuthenticated) {
-			await authenticate({
+			// await authenticate({
+			// 	provider: "magicLink",
+			// 	email: emailRef.current.value,
+			// 	apiKey: process.env.NEXT_PUBLIC_MAGICLINK_API_KEY,
+			// 	network: "mainnet",
+			// })
+			// 	.then(function (user) {
+			// 		if (user) {
+			// 			closeModal();
+			// 			if (router.pathname === "/") router.push("/mxcatalog/new-releases");
+			// 		}
+			// 	})
+			// 	.catch(function (error) {
+			// 		console.log("Magic authentication error:", error);
+			// 	});
+
+			// Enable web3 to get user address and chain
+			setLoading({
+				status: true,
+				message: "Getting you into Musixverse...",
+			});
+			await enableWeb3({
+				throwOnError: true,
 				provider: "magicLink",
 				email: emailRef.current.value,
 				apiKey: process.env.NEXT_PUBLIC_MAGICLINK_API_KEY,
-				network: "mumbai",
+				network: "mainnet",
+			});
+			const { account, chainId } = Moralis;
+
+			if (!account) {
+				throw new Error("Connecting to chain failed, as no connected account was found");
+			}
+			if (!chainId) {
+				throw new Error("Connecting to chain failed, as no connected chain was found");
+			}
+
+			// Get message to sign from the auth api
+			const { message } = await Moralis.Cloud.run("requestMessage", {
+				address: account,
+				chain: parseInt(chainId, 16),
+				networkType: "evm",
+			});
+
+			// Authenticate and login via parse
+			await authenticate({
+				signingMessage: message,
+				throwOnError: true,
+				provider: "magicLink",
+				email: emailRef.current.value,
+				apiKey: process.env.NEXT_PUBLIC_MAGICLINK_API_KEY,
+				network: "mainnet",
 			})
-				.then(function (user) {
+				.then(async function (user) {
 					if (user) {
-						closeModal();
-						if (router.pathname === "/") router.push("/mxcatalog/new-releases");
+						await fetch("/api/auth/login", {
+							method: "post",
+							headers: {
+								"Content-Type": "application/json",
+							},
+							body: JSON.stringify({ currentUser: user }),
+						}).then(() => {
+							closeModal();
+							if (router.pathname === "/") router.replace("/mxcatalog/new-releases");
+						});
+						setAuthModalOpen(false);
+						console.log("MagicLink authentication success:", user);
 					}
+					setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 				})
 				.catch(function (error) {
-					console.log("Magic authentication error:", error);
+					console.log("MagicLink authentication error:", error);
+					setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 				});
+			setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
+			// pushpit@musixverse.com
+			// pushpit.19584@sscbs.du.ac.in
 		}
 	};
 
@@ -225,9 +297,78 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 		setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 	};
 
-	// const [betaAccessGranted, setBetaAccessGranted] = useState(false);
-	// const [betaAccessError, setBetaAccessError] = useState(false);
-	// const [accessCode, setAccessCode] = useState("");
+	// const { connectAsync } = useConnect();
+	// const { disconnectAsync } = useDisconnect();
+	// const { isConnected } = useAccount();
+	// const { signMessageAsync } = useSignMessage();
+	// const { requestChallengeAsync } = useAuthRequestChallengeEvm();
+	// const { push } = useRouter();
+
+	// const handleAuth = async () => {
+	// 	if (isConnected) {
+	// 		await disconnectAsync();
+	// 	}
+
+	// 	const { account, chain } = await connectAsync({ connector: new MetaMaskConnector() });
+	// 	const { message } = await requestChallengeAsync({ address: account, chainId: chain.id });
+	// 	const signature = await signMessageAsync({ message });
+	// 	// redirect user after success authentication to '/user' page
+	// 	const { url } = await signIn("moralis-auth", { message, signature, redirect: false, callbackUrl: "/user" });
+	// 	/**
+	// 	 * instead of using signIn(..., redirect: "/user")
+	// 	 * we get the url from callback and push it to the router to avoid page refreshing
+	// 	 */
+	// 	push(url);
+	// };
+
+	const { connectAsync } = useConnect({
+		connector: new MagicAuthConnector({
+			options: {
+				apiKey: process.env.NEXT_PUBLIC_MAGICLINK_API_KEY,
+				accentColor: "#5AB510",
+				customLogo: "/mxv_green.png",
+				customHeaderText: "Musixverse",
+			},
+		}),
+	});
+	const { disconnectAsync } = useDisconnect();
+	const { isConnected } = useAccount();
+	const { signMessageAsync } = useSignMessage();
+	const { push } = useRouter();
+
+	const handleAuth = async () => {
+		if (isConnected) {
+			await disconnectAsync();
+		}
+
+		const { account } = await connectAsync();
+		console.log("account:", account);
+
+		// process.env.NEXT_PUBLIC_BLOCKCHAIN_NETWORK_ID
+		const userData = { address: account, chain: "0x1", network: "evm" };
+		const { data } = await axios.post("/api/auth/request-message", userData, {
+			headers: {
+				"Content-Type": "application/json",
+			},
+		});
+		const message = data.message;
+
+		const signature = await signMessageAsync({ message });
+
+		// redirect user after success authentication to '/user' page
+		const { url } = await signIn("credentials", {
+			message,
+			signature,
+			redirect: false,
+			callbackUrl: "/user",
+		});
+
+		/**
+		 * instead of using signIn(..., redirect: "/user")
+		 * we get the url from callback and push it to the router to avoid page refreshing
+		 */
+		push(url);
+	};
 
 	return (
 		<>
@@ -270,74 +411,19 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 								</div>
 							</div>
 
-							{/* {!betaAccessGranted ? (
-								<div className="w-full flex flex-col sm:flex-row mt-4 pr-4">
-									<div className="sm:w-2/5">
-										<div className="text-xl font-semibold font-primary">Jump into Musixverse!</div>
-										<p className="text-sm mt-4 pr-14">Please enter an access code to try out Musixverse Beta.</p>
-										<p className="text-[10px] text-gray-400 mt-8 sm:mt-36 pr-14">
-											If you do not have an access code yet, please{" "}
-											<Link href={DISCORD_SUPPORT_CHANNEL_INVITE_LINK} passHref>
-												<a target="_blank" rel="noopener noreferrer" className="text-primary-500 hover:text-primary-600">
-													contact our team here
-												</a>
-											</Link>
-											.
-										</p>
-									</div>
-									<div className="sm:w-3/5">
-										<form
-											onSubmit={(e) => {
-												e.preventDefault();
-												if (accessCode === "MXVBETAQPALZM") {
-													setBetaAccessGranted(true);
-												} else {
-													setBetaAccessError(true);
-												}
-											}}
-										>
-											<p className="text-sm dark:text-light-200 mb-2">
-												Access Code
-												<RequiredAsterisk />
-											</p>
-											<input
-												type="text"
-												value={accessCode}
-												onChange={(e) => {
-													setAccessCode(e.target.value);
-													setBetaAccessError(false);
-												}}
-												className="w-full p-2 border-2 border-gray-500 rounded-md shadow-sm outline-none focus:border-primary-500 text-sm"
-												required
-											/>
-											{betaAccessError && <span className="text-error-600 text-xs mt-1">Invalid access code</span>}
-											<div className="flex justify-end mt-12">
-												<button
-													type="submit"
-													className="flex justify-center items-center space-x-3 bg-primary-500 hover:bg-primary-600 text-[14px] text-light-100 py-2 px-6 rounded-lg font-primary font-semibold max-w-[210px]"
-												>
-													Submit
-													<span className="ml-2 text-xl">
-														<i className="fa-solid fa-arrow-right-long"></i>
-													</span>
-												</button>
-											</div>
-										</form>
-									</div>
-								</div> */}
-
 							{!magicFormOpen ? (
 								<div className="w-full flex flex-col sm:flex-row sm:space-x-4 mt-4 pr-4">
 									<div className="sm:w-2/5">
 										<div className="text-xl font-semibold font-primary">Jump into Musixverse!</div>
 										<p className="text-sm mt-4 pr-14">Select your wallet from the options to get started.</p>
-										<p className="text-[10px] text-gray-400 mt-8 sm:mt-36 pr-14">
+										<p className="text-[10px] text-gray-400 mt-8 sm:mt-48 pr-14">
 											Connecting your wallet is the simplest way to log in to the world of Web3!
 										</p>
 									</div>
 									<div className="sm:w-3/5 mt-4 sm:-mt-10">
 										<div className="text-sm">Available Wallets</div>
 										<div className="mt-6 w-full space-y-4">
+											<button onClick={() => handleAuth("magicLink")}>Authenticate via Magic</button>
 											<button
 												onClick={() => handleMetamaskAuth()}
 												className="w-full bg-light-200 hover:bg-light-300 dark:bg-dark-800 dark:hover:bg-[#000] rounded-lg flex items-center p-4 text-sm"
@@ -362,20 +448,20 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 													</span>
 												</div>
 											</button>
-											{/* <button
+											<button
 												onClick={() => setMagicFormOpen(true)}
 												className="w-full bg-light-200 hover:bg-light-300 dark:bg-dark-800 dark:hover:bg-[#000] rounded-lg flex items-center p-4 text-sm"
 											>
-												<Image src="/assets/magic.svg" alt="Magic Logo" width="35" height="35" />
+												<i className="fa-regular fa-envelope text-[2rem] ml-1 text-dark-500"></i>
 												<div className="flex justify-between items-center w-full">
-													<span className="ml-4">Magic</span>
+													<span className="ml-4">Email</span>
 													<span className="ml-2 text-xl">
 														<i className="fa-solid fa-arrow-right-long"></i>
 													</span>
 												</div>
-											</button> */}
+											</button>
 										</div>
-										<p className="text-[15px] text-gray-400 mt-4 sm:mt-16">
+										<p className="text-[14px] text-gray-400 mt-6 sm:mt-10">
 											Having problems setting up your wallet? Follow this&nbsp;
 											<Link href={"https://medium.com/@musixverse/how-to-set-up-a-crypto-wallet-metamask-477be25c0f5f"} passHref>
 												<a target="_blank" rel="noopener noreferrer" className="text-primary-500 hover:text-primary-600">
@@ -395,8 +481,13 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 											Connecting your wallet is the simplest way to log in to the world of Web3!
 										</p>
 									</div>
-									<div className="sm:w-3/5">
-										<form onSubmit={magicLogin}>
+									<div className="sm:w-3/5 mt-4 sm:mt-0">
+										<form
+											onSubmit={(e) => {
+												e.preventDefault();
+												magicLogin();
+											}}
+										>
 											<p className="text-sm dark:text-light-200 mb-2">Email Address*</p>
 											<input
 												type="email"

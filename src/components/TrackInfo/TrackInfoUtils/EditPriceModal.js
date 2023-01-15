@@ -51,6 +51,10 @@ const EditPriceModal = ({ isOpen, setEditPriceModalOpen, tokenId, currentPrice }
 		} catch (err) {
 			setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 			setEditPriceModalOpen(false);
+
+			if (err.message && err.message.startsWith("underlying network changed")) {
+				await setNewPrice(e);
+			}
 			if (err.title === "User is not connected to the same wallet") {
 				setError({
 					title: err.title,

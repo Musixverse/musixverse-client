@@ -62,7 +62,7 @@ export default function CtaButtons({ currentOwnerAddress, tokenId, trackId, pric
 							/>
 						</>
 					) : user && user.attributes.ethAddress == currentOwnerAddress ? (
-						<CustomButton green={true} onClick={() => setShareTrackNftModalOpen(true)}>
+						<CustomButton type="button" green={true} onClick={() => setShareTrackNftModalOpen(true)}>
 							<div className="flex justify-center items-center space-x-2">
 								<i className="fa-solid fa-share-nodes text-lg"></i>
 								<span>Share</span>

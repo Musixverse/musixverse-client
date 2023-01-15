@@ -5,29 +5,21 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useMoralis } from "react-moralis";
 const { Transition } = require("@headlessui/react");
+import { Magic } from "magic-sdk";
 import { addPolygonNetwork } from "../../utils/smart-contract/functions";
+import { isEmailValid, isEmailValidAndAvailableForMagicLogin } from "../../utils/Validate";
 import logoBlack from "../../../public/logo-black.svg";
 import logoWhite from "../../../public/logo-white.svg";
-import { DISCORD_SUPPORT_CHANNEL_INVITE_LINK } from "../../config/constants";
-import RequiredAsterisk from "../RequiredAsterisk";
 import LoadingContext from "../../../store/loading-context";
 import StatusContext from "../../../store/status-context";
 import AuthModalContext from "../../../store/authModal-context";
 
-import { MetaMaskConnector } from "wagmi/connectors/metaMask";
-import { MagicAuthConnector } from "@everipedia/wagmi-magic-connector";
-import { signIn } from "next-auth/react";
-import { useAccount, useConnect, useSignMessage, useDisconnect } from "wagmi";
-import { useAuthRequestChallengeEvm } from "@moralisweb3/next";
-import axios from "axios";
-import Parse from "parse";
-
 export default function AuthModal({ isOpen = "", onClose = "" }) {
 	const router = useRouter();
-	const { authenticate, isAuthenticated, isWeb3Enabled, enableWeb3, Moralis, setUserData } = useMoralis();
+	const { authenticate, isAuthenticated, isWeb3Enabled, enableWeb3, Moralis, logout } = useMoralis();
 	const [, setLoading] = useContext(LoadingContext);
 	const [, , , setError] = useContext(StatusContext);
-	const [authModalOpen, setAuthModalOpen] = useContext(AuthModalContext);
+	const [, setAuthModalOpen] = useContext(AuthModalContext);
 	const [isModalOpen, setIsModalOpen] = useState(isOpen);
 	const [magicFormOpen, setMagicFormOpen] = useState(false);
 	const emailRef = useRef(null);
@@ -62,29 +54,61 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 		} else displayAuthMethods();
 	};
 
+	// To log out user who authenticated using Magiclink
+	const [magicUser, setMagicUser] = useState(null);
+	useEffect(() => {
+		async function getMagicUser() {
+			try {
+				const magic = new Magic(process.env.NEXT_PUBLIC_MAGICLINK_API_KEY);
+				await magic.user.getMetadata().then((_magicUser) => {
+					if (_magicUser && _magicUser.email) {
+						setMagicUser(_magicUser);
+					}
+				});
+			} catch (e) {}
+		}
+		getMagicUser();
+	}, []);
+	const handleLogout = async () => {
+		if (router.pathname != "/") router.push("/");
+		await logout();
+		if (magicUser) {
+			const magic = new Magic(process.env.NEXT_PUBLIC_MAGICLINK_API_KEY);
+			await magic.user.logout();
+		}
+		if (window.localStorage.walletconnect) {
+			window.localStorage.removeItem("walletconnect");
+		}
+		await fetch("/api/auth/logout", {
+			method: "post",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({}),
+		});
+	};
 	const magicLogin = async () => {
 		if (!isAuthenticated) {
-			// await authenticate({
-			// 	provider: "magicLink",
-			// 	email: emailRef.current.value,
-			// 	apiKey: process.env.NEXT_PUBLIC_MAGICLINK_API_KEY,
-			// 	network: "mainnet",
-			// })
-			// 	.then(function (user) {
-			// 		if (user) {
-			// 			closeModal();
-			// 			if (router.pathname === "/") router.push("/mxcatalog/new-releases");
-			// 		}
-			// 	})
-			// 	.catch(function (error) {
-			// 		console.log("Magic authentication error:", error);
-			// 	});
-
-			// Enable web3 to get user address and chain
 			setLoading({
 				status: true,
 				message: "Getting you into Musixverse...",
 			});
+
+			const emailCheck = await isEmailValid(emailRef.current.value);
+			if (emailCheck.status === false) {
+				setError({
+					title: emailCheck.title || "Invalid credentials!",
+					message: emailCheck.message,
+					showErrorBox: true,
+				});
+				emailRef.current.focus();
+				setLoading({
+					status: false,
+				});
+				return;
+			}
+
+			// Enable web3 to get user address and chain
 			await enableWeb3({
 				throwOnError: true,
 				provider: "magicLink",
@@ -92,8 +116,8 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 				apiKey: process.env.NEXT_PUBLIC_MAGICLINK_API_KEY,
 				network: "mainnet",
 			});
-			const { account, chainId } = Moralis;
 
+			const { account, chainId } = Moralis;
 			if (!account) {
 				throw new Error("Connecting to chain failed, as no connected account was found");
 			}
@@ -119,6 +143,24 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 			})
 				.then(async function (user) {
 					if (user) {
+						if (!user.attributes.email) {
+							// EMAIL CHECK
+							const emailCheck = await isEmailValidAndAvailableForMagicLogin(emailRef.current.value);
+							if (emailCheck.status === false) {
+								setError({
+									title: emailCheck.title || "Invalid credentials!",
+									message: emailCheck.message,
+									showErrorBox: true,
+								});
+								emailRef.current.focus();
+								await handleLogout();
+								setLoading({
+									status: false,
+								});
+								return;
+							}
+							await Moralis.Cloud.run("magicAuthSetUserEmail", { email: emailRef.current.value, userId: user.id });
+						}
 						await fetch("/api/auth/login", {
 							method: "post",
 							headers: {
@@ -130,17 +172,14 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 							if (router.pathname === "/") router.replace("/mxcatalog/new-releases");
 						});
 						setAuthModalOpen(false);
-						console.log("MagicLink authentication success:", user);
 					}
 					setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 				})
 				.catch(function (error) {
-					console.log("MagicLink authentication error:", error);
+					console.error("MagicLink authentication error:", error);
 					setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 				});
 			setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
-			// pushpit@musixverse.com
-			// pushpit.19584@sscbs.du.ac.in
 		}
 	};
 
@@ -297,79 +336,6 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 		setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 	};
 
-	// const { connectAsync } = useConnect();
-	// const { disconnectAsync } = useDisconnect();
-	// const { isConnected } = useAccount();
-	// const { signMessageAsync } = useSignMessage();
-	// const { requestChallengeAsync } = useAuthRequestChallengeEvm();
-	// const { push } = useRouter();
-
-	// const handleAuth = async () => {
-	// 	if (isConnected) {
-	// 		await disconnectAsync();
-	// 	}
-
-	// 	const { account, chain } = await connectAsync({ connector: new MetaMaskConnector() });
-	// 	const { message } = await requestChallengeAsync({ address: account, chainId: chain.id });
-	// 	const signature = await signMessageAsync({ message });
-	// 	// redirect user after success authentication to '/user' page
-	// 	const { url } = await signIn("moralis-auth", { message, signature, redirect: false, callbackUrl: "/user" });
-	// 	/**
-	// 	 * instead of using signIn(..., redirect: "/user")
-	// 	 * we get the url from callback and push it to the router to avoid page refreshing
-	// 	 */
-	// 	push(url);
-	// };
-
-	const { connectAsync } = useConnect({
-		connector: new MagicAuthConnector({
-			options: {
-				apiKey: process.env.NEXT_PUBLIC_MAGICLINK_API_KEY,
-				accentColor: "#5AB510",
-				customLogo: "/mxv_green.png",
-				customHeaderText: "Musixverse",
-			},
-		}),
-	});
-	const { disconnectAsync } = useDisconnect();
-	const { isConnected } = useAccount();
-	const { signMessageAsync } = useSignMessage();
-	const { push } = useRouter();
-
-	const handleAuth = async () => {
-		if (isConnected) {
-			await disconnectAsync();
-		}
-
-		const { account } = await connectAsync();
-		console.log("account:", account);
-
-		// process.env.NEXT_PUBLIC_BLOCKCHAIN_NETWORK_ID
-		const userData = { address: account, chain: "0x1", network: "evm" };
-		const { data } = await axios.post("/api/auth/request-message", userData, {
-			headers: {
-				"Content-Type": "application/json",
-			},
-		});
-		const message = data.message;
-
-		const signature = await signMessageAsync({ message });
-
-		// redirect user after success authentication to '/user' page
-		const { url } = await signIn("credentials", {
-			message,
-			signature,
-			redirect: false,
-			callbackUrl: "/user",
-		});
-
-		/**
-		 * instead of using signIn(..., redirect: "/user")
-		 * we get the url from callback and push it to the router to avoid page refreshing
-		 */
-		push(url);
-	};
-
 	return (
 		<>
 			<Transition show={isModalOpen}>
@@ -423,7 +389,6 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 									<div className="sm:w-3/5 mt-4 sm:-mt-10">
 										<div className="text-sm">Available Wallets</div>
 										<div className="mt-6 w-full space-y-4">
-											<button onClick={() => handleAuth("magicLink")}>Authenticate via Magic</button>
 											<button
 												onClick={() => handleMetamaskAuth()}
 												className="w-full bg-light-200 hover:bg-light-300 dark:bg-dark-800 dark:hover:bg-[#000] rounded-lg flex items-center p-4 text-sm"
@@ -452,7 +417,7 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 												onClick={() => setMagicFormOpen(true)}
 												className="w-full bg-light-200 hover:bg-light-300 dark:bg-dark-800 dark:hover:bg-[#000] rounded-lg flex items-center p-4 text-sm"
 											>
-												<i className="fa-regular fa-envelope text-[2rem] ml-1 text-dark-500"></i>
+												<i className="fa-regular fa-envelope text-[2rem] ml-1 text-dark-500 dark:text-light-300"></i>
 												<div className="flex justify-between items-center w-full">
 													<span className="ml-4">Email</span>
 													<span className="ml-2 text-xl">

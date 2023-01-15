@@ -22,7 +22,10 @@ export default function UnlockableContent({ tokenId, currentOwnerAddress, unlock
 				const data = await res.json();
 				setUnlockableContentUriData(data);
 			} catch (err) {
-				if (err.title === "User is not connected to the same wallet") {
+				if (err.message && err.message.startsWith("underlying network changed")) {
+					await getUnlockableContentUri();
+				}
+				if (err.title && err.title === "User is not connected to the same wallet") {
 					setError({
 						title: err.title,
 						message: err.message,

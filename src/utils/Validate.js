@@ -50,6 +50,33 @@ export async function isEmailValidAndAvailable(email) {
 	};
 }
 
+export async function isEmailValidAndAvailableForMagicLogin(email) {
+	const emailRegex = new RegExp(
+		/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i
+	);
+	if (!emailRegex.test(email)) {
+		return {
+			status: false,
+			message: "Please enter a valid email",
+		};
+	}
+
+	await Moralis.start({ serverUrl: PARSE_SERVER_URL, appId: PARSE_APP_ID });
+	const emailExists = await Moralis.Cloud.run("checkEmailExistsForMagicLogin", { email: email });
+	if (emailExists) {
+		return {
+			status: false,
+			title: "An account with this email already exists",
+			message: "Please sign up using another email address.",
+		};
+	}
+
+	return {
+		status: true,
+		message: "",
+	};
+}
+
 export async function isUsernameValidAndAvailable(username) {
 	if (username.trim().length === 0) return { status: false, title: "Username can't be empty", message: "Please choose another username" };
 

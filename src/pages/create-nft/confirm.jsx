@@ -107,7 +107,7 @@ const confirm = ({ nftDraft }) => {
 
 					<Link href={`/mxcatalog/new-releases`} passHref>
 						<div>
-							<CustomButton green={true} classes="text-sm px-8 py-3 mt-12 font-primary font-semibold">
+							<CustomButton type="button" green={true} classes="text-sm px-8 py-3 mt-12 font-primary font-semibold">
 								Go to Mx Catalog
 								<span className="ml-12 text-xl">
 									<i className="fa-solid fa-arrow-right-long"></i>

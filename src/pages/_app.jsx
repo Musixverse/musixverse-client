@@ -76,17 +76,9 @@ function App({ Component, pageProps, router }) {
 			<Script
 				src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}`}
 				strategy="afterInteractive"
-				onError={(err) => {
-					console.error("Google Tag Manager Script Error:", err);
-				}}
+				onError={(err) => {}}
 			/>
-			<Script
-				id="google-analytics"
-				strategy="afterInteractive"
-				onError={(err) => {
-					console.error("Google Analytics Script Error:", err);
-				}}
-			>
+			<Script id="google-analytics" strategy="afterInteractive" onError={(err) => {}}>
 				{`
                     window.dataLayer = window.dataLayer || [];
                     function gtag(){dataLayer.push(arguments);}

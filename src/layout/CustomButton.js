@@ -1,7 +1,7 @@
 export default function CustomButton({ green = false, greenOutline = false, light200 = false, error = false, onClick, children, classes, type, disabled }) {
 	return (
 		<button
-			type={type ? type : "button"}
+			type={type ? type : "submit"}
 			onClick={() => (onClick ? onClick() : {})}
 			className={
 				green

@@ -8,6 +8,7 @@ import logoBlack from "../../../public/logo-black.svg";
 import logoWhite from "../../../public/logo-white.svg";
 import HamburgerMenu from "./HamburgerMenu/HamburgerMenu";
 import { loadTransak } from "../../utils/TransakOnRamp";
+import { Magic } from "magic-sdk";
 
 const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 	const { theme, setTheme } = useTheme();
@@ -46,8 +47,27 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 		truncatedWalletAddress = user.attributes.ethAddress.substring(0, 10) + "..." + user.attributes.ethAddress.substring(36, 42);
 	}
 
+	// To log out user who authenticated using Magiclink
+	const [magicUser, setMagicUser] = useState(null);
+	useEffect(() => {
+		async function getMagicUser() {
+			try {
+				const magic = new Magic(process.env.NEXT_PUBLIC_MAGICLINK_API_KEY);
+				await magic.user.getMetadata().then((_magicUser) => {
+					if (_magicUser && _magicUser.email) {
+						setMagicUser(_magicUser);
+					}
+				});
+			} catch (e) {}
+		}
+		getMagicUser();
+	}, []);
 	const handleLogout = async () => {
 		if (router.pathname != "/") router.push("/");
+		if (user.attributes.authMethod === "magicLink" || magicUser) {
+			const magic = new Magic(process.env.NEXT_PUBLIC_MAGICLINK_API_KEY);
+			await magic.user.logout();
+		}
 		await logout();
 		if (window.localStorage.walletconnect) {
 			window.localStorage.removeItem("walletconnect");

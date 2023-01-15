@@ -54,9 +54,7 @@ const ShareTrackNftModal = ({ isOpen, setOpen, artistName, title, setAuthModalOp
 					<p className="text-xs">
 						purchases this NFT using your link.&nbsp;
 						<Link href="/faq" passHref>
-							<a className="hover:underline hover:text-primary-500">
-								Learn more
-							</a>
+							<a className="hover:underline hover:text-primary-500">Learn more</a>
 						</Link>
 					</p>
 				</div>
@@ -75,6 +73,7 @@ const ShareTrackNftModal = ({ isOpen, setOpen, artistName, title, setAuthModalOp
 					) : (
 						<div className="flex items-center justify-center w-full">
 							<CustomButton
+								type="button"
 								onClick={() => {
 									setOpen(false);
 									setAuthModalOpen(true);

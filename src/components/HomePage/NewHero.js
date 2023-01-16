@@ -33,7 +33,7 @@ export default function NewHero() {
 						}}
 						className="bg-primary-500 hover:bg-primary-400 text-light-100 transition duration-300 text-center border-[2px] border-primary-500 text-xs sm:text-sm font-medium lg:text-base xl:text-lg rounded-3xl px-10 xl:px-14 py-2"
 					>
-						{isAuthenticated && user ? "Get Started" : "Connect Wallet"}
+						{isAuthenticated && user ? "Get Started" : "Sign up / Login"}
 					</button>
 					<Link href={"/mxcatalog/new-releases"} passHref>
 						<button className="bg-none text-xs sm:text-sm lg:text-base xl:text-lg font-medium rounded-3xl text-center px-10 xl:px-14 py-2 border-[2px] border-primary-400">

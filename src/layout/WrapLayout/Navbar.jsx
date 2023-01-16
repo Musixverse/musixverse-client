@@ -14,7 +14,7 @@ import { loadTransak } from "../../utils/TransakOnRamp";
 
 const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 	const { theme, setTheme } = useTheme();
-	const { isAuthenticated, logout, user, Moralis } = useMoralis();
+	const { isAuthenticated, logout, user, Moralis, isInitialized } = useMoralis();
 	const router = useRouter();
 	const [balance, setBalance] = useState(0);
 
@@ -113,7 +113,6 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 		}
 	);
 	const search = async (keyword) => {
-		console.log(keyword);
 		if (keyword === "") {
 			// If the text field is empty, show no results
 			setSearchResults([]);
@@ -122,10 +121,9 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 		}
 	};
 	useEffect(() => {
-		if (searchedQuery !== "") {
+		if (isInitialized) {
 			performSearch({
 				onSuccess: async (object) => {
-					console.log(object);
 					setSearchResults(object);
 				},
 				onError: (error) => {
@@ -133,7 +131,7 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 				},
 			});
 		}
-	}, [searchedQuery, performSearch]);
+	}, [searchedQuery, performSearch, isInitialized]);
 
 	return (
 		<div className="absolute flex justify-center w-screen">
@@ -206,11 +204,11 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 								{/* Search bar */}
 								<li
 									className="block group relative search-li"
-									onMouseOver={() => {
+									onMouseEnter={() => {
 										document.getElementById("search-input").focus();
 										setSearchFocused(true);
 									}}
-									onMouseOut={() => {
+									onMouseLeave={() => {
 										document.getElementById("search-input").blur();
 										setSearchFocused(false);
 									}}
@@ -409,7 +407,7 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 													onClick={() => setAuthModalOpen(true)}
 													className="flex items-center justify-center px-10 py-2 text-base font-semibold rounded-full bg-search-100 dark:bg-search-200"
 												>
-													Connect wallet
+													Sign up / Login
 												</div>
 											) : (
 												<div className="flex items-center justify-center px-4 py-2 text-sm rounded-full bg-search-100 dark:bg-search-200">

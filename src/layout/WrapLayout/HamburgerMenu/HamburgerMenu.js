@@ -92,7 +92,7 @@ export default function HamburgerMenu({ avatarUrl, truncatedName }) {
 												}}
 												className="quick_hamburger_nav flex items-center justify-center px-6 py-2 text-base font-semibold rounded-full text-white bg-search-200"
 											>
-												Connect wallet
+												Sign up / Login
 											</div>
 										) : (
 											<div className="quick_hamburger_nav flex items-center justify-center px-4 py-2 text-sm rounded-full text-white bg-search-200">

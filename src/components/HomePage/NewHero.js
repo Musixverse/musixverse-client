@@ -8,7 +8,7 @@ import styles from "../../../styles/HomePage/newHero.module.css";
 import AuthModalContext from "../../../store/authModal-context";
 import Carousel from "./HomePageUtils/PromoCarousel";
 
-export default function NewHero() {
+export default function NewHero({ tracks }) {
 	const router = useRouter();
 	const [, setAuthModalOpen] = useContext(AuthModalContext);
 	const { user, isAuthenticated } = useMoralis();
@@ -54,7 +54,7 @@ export default function NewHero() {
 
 			{/* <PromoNftCard/> */}
 			{/* <Carousal></Carousal> */}
-			<Carousel />
+			<Carousel tracks={tracks} />
 			{/* <Carousal slides={slides} autoplay={true} interval={1000}/> */}
 		</div>
 	);

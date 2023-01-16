@@ -13,6 +13,7 @@ import logoWhite from "../../../public/logo-white.svg";
 import LoadingContext from "../../../store/loading-context";
 import StatusContext from "../../../store/status-context";
 import AuthModalContext from "../../../store/authModal-context";
+import MagicWeb3Connector from "../../components/Auth/MagicWeb3Connector";
 
 export default function AuthModal({ isOpen = "", onClose = "" }) {
 	const router = useRouter();
@@ -111,7 +112,8 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 			// Enable web3 to get user address and chain
 			await enableWeb3({
 				throwOnError: true,
-				provider: "magicLink",
+				// provider: "magicLink",
+				connector: MagicWeb3Connector,
 				email: emailRef.current.value,
 				apiKey: process.env.NEXT_PUBLIC_MAGICLINK_API_KEY,
 				network: "mainnet",
@@ -132,53 +134,60 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 				networkType: "evm",
 			});
 
-			// Authenticate and login via parse
-			await authenticate({
-				signingMessage: message,
-				throwOnError: true,
-				provider: "magicLink",
-				email: emailRef.current.value,
-				apiKey: process.env.NEXT_PUBLIC_MAGICLINK_API_KEY,
-				network: "mainnet",
-			})
-				.then(async function (user) {
-					if (user) {
-						if (!user.attributes.email) {
-							// EMAIL CHECK
-							const emailCheck = await isEmailValidAndAvailableForMagicLogin(emailRef.current.value);
-							if (emailCheck.status === false) {
-								setError({
-									title: emailCheck.title || "Invalid credentials!",
-									message: emailCheck.message,
-									showErrorBox: true,
-								});
-								emailRef.current.focus();
-								await handleLogout();
-								setLoading({
-									status: false,
-								});
-								return;
-							}
-							await Moralis.Cloud.run("magicAuthSetUserEmail", { email: emailRef.current.value, userId: user.id });
-						}
-						await fetch("/api/auth/login", {
-							method: "post",
-							headers: {
-								"Content-Type": "application/json",
-							},
-							body: JSON.stringify({ currentUser: user }),
-						}).then(() => {
-							closeModal();
-							if (router.pathname === "/") router.replace("/mxcatalog/new-releases");
-						});
-						setAuthModalOpen(false);
-					}
-					setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
+			try {
+				// Authenticate and login via parse
+				await authenticate({
+					signingMessage: message,
+					throwOnError: true,
+					// provider: "magicLink",
+					connector: MagicWeb3Connector,
+					email: emailRef.current.value,
+					apiKey: process.env.NEXT_PUBLIC_MAGICLINK_API_KEY,
+					network: "mainnet",
 				})
-				.catch(function (error) {
-					console.error("MagicLink authentication error:", error);
-					setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
-				});
+					.then(async function (user) {
+						if (user) {
+							if (!user.attributes.email) {
+								// EMAIL CHECK
+								const emailCheck = await isEmailValidAndAvailableForMagicLogin(emailRef.current.value);
+								if (emailCheck.status === false) {
+									setError({
+										title: emailCheck.title || "Invalid credentials!",
+										message: emailCheck.message,
+										showErrorBox: true,
+									});
+									emailRef.current.focus();
+									await handleLogout();
+									setLoading({
+										status: false,
+									});
+									return;
+								}
+								await Moralis.Cloud.run("magicAuthSetUserEmail", { email: emailRef.current.value, userId: user.id });
+							}
+							await fetch("/api/auth/login", {
+								method: "post",
+								headers: {
+									"Content-Type": "application/json",
+								},
+								body: JSON.stringify({ currentUser: user }),
+							}).then(() => {
+								closeModal();
+								if (router.pathname === "/") router.replace("/mxcatalog/new-releases");
+							});
+							setAuthModalOpen(false);
+						}
+						setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
+					})
+					.catch(function (error) {
+						console.error("MagicLink authentication error:", error);
+						setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
+						router.reload(window.location.pathname);
+					});
+			} catch (error) {
+				console.error("MagicLink authentication error:", error);
+				router.reload(window.location.pathname);
+			}
 			setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 		}
 	};

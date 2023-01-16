@@ -64,6 +64,10 @@ a {
 	@apply w-[275px] px-4;
 }
 
+.search-li:hover .search-text {
+	@apply w-[275px] px-4;
+}
+
 .search-box:hover > .search-btn {
 	@apply text-black bg-white;
 }

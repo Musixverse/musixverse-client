@@ -1,14 +1,16 @@
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Fragment } from "react";
+import { Magic } from "magic-sdk";
+const { Transition } = require("@headlessui/react");
 import { useRouter } from "next/router";
 import { useTheme } from "next-themes";
 import Image from "next/image";
 import { useMoralis, useMoralisCloudFunction } from "react-moralis";
 import logoBlack from "../../../public/logo-black.svg";
 import logoWhite from "../../../public/logo-white.svg";
+import mxv_verified from "../../../public/assets/mxv_tick.svg";
 import HamburgerMenu from "./HamburgerMenu/HamburgerMenu";
 import { loadTransak } from "../../utils/TransakOnRamp";
-import { Magic } from "magic-sdk";
 
 const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 	const { theme, setTheme } = useTheme();
@@ -92,13 +94,64 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 		window.addEventListener("scroll", handleScroll);
 		return () => window.removeEventListener("scroll", handleScroll);
 	});
-
 	if (clientWindowHeight > 50) {
 		customStyles = "lg:rounded-full lg:mt-2 lg:shadow-lg";
 	}
 
+	/**************************************************************************/
+	/******************************   Search  *********************************/
+	/**************************************************************************/
+	const [searchText, setSearchText] = useState("");
+	const [searchedQuery, setSearchedQuery] = useState("");
+	const [searchResults, setSearchResults] = useState([]);
+	const [isSearchFocused, setSearchFocused] = useState(false);
+	const { fetch: performSearch } = useMoralisCloudFunction(
+		"performSearch",
+		{ searchText: searchText },
+		{
+			autoFetch: false,
+		}
+	);
+	const search = async (keyword) => {
+		console.log(keyword);
+		if (keyword === "") {
+			// If the text field is empty, show no results
+			setSearchResults([]);
+		} else {
+			setSearchedQuery(keyword);
+		}
+	};
+	useEffect(() => {
+		if (searchedQuery !== "") {
+			performSearch({
+				onSuccess: async (object) => {
+					console.log(object);
+					setSearchResults(object);
+				},
+				onError: (error) => {
+					console.log("performSearch Error:", error);
+				},
+			});
+		}
+	}, [searchedQuery, performSearch]);
+
 	return (
 		<div className="absolute flex justify-center w-screen">
+			{/* Blur page background when search icon is hovered */}
+			<Transition show={isSearchFocused}>
+				<Transition.Child
+					as={Fragment}
+					enter="transition-all duration-200"
+					enterFrom="opacity-0"
+					enterTo="opacity-100"
+					leave="transition-all duration-200"
+					leaveTo="opacity-0"
+					leaveFrom="opacity-100"
+				>
+					<div style={{ zIndex: "40" }} className="w-screen h-screen left-0 top-0 bg-black/50 backdrop-blur-sm fixed" />
+				</Transition.Child>
+			</Transition>
+
 			<div className="w-full fixed z-40 max-w-[1920px] lg:px-16 xl:px-20 2xl:px-36">
 				<nav className={"navbar duration-500 ease-in mx-auto " + customStyles}>
 					<div className="flex flex-wrap items-center justify-start w-full pl-7 sm:pl-9 pr-16 lg:px-16 py-2">
@@ -111,15 +164,6 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 						{/* Internal links */}
 						<div className="hidden ml-10 lg:block">
 							<ul className="flex flex-row items-center font-medium md:text-base md:space-x-3 xl:space-x-6 md:mt-0 sm:text-sm">
-								{/* <li className="hidden hover:text-primary-600 md:block">
-									<Link
-										href="/"
-										className="py-2 pl-3 pr-4 text-white rounded hover:text-primary-500 md:bg-transparent md:p-0 dark:text-white"
-										aria-current="page"
-									>
-										Home
-									</Link>
-								</li> */}
 								<li className="hover:text-primary-600">
 									<Link
 										href="/mxcatalog/new-releases"
@@ -157,18 +201,136 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 							</ul>
 						</div>
 
-						<div className="hidden ml-auto md:block">
+						<div className="ml-auto hidden md:block">
 							<ul className="flex flex-row items-center text-sm font-medium md:space-x-8 lg:space-x-3 xl:space-x-6 md:mt-0 sm:text-sm">
 								{/* Search bar */}
-								{/* TODO: hidden for beta */}
-								{/* <li className="hidden xl:block">
+								<li
+									className="block group relative search-li"
+									onMouseOver={() => {
+										document.getElementById("search-input").focus();
+										setSearchFocused(true);
+									}}
+									onMouseOut={() => {
+										document.getElementById("search-input").blur();
+										setSearchFocused(false);
+									}}
+								>
 									<div className="search-box">
-										<input className="search-text" type="text" placeholder="Search items, collections and accounts" />
+										<input
+											className="search-text"
+											id="search-input"
+											type="text"
+											placeholder="Search items, collections and profiles"
+											value={searchText}
+											onChange={(e) => {
+												setSearchText(e.target.value);
+												search(e.target.value);
+											}}
+										/>
 										<a href="#" className="search-btn">
 											<i className="fas fa-search"></i>
 										</a>
 									</div>
-								</li> */}
+
+									<div className="pt-2 rounded-xl absolute w-full md:w-[500px] md:right-0 hidden group-focus-within:block transition-all duration-500">
+										<a className="flex flex-col basis-full">
+											<button
+												type="button"
+												className="flex items-center rounded-t-xl justify-center px-3 pt-3 pb-1 bg-light-100 dark:bg-dark-600 dark:text-light-100 cursor-default"
+											>
+												Artists & Fans
+											</button>
+										</a>
+										{searchResults.users && searchResults.users.length > 0 ? (
+											searchResults.users.map((_user, idx) => (
+												<Link href={`/profile/${_user.username}`} key={_user.objectId}>
+													<a className="flex flex-col basis-full">
+														<button
+															type="button"
+															className="flex items-center justify-start px-3 py-2 bg-light-100 dark:bg-dark-600 dark:text-light-100 hover:bg-light-300 dark:hover:bg-dark-800 text-start"
+														>
+															{_user.avatar ? (
+																<Image src={_user.avatar} height="30" width="30" alt="user's avatar" className="rounded-full" />
+															) : (
+																""
+															)}
+															<span className="ml-2 text-[16px]">{_user.name}</span>
+															<div>
+																<span className="ml-2 text-[12px] font-normal">@{_user.username}</span>
+															</div>
+															{_user.isArtistVerified && (
+																<div className="flex ml-2 align-center">
+																	<Image src={mxv_verified} width={14} height={14} alt="MXV verified" />
+																</div>
+															)}
+														</button>
+													</a>
+												</Link>
+											))
+										) : (
+											<a className="flex flex-col basis-full">
+												<button
+													type="button"
+													className="flex items-center justify-center px-3 pt-4 pb-4 bg-light-100 dark:bg-dark-600 dark:text-light-100 text-xs font-light cursor-default"
+												>
+													No users found
+												</button>
+											</a>
+										)}
+
+										<a className="flex flex-col basis-full">
+											<button
+												type="button"
+												className="flex items-center justify-center px-3 pt-3 pb-1 bg-light-100 dark:bg-dark-600 dark:text-light-100 cursor-default"
+											>
+												Tracks
+											</button>
+										</a>
+										{searchResults.tracks && searchResults.tracks.length > 0 ? (
+											searchResults.tracks.map((_track, idx) => {
+												const _tokenId = parseInt(_track.maxTokenId) - parseInt(_track.numberOfCopies) + 1;
+												return (
+													<Link href={`/track/polygon/${_tokenId}`} key={_tokenId}>
+														<a className="flex flex-col basis-full">
+															<button
+																type="button"
+																className={
+																	"flex items-center justify-start px-3 py-2 bg-light-100 dark:bg-dark-600 dark:text-light-100 hover:bg-light-300 dark:hover:bg-dark-800 text-start " +
+																	(idx + 1 === searchResults.tracks.length ? "rounded-b-xl" : "")
+																}
+															>
+																{_track.artwork.uri ? (
+																	<Image
+																		src={_track.artwork.uri.replace("ipfs://", process.env.NEXT_PUBLIC_IPFS_NODE_URL)}
+																		height="30"
+																		width="30"
+																		alt="cover art"
+																		className="rounded"
+																	/>
+																) : (
+																	""
+																)}
+																<span className="ml-2 text-[16px]">{_track.title}</span>
+																<div>
+																	<span className="ml-2 text-[12px] font-normal">by {_track.artist}</span>
+																</div>
+															</button>
+														</a>
+													</Link>
+												);
+											})
+										) : (
+											<a className="flex flex-col basis-full">
+												<button
+													type="button"
+													className="flex rounded-b-xl items-center justify-center px-3 pt-3 pb-5 bg-light-100 dark:bg-dark-600 dark:text-light-100 text-xs font-light cursor-default"
+												>
+													No tracks to display
+												</button>
+											</a>
+										)}
+									</div>
+								</li>
 
 								{/* Notification button */}
 								{/* <li className="hidden lg:block">
@@ -183,7 +345,7 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 									</button>
 								</li> */}
 								{/* Toggle theme button */}
-								<li>
+								<li className="hidden md:block">
 									<button
 										aria-label="Toggle Dark Mode"
 										type="button"

@@ -1,7 +1,7 @@
 import { Fragment, useState } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/solid";
-import styles from "../../../../styles/CreateNFT/InputDropdown.module.css";
+import styles from "@/styles/CreateNFT/InputDropdown.module.css";
 
 function classNames(...classes) {
 	return classes.filter(Boolean).join(" ");

@@ -32,7 +32,7 @@ const VerifyEmailSuccess = () => {
 						<div className="flex sm:flex-row flex-col items-center justify-center gap-8 mt-6">
 							<Link href={`/profile/verify`} passHref>
 								<div>
-									<CustomButton green={true} classes="text-md px-8 py-3 font-primary font-semibold">
+									<CustomButton type="button" green={true} classes="text-md px-8 py-3 font-primary font-semibold">
 										Verify Profile
 										<span className="ml-6 text-md">
 											<i className="fa-solid fa-arrow-right-long"></i>
@@ -45,14 +45,14 @@ const VerifyEmailSuccess = () => {
 						<div className="flex sm:flex-row flex-col items-center justify-center gap-8 mt-6">
 							<Link href={`/profile/${username}`} passHref>
 								<div>
-									<CustomButton light200={true} classes="text-md px-8 py-3 font-primary font-semibold">
+									<CustomButton type="button" light200={true} classes="text-md px-8 py-3 font-primary font-semibold">
 										View Profile
 									</CustomButton>
 								</div>
 							</Link>
 							<Link href={`/mxcatalog/new-releases`} passHref>
 								<div>
-									<CustomButton green={true} classes="text-md px-8 py-3 font-primary font-semibold">
+									<CustomButton type="button" green={true} classes="text-md px-8 py-3 font-primary font-semibold">
 										Go to Mx Catalog
 										<span className="ml-6 text-md">
 											<i className="fa-solid fa-arrow-right-long"></i>

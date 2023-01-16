@@ -1,6 +1,7 @@
 import { useState, useContext } from "react";
 import Link from "next/link";
 import Image from "next/future/image";
+import { useMoralis } from "react-moralis";
 import Modal from "../../../layout/Modal/Modal";
 import { bytesToMegaBytes } from "../../../utils/Convert";
 import LoadingContext from "../../../../store/loading-context";
@@ -9,6 +10,7 @@ import { updateCommentOnToken } from "../../../utils/smart-contract/functions";
 import UpdateCommentSuccessModal from "./UpdateCommentSuccessModal";
 
 const UnlockableContentModal = ({ isOpen, setOpen, tokenId, selectedUnlockableItemIndex, selectedUnlockableItem }) => {
+	const { user } = useMoralis();
 	const [, setLoading] = useContext(LoadingContext);
 	const [, , , setError] = useContext(StatusContext);
 	const [comment, setComment] = useState("");
@@ -17,10 +19,17 @@ const UnlockableContentModal = ({ isOpen, setOpen, tokenId, selectedUnlockableIt
 	const postComment = async (e) => {
 		e.preventDefault();
 
-		setLoading({
-			status: true,
-			title: "Please sign the transaction in your wallet...",
-		});
+		if (user.attributes.authMethod == "magicLink") {
+			setLoading({
+				status: true,
+				title: "Please wait while your comment is updating...",
+			});
+		} else {
+			setLoading({
+				status: true,
+				title: "Please sign the transaction in your wallet...",
+			});
+		}
 		try {
 			await updateCommentOnToken(tokenId, comment);
 			setOpen(false);
@@ -31,6 +40,9 @@ const UnlockableContentModal = ({ isOpen, setOpen, tokenId, selectedUnlockableIt
 		} catch (err) {
 			setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 			setOpen(false);
+			if (err.message && err.message.startsWith("underlying network changed")) {
+				await postComment(e);
+			}
 			if (err.title === "User is not connected to the same wallet") {
 				setError({
 					title: err.title,

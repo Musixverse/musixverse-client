@@ -123,7 +123,7 @@ export default function BandDashboard({ bandsOfArtist }) {
 
 							<Link href="/create-band" passHref>
 								<div className="w-fit">
-									<CustomButton green={true} classes="text-sm px-6 py-2 mt-4">
+									<CustomButton type="button" green={true} classes="text-sm px-6 py-2 mt-4">
 										Create Band Profile
 										<span className="ml-8 text-xl">
 											<i className="fa-solid fa-arrow-right-long"></i>
@@ -193,9 +193,7 @@ export default function BandDashboard({ bandsOfArtist }) {
 
 						<span className="ml-2 text-sm font-primary">
 							<Link href={`/profile/band/${activeBand.username}`} passHref>
-								<a>
-									@{activeBand.username}
-								</a>
+								<a>@{activeBand.username}</a>
 							</Link>
 						</span>
 					</p>

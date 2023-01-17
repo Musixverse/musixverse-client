@@ -1,4 +1,4 @@
-import { useState, useRef, useContext } from "react";
+import { useState, useRef, useContext, useEffect } from "react";
 import Link from "next/link";
 import RightSection from "./ArtistRegUtils/RightSection";
 import styles from "../../../styles/Registration/Artist.module.css";
@@ -9,8 +9,27 @@ import { useMoralis, useNewMoralisObject } from "react-moralis";
 import StatusContext from "../../../store/status-context";
 import { isUsernameValidAndAvailable, isEmailValidAndAvailable } from "../../utils/Validate";
 import { defaultAvatarUrls } from "../../config/constants";
+import { Magic } from "magic-sdk";
 
 export default function BasicDetails() {
+	const [magicUser, setMagicUser] = useState(null);
+	useEffect(() => {
+		async function getMagicUser() {
+			try {
+				const magic = new Magic(process.env.NEXT_PUBLIC_MAGICLINK_API_KEY);
+				await magic.user.getMetadata().then((_magicUser) => {
+					if (_magicUser && _magicUser.email) {
+						setEmail(_magicUser.email);
+						setMagicUser(_magicUser);
+					}
+				});
+			} catch (e) {
+				console.error("MagicLink not found:", e);
+			}
+		}
+		getMagicUser();
+	}, []);
+
 	const [, , , setError] = useContext(StatusContext);
 	const { userError, user, setUserData } = useMoralis();
 	const { save: saveUserInfo } = useNewMoralisObject("UserInfo");
@@ -42,24 +61,35 @@ export default function BasicDetails() {
 		}
 
 		// EMAIL CHECK
-		const emailCheck = await isEmailValidAndAvailable(email);
-		if (emailCheck.status === false) {
-			setError({
-				title: emailCheck.title || "Invalid credentials!",
-				message: emailCheck.message,
-				showErrorBox: true,
-			});
-			emailRef.current.focus();
-			return;
+		if (magicUser && magicUser.email) {
+		} else {
+			const emailCheck = await isEmailValidAndAvailable(email);
+			if (emailCheck.status === false) {
+				setError({
+					title: emailCheck.title || "Invalid credentials!",
+					message: emailCheck.message,
+					showErrorBox: true,
+				});
+				emailRef.current.focus();
+				return;
+			}
 		}
 
 		if (name !== "" && username !== "" && email !== "") {
-			await setUserData({
-				name: name === "" ? undefined : name,
-				username: username === "" ? undefined : username,
-				email: email === "" ? undefined : email,
-				isArtist: true,
-			});
+			if (user && user.attributes.authMethod == "magicLink") {
+				await setUserData({
+					name: name === "" ? undefined : name,
+					username: username === "" ? undefined : username,
+					isArtist: true,
+				});
+			} else {
+				await setUserData({
+					name: name === "" ? undefined : name,
+					username: username === "" ? undefined : username,
+					email: email === "" ? undefined : email,
+					isArtist: true,
+				});
+			}
 
 			const userData = {
 				user: user,
@@ -168,6 +198,7 @@ export default function BasicDetails() {
 									value={email}
 									onChange={(e) => setEmail(e.target.value)}
 									required
+									disabled={magicUser ? true : false}
 									className="w-full p-1 border-2 border-gray-500 rounded-md shadow-sm outline-none focus:border-primary-500"
 								/>
 							</div>

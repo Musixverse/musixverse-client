@@ -6,6 +6,7 @@ import LoadingContext from "../../../../store/loading-context";
 import StatusContext from "../../../../store/status-context";
 import AuthModalContext from "../../../../store/authModal-context";
 import { purchaseTrackNFT } from "../../../utils/smart-contract/functions";
+import { loadTransak } from "../../../utils/TransakOnRamp";
 import PurchaseSuccessModal from "./PurchaseSuccessModal";
 import { ethers } from "ethers";
 
@@ -25,10 +26,17 @@ const PurchaseButton = ({ tokenId, trackId, price }) => {
 		if (user && !user.attributes.emailVerified) {
 			router.push("/register/confirm-email");
 		} else if (user && user.attributes.emailVerified) {
-			setLoading({
-				status: true,
-				title: "Please sign the transaction in your wallet...",
-			});
+			if (user.attributes.authMethod == "magicLink") {
+				setLoading({
+					status: true,
+					title: "Please wait while your order is processed...",
+				});
+			} else {
+				setLoading({
+					status: true,
+					title: "Please sign the transaction in your wallet...",
+				});
+			}
 			try {
 				if (ref) {
 					await fetchAddressFromUsername({
@@ -63,6 +71,10 @@ const PurchaseButton = ({ tokenId, trackId, price }) => {
 			} catch (err) {
 				console.error(err);
 				setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
+
+				if (err.message && err.message.startsWith("underlying network changed")) {
+					await purchaseToken();
+				}
 				if (err.title && err.title === "User is not connected to the same wallet") {
 					setError({
 						title: err.title,
@@ -73,14 +85,30 @@ const PurchaseButton = ({ tokenId, trackId, price }) => {
 				if (err.message && err.message.includes("insufficient funds")) {
 					setError({
 						title: "Insufficient funds",
-						message: "Please get enough funds in your wallet for this transaction",
+						message: (
+							<>
+								Please get enough MATIC in your account for this transaction. Click{" "}
+								<span onClick={() => loadTransak(user)} className="cursor-pointer underline">
+									here
+								</span>{" "}
+								to buy.
+							</>
+						),
 						showErrorBox: true,
 					});
 				}
 				if (err.data && err.data.message.includes("insufficient funds")) {
 					setError({
 						title: "Insufficient funds",
-						message: "Please get enough funds in your wallet for this transaction",
+						message: (
+							<>
+								Please get enough MATIC in your account for this transaction. Click{" "}
+								<span onClick={() => loadTransak(user)} className="cursor-pointer underline">
+									here
+								</span>{" "}
+								to buy.
+							</>
+						),
 						showErrorBox: true,
 					});
 				}
@@ -92,7 +120,7 @@ const PurchaseButton = ({ tokenId, trackId, price }) => {
 
 	return (
 		<>
-			<CustomButton green={true} onClick={() => purchaseToken()}>
+			<CustomButton type="button" green={true} onClick={() => purchaseToken()}>
 				Buy Now
 			</CustomButton>
 			<PurchaseSuccessModal isOpen={purchaseNFTSuccess} setOpen={setPurchaseNFTSuccess} />

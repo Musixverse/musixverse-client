@@ -21,15 +21,17 @@ export default function ReportABug() {
 		const bugDescription = bugDescriptionRef.current.value;
 
 		// EMAIL CHECK
-		const emailCheck = await isEmailValid(email);
-		if (emailCheck.status === false) {
-			setError({
-				title: emailCheck.title || "Invalid credentials!",
-				message: emailCheck.message,
-				showErrorBox: true,
-			});
-			emailRef.current.focus();
-			return;
+		if (email.length != 0) {
+			const emailCheck = await isEmailValid(email);
+			if (emailCheck.status === false) {
+				setError({
+					title: emailCheck.title || "Invalid credentials!",
+					message: emailCheck.message,
+					showErrorBox: true,
+				});
+				emailRef.current.focus();
+				return;
+			}
 		}
 
 		if (name.length != 0) {

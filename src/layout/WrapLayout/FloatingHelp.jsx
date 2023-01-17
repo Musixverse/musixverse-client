@@ -2,10 +2,10 @@ import Link from "next/link";
 
 export default function FloatingHelp() {
 	return (
-		<div className="hidden sm:block fixed right-0 bottom-0 z-40 pr-4 pb-4">
+		<div className="hidden sm:block fixed right-0 bottom-0 z-30 pr-4 pb-4">
 			<div className="relative group">
 				<ul className="absolute hidden w-full pb-10 group-hover:block -top-36">
-					<ul className="flex flex-col w-full dark:bg-dark-500 bg-light-200 rounded-xl">
+					<ul className="flex flex-col w-full dark:bg-dark-500 bg-zinc-200 rounded-xl">
 						<li className="w-full px-4 py-3 text-sm bg-transparent cursor-pointer font-secondary rounded-t-xl whitespace-nowrap hover:bg-light-300 dark:hover:bg-dark-800">
 							<Link href="https://discord.com/invite/rXKb7rCqjG" passHref>
 								<a target="_blank" rel="noopener noreferrer" className="flex items-center">

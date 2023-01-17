@@ -2,7 +2,7 @@
 
 ## Using Next.js
 
-### Environment Variables-
+### Environment Variables
 
 ```
 Note: .env.example is an example of the secrets file. .env*.local should be added to .gitignore, as those files are intended to be ignored. .env.development.local is where secrets can be stored.

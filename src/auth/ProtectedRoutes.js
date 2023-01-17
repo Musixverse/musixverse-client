@@ -66,7 +66,7 @@ const ProtectedRoutes = ({ router, children }) => {
 				} else {
 					// Authenticated
 					refetchData();
-					if (isBrowser() && !user.attributes.email) {
+					if (isBrowser() && (!user.attributes.email || !user.attributes.name)) {
 						if (!router.pathname.startsWith(appRoutes.REGISTER)) router.push(appRoutes.REGISTER);
 					} else if (isBrowser() && pathIsProtectedForAuthenticatedUserEmailUnverified && !user.attributes.emailVerified) {
 						router.push(appRoutes.CONFIRM_EMAIL);

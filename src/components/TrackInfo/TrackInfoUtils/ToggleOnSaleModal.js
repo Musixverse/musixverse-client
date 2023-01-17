@@ -1,4 +1,5 @@
 import { useState, useContext } from "react";
+import { useMoralis } from "react-moralis";
 import LoadingContext from "../../../../store/loading-context";
 import StatusContext from "../../../../store/status-context";
 import { toggleOnSale } from "../../../utils/smart-contract/functions";
@@ -6,6 +7,8 @@ import Modal from "../../../layout/Modal/Modal";
 import ToggleOnSaleSuccessModal from "./ToggleOnSaleSuccessModal";
 
 const ToggleOnSaleModal = ({ isOpen, setToggleOnSaleModalOpen, tokenId, onSale }) => {
+	const { user } = useMoralis();
+
 	const [, setLoading] = useContext(LoadingContext);
 	const [, , , setError] = useContext(StatusContext);
 	const [toggleOnSaleSuccess, setToggleOnSaleSuccess] = useState(false);
@@ -13,10 +16,17 @@ const ToggleOnSaleModal = ({ isOpen, setToggleOnSaleModalOpen, tokenId, onSale }
 	const toggleOnSaleAttribute = async (e) => {
 		e.preventDefault();
 
-		setLoading({
-			status: true,
-			title: "Please sign the transaction in your wallet...",
-		});
+		if (user.attributes.authMethod == "magicLink") {
+			setLoading({
+				status: true,
+				title: "Please wait while we process your request...",
+			});
+		} else {
+			setLoading({
+				status: true,
+				title: "Please sign the transaction in your wallet...",
+			});
+		}
 		try {
 			await toggleOnSale(tokenId);
 			setToggleOnSaleModalOpen(false);
@@ -26,6 +36,9 @@ const ToggleOnSaleModal = ({ isOpen, setToggleOnSaleModalOpen, tokenId, onSale }
 		} catch (err) {
 			setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 			setToggleOnSaleModalOpen(false);
+			if (err.message && err.message.startsWith("underlying network changed")) {
+				await toggleOnSaleAttribute(e);
+			}
 			if (err.title === "User is not connected to the same wallet") {
 				setError({
 					title: err.title,

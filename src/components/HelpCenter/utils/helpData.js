@@ -67,7 +67,7 @@ export const buyNFT = [
 			<>
 				<p>The following things are required to buy an NFT on Musixverse:</p>
 				<ul className="list-disc pl-4">
-					<li>Metamask/WalletConnect Wallet</li>
+					<li>An account on Musixverse using Metamask/WalletConnect wallet or Email</li>
 					<li>MATIC in your wallet</li>
 					<li>Collector/Artist Account</li>
 				</ul>
@@ -198,7 +198,7 @@ export const createNFT = [
 				<p>
 					Before you create an NFT on Musixverse, you need to have the following prerequisites ready:
 					<ul className="list-disc pl-4">
-						<li>Metamask/WalletConnect Wallet</li>
+						<li>An account on Musixverse using Metamask/WalletConnect wallet or Email</li>
 						<li>
 							MATIC in your wallet (to pay gas fees while minting an NFT, it’s close to negligible). You may be eligible to get free MATIC from
 							Musixverse to cover the gas fee. Drop us an email on{" "}

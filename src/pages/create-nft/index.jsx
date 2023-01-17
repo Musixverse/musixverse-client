@@ -496,6 +496,9 @@ const CreateNFT = ({ userInfo }) => {
 		} catch (error) {
 			setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 			console.error(error);
+			if (err.message && err.message.startsWith("underlying network changed")) {
+				await nftCreateFormOnSubmit();
+			}
 			if (error.title === "User is not connected to the same wallet") {
 				setError({
 					title: error.title,

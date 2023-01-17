@@ -1,7 +1,7 @@
 import CountriesDropdown from "../../Settings/SettingsUtils/CountriesDropdown";
 import StatesDropdown from "../../Settings/SettingsUtils/StatesDropdown";
 import CitiesDropdown from "../../Settings/SettingsUtils/CitiesDropdown";
-import InputDropdown from "./InputDropdown";
+import InputDropdown from "@/layout/Dropdown/InputDropdown";
 import RequiredAsterisk from "../../../layout/RequiredAsterisk";
 import Tooltip from "../../../layout/Tooltip/Tooltip";
 import { languageArray } from "../../../config/constants";

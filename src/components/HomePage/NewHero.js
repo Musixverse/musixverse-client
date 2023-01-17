@@ -8,7 +8,7 @@ import styles from "../../../styles/HomePage/newHero.module.css";
 import AuthModalContext from "../../../store/authModal-context";
 import Carousel from "./HomePageUtils/PromoCarousel";
 
-export default function NewHero() {
+export default function NewHero({ tracks }) {
 	const router = useRouter();
 	const [, setAuthModalOpen] = useContext(AuthModalContext);
 	const { user, isAuthenticated } = useMoralis();
@@ -33,7 +33,7 @@ export default function NewHero() {
 						}}
 						className="bg-primary-500 hover:bg-primary-400 text-light-100 transition duration-300 text-center border-[2px] border-primary-500 text-xs sm:text-sm font-medium lg:text-base xl:text-lg rounded-3xl px-10 xl:px-14 py-2"
 					>
-						{isAuthenticated && user ? "Get Started" : "Connect Wallet"}
+						{isAuthenticated && user ? "Get Started" : "Sign up / Login"}
 					</button>
 					<Link href={"/mxcatalog/new-releases"} passHref>
 						<button className="bg-none text-xs sm:text-sm lg:text-base xl:text-lg font-medium rounded-3xl text-center px-10 xl:px-14 py-2 border-[2px] border-primary-400">
@@ -54,7 +54,7 @@ export default function NewHero() {
 
 			{/* <PromoNftCard/> */}
 			{/* <Carousal></Carousal> */}
-			<Carousel />
+			<Carousel tracks={tracks} />
 			{/* <Carousal slides={slides} autoplay={true} interval={1000}/> */}
 		</div>
 	);

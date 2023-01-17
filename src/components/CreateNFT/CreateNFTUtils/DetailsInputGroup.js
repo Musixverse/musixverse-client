@@ -1,6 +1,6 @@
-import InputDropdown from "./InputDropdown";
-import RequiredAsterisk from "../../../layout/RequiredAsterisk";
-import Tooltip from "../../../layout/Tooltip/Tooltip";
+import InputDropdown from "@/layout/Dropdown/InputDropdown";
+import RequiredAsterisk from "@/layout/RequiredAsterisk";
+import Tooltip from "@/layout/Tooltip/Tooltip";
 import { trackOriginArray, genreArray, parentalAdvisoryArray, minRecordingYear } from "../../../config/constants";
 
 export default function DetailsInputGroup({

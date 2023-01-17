@@ -251,6 +251,7 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 			})
 				.then(async function (user) {
 					if (user) {
+						closeModal();
 						await fetch("/api/auth/login", {
 							method: "post",
 							headers: {
@@ -258,11 +259,10 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 							},
 							body: JSON.stringify({ currentUser: user }),
 						}).then(() => {
-							closeModal();
 							if (router.pathname === "/") router.push("/mxcatalog/new-releases");
+							setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 						});
 					}
-					setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 				})
 				.catch(function (error) {
 					console.log("Metamask authentication error:", error);
@@ -321,6 +321,7 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 			})
 				.then(async function (user) {
 					if (user) {
+						closeModal();
 						await fetch("/api/auth/login", {
 							method: "post",
 							headers: {
@@ -328,11 +329,10 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 							},
 							body: JSON.stringify({ currentUser: user }),
 						}).then(() => {
-							closeModal();
 							if (router.pathname === "/") router.push("/mxcatalog/new-releases");
+							setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 						});
 					}
-					setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 				})
 				.catch(function (error) {
 					console.log("WalletConnect authentication error:", error);

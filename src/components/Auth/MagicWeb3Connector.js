@@ -238,6 +238,7 @@ var MagicWeb3Connector = /*#__PURE__*/ (function (_AbstractWeb3Connecto) {
 											_context3.next = 27;
 											return magic.auth.loginWithMagicLink({
 												email: email,
+												redirectURI: process.env.NEXT_PUBLIC_MUSIXVERSE_CLIENT_BASE_URL + "/mxcatalog/new-releases",
 											});
 
 										case 27:

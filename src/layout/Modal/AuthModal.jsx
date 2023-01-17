@@ -147,6 +147,7 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 				})
 					.then(async function (user) {
 						if (user) {
+							setAuthModalOpen(false);
 							if (!user.attributes.email) {
 								// EMAIL CHECK
 								const emailCheck = await isEmailValidAndAvailableForMagicLogin(emailRef.current.value);
@@ -175,7 +176,6 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 								closeModal();
 								if (router.pathname === "/") router.replace("/mxcatalog/new-releases");
 							});
-							setAuthModalOpen(false);
 						}
 						setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 					})

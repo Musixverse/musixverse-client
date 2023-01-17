@@ -112,10 +112,10 @@ export default function BandDashboard({ bandsOfArtist }) {
 	};
 
 	return (
-		<div className="w-full flex flex-col">
-			<div className="w-full flex-1 p-10 bg-light-300 dark:bg-dark-600 rounded-xl">
-				<div className="w-full flex flex-col items-start justify-between space-y-5 md:flex-row md:space-y-0">
-					<div className="w-full flex flex-col space-y-8">
+		<div className="flex flex-col w-full">
+			<div className="flex-1 w-full p-10 bg-light-300 dark:bg-dark-600 rounded-xl">
+				<div className="flex flex-col items-start justify-between w-full space-y-5 md:flex-row md:space-y-0">
+					<div className="flex flex-col w-full space-y-8">
 						<h1 className="text-4xl font-tertiary">BAND DASHBOARD</h1>
 
 						<div className="font-secondary">
@@ -123,7 +123,7 @@ export default function BandDashboard({ bandsOfArtist }) {
 
 							<Link href="/create-band" passHref>
 								<div className="w-fit">
-									<CustomButton green={true} classes="text-sm px-6 py-2 mt-4">
+									<CustomButton type="button" green={true} classes="text-sm px-6 py-2 mt-4">
 										Create Band Profile
 										<span className="ml-8 text-xl">
 											<i className="fa-solid fa-arrow-right-long"></i>
@@ -137,9 +137,9 @@ export default function BandDashboard({ bandsOfArtist }) {
 							<div className="pt-4">
 								<div className="w-full border-t-[2px] border-[#9a9a9a]"></div>
 
-								<p className="font-tertiary text-3xl mt-10">YOUR BANDS</p>
+								<p className="mt-10 text-3xl font-tertiary">YOUR BANDS</p>
 
-								<div className="grid grid-cols-3 items-center mt-2">
+								<div className="grid items-center grid-cols-3 mt-2">
 									{bandsOfArtist.length > 0 &&
 										bandsOfArtist.map((band) => {
 											return (
@@ -159,7 +159,7 @@ export default function BandDashboard({ bandsOfArtist }) {
 														className="flex items-center text-sm font-normal cursor-pointer font-secondary"
 													>
 														<span className="inline-block w-6 h-6 mr-3 border-2 rounded-full border-[#363636] flex-no-shrink"></span>
-														<div className="relative rounded h-8 w-8">
+														<div className="relative w-8 h-8 rounded">
 															<Image
 																src={band.avatar}
 																layout="fill"
@@ -168,7 +168,7 @@ export default function BandDashboard({ bandsOfArtist }) {
 																className="rounded-full"
 															/>
 														</div>
-														<p className="ml-2 flex items-center">
+														<p className="flex items-center ml-2">
 															{band.name}
 															<span className="ml-1">
 																{band.isBandVerified && <Image src={mxv_tick} width={14} height={14} alt="mxv_verified" />}
@@ -186,16 +186,14 @@ export default function BandDashboard({ bandsOfArtist }) {
 			</div>
 
 			{activeBand && (
-				<div className="w-full flex flex-col mt-10 mb-4">
-					<p className="font-tertiary text-5xl">
+				<div className="flex flex-col w-full mt-10 mb-4">
+					<p className="text-5xl font-tertiary">
 						{activeBand.name}
 						<span className="ml-2">{activeBand.isBandVerified && <Image src={mxv_tick} width={20} height={20} alt="mxv_verified" />}</span>
 
-						<span className="font-primary text-sm ml-2">
+						<span className="ml-2 text-sm font-primary">
 							<Link href={`/profile/band/${activeBand.username}`} passHref>
-								<a target="_blank" rel="noopener noreferrer">
-									@{activeBand.username}
-								</a>
+								<a>@{activeBand.username}</a>
 							</Link>
 						</span>
 					</p>

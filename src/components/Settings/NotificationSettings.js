@@ -71,7 +71,7 @@ export default function NotificationSettings({ walletAddress, userPreferences })
 			/>
 
 			<div className="flex justify-end mt-8" onClick={handleSave}>
-				<CustomButton green={true} classes="text-sm px-8 py-3">
+				<CustomButton type="button" green={true} classes="text-sm px-8 py-3">
 					Save Changes
 				</CustomButton>
 			</div>

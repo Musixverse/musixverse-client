@@ -1,16 +1,20 @@
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Fragment } from "react";
+import { Magic } from "magic-sdk";
+const { Transition } = require("@headlessui/react");
 import { useRouter } from "next/router";
 import { useTheme } from "next-themes";
 import Image from "next/image";
 import { useMoralis, useMoralisCloudFunction } from "react-moralis";
 import logoBlack from "../../../public/logo-black.svg";
 import logoWhite from "../../../public/logo-white.svg";
+import mxv_verified from "../../../public/assets/mxv_tick.svg";
 import HamburgerMenu from "./HamburgerMenu/HamburgerMenu";
+import { loadTransak } from "../../utils/TransakOnRamp";
 
 const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 	const { theme, setTheme } = useTheme();
-	const { isAuthenticated, logout, user, Moralis } = useMoralis();
+	const { isAuthenticated, logout, user, Moralis, isInitialized } = useMoralis();
 	const router = useRouter();
 	const [balance, setBalance] = useState(0);
 
@@ -45,8 +49,27 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 		truncatedWalletAddress = user.attributes.ethAddress.substring(0, 10) + "..." + user.attributes.ethAddress.substring(36, 42);
 	}
 
+	// To log out user who authenticated using Magiclink
+	const [magicUser, setMagicUser] = useState(null);
+	useEffect(() => {
+		async function getMagicUser() {
+			try {
+				const magic = new Magic(process.env.NEXT_PUBLIC_MAGICLINK_API_KEY);
+				await magic.user.getMetadata().then((_magicUser) => {
+					if (_magicUser && _magicUser.email) {
+						setMagicUser(_magicUser);
+					}
+				});
+			} catch (e) {}
+		}
+		getMagicUser();
+	}, []);
 	const handleLogout = async () => {
 		if (router.pathname != "/") router.push("/");
+		if (user.attributes.authMethod === "magicLink" || magicUser) {
+			const magic = new Magic(process.env.NEXT_PUBLIC_MAGICLINK_API_KEY);
+			await magic.user.logout();
+		}
 		await logout();
 		if (window.localStorage.walletconnect) {
 			window.localStorage.removeItem("walletconnect");
@@ -71,13 +94,62 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 		window.addEventListener("scroll", handleScroll);
 		return () => window.removeEventListener("scroll", handleScroll);
 	});
-
 	if (clientWindowHeight > 50) {
 		customStyles = "lg:rounded-full lg:mt-2 lg:shadow-lg";
 	}
 
+	/**************************************************************************/
+	/******************************   Search  *********************************/
+	/**************************************************************************/
+	const [searchText, setSearchText] = useState("");
+	const [searchedQuery, setSearchedQuery] = useState("");
+	const [searchResults, setSearchResults] = useState([]);
+	const [isSearchFocused, setSearchFocused] = useState(false);
+	const { fetch: performSearch } = useMoralisCloudFunction(
+		"performSearch",
+		{ searchText: searchText },
+		{
+			autoFetch: false,
+		}
+	);
+	const search = async (keyword) => {
+		if (keyword === "") {
+			// If the text field is empty, show no results
+			setSearchResults([]);
+		} else {
+			setSearchedQuery(keyword);
+		}
+	};
+	useEffect(() => {
+		if (isInitialized) {
+			performSearch({
+				onSuccess: async (object) => {
+					setSearchResults(object);
+				},
+				onError: (error) => {
+					console.log("performSearch Error:", error);
+				},
+			});
+		}
+	}, [searchedQuery, performSearch, isInitialized]);
+
 	return (
 		<div className="absolute flex justify-center w-screen">
+			{/* Blur page background when search icon is hovered */}
+			<Transition show={isSearchFocused}>
+				<Transition.Child
+					as={Fragment}
+					enter="transition-all duration-200"
+					enterFrom="opacity-0"
+					enterTo="opacity-100"
+					leave="transition-all duration-200"
+					leaveTo="opacity-0"
+					leaveFrom="opacity-100"
+				>
+					<div style={{ zIndex: "40" }} className="w-screen h-screen left-0 top-0 bg-black/50 backdrop-blur-sm fixed" />
+				</Transition.Child>
+			</Transition>
+
 			<div className="w-full fixed z-40 max-w-[1920px] lg:px-16 xl:px-20 2xl:px-36">
 				<nav className={"navbar duration-500 ease-in mx-auto " + customStyles}>
 					<div className="flex flex-wrap items-center justify-start w-full pl-7 sm:pl-9 pr-16 lg:px-16 py-2">
@@ -90,21 +162,20 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 						{/* Internal links */}
 						<div className="hidden ml-10 lg:block">
 							<ul className="flex flex-row items-center font-medium md:text-base md:space-x-3 xl:space-x-6 md:mt-0 sm:text-sm">
-								{/* <li className="hidden hover:text-primary-600 md:block">
-									<Link
-										href="/"
-										className="py-2 pl-3 pr-4 text-white rounded hover:text-primary-500 md:bg-transparent md:p-0 dark:text-white"
-										aria-current="page"
-									>
-										Home
-									</Link>
-								</li> */}
 								<li className="hover:text-primary-600">
 									<Link
 										href="/mxcatalog/new-releases"
 										className="block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:text-primary-500 md:hover:bg-transparent md:border-0 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
 									>
 										Mx Catalog
+									</Link>
+								</li>
+								<li className="hover:text-primary-600">
+									<Link
+										href="/mxlyrics"
+										className="block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:text-primary-500 md:hover:bg-transparent md:border-0 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+									>
+										Mx Lyrics
 									</Link>
 								</li>
 								{user && user.attributes.isArtist && (
@@ -128,18 +199,150 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 							</ul>
 						</div>
 
-						<div className="hidden ml-auto md:block">
+						<div className="ml-auto hidden md:block">
 							<ul className="flex flex-row items-center text-sm font-medium md:space-x-8 lg:space-x-3 xl:space-x-6 md:mt-0 sm:text-sm">
 								{/* Search bar */}
-								{/* TODO: hidden for beta */}
-								{/* <li className="hidden xl:block">
+								<li
+									className="block group relative search-li"
+									onMouseEnter={() => {
+										document.getElementById("search-input").focus();
+										setSearchFocused(true);
+									}}
+									onMouseLeave={() => {
+										document.getElementById("search-input").blur();
+										setSearchFocused(false);
+									}}
+								>
 									<div className="search-box">
-										<input className="search-text" type="text" placeholder="Search items, collections and accounts" />
+										<input
+											className="search-text"
+											id="search-input"
+											type="text"
+											placeholder="Search items, collections and profiles"
+											value={searchText}
+											onChange={(e) => {
+												setSearchText(e.target.value);
+												search(e.target.value);
+											}}
+										/>
 										<a href="#" className="search-btn">
 											<i className="fas fa-search"></i>
 										</a>
 									</div>
-								</li> */}
+
+									{isSearchFocused && (
+										<div className="pt-2 rounded-xl absolute w-full md:w-[500px] md:right-0 hidden group-focus-within:block transition-all duration-500">
+											<a className="flex flex-col basis-full">
+												<button
+													type="button"
+													className="flex items-center rounded-t-xl justify-center px-3 pt-3 pb-1 bg-light-100 dark:bg-dark-600 dark:text-light-100 cursor-default"
+												>
+													Artists & Fans
+												</button>
+											</a>
+											{searchResults.users && searchResults.users.length > 0 ? (
+												searchResults.users.map((_user, idx) => (
+													<a
+														className="flex flex-col basis-full"
+														key={_user.objectId}
+														onClick={() => {
+															document.getElementById("search-input").blur();
+															setSearchFocused(false);
+															router.push(`/profile/${_user.username}`);
+														}}
+													>
+														<button
+															type="button"
+															className="flex items-center justify-start px-3 py-2 bg-light-100 dark:bg-dark-600 dark:text-light-100 hover:bg-light-300 dark:hover:bg-dark-800 text-start"
+														>
+															{_user.avatar ? (
+																<Image src={_user.avatar} height="30" width="30" alt="user's avatar" className="rounded-full" />
+															) : (
+																""
+															)}
+															<span className="ml-2 text-[16px]">{_user.name}</span>
+															<div>
+																<span className="ml-2 text-[12px] font-normal">@{_user.username}</span>
+															</div>
+															{_user.isArtistVerified && (
+																<div className="flex ml-2 align-center">
+																	<Image src={mxv_verified} width={14} height={14} alt="MXV verified" />
+																</div>
+															)}
+														</button>
+													</a>
+												))
+											) : (
+												<a className="flex flex-col basis-full">
+													<button
+														type="button"
+														className="flex items-center justify-center px-3 pt-4 pb-4 bg-light-100 dark:bg-dark-600 dark:text-light-100 text-xs font-light cursor-default"
+													>
+														No users found
+													</button>
+												</a>
+											)}
+
+											<a className="flex flex-col basis-full">
+												<button
+													type="button"
+													className="flex items-center justify-center px-3 pt-3 pb-1 bg-light-100 dark:bg-dark-600 dark:text-light-100 cursor-default"
+												>
+													Tracks
+												</button>
+											</a>
+											{searchResults.tracks && searchResults.tracks.length > 0 ? (
+												searchResults.tracks.map((_track, idx) => {
+													const _tokenId = parseInt(_track.maxTokenId) - parseInt(_track.numberOfCopies) + 1;
+													return (
+														<a
+															className="flex flex-col basis-full"
+															key={_tokenId}
+															onClick={() => {
+																document.getElementById("search-input").blur();
+																setSearchFocused(false);
+																router.push(`/track/polygon/${_tokenId}`);
+															}}
+														>
+															<button
+																type="button"
+																className={
+																	"flex items-center justify-start px-3 py-2 bg-light-100 dark:bg-dark-600 dark:text-light-100 hover:bg-light-300 dark:hover:bg-dark-800 text-start " +
+																	(idx + 1 === searchResults.tracks.length ? "rounded-b-xl" : "")
+																}
+															>
+																{_track.artwork.uri ? (
+																	<Image
+																		src={_track.artwork.uri.replace("ipfs://", process.env.NEXT_PUBLIC_IPFS_NODE_URL)}
+																		height="30"
+																		width="30"
+																		alt="cover art"
+																		className="rounded"
+																	/>
+																) : (
+																	""
+																)}
+																<span className="ml-2 text-[16px]">{_track.title}</span>
+																<div>
+																	<span className="ml-2 text-[12px] font-normal">by {_track.artist}</span>
+																</div>
+															</button>
+														</a>
+													);
+												})
+											) : (
+												<a className="flex flex-col basis-full">
+													<button
+														type="button"
+														className="flex rounded-b-xl items-center justify-center px-3 pt-3 pb-5 bg-light-100 dark:bg-dark-600 dark:text-light-100 text-xs font-light cursor-default"
+													>
+														No tracks to display
+													</button>
+												</a>
+											)}
+										</div>
+									)}
+								</li>
 
 								{/* Notification button */}
 								{/* <li className="hidden lg:block">
@@ -154,7 +357,7 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 									</button>
 								</li> */}
 								{/* Toggle theme button */}
-								<li>
+								<li className="hidden md:block">
 									<button
 										aria-label="Toggle Dark Mode"
 										type="button"
@@ -218,7 +421,7 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 													onClick={() => setAuthModalOpen(true)}
 													className="flex items-center justify-center px-10 py-2 text-base font-semibold rounded-full bg-search-100 dark:bg-search-200"
 												>
-													Connect wallet
+													Sign up / Login
 												</div>
 											) : (
 												<div className="flex items-center justify-center px-4 py-2 text-sm rounded-full bg-search-100 dark:bg-search-200">
@@ -236,41 +439,32 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 										>
 											<li>
 												{isAuthenticated && user && (
-													<div className="flex flex-col px-4 pt-3 pb-2">
-														<div className="flex items-center justify-between w-full bg-transparent rounded-t-xl dropdown-item whitespace-nowrap active:bg-transparent active:dark:text-light-100">
-															<div>
-																<p>Wallet Address</p>
-																<p>{truncatedWalletAddress}</p>
+													<Link href="/settings/profile-settings" passHref={true}>
+														<div className="flex flex-col px-4 pt-3 pb-2 cursor-pointer rounded-t-xl hover:bg-gray-100 dark:hover:bg-dark-600">
+															<div className="flex items-center justify-between w-full bg-transparent rounded-t-xl dropdown-item whitespace-nowrap active:bg-transparent active:dark:text-light-100">
+																<div>
+																	<p>Wallet Address</p>
+																	<p>{truncatedWalletAddress}</p>
+																</div>
+																{avatarUrl ? (
+																	<Image
+																		src={avatarUrl}
+																		alt={user.walletAddress}
+																		width={40}
+																		height={40}
+																		objectFit="contain"
+																		className="rounded-lg"
+																	/>
+																) : null}
 															</div>
-															{avatarUrl ? (
-																<Image
-																	src={avatarUrl}
-																	alt={user.walletAddress}
-																	width={40}
-																	height={40}
-																	objectFit="contain"
-																	className="rounded-lg"
-																/>
-															) : null}
+															<p className="mt-1">
+																Balance:&nbsp;&nbsp;
+																<Image src={"/assets/matic-logo.svg"} width={12} height={12} alt="matic logo" /> {balance}
+																&nbsp;MATIC
+															</p>
 														</div>
-														<p className="mt-1">
-															Balance:&nbsp;&nbsp;
-															<Image src={"/assets/matic-logo.svg"} width={12} height={12} alt="matic logo" /> {balance}
-															&nbsp;MATIC
-														</p>
-													</div>
+													</Link>
 												)}
-												{/* (
-													<div className="px-4 py-3 bg-transparent rounded-t-xl hover:bg-primary-500 hover:text-light-100">
-														<a
-															className="block w-full dropdown-item whitespace-nowrap hover:bg-primary-500 active:bg-primary-500"
-															href="#"
-															onClick={() => setAuthModalOpen(true)}
-														>
-															Connect wallet
-														</a>
-													</div>
-												) */}
 											</li>
 											{user && isAuthenticated && user.attributes.email && (
 												<li>
@@ -290,15 +484,18 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 													</Link>
 												</li>
 											)}
-											{/* {user && isAuthenticated && user.attributes.email && (
+											{user && isAuthenticated && user.attributes.email && (
 												<li>
-													<Link href="/settings/notifications-settings" passHref={true}>
-														<div className="block w-full px-4 py-2 bg-transparent cursor-pointer dropdown-item whitespace-nowrap hover:bg-gray-100 dark:hover:bg-dark-600">
-															Notification Settings
-														</div>
-													</Link>
+													<div
+														onClick={() => loadTransak(user)}
+														className="block w-full px-4 py-2 bg-transparent cursor-pointer dropdown-item whitespace-nowrap hover:bg-gray-100 dark:hover:bg-dark-600"
+													>
+														Buy MATIC&nbsp;&nbsp;
+														<Image src={"/assets/matic-logo.svg"} width={14} height={14} alt="matic logo" />
+													</div>
 												</li>
-											)} */}
+											)}
+
 											{user && isAuthenticated && user.attributes.email && (
 												<li>
 													<Link href="/settings/account-help" passHref={true}>

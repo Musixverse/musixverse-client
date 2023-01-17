@@ -2,8 +2,10 @@ import Web3 from "web3";
 import Moralis from "moralis";
 // Importing contract abi, address, and other variables
 import { MUSIXVERSE_FACET_CONTRACT_ABI, MUSIXVERSE_GETTERS_FACET_CONTRACT_ABI } from "../../config/constants";
+import { Magic } from "magic-sdk";
 
 var MUSIXVERSE;
+var magicWeb3;
 
 async function addPolygonNetwork() {
 	const { ethereum } = window;
@@ -75,6 +77,16 @@ async function addPolygonNetwork() {
 async function connectSmartContract() {
 	const { ethereum } = window;
 
+	// <-------- MagicLink
+	const polygonNodeOptions = {
+		rpcUrl: process.env.NEXT_PUBLIC_RPC_URL,
+		chainId: parseInt(process.env.NEXT_PUBLIC_BLOCKCHAIN_NETWORK_ID),
+	};
+	const magicMatic = new Magic(process.env.NEXT_PUBLIC_MAGICLINK_API_KEY, { network: polygonNodeOptions });
+	magicMatic.network = "matic";
+	magicWeb3 = new Web3(magicMatic.rpcProvider);
+	// -------->
+
 	const provider = new Web3.providers.HttpProvider(process.env.NEXT_PUBLIC_RPC_URL);
 	window.web3 = new Web3(provider);
 
@@ -83,9 +95,9 @@ async function connectSmartContract() {
 	console.log("Contract connected");
 
 	if (ethereum && (await ethereum.request({ method: "net_version" })) !== process.env.NEXT_PUBLIC_BLOCKCHAIN_NETWORK_ID.toString()) {
-		await addPolygonNetwork();
+		// await addPolygonNetwork();
 	} else if (ethereum) {
-		await addPolygonNetwork();
+		// await addPolygonNetwork();
 		window.web3 = new Web3(ethereum);
 	}
 
@@ -123,6 +135,34 @@ async function mintTrackNFT(
 	onSale,
 	unlockTimestamp
 ) {
+	const callerAddress = Moralis.User.current().attributes.ethAddress;
+
+	// MagicLink
+	const authMethod = Moralis.User.current().attributes.authMethod;
+	if (authMethod == "magicLink") {
+		await Moralis.enableWeb3({
+			provider: "magicLink",
+			email: Moralis.User.current().attributes.email,
+			apiKey: process.env.NEXT_PUBLIC_MAGICLINK_API_KEY,
+			network: "mainnet",
+		});
+		const contract = new magicWeb3.eth.Contract(MUSIXVERSE_FACET_CONTRACT_ABI, process.env.NEXT_PUBLIC_MXV_DIAMOND_ADDRESS);
+		await contract.methods
+			.mintTrackNFT([
+				numberOfCopies,
+				Moralis.Units.Token(String(price), "18"),
+				metadataHash,
+				unlockableContentURIHash,
+				collaborators,
+				percentageContributions,
+				resaleRoyaltyPercentage,
+				onSale,
+				unlockTimestamp,
+			])
+			.send({ from: callerAddress, gasLimit: 3000000 });
+		return;
+	}
+
 	if (window.localStorage.walletconnect) {
 		await Moralis.enableWeb3({ provider: "walletconnect" });
 
@@ -151,8 +191,8 @@ async function mintTrackNFT(
 		return;
 	}
 
+	await addPolygonNetwork();
 	const { ethereum } = window;
-	const callerAddress = Moralis.User.current().attributes.ethAddress;
 	if (callerAddress === ethereum.selectedAddress) {
 		const sendOptions = {
 			contractAddress: process.env.NEXT_PUBLIC_MXV_DIAMOND_ADDRESS,
@@ -192,7 +232,26 @@ async function mintTrackNFT(
 async function purchaseTrackNFT(tokenId, trackId, referrer, price) {
 	const _tokenId = parseInt(tokenId).toString();
 	const _trackId = parseInt(trackId).toString();
+	const callerAddress = Moralis.User.current().attributes.ethAddress;
 
+	// MagicLink
+	const authMethod = Moralis.User.current().attributes.authMethod;
+	if (authMethod == "magicLink") {
+		await Moralis.enableWeb3({
+			provider: "magicLink",
+			email: Moralis.User.current().attributes.email,
+			apiKey: process.env.NEXT_PUBLIC_MAGICLINK_API_KEY,
+			network: "mainnet",
+		});
+		const contract = new magicWeb3.eth.Contract(MUSIXVERSE_FACET_CONTRACT_ABI, process.env.NEXT_PUBLIC_MXV_DIAMOND_ADDRESS);
+		await contract.methods
+			.purchaseTrackNFT(parseInt(_tokenId), parseInt(_trackId), referrer)
+			.send({ from: callerAddress, value: Moralis.Units.Token(String(price), "18"), gasLimit: 3000000 });
+
+		return;
+	}
+
+	// WalletConnect
 	if (window.localStorage.walletconnect) {
 		await Moralis.enableWeb3({ provider: "walletconnect" });
 
@@ -214,9 +273,9 @@ async function purchaseTrackNFT(tokenId, trackId, referrer, price) {
 		return;
 	}
 
+	// Metamask
+	await addPolygonNetwork();
 	const { ethereum } = window;
-	const callerAddress = Moralis.User.current().attributes.ethAddress;
-
 	if (callerAddress === ethereum.selectedAddress) {
 		const sendOptions = {
 			contractAddress: process.env.NEXT_PUBLIC_MXV_DIAMOND_ADDRESS,
@@ -248,6 +307,21 @@ async function purchaseTrackNFT(tokenId, trackId, referrer, price) {
 
 async function updatePrice(tokenId, newPrice) {
 	const _tokenId = parseInt(tokenId).toString();
+	const callerAddress = Moralis.User.current().attributes.ethAddress;
+
+	// MagicLink
+	const authMethod = Moralis.User.current().attributes.authMethod;
+	if (authMethod == "magicLink") {
+		await Moralis.enableWeb3({
+			provider: "magicLink",
+			email: Moralis.User.current().attributes.email,
+			apiKey: process.env.NEXT_PUBLIC_MAGICLINK_API_KEY,
+			network: "mainnet",
+		});
+		const contract = new magicWeb3.eth.Contract(MUSIXVERSE_FACET_CONTRACT_ABI, process.env.NEXT_PUBLIC_MXV_DIAMOND_ADDRESS);
+		await contract.methods.updatePrice(parseInt(_tokenId), Moralis.Units.Token(String(newPrice), "18")).send({ from: callerAddress, gasLimit: 3000000 });
+		return;
+	}
 
 	if (window.localStorage.walletconnect) {
 		await Moralis.enableWeb3({ provider: "walletconnect" });
@@ -268,8 +342,9 @@ async function updatePrice(tokenId, newPrice) {
 		return;
 	}
 
+	// Metamask
+	await addPolygonNetwork();
 	const { ethereum } = window;
-	const callerAddress = Moralis.User.current().attributes.ethAddress;
 	if (callerAddress === ethereum.selectedAddress) {
 		const sendOptions = {
 			contractAddress: process.env.NEXT_PUBLIC_MXV_DIAMOND_ADDRESS,
@@ -299,6 +374,21 @@ async function updatePrice(tokenId, newPrice) {
 
 async function toggleOnSale(tokenId) {
 	const _tokenId = parseInt(tokenId).toString();
+	const callerAddress = Moralis.User.current().attributes.ethAddress;
+
+	// MagicLink
+	const authMethod = Moralis.User.current().attributes.authMethod;
+	if (authMethod == "magicLink") {
+		await Moralis.enableWeb3({
+			provider: "magicLink",
+			email: Moralis.User.current().attributes.email,
+			apiKey: process.env.NEXT_PUBLIC_MAGICLINK_API_KEY,
+			network: "mainnet",
+		});
+		const contract = new magicWeb3.eth.Contract(MUSIXVERSE_FACET_CONTRACT_ABI, process.env.NEXT_PUBLIC_MXV_DIAMOND_ADDRESS);
+		await contract.methods.toggleOnSale(parseInt(_tokenId)).send({ from: callerAddress, gasLimit: 3000000 });
+		return;
+	}
 
 	if (window.localStorage.walletconnect) {
 		await Moralis.enableWeb3({ provider: "walletconnect" });
@@ -318,8 +408,9 @@ async function toggleOnSale(tokenId) {
 		return;
 	}
 
+	// Metamask
+	await addPolygonNetwork();
 	const { ethereum } = window;
-	const callerAddress = Moralis.User.current().attributes.ethAddress;
 	if (callerAddress === ethereum.selectedAddress) {
 		const sendOptions = {
 			contractAddress: process.env.NEXT_PUBLIC_MXV_DIAMOND_ADDRESS,
@@ -349,11 +440,24 @@ async function toggleOnSale(tokenId) {
 async function unlockableContentUri(tokenId, callerAddress) {
 	const _tokenId = parseInt(tokenId);
 
+	// MagicLink
+	const authMethod = Moralis.User.current().attributes.authMethod;
+	if (authMethod == "magicLink") {
+		await Moralis.enableWeb3({
+			provider: "magicLink",
+			email: Moralis.User.current().attributes.email,
+			apiKey: process.env.NEXT_PUBLIC_MAGICLINK_API_KEY,
+			network: "mainnet",
+		});
+		const contract = new magicWeb3.eth.Contract(MUSIXVERSE_GETTERS_FACET_CONTRACT_ABI, process.env.NEXT_PUBLIC_MXV_DIAMOND_ADDRESS);
+		const _unlockableContentUri = await contract.methods.unlockableContentUri(_tokenId).call({ from: callerAddress });
+		return _unlockableContentUri;
+	}
+
 	if (window.localStorage.walletconnect) {
 		await Moralis.enableWeb3({ provider: "walletconnect" });
 
 		const options = {
-			chain: "mumbai",
 			contractAddress: process.env.NEXT_PUBLIC_MXV_DIAMOND_ADDRESS,
 			functionName: "unlockableContentUri",
 			abi: MUSIXVERSE_GETTERS_FACET_CONTRACT_ABI,
@@ -363,10 +467,11 @@ async function unlockableContentUri(tokenId, callerAddress) {
 		return _unlockableContentUri;
 	}
 
+	// Metamask
+	await addPolygonNetwork();
 	const { ethereum } = window;
 	if (callerAddress === ethereum.selectedAddress) {
 		const options = {
-			chain: "mumbai",
 			contractAddress: process.env.NEXT_PUBLIC_MXV_DIAMOND_ADDRESS,
 			functionName: "unlockableContentUri",
 			abi: MUSIXVERSE_GETTERS_FACET_CONTRACT_ABI,
@@ -389,12 +494,26 @@ async function unlockableContentUri(tokenId, callerAddress) {
 
 async function updateCommentOnToken(tokenId, comment) {
 	const _tokenId = parseInt(tokenId);
+	const callerAddress = Moralis.User.current().attributes.ethAddress;
+
+	// MagicLink
+	const authMethod = Moralis.User.current().attributes.authMethod;
+	if (authMethod == "magicLink") {
+		await Moralis.enableWeb3({
+			provider: "magicLink",
+			email: Moralis.User.current().attributes.email,
+			apiKey: process.env.NEXT_PUBLIC_MAGICLINK_API_KEY,
+			network: "mainnet",
+		});
+		const contract = new magicWeb3.eth.Contract(MUSIXVERSE_FACET_CONTRACT_ABI, process.env.NEXT_PUBLIC_MXV_DIAMOND_ADDRESS);
+		await contract.methods.updateCommentOnToken(parseInt(_tokenId), comment).send({ from: callerAddress, gasLimit: 3000000 });
+		return;
+	}
 
 	if (window.localStorage.walletconnect) {
 		await Moralis.enableWeb3({ provider: "walletconnect" });
 
 		const options = {
-			chain: "mumbai",
 			contractAddress: process.env.NEXT_PUBLIC_MXV_DIAMOND_ADDRESS,
 			functionName: "updateCommentOnToken",
 			abi: MUSIXVERSE_FACET_CONTRACT_ABI,
@@ -410,11 +529,11 @@ async function updateCommentOnToken(tokenId, comment) {
 		return;
 	}
 
+	// Metamask
+	await addPolygonNetwork();
 	const { ethereum } = window;
-	const callerAddress = Moralis.User.current().attributes.ethAddress;
 	if (callerAddress === ethereum.selectedAddress) {
 		const options = {
-			chain: "mumbai",
 			contractAddress: process.env.NEXT_PUBLIC_MXV_DIAMOND_ADDRESS,
 			functionName: "updateCommentOnToken",
 			abi: MUSIXVERSE_FACET_CONTRACT_ABI,
@@ -440,43 +559,6 @@ async function updateCommentOnToken(tokenId, comment) {
 	}
 }
 
-// async function uri(tokenId) {
-// 	const _tokenUri = await MUSIXVERSE.methods.uri(tokenId).call();
-// 	return _tokenUri;
-// }
-
-// async function ownerOf(tokenId) {
-// 	const _tokenId = parseInt(tokenId).toString();
-// 	return await MUSIXVERSE.methods.ownerOf(_tokenId).call();
-// }
-
-// async function contractURI() {
-// 	return await MUSIXVERSE.methods.contractURI().call();
-// }
-
-// async function baseURI() {
-// 	return await MUSIXVERSE.methods.baseURI().call();
-// }
-
-// async function getRoyaltyInfo(tokenId) {
-// 	const _tokenId = parseInt(tokenId).toString();
-// 	return await MUSIXVERSE.methods.getRoyaltyInfo(_tokenId).call();
-// }
-
-// async function getCurrentNftPrice(tokenId) {
-// 	const _tokenId = parseInt(tokenId).toString();
-// 	if (MUSIXVERSE) {
-// 		var trackNft;
-// 		await MUSIXVERSE.methods
-// 			.trackNFTs(_tokenId)
-// 			.call()
-// 			.then(function (result) {
-// 				trackNft = result;
-// 			});
-// 		return trackNft;
-// 	}
-// }
-
 module.exports = {
 	addPolygonNetwork,
 	connectSmartContract,
@@ -486,10 +568,4 @@ module.exports = {
 	toggleOnSale,
 	unlockableContentUri,
 	updateCommentOnToken,
-	// uri,
-	// ownerOf,
-	// contractURI,
-	// baseURI,
-	// getRoyaltyInfo,
-	// getCurrentNftPrice,
 };

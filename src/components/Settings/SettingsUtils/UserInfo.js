@@ -1,7 +1,9 @@
+import { useState, useEffect } from "react";
 import CountriesDropdown from "./CountriesDropdown";
 import StatesDropdown from "./StatesDropdown";
 import CitiesDropdown from "./CitiesDropdown";
 import Tooltip from "../../../layout/Tooltip/Tooltip";
+import { Magic } from "magic-sdk";
 
 export default function UserInfo({
 	username,
@@ -20,6 +22,21 @@ export default function UserInfo({
 	setCity,
 	isBandSettings,
 }) {
+	const [magicUser, setMagicUser] = useState(null);
+	useEffect(() => {
+		async function getMagicUser() {
+			try {
+				const magic = new Magic(process.env.NEXT_PUBLIC_MAGICLINK_API_KEY);
+				await magic.user.getMetadata().then((_magicUser) => {
+					if (_magicUser && _magicUser.email) {
+						setMagicUser(_magicUser);
+					}
+				});
+			} catch (e) {}
+		}
+		getMagicUser();
+	}, []);
+
 	return (
 		<div className="flex-col flex-1 mt-5 md:mt-7">
 			<div className="flex space-x-2 md:space-x-4">
@@ -57,6 +74,7 @@ export default function UserInfo({
 							id="email"
 							placeholder="Enter your email"
 							spellCheck={false}
+							disabled={magicUser ? true : false}
 							className="dark:bg-[#242424] dark:border-[#323232] dark:focus:border-primary-500 w-full px-4 py-2 text-sm border-2 rounded-md shadow-sm outline-none border-light-100 focus:border-primary-500"
 						/>
 					</div>

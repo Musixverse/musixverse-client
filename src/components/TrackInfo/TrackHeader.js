@@ -60,7 +60,7 @@ export default function TrackHeader({
 					<div className="absolute hidden pt-2 group-hover:block">
 						{artworkArtistInfo && (artworkInfo.invitedArtistId || artworkInfo.artistAddress) && artworkArtistInfo.avatar ? (
 							<Link href={`/profile/${artworkArtistInfo.username}`} className="cursor-pointer">
-								<a target="_blank" rel="noopener noreferrer">
+								{/* <a target="_blank" rel="noopener noreferrer"> */}
 									<div className="flex items-center mb-2 text-sm font-secondary">
 										<span className="mr-2">Artwork by-</span>
 										<Image
@@ -72,7 +72,7 @@ export default function TrackHeader({
 										/>
 										<span className="ml-1">@{artworkArtistInfo.username}</span>
 									</div>
-								</a>
+								{/* </a> */}
 							</Link>
 						) : artworkInfo.artist ? (
 							<div className="flex items-center mb-2 text-sm font-secondary">
@@ -88,9 +88,9 @@ export default function TrackHeader({
 					<div className="flex items-center pt-8 pb-2 font-bold sm:pt-0">
 						{artist ? (
 							<Link href={artist.isBand ? `/profile/band/${artist.username}` : `/profile/${artist.username}`} className="cursor-pointer">
-								<a target="_blank" rel="noopener noreferrer">
+								{/* <a target="_blank" rel="noopener noreferrer"> */}
 									{artist.name}
-								</a>
+								{/* </a> */}
 							</Link>
 						) : null}
 						{artist && artist.isArtistVerified && (

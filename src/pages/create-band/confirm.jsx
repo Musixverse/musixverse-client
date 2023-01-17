@@ -108,7 +108,7 @@ const confirm = ({ band }) => {
 
 					<Link href={`/profile/band/${band.username}`} passHref>
 						<div>
-							<CustomButton green={true} classes="text-sm px-8 py-3 mt-12 font-primary font-semibold">
+							<CustomButton type="button" green={true} classes="text-sm px-8 py-3 mt-12 font-primary font-semibold">
 								View Band Profile
 								<span className="ml-12 text-xl">
 									<i className="fa-solid fa-arrow-right-long"></i>

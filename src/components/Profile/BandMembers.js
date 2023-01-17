@@ -14,15 +14,15 @@ const BandMembers = ({ bandMembers, updatedBandMembersList }) => {
 
 	return (
 		<div className="mt-8 -mb-8">
-			<p className="font-tertiary text-3xl">Band Members</p>
-			<div className="w-full grid grid-flow-col auto-cols-max mt-2 gap-8 pb-4 overflow-scroll">
+			<p className="text-3xl font-tertiary">Band Members</p>
+			<div className="grid w-full grid-flow-col gap-8 pb-4 mt-2 overflow-scroll auto-cols-max">
 				{bandMembersList.map((bandMember) => {
 					return (
 						<Link key={bandMember.userId} href={`/profile/${bandMember.username}`} passHref>
-							<a target="_blank" rel="noopener noreferrer">
-								<div className="group cursor-pointer pl-3 pr-8 py-2 bg-light-100 dark:bg-dark-600 rounded-full flex items-center justify-center  w-fit">
+							<a>
+								<div className="flex items-center justify-center py-2 pl-3 pr-8 rounded-full cursor-pointer group bg-light-100 dark:bg-dark-600 w-fit">
 									<Image src={bandMember.avatar} width={40} height={40} alt="bandMember image" className="rounded-full" />
-									<div className="ml-4 flex flex-col">
+									<div className="flex flex-col ml-4">
 										<div className="flex items-center space-x-4">
 											<p className="text-sm">{bandMember.name}</p>
 											<p className="text-xs group-hover:text-primary-500">@{bandMember.username}</p>

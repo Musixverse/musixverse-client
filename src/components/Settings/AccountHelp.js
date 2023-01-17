@@ -28,7 +28,7 @@ export default function AccountHelp() {
 					<>
 						{user && user.attributes.isArtist ? "Do you want to switch to a collector account?" : "Do you want to switch to an artist account?"}
 						<div className="my-2">
-							<CustomButton green={true} classes="text-md px-8 py-2" onClick={() => setSwitchAccountModalOpen(true)}>
+							<CustomButton type="button" green={true} classes="text-md px-8 py-2" onClick={() => setSwitchAccountModalOpen(true)}>
 								Switch Account
 							</CustomButton>
 						</div>
@@ -47,9 +47,7 @@ export default function AccountHelp() {
 					<>
 						Visit our{" "}
 						<Link href="/help-center" passHref>
-							<a target="_blank" rel="noopener noreferrer" className="font-medium text-primary-500">
-								help center
-							</a>
+							<a className="font-medium text-primary-500">help center</a>
 						</Link>{" "}
 						to learn how to get started with buying, selling, and creating.{" "}
 					</>

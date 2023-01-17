@@ -7,7 +7,7 @@ const PurchasedActivity = ({ activity }) => {
 	return (
 		<>
 			<div className={"dark:bg-dark-800 " + styles["sales-history__action"]}>
-				<i className="fa-solid fa-pen-to-square text-lg"></i>
+				<i className="text-lg fa-solid fa-pen-to-square"></i>
 			</div>
 
 			<div className="ml-3 font-secondary">
@@ -20,7 +20,7 @@ const PurchasedActivity = ({ activity }) => {
 					by&nbsp;
 					{activity ? (
 						<Link href={`/profile/${activity.caller.username}`} className="cursor-pointer">
-							<a target="_blank" rel="noopener noreferrer">
+							<a>
 								@{activity.caller.username}&nbsp;
 							</a>
 						</Link>

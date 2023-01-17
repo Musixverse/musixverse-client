@@ -230,19 +230,27 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 										</a>
 									</div>
 
-									<div className="pt-2 rounded-xl absolute w-full md:w-[500px] md:right-0 hidden group-focus-within:block transition-all duration-500">
-										<a className="flex flex-col basis-full">
-											<button
-												type="button"
-												className="flex items-center rounded-t-xl justify-center px-3 pt-3 pb-1 bg-light-100 dark:bg-dark-600 dark:text-light-100 cursor-default"
-											>
-												Artists & Fans
-											</button>
-										</a>
-										{searchResults.users && searchResults.users.length > 0 ? (
-											searchResults.users.map((_user, idx) => (
-												<Link href={`/profile/${_user.username}`} key={_user.objectId}>
-													<a className="flex flex-col basis-full">
+									{isSearchFocused && (
+										<div className="pt-2 rounded-xl absolute w-full md:w-[500px] md:right-0 hidden group-focus-within:block transition-all duration-500">
+											<a className="flex flex-col basis-full">
+												<button
+													type="button"
+													className="flex items-center rounded-t-xl justify-center px-3 pt-3 pb-1 bg-light-100 dark:bg-dark-600 dark:text-light-100 cursor-default"
+												>
+													Artists & Fans
+												</button>
+											</a>
+											{searchResults.users && searchResults.users.length > 0 ? (
+												searchResults.users.map((_user, idx) => (
+													<a
+														className="flex flex-col basis-full"
+														key={_user.objectId}
+														onClick={() => {
+															document.getElementById("search-input").blur();
+															setSearchFocused(false);
+															router.push(`/profile/${_user.username}`);
+														}}
+													>
 														<button
 															type="button"
 															className="flex items-center justify-start px-3 py-2 bg-light-100 dark:bg-dark-600 dark:text-light-100 hover:bg-light-300 dark:hover:bg-dark-800 text-start"
@@ -263,33 +271,39 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 															)}
 														</button>
 													</a>
-												</Link>
-											))
-										) : (
+												))
+											) : (
+												<a className="flex flex-col basis-full">
+													<button
+														type="button"
+														className="flex items-center justify-center px-3 pt-4 pb-4 bg-light-100 dark:bg-dark-600 dark:text-light-100 text-xs font-light cursor-default"
+													>
+														No users found
+													</button>
+												</a>
+											)}
+
 											<a className="flex flex-col basis-full">
 												<button
 													type="button"
-													className="flex items-center justify-center px-3 pt-4 pb-4 bg-light-100 dark:bg-dark-600 dark:text-light-100 text-xs font-light cursor-default"
+													className="flex items-center justify-center px-3 pt-3 pb-1 bg-light-100 dark:bg-dark-600 dark:text-light-100 cursor-default"
 												>
-													No users found
+													Tracks
 												</button>
 											</a>
-										)}
-
-										<a className="flex flex-col basis-full">
-											<button
-												type="button"
-												className="flex items-center justify-center px-3 pt-3 pb-1 bg-light-100 dark:bg-dark-600 dark:text-light-100 cursor-default"
-											>
-												Tracks
-											</button>
-										</a>
-										{searchResults.tracks && searchResults.tracks.length > 0 ? (
-											searchResults.tracks.map((_track, idx) => {
-												const _tokenId = parseInt(_track.maxTokenId) - parseInt(_track.numberOfCopies) + 1;
-												return (
-													<Link href={`/track/polygon/${_tokenId}`} key={_tokenId}>
-														<a className="flex flex-col basis-full">
+											{searchResults.tracks && searchResults.tracks.length > 0 ? (
+												searchResults.tracks.map((_track, idx) => {
+													const _tokenId = parseInt(_track.maxTokenId) - parseInt(_track.numberOfCopies) + 1;
+													return (
+														<a
+															className="flex flex-col basis-full"
+															key={_tokenId}
+															onClick={() => {
+																document.getElementById("search-input").blur();
+																setSearchFocused(false);
+																router.push(`/track/polygon/${_tokenId}`);
+															}}
+														>
 															<button
 																type="button"
 																className={
@@ -314,20 +328,20 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 																</div>
 															</button>
 														</a>
-													</Link>
-												);
-											})
-										) : (
-											<a className="flex flex-col basis-full">
-												<button
-													type="button"
-													className="flex rounded-b-xl items-center justify-center px-3 pt-3 pb-5 bg-light-100 dark:bg-dark-600 dark:text-light-100 text-xs font-light cursor-default"
-												>
-													No tracks to display
-												</button>
-											</a>
-										)}
-									</div>
+													);
+												})
+											) : (
+												<a className="flex flex-col basis-full">
+													<button
+														type="button"
+														className="flex rounded-b-xl items-center justify-center px-3 pt-3 pb-5 bg-light-100 dark:bg-dark-600 dark:text-light-100 text-xs font-light cursor-default"
+													>
+														No tracks to display
+													</button>
+												</a>
+											)}
+										</div>
+									)}
 								</li>
 
 								{/* Notification button */}

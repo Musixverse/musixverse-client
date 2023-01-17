@@ -164,6 +164,7 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 									});
 									return;
 								}
+								console.log("Setting authMethod");
 								await Moralis.Cloud.run("magicAuthSetUserEmail", { email: emailRef.current.value, userId: user.id });
 							}
 							await fetch("/api/auth/login", {
@@ -182,13 +183,13 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 					.catch(function (error) {
 						console.error("MagicLink authentication error:", error);
 						setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
-						router.reload(window.location.pathname);
+						// router.reload(window.location.pathname);
 					});
 			} catch (error) {
 				console.error("MagicLink authentication error:", error);
-				router.reload(window.location.pathname);
+				// router.reload(window.location.pathname);
 			}
-			setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
+			// setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 		}
 	};
 

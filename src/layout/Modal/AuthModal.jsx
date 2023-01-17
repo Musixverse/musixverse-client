@@ -175,9 +175,9 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 							}).then(() => {
 								closeModal();
 								if (router.pathname === "/") router.replace("/mxcatalog/new-releases");
+								setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 							});
 						}
-						setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 					})
 					.catch(function (error) {
 						console.error("MagicLink authentication error:", error);

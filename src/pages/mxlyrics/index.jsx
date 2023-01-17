@@ -129,7 +129,7 @@ const MxLyrics = () => {
 								{choice == "generateLyrics" ? (
 									<textarea
 										rows={1}
-										className="mt-2 sm:mt-4 w-full flex gap-4 items-start justify-start placeholder-light-600 dark:placeholder-light-800 bg-light-300/50 dark:bg-dark-600 border border-transparent dark:border-dark-300 focus:outline-none focus:border-primary-500 dark:focus:border-primary-500 rounded-xl overflow-hidden px-5 py-4 resize-none"
+										className="mt-2 sm:mt-4 w-full flex gap-4 items-start justify-start placeholder-light-600 dark:placeholder-light-800 bg-light-300/50 dark:bg-dark-600 border border-transparent dark:border-dark-300 focus:outline-none focus:border-primary-500 dark:focus:border-primary-500 rounded-xl overflow-auto px-5 py-4 resize-none"
 										placeholder="enter song name"
 										value={userInput}
 										onChange={(event) => setUserInput(event.target.value)}
@@ -138,7 +138,7 @@ const MxLyrics = () => {
 								) : (
 									<textarea
 										rows={8}
-										className="mt-2 sm:mt-4 w-full flex gap-4 items-start justify-start placeholder-light-600 dark:placeholder-light-800 bg-light-300/50 dark:bg-dark-600 border border-transparent dark:border-dark-300 focus:outline-none focus:border-primary-500 dark:focus:border-primary-500 rounded-xl overflow-hidden px-5 py-4 resize-none"
+										className="mt-2 sm:mt-4 w-full flex gap-4 items-start justify-start placeholder-light-600 dark:placeholder-light-800 bg-light-300/50 dark:bg-dark-600 border border-transparent dark:border-dark-300 focus:outline-none focus:border-primary-500 dark:focus:border-primary-500 rounded-xl overflow-auto px-5 py-4 resize-none"
 										placeholder="enter your lyrics"
 										value={userInput}
 										onChange={(event) => setUserInput(event.target.value)}

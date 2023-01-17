@@ -6,7 +6,7 @@ import styles from "../../../../styles/HomePage/promoCarousel.module.css";
 import { useRouter } from "next/router";
 import ArtistIntro from "./ArtistIntro";
 
-export default function PromoCarousel() {
+export default function PromoCarousel({ tracks }) {
 	const { theme } = useTheme();
 	const [currSlide, setCurrSlide] = useState(1);
 	const router = useRouter();

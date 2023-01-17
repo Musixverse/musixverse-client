@@ -76,12 +76,20 @@ export default function BasicDetails() {
 		}
 
 		if (name !== "" && username !== "" && email !== "") {
-			await setUserData({
-				name: name === "" ? undefined : name,
-				username: username === "" ? undefined : username,
-				email: email === "" ? undefined : email,
-				isArtist: true,
-			});
+			if (user && user.attributes.authMethod == "magicLink") {
+				await setUserData({
+					name: name === "" ? undefined : name,
+					username: username === "" ? undefined : username,
+					isArtist: true,
+				});
+			} else {
+				await setUserData({
+					name: name === "" ? undefined : name,
+					username: username === "" ? undefined : username,
+					email: email === "" ? undefined : email,
+					isArtist: true,
+				});
+			}
 
 			const userData = {
 				user: user,

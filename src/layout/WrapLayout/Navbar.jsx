@@ -484,7 +484,7 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 													</Link>
 												</li>
 											)}
-											{user && isAuthenticated && user.attributes.email && (
+											{/* {user && isAuthenticated && user.attributes.email && (
 												<li>
 													<div
 														onClick={() => loadTransak(user)}
@@ -494,7 +494,7 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 														<Image src={"/assets/matic-logo.svg"} width={14} height={14} alt="matic logo" />
 													</div>
 												</li>
-											)}
+											)} */}
 
 											{user && isAuthenticated && user.attributes.email && (
 												<li>

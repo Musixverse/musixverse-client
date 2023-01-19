@@ -38,11 +38,36 @@ export async function getStaticProps() {
 function Home({ tracks }) {
 	const [mounted, setMounted] = useState(false);
 	const { theme } = useTheme();
+	const [image, setImmg] = useState(undefined);
 
 	useEffect(() => {
 		setMounted(true);
+		async function getData(){
+		const response = await fetch("/api/extract-asset", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({ 
+				artistName: 'Ankur Sarasiya', 
+				songName: 'Naqab'.toUpperCase(),
+				numberOfCopies: 10,
+				coverArtURL: "https://gateway.musixverse.com/ipfs/bafybeidnyuqckv3dy7c767z3qg42kbpwg5ittdknr5hxet3yepgi2b6bye",
+				artistProfilePicture: "",
+			}),
+		});
+		response.json().then((data)=>{
+			console.log("FROM UI",data.buffer);
+			setImmg("data:image/png;base64,"+data.buffer);
+		})
+			// console.log("THIS IS THE API RESPONSE: ",response);
+			// setImmg(response);
+		// const data = await response.json();
+		// const { output } = data;
+		}
+		getData();
 	}, []);
-
+	console.log(image);
 	return (
 		<>
 			<Head>
@@ -55,6 +80,7 @@ function Home({ tracks }) {
 					{/* <Banner /> */}
 					{/* <HeroSection /> */}
 					<div className="flex flex-col w-full max-w-[1920px] px-6 md:px-8 lg:px-16 xl:px-20 2xl:px-36">
+						{image && <img src={image} />}
 						<NewHero tracks={tracks} />
 						<TopArtists />
 						<ShareAndEarn />

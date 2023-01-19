@@ -147,7 +147,6 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 				})
 					.then(async function (user) {
 						if (user) {
-							setAuthModalOpen(false);
 							if (!user.attributes.email) {
 								// EMAIL CHECK
 								const emailCheck = await isEmailValidAndAvailableForMagicLogin(emailRef.current.value);
@@ -166,6 +165,7 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 								}
 								await Moralis.Cloud.run("magicAuthSetUserEmail", { email: emailRef.current.value, userId: user.id });
 							}
+							setAuthModalOpen(false);
 							await fetch("/api/auth/login", {
 								method: "post",
 								headers: {
@@ -182,13 +182,11 @@ export default function AuthModal({ isOpen = "", onClose = "" }) {
 					.catch(function (error) {
 						console.error("MagicLink authentication error:", error);
 						setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
-						router.reload(window.location.pathname);
 					});
 			} catch (error) {
 				console.error("MagicLink authentication error:", error);
-				router.reload(window.location.pathname);
+				setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 			}
-			setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 		}
 	};
 

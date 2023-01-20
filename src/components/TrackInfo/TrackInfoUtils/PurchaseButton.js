@@ -87,11 +87,12 @@ const PurchaseButton = ({ tokenId, trackId, price }) => {
 						title: "Insufficient funds",
 						message: (
 							<>
-								Please get enough MATIC in your account for this transaction. Click{" "}
+								Please get enough MATIC in your account for this transaction.
+								{/* Click{" "}
 								<span onClick={() => loadTransak(user)} className="cursor-pointer underline">
 									here
 								</span>{" "}
-								to buy.
+								to buy. */}
 							</>
 						),
 						showErrorBox: true,
@@ -102,11 +103,12 @@ const PurchaseButton = ({ tokenId, trackId, price }) => {
 						title: "Insufficient funds",
 						message: (
 							<>
-								Please get enough MATIC in your account for this transaction. Click{" "}
+								Please get enough MATIC in your account for this transaction.
+								{/* Click{" "}
 								<span onClick={() => loadTransak(user)} className="cursor-pointer underline">
 									here
 								</span>{" "}
-								to buy.
+								to buy. */}
 							</>
 						),
 						showErrorBox: true,

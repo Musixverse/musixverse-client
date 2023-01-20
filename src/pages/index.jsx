@@ -4,6 +4,7 @@ import { useTheme } from "next-themes";
 import { title_main_page, meta_description } from "../config/constants";
 import LoadingSection from "../layout/Loading/LoadingSection";
 import LoadingSectionDark from "../layout/Loading/LoadingSectionDark";
+import Moralis from "moralis/node";
 import Banner from "../components/HomePage/HomePageBanner";
 import Section2 from "../components/HomePage/HomePage_section3";
 import Section3 from "../components/HomePage/HomePage_section4";
@@ -18,8 +19,23 @@ import GetStartedFan from "../components/HomePage/GetStartedFan";
 // import GetStartedAsArtist from "../components/HomePage/GetStartedAsArtist";
 // import GetStartedAsFan from "../components/HomePage/GetStartedAsFan";
 import NewsLetter from "../layout/NewsLetter";
+import { PARSE_APP_ID, PARSE_SERVER_URL } from "../config/constants";
 
-function Home({}) {
+export async function getStaticProps() {
+	await Moralis.start({ serverUrl: PARSE_SERVER_URL, appId: PARSE_APP_ID });
+
+	// Fetch token details
+	const _tracks = await Moralis.Cloud.run("fetchTracksForHeroSection");
+	const tracks = JSON.parse(JSON.stringify(_tracks));
+
+	// Passing data to the page using props
+	return {
+		props: { tracks },
+		revalidate: 10,
+	};
+}
+
+function Home({ tracks }) {
 	const [mounted, setMounted] = useState(false);
 	const { theme } = useTheme();
 
@@ -39,7 +55,7 @@ function Home({}) {
 					{/* <Banner /> */}
 					{/* <HeroSection /> */}
 					<div className="flex flex-col w-full max-w-[1920px] px-6 md:px-8 lg:px-16 xl:px-20 2xl:px-36">
-						<NewHero />
+						<NewHero tracks={tracks} />
 						<TopArtists />
 						<ShareAndEarn />
 						<GetStartedArtist />

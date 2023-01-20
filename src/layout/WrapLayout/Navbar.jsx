@@ -14,7 +14,7 @@ import { loadTransak } from "../../utils/TransakOnRamp";
 
 const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 	const { theme, setTheme } = useTheme();
-	const { isAuthenticated, logout, user, Moralis } = useMoralis();
+	const { isAuthenticated, logout, user, Moralis, isInitialized } = useMoralis();
 	const router = useRouter();
 	const [balance, setBalance] = useState(0);
 
@@ -113,7 +113,6 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 		}
 	);
 	const search = async (keyword) => {
-		console.log(keyword);
 		if (keyword === "") {
 			// If the text field is empty, show no results
 			setSearchResults([]);
@@ -122,10 +121,9 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 		}
 	};
 	useEffect(() => {
-		if (searchedQuery !== "") {
+		if (isInitialized) {
 			performSearch({
 				onSuccess: async (object) => {
-					console.log(object);
 					setSearchResults(object);
 				},
 				onError: (error) => {
@@ -133,7 +131,7 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 				},
 			});
 		}
-	}, [searchedQuery, performSearch]);
+	}, [searchedQuery, performSearch, isInitialized]);
 
 	return (
 		<div className="absolute flex justify-center w-screen">
@@ -206,11 +204,11 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 								{/* Search bar */}
 								<li
 									className="block group relative search-li"
-									onMouseOver={() => {
+									onMouseEnter={() => {
 										document.getElementById("search-input").focus();
 										setSearchFocused(true);
 									}}
-									onMouseOut={() => {
+									onMouseLeave={() => {
 										document.getElementById("search-input").blur();
 										setSearchFocused(false);
 									}}
@@ -232,19 +230,27 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 										</a>
 									</div>
 
-									<div className="pt-2 rounded-xl absolute w-full md:w-[500px] md:right-0 hidden group-focus-within:block transition-all duration-500">
-										<a className="flex flex-col basis-full">
-											<button
-												type="button"
-												className="flex items-center rounded-t-xl justify-center px-3 pt-3 pb-1 bg-light-100 dark:bg-dark-600 dark:text-light-100 cursor-default"
-											>
-												Artists & Fans
-											</button>
-										</a>
-										{searchResults.users && searchResults.users.length > 0 ? (
-											searchResults.users.map((_user, idx) => (
-												<Link href={`/profile/${_user.username}`} key={_user.objectId}>
-													<a className="flex flex-col basis-full">
+									{isSearchFocused && (
+										<div className="pt-2 rounded-xl absolute w-full md:w-[500px] md:right-0 hidden group-focus-within:block transition-all duration-500">
+											<a className="flex flex-col basis-full">
+												<button
+													type="button"
+													className="flex items-center rounded-t-xl justify-center px-3 pt-3 pb-1 bg-light-100 dark:bg-dark-600 dark:text-light-100 cursor-default"
+												>
+													Artists & Fans
+												</button>
+											</a>
+											{searchResults.users && searchResults.users.length > 0 ? (
+												searchResults.users.map((_user, idx) => (
+													<a
+														className="flex flex-col basis-full"
+														key={_user.objectId}
+														onClick={() => {
+															document.getElementById("search-input").blur();
+															setSearchFocused(false);
+															router.push(`/profile/${_user.username}`);
+														}}
+													>
 														<button
 															type="button"
 															className="flex items-center justify-start px-3 py-2 bg-light-100 dark:bg-dark-600 dark:text-light-100 hover:bg-light-300 dark:hover:bg-dark-800 text-start"
@@ -265,33 +271,39 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 															)}
 														</button>
 													</a>
-												</Link>
-											))
-										) : (
+												))
+											) : (
+												<a className="flex flex-col basis-full">
+													<button
+														type="button"
+														className="flex items-center justify-center px-3 pt-4 pb-4 bg-light-100 dark:bg-dark-600 dark:text-light-100 text-xs font-light cursor-default"
+													>
+														No users found
+													</button>
+												</a>
+											)}
+
 											<a className="flex flex-col basis-full">
 												<button
 													type="button"
-													className="flex items-center justify-center px-3 pt-4 pb-4 bg-light-100 dark:bg-dark-600 dark:text-light-100 text-xs font-light cursor-default"
+													className="flex items-center justify-center px-3 pt-3 pb-1 bg-light-100 dark:bg-dark-600 dark:text-light-100 cursor-default"
 												>
-													No users found
+													Tracks
 												</button>
 											</a>
-										)}
-
-										<a className="flex flex-col basis-full">
-											<button
-												type="button"
-												className="flex items-center justify-center px-3 pt-3 pb-1 bg-light-100 dark:bg-dark-600 dark:text-light-100 cursor-default"
-											>
-												Tracks
-											</button>
-										</a>
-										{searchResults.tracks && searchResults.tracks.length > 0 ? (
-											searchResults.tracks.map((_track, idx) => {
-												const _tokenId = parseInt(_track.maxTokenId) - parseInt(_track.numberOfCopies) + 1;
-												return (
-													<Link href={`/track/polygon/${_tokenId}`} key={_tokenId}>
-														<a className="flex flex-col basis-full">
+											{searchResults.tracks && searchResults.tracks.length > 0 ? (
+												searchResults.tracks.map((_track, idx) => {
+													const _tokenId = parseInt(_track.maxTokenId) - parseInt(_track.numberOfCopies) + 1;
+													return (
+														<a
+															className="flex flex-col basis-full"
+															key={_tokenId}
+															onClick={() => {
+																document.getElementById("search-input").blur();
+																setSearchFocused(false);
+																router.push(`/track/polygon/${_tokenId}`);
+															}}
+														>
 															<button
 																type="button"
 																className={
@@ -316,20 +328,20 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 																</div>
 															</button>
 														</a>
-													</Link>
-												);
-											})
-										) : (
-											<a className="flex flex-col basis-full">
-												<button
-													type="button"
-													className="flex rounded-b-xl items-center justify-center px-3 pt-3 pb-5 bg-light-100 dark:bg-dark-600 dark:text-light-100 text-xs font-light cursor-default"
-												>
-													No tracks to display
-												</button>
-											</a>
-										)}
-									</div>
+													);
+												})
+											) : (
+												<a className="flex flex-col basis-full">
+													<button
+														type="button"
+														className="flex rounded-b-xl items-center justify-center px-3 pt-3 pb-5 bg-light-100 dark:bg-dark-600 dark:text-light-100 text-xs font-light cursor-default"
+													>
+														No tracks to display
+													</button>
+												</a>
+											)}
+										</div>
+									)}
 								</li>
 
 								{/* Notification button */}
@@ -409,7 +421,7 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 													onClick={() => setAuthModalOpen(true)}
 													className="flex items-center justify-center px-10 py-2 text-base font-semibold rounded-full bg-search-100 dark:bg-search-200"
 												>
-													Connect wallet
+													Sign up / Login
 												</div>
 											) : (
 												<div className="flex items-center justify-center px-4 py-2 text-sm rounded-full bg-search-100 dark:bg-search-200">
@@ -472,7 +484,7 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 													</Link>
 												</li>
 											)}
-											{user && isAuthenticated && user.attributes.email && (
+											{/* {user && isAuthenticated && user.attributes.email && (
 												<li>
 													<div
 														onClick={() => loadTransak(user)}
@@ -482,7 +494,7 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 														<Image src={"/assets/matic-logo.svg"} width={14} height={14} alt="matic logo" />
 													</div>
 												</li>
-											)}
+											)} */}
 
 											{user && isAuthenticated && user.attributes.email && (
 												<li>

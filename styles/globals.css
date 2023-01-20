@@ -60,10 +60,6 @@ a {
 	@apply h-[40px] bg-search-100 dark:bg-search-200 rounded-full p-1.5;
 }
 
-.search-box:hover > .search-text {
-	@apply w-[275px] px-4;
-}
-
 .search-li:hover .search-text {
 	@apply w-[275px] px-4;
 }

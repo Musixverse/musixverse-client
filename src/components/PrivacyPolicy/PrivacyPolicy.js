@@ -8,7 +8,7 @@ export default function PrivacyPolicy() {
 					<div className={styles["privacy_policy_heading"]}>Privacy Policy</div>
 				</div>
 				<div>
-					<div className="text-primary-500">(Last Updated Jan 20, 2023)</div>
+					<div className="text-primary-500 text-sm pt-1">(Effective as of Nov 20, 2022)</div>
 				</div>
 
 				<div className="mt-5">
@@ -38,34 +38,65 @@ export default function PrivacyPolicy() {
 
 				<div className="mt-4">
 					<div className={styles["privacy_policy_content"]}>
-						<span className="text-primary-500">a. Personally-Identifiable Information:</span> We only collect personally identifiable information
-						when you specifically and knowingly provide it to us, for example when you provide personal information such as your email address,
-						name, or other information like a wallet address. Personally identifiable information includes, where applicable, “personal data”,
-						“personal information” and/or “sensitive personal information” each as defined in applicable law, and excludes staking addresses or
-						payment addresses. We ask that you not send us, and you do not disclose, any sensitive personal data (e.g., social security numbers,
-						information related to racial or ethnic origin, political opinions, religion or other beliefs, health, biometrics or genetic
-						characteristics, criminal background or trade union membership). We collect and use your personally-identifiable information to provide
-						customer service or provide updates or information you request. This policy does not apply to the privacy practices of third parties or
-						protocols that we do not own or control, including but not limited to any decentralized exchange, third party websites, or other
-						applications to which the Musixverse website may link or otherwise reference. If you communicate with us via any Musixverse site, you
-						will have agreed to provide your personally identifiable information in order to respond to your communication. This consent provides us
-						with the legal basis we require under applicable law to process your data. You maintain the right to withdraw such consent at any time.
+						In order to better provide you with products, services, and content offerings on our Site,
+						Musixverse may collect personally identifiable information, such as your:
+						<ol className="list-decimal pl-8">
+							<li>First and Last Name</li>
+							<li>Birthdate</li>
+							<li>Email Address</li>
+							<li>Phone Number</li>
+							<li>Username and Password</li>
+							<li>Social Media Account credentials</li>
+							<li>User pictures</li>
+							<li>Government ID</li>
+						</ol>
 						<br />
+						If you purchase Musixverse&apos;s products and services, we may collect billing and credit card
+						information in addition to your public wallet address. This information is used to complete the
+						purchase transaction.
 						<br />
-						<span className="text-primary-500">b. Non-Personally-Identifiable Information:</span> Non-personally identifiable information is
-						information which does not permit you to be identified or identifiable either by itself or in combination with other information
-						available to a third party, such as a website that referred you to us, your IP address, browser type and language, hardware types,
-						geographic location, log data, and access times and durations. We do not presently collect any non-personally identifiable information.
+						The Site may also collect anonymous demographic information, which is not unique to
+						you, including but not limited to your:
+						<ol className="list-decimal pl-8">
+							<li>Age</li>
+							<li>Gender</li>
+						</ol>
 						<br />
+						We do not collect any personal information about you unless you voluntarily provide it to us.
+						However, you may be required to provide certain personal information to us when you elect to
+						use certain products or services available on the Site. These may include:
+						<ol className="list-decimal pl-8">
+							<li>registering for an account on our Site;</li>
+							<li>transacting on the Site using your digital wallet holding various virtual currency;</li>
+							<li>entering a sweepstakes or contest sponsored by us or one of our partners;</li>
+							<li>signing up for special offers from selected third parties;</li>
+							<li>sending us an email message;</li>
+							<li>accessing our third-party site content; and</li>
+							<li>submitting your credit card or other payment information when ordering and purchasing</li>
+							<li>products and services on our Site. To wit, we will use your information for, but not limited
+							to, communicating with you in relation to services and/or products you have requested from
+							us. We also may gather additional personal or non-personal information in the future.</li>
+						</ol>	
 						<br />
-						<span className="text-primary-500">c. Cookies, Pixels and Local Storage:</span> We do not collect information using “cookies”, which are
-						small data files stored on the hard drive of your computer or mobile device by a website. We enable local storage, but that information
-						is saved locally to your browser only and not shared with us.
-						<br />
-						<br />
-						<span className="text-primary-500">d. Track Info:</span> The track and information related to the track (&quot;Track Name&quot;,
-						&quot;Artist Name&quot;, &quot;Lyrics&quot;, &quot;Cover Image&quot;, etc). We display this information to every user accessing
-						Musixverse. This consent provides us with the legal basis we require under applicable law to process your data.
+						We may also automatically collect the following categories of network activity and/or device
+						information (some of which may qualify as “Personal Information” or “Personal Data” under
+						applicable law) from devices (e.g., mobile, computer, laptop, tablet) used to visit or use our
+						Services (&quot;Device Information&quot;):
+						<ol className="list-decimal pl-8">
+							<li>IP address;</li>
+							<li>Device identifier;</li>
+							<li>The website you visited before using our Services;</li>
+							<li>Browser type;</li>
+							<li>Any search terms entered on or through our Services;</li>
+							<li>General location data based on your Device Information, such as country, state or province;</li>
+							<li>Computer operating system;</li>
+							<li>Access times;</li>
+							<li>Usage patterns and page views within our Services;</li>
+							<li>Log files;</li>
+							<li>Cookies;</li>
+							<li>Clear gifs; and</li>
+							<li>Flash LSOs.</li>
+						</ol>	
 					</div>
 				</div>
 
@@ -171,26 +202,29 @@ export default function PrivacyPolicy() {
 				<div className="mt-4">
 					<div className={styles["privacy_policy_content"]}>
 						Subject to certain exceptions set out below, on receipt of a verifiable request from you, we will:
-						• Delete your personal information from our records; and
-						• Direct any service providers to delete your personal information from their records.
-						<br />
+						<ul className="list-disc pl-8">
+							<li>Delete your personal information from our records; and</li>	
+							<li>Direct any service providers to delete your personal information from their records.</li>	
+						</ul>
 						<br />
 						Please note that we may not be able to comply with requests to delete your personal information
 						if it is necessary to:
-						• Complete the transaction for which the personal information was collected, fulfill the terms of a
-						written warranty or product recall conducted in accordance with the law, provide a good or service
-						requested by you, or reasonably anticipated within the context of our ongoing business relationship
-						with you, or otherwise perform a contract between you and us;
-						• Detect security incidents, protect against malicious, deceptive, fraudulent, or illegal activity; or
-						prosecute those responsible for that activity;
-						• Debug to identify and repair errors that impair existing intended functionality;
-						• Exercise free speech, ensure the right of another consumer to exercise his or her right of free
-						speech, or exercise another right provided for by law;
-						• Enable solely internal uses that are reasonably aligned with your expectations based on
-						your relationship with us;
-						• Comply with an existing legal obligation; or
-						• Otherwise use your personal information, internally, in a lawful manner that is compatible with
-						the context in which you provided the information.
+						<ul className="list-disc pl-8">
+							<li>Complete the transaction for which the personal information was collected, fulfill the terms of a
+							written warranty or product recall conducted in accordance with the law, provide a good or service
+							requested by you, or reasonably anticipated within the context of our ongoing business relationship
+							with you, or otherwise perform a contract between you and us;</li>
+							<li>Detect security incidents, protect against malicious, deceptive, fraudulent, or illegal activity; or
+							prosecute those responsible for that activity;</li>
+							<li>Debug to identify and repair errors that impair existing intended functionality;</li>
+							<li>Exercise free speech, ensure the right of another consumer to exercise his or her right of free
+							speech, or exercise another right provided for by law;</li>
+							<li>Enable solely internal uses that are reasonably aligned with your expectations based on
+							your relationship with us;</li>
+							<li>Comply with an existing legal obligation; or</li>
+							<li>Otherwise use your personal information, internally, in a lawful manner that is compatible with
+							the context in which you provided the information.</li>
+						</ul>	
 					</div>
 				</div>
 
@@ -233,12 +267,13 @@ export default function PrivacyPolicy() {
 						about significant changes in the way we treat personal information by sending a notice to the
 						primary email address specified in your account, by placing a prominent notice on our site, and/or
 						by updating any privacy information on this page. Your continued use of the Site and/or services
-						available through this Site after such modifications will constitute your: (a) acknowledgment of
-						the modified Privacy Policy; and (b) agreement to abide and be bound by that Policy.
+						available through this Site after such modifications will constitute your: 
+						<br />(a) acknowledgment of the modified Privacy Policy; and
+						<br />(b) agreement to abide and be bound by that Policy.
 					</div>
 				</div>
 
-				<div className="mt-10">
+				{/* <div className="mt-10">
 					<div className={styles["privacy_policy_sub-heading"]}>Dispute resolution</div>
 				</div>
 
@@ -247,7 +282,7 @@ export default function PrivacyPolicy() {
 						You agree to the dispute resolution mechanism as the sole means to seek resolution to any disputes
 						arising from this Privacy Policy available at []
 					</div>
-				</div>
+				</div> */}
 
 				<div className="mt-10">
 					<div className={styles["privacy_policy_sub-heading"]}>Contact Information</div>
@@ -258,6 +293,7 @@ export default function PrivacyPolicy() {
 						Musixverse welcomes your questions or comments regarding this Statement of Privacy. If
 						you believe that Musixverse has not adhered to this Statement, please contact Musixverse
 						at:
+						<br />
 						<a
 							href="https://www.google.co.in/maps/search/KH.No.+23%2F2,1st+Floor,Gali+No.5,+Block-A,+Himgiri+Enclave,+Village+Mukandpur,+Delhi,+North+%09%09%09%09%09%09East,+Delhi,+India,+110084/@28.6915721,77.2055784,21z?hl=en&authuser=0"
 							target="_blank"
@@ -265,12 +301,15 @@ export default function PrivacyPolicy() {
 							className="font-primary font-semibold dark:text-[#afafaf]"
 						>
 						{" "}
-							Musixverse Technologies Pvt Ltd.
-							KH.No. 23/2,1st Floor,Gali No.5, Block-A, Himgiri Enclave, Village Mukandpur, Delhi, North
-							East, Delhi, India, 110084
+						<br /> 
+							Musixverse Technologies Pvt Ltd.<br />
+							KH.No. 23/2,1st Floor,Gali No.5, Block-A, Himgiri Enclave, Village Mukandpur, Delhi, North<br />
+							East, Delhi, India, 110084<br />
 						{" "}
-						</a>	
+						</a>
+						<br />	
 						Email Address:
+						<br />
 						<a
 							href="mailto:contact@musixverse.com"
 							target="_blank"
@@ -279,6 +318,7 @@ export default function PrivacyPolicy() {
 						>
 							contact@musixverse.com
 						</a>
+						<br />
 						<a
 							href="tel:8171648640"
 							target="_blank"

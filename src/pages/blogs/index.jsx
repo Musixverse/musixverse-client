@@ -1,3 +1,4 @@
+import Blog from "@/components/Blogs/Blog";
 import Head from "next/head";
 import { meta_description } from "../../config/constants";
 
@@ -11,8 +12,8 @@ const Blogs = ({}) => {
 			</Head>
 
 			<div className="flex flex-col items-center justify-center w-full bg-light-200 dark:bg-dark-800">
-				<div className="overflow-x-hidden w-full max-w-[1920px]">
-					Blog Page
+				<div className="overflow-x-hidden justify-center w-full max-w-[768px]">
+					<Blog />
 				</div>
 			</div>
 		</>

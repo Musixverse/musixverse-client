@@ -1,6 +1,6 @@
 import Image from 'node_modules/next/image'
 
-const BlogProfile = ({profile,username,lastupdated}) => {
+const BlogProfile = ({profile,username,lastupdated,name}) => {
   return (
     <div>
         <div className="flex justify-between">
@@ -9,7 +9,7 @@ const BlogProfile = ({profile,username,lastupdated}) => {
                     <Image src={profile} alt={'artist profile'} objectfit={'container'} />
                 </div>
                 <div className="flex flex-col justify-center ml-2">
-                    <div className="font-primary font-bold text-lg">{username}</div>    
+                    <div className="font-primary font-bold text-lg">{name}</div>    
                     <div className="font-primary text-sm text-gray-500">{lastupdated}</div> 
                 </div> 
             </div>

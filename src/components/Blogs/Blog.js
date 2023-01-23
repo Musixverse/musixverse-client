@@ -12,6 +12,7 @@ const Blog = () => {
         <BlogProfile 
             profile={logo}
             username={'Royal'}
+            name={'Shivam'}
             lastupdated={new Date().toLocaleDateString('en-us', { year:"numeric", month:"short", day:"numeric"})}
         />    
         <BlogHeader>DANIEL LOVE: I&apos;M A COLLECTOR WHO BECAME A FAN</BlogHeader>

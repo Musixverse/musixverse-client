@@ -130,6 +130,7 @@ export default function TrackHeader({
 						image={image}
 						trackId={trackId}
 						price={priceInWei}
+						numberOfCopies={numberOfCopies}
 					/>
 
 					<div className="grid content-between w-full h-full pt-6">

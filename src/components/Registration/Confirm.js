@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useRef, useEffect, useContext } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useTheme } from "next-themes";
@@ -10,12 +10,14 @@ import W_blackhole from "../../../public/assets/registration/white_black_hole.sv
 import StatusContext from "../../../store/status-context";
 import ArtistEmailVerificationSuccessModal from "./ArtistRegUtils/ArtistEmailVerificationSuccessModal";
 import CollectorEmailVerificationSuccessModal from "./ArtistRegUtils/CollectorEmailVerificationSuccessModal";
+import ReCAPTCHA from "react-google-recaptcha";
 
 export default function Confirm() {
 	const router = useRouter();
 	const { theme } = useTheme();
 	const { user, Moralis, refetchUserData } = useMoralis();
-	const [, , setSuccess] = useContext(StatusContext);
+	const [, , setSuccess, setError] = useContext(StatusContext);
+	const recaptchaRef = useRef(null);
 
 	const [artistEmailVerificationSuccess, setArtistEmailVerificationSuccess] = useState(false);
 	const [collectorEmailVerificationSuccess, setCollectorEmailVerificationSuccess] = useState(false);
@@ -50,21 +52,36 @@ export default function Confirm() {
 		return;
 	};
 
-	const resendVerificationEmail = async () => {
-		await Moralis.User.requestEmailVerification(user.attributes.email)
-			.then(() => {
-				setSuccess((prevState) => ({
-					...prevState,
-					title: "Verification email sent",
-					message: "An email is sent to your registered email address. Please verify your email.",
-					showSuccessBox: true,
-				}));
-				return;
-			})
-			.catch((error) => {
-				// Show the error message somewhere
-				alert("Error: " + error.code + " " + error.message);
+	const resendVerificationEmail = async (e) => {
+		e.preventDefault();
+
+		const recaptchaValue = recaptchaRef.current.getValue();
+		const res = await fetch(`/api/validate-captcha`, { method: "POST", body: JSON.stringify({ recaptchaValue: recaptchaValue }) });
+		const status = await res.json();
+
+		if (status.success === true) {
+			await Moralis.User.requestEmailVerification(user.attributes.email)
+				.then(() => {
+					setSuccess((prevState) => ({
+						...prevState,
+						title: "Verification email sent",
+						message: "An email is sent to your registered email address. Please verify your email.",
+						showSuccessBox: true,
+					}));
+					recaptchaRef.current.reset();
+					return;
+				})
+				.catch((error) => {
+					// Show the error message somewhere
+					alert("Error: " + error.code + " " + error.message);
+				});
+		} else {
+			setError({
+				title: "reCAPTCHA failed",
+				message: `Please click "I'm not a robot" before clicking "Resend"`,
+				showErrorBox: true,
 			});
+		}
 	};
 
 	return (
@@ -84,7 +101,7 @@ export default function Confirm() {
 							Make sure to check your Promotions tab and Spam folder
 						</p>
 					</span>
-					<form onSubmit={backToApp} className="mt-12">
+					<form onSubmit={backToApp} className="mt-8">
 						{user && user.attributes.isArtist ? (
 							<button
 								type="submit"
@@ -108,6 +125,15 @@ export default function Confirm() {
 					>
 						Resend verification email
 					</button>
+					<div className="mt-4">
+						<ReCAPTCHA
+							ref={recaptchaRef}
+							size="normal"
+							badge="inline"
+							theme={"light"}
+							sitekey={process.env.NEXT_PUBLIC_GOOGLE_RECAPTCHA_SITE_KEY}
+						/>
+					</div>
 					<p className="font-secondary text-[14px] text-center mt-8">
 						Email incorrect? Update your email by going to{" "}
 						<Link href="/settings/profile-settings" passHref>

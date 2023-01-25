@@ -38,7 +38,6 @@ export async function getStaticProps() {
 function Home({ tracks }) {
 	const [mounted, setMounted] = useState(false);
 	const { theme } = useTheme();
-	const [image, setImmg] = useState(undefined);
 
 	useEffect(() => {
 		setMounted(true);

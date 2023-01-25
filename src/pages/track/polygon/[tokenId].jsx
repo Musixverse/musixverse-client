@@ -39,23 +39,6 @@ export async function getStaticProps(context) {
 				collaborator.address === collaboratorUser.ethAddress && collaboratorUsers.push(collaboratorUser);
 			});
 		});
-		
-		// const res = await fetch("/api/extract-asset",{
-		// 	method:'POST',
-		// 	headers: {
-		// 		"Content-Type": "application/json",
-		// 	},
-		// 	body: JSON.stringify({ 
-		// 		artistName, 
-		// 		songName: title.toUpperCase(),
-		// 		numberOfCopies,
-		// 		coverArtURL: coverArt,
-		// 		artistProfilePicture: "",
-		// 	}),
-		// })
-
-		// const data = await res.json()
-		// const nftImage = data.buffer;
 
 		// Passing data to the Page using props
 		return {
@@ -74,7 +57,6 @@ export async function getStaticProps(context) {
 				artworkArtistInfo,
 				collaboratorUsers,
 				activity,
-				// nftImage
 			},
 			revalidate: 2,
 		};
@@ -105,9 +87,7 @@ export default function TrackInfo({
 	artworkArtistInfo,
 	collaboratorUsers,
 	activity,
-	nftImage
 }) {
-	// console.log(	"hi", nftImage);
 	return (
 		<>
 			<Head>

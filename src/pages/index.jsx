@@ -42,7 +42,6 @@ function Home({ tracks }) {
 	useEffect(() => {
 		setMounted(true);
 	}, []);
-
 	return (
 		<>
 			<Head>

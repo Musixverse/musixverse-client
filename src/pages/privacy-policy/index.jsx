@@ -12,7 +12,7 @@ const PrivacyPolicy = ({}) => {
 			</Head>
 
 			<div className="flex flex-col items-center justify-center w-full bg-light-200 dark:bg-dark-800">
-				<div className="w-full max-w-[1920px] px-6 md:px-8 lg:px-16 xl:px-20 2xl:px-36">
+				<div className="w-full max-w-[768px] px-6 md:px-8 lg:px-0">
 					<PrivacyComp />
 				</div>
 			</div>

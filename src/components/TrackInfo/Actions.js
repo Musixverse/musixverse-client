@@ -19,11 +19,11 @@ const Actions = ({ numberOfCopies, coverArt, tokenId, artistName, title }) => {
 	/*******************************
 	 *******  SHARE BUTTON  ********
 	 *******************************/
-	 const [isShareTrackNftModalOpen, setShareTrackNftModalOpen] = useState(false);
-	 /*******************************
+	const [isShareTrackNftModalOpen, setShareTrackNftModalOpen] = useState(false);
+	/*******************************
 	 *******  EXTRACT ASSET ********
 	 *******************************/
-	 const [assetImage, setAssetImage] = useState(undefined);
+	const [assetImage, setAssetImage] = useState(undefined);
 	const [extractAssetModal, setExtractAssetModal] = useState(false);
 
 	useEffect(() => {
@@ -60,29 +60,29 @@ const Actions = ({ numberOfCopies, coverArt, tokenId, artistName, title }) => {
 	};
 
 	const handleShareAsset = () => {
-		//Get the data to know if the current view is the owner of this nft or not
-		//to pass the type param in payload for api call
-		setLoading({ status: true, title: "", message: "", showProgressBar: false, progress: 0 });
-		fetch("/api/extract-asset",{
-			method:'POST',
+		// Get the data to know if the current view is the owner of this nft or not
+		// to pass the type param in payload for api call
+		setLoading({ status: true, title: "", message: "Hang on for a moment. Your image is being generated...", showProgressBar: false, progress: 0 });
+		fetch("/api/extract-asset", {
+			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
 			},
-			body: JSON.stringify({ 
-				artistName, 
+			body: JSON.stringify({
+				artistName,
 				songName: title.toUpperCase(),
 				numberOfCopies,
 				coverArtURL: coverArt,
 				artistProfilePicture: "",
 			}),
-		}).then((res)=>{
-			res.json().then((data)=>{
+		}).then((res) => {
+			res.json().then((data) => {
 				setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 				setAssetImage(data.buffer);
 				setExtractAssetModal(true);
-			})
-		})
-	}
+			});
+		});
+	};
 
 	return (
 		<div className="flex flex-row space-x-2 text-xs md:space-x-4">
@@ -115,13 +115,13 @@ const Actions = ({ numberOfCopies, coverArt, tokenId, artistName, title }) => {
 				</div>
 			</button>
 
-			<button 
+			<button
 				onClick={handleShareAsset}
 				className="flex items-center justify-center px-4 py-2 rounded-lg cursor-pointer hover:bg-light-200 dark:hover:bg-dark-600"
 			>
-				<span className="flex">
-					<i className="mr-2 text-lg fa-solid fa-share-nodes"></i>
-					Share Asset
+				<span className="flex space-x-2">
+					<i className="text-lg fa fa-instagram"></i>
+					<span>Story</span>
 				</span>
 			</button>
 
@@ -138,12 +138,7 @@ const Actions = ({ numberOfCopies, coverArt, tokenId, artistName, title }) => {
 				setAuthModalOpen={setAuthModalOpen}
 			/>
 
-			<ShareAssetImageModal
-				isOpen={extractAssetModal}
-				setOpen={setExtractAssetModal}
-				assetImage={assetImage}
-			/>
-
+			<ShareAssetImageModal isOpen={extractAssetModal} setOpen={setExtractAssetModal} assetImage={assetImage} />
 		</div>
 	);
 };

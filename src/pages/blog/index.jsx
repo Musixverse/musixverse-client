@@ -1,6 +1,6 @@
-import Blog from "@/components/Blogs/Blog";
+import Blog from "@/components/Blog/Blog";
 import Head from "next/head";
-import { meta_description } from "../../config/constants";
+import { meta_description } from "@/config/constants";
 
 const Blogs = ({}) => {
 	return (

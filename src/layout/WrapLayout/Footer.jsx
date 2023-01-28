@@ -142,7 +142,7 @@ const Footer = () => {
 					</div>
 					<div className="grid grid-cols-2 gap-2 gap-x-10 md:gap-x-8 md:pt-6 lg:gap-0 lg:flex justify-between lg:space-x-6 xl:space-x-28 font-primary">
 						<li className="text-xs text-neutral-400 list-none">
-							<Link href="https://drive.google.com/file/d/1cbK9O_fKX4eaIQgIU9Lc2JADUg5P3Qz8/view?usp=sharing">
+							<Link href="/privacy-policy">
 								<a target="_blank" rel="noopener noreferrer">
 									Privacy Policy
 								</a>

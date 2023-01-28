@@ -4,7 +4,7 @@
 	"scripts": {
 		"dev": "next dev",
 		"build": "next build",
-		"start": "node node_modules/puppeteer/install.js && next start",
+		"start": "next start",
 		"lint": "next lint",
 		"postbuild": "next-sitemap"
 	},

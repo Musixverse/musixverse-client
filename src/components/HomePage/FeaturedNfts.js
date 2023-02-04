@@ -17,7 +17,7 @@ const FeaturedNfts = ({ tracks }) => {
 							key={track.trackId}
 							redirectLink={`/track/polygon/${track.tokenIdHavingLowestPrice}`}
 							trackId={track.trackId}
-							audio={track.audio}
+							audio={track.audio.replace("ipfs://", process.env.NEXT_PUBLIC_IPFS_NODE_URL)}
 							trackName={track.title}
 							price={track.price}
 							artistName={track.artist}

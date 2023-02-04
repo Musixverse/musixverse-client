@@ -59,15 +59,19 @@ const Actions = ({ numberOfCopies, coverArt, tokenId, artistName, title }) => {
 		}
 	};
 
-	const handleShareAsset = () => {
+	const handleShareAsset = async () => {
 		// Get the data to know if the current view is the owner of this nft or not
 		// to pass the type param in payload for api call
 		setLoading({ status: true, title: "", message: "Hang on for a moment. Your image is being generated...", showProgressBar: false, progress: 0 });
-		fetch("/api/extract-asset", {
+		await fetch(`${process.env.NEXT_PUBLIC_PARSE_SERVER_BASE_URL}/extract-asset`, {
 			method: "POST",
 			headers: {
-				"Content-Type": "application/json",
+				"Content-Type": "application/json; charset=utf-8",
+				Connection: "keep-alive",
+				Accept: "*",
 			},
+			maxContentLength: Infinity,
+			maxBodyLength: Infinity,
 			body: JSON.stringify({
 				artistName,
 				songName: title.toUpperCase(),

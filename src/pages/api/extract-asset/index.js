@@ -1,5 +1,17 @@
 const Jimp = require("jimp");
-const puppeteer = require("puppeteer");
+// const puppeteer = require("puppeteer");
+const chrome = require('chrome-aws-lambda');
+
+let puppeteer;
+
+if (process.env.AWS_LAMBDA_FUNCTION_VERSION) {
+  // running on the Vercel platform.
+//   chrome = require('chrome-aws-lambda');
+  puppeteer = require('puppeteer-core');
+} else {
+  // running locally.
+  puppeteer = require('puppeteer');
+}
 
 export default async function handler(req, res) {
 	try {
@@ -12,7 +24,13 @@ export default async function handler(req, res) {
 			`</p></div></div></div><div class="footer"> <p>Minted On</p>${mxv_logo}<br> <p>Your NFT comes with exclusive perks that are only available to you, the NFT owner, as long as you continue to own the NFT.<br>The artist appreciates your support and has put together self-curated items exclusively for you.</p></div></div></div></body></html>`;
 		const html = style + upperBody;
 
-		const browser = await puppeteer.launch();
+		const browser = await puppeteer.launch({
+			args: [...chrome.args, '--hide-scrollbars', '--disable-web-security'],
+			defaultViewport: chrome.defaultViewport,
+			executablePath: await chrome.executablePath,
+			headless: true,
+			ignoreHTTPSErrors: true,
+		});
 		const page = await browser.newPage();
 		await page.setViewport({ width: 1080, height: 1920 });
 		if (artistName && songName && numberOfCopies) {

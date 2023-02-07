@@ -87,7 +87,7 @@ const InstagramVerification = ({
 
 			<p className="text-sm font-semibold font-secondary mt-6">Instagram Handle</p>
 
-			<div className="w-2/3 flex mt-1">
+			<div className="w-full sm:w-2/3 flex mt-1">
 				<span className="absolute ml-3 mt-2">@</span>
 				<input
 					className="mr-4 dark:text-light-100 dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-500 w-full pl-8 pr-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-500"
@@ -174,7 +174,7 @@ const InstagramVerification = ({
 			)}
 
 			<div className="w-full flex justify-center">
-				<div className="w-2/5 flex justify-between mt-14">
+				<div className="w-full md:w-2/5 flex justify-between mt-14">
 					<button
 						onClick={() => prevStep()}
 						className="flex w-fit items-center px-10 py-3 text-sm font-primary font-bold rounded-md bg-light-100 dark:bg-[#323232] hover:bg-gray-200 text-primary-500"

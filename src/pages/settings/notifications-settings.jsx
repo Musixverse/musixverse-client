@@ -1,9 +1,9 @@
 import Head from "next/head";
 import Moralis from "moralis/node";
-import { PARSE_APP_ID, PARSE_SERVER_URL, meta_description } from "../../config/constants";
-import SettingsNav from "../../components/Settings/SettingsNav";
-import NotificationSettings from "../../components/Settings/NotificationSettings";
 import { useMoralis } from "react-moralis";
+import { meta_description, PARSE_APP_ID, PARSE_SERVER_URL } from "@/config/constants";
+import SettingsNav from "@/components/Settings/SettingsNav";
+import NotificationSettings from "@/components/Settings/NotificationSettings";
 
 export async function getServerSideProps(context) {
 	try {
@@ -28,7 +28,7 @@ export default function NotificationsSettings({ userPreferences }) {
 	return (
 		<>
 			<Head>
-				<title>Musixverse | Settings</title>
+				<title>Musixverse | Notification Settings</title>
 				<meta name="description" content={meta_description} />
 				<link rel="icon" href="/favicon.ico" />
 			</Head>

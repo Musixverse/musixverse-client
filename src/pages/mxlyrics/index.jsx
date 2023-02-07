@@ -1,10 +1,10 @@
 import Head from "next/head";
-import { meta_description } from "../../config/constants";
 import { useState, useContext } from "react";
 import { useMoralis } from "react-moralis";
-import AuthModalContext from "../../../store/authModal-context";
-import CustomButton from "../../layout/CustomButton";
-import styles from "../../../styles/MxLyrics/MxLyrics.module.css";
+import { mxlyrics_meta_description } from "@/config/constants";
+import AuthModalContext from "@/store/authModal-context";
+import CustomButton from "@/layout/CustomButton";
+import styles from "@/styles/MxLyrics/MxLyrics.module.css";
 import InputDropdown from "@/layout/Dropdown/InputDropdown";
 import { languageArray, genreArray } from "@/config/constants";
 
@@ -68,7 +68,7 @@ const MxLyrics = () => {
 		<>
 			<Head>
 				<title>Musixverse | MxLyrics</title>
-				<meta name="description" content={meta_description} />
+				<meta name="description" content={mxlyrics_meta_description} />
 			</Head>
 
 			<div className="flex items-center justify-center bg-light-200 dark:bg-dark-1000">
@@ -85,13 +85,13 @@ const MxLyrics = () => {
 									}
 								}
 							}}
-							className="lg:mt-0 mt-40 lg:h-screen items-center flex flex-col justify-center"
+							className="lg:mt-0 mt-40 lg:min-h-screen items-center flex flex-col justify-center"
 						>
-							<p className="lg:text-[100px] md:text-[90px] sm:text-[75px] text-[70px] text-center font-bold -tracking-2">
-								M<span className="text-primary-400 lg:text-[85px] md:text-[70px] sm:text-[60px] text-[55px]">x</span> L
-								<span className="lg:text-[85px] md:text-[70px] sm:text-[60px] text-[55px]">yrics</span>
+							<p className="lg:text-[120px] md:text-[90px] sm:text-[75px] text-[70px] text-center font-bold -tracking-2">
+								M<span className="text-primary-400 lg:text-[105px] md:text-[70px] sm:text-[60px] text-[55px]">x</span> L
+								<span className="lg:text-[105px] md:text-[70px] sm:text-[60px] text-[55px]">yrics</span>
 							</p>
-							<h1 className="text-lg md:text-xl text-center font-semibold -mt-2">say goodbye to creative blocks</h1>
+							<h1 className="text-lg md:text-xl text-center font-semibold -mt-2">Find the perfect lyrics for your next hit song</h1>
 
 							<div className="mt-16 flex flex-col justify-center items-center">
 								<div className="w-full flex justify-between text-xs sm:text-sm">

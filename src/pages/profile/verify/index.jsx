@@ -2,11 +2,12 @@ import { useState, useEffect } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useMoralis, useMoralisCloudFunction } from "react-moralis";
-import NameAndIdVerification from "../../../components/Profile/Verification/NameAndIdVerification";
-import SendUsADM from "../../../components/Profile/Verification/SendUsADM";
-import InstagramVerification from "../../../components/Profile/Verification/InstagramVerification";
-import ScrollToPageTop from "../../../utils/ScrollToPageTop";
-import VerificationRequestSubmittedModal from "../../../components/Profile/Verification/VerificationRequestSubmittedModal";
+import { meta_description } from "@/config/constants";
+import NameAndIdVerification from "@/components/Profile/Verification/NameAndIdVerification";
+import SendUsADM from "@/components/Profile/Verification/SendUsADM";
+import InstagramVerification from "@/components/Profile/Verification/InstagramVerification";
+import ScrollToPageTop from "@/utils/ScrollToPageTop";
+import VerificationRequestSubmittedModal from "@/components/Profile/Verification/VerificationRequestSubmittedModal";
 
 const Verify = () => {
 	const { user } = useMoralis();
@@ -90,7 +91,7 @@ const Verify = () => {
 		<>
 			<Head>
 				<title>Musixverse | Artist Profile Verification</title>
-				<meta name="description" content="The NFT Marketplace for Musicians and Fans" />
+				<meta name="description" content={meta_description} />
 			</Head>
 			<ScrollToPageTop samePage={true} changingValue={step} />
 

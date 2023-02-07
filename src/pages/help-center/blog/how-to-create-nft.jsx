@@ -1,7 +1,7 @@
 import Head from "next/head";
-import { meta_description } from "../../../config/constants";
-import HelpCenterHeading from "../../../components/HelpCenter/utils/HelpCenterHeading";
-import Create_Blog from "../../../components/HelpCenter/blogs/HowToCreate";
+import { meta_description } from "@/config/constants";
+import HelpCenterHeading from "@/components/HelpCenter/utils/HelpCenterHeading";
+import Create_Blog from "@/components/HelpCenter/blogs/HowToCreate";
 
 const CreateNFT_b = ({}) => {
 	return (

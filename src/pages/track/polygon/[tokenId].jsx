@@ -1,14 +1,13 @@
 import Head from "next/head";
 import Moralis from "moralis/node";
-import { meta_description } from "../../../config/constants";
-import TrackHeader from "../../../components/TrackInfo/TrackHeader";
-import UnlockableContent from "../../../components/TrackInfo/UnlockableContent";
-import TrackDetails from "../../../components/TrackInfo/TrackDetails";
-import Collaborators from "../../../components/TrackInfo/Collaborators";
-import PurchaseInfo from "../../../components/TrackInfo/PurchaseInfo";
-import Activity from "../../../components/TrackInfo/Activity";
-import SimilarTokens from "../../../components/TrackInfo/SimilarTokens";
-import { PARSE_APP_ID, PARSE_SERVER_URL } from "../../../config/constants";
+import { meta_description, PARSE_APP_ID, PARSE_SERVER_URL } from "@/config/constants";
+import TrackHeader from "@/components/TrackInfo/TrackHeader";
+import UnlockableContent from "@/components/TrackInfo/UnlockableContent";
+import TrackDetails from "@/components/TrackInfo/TrackDetails";
+import Collaborators from "@/components/TrackInfo/Collaborators";
+import PurchaseInfo from "@/components/TrackInfo/PurchaseInfo";
+import Activity from "@/components/TrackInfo/Activity";
+import SimilarTokens from "@/components/TrackInfo/SimilarTokens";
 import { NextSeo } from "next-seo";
 
 export async function getStaticProps(context) {
@@ -91,7 +90,7 @@ export default function TrackInfo({
 	return (
 		<>
 			<Head>
-				<title>{"Musixverse | Track Info: " + metadata.title + " by " + metadata.artist}</title>
+				<title>{"Musixverse | Track: " + metadata.title + " by " + metadata.artist}</title>
 				<meta name="description" content={meta_description}></meta>
 				<meta name="viewport" content="initial-scale=1.0, width=device-width"></meta>
 				<meta name="og:image" content={metadata.artwork.uri.replace("ipfs://", process.env.NEXT_PUBLIC_IPFS_NODE_URL)}></meta>
@@ -100,13 +99,13 @@ export default function TrackInfo({
 			</Head>
 
 			<NextSeo
-				title={"Musixverse | Track Info: " + metadata.title + " by " + metadata.artist}
+				title={"Musixverse | Track: " + metadata.title + " by " + metadata.artist}
 				description={metadata.description}
 				canonical="https://www.musixverse.com"
 				openGraph={{
 					siteName: "Musixverse",
 					url: "https://www.musixverse.com",
-					title: "Musixverse | Track Info : " + metadata.title + " by " + metadata.artist,
+					title: "Musixverse | Track: " + metadata.title + " by " + metadata.artist,
 					description: metadata.description,
 					images: [
 						{

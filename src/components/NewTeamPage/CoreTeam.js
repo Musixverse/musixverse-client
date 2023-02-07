@@ -2,7 +2,7 @@ import { useState } from "react";
 import TeamModal from "./TeamModal";
 import MemberNft from "./MemberNFT";
 import NewTeamModal from "./NewTeamModal";
-import { coreTeam } from "../../config/constants";
+import { coreTeam } from "@/config/constants";
 
 export default function CoreTeam() {
 	const [showModal, setShowModal] = useState(false);

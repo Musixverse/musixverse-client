@@ -1,6 +1,6 @@
 import { getServerSideSitemap } from "next-sitemap";
 import Moralis from "moralis/node";
-import { PARSE_APP_ID, PARSE_SERVER_URL } from "../../config/constants";
+import { PARSE_APP_ID, PARSE_SERVER_URL } from "@/config/constants";
 
 export async function getServerSideProps(context) {
 	try {

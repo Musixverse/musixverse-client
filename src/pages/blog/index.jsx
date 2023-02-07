@@ -1,13 +1,13 @@
 import Blog from "@/components/Blog/Blog";
 import Head from "next/head";
-import { meta_description } from "@/config/constants";
+import { blog_meta_description } from "@/config/constants";
 
 const Blogs = ({}) => {
 	return (
 		<>
 			<Head>
 				<title>Musixverse | Blog</title>
-				<meta name="description" content={meta_description} />
+				<meta name="description" content={blog_meta_description} />
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 

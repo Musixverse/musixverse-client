@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Moralis from "moralis/node";
+import { NextSeo } from "next-seo";
 import { meta_description, PARSE_APP_ID, PARSE_SERVER_URL } from "@/config/constants";
 import TrackHeader from "@/components/TrackInfo/TrackHeader";
 import UnlockableContent from "@/components/TrackInfo/UnlockableContent";
@@ -8,7 +9,6 @@ import Collaborators from "@/components/TrackInfo/Collaborators";
 import PurchaseInfo from "@/components/TrackInfo/PurchaseInfo";
 import Activity from "@/components/TrackInfo/Activity";
 import SimilarTokens from "@/components/TrackInfo/SimilarTokens";
-import { NextSeo } from "next-seo";
 
 export async function getStaticProps(context) {
 	const { tokenId } = context.params;
@@ -156,6 +156,7 @@ export default function TrackInfo({
 						comment={comment}
 						trackId={trackId}
 						activity={activity}
+						collaboratorUsers={collaboratorUsers}
 					/>
 					{metadata.collaborators.length > 1 && (
 						<Collaborators bandId={metadata.bandId} collaborators={metadata.collaborators} collaboratorUsers={collaboratorUsers} />

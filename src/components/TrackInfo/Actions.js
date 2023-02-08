@@ -7,7 +7,7 @@ import ShareTrackNftModal from "./TrackInfoUtils/ShareTrackNftModal";
 import ShareAssetImageModal from "./TrackInfoUtils/ShareAssetImage";
 import LoadingContext from "store/loading-context";
 
-const Actions = ({ numberOfCopies, coverArt, tokenId, artistName, title }) => {
+const Actions = ({ numberOfCopies, coverArt, tokenId, artistName, title, collaboratorUsers }) => {
 	const [, setLoading] = useContext(LoadingContext);
 	const { user } = useMoralis();
 	const [, setAuthModalOpen] = useContext(AuthModalContext);
@@ -63,6 +63,7 @@ const Actions = ({ numberOfCopies, coverArt, tokenId, artistName, title }) => {
 		// Get the data to know if the current view is the owner of this nft or not
 		// to pass the type param in payload for api call
 		setLoading({ status: true, title: "", message: "Hang on for a moment. Your image is being generated...", showProgressBar: false, progress: 0 });
+
 		await fetch(`${process.env.NEXT_PUBLIC_PARSE_SERVER_BASE_URL}/extract-asset`, {
 			method: "POST",
 			headers: {
@@ -73,11 +74,15 @@ const Actions = ({ numberOfCopies, coverArt, tokenId, artistName, title }) => {
 			maxContentLength: Infinity,
 			maxBodyLength: Infinity,
 			body: JSON.stringify({
-				artistName,
+				artistName: artistName,
 				songName: title.toUpperCase(),
-				numberOfCopies,
+				numberOfCopies: numberOfCopies,
 				coverArtURL: coverArt,
-				artistProfilePicture: "",
+				isReleasedByArtist:
+					user && user.attributes.ethAddress && collaboratorUsers.some((collaborator) => collaborator.ethAddress === user.attributes.ethAddress)
+						? true
+						: false,
+				collaboratorUsers: collaboratorUsers,
 			}),
 		}).then((res) => {
 			res.json().then((data) => {
@@ -86,6 +91,7 @@ const Actions = ({ numberOfCopies, coverArt, tokenId, artistName, title }) => {
 				setExtractAssetModal(true);
 			});
 		});
+		setLoading({ status: false, title: "", message: "", showProgressBar: false, progress: 0 });
 	};
 
 	return (

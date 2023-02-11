@@ -2,21 +2,21 @@ import { useState, useEffect } from "react";
 import { MoralisProvider } from "react-moralis";
 import Script from "next/script";
 import { ThemeProvider } from "next-themes";
-import * as ga from "../../lib/google-analytics";
-import StatusContext from "../../store/status-context";
-import LoadingContext from "../../store/loading-context";
-import AuthModalContext from "../../store/authModal-context";
-import AccessLevelContext from "../../store/accessLevel-context";
-import BrowserNotSupportedContext from "../../store/browserNotSupported-context";
-import "../../styles/globals.css";
-import ProtectedRoutes from "../auth/ProtectedRoutes";
-import ErrorBoundary from "../layout/WrapLayout/ErrorBoundary";
-import Layout from "../layout/WrapLayout/Layout";
-import ScrollToPageTop from "../utils/ScrollToPageTop";
-import { connectSmartContract } from "../utils/smart-contract/functions";
+import * as ga from "@/lib/google-analytics";
+import "@/styles/globals.css";
 import "react-datepicker/dist/react-datepicker.css";
-import { PARSE_APP_ID, PARSE_SERVER_URL } from "../config/constants";
-import AudioPlayerContext from "../../store/audioplayer-context";
+import ProtectedRoutes from "@/auth/ProtectedRoutes";
+import ErrorBoundary from "@/layout/WrapLayout/ErrorBoundary";
+import Layout from "@/layout/WrapLayout/Layout";
+import ScrollToPageTop from "@/utils/ScrollToPageTop";
+import { connectSmartContract } from "@/utils/smart-contract/functions";
+import { PARSE_APP_ID, PARSE_SERVER_URL } from "@/config/constants";
+import StatusContext from "@/store/status-context";
+import LoadingContext from "@/store/loading-context";
+import AuthModalContext from "@/store/authModal-context";
+import AccessLevelContext from "@/store/accessLevel-context";
+import BrowserNotSupportedContext from "@/store/browserNotSupported-context";
+import AudioPlayerContext from "@/store/audioplayer-context";
 
 function App({ Component, pageProps, router }) {
 	useEffect(() => {

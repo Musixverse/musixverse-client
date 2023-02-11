@@ -1,14 +1,14 @@
 import Head from "next/head";
-import { meta_description } from "../../config/constants";
-import GetStarted from "../../components/HelpCenter/GettingStarted";
-import HelpCenterHeading from "../../components/HelpCenter/utils/HelpCenterHeading";
+import { helpcenter_meta_description } from "@/config/constants";
+import GetStarted from "@/components/HelpCenter/GettingStarted";
+import HelpCenterHeading from "@/components/HelpCenter/utils/HelpCenterHeading";
 
 const GettingStarted = ({}) => {
 	return (
 		<>
 			<Head>
 				<title>Help Center | Getting Started</title>
-				<meta name="description" content={meta_description} />
+				<meta name="description" content={helpcenter_meta_description} />
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 

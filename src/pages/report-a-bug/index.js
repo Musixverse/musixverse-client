@@ -1,13 +1,13 @@
 import Head from "next/head";
-import { meta_description } from "../../config/constants";
-import ReportBug from "../../components/ReportABug/ReportABug";
+import { reportabug_meta_description } from "@/config/constants";
+import ReportBug from "@/components/ReportABug/ReportABug";
 
 const ReportABug = ({}) => {
 	return (
 		<>
 			<Head>
 				<title>Musixverse | Report A Bug</title>
-				<meta name="description" content={meta_description} />
+				<meta name="description" content={reportabug_meta_description} />
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 

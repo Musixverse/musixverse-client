@@ -93,7 +93,7 @@ const SendUsADM = ({
 					Please provide a link to any of your song (Eg. Spotify link, Amazon Music link, YouTube link, etc.)
 				</p>
 				<input
-					className="w-1/2 dark:text-light-100 dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-500 px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-500"
+					className="w-full sm:w-1/2 dark:text-light-100 dark:bg-[#323232] dark:border-[#323232] dark:focus:border-primary-500 px-4 py-2 text-sm border-2 rounded-lg shadow-sm outline-none border-[#777777] focus:border-primary-500"
 					id="songLink"
 					name="songLink"
 					type="url"
@@ -149,7 +149,7 @@ const SendUsADM = ({
 				<p className="text-[#777777] font-normal text-sm mt-16 text-center">Please click the submit button only after you have sent the DM</p>
 
 				<div className="w-full flex justify-center">
-					<div className="w-2/5 flex justify-between mt-10">
+					<div className="w-full md:w-2/5 flex justify-between mt-10">
 						<button
 							onClick={() => prevStep()}
 							type="button"

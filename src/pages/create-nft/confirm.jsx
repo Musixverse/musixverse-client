@@ -1,12 +1,11 @@
 import Head from "next/head";
-import { meta_description } from "../../config/constants";
 import Image from "next/image";
 import Link from "next/link";
 import Moralis from "moralis/node";
-import { PARSE_APP_ID, PARSE_SERVER_URL } from "../../config/constants";
-import CustomButton from "../../layout/CustomButton";
-import Tooltip from "../../layout/Tooltip/Tooltip";
-import PreviewDraft from "../../components/CreateNFT/CreateNFTUtils/PreviewDraft";
+import { meta_description, PARSE_APP_ID, PARSE_SERVER_URL } from "@/config/constants";
+import CustomButton from "@/layout/CustomButton";
+import Tooltip from "@/layout/Tooltip/Tooltip";
+import PreviewDraft from "@/components/CreateNFT/CreateNFTUtils/PreviewDraft";
 
 export async function getServerSideProps(context) {
 	try {

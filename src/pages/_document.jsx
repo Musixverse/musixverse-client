@@ -1,7 +1,7 @@
 import Document, { Html, Head, Main, NextScript } from "next/document";
 import Script from "next/script";
 import { DefaultSeo } from "next-seo";
-import SEO from "../config/next-seo.config";
+import SEO from "@/config/next-seo.config";
 
 export default class CustomDocument extends Document {
 	render() {

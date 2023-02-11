@@ -1,9 +1,9 @@
-import Head from "next/head";
-import { meta_description } from "../../config/constants";
-import Register from "../../components/Registration/Register";
 import { useEffect, useContext } from "react";
 import { useMoralis } from "react-moralis";
-import LoadingContext from "../../../store/loading-context";
+import Head from "next/head";
+import { meta_description } from "@/config/constants";
+import Register from "@/components/Registration/Register";
+import LoadingContext from "@/store/loading-context";
 
 const Register_Page = () => {
 	const { user, isInitialized } = useMoralis();

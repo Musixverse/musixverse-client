@@ -1,9 +1,9 @@
-import Head from "next/head";
-import { meta_description } from "../../config/constants";
-import Confirm from "../../components/Registration/Confirm";
 import { useEffect, useContext } from "react";
 import { useMoralis } from "react-moralis";
-import LoadingContext from "../../../store/loading-context";
+import Head from "next/head";
+import { meta_description } from "@/config/constants";
+import Confirm from "@/components/Registration/Confirm";
+import LoadingContext from "@/store/loading-context";
 
 const Confirm_Page = () => {
 	const { user, isInitialized } = useMoralis();

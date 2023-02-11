@@ -104,9 +104,9 @@ export default function ReportABug() {
 				<div className="mt-4">
 					<div className={styles["report_a_bug_notice"]}>
 						Thank you for reporting bugs! Identifying, reproducing, and documenting bugs is important to improve Musixverse. Feedback is vital to
-						making our services even better. With bug reporting forms, email, and discord server, it&apos;s easy to report issues you encounter and
+						make our services even better. With bug reporting forms, email, and discord server, it&apos;s easy to report issues you encounter and
 						request enhancements to any services or functionalities on our platform. You&apos;ll directly influence the platform&apos;s development
-						and building of the future of the Music Industry We at{" "}
+						and building of the future of the Music Industry. We at{" "}
 						<a href={"/"} className="text-primary-500">
 							Musixverse
 						</a>

@@ -1,13 +1,13 @@
 import Head from "next/head";
-import { meta_description } from "../../config/constants";
-import AccountHelp from "../../components/Settings/AccountHelp";
-import SettingsNav from "../../components/Settings/SettingsNav";
+import { meta_description } from "@/config/constants";
+import AccountHelp from "@/components/Settings/AccountHelp";
+import SettingsNav from "@/components/Settings/SettingsNav";
 
 export default function AccountHelpSetting() {
 	return (
 		<>
 			<Head>
-				<title>Musixverse | Settings</title>
+				<title>Musixverse | Account Help</title>
 				<meta name="description" content={meta_description} />
 				<link rel="icon" href="/favicon.ico" />
 			</Head>

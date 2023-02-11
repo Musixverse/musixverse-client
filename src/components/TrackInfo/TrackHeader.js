@@ -30,6 +30,7 @@ export default function TrackHeader({
 	trackId,
 	priceInWei,
 	activity,
+	collaboratorUsers,
 }) {
 	const [isCoverArtModalOpen, setCoverArtModalOpen] = useState(false);
 
@@ -61,17 +62,11 @@ export default function TrackHeader({
 						{artworkArtistInfo && (artworkInfo.invitedArtistId || artworkInfo.artistAddress) && artworkArtistInfo.avatar ? (
 							<Link href={`/profile/${artworkArtistInfo.username}`} className="cursor-pointer">
 								{/* <a target="_blank" rel="noopener noreferrer"> */}
-									<div className="flex items-center mb-2 text-sm font-secondary">
-										<span className="mr-2">Artwork by-</span>
-										<Image
-											src={artworkArtistInfo.avatar}
-											height="25"
-											width="25"
-											className="rounded-full"
-											alt="Artwork Artist Profile Avatar"
-										/>
-										<span className="ml-1">@{artworkArtistInfo.username}</span>
-									</div>
+								<div className="flex items-center mb-2 text-sm font-secondary">
+									<span className="mr-2">Artwork by-</span>
+									<Image src={artworkArtistInfo.avatar} height="25" width="25" className="rounded-full" alt="Artwork Artist Profile Avatar" />
+									<span className="ml-1">@{artworkArtistInfo.username}</span>
+								</div>
 								{/* </a> */}
 							</Link>
 						) : artworkInfo.artist ? (
@@ -89,7 +84,7 @@ export default function TrackHeader({
 						{artist ? (
 							<Link href={artist.isBand ? `/profile/band/${artist.username}` : `/profile/${artist.username}`} className="cursor-pointer">
 								{/* <a target="_blank" rel="noopener noreferrer"> */}
-									{artist.name}
+								{artist.name}
 								{/* </a> */}
 							</Link>
 						) : null}
@@ -131,6 +126,7 @@ export default function TrackHeader({
 						trackId={trackId}
 						price={priceInWei}
 						numberOfCopies={numberOfCopies}
+						collaboratorUsers={collaboratorUsers}
 					/>
 
 					<div className="grid content-between w-full h-full pt-6">

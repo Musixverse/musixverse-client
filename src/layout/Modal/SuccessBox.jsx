@@ -13,12 +13,13 @@ const SuccessBox = () => {
 
 	useEffect(() => {
 		if (success.showSuccessBox) {
-			setTimeout(function () {
+			const timer = setTimeout(function () {
 				setSuccess((prevState) => ({
 					...prevState,
 					showSuccessBox: false,
 				}));
-			}, 8000);
+			}, 6000);
+			return () => clearTimeout(timer);
 		}
 	}, [success.showSuccessBox, setSuccess]);
 

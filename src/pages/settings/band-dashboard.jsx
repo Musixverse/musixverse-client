@@ -1,8 +1,8 @@
 import Head from "next/head";
 import Moralis from "moralis/node";
-import { PARSE_APP_ID, PARSE_SERVER_URL, meta_description } from "../../config/constants";
-import SettingsNav from "../../components/Settings/SettingsNav";
-import BandDashboard from "../../components/Settings/BandDashboard";
+import { meta_description, PARSE_APP_ID, PARSE_SERVER_URL } from "@/config/constants";
+import SettingsNav from "@/components/Settings/SettingsNav";
+import BandDashboard from "@/components/Settings/BandDashboard";
 
 export async function getServerSideProps(context) {
 	try {
@@ -24,7 +24,7 @@ export default function DashboardForBands({ bandsOfArtist }) {
 	return (
 		<>
 			<Head>
-				<title>Musixverse | Settings</title>
+				<title>Musixverse | Band Dashboard</title>
 				<meta name="description" content={meta_description} />
 				<link rel="icon" href="/favicon.ico" />
 			</Head>

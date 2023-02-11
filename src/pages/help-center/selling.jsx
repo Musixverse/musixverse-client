@@ -1,14 +1,14 @@
 import Head from "next/head";
-import { meta_description } from "../../config/constants";
-import Sell from "../../components/HelpCenter/Sell";
-import HelpCenterHeading from "../../components/HelpCenter/utils/HelpCenterHeading";
+import { helpcenter_meta_description } from "@/config/constants";
+import Sell from "@/components/HelpCenter/Sell";
+import HelpCenterHeading from "@/components/HelpCenter/utils/HelpCenterHeading";
 
 const SellingNFT = ({}) => {
 	return (
 		<>
 			<Head>
 				<title>Help Center | Selling NFT</title>
-				<meta name="description" content={meta_description} />
+				<meta name="description" content={helpcenter_meta_description} />
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 

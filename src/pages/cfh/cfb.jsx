@@ -1,16 +1,16 @@
 import Head from "next/head";
-import { meta_description } from "../../config/constants";
-import BannerCFB from "../../components/CFB/BannerCFB";
-import CFB1 from "../../components/CFB/CFB1";
-import CFB4 from "../../components/CFB/CFB4";
-import CFB5 from "../../components/CFB/CFB5";
+import { cfh_meta_description } from "@/config/constants";
+import BannerCFB from "@/components/CFB/BannerCFB";
+import CFB1 from "@/components/CFB/CFB1";
+import CFB4 from "@/components/CFB/CFB4";
+import CFB5 from "@/components/CFB/CFB5";
 
 const CFB = ({}) => {
 	return (
 		<>
 			<Head>
 				<title>Musixverse | Community Feedback Board</title>
-				<meta name="description" content={meta_description} />
+				<meta name="description" content={cfh_meta_description} />
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 

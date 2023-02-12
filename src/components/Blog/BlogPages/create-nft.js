@@ -23,7 +23,7 @@ const createNFT = () => {
             src={
                 "https://miro.medium.com/v2/resize:fit:828/format:webp/1*VrXkEv2wJABf4l1bbZi_QQ.png"
             }
-            alt={"cover art"}
+            alt={"cover art of create NFT blog"}
             width={768}
             height={400}
         />

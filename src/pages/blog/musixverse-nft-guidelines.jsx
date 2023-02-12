@@ -1,4 +1,4 @@
-import Blog from "@/components/Blog/Blog";
+import Blog from "@/components/Blog/BlogPages/musixverse-guidelines";
 import Head from "next/head";
 import { meta_description } from "@/config/constants";
 

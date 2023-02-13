@@ -224,7 +224,7 @@ export const createNFT = [
 					<br />
 					You can also follow this{" "}
 					<span className="font-medium underline underline-offset-2 text-primary-500">
-						<Link href="https://medium.com/@musixverse/how-to-create-an-nft-on-musixverse-15e58cb2bee1">
+						<Link href="https://musixverse.com/help-center/blog/how-to-create-nft-on-musixverse">
 							step-by-step guide to create an NFT on Musixverse.
 						</Link>
 					</span>
@@ -274,7 +274,7 @@ export const createNFT = [
 					<li>
 						You can also follow the standard{" "}
 						<span className="font-medium underline underline-offset-2 text-primary-500">
-							<Link href="https://medium.com/@musixverse/musixverse-nft-guidelines-3664764ecd7f">Musixverse NFT guidelines</Link>
+							<Link href="https://musixverse.com/help-center/blog/musixverse-nft-guidelines">Musixverse NFT guidelines</Link>
 						</span>{" "}
 						to create your NFTs.
 					</li>

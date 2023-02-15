@@ -4,6 +4,8 @@ import BlogHeader from "./BlogHeader";
 import BlogImage from "./BlogImage";
 import BlogSubHeading from "./BlogSubHeading";
 import BlogContent from "./BlogContent";
+import BlogNoteContent from "./BlogNoteContent";
+import ContentBold from "./ContentBold";
 
 const Blog = () => {
 	return (
@@ -30,6 +32,10 @@ const Blog = () => {
 				maintain creative freedom while allowing fans to share in music ownership. Robert, a former producer residing in Los Angeles, found this notion
 				appealing. As soon as he learned about Musixverse&apos;s purpose, he opened an account and purchased his first token this spring.
 			</BlogContent>
+			<BlogNoteContent>
+				<ContentBold>Note:</ContentBold> If you’re part of a band, you can mint NFTs of songs collectively as a band, but first, you need to create a band profile for that. 
+				Follow our guide to know how to create a band profile on Musixverse.
+			</BlogNoteContent>
 			<BlogSubHeading>Investing in the future of music</BlogSubHeading>
 			<BlogContent>
 				Creating a world where artists and fans co-own music together immediately resonated with Daniel, and he decided to get involved. “Musixverse is

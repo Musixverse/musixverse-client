@@ -1,18 +1,22 @@
 import PromoNftCard from "./PromoNftCards";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import { useTheme } from "next-themes";
 import styles from "../../../../styles/HomePage/promoCarousel.module.css";
 import { useRouter } from "next/router";
 import ArtistIntro from "./ArtistIntro";
+import { useMoralis } from "react-moralis";
+
 
 export default function PromoCarousel({ tracks }) {
 	const { theme } = useTheme();
 	const [currSlide, setCurrSlide] = useState(1);
-	const router = useRouter();
+	const router = useRouter();	
+	const { Moralis } = useMoralis();
+	
 	let xDown = null;
 	let yDown = null;
-
+	
 	useEffect(() => {
 		const carouselRider = setInterval(() => {
 			setCurrSlide((prevSlide) => {
@@ -21,10 +25,10 @@ export default function PromoCarousel({ tracks }) {
 		}, 6000);
 
 		return () => clearInterval(carouselRider);
-	}, []);
+	}, [currSlide]);
 
-	const imgSrcs_darkTheme = [
-		{ artistName: "Harry Arora", imgSrc: "/assets/homepage/slider/harryFull_b.png" },
+	const imgSrcs_darkTheme = useMemo(()=>[
+		{ artistName: "Donny Artist", imgSrc: "/assets/homepage/slider/harryFull_b.png" },
 		{ artistName: "Xubaan", imgSrc: "/assets/homepage/slider/xubaanFull_b.png" },
 		{ artistName: "Jatayu", imgSrc: "/assets/homepage/slider/jatayuFull_b.png" },
 		{ artistName: "Sarthak Kalyani", imgSrc: "/assets/homepage/slider/sarthakFull_b.png" },
@@ -32,9 +36,9 @@ export default function PromoCarousel({ tracks }) {
 		{ artistName: "Sommaiya", imgSrc: "/assets/homepage/slider/sommaiyaFull_b.png" },
 		{ artistName: "Submarine In Space", imgSrc: "/assets/homepage/slider/submarineFull_b.png" },
 		{ artistName: "Aditya Kalway", imgSrc: "/assets/homepage/slider/adityaFull_b.png" },
-	];
-	const imgSrcs_lightTheme = [
-		{ artistName: "Harry Arora", imgSrc: "/assets/homepage/slider/harryFull_w.png" },
+	],[]);
+	const imgSrcs_lightTheme = useMemo(()=>[
+		{ artistName: "Donny Artist", imgSrc: "/assets/homepage/slider/harryFull_w.png" },
 		{ artistName: "Xubaan", imgSrc: "/assets/homepage/slider/xubaanFull_w.png" },
 		{ artistName: "Jatayu", imgSrc: "/assets/homepage/slider/jatayuFull_w.png" },
 		{ artistName: "Sarthak Kalyani", imgSrc: "/assets/homepage/slider/sarthakFull_w.png" },
@@ -42,10 +46,21 @@ export default function PromoCarousel({ tracks }) {
 		{ artistName: "Sommaiya", imgSrc: "/assets/homepage/slider/sommaiyaFull_w.png" },
 		{ artistName: "Submarine In Space", imgSrc: "/assets/homepage/slider/submarineFull_w.png" },
 		{ artistName: "Aditya Kalway", imgSrc: "/assets/homepage/slider/adityaFull_w.png" },
-	];
+	],[]);
 
-	const imgs = theme === "dark" ? imgSrcs_darkTheme : imgSrcs_lightTheme;
+	const imgs = useMemo(()=>theme === "dark" ? imgSrcs_darkTheme : imgSrcs_lightTheme, [theme, imgSrcs_darkTheme, imgSrcs_lightTheme]) ;
 
+	useEffect(()=>{
+		tracks.forEach((element, idx) => {
+			if(element.artist === imgs[idx].artistName){
+				imgs[idx] = {
+					...imgs[idx], 
+					hasMinted: true
+				}
+			}
+		});
+	},[tracks, imgs])
+	
 	//This function has to update the image being displayed
 	const handleNftCardClick = (e, idx) => {
 		e.preventDefault();
@@ -106,7 +121,6 @@ export default function PromoCarousel({ tracks }) {
 				<input type="radio" name="slider" id="s7" readOnly checked={currSlide === 7} />
 				<input type="radio" name="slider" id="s8" readOnly checked={currSlide === 8} />
 
-				{/* {labels} */}
 				<label
 					onTouchStart={handleTouchStart}
 					onTouchMove={handleTouchMove}
@@ -116,7 +130,17 @@ export default function PromoCarousel({ tracks }) {
 					htmlFor="s1"
 					id="slide1"
 				>
-					<ArtistIntro artistName={"Harry Arora"} />
+					{imgs[0].hasMinted === true? 
+						<PromoNftCard 
+							artist={tracks[0].artist} 
+							artwork={tracks[0].artwork.uri.replace("ipfs://", process.env.NEXT_PUBLIC_IPFS_NODE_URL)}
+							title={tracks[0].title}
+							price={Moralis.Units.FromWei(tracks[0].price)}
+							tokenId={tracks[0].localTokenId}
+						/>
+						:
+						<ArtistIntro artistName={"Harry Arora"} />
+					}
 				</label>
 				<label
 					onTouchStart={handleTouchStart}
@@ -127,7 +151,17 @@ export default function PromoCarousel({ tracks }) {
 					htmlFor="s2"
 					id="slide2"
 				>
-					<ArtistIntro artistName={"Xubaan"} isBand={true} />
+					{imgs[1].hasMinted === true? 
+						<PromoNftCard 
+							artist={tracks[1].artist} 
+							artwork={tracks[1].artwork.uri.replace("ipfs://", process.env.NEXT_PUBLIC_IPFS_NODE_URL)}
+							title={tracks[1].title}
+							price={Moralis.Units.FromWei(tracks[1].price)}
+							tokenId={tracks[1].localTokenId}
+						/>
+						:
+						<ArtistIntro artistName={"Xubaan"} isBand={true} /> 
+					}
 				</label>
 				<label
 					onTouchStart={handleTouchStart}
@@ -138,7 +172,17 @@ export default function PromoCarousel({ tracks }) {
 					htmlFor="s3"
 					id="slide3"
 				>
-					<ArtistIntro artistName={"Jatayu"} isBand={true} />
+					{imgs[2].hasMinted === true? 
+						<PromoNftCard 
+							artist={tracks[2].artist} 
+							artwork={tracks[2].artwork.uri.replace("ipfs://", process.env.NEXT_PUBLIC_IPFS_NODE_URL)}
+							title={tracks[2].title}
+							price={Moralis.Units.FromWei(tracks[2].price)}
+							tokenId={tracks[2].localTokenId}
+						/>
+						:
+						<ArtistIntro artistName={"Jatayu"} isBand={true} /> 
+					}
 				</label>
 				<label
 					onTouchStart={handleTouchStart}
@@ -149,7 +193,17 @@ export default function PromoCarousel({ tracks }) {
 					htmlFor="s4"
 					id="slide4"
 				>
-					<ArtistIntro artistName={"Sarthak Kalyani"} />
+					{imgs[3].hasMinted === true? 
+						<PromoNftCard 
+							artist={tracks[3].artist} 
+							artwork={tracks[3].artwork.uri.replace("ipfs://", process.env.NEXT_PUBLIC_IPFS_NODE_URL)}
+							title={tracks[3].title}
+							price={Moralis.Units.FromWei(tracks[3].price)}
+							tokenId={tracks[3].localTokenId}
+						/>
+						:
+						<ArtistIntro artistName={"Sarthak Kalyani"} />
+					}
 				</label>
 				<label
 					onTouchStart={handleTouchStart}
@@ -160,7 +214,17 @@ export default function PromoCarousel({ tracks }) {
 					htmlFor="s5"
 					id="slide5"
 				>
+					{imgs[4].hasMinted === true? 
+						<PromoNftCard 
+							artist={tracks[4].artist} 
+							artwork={tracks[4].artwork.uri.replace("ipfs://", process.env.NEXT_PUBLIC_IPFS_NODE_URL)}
+							title={tracks[4].title}
+							price={Moralis.Units.FromWei(tracks[4].price)}
+							tokenId={tracks[4].localTokenId}
+						/>
+						:
 					<ArtistIntro artistName={"Pooja Tiwari"} />
+}
 				</label>
 				<label
 					onTouchStart={handleTouchStart}
@@ -171,7 +235,17 @@ export default function PromoCarousel({ tracks }) {
 					htmlFor="s6"
 					id="slide6"
 				>
-					<ArtistIntro artistName={"Sommaiya"} />
+					{imgs[5].hasMinted === true? 
+						<PromoNftCard 
+							artist={tracks[5].artist} 
+							artwork={tracks[5].artwork.uri.replace("ipfs://", process.env.NEXT_PUBLIC_IPFS_NODE_URL)}
+							title={tracks[5].title}
+							price={Moralis.Units.FromWei(tracks[5].price)}
+							tokenId={tracks[5].localTokenId}
+						/>
+						:
+						<ArtistIntro artistName={"Sommaiya"} />
+					}
 				</label>
 				<label
 					onTouchStart={handleTouchStart}
@@ -182,7 +256,17 @@ export default function PromoCarousel({ tracks }) {
 					htmlFor="s7"
 					id="slide7"
 				>
-					<ArtistIntro artistName={"Submarine In Space"} isBand={true} />
+					{imgs[6].hasMinted === true? 
+						<PromoNftCard 
+							artist={tracks[6].artist} 
+							artwork={tracks[6].artwork.uri.replace("ipfs://", process.env.NEXT_PUBLIC_IPFS_NODE_URL)}
+							title={tracks[6].title}
+							price={Moralis.Units.FromWei(tracks[6].price)}
+							tokenId={tracks[6].localTokenId}
+						/>
+						:
+						<ArtistIntro artistName={"Submarine In Space"} isBand={true} />
+					}
 				</label>
 				<label
 					onTouchStart={handleTouchStart}
@@ -193,14 +277,18 @@ export default function PromoCarousel({ tracks }) {
 					htmlFor="s8"
 					id="slide8"
 				>
-					<ArtistIntro artistName={"Aditya Kalway"} />
+					{imgs[7].hasMinted === true? 
+						<PromoNftCard 
+							artist={tracks[7].artist} 
+							artwork={tracks[7].artwork.uri.replace("ipfs://", process.env.NEXT_PUBLIC_IPFS_NODE_URL)}
+							title={tracks[7].title}
+							price={Moralis.Units.FromWei(tracks[7].price)}
+							tokenId={tracks[7].localTokenId}
+						/>
+						:
+						<ArtistIntro artistName={"Aditya Kalway"} />
+					}
 				</label>
-
-				{/* <label onTouchStart={handleTouchStart} onTouchMove={handleTouchMove} onClick={(e)=>{handleNftCardClick(e, 1)}} htmlFor="s1" id="slide1"><PromoNftCard /></label>
-				<label onTouchStart={handleTouchStart} onTouchMove={handleTouchMove} onClick={(e)=>{handleNftCardClick(e, 2)}} htmlFor="s2" id="slide2"><PromoNftCard /></label>
-				<label onTouchStart={handleTouchStart} onTouchMove={handleTouchMove} onClick={(e)=>{handleNftCardClick(e, 3)}} htmlFor="s3" id="slide3"><PromoNftCard /></label>
-				<label onTouchStart={handleTouchStart} onTouchMove={handleTouchMove} onClick={(e)=>{handleNftCardClick(e, 4)}} htmlFor="s4" id="slide4"><PromoNftCard /></label>
-				<label onTouchStart={handleTouchStart} onTouchMove={handleTouchMove} onClick={(e)=>{handleNftCardClick(e, 5)}} htmlFor="s5" id="slide5"><PromoNftCard /></label> */}
 			</div>
 		</div>
 	);

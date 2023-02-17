@@ -39,11 +39,9 @@ const Footer = () => {
 							<li className="hover:text-primary-500">
 								<Link href="/mxcatalog/explore">Explore</Link>
 							</li>
-							<Tooltip
-								labelText={<li className="text-dark-600 dark:text-light-100 cursor-help">Trending</li>}
-								message="Coming soon!"
-								tooltipLocation="bottom"
-							></Tooltip>
+							<li className="hover:text-primary-500">
+								<Link href="/discover-artists">Discover Artists</Link>
+							</li>
 							{user && user.attributes.isArtist && (
 								<li className="hover:text-primary-500">
 									<Link href="/create-nft">Create</Link>

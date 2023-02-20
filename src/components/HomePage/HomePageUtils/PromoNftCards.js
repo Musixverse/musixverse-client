@@ -1,7 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import PromoCountdown from "./PromoCountdown";
-
+import AudioPlayerContext from "@/store/audioplayer-context";
+import { useContext } from "react";
+import { useMoralis } from "react-moralis";
 /*
     To do:
     1. Change notification to play
@@ -16,20 +18,58 @@ export default function PromoNftCard({
     price,
     title,
     artwork,
-    tokenId  
+    tokenId,
+    audio,
+    trackId
 }){
+	const { Moralis } = useMoralis();
+	const [audioPlayerProps, setAudioPlayerProps] = useContext(AudioPlayerContext);
+	const audioPlayerTrackId = audioPlayerProps.currentlyPlayingIdx === -1 ? undefined : audioPlayerProps.queue[audioPlayerProps.currentlyPlayingIdx].trackId;
+
+
     const obj = {
         artistName: artist,
         trackName: title,
         artwork,
         countdownTime: undefined,
-        price: price,
-        audioURL: "",
+        price: Moralis.Units.FromWei(price),
         isArtistVerified: true,
-        trackId: "",
         tokenId,
-        nftCoverArt: "",
     }
+
+    const playTrackHandler = () => {
+		//If same song is played again then dont add again
+		//Instead need a logic to pause it in the audioplayer...
+		if (audioPlayerTrackId && trackId === audioPlayerTrackId) {
+			setAudioPlayerProps((prevProps) => {
+				return {
+					...prevProps,
+					isPlaying: !prevProps.isPlaying,
+				};
+			});
+			return;
+		}
+		setAudioPlayerProps((prevProps) => {
+			const newQueue = [...prevProps.queue];
+			newQueue.push({
+				tokenId: tokenId,
+				audioURL: audio,
+				price: price,
+				artistName: artist,
+				isArtistVerified: true,
+				songName: title,
+				nftCover: artwork,
+				trackId: trackId,
+			});
+			return {
+				...prevProps,
+				queue: newQueue,
+				currentlyPlayingIdx: newQueue.length-1,
+				playerIsLoaded: false,
+			};
+		});
+	};
+
     return(
         <div className="bg-light-100 dark:bg-[#2d2d2d] rounded-3xl flex flex-col p-3 w-[300px] sm:w-[340px] lg:w-[380px] h-[216px]">
             {/* NFT details */}
@@ -57,8 +97,8 @@ export default function PromoNftCard({
                             <PromoCountdown/>
                             :
                             <div className="flex flex-1 mt-2 space-x-2">
-                                <button className="flex w-[36px] h-[36px] items-center justify-center border-[3px] rounded-xl border-primary-500">
-                                    <i className="text-lg fas fa-play"></i>
+                                <button onClick={playTrackHandler} className="flex w-[36px] h-[36px] items-center justify-center border-[3px] rounded-xl border-primary-500">
+                                    <i className={"text-lg fas " + (audioPlayerProps.isPlaying && trackId === audioPlayerTrackId ? "fa-pause" : "fa-play")}></i>
                                 </button>
                                 <Link href={`/track/polygon/${tokenId}`} passHref>
                                     <button className="text-lg font-semibold px-7 rounded-xl w-max bg-primary-500 hover:bg-primary-400 text-dark-300">Buy Now</button>

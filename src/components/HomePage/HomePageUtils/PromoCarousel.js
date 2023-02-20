@@ -3,19 +3,16 @@ import { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import { useTheme } from "next-themes";
 import styles from "../../../../styles/HomePage/promoCarousel.module.css";
-import { useRouter } from "next/router";
 import ArtistIntro from "./ArtistIntro";
-import { useMoralis } from "react-moralis";
 
 
 export default function PromoCarousel({ tracks }) {
 	const { theme } = useTheme();
 	const [currSlide, setCurrSlide] = useState(1);
-	const router = useRouter();	
-	const { Moralis } = useMoralis();
 	
 	let xDown = null;
 	let yDown = null;
+
 	
 	useEffect(() => {
 		const carouselRider = setInterval(() => {
@@ -121,7 +118,36 @@ export default function PromoCarousel({ tracks }) {
 				<input type="radio" name="slider" id="s7" readOnly checked={currSlide === 7} />
 				<input type="radio" name="slider" id="s8" readOnly checked={currSlide === 8} />
 
-				<label
+				{imgs.map((item, idx)=>{
+					return (
+						<label
+							key={"s"+(idx+1)}
+							onTouchStart={handleTouchStart}
+							onTouchMove={handleTouchMove}
+							onClick={(e) => {
+								handleNftCardClick(e, (idx+1));
+							}}
+							htmlFor={"s"+(idx+1)}
+							id={"slide"+(idx+1)}
+						>
+							{imgs[idx].hasMinted === true? 
+								<PromoNftCard 
+									artist={tracks[idx].artist} 
+									artwork={tracks[idx].artwork.uri.replace("ipfs://", process.env.NEXT_PUBLIC_IPFS_NODE_URL)}
+									title={tracks[idx].title}
+									price={tracks[idx].price}
+									tokenId={tracks[idx].localTokenId}
+									audio={tracks[idx].audio.replace("ipfs://", process.env.NEXT_PUBLIC_IPFS_NODE_URL)}
+									trackId={tracks[idx].trackId}
+								/>
+								:
+								<ArtistIntro artistName={item.artistName} />
+							}
+						</label>
+					);
+				})}
+
+				{/* <label
 					onTouchStart={handleTouchStart}
 					onTouchMove={handleTouchMove}
 					onClick={(e) => {
@@ -288,7 +314,7 @@ export default function PromoCarousel({ tracks }) {
 						:
 						<ArtistIntro artistName={"Aditya Kalway"} />
 					}
-				</label>
+				</label> */}
 			</div>
 		</div>
 	);

@@ -32,6 +32,7 @@ export const privacy_meta_description =
 	"This Privacy Policy is meant to help you understand what information we collect, why we collect it, and how you can update, manage, export, and delete your information.";
 export const reportabug_meta_description =
 	"Feedback is vital to make our services even better. With bug reporting forms, email, and discord server, it's easy to report issues you encounter and request enhancements to any services or functionalities on our platform. You'll directly influence the platform's development and building of the future of the music industry.";
+export const discoverartists_meta_description = "Discover Artists on Musixverse. Find your favorite artists and start your journey on Musixverse!";
 
 /**************************************************************************/
 /***********************    BLOCKCHAIN CONSTANTS  *************************/

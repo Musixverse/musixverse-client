@@ -25,7 +25,7 @@ export default function PromoCarousel({ tracks }) {
 	}, [currSlide]);
 
 	const imgSrcs_darkTheme = useMemo(()=>[
-		{ artistName: "Donny Artist", imgSrc: "/assets/homepage/slider/harryFull_b.png" },
+		{ artistName: "Harry Arora", imgSrc: "/assets/homepage/slider/harryFull_b.png" },
 		{ artistName: "Xubaan", imgSrc: "/assets/homepage/slider/xubaanFull_b.png" },
 		{ artistName: "Jatayu", imgSrc: "/assets/homepage/slider/jatayuFull_b.png" },
 		{ artistName: "Sarthak Kalyani", imgSrc: "/assets/homepage/slider/sarthakFull_b.png" },
@@ -35,7 +35,7 @@ export default function PromoCarousel({ tracks }) {
 		{ artistName: "Aditya Kalway", imgSrc: "/assets/homepage/slider/adityaFull_b.png" },
 	],[]);
 	const imgSrcs_lightTheme = useMemo(()=>[
-		{ artistName: "Donny Artist", imgSrc: "/assets/homepage/slider/harryFull_w.png" },
+		{ artistName: "Harry Arora", imgSrc: "/assets/homepage/slider/harryFull_w.png" },
 		{ artistName: "Xubaan", imgSrc: "/assets/homepage/slider/xubaanFull_w.png" },
 		{ artistName: "Jatayu", imgSrc: "/assets/homepage/slider/jatayuFull_w.png" },
 		{ artistName: "Sarthak Kalyani", imgSrc: "/assets/homepage/slider/sarthakFull_w.png" },

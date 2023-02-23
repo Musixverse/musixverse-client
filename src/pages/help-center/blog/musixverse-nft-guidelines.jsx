@@ -24,25 +24,28 @@ const MusixverseGuidelines = ({}) => {
 					<div className="py-36">
 						<BlogProfile
 							avatar={`https://miro.medium.com/max/113/1*FtvHUSJhezqK1lK7WZ_zDw.png`}
-							username={`Musixverse`}
+							username={`musixverse`}
 							name={`Musixverse`}
-							lastupdated={new Date(2022,11,10).toLocaleDateString("en-us", { year: "numeric", month: "short", day: "numeric" })}
+							lastupdated={new Date(2022, 11, 10).toLocaleDateString("en-us", { year: "numeric", month: "short", day: "numeric" })}
 						/>
 						<BlogHeader>Musixverse NFT Guidelines</BlogHeader>
 						<BlogImage
-							src={
-								"https://miro.medium.com/max/828/1*u7NsPO8ojCpvAEeRUzNLRg.webp"
-							}
+							src={"https://miro.medium.com/max/828/1*u7NsPO8ojCpvAEeRUzNLRg.webp"}
 							alt={"musixverse main tagline Hear It Own It Live It"}
 							width={768}
 							height={400}
 						/>
 						<BlogContent>
-							Minting NFTs on Musixverse is a smooth process. In this guide, we present a standard guideline that you can follow to create your NFTs.
+							Minting NFTs on Musixverse is a smooth process. In this guide, we present a standard guideline that you can follow to create your
+							NFTs.
 						</BlogContent>
 						<BlogNoteContent>
-							<ContentBold>Before you begin:</ContentBold> 
-							If you’re unsure of how to create an NFT on Musixverse, check out our <BlogLink link="https://medium.com/@musixverse/how-to-create-an-nft-on-musixverse-15e58cb2bee1">tutorial on creating NFTs</BlogLink> to get started.
+							<ContentBold>Before you begin:</ContentBold>
+							If you’re unsure of how to create an NFT on Musixverse, check out our{" "}
+							<BlogLink link="https://medium.com/@musixverse/how-to-create-an-nft-on-musixverse-15e58cb2bee1">
+								tutorial on creating NFTs
+							</BlogLink>{" "}
+							to get started.
 						</BlogNoteContent>
 						<BlogSubHeading>1. Finalize the Song</BlogSubHeading>
 						<BlogContent>This is the song that you will package into the NFT</BlogContent>
@@ -57,9 +60,20 @@ const MusixverseGuidelines = ({}) => {
 						<BlogContent>
 							<ul className="list-disc list-inside">
 								<li>This is obviously the key thing that you need to create an NFT on Musixverse.</li>
-								<li>You should choose a high-quality audio recording but ideally try to keep it under 50 MB so that it quickly loads on Musixverse.</li>
-								<li>You could package the final mastered recording of an original song that has already been released OR if you want to get more creative, you could package an interim version of the song that is close to your heart for some reason. Please remember that this is a collectible for your fans and so make it worth their investment :)</li>
-								<li>Please ensure that you completely own the rights to the song you are packaging in the NFT. If you have any collaborators in the song and they own any rights, ensure that you add them as collaborators and share income and royalties generated from the sale of your NFTs.</li>
+								<li>
+									You should choose a high-quality audio recording but ideally try to keep it under 50 MB so that it quickly loads on
+									Musixverse.
+								</li>
+								<li>
+									You could package the final mastered recording of an original song that has already been released OR if you want to get more
+									creative, you could package an interim version of the song that is close to your heart for some reason. Please remember that
+									this is a collectible for your fans and so make it worth their investment :)
+								</li>
+								<li>
+									Please ensure that you completely own the rights to the song you are packaging in the NFT. If you have any collaborators in
+									the song and they own any rights, ensure that you add them as collaborators and share income and royalties generated from
+									the sale of your NFTs.
+								</li>
 							</ul>
 						</BlogContent>
 						<BlogSubHeading>2. Finalize Cover Art</BlogSubHeading>
@@ -73,8 +87,14 @@ const MusixverseGuidelines = ({}) => {
 						<BlogSubHeading>Guidelines:</BlogSubHeading>
 						<BlogContent>
 							<ul className="list-disc list-inside">
-								<li>If the song you are creating the NFT of is already released on major streaming platforms, you could use the same cover art as the cover art of the already released song.</li>
-								<li>If you want to get creative and give something exclusive to your fans, you can modify the existing cover art to give it the NFT theme or create a new cover art altogether.</li>
+								<li>
+									If the song you are creating the NFT of is already released on major streaming platforms, you could use the same cover art
+									as the cover art of the already released song.
+								</li>
+								<li>
+									If you want to get creative and give something exclusive to your fans, you can modify the existing cover art to give it the
+									NFT theme or create a new cover art altogether.
+								</li>
 							</ul>
 						</BlogContent>
 						<BlogSubHeading>3. Onboard Collaborators</BlogSubHeading>
@@ -92,8 +112,16 @@ const MusixverseGuidelines = ({}) => {
 						<BlogSubHeading>Guidelines:</BlogSubHeading>
 						<BlogContent>
 							<ul className="list-disc list-inside">
-								<li>If your audio recording has collaborators who own rights alongside you, we highly recommend that you add them as collaborators with an assigned share of income from NFT sales. Adding them as collaborators will ensure that the NFT does not get created until they approve of it and they agree to their share of income. This is important so that there are no disputes later.</li>
-								<li>If your audio recording has collaborators but you own the rights completely, you may still choose to add them as collaborators on the NFT as a gesture of goodwill and assign them an appropriate share of income from the NFT.</li>
+								<li>
+									If your audio recording has collaborators who own rights alongside you, we highly recommend that you add them as
+									collaborators with an assigned share of income from NFT sales. Adding them as collaborators will ensure that the NFT does
+									not get created until they approve of it and they agree to their share of income. This is important so that there are no
+									disputes later.
+								</li>
+								<li>
+									If your audio recording has collaborators but you own the rights completely, you may still choose to add them as
+									collaborators on the NFT as a gesture of goodwill and assign them an appropriate share of income from the NFT.
+								</li>
 							</ul>
 						</BlogContent>
 						<BlogSubHeading>4. What is the Story?</BlogSubHeading>
@@ -107,7 +135,10 @@ const MusixverseGuidelines = ({}) => {
 						<BlogSubHeading>Guidelines:</BlogSubHeading>
 						<BlogContent>
 							<ul className="list-disc list-inside">
-								<li>What is the story behind this song? Where did the idea come from? How did it come to life? Every NFT has a story. Tell the world why this song is close to your heart.</li>
+								<li>
+									What is the story behind this song? Where did the idea come from? How did it come to life? Every NFT has a story. Tell the
+									world why this song is close to your heart.
+								</li>
 								<li>Take some time to write down this story. It shows the world why this song and this NFT are important to you.</li>
 								<li>It will help people connect with you and get to know you better.</li>
 							</ul>
@@ -124,13 +155,19 @@ const MusixverseGuidelines = ({}) => {
 						<BlogSubHeading>Guidelines:</BlogSubHeading>
 						<BlogContent>
 							<ul className="list-disc list-inside">
-								<li>A lot is available for everyone to see on the internet. For unlockable content, choose things that are exclusive and no one has ever seen.</li>
-								<li>It could be behind-the-seen pictures, interim recordings of the song, behind the scene videos, or the exclusive story behind the song. Anything that you think is worth sharing with your biggest fans?</li>
+								<li>
+									A lot is available for everyone to see on the internet. For unlockable content, choose things that are exclusive and no one
+									has ever seen.
+								</li>
+								<li>
+									It could be behind-the-seen pictures, interim recordings of the song, behind the scene videos, or the exclusive story behind
+									the song. Anything that you think is worth sharing with your biggest fans?
+								</li>
 							</ul>
 						</BlogContent>
 
 						<AboutUs />
-					</div> 
+					</div>
 				</div>
 			</div>
 		</>

@@ -4,7 +4,7 @@ import styles from "../../../styles/TrackInfo/AudioPlayer.module.css";
 import ShinyLoader from "../../layout/ShinyLoader";
 import AudioPlayerContext from "../../../store/audioplayer-context";
 
-export default function AudioPlayer({ tokenId, audio, artistName, isArtistVerified, trackName, image, trackId, price }) {
+export default function AudioPlayer({ numberOfCopies, tokenId, audio, artistName, isArtistVerified, trackName, image, trackId, price, collaboratorUsers }) {
 	/*******************************
 	 *******  AUDIO PLAYER  ********
 	 *******************************/
@@ -153,7 +153,14 @@ export default function AudioPlayer({ tokenId, audio, artistName, isArtistVerifi
 					{/* <audio ref={audio} src={audio_url} onTimeUpdate={updateProgress} onEnded={resetProgress}></audio> */}
 				</div>
 
-				<Actions tokenId={tokenId} artistName={artistName} title={trackName} />
+				<Actions
+					tokenId={tokenId}
+					coverArt={image}
+					numberOfCopies={numberOfCopies}
+					artistName={artistName}
+					title={trackName}
+					collaboratorUsers={collaboratorUsers}
+				/>
 			</div>
 		</div>
 	);

@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { meta_description } from "../../config/constants";
+import { contactus_meta_description } from "../../config/constants";
 import Contactus from "../../components/ContactUs/ContactUs";
 
 const ContactUs = ({}) => {
@@ -7,7 +7,7 @@ const ContactUs = ({}) => {
 		<>
 			<Head>
 				<title>Musixverse | Contact Us</title>
-				<meta name="description" content={meta_description} />
+				<meta name="description" content={contactus_meta_description} />
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 

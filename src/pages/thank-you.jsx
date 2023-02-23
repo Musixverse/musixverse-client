@@ -1,11 +1,11 @@
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import { meta_description } from "../config/constants";
-import discord from "../../public/assets/social/discord.svg";
-import facebook from "../../public/assets/social/facebook.svg";
-import twitter from "../../public/assets/social/twitter.svg";
-import instagram from "../../public/assets/social/instagram.svg";
+import { meta_description } from "@/config/constants";
+import discord from "/public/assets/social/discord.svg";
+import facebook from "/public/assets/social/facebook.svg";
+import twitter from "/public/assets/social/twitter.svg";
+import instagram from "/public/assets/social/instagram.svg";
 
 function ThankYou() {
 	return (
@@ -23,7 +23,7 @@ function ThankYou() {
 
 				<div className="flex flex-row justify-start sm:mt-24 mt-16 mb-10">
 					<div className="w-full grid grid-cols-5 gap-4">
-						<div className="col-span-5 p-10 border-2 border-gray-400 rounded-md">
+						<div className="col-span-5 p-10 bg-light-100 rounded-md">
 							<div className="font-tertiary text-5xl">Thank you for joining the mailing list!</div>
 							<div className="mt-16 font-secondary text-lg">Follow us on social media to stay in the loop and know more</div>
 

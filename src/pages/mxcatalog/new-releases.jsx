@@ -1,7 +1,7 @@
 import Head from "next/head";
 import Moralis from "moralis/node";
-import { meta_description, PARSE_APP_ID, PARSE_SERVER_URL } from "../../config/constants";
-import Marketplace from "../../components/MxCatalog/Utils/Marketplace";
+import { mxcatalog_meta_description, PARSE_APP_ID, PARSE_SERVER_URL } from "@/config/constants";
+import Marketplace from "@/components/MxCatalog/Utils/Marketplace";
 
 export async function getStaticProps() {
 	await Moralis.start({ serverUrl: PARSE_SERVER_URL, appId: PARSE_APP_ID });
@@ -43,7 +43,7 @@ export default function NewReleases({ tracksWhoseAllCopiesAreNotSold }) {
 		<>
 			<Head>
 				<title>Musixverse | New Releases</title>
-				<meta name="description" content={meta_description} />
+				<meta name="description" content={mxcatalog_meta_description} />
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 

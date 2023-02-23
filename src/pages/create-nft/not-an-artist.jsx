@@ -1,6 +1,6 @@
 import Head from "next/head";
-import { meta_description } from "../../config/constants";
-import NotAnArtist from "../../components/CreateNFT/not-an-artist";
+import { meta_description } from "@/config/constants";
+import NotAnArtist from "@/components/CreateNFT/not-an-artist";
 
 const notanartist = ({}) => {
 	return (

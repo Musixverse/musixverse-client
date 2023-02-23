@@ -39,11 +39,9 @@ const Footer = () => {
 							<li className="hover:text-primary-500">
 								<Link href="/mxcatalog/explore">Explore</Link>
 							</li>
-							<Tooltip
-								labelText={<li className="text-dark-600 dark:text-light-100 cursor-help">Trending</li>}
-								message="Coming soon!"
-								tooltipLocation="bottom"
-							></Tooltip>
+							<li className="hover:text-primary-500">
+								<Link href="/discover-artists">Discover Artists</Link>
+							</li>
 							{user && user.attributes.isArtist && (
 								<li className="hover:text-primary-500">
 									<Link href="/create-nft">Create</Link>
@@ -142,11 +140,7 @@ const Footer = () => {
 					</div>
 					<div className="grid grid-cols-2 gap-2 gap-x-10 md:gap-x-8 md:pt-6 lg:gap-0 lg:flex justify-between lg:space-x-6 xl:space-x-28 font-primary">
 						<li className="text-xs text-neutral-400 list-none">
-							<Link href="https://drive.google.com/file/d/1cbK9O_fKX4eaIQgIU9Lc2JADUg5P3Qz8/view?usp=sharing">
-								<a target="_blank" rel="noopener noreferrer">
-									Privacy Policy
-								</a>
-							</Link>
+							<Link href="/privacy-policy">Privacy Policy</Link>
 						</li>
 						<li className="text-xs text-neutral-400 list-none">
 							<Link href="https://drive.google.com/file/d/1Av96OC67-zCfmFuQrAeGT7ruAPcft4Yl/view?usp=sharing">

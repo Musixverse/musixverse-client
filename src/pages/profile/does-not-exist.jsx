@@ -1,7 +1,7 @@
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { meta_description } from "../../config/constants";
+import { meta_description } from "@/config/constants";
 
 function DoesNotExist() {
 	const router = useRouter();

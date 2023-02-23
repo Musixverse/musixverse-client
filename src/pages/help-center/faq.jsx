@@ -1,13 +1,13 @@
 import Head from "next/head";
-import { meta_description } from "../../config/constants";
-import Faq from "../../components/FAQ/Faq";
+import { faq_meta_description } from "@/config/constants";
+import Faq from "@/components/FAQ/Faq";
 
 const FAQs = ({}) => {
 	return (
 		<>
 			<Head>
 				<title>Help Center | FAQ</title>
-				<meta name="description" content={meta_description} />
+				<meta name="description" content={faq_meta_description} />
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 

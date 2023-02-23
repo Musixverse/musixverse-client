@@ -3,10 +3,15 @@
         "target": "esnext",
         "baseUrl": ".",
         "paths": {
+            "@/auth/*": ["src/auth/*"],
             "@/components/*": ["src/components/*"],
-            "@/layout/*": ["src/layout/*"],
             "@/config/*": ["src/config/*"],
-            "@/styles/*": ["styles/*"]
+            "@/layout/*": ["src/layout/*"],
+            "@/lib/*": ["src/lib/*"],
+            "@/utils/*": ["src/utils/*"],
+            "@/store/*": ["store/*"],
+            "@/styles/*": ["styles/*"],
+            "@/public/*": ["public/*"],
         }
     }
 }

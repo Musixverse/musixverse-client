@@ -1,23 +1,22 @@
 import { useEffect, useState } from "react";
 import Head from "next/head";
 import { NextSeo } from "next-seo";
-import dynamic from "next/dynamic";
-import { meta_description } from "../../config/constants";
 import { useRouter } from "next/router";
+import dynamic from "next/dynamic";
 import Moralis from "moralis/node";
-import Banner from "../../components/Profile/Banner";
-import ArtistHeader from "../../components/Profile/ArtistHeader";
-import Filter from "../../components/Profile/Filter";
-import NFTs from "../../components/Profile/NFTs";
-const FavouritesHeader = dynamic(() => import("../../components/Profile/FavouritesHeader"));
-const FavouriteNFTs = dynamic(() => import("../../components/Profile/FavouriteNFTs"));
-import NewsLetter from "../../layout/NewsLetter";
-const ArtistBioModal = dynamic(() => import("../../components/Profile/ProfileUtils/ArtistBioModal"));
-const ArtistReportModal = dynamic(() => import("../../components/Profile/ProfileUtils/ArtistReportModal"));
-const FavouritesModal = dynamic(() => import("../../components/Profile/ProfileUtils/FavouritesModal"));
-const FollowersModal = dynamic(() => import("../../components/Profile/ProfileUtils/FollowersModal"));
-const FollowingModal = dynamic(() => import("../../components/Profile/ProfileUtils/FollowingModal"));
-import { PARSE_APP_ID, PARSE_SERVER_URL } from "../../config/constants";
+import { meta_description, PARSE_APP_ID, PARSE_SERVER_URL } from "@/config/constants";
+import Banner from "@/components/Profile/Banner";
+import ArtistHeader from "@/components/Profile/ArtistHeader";
+import Filter from "@/components/Profile/Filter";
+import NFTs from "@/components/Profile/NFTs";
+import NewsLetter from "@/layout/NewsLetter";
+const FavouritesHeader = dynamic(() => import("@/components/Profile/FavouritesHeader"));
+const FavouriteNFTs = dynamic(() => import("@/components/Profile/FavouriteNFTs"));
+const ArtistBioModal = dynamic(() => import("@/components/Profile/ProfileUtils/ArtistBioModal"));
+const ArtistReportModal = dynamic(() => import("@/components/Profile/ProfileUtils/ArtistReportModal"));
+const FavouritesModal = dynamic(() => import("@/components/Profile/ProfileUtils/FavouritesModal"));
+const FollowersModal = dynamic(() => import("@/components/Profile/ProfileUtils/FollowersModal"));
+const FollowingModal = dynamic(() => import("@/components/Profile/ProfileUtils/FollowingModal"));
 
 export async function getStaticProps(context) {
 	const { username } = context.params;

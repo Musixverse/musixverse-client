@@ -195,9 +195,9 @@ export default function NewAudioPlayer() {
 		<div className="md:w-[364px] md:h-[72px] md:hover:h-[280px] group transition-[width,height] duration-500 ease-in-out fixed z-40 overflow-hidden left-4 bottom-4 md:hover:w-[500px]">
 			<div
 				onClick={handlePlayerClose}
-				className="rounded-lg p-1 absolute z-10 hidden cursor-pointer top-1 right-1 group-hover:flex items-center justify-center backdrop-blur-[40px] backdrop-brightness-110 hover:backdrop-brightness-150"
+				className="text-light-100 rounded-lg w-8 h-8 absolute z-10 hidden cursor-pointer top-1 right-1 group-hover:flex items-center justify-center backdrop-blur-[40px] backdrop-brightness-110 hover:backdrop-brightness-50"
 			>
-				<span class="material-symbols-outlined">close</span>
+				<i className="fa-solid fa-xmark text-lg"></i>
 			</div>
 			{/* Normal state bg-div */}
 			<div

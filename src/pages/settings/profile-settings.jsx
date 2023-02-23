@@ -2,13 +2,13 @@ import { useState, useEffect, useContext } from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import Moralis from "moralis/node";
-import { PARSE_APP_ID, PARSE_SERVER_URL, meta_description } from "../../config/constants";
-import SettingsNav from "../../components/Settings/SettingsNav";
-import ProfileSettings from "../../components/Settings/ProfileSettings";
 import { useMoralis, useMoralisCloudFunction } from "react-moralis";
-import StatusContext from "../../../store/status-context";
-import LoadingContext from "../../../store/loading-context";
-import { isNameValid, isUsernameValidAndAvailable, isEmailValidAndAvailable } from "../../utils/Validate";
+import { meta_description, PARSE_APP_ID, PARSE_SERVER_URL } from "@/config/constants";
+import SettingsNav from "@/components/Settings/SettingsNav";
+import ProfileSettings from "@/components/Settings/ProfileSettings";
+import StatusContext from "@/store/status-context";
+import LoadingContext from "@/store/loading-context";
+import { isNameValid, isUsernameValidAndAvailable, isEmailValidAndAvailable } from "@/utils/Validate";
 
 export async function getServerSideProps(context) {
 	try {
@@ -164,7 +164,7 @@ export default function Settings({ userData }) {
 	return (
 		<>
 			<Head>
-				<title>Musixverse | Settings</title>
+				<title>Musixverse | Profile Settings</title>
 				<meta name="description" content={meta_description} />
 				<link rel="icon" href="/favicon.ico" />
 			</Head>

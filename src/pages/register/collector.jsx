@@ -1,9 +1,9 @@
-import Head from "next/head";
-import { meta_description } from "../../config/constants";
-import CollectorRegistration from "../../components/Registration/CollectorRegistration";
 import { useEffect, useContext } from "react";
 import { useMoralis } from "react-moralis";
-import LoadingContext from "../../../store/loading-context";
+import Head from "next/head";
+import { meta_description } from "@/config/constants";
+import CollectorRegistration from "@/components/Registration/CollectorRegistration";
+import LoadingContext from "@/store/loading-context";
 
 const Collector_Page = () => {
 	const { user, isInitialized } = useMoralis();

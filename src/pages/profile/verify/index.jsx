@@ -2,11 +2,12 @@ import { useState, useEffect } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useMoralis, useMoralisCloudFunction } from "react-moralis";
-import NameAndIdVerification from "../../../components/Profile/Verification/NameAndIdVerification";
-import SendUsADM from "../../../components/Profile/Verification/SendUsADM";
-import InstagramVerification from "../../../components/Profile/Verification/InstagramVerification";
-import ScrollToPageTop from "../../../utils/ScrollToPageTop";
-import VerificationRequestSubmittedModal from "../../../components/Profile/Verification/VerificationRequestSubmittedModal";
+import { meta_description } from "@/config/constants";
+import NameAndIdVerification from "@/components/Profile/Verification/NameAndIdVerification";
+import SendUsADM from "@/components/Profile/Verification/SendUsADM";
+import InstagramVerification from "@/components/Profile/Verification/InstagramVerification";
+import ScrollToPageTop from "@/utils/ScrollToPageTop";
+import VerificationRequestSubmittedModal from "@/components/Profile/Verification/VerificationRequestSubmittedModal";
 
 const Verify = () => {
 	const { user } = useMoralis();
@@ -90,13 +91,13 @@ const Verify = () => {
 		<>
 			<Head>
 				<title>Musixverse | Artist Profile Verification</title>
-				<meta name="description" content="The NFT Marketplace for Musicians and Fans" />
+				<meta name="description" content={meta_description} />
 			</Head>
 			<ScrollToPageTop samePage={true} changingValue={step} />
 
-			<div className="flex flex-col p-40 items-center bg-light-300 dark:bg-dark-600">
+			<div className="flex flex-col lg:p-40 md:px-8 py-40 sm:px-4 px-2 items-center bg-light-300 dark:bg-dark-600">
 				<p className="text-4xl font-semibold text-center">Artist Verification</p>
-				<div className="w-2/3 mt-10 p-14 bg-light-200 dark:bg-dark-800 justify-center rounded-xl">
+				<div className="w-full md:w-2/3 mt-10 sm:p-14 py-12 px-6 bg-light-200 dark:bg-dark-800 justify-center rounded-xl">
 					{step == 1 ? (
 						<NameAndIdVerification {...step1Values} />
 					) : step == 2 ? (

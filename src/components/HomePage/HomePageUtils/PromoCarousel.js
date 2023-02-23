@@ -5,15 +5,13 @@ import { useTheme } from "next-themes";
 import styles from "../../../../styles/HomePage/promoCarousel.module.css";
 import ArtistIntro from "./ArtistIntro";
 
-
 export default function PromoCarousel({ tracks }) {
 	const { theme } = useTheme();
 	const [currSlide, setCurrSlide] = useState(1);
-	
+
 	let xDown = null;
 	let yDown = null;
 
-	
 	useEffect(() => {
 		const carouselRider = setInterval(() => {
 			setCurrSlide((prevSlide) => {
@@ -24,40 +22,46 @@ export default function PromoCarousel({ tracks }) {
 		return () => clearInterval(carouselRider);
 	}, [currSlide]);
 
-	const imgSrcs_darkTheme = useMemo(()=>[
-		{ artistName: "Harry Arora", imgSrc: "/assets/homepage/slider/harryFull_b.png" },
-		{ artistName: "Xubaan", imgSrc: "/assets/homepage/slider/xubaanFull_b.png" },
-		{ artistName: "Jatayu", imgSrc: "/assets/homepage/slider/jatayuFull_b.png" },
-		{ artistName: "Sarthak Kalyani", imgSrc: "/assets/homepage/slider/sarthakFull_b.png" },
-		{ artistName: "Pooja Tiwari", imgSrc: "/assets/homepage/slider/poojaFull_b.png" },
-		{ artistName: "Sommaiya", imgSrc: "/assets/homepage/slider/sommaiyaFull_b.png" },
-		{ artistName: "Submarine In Space", imgSrc: "/assets/homepage/slider/submarineFull_b.png" },
-		{ artistName: "Aditya Kalway", imgSrc: "/assets/homepage/slider/adityaFull_b.png" },
-	],[]);
-	const imgSrcs_lightTheme = useMemo(()=>[
-		{ artistName: "Harry Arora", imgSrc: "/assets/homepage/slider/harryFull_w.png" },
-		{ artistName: "Xubaan", imgSrc: "/assets/homepage/slider/xubaanFull_w.png" },
-		{ artistName: "Jatayu", imgSrc: "/assets/homepage/slider/jatayuFull_w.png" },
-		{ artistName: "Sarthak Kalyani", imgSrc: "/assets/homepage/slider/sarthakFull_w.png" },
-		{ artistName: "Pooja Tiwari", imgSrc: "/assets/homepage/slider/poojaFull_w.png" },
-		{ artistName: "Sommaiya", imgSrc: "/assets/homepage/slider/sommaiyaFull_w.png" },
-		{ artistName: "Submarine In Space", imgSrc: "/assets/homepage/slider/submarineFull_w.png" },
-		{ artistName: "Aditya Kalway", imgSrc: "/assets/homepage/slider/adityaFull_w.png" },
-	],[]);
+	const imgSrcs_darkTheme = useMemo(
+		() => [
+			{ artistName: "Harry Arora", imgSrc: "/assets/homepage/slider/harryFull_b.png" },
+			{ artistName: "Xubaan", imgSrc: "/assets/homepage/slider/xubaanFull_b.png" },
+			{ artistName: "Jatayu", imgSrc: "/assets/homepage/slider/jatayuFull_b.png" },
+			{ artistName: "Sarthak Kalyani", imgSrc: "/assets/homepage/slider/sarthakFull_b.png" },
+			{ artistName: "Pooja Tiwari", imgSrc: "/assets/homepage/slider/poojaFull_b.png" },
+			{ artistName: "Sommaiya Angrish", imgSrc: "/assets/homepage/slider/sommaiyaFull_b.png" },
+			{ artistName: "Submarine In Space", imgSrc: "/assets/homepage/slider/submarineFull_b.png" },
+			{ artistName: "Aditya Kalway", imgSrc: "/assets/homepage/slider/adityaFull_b.png" },
+		],
+		[]
+	);
+	const imgSrcs_lightTheme = useMemo(
+		() => [
+			{ artistName: "Harry Arora", imgSrc: "/assets/homepage/slider/harryFull_w.png" },
+			{ artistName: "Xubaan", imgSrc: "/assets/homepage/slider/xubaanFull_w.png" },
+			{ artistName: "Jatayu", imgSrc: "/assets/homepage/slider/jatayuFull_w.png" },
+			{ artistName: "Sarthak Kalyani", imgSrc: "/assets/homepage/slider/sarthakFull_w.png" },
+			{ artistName: "Pooja Tiwari", imgSrc: "/assets/homepage/slider/poojaFull_w.png" },
+			{ artistName: "Sommaiya Angrish", imgSrc: "/assets/homepage/slider/sommaiyaFull_w.png" },
+			{ artistName: "Submarine In Space", imgSrc: "/assets/homepage/slider/submarineFull_w.png" },
+			{ artistName: "Aditya Kalway", imgSrc: "/assets/homepage/slider/adityaFull_w.png" },
+		],
+		[]
+	);
 
-	const imgs = useMemo(()=>theme === "dark" ? imgSrcs_darkTheme : imgSrcs_lightTheme, [theme, imgSrcs_darkTheme, imgSrcs_lightTheme]) ;
+	const imgs = useMemo(() => (theme === "dark" ? imgSrcs_darkTheme : imgSrcs_lightTheme), [theme, imgSrcs_darkTheme, imgSrcs_lightTheme]);
 
-	useEffect(()=>{
+	useEffect(() => {
 		tracks.forEach((element, idx) => {
-			if(element.artist === imgs[idx].artistName){
+			if (element.artist === imgs[idx].artistName) {
 				imgs[idx] = {
-					...imgs[idx], 
-					hasMinted: true
-				}
+					...imgs[idx],
+					hasMinted: true,
+				};
 			}
 		});
-	},[tracks, imgs])
-	
+	}, [tracks, imgs]);
+
 	//This function has to update the image being displayed
 	const handleNftCardClick = (e, idx) => {
 		e.preventDefault();
@@ -118,21 +122,21 @@ export default function PromoCarousel({ tracks }) {
 				<input type="radio" name="slider" id="s7" readOnly checked={currSlide === 7} />
 				<input type="radio" name="slider" id="s8" readOnly checked={currSlide === 8} />
 
-				{imgs.map((item, idx)=>{
+				{imgs.map((item, idx) => {
 					return (
 						<label
-							key={"s"+(idx+1)}
+							key={"s" + (idx + 1)}
 							onTouchStart={handleTouchStart}
 							onTouchMove={handleTouchMove}
 							onClick={(e) => {
-								handleNftCardClick(e, (idx+1));
+								handleNftCardClick(e, idx + 1);
 							}}
-							htmlFor={"s"+(idx+1)}
-							id={"slide"+(idx+1)}
+							htmlFor={"s" + (idx + 1)}
+							id={"slide" + (idx + 1)}
 						>
-							{imgs[idx].hasMinted === true? 
-								<PromoNftCard 
-									artist={tracks[idx].artist} 
+							{imgs[idx].hasMinted === true ? (
+								<PromoNftCard
+									artist={tracks[idx].artist}
 									artwork={tracks[idx].artwork.uri.replace("ipfs://", process.env.NEXT_PUBLIC_IPFS_NODE_URL)}
 									title={tracks[idx].title}
 									price={tracks[idx].price}
@@ -140,9 +144,9 @@ export default function PromoCarousel({ tracks }) {
 									audio={tracks[idx].audio.replace("ipfs://", process.env.NEXT_PUBLIC_IPFS_NODE_URL)}
 									trackId={tracks[idx].trackId}
 								/>
-								:
+							) : (
 								<ArtistIntro artistName={item.artistName} />
-							}
+							)}
 						</label>
 					);
 				})}

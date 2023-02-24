@@ -80,7 +80,7 @@ const Footer = () => {
 								<Link href="/contact-us">Contact Us</Link>
 							</li>
 							<li className="hover:text-primary-500">
-								<Link href="/faq">FAQ</Link>
+								<Link href="/help-center/faq">FAQ</Link>
 							</li>
 							<li className="hover:text-primary-500">
 								<Link href="/report-a-bug">Report a Bug</Link>

@@ -29,6 +29,12 @@ function App({ Component, pageProps, router }) {
 			router.events.off("routeChangeComplete");
 		};
 	}, [router.events]);
+	useEffect(() => {
+		const use = async () => {
+			(await import("tw-elements")).default;
+		};
+		use();
+	}, []);
 
 	const [isLoading, setLoading] = useState({
 		status: false,
@@ -88,12 +94,6 @@ function App({ Component, pageProps, router }) {
                     });
                 `}
 			</Script>
-			<Script
-				src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"
-				onError={(err) => {
-					console.error("Tailwind Elements Script Error:", err);
-				}}
-			></Script>
 			<Script
 				src="https://cdn.withpersona.com/dist/persona-v4.2.0.js"
 				strategy="lazyOnload"

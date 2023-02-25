@@ -59,7 +59,7 @@ export default function AccountHelp() {
 				description={
 					<>
 						Read our FAQs{" "}
-						<Link href="/faq" passHref>
+						<Link href="/help-center/faq" passHref>
 							<a className="font-medium text-primary-500">here</a>
 						</Link>{" "}
 						to learn more about how to buy, sell, and create NFTs on Musixverse.

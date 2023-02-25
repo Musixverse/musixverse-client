@@ -1,9 +1,9 @@
-import Head from "next/head";
-import { meta_description } from "../../../config/constants";
-import BasicDetails from "../../../components/Registration/BasicDetails";
 import { useEffect, useContext } from "react";
 import { useMoralis } from "react-moralis";
-import LoadingContext from "../../../../store/loading-context";
+import Head from "next/head";
+import { meta_description } from "@/config/constants";
+import BasicDetails from "@/components/Registration/BasicDetails";
+import LoadingContext from "@/store/loading-context";
 
 const ArtistBasicDetails = () => {
 	const { user, isInitialized } = useMoralis();
@@ -29,7 +29,6 @@ const ArtistBasicDetails = () => {
 				<meta name="description" content={meta_description} />
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
-			{/* Component */}
 			<BasicDetails />
 		</>
 	);

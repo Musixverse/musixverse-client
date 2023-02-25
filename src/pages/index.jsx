@@ -1,25 +1,25 @@
 import { useState, useEffect } from "react";
 import Head from "next/head";
 import { useTheme } from "next-themes";
-import { title_main_page, meta_description } from "../config/constants";
-import LoadingSection from "../layout/Loading/LoadingSection";
-import LoadingSectionDark from "../layout/Loading/LoadingSectionDark";
 import Moralis from "moralis/node";
-import Banner from "../components/HomePage/HomePageBanner";
-import Section2 from "../components/HomePage/HomePage_section3";
-import Section3 from "../components/HomePage/HomePage_section4";
-import Section4 from "../components/HomePage/HomePage_section5";
-import Section2New from "../components/HomePage/HomePageSection2";
-import HeroSection from "../components/HomePage/HeroSection";
-import NewHero from "../components/HomePage/NewHero";
-import TopArtists from "../components/NewHomePage/TopArtist-new";
-import ShareAndEarn from "../components/HomePage/ShareAndEarn";
-import GetStartedArtist from "../components/HomePage/GetStartedArtist";
-import GetStartedFan from "../components/HomePage/GetStartedFan";
-// import GetStartedAsArtist from "../components/HomePage/GetStartedAsArtist";
-// import GetStartedAsFan from "../components/HomePage/GetStartedAsFan";
-import NewsLetter from "../layout/NewsLetter";
-import { PARSE_APP_ID, PARSE_SERVER_URL } from "../config/constants";
+import { title_main_page, meta_description, PARSE_APP_ID, PARSE_SERVER_URL } from "@/config/constants";
+import LoadingSection from "@/layout/Loading/LoadingSection";
+import LoadingSectionDark from "@/layout/Loading/LoadingSectionDark";
+import Banner from "@/components/HomePage/HomePageBanner";
+import Section2 from "@/components/HomePage/HomePage_section3";
+import Section3 from "@/components/HomePage/HomePage_section4";
+import Section4 from "@/components/HomePage/HomePage_section5";
+import Section2New from "@/components/HomePage/HomePageSection2";
+import HeroSection from "@/components/HomePage/HeroSection";
+import NewHero from "@/components/HomePage/NewHero";
+import FeaturedNfts from "@/components/HomePage/FeaturedNfts";
+import TopArtists from "@/components/NewHomePage/TopArtist-new";
+import ShareAndEarn from "@/components/HomePage/ShareAndEarn";
+import GetStartedArtist from "@/components/HomePage/GetStartedArtist";
+import GetStartedFan from "@/components/HomePage/GetStartedFan";
+// import GetStartedAsArtist from "@/components/HomePage/GetStartedAsArtist";
+// import GetStartedAsFan from "@/components/HomePage/GetStartedAsFan";
+import NewsLetter from "@/layout/NewsLetter";
 
 export async function getStaticProps() {
 	await Moralis.start({ serverUrl: PARSE_SERVER_URL, appId: PARSE_APP_ID });
@@ -42,7 +42,6 @@ function Home({ tracks }) {
 	useEffect(() => {
 		setMounted(true);
 	}, []);
-
 	return (
 		<>
 			<Head>
@@ -56,6 +55,7 @@ function Home({ tracks }) {
 					{/* <HeroSection /> */}
 					<div className="flex flex-col w-full max-w-[1920px] px-6 md:px-8 lg:px-16 xl:px-20 2xl:px-36">
 						<NewHero tracks={tracks} />
+						<FeaturedNfts tracks={tracks} />
 						<TopArtists />
 						<ShareAndEarn />
 						<GetStartedArtist />

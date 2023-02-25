@@ -160,7 +160,7 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 						</Link>
 
 						{/* Internal links */}
-						<div className="hidden ml-10 lg:block">
+						<div className="hidden ml-10 xl:block">
 							<ul className="flex flex-row items-center font-medium md:text-base md:space-x-3 xl:space-x-6 md:mt-0 sm:text-sm">
 								<li className="hover:text-primary-600">
 									<Link
@@ -178,6 +178,14 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 										Mx Lyrics
 									</Link>
 								</li>
+								<li className="hover:text-primary-600">
+									<Link
+										href="/discover-artists"
+										className="block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:text-primary-500 md:hover:bg-transparent md:border-0 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+									>
+										Discover Artists
+									</Link>
+								</li>
 								{user && user.attributes.isArtist && (
 									<li className="hover:text-primary-600">
 										<Link
@@ -188,14 +196,6 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 										</Link>
 									</li>
 								)}
-								<li className="hover:text-primary-600">
-									<Link
-										href="/help-center"
-										className="block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:text-primary-500 md:hover:bg-transparent md:border-0 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-									>
-										Resources
-									</Link>
-								</li>
 							</ul>
 						</div>
 
@@ -505,6 +505,13 @@ const Navbar = ({ authModalOpen, setAuthModalOpen }) => {
 													</Link>
 												</li>
 											)}
+											<li>
+												<Link href="/help-center" passHref={true}>
+													<div className="block w-full px-4 py-2 bg-transparent cursor-pointer dropdown-item whitespace-nowrap hover:bg-gray-100 dark:hover:bg-dark-600">
+														Resources
+													</div>
+												</Link>
+											</li>
 											{user && isAuthenticated && (
 												<li>
 													<Link href="/contact-us" passHref={true}>

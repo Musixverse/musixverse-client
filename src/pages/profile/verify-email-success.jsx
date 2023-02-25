@@ -1,9 +1,9 @@
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { meta_description } from "../../config/constants";
-import CustomButton from "../../layout/CustomButton";
 import { useMoralis } from "react-moralis";
+import { meta_description } from "@/config/constants";
+import CustomButton from "@/layout/CustomButton";
 
 const VerifyEmailSuccess = () => {
 	const router = useRouter();

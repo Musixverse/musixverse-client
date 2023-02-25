@@ -1,6 +1,6 @@
 export default function ArtistIntro({artistName, isBand}){
     return (
-        <div className="flex flex-col items-center p-5 rounded-3xl bg-light-300 dark:bg-[#2d2d2dfb] w-[300px] sm:w-[340px] lg:w-[380px]">
+        <div className="flex flex-col items-center p-5 rounded-3xl bg-light-300 dark:bg-[#2d2d2d] w-[300px] sm:w-[340px] lg:w-[380px]">
             <div className="flex flex-col items-center mt-3">
                 <h3 className="font-medium text-[#868686] text-xs lg:text-lg 2xl:text-xl">{isBand? "Band":"Artist"}</h3>
                 <h1 className="text-lg font-semibold 2xl:text-2xl">{artistName}</h1>

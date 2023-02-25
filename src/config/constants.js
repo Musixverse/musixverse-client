@@ -7,9 +7,32 @@ import MusixverseSettersFacet from "../utils/smart-contract/contracts/Musixverse
 /**************************************************************************/
 export const title_main_page = "Musixverse | The Ultimate Music NFT Marketplace";
 export const meta_description =
-	"Musixverse is a Music NFT marketplace that will bring Artists and Fans together like never before and unlock novel models of communications and commerce.";
+	"Musixverse helps independent musicians to grow their audience. Our Music NFT marketplace brings Artists and Fans together like never before and unlock novel models of communications and commerce.";
 export const meta_description2 = "Powering music ownership and provenance across the web and beyond";
 export const meta_description3 = "The NFT Marketplace for Musicians and Fans";
+
+export const blog_meta_description =
+	"Be the first to discover news, updates, drops, and features on the first platform that connects artists and fans all around the world. Welcome to the Musixverse Blog.";
+export const cfh_meta_description =
+	"Community is at the core of Musixverse. The Insider Community is a group of select individuals with exclusive access to Musixverse and its features before anyone else. In return, we will ask you to provide feedback about the platform as we continue to build and improve it.";
+export const mxcatalog_meta_description = "The NFT marketplace of Musixverse. Buy, sell, or trade Music NFTs and build your collection.";
+export const contactus_meta_description =
+	"Just send us your questions or concerns by filling out the shortest contact form you've ever seen and we will give you the help you need. Start Here.";
+export const aboutus_meta_description =
+	"Musixverse is how music should be: driven by the relationship between fans and artists. We’re creating a platform for a more collaborative music movement, built on web3 technology and values. On Musixverse, Fans support Artists they love directly and stake their claim on being there before everyone else.";
+export const createband_meta_description = "Create your own band and start your journey on Musixverse. Grow your audience and monetize your music.";
+export const createnft_meta_description =
+	"Musixverse makes creating an NFT easier than ever! Enjoy several benefits/rewards and unlock a new way to connect with your fans like never before.";
+export const faq_meta_description =
+	"A selection of popular topics that can help answer questions related to Musixverse. Find answers to top questions here. Can't get what you're looking for? Contact Us.";
+export const helpcenter_meta_description = "How to buy, sell, and create Music NFTs on Musixverse? Looking for answers? Find answers to top questions here.";
+export const mxlyrics_meta_description =
+	"Let us help you fastrack your music creation process. Get lyrics suggestions & auto-completions. Find the perfect lyrics for your next hit song.";
+export const privacy_meta_description =
+	"This Privacy Policy is meant to help you understand what information we collect, why we collect it, and how you can update, manage, export, and delete your information.";
+export const reportabug_meta_description =
+	"Feedback is vital to make our services even better. With bug reporting forms, email, and discord server, it's easy to report issues you encounter and request enhancements to any services or functionalities on our platform. You'll directly influence the platform's development and building of the future of the music industry.";
+export const discoverartists_meta_description = "Discover Artists on Musixverse. Find your favorite artists and start your journey on Musixverse!";
 
 /**************************************************************************/
 /***********************    BLOCKCHAIN CONSTANTS  *************************/

@@ -22,10 +22,8 @@ export default function TopArtists() {
 				<div className="absolute z-10 mt-10 text-sm text-white right-6 lg:right-16">
 					<div className="space-x-4">
 						<span className="py-2 px-8 font-primary cursor-pointer bg-[rgba(255,255,255,0.4)] rounded-3xl">
-							<Link href="https://www.instagram.com/musixverse" passHref>
-								<a target="_blank" rel="noopener noreferrer">
-									<span>View all</span>
-								</a>
+							<Link href="/discover-artists" passHref>
+								<span>Discover Artists</span>
 							</Link>
 						</span>
 						<span className="px-3 py-2 font-primary cursor-pointer bg-[rgba(255,255,255,0.4)] rounded-full">

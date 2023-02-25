@@ -218,7 +218,7 @@ export default function HamburgerMenu({ avatarUrl, truncatedName }) {
 													</Link>
 												</div>
 												<div className="flex flex-wrap ham_menu_hover_effect_row justify-center">
-													<Link href={"/faq"} className="ham_menu_link ham_menu_hover_effect text-center" passHref={true}>
+													<Link href={"/help-center/faq"} className="ham_menu_link ham_menu_hover_effect text-center" passHref={true}>
 														<a className="text-white hover:text-primary-500" onClick={closeNavbar}>
 															FAQ
 														</a>

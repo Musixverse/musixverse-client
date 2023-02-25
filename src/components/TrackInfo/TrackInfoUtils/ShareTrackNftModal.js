@@ -53,7 +53,7 @@ const ShareTrackNftModal = ({ isOpen, setOpen, artistName, title, setAuthModalOp
 					<p className="text-xs">of the transaction fee whenever someone</p>
 					<p className="text-xs">
 						purchases this NFT using your link.&nbsp;
-						<Link href="/faq" passHref>
+						<Link href="/help-center/faq" passHref>
 							<a className="hover:underline hover:text-primary-500">Learn more</a>
 						</Link>
 					</p>

@@ -1,9 +1,21 @@
+const defaultTheme = require("tailwindcss/defaultTheme");
+
 module.exports = {
 	mode: "jit",
-	purge: ["./src/pages/**/*.{js,ts,jsx,tsx}", "./src/components/**/*.{js,ts,jsx,tsx}", "./src/layout/**/*.{js,ts,jsx,tsx}"],
-	content: ["./src/pages/**/*.{js,ts,jsx,tsx}", "./src/components/**/*.{js,ts,jsx,tsx}", "./src/layout/**/*.{js,ts,jsx,tsx}"],
+	// purge: ["./src/pages/**/*.{js,ts,jsx,tsx}", "./src/components/**/*.{js,ts,jsx,tsx}", "./src/layout/**/*.{js,ts,jsx,tsx}"],
+	content: [
+		"./src/pages/**/*.{js,ts,jsx,tsx}",
+		"./src/components/**/*.{js,ts,jsx,tsx}",
+		"./src/layout/**/*.{js,ts,jsx,tsx}",
+		"./node_modules/tw-elements/dist/js/**/*.js",
+	],
 	darkMode: "class",
 	theme: {
+		screens: {
+			xs: "500px",
+			smd: "760px",
+			...defaultTheme.screens,
+		},
 		extend: {
 			animation: {
 				marquee: "marquee 10s linear infinite",
@@ -130,5 +142,5 @@ module.exports = {
 			},
 		},
 	},
-	plugins: [],
+	plugins: [require("tw-elements/dist/plugin")],
 };

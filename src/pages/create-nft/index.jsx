@@ -1,21 +1,21 @@
 import Head from "next/head";
 import Moralis from "moralis/node";
-import { PARSE_APP_ID, PARSE_SERVER_URL, meta_description } from "../../config/constants";
+import { PARSE_APP_ID, PARSE_SERVER_URL, createnft_meta_description } from "@/config/constants";
 import { useState, useEffect, useContext } from "react";
 import { useRouter } from "next/router";
 import { useMoralis, useNewMoralisObject, useMoralisCloudFunction } from "react-moralis";
-import ScrollToPageTop from "../../utils/ScrollToPageTop";
-import CreateNFTIntro from "../../components/CreateNFT/step-0";
-import TrackDetails from "../../components/CreateNFT/step-1";
-import ComprehensiveDetails from "../../components/CreateNFT/step-2";
-import UnlockableContent from "../../components/CreateNFT/step-3";
-import PricingAndSplits from "../../components/CreateNFT/step-4";
-import SuccessModal from "../../components/CreateNFT/CreateNFTUtils/SuccessModal";
-import SaveDraftSuccessModal from "../../components/CreateNFT/CreateNFTUtils/SaveDraftSuccessModal";
-import { mintTrackNFT } from "../../utils/smart-contract/functions";
-import LoadingContext from "../../../store/loading-context";
-import StatusContext from "../../../store/status-context";
-import { uploadJSONToIPFS } from "../../utils/image-crop/uploadToIPFS";
+import ScrollToPageTop from "@/utils/ScrollToPageTop";
+import CreateNFTIntro from "@/components/CreateNFT/step-0";
+import TrackDetails from "@/components/CreateNFT/step-1";
+import ComprehensiveDetails from "@/components/CreateNFT/step-2";
+import UnlockableContent from "@/components/CreateNFT/step-3";
+import PricingAndSplits from "@/components/CreateNFT/step-4";
+import SuccessModal from "@/components/CreateNFT/CreateNFTUtils/SuccessModal";
+import SaveDraftSuccessModal from "@/components/CreateNFT/CreateNFTUtils/SaveDraftSuccessModal";
+import { mintTrackNFT } from "@/utils/smart-contract/functions";
+import LoadingContext from "@/store/loading-context";
+import StatusContext from "@/store/status-context";
+import { uploadJSONToIPFS } from "@/utils/image-crop/uploadToIPFS";
 
 export async function getServerSideProps(context) {
 	try {
@@ -666,7 +666,7 @@ const CreateNFT = ({ userInfo }) => {
 				<>
 					<Head>
 						<title>Musixverse | Create NFT</title>
-						<meta name="description" content={meta_description} />
+						<meta name="description" content={createnft_meta_description} />
 						<link rel="icon" href="/favicon.ico" />
 					</Head>
 					<ScrollToPageTop samePage={true} changingValue={step} />
@@ -679,7 +679,7 @@ const CreateNFT = ({ userInfo }) => {
 				<>
 					<Head>
 						<title>Musixverse | Create NFT - Track Details</title>
-						<meta name="description" content={meta_description} />
+						<meta name="description" content={createnft_meta_description} />
 						<link rel="icon" href="/favicon.ico" />
 					</Head>
 					<ScrollToPageTop samePage={true} changingValue={step} />
@@ -693,7 +693,7 @@ const CreateNFT = ({ userInfo }) => {
 				<>
 					<Head>
 						<title>Musixverse | Create NFT - Comprehensive Details</title>
-						<meta name="description" content={meta_description} />
+						<meta name="description" content={createnft_meta_description} />
 						<link rel="icon" href="/favicon.ico" />
 					</Head>
 					<ScrollToPageTop samePage={true} changingValue={step} />
@@ -707,7 +707,7 @@ const CreateNFT = ({ userInfo }) => {
 				<>
 					<Head>
 						<title>Musixverse | Create NFT - Unlockable Content</title>
-						<meta name="description" content={meta_description} />
+						<meta name="description" content={createnft_meta_description} />
 						<link rel="icon" href="/favicon.ico" />
 					</Head>
 					<ScrollToPageTop samePage={true} changingValue={step} />
@@ -721,7 +721,7 @@ const CreateNFT = ({ userInfo }) => {
 				<>
 					<Head>
 						<title>Musixverse | Create NFT - Pricing and Splits</title>
-						<meta name="description" content={meta_description} />
+						<meta name="description" content={createnft_meta_description} />
 						<link rel="icon" href="/favicon.ico" />
 					</Head>
 					<ScrollToPageTop samePage={true} changingValue={step} />

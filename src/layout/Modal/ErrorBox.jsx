@@ -22,12 +22,13 @@ const ErrorBox = () => {
 
 	useEffect(() => {
 		if (error.showErrorBox) {
-			setTimeout(function () {
+			const timer = setTimeout(function () {
 				setError((prevState) => ({
 					...prevState,
 					showErrorBox: false,
 				}));
-			}, 8000);
+			}, 6000);
+			return () => clearTimeout(timer);
 		}
 	}, [error.showErrorBox, setError]);
 

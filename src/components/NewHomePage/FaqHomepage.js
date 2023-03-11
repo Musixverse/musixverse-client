@@ -41,9 +41,9 @@ export default function GettingStarted() {
 	});
 
 	return (
-		<div className="self-start w-full p-12 pb-16 dark:bg-dark-600 bg-light-100 rounded-xl">
+		<div className="self-start w-full p-12 my-14 dark:bg-dark-600 bg-light-100 rounded-xl">
 			{/* FAQ Category Heading */}
-			<h3 className="mb-5 text-lg text-center font-medium sm:text-3xl text-primary-600">Buy NFT</h3>
+			{/* <h3 className="mb-5 text-lg text-center font-medium sm:text-3xl text-primary-600">About Musixverse</h3> */}
 			<div className="w-full rounded-none accordion" id="accordionExample">
 				{FaqMusixverseAccordion}
 			</div>

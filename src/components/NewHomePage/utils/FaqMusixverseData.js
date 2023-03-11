@@ -66,9 +66,9 @@ export const Faq_Musixverse = [
 		body: (
 			<>
 				<p>
-                Not really. Minting NFTs is not that difficult. But to get started, we’d recommend going through these blogs:
+                Not really. Minting NFTs is not that difficult. But to get started, we’d recommend going through these blogs:{" "}
                 <span className="font-medium underline underline-offset-2 text-primary-500">
-                    <Link href="https://medium.com/@musixverse">https://medium.com/@musixverse</Link>
+                    <Link href="https://medium.com/@musixverse" target="_blank">https://medium.com/@musixverse</Link>
                 </span>
 				</p>
 			</>
@@ -83,7 +83,7 @@ export const Faq_Musixverse = [
                 You can start simply by creating an Artist account on the website and applying for verification. To know how to set up a crypto wallet, create an NFT, sell an NFT, or create a band profile on musixverse, you can click here:  
 					{" "}
 					<span className="font-medium underline underline-offset-2 text-primary-500">
-						<Link href="https://medium.com/@musixverse">https://medium.com/@musixverse</Link>
+						<Link href="https://medium.com/@musixverse" target="_blank">https://medium.com/@musixverse</Link>
 					</span>
                     {" "}
 					and read our blogs, while we verify your profile!

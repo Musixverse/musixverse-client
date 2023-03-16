@@ -17,7 +17,8 @@ import TopArtists from "@/components/NewHomePage/TopArtist-new";
 import ShareAndEarn from "@/components/HomePage/ShareAndEarn";
 import GetStartedArtist from "@/components/HomePage/GetStartedArtist";
 import GetStartedFan from "@/components/HomePage/GetStartedFan";
-import FaqMusixverse from "@/components/NewHomePage/FaqHomepage"
+import FaqArtist from "@/components/NewHomePage/FaqArtist"
+import FaqFan from "@/components/NewHomePage/FaqFan"
 // import GetStartedAsArtist from "@/components/HomePage/GetStartedAsArtist";
 // import GetStartedAsFan from "@/components/HomePage/GetStartedAsFan";
 import NewsLetter from "@/layout/NewsLetter";
@@ -60,8 +61,9 @@ function Home({ tracks }) {
 						<TopArtists />
 						<ShareAndEarn />
 						<GetStartedArtist />
-						<FaqMusixverse />
+						<FaqArtist />
 						<GetStartedFan />
+						<FaqFan />
 						{/* <GetStartedAsArtist/> */}
 						{/* <GetStartedAsFan/> */}
 						{/* <Section2New /> */}

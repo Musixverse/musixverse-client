@@ -1,11 +1,11 @@
 import { useState } from "react";
 import styles from "../../../styles/Faq/Accordion.module.css";
-import { Faq_Musixverse } from "./utils/FaqMusixverseData";
+import { Faq_Artist } from "./utils/FaqHomepageData";
 
-export default function GettingStarted() {
+export default function AboutArtist() {
 	const [currentlyExpanded, setCurrentlyExpanded] = useState(0);
 
-	const FaqMusixverseAccordion = Faq_Musixverse.map((elem, idx) => {
+	const FaqArtistAccordion = Faq_Artist.map((elem, idx) => {
 		return (
 			<div key={idx} className={"accordion-item " + styles["faq-item"]}>
 				{/* FAQ Item Heading */}
@@ -45,7 +45,7 @@ export default function GettingStarted() {
 			{/* FAQ Category Heading */}
 			{/* <h3 className="mb-5 text-lg text-center font-medium sm:text-3xl text-primary-600">About Musixverse</h3> */}
 			<div className="w-full rounded-none accordion" id="accordionExample">
-				{FaqMusixverseAccordion}
+				{FaqArtistAccordion}
 			</div>
 		</div>
 	);

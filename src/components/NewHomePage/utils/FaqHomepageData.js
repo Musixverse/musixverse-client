@@ -102,12 +102,12 @@ export const Faq_Fan = [
 				<p>
                 Setting up a crypto wallet takes less than 5 minutes. For step by step process, please refer: {" "}
                 <span className="font-medium underline underline-offset-2 text-primary-500">
-                    <Link href="https://medium.com/@musixverse/how-to-set-up-a-crypto-wallet-metamask-477be25c0f5f" target="_blank">https://medium.com/@musixverse/how-to-set-up-a-crypto-wallet-metamask-477be25c0f5f</Link>
+                    <Link href="https://musixverse.com/help-center/blog/how-to-setup-cryptowallet" target="_blank">How to setup a crypto wallet</Link>
                 </span>
 				</p>
 			</>
 		),
-		content_id: "collapseOne",
+		content_id: "collapseEight",
 	},
 	{
 		heading: "How much money do I need to buy an NFT?",
@@ -118,7 +118,7 @@ export const Faq_Fan = [
 				</p>
 			</>
 		),
-		content_id: "collapseTwo",
+		content_id: "collapseNine",
 	},
 	{
 		heading: "What's the benefit of purchasing a Music NFT?",
@@ -138,7 +138,7 @@ export const Faq_Fan = [
 				</p>
 			</>
 		),
-		content_id: "collapseThree",
+		content_id: "collapseTen",
 	},
 	{
 		heading: "Are there any hidden fees?",
@@ -149,7 +149,7 @@ export const Faq_Fan = [
 				</p>
 			</>
 		),
-		content_id: "collapseFour",
+		content_id: "collapseEleven",
 	},
 	{
 		heading: "How to buy an NFT directly using my bank account?",
@@ -160,7 +160,7 @@ export const Faq_Fan = [
 				</p>
 			</>
 		),
-		content_id: "collapseFive",
+		content_id: "collapseTwelve",
 	},
 	{
 		heading: "Do I need to have any tech knowledge to buy NFTs?",
@@ -171,6 +171,6 @@ export const Faq_Fan = [
 				</p>
 			</>
 		),
-		content_id: "collapseSix",
+		content_id: "collapseThirteen",
 	},
 ];

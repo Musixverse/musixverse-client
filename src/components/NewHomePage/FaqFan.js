@@ -3,7 +3,7 @@ import styles from "../../../styles/Faq/Accordion.module.css";
 import { Faq_Fan } from "./utils/FaqHomepageData";
 
 export default function AboutArtist() {
-	const [currentlyExpanded, setCurrentlyExpanded] = useState(0);
+	const [currentlyExpandedFan, setCurrentlyExpandedFan] = useState(0);
 
 	const FaqFanAccordion = Faq_Fan.map((elem, idx) => {
 		return (
@@ -13,19 +13,19 @@ export default function AboutArtist() {
 					className={
 						"relative flex items-center w-full px-5 py-4 text-sm sm:text-base text-left  transition border-b border-primary-500 rounded-none bg-transparent focus:outline-none dark:hover:text-primary-600 hover:text-primary-600 " +
 						(idx === 0 ? "" : "collapsed") +
-						(currentlyExpanded === idx ? " text-primary-600" : "text-gray-800 dark:text-light-200")
+						(currentlyExpandedFan === idx ? " text-primary-600" : "text-gray-800 dark:text-light-200")
 					}
 					type="button"
 					onClick={() => {
-						if (currentlyExpanded !== idx) setCurrentlyExpanded(idx);
-						else setCurrentlyExpanded(-1);
+						if (currentlyExpandedFan !== idx) setCurrentlyExpandedFan(idx);
+						else setCurrentlyExpandedFan(-1);
 					}}
 					data-bs-toggle="collapse"
 					data-bs-target={"#" + elem.content_id}
 					aria-expanded="true"
 					aria-controls={elem.content_id}
 				>
-					{currentlyExpanded === idx ? (
+					{currentlyExpandedFan === idx ? (
 						<span className="mr-3 text-primary-600 material-symbols-outlined">do_not_disturb_on</span>
 					) : (
 						<span className="mr-3 material-symbols-outlined text-primary-600">add_circle</span>

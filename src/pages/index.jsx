@@ -5,18 +5,20 @@ import Moralis from "moralis/node";
 import { title_main_page, meta_description, PARSE_APP_ID, PARSE_SERVER_URL } from "@/config/constants";
 import LoadingSection from "@/layout/Loading/LoadingSection";
 import LoadingSectionDark from "@/layout/Loading/LoadingSectionDark";
-import Banner from "@/components/HomePage/HomePageBanner";
-import Section2 from "@/components/HomePage/HomePage_section3";
-import Section3 from "@/components/HomePage/HomePage_section4";
-import Section4 from "@/components/HomePage/HomePage_section5";
-import Section2New from "@/components/HomePage/HomePageSection2";
-import HeroSection from "@/components/HomePage/HeroSection";
+// import Banner from "@/components/HomePage/HomePageBanner";
+// import Section2 from "@/components/HomePage/HomePage_section3";
+// import Section3 from "@/components/HomePage/HomePage_section4";
+// import Section4 from "@/components/HomePage/HomePage_section5";
+// import Section2New from "@/components/HomePage/HomePageSection2";
+// import HeroSection from "@/components/HomePage/HeroSection";
 import NewHero from "@/components/HomePage/NewHero";
 import FeaturedNfts from "@/components/HomePage/FeaturedNfts";
 import TopArtists from "@/components/NewHomePage/TopArtist-new";
 import ShareAndEarn from "@/components/HomePage/ShareAndEarn";
 import GetStartedArtist from "@/components/HomePage/GetStartedArtist";
 import GetStartedFan from "@/components/HomePage/GetStartedFan";
+import FaqArtist from "@/components/NewHomePage/FaqArtist"
+import FaqFan from "@/components/NewHomePage/FaqFan"
 // import GetStartedAsArtist from "@/components/HomePage/GetStartedAsArtist";
 // import GetStartedAsFan from "@/components/HomePage/GetStartedAsFan";
 import NewsLetter from "@/layout/NewsLetter";
@@ -59,7 +61,9 @@ function Home({ tracks }) {
 						<TopArtists />
 						<ShareAndEarn />
 						<GetStartedArtist />
+						<FaqArtist />
 						<GetStartedFan />
+						<FaqFan />
 						{/* <GetStartedAsArtist/> */}
 						{/* <GetStartedAsFan/> */}
 						{/* <Section2New /> */}
